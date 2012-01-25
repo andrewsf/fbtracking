@@ -1,4 +1,4 @@
-/*1327153575,169943150,JIT Construction: v498177,en_US*/
+/*1327459898,169898617,JIT Construction: v499725,en_US*/
 
 if (!window.FB) window.FB = {
     _apiKey: null,
@@ -473,31 +473,31 @@ FB.provide('ApiServer', {
     },
     graph: function() {
         var a = Array.prototype.slice.call(arguments),
-            f = a.shift(),
-            d = a.shift(),
-            c, e, b;
-        while (d) {
-            var g = typeof d;
-            if (g === 'string' && !c) {
-                c = d.toLowerCase();
-            } else if (g === 'function' && !b) {
-                b = d;
-            } else if (g === 'object' && !e) {
-                e = d;
+            b = a.shift().match(/\/?([^?]*)\??([^#]*)/),
+            g = b[1],
+            e = a.shift(),
+            d, f, c;
+        while (e) {
+            var h = typeof e;
+            if (h === 'string' && !d) {
+                d = e.toLowerCase();
+            } else if (h === 'function' && !c) {
+                c = e;
+            } else if (h === 'object' && !f) {
+                f = e;
             } else {
-                FB.log('Invalid argument passed to FB.api(): ' + d);
+                FB.log('Invalid argument passed to FB.api(): ' + e);
                 return;
             }
-            d = a.shift();
+            e = a.shift();
         }
-        c = c || 'get';
-        e = e || {};
-        if (f[0] === '/') f = f.substr(1);
-        if (FB.Array.indexOf(FB.ApiServer.METHODS, c) < 0) {
-            FB.log('Invalid method passed to FB.api(): ' + c);
+        d = d || 'get';
+        f = FB.copy(f || {}, FB.QS.decode(b[2]));
+        if (FB.Array.indexOf(FB.ApiServer.METHODS, d) < 0) {
+            FB.log('Invalid method passed to FB.api(): ' + d);
             return;
         }
-        FB.ApiServer.oauthRequest('graph', f, c, e, b);
+        FB.ApiServer.oauthRequest('graph', g, d, f, c);
     },
     rest: function(e, a) {
         var c = e.method.toLowerCase().replace('.', '_');
@@ -2146,13 +2146,13 @@ FB.provide('Auth', {
                     expiresIn: parseInt(f.expires_in, 10),
                     signedRequest: f.signed_request
                 };
-                FB.Auth.setAuthResponse(a, 'connected');
                 if (FB.Cookie.getEnabled()) {
                     var e = a.expiresIn === 0 ? 0 : (new Date()).getTime() + a.expiresIn * 1000;
                     var d = FB.Cookie._domain;
                     if (!d && f.base_domain) d = '.' + f.base_domain;
                     FB.Cookie.setSignedRequestCookie(f.signed_request, e, d);
                 }
+                FB.Auth.setAuthResponse(a, 'connected');
             } else if (!FB._authResponse && a) {
                 FB.Auth.setAuthResponse(a, 'connected');
             } else if (!(a && c == 'permissions.oauth')) {
@@ -5410,7 +5410,7 @@ FB.provide("Flash", {
         [10, 3, 181, 34],
         [11, 0, 0]
     ],
-    "_swfPath": "rsrc.php\/v1\/yD\/r\/GL74y29Am1r.swf"
+    "_swfPath": "rsrc.php\/v1\/y4\/r\/EjGRk6xMiVD.swf"
 }, true);
 FB.provide("XD", {
     "_xdProxyUrl": "connect\/xd_proxy.php?version=3"
