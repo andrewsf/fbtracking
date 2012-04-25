@@ -1,10 +1,9 @@
-/*1334884391,169913725,JIT Construction: v544399,en_US*/
+/*1335317417,169923001,JIT Construction: v546667,en_US*/
 
 var FB;
 if (!FB) {
     FB = {};
     (function() {
-        function bagofholding() {};
         var __DEV__ = 0;
 
         function __d() {
@@ -12,7 +11,7 @@ if (!FB) {
         }
         var __e = __d;
         if (window.FB && !window.FB.copy)(function() {
-            var a = /iframe_canvas|app_runner/.test(window.name);
+            var a = /iframe_canvas|app_runner|dialog/.test(window.name);
 
             function b(c, d, e, f) {
                 for (var g in d) if (e || typeof c[g] === 'undefined') c[g] = f ? f(d[g]) : d[g];
@@ -25,7 +24,7 @@ if (!FB) {
                 _logging: true,
                 _inCanvas: a,
                 _https: (function() {
-                    if (location.protocol == 'https:' && !a) return true;
+                    if (location.protocol == 'https:' && (window == top || !a)) return true;
                     if (/_fb_https?/.test(window.name)) return window.name.indexOf('_fb_https') != -1;
                 })(),
                 onlyUseHttps: function() {
@@ -1066,24 +1065,19 @@ if (!FB) {
                 d.sdk = 'joey';
                 d.pretty = 0;
                 var f = e;
-                e = function(j) {
-                    if (FB.Auth && j && FB.getAccessToken() == d.access_token) if (j.error == 'invalid_token' || j.error_code == '190' || (j.error && j.error.type == 'OAuthException' && j.error.code == 190)) FB.getLoginStatus(null, true);
-                    f && f(j);
+                e = function(i) {
+                    if (FB.Auth && i && FB.getAccessToken() == d.access_token) if (i.error == 'invalid_token' || i.error_code == '190' || (i.error && i.error.type == 'OAuthException' && i.error.code == 190)) FB.getLoginStatus(null, true);
+                    f && f(i);
                 };
                 d = FB.JSON.flatten(d);
-                var g = {
-                    jsonp: true,
-                    cors: !FB.initSitevars.corsKillSwitch,
-                    flash: FB.Flash.hasMinVersion()
-                };
-                if ('jsonp' in g) try {
+                try {
                     FB.ApiServer.jsonp(a, b, c, d, e);
                     return;
-                } catch (h) {}
-                if ('cors' in g) try {
+                } catch (g) {}
+                try {
                     if (FB.ApiServer.corsPost(a, b, c, d, e)) return;
-                } catch (i) {}
-                if ('flash' in g) {
+                } catch (h) {}
+                if (FB.Flash.hasMinVersion()) {
                     FB.ApiServer.flash(a, b, c, d, e);
                     return;
                 }
@@ -1128,13 +1122,18 @@ if (!FB) {
                         d.send(f);
                     }
                 };
+                d.onload = function() {
+                    d.onload = Function.prototype;
+                    if ('onload' in e) e.onload(d);
+                };
+                d.onerror = function() {
+                    d.onerror = Function.prototype;
+                    if ('onerror' in e) e.onerror(d);
+                };
                 d.onreadystatechange = function() {
-                    if (d.readyState == 4) {
-                        d.onreadystatechange = Function.prototype;
-                        if (d.status == 200) {
-                            if ('onload' in e) e.onload(d);
-                        } else if ('onerror' in e) e.onerror(d);
-                    }
+                    if (d.readyState == 4) if (d.status == 200) {
+                        d.onload();
+                    } else d.onerror();
                 };
                 return e;
             },
@@ -1384,7 +1383,27 @@ if (!FB) {
             }
         });
         FB.XD.Fragment.checkAndDispatch();
-        __d("ua", [], function(a, b, c, d, e, f) {
+        __d("QueryString", [], function(a, b, c, d, e, f) {
+            var g = {
+                encode: function(h) {
+                    var i = [];
+                    for (var j in h) if (h.hasOwnProperty(j)) i.push(encodeURIComponent(j) + '=' + encodeURIComponent(h[j]));
+                    return i.join('&');
+                },
+                decode: function(h) {
+                    var i = h.split('&'),
+                        j = i.length,
+                        k = {};
+                    while (j--) {
+                        var l = i[j].split('=', 2);
+                        k[decodeURIComponent(l[0])] = decodeURIComponent(l[1]);
+                    }
+                    return k;
+                }
+            };
+            e.exports = g;
+        });
+        __d("UserAgent", [], function(a, b, c, d, e, f) {
             var g = false,
                 h, i, j, k, l, m, n, o, p, q;
 
@@ -1449,8 +1468,8 @@ if (!FB) {
                     return r() || q;
                 }
             };
-            a.ua = e.exports = s;
-        }, 3);
+            e.exports = s;
+        });
         __d("copyProperties", [], function(a, b, c, d, e, f) {
             function g(h, i) {
                 h = h || {};
@@ -1461,36 +1480,16 @@ if (!FB) {
             }
             e.exports = g;
         });
-        __d("QueryString", [], function(a, b, c, d, e, f) {
-            var g = {
-                encode: function(h) {
-                    var i = [];
-                    for (var j in h) if (h.hasOwnProperty(j)) i.push(encodeURIComponent(j) + '=' + encodeURIComponent(h[j]));
-                    return i.join('&');
-                },
-                decode: function(h) {
-                    var i = h.split('&'),
-                        j = i.length,
-                        k = {};
-                    while (j--) {
-                        var l = i[j].split('=', 2);
-                        k[decodeURIComponent(l[0])] = decodeURIComponent(l[1]);
-                    }
-                    return k;
-                }
-            };
-            e.exports = g;
-        });
         __d("guid", [], function(a, b, c, d, e, f) {
             function g() {
                 return 'f' + (Math.random() * (1 << 30)).toString(16).replace('.', '');
             }
             e.exports = g;
         });
-        __d("Flash", ["ua", "copyProperties", "QueryString", "guid"], function(a, b, c, d, e, f) {
-            var g = b("ua"),
-                h = b("copyProperties"),
-                i = b("QueryString"),
+        __d("Flash", ["QueryString", "UserAgent", "copyProperties", "guid"], function(a, b, c, d, e, f) {
+            var g = b("QueryString"),
+                h = b("UserAgent"),
+                i = b("copyProperties"),
                 j = b("guid"),
                 k = {},
                 l;
@@ -1510,7 +1509,7 @@ if (!FB) {
             }
             function p(r) {
                 if (!l) {
-                    if (g.ie() >= 9) window.attachEvent('onunload', n);
+                    if (h.ie() >= 9) window.attachEvent('onunload', n);
                     l = true;
                 }
                 k[r] = r;
@@ -1519,16 +1518,16 @@ if (!FB) {
                 embed: function(r, s, t, u) {
                     var v = j();
                     r = encodeURI(r);
-                    t = h({
+                    t = i({
                         allowscriptaccess: 'always',
                         flashvars: u,
                         movie: r
                     }, t || {});
-                    if (typeof t.flashvars == 'object') t.flashvars = i.encode(t.flashvars);
+                    if (typeof t.flashvars == 'object') t.flashvars = g.encode(t.flashvars);
                     var w = [];
                     for (var x in t) if (t.hasOwnProperty(x) && t[x]) w.push('<param name="' + encodeURI(x) + '" value="' + encodeURI(t[x]) + '">');
                     var y = document.createElement('div'),
-                        z = '<object ' + (g.ie() ? 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ' : 'type="application/x-shockwave-flash"') + 'data="' + r + '" ' + 'id="' + v + '">' + w.join('') + '</object>';
+                        z = '<object ' + (h.ie() ? 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ' : 'type="application/x-shockwave-flash"') + 'data="' + r + '" ' + 'id="' + v + '">' + w.join('') + '</object>';
                     y.innerHTML = z;
                     s.appendChild(y.firstChild);
                     p(v);
@@ -1672,8 +1671,8 @@ if (!FB) {
                         i.warn('Missing channel name, selecting at random');
                         p.channel = j();
                     }
-                    if (!p.whenReady) p.whenReady = bagofholding;
-                    if (!p.onMessage) p.onMessage = bagofholding;
+                    if (!p.whenReady) p.whenReady = Function.prototype;
+                    if (!p.onMessage) p.onMessage = Function.prototype;
                     var q = p.transport || n(p.blacklist || []),
                         r = l[q];
                     if (r && r.isAvailable()) {
@@ -3361,11 +3360,11 @@ if (!FB) {
                         if (FB.Cookie.getEnabled()) FB.Cookie.clearSignedRequestCookie();
                     }
                     if (d && d.https == 1 && !FB._https) FB._https = true;
-                    response = {
+                    var i = {
                         authResponse: FB._authResponse,
                         status: FB._userStatus
                     };
-                    a && a(response);
+                    a && a(i);
                 };
             },
             parseSignedRequest: function(a) {
@@ -6436,34 +6435,6 @@ if (!FB) {
                         d = document.documentElement.scrollHeight;
                     return (c + a) / d >= this._attr.trigger;
                 }
-            },
-            _handleResizeMsg: function(a) {
-                if (!this.isValid()) return;
-                if (a.width) this.getIframeNode().style.width = a.width + 'px';
-                if (a.height) {
-                    this._setNextResize(a.height);
-                    this._checkNextResize();
-                }
-                this._makeVisible();
-            },
-            _setNextResize: function(a) {
-                this.next_resize = a;
-            },
-            _checkNextResize: function() {
-                if (!this.next_resize || this.resize_running) return;
-                var a = this.getIframeNode(),
-                    b = this.next_resize;
-                this.next_resize = null;
-                if (this.animate) {
-                    this.animate = false;
-                    this.resize_running = true;
-                    FB.Anim.ate(a, {
-                        height: b + 'px'
-                    }, 330, FB.bind(function() {
-                        this.resize_running = false;
-                        this._checkNextResize();
-                    }, this));
-                } else a.style.height = b + 'px';
             }
         });
         FB.XFBML.RecommendationsBar.markRead = function(a) {
@@ -6765,7 +6736,7 @@ FB.provide("Flash", {
         [10, 3, 181, 34],
         [11, 0, 0]
     ],
-    "_swfPath": "rsrc.php\/v1\/yQ\/r\/f3KaqM7xIBg.swf"
+    "_swfPath": "rsrc.php\/v1\/ym\/r\/WT2HOUZkT6k.swf"
 }, true);
 FB.provide('Auth', {
     "_xdStorePath": "xd_localstorage\/v2"
