@@ -1,4 +1,4 @@
-/*1336524859,169939823,JIT Construction: v554319,en_US*/
+/*1336540905,169928052,JIT Construction: v554488,en_US*/
 
 var FB;
 if (!FB) {
@@ -539,7 +539,7 @@ if (!FB) {
                             r = window[r] || {};
                         }
                         var w = r[s];
-                        if (typeof w == 'function') return w.apply(r, u);
+                        if (s !== 'bind' && typeof w == 'function') return w.apply(r, u);
                         if (t) v = /\s(.*)\]/.exec(o.call(r).toLowerCase())[1];
                         var x = p[v];
                         if (!x) throw new Error('No polyfill registered for ' + v);
