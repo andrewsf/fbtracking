@@ -1,4 +1,4 @@
-/*1337292859,169941868,JIT Construction: v559200,en_US*/
+/*1337356580,169927535,JIT Construction: v559610,en_US*/
 
 var FB;
 if (!FB) {
@@ -128,7 +128,7 @@ FB.subclass('XFBML.SocialContext','XFBML.IframeWidget',null,{setupAndValidate:fu
 FB.subclass('XFBML.Subscribe','XFBML.EdgeWidget',null,{setupAndValidate:function(){this._attr={channel:this.getChannelUrl(),api_key:FB._apiKey,font:this.getAttribute('font'),colorscheme:this.getAttribute('colorscheme','light'),href:this.getAttribute('href'),ref:this.getAttribute('ref'),layout:this._getLayout(),show_faces:this._shouldShowFaces(),width:this._getWidgetWidth()};return true;},getUrlBits:function(){return {name:'subscribe',params:this._attr};},_getWidgetWidth:function(){var a=this._getLayout(),b={standard:450,box_count:83,button_count:115},c=b[a],d=this._getPxAttribute('width',c),e={standard:{min:225,max:900},box_count:{min:43,max:900},button_count:{min:63,max:900}};if(d<e[a].min){d=e[a].min;}else if(d>e[a].max)d=e[a].max;return d;}});
 void(0);
 ;
-__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"s-static.ak.fbcdn.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/s-static.ak.fbcdn.net\/rsrc.php\/v1\/y5\/r\/SrnvQJBTxo-.swf"}});__d("SDKConfig",[],{"migrate":1});__d("XDConfig",[],{"XdUrl":"connect\/xd_arbiter.php?version=6","Flash":{"path":"https:\/\/s-static.ak.fbcdn.net\/rsrc.php\/v1\/ys\/r\/WON-TVLCpDP.swf"},"useCdn":true});;
+__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"s-static.ak.fbcdn.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/s-static.ak.fbcdn.net\/rsrc.php\/v1\/y5\/r\/SrnvQJBTxo-.swf"}});__d("SDKConfig",[],{"migrate":0});__d("XDConfig",[],{"XdUrl":"connect\/xd_arbiter.php?version=6","Flash":{"path":"https:\/\/s-static.ak.fbcdn.net\/rsrc.php\/v1\/ys\/r\/WON-TVLCpDP.swf"},"useCdn":true});;
 }).call(FB);
 }
 
