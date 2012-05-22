@@ -1,4 +1,4 @@
-/*1337356580,169927535,JIT Construction: v559610,en_US*/
+/*1337628593,169894763,JIT Construction: v560112,en_US*/
 
 var FB;
 if (!FB) {
@@ -7161,20 +7161,20 @@ FB.provide("TemplateUI", {
 }, true);
 FB.provide("XFBML.ConnectBar", {
     "imgs": {
-        "buttonUrl": "rsrc.php\/v1\/yY\/r\/h_Y6u1wrZPW.png",
-        "missingProfileUrl": "rsrc.php\/v1\/yo\/r\/UlIqmHJn-SK.gif"
+        "buttonUrl": "rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png",
+        "missingProfileUrl": "rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"
     }
 }, true);
 FB.provide("XFBML.ProfilePic", {
     "_defPicMap": {
         "pic": "rsrc.php\/v1\/yh\/r\/C5yt7Cqf3zU.jpg",
-        "pic_big": "rsrc.php\/v1\/yL\/r\/HsTZSDw4avx.gif",
-        "pic_big_with_logo": "rsrc.php\/v1\/y5\/r\/SRDCaeCL7hM.gif",
+        "pic_big": "rsrc.php\/v2\/yL\/r\/HsTZSDw4avx.gif",
+        "pic_big_with_logo": "rsrc.php\/v2\/y5\/r\/SRDCaeCL7hM.gif",
         "pic_small": "rsrc.php\/v1\/yi\/r\/odA9sNLrE86.jpg",
-        "pic_small_with_logo": "rsrc.php\/v1\/yD\/r\/k1xiRXKnlGd.gif",
-        "pic_square": "rsrc.php\/v1\/yo\/r\/UlIqmHJn-SK.gif",
-        "pic_square_with_logo": "rsrc.php\/v1\/yX\/r\/9dYJBPDHXwZ.gif",
-        "pic_with_logo": "rsrc.php\/v1\/yu\/r\/fPPR9f2FJ3t.gif"
+        "pic_small_with_logo": "rsrc.php\/v2\/yD\/r\/k1xiRXKnlGd.gif",
+        "pic_square": "rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif",
+        "pic_square_with_logo": "rsrc.php\/v2\/yX\/r\/9dYJBPDHXwZ.gif",
+        "pic_with_logo": "rsrc.php\/v2\/yu\/r\/fPPR9f2FJ3t.gif"
     }
 }, true);
 if (FB.Dom && FB.Dom.addCssRules) {
