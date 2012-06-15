@@ -1,4 +1,4 @@
-/*1339248711,169926258,JIT Construction: v571030,en_US*/
+/*1339553873,169913455,JIT Construction: v573035,en_US*/
 
 window.FB || (function() {
     var ES5 = function() {
@@ -575,7 +575,7 @@ window.FB || (function() {
             }
         });
         __d("XDConfig", [], {
-            "XdUrl": "connect\/xd_arbiter.php?version=6",
+            "XdUrl": "connect\/xd_arbiter.php?version=8",
             "Flash": {
                 "path": "https:\/\/s-static.ak.fbcdn.net\/rsrc.php\/v1\/ys\/r\/WON-TVLCpDP.swf"
             },
@@ -875,20 +875,22 @@ window.FB || (function() {
                 h;
 
             function i(k) {
-                var l = {
-                    line: k.lineNumber || k.line,
-                    message: k.message,
-                    name: k.name,
-                    script: k.fileName || k.sourceURL || k.script,
-                    stack: k.stackTrace || k.stack
-                };
-                l._originalError = k;
+                var l = Array.prototype.slice.call(arguments.callee.caller.caller.arguments),
+                    m = {
+                        line: k.lineNumber || k.line,
+                        message: k.message,
+                        name: k.name,
+                        script: k.fileName || k.sourceURL || k.script,
+                        stack: k.stackTrace || k.stack,
+                        args: ES5('JSON', 'stringify', false, l).substring(0, 200)
+                    };
+                m._originalError = k;
                 if (g.chrome() && /([\w:\.\/]+\.js):(\d+)/.test(k.stack)) {
-                    l.script = RegExp.$1;
-                    l.line = parseInt(RegExp.$2, 10);
+                    m.script = RegExp.$1;
+                    m.line = parseInt(RegExp.$2, 10);
                 }
-                for (var m in l)(l[m] == null && delete l[m]);
-                return l;
+                for (var n in m)(m[n] == null && delete m[n]);
+                return m;
             }
             function j(k, l, m) {
                 if (!h) return k.apply(l, m || []);
@@ -1391,14 +1393,15 @@ window.FB || (function() {
                 if (this instanceof n === false) return new n(o);
                 var p = o.match(j);
                 if (!o || !p) throw new URIError('The passed argument could not be parsed as a url.');
-                this._protocol = p[4] || location.protocol.replace(/:/, '');
-                this._domain = p[6] || location.hostname;
-                this._port = p[8] || (p[6] ? (this._protocol == 'http' ? '80' : '443') : location.port);
-                this._path = p[9] || '';
-                this._search = p[11] || '';
-                this._fragment = p[13] || '';
+                var q = !! location.hostname;
+                this.setProtocol(p[4] || (q ? location.protocol.replace(/:/, '') : ''));
+                this.setDomain(p[6] || location.hostname);
+                this.setPort(p[8] || (q && !p[6] ? location.port : ''));
+                this.setPath(p[9] || '');
+                this.setSearch(p[11] || '');
+                this.setFragment(p[13] || '');
                 if (this._path.substring(0, 1) != '/') this._path = '/' + this._path;
-                if (!l.test(decodeURIComponent(this._domain.toLowerCase()))) {
+                if (this._domain && !l.test(decodeURIComponent(this._domain.toLowerCase()))) {
                     i.error('Invalid characters found in domain name: %s', this._domain);
                     throw new URIError('Domain contained invalid characters.');
                 }
@@ -1457,7 +1460,7 @@ window.FB || (function() {
                     return m.test(this._domain);
                 },
                 toString: function() {
-                    return this._protocol + '://' + this._domain + (/http80|https443/.test(this._protocol + this._port) ? '' : ':' + this._port) + this._path + (this._search ? '?' + this._search : '') + (this._fragment ? '#' + this._fragment : '');
+                    return (this._protocol ? this._protocol + ':' : '') + (this._domain ? '//' + this._domain : '') + (this._port ? ':' + this._port : '') + this._path + (this._search ? '?' + this._search : '') + (this._fragment ? '#' + this._fragment : '');
                 },
                 valueOf: function() {
                     return this.toString();
@@ -1606,9 +1609,12 @@ window.FB || (function() {
             m.setPrefix('FB._callbacks');
             var r = g.errorHandling.rate;
             if (r && Math.floor(Math.random() * 100) + 1 < r) h.setErrorHandler(function(x) {
+                typeof console !== 'undefined' && typeof bagofholding === 'function';
+                delete x._originalError;
                 var y = n.appendToUrl(o.resolve('www', true) + '/common/scribe_endpoint.php', {
                     c: 'jssdk_error',
-                    d: ES5('JSON', 'stringify', false, {
+                    m: ES5('JSON', 'stringify', false, {
+                        appId: p._apiKey,
                         error: x.name || x.message,
                         extra: x
                     })
@@ -1910,188 +1916,194 @@ window.FB || (function() {
             };
             e.exports = i;
         });
-        __d("XDM", ["DOMEventListener", "DOMWrapper", "Flash", "Log", "copyProperties", "guid"], function(a, b, c, d, e, f) {
-            var g = b('DOMEventListener'),
-                h = b('DOMWrapper'),
-                i = b('Flash'),
-                j = b('Log'),
-                k = b('copyProperties'),
-                l = b('guid'),
-                m = {},
-                n = {
+        __d("XDM", ["copyProperties", "guid", "DOMEventListener", "DOMWrapper", "Flash", "Log", "UserAgent"], function(a, b, c, d, e, f) {
+            var g = b('copyProperties'),
+                h = b('guid'),
+                i = b('DOMEventListener'),
+                j = b('DOMWrapper'),
+                k = b('Flash'),
+                l = b('Log'),
+                m = b('UserAgent'),
+                n = {},
+                o = {
                     transports: []
                 },
-                o = h.getWindow();
+                p = j.getWindow();
 
-            function p(r) {
-                var s = {},
-                    t = r.length,
-                    u = n.transports;
-                while (t--) s[r[t]] = 1;
-                t = u.length;
-                while (t--) {
-                    var v = u[t],
-                        w = m[v];
-                    if (!s[v] && w.isAvailable()) return v;
+            function q(s) {
+                var t = {},
+                    u = s.length,
+                    v = o.transports;
+                while (u--) t[s[u]] = 1;
+                u = v.length;
+                while (u--) {
+                    var w = v[u],
+                        x = n[w];
+                    if (!t[w] && x.isAvailable()) return w;
                 }
             }
-            var q = {
-                register: function(r, s) {
-                    j.debug('Registering %s as XDM provider', r);
-                    n.transports.push(r);
-                    m[r] = s;
+            var r = {
+                register: function(s, t) {
+                    l.debug('Registering %s as XDM provider', s);
+                    o.transports.push(s);
+                    n[s] = t;
                 },
-                create: function(r) {
-                    if (!r.whenReady && !r.onMessage) {
-                        j.error('An instance without whenReady or onMessage makes no sense');
+                create: function(s) {
+                    if (!s.whenReady && !s.onMessage) {
+                        l.error('An instance without whenReady or onMessage makes no sense');
                         throw new Error('An instance without whenReady or ' + 'onMessage makes no sense');
                     }
-                    if (!r.channel) {
-                        j.warn('Missing channel name, selecting at random');
-                        r.channel = l();
+                    if (!s.channel) {
+                        l.warn('Missing channel name, selecting at random');
+                        s.channel = h();
                     }
-                    if (!r.whenReady) r.whenReady = bagofholding;
-                    if (!r.onMessage) r.onMessage = bagofholding;
-                    var s = r.transport || p(r.blacklist || []),
-                        t = m[s];
-                    if (t && t.isAvailable()) {
-                        j.debug('%s is available', s);
-                        t.init(r);
-                        return s;
+                    if (!s.whenReady) s.whenReady = bagofholding;
+                    if (!s.onMessage) s.onMessage = bagofholding;
+                    var t = s.transport || q(s.blacklist || []),
+                        u = n[t];
+                    if (u && u.isAvailable()) {
+                        l.debug('%s is available', t);
+                        u.init(s);
+                        return t;
                     }
                 }
             };
-            q.register('fragment', (function() {
-                var r = false,
-                    s, t = location.protocol + '//' + location.host;
+            r.register('fragment', (function() {
+                var s = false,
+                    t, u = location.protocol + '//' + location.host;
 
-                function u(v) {
-                    var w = document.createElement('iframe');
-                    w.src = 'javascript:false';
-                    var x = g.add(w, 'load', function() {
-                        x.remove();
+                function v(w) {
+                    var x = document.createElement('iframe');
+                    x.src = 'javascript:false';
+                    var y = i.add(x, 'load', function() {
+                        y.remove();
                         setTimeout(function() {
-                            w.parentNode.removeChild(w);
+                            x.parentNode.removeChild(x);
                         }, 5000);
                     });
-                    s.appendChild(w);
-                    w.src = v;
+                    t.appendChild(x);
+                    x.src = w;
                 }
                 return {
                     isAvailable: function() {
                         return true;
                     },
-                    init: function(v) {
-                        j.debug('init fragment');
-                        var w = {
-                            send: function(x, y, z, aa) {
-                                j.debug('sending to: %s (%s)', y + v.channelPath, aa);
-                                u(y + v.channelPath + x + '&xd_rel=parent.parent&relation=parent.parent&xd_origin=' + encodeURIComponent(t));
+                    init: function(w) {
+                        l.debug('init fragment');
+                        var x = {
+                            send: function(y, z, aa, ba) {
+                                l.debug('sending to: %s (%s)', z + w.channelPath, ba);
+                                v(z + w.channelPath + y + '&xd_rel=parent.parent&relation=parent.parent&xd_origin=' + encodeURIComponent(u));
                             }
                         };
-                        if (r) {
-                            v.whenReady(w);
+                        if (s) {
+                            w.whenReady(x);
                             return;
                         }
-                        s = v.root;
-                        r = true;
-                        v.whenReady(w);
+                        t = w.root;
+                        s = true;
+                        w.whenReady(x);
                     }
                 };
             })());
-            q.register('flash', (function() {
-                var r = false,
-                    s, t = {},
-                    u = false,
-                    v = 15000,
-                    w;
+            r.register('flash', (function() {
+                var s = false,
+                    t, u = {},
+                    v = false,
+                    w = 15000,
+                    x;
                 return {
                     isAvailable: function() {
-                        return i.checkMinVersion('8.0.24');
+                        return k.checkMinVersion('8.0.24');
                     },
-                    init: function(x) {
-                        j.debug('init flash: ' + x.channel);
-                        var y = {
-                            send: function(ba, ca, da, ea) {
-                                j.debug('sending to: %s (%s)', ca, ea);
-                                s.postMessage(ba, ca, ea);
+                    init: function(y) {
+                        l.debug('init flash: ' + y.channel);
+                        var z = {
+                            send: function(ca, da, ea, fa) {
+                                l.debug('sending to: %s (%s)', da, fa);
+                                t.postMessage(ca, da, fa);
                             }
                         };
-                        if (r) {
-                            x.whenReady(y);
+                        if (s) {
+                            y.whenReady(z);
                             return;
                         }
-                        var z = x.root.appendChild(o.document.createElement('div')),
-                            aa = l();
-                        t[aa] = function() {
-                            clearTimeout(w);
-                            j.info('xdm.swf called the callback');
-                            delete t[aa];
-                            aa = l();
-                            t[aa] = function(ba, ca) {
-                                ba = decodeURIComponent(ba);
-                                j.debug('received message %s from %s', ba, ca);
-                                x.onMessage(ba, ca);
+                        var aa = y.root.appendChild(p.document.createElement('div')),
+                            ba = h();
+                        u[ba] = function() {
+                            clearTimeout(x);
+                            l.info('xdm.swf called the callback');
+                            delete u[ba];
+                            ba = h();
+                            u[ba] = function(ca, da) {
+                                ca = decodeURIComponent(ca);
+                                l.debug('received message %s from %s', ca, da);
+                                y.onMessage(ca, da);
                             };
-                            s.init(x.channel, 'FB_XDM_CALLBACKS.' + aa);
-                            x.whenReady(y);
+                            t.init(y.channel, 'FB_XDM_CALLBACKS.' + ba);
+                            y.whenReady(z);
                         };
-                        o.FB_XDM_CALLBACKS = t;
-                        s = i.embed(x.flashUrl, z, null, {
+                        p.FB_XDM_CALLBACKS = u;
+                        t = k.embed(y.flashUrl, aa, null, {
                             protocol: location.protocol.replace(':', ''),
                             host: location.host,
-                            callback: 'FB_XDM_CALLBACKS.' + aa,
-                            log: u
+                            callback: 'FB_XDM_CALLBACKS.' + ba,
+                            log: v
                         });
-                        w = setTimeout(function() {
-                            j.warn('The Flash component did not load within %s ms - ' + 'verify that the container is not set to hidden or invisible ' + 'using CSS as this will cause some browsers to not load ' + 'the components', v);
-                        }, v);
-                        r = true;
+                        x = setTimeout(function() {
+                            l.warn('The Flash component did not load within %s ms - ' + 'verify that the container is not set to hidden or invisible ' + 'using CSS as this will cause some browsers to not load ' + 'the components', w);
+                        }, w);
+                        s = true;
                     }
                 };
             })());
-            q.register('postmessage', (function() {
-                var r = false;
+            r.register('postmessage', (function() {
+                var s = false;
                 return {
                     isAvailable: function() {
-                        return !!o.postMessage;
+                        return !!p.postMessage;
                     },
-                    init: function(s) {
-                        j.debug('init postMessage: ' + s.channel);
-                        var t = '_FB_' + s.channel,
-                            u = {
-                                send: function(v, w, x, y) {
-                                    if (o === x) {
-                                        j.error('Invalid windowref, equal to window (self)');
+                    init: function(t) {
+                        l.debug('init postMessage: ' + t.channel);
+                        var u = '_FB_' + t.channel,
+                            v = {
+                                send: function(w, x, y, z) {
+                                    if (p === y) {
+                                        l.error('Invalid windowref, equal to window (self)');
                                         throw new Error();
                                     }
-                                    j.debug('sending to: %s (%s)', w, y);
-                                    x.postMessage('_FB_' + y + v, w);
+                                    l.debug('sending to: %s (%s)', x, z);
+                                    var aa = function() {
+                                            y.postMessage('_FB_' + z + w, x);
+                                        };
+                                    if (m.ie() == 8) {
+                                        setTimeout(aa, 0);
+                                    } else aa();
                                 }
                             };
-                        if (r) {
-                            s.whenReady(u);
+                        if (s) {
+                            t.whenReady(v);
                             return;
                         }
-                        g.add(o, 'message', function(event) {
-                            var v = event.data,
-                                w = event.origin || 'native';
-                            if (typeof v != 'string') {
-                                j.warn('Received message of type %s from %s, expected a string', typeof v, w);
+                        i.add(p, 'message', function(event) {
+                            var w = event.data,
+                                x = event.origin || 'native';
+                            if (typeof w != 'string') {
+                                l.warn('Received message of type %s from %s, expected a string', typeof w, x);
                                 return;
                             }
-                            j.debug('received message %s from %s', v, w);
-                            if (w != 'native') if (v.substring(0, t.length) == t) {
-                                v = v.substring(t.length);
+                            l.debug('received message %s from %s', w, x);
+                            if (x != 'native') if (w.substring(0, u.length) == u) {
+                                w = w.substring(u.length);
                             } else return;
-                            s.onMessage(v, w);
+                            t.onMessage(w, x);
                         });
-                        s.whenReady(u);
-                        r = true;
+                        t.whenReady(v);
+                        s = true;
                     }
                 };
             })());
-            e.exports = q;
+            e.exports = r;
         });
         __d("SDK_XD", ["applyWithGuard", "guid", "resolveWindow", "FB", "XDM", "Log", "QueryString", "Queue", "XDConfig"], function(a, b, c, d, e, f) {
             var g = c('XDConfig'),
@@ -2208,39 +2220,40 @@ window.FB || (function() {
                 _origin: w,
                 onMessage: ca,
                 recv: ca,
-                init: function(ga) {
+                init: function(ga, ha) {
                     if (y) return;
-                    var ha = ga ? /\/\/.*?(\/[^#]*)/.exec(ga)[1] : location.pathname + location.search;
-                    ha += (~ES5(ha, 'indexOf', true, '?') ? '&' : '?') + 'fb_xd_fragment#xd_sig=' + u + '&';
-                    var ia = k.Content.appendHidden(document.createElement('div')),
-                        ja = l.create({
-                            root: ia,
+                    var ia = ga ? /\/\/.*?(\/[^#]*)/.exec(ga)[1] : location.pathname + location.search;
+                    ia += (~ES5(ia, 'indexOf', true, '?') ? '&' : '?') + 'fb_xd_fragment#xd_sig=' + u + '&';
+                    var ja = k.Content.appendHidden(document.createElement('div')),
+                        ka = l.create({
+                            root: ja,
                             channel: v,
                             channelPath: '/' + g.XdUrl + '#',
                             flashUrl: g.Flash.path,
-                            whenReady: function(oa) {
-                                x = oa;
+                            whenReady: function(pa) {
+                                x = pa;
                             },
                             onMessage: ca
                         }),
-                        ka = {
+                        la = {
                             channel: v,
                             origin: location.protocol + '//' + location.host,
-                            channel_path: ha,
-                            transport: ja
+                            channel_path: ia,
+                            transport: ka,
+                            xd_name: ha
                         },
-                        la = g.XdUrl + '#' + n.encode(ka),
-                        ma = g.useCdn ? k._domain.staticfb : 'http://www.facebook.com/',
-                        na = g.useCdn ? k._domain.https_staticfb : 'https://www.facebook.com/';
+                        ma = g.XdUrl + '#' + n.encode(la),
+                        na = g.useCdn ? k._domain.staticfb : 'http://www.facebook.com/',
+                        oa = g.useCdn ? k._domain.https_staticfb : 'https://www.facebook.com/';
                     if (!k.onlyUseHttps()) s = ea({
-                        url: ma + la,
+                        url: na + ma,
                         name: 'fb_xdm_frame_http',
-                        root: ia
+                        root: ja
                     });
                     t = ea({
-                        url: na + la,
+                        url: oa + ma,
                         name: 'fb_xdm_frame_https',
-                        root: ia
+                        root: ja
                     });
                     y = true;
                 },
@@ -2703,8 +2716,8 @@ window.FB || (function() {
             getViewportInfo: function() {
                 var a = (document.documentElement && document.compatMode == 'CSS1Compat') ? document.documentElement : document.body;
                 return {
-                    scrollTop: a.scrollTop,
-                    scrollLeft: a.scrollLeft,
+                    scrollTop: a.scrollTop || document.body.scrollTop,
+                    scrollLeft: a.scrollLeft || document.body.scrollLeft,
                     width: self.innerWidth ? self.innerWidth : a.clientWidth,
                     height: self.innerHeight ? self.innerHeight : a.clientHeight
                 };
@@ -3929,7 +3942,7 @@ window.FB || (function() {
                 if ('appId' in a || 'apiKey' in a) FB._apiKey = a.appId || a.apiKey;
                 if ('scope' in a) FB._scope = a.scope;
                 if (!FB._initialized) {
-                    FB.XD.init(a.channelUrl ? FB.URI.resolve(a.channelUrl) : null);
+                    FB.XD.init(a.channelUrl ? FB.URI.resolve(a.channelUrl) : null, a.xdProxyName);
                     if (FB.UA.mobile() && FB.TemplateUI && FB.TemplateData && FB.TemplateData._enabled && a.useCachedDialogs !== false) {
                         FB.TemplateUI.init();
                         FB.Event.subscribe('auth.statusChange', FB.TemplateData.update);
@@ -6917,7 +6930,7 @@ FB.provide("", {
     "_localeIsRtl": false
 }, true);
 FB.provide("Arbiter", {
-    "_canvasProxyUrl": "connect\/canvas_proxy.php?version=6"
+    "_canvasProxyUrl": "connect\/canvas_proxy.php?version=8"
 }, true);
 FB.provide('Auth', {
     "_xdStorePath": "xd_localstorage\/v2"
