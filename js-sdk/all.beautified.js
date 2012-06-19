@@ -1,4 +1,4 @@
-/*1339553873,169913455,JIT Construction: v573035,en_US*/
+/*1340141576,169913977,JIT Construction: v576126,en_US*/
 
 window.FB || (function() {
     var ES5 = function() {
@@ -569,9 +569,9 @@ window.FB || (function() {
             }
         });
         __d("SDKConfig", [], {
-            "seal": false,
+            "seal": true,
             "errorHandling": {
-                "rate": 0
+                "rate": 5
             }
         });
         __d("XDConfig", [], {
@@ -1631,7 +1631,7 @@ window.FB || (function() {
                     z[ba] = ca;
                     if (g.seal) if (typeof ca === 'function' && !/^_/.test(ba)) aa[ba] = function() {
                         var da = ES5(Array.prototype.slice.call(arguments), 'map', true, function(ea) {
-                            return typeof ea === 'function' ?
+                            return typeof ea === 'function' && /^function/.test(ea.toString()) ?
                             function() {
                                 var fa = arguments;
                                 setTimeout(function() {
