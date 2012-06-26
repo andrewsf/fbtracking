@@ -1,4 +1,4 @@
-/*1340163282,169902707,JIT Construction: v577001,en_US*/
+/*1340667203,169908848,JIT Construction: v580167,en_US*/
 
 window.FB || (function() {
     var ES5 = function() {
@@ -2232,31 +2232,31 @@ window.FB || (function() {
                             channel: w,
                             channelPath: '/' + g.XdUrl + '#',
                             flashUrl: g.Flash.path,
-                            whenReady: function(qa) {
-                                y = qa;
+                            whenReady: function(ma) {
+                                y = ma;
+                                var na = {
+                                    channel: w,
+                                    origin: location.protocol + '//' + location.host,
+                                    channel_path: ja,
+                                    transport: la,
+                                    xd_name: ia
+                                },
+                                    oa = g.XdUrl + '#' + n.encode(na),
+                                    pa = g.useCdn ? k._domain.staticfb : 'http://www.facebook.com/',
+                                    qa = g.useCdn ? k._domain.https_staticfb : 'https://www.facebook.com/';
+                                if (!k.onlyUseHttps()) t = fa({
+                                    url: pa + oa,
+                                    name: 'fb_xdm_frame_http',
+                                    root: ka
+                                });
+                                u = fa({
+                                    url: qa + oa,
+                                    name: 'fb_xdm_frame_https',
+                                    root: ka
+                                });
                             },
                             onMessage: da
-                        }),
-                        ma = {
-                            channel: w,
-                            origin: location.protocol + '//' + location.host,
-                            channel_path: ja,
-                            transport: la,
-                            xd_name: ia
-                        },
-                        na = g.XdUrl + '#' + n.encode(ma),
-                        oa = g.useCdn ? k._domain.staticfb : 'http://www.facebook.com/',
-                        pa = g.useCdn ? k._domain.https_staticfb : 'https://www.facebook.com/';
-                    if (!k.onlyUseHttps()) t = fa({
-                        url: oa + na,
-                        name: 'fb_xdm_frame_http',
-                        root: ka
-                    });
-                    u = fa({
-                        url: pa + na,
-                        name: 'fb_xdm_frame_https',
-                        root: ka
-                    });
+                        });
                     z = true;
                 },
                 sendToFacebook: function(ha, ia) {
