@@ -1,4 +1,4 @@
-/*1340667203,169908848,JIT Construction: v580167,en_US*/
+/*1340846512,169902708,JIT Construction: v581908,en_US*/
 
 window.FB || (function() {
     var ES5 = function() {
@@ -569,9 +569,12 @@ window.FB || (function() {
             }
         });
         __d("SDKConfig", [], {
-            "seal": true,
             "errorHandling": {
                 "rate": 2
+            },
+            "api": {
+                "mode": "warn",
+                "whitelist": ["api", "init", "ui", "getAccessToken", "getAuthResponse", "getLoginStatus", "getUserID", "login", "logout", "Event", "Event.subscribe", "Event.unsubscribe", "XFBML", "XFBML.parse", "Canvas", "Canvas.Prefetcher.addStaticResource", "Canvas.Prefetcher.setCollectionMode", "Canvas.getPageInfo", "Canvas.hideFlashElement", "Canvas.showFlashElement", "Canvas.scrollTo", "Canvas.setAutoGrow", "Canvas.setAutoResize", "Canvas.setDoneLoading", "Canvas.setSize", "Canvas.setUrlHandler", "Canvas.startTimer", "Canvas.stopTimer", "Insights.impression", "Dom", "Dom.addCssRules", "Arbiter", "Arbiter.inform", "JSON", "JSON.parse", "JSON.stringify", "XD", "XD.onMessage", "Music", "Music.send", "Payment", "Payment.setSize", "CanvasInsights", "CanvasInsights.setDoneLoading", "Payment.init", "Music.init", "Music.flashCallback", "Data", "Data.waitOn", "Data.query"]
             }
         });
         __d("XDConfig", [], {
@@ -615,17 +618,21 @@ window.FB || (function() {
                 if (!u.exports) {
                     var y = u.exports = {},
                         z = u.factory;
+                    if (typeof z === 'string') {
+                        var aa = '(' + z + ')';
+                        z = (eval)(aa);
+                    }
                     if (Object.prototype.toString.call(z) === '[object Function]') {
-                        var aa = [],
-                            ba = u.dependencies,
-                            ca = ba.length;
-                        if (u.special & g) ca = Math.min(ca, z.length);
-                        for (w = 0; w < ca; w++) {
-                            v = ba[w];
-                            aa.push(v === 'module' ? u : (v === 'exports' ? y : i(v)));
+                        var ba = [],
+                            ca = u.dependencies,
+                            da = ca.length;
+                        if (u.special & g) da = Math.min(da, z.length);
+                        for (w = 0; w < da; w++) {
+                            v = ca[w];
+                            ba.push(v === 'module' ? u : (v === 'exports' ? y : i(v)));
                         }
-                        var da = z.apply(u.context || a, aa);
-                        if (da) u.exports = da;
+                        var ea = z.apply(u.context || a, ba);
+                        if (ea) u.exports = ea;
                     } else u.exports = z;
                 }
                 if (u.refcount-- === 1) delete b[t];
@@ -1591,7 +1598,7 @@ window.FB || (function() {
             }
             e.exports = g;
         });
-        __d("FB", ["applyWithGuard", "guid", "dotAccess", "copyProperties", "safeEval", "GlobalCallback", "QueryString", "UrlMap", "SDKConfig"], function(a, b, c, d, e, f) {
+        __d("FB", ["applyWithGuard", "guid", "dotAccess", "copyProperties", "safeEval", "GlobalCallback", "Log", "QueryString", "UrlMap", "SDKConfig"], function(a, b, c, d, e, f) {
             var g = c('SDKConfig'),
                 h = b('applyWithGuard'),
                 i = b('guid'),
@@ -1599,131 +1606,170 @@ window.FB || (function() {
                 k = b('copyProperties'),
                 l = b('safeEval'),
                 m = b('GlobalCallback'),
-                n = b('QueryString'),
-                o = b('UrlMap'),
-                p, q;
-            if (g.seal) {
-                p = FB;
-                q = window.FB = {};
-            } else p = window.FB = FB;
+                n = b('Log'),
+                o = b('QueryString'),
+                p = b('UrlMap'),
+                q, r, s, t = j(g, 'api.mode'),
+                u = {};
+            q = FB;
+            r = window.FB = {};
             m.setPrefix('FB._callbacks');
-            var r = g.errorHandling.rate;
-            if (r && Math.floor(Math.random() * 100) + 1 < r) h.setErrorHandler(function(x) {
-                typeof console !== 'undefined' && typeof bagofholding === 'function';
-                delete x._originalError;
-                var y = n.appendToUrl(o.resolve('www', true) + '/common/scribe_endpoint.php', {
-                    c: 'jssdk_error',
-                    m: ES5('JSON', 'stringify', false, {
-                        appId: p._apiKey,
-                        error: x.name || x.message,
-                        extra: x
-                    })
-                });
-                (new Image()).src = y;
-                throw x;
-            });
-
-            function s(x, y) {
-                var z = x ? j(p, x, true) : p;
-                if (g.seal) var aa = x ? j(q, x, true) : q;
-                ES5(ES5('Object', 'keys', false, y), 'forEach', true, function(ba) {
-                    var ca = y[ba];
-                    z[ba] = ca;
-                    if (g.seal) if (typeof ca === 'function' && !/^_/.test(ba)) aa[ba] = function() {
-                        var da = ES5(Array.prototype.slice.call(arguments), 'map', true, function(ea) {
-                            return typeof ea === 'function' && /^function/.test(ea.toString()) ?
-                            function() {
-                                var fa = arguments;
-                                setTimeout(function() {
-                                    ea.apply(null, fa);
-                                }, 0);
-                            } : ea;
-                        });
-                        return h(ca, z, da);
-                    };
+            if (j(g, 'api.whitelist.length')) {
+                s = {};
+                ES5(g.api.whitelist, 'forEach', true, function(ca) {
+                    s[ca] = 1;
                 });
             }
-            var t = /iframe_canvas|app_runner/.test(window.name),
-                u = /dialog/.test(window.name),
-                v = (function() {
-                    if (location.protocol == 'https:' && (window == top || !(t || u))) return true;
+            function v(ca) {
+                k(ca, {
+                    appId: q._apiKey
+                });
+                (new Image()).src = o.appendToUrl(p.resolve('www', true) + '/common/scribe_endpoint.php', {
+                    c: 'jssdk_error',
+                    m: ES5('JSON', 'stringify', false, ca)
+                });
+            }
+            var w = g.errorHandling.rate;
+            if (w && Math.floor(Math.random() * 100) + 1 < w) h.setErrorHandler(function(ca) {
+                typeof console !== 'undefined' && typeof bagofholding === 'function';
+                delete ca._originalError;
+                v({
+                    error: ca.name || ca.message,
+                    extra: ca
+                });
+                throw ca;
+            });
+
+            function x(ca, da) {
+                var ea = ca ? j(q, ca, true) : q,
+                    fa = ca ? j(r, ca, true) : r;
+                ES5(ES5('Object', 'keys', false, da), 'forEach', true, function(ga) {
+                    var ha = (ca ? ca + '.' : '') + ga,
+                        ia = da[ga],
+                        ja, ka;
+                    ea[ga] = ia;
+                    if (typeof ia !== 'function') return;
+                    if (/^_/.test(ga)) {
+                        ja = 'hide';
+                    } else if (s && !s[ha]) ja = t;
+                    switch (ja) {
+                    case 'hide':
+                        return;
+                    case 'stub':
+                        ka = function() {
+                            n.warn('The method FB.%s has been removed from the JS SDK.', ha);
+                        };
+                        break;
+                    default:
+                        ka = function() {
+                            if (ja === 'warn') {
+                                n.warn('The method FB.%s is not officially supported by ' + 'Facebook and access to it will soon be removed.', ha);
+                                if (!u.hasOwnProperty(ha)) {
+                                    v({
+                                        error: 'Private method used',
+                                        extra: {
+                                            args: ha
+                                        }
+                                    });
+                                    u[ha] = true;
+                                }
+                            }
+                            var la = ES5(Array.prototype.slice.call(arguments), 'map', true, function(ma) {
+                                return typeof ma === 'function' && /^function/.test(ma.toString()) ?
+                                function() {
+                                    var na = arguments;
+                                    setTimeout(function() {
+                                        ma.apply(null, na);
+                                    }, 0);
+                                } : ma;
+                            });
+                            return h(ia, ea, la);
+                        };
+                    }
+                    if (ka) fa[ga] = ka;
+                });
+            }
+            var y = /iframe_canvas|app_runner/.test(window.name),
+                z = /dialog/.test(window.name),
+                aa = (function() {
+                    if (location.protocol == 'https:' && (window == top || !(y || z))) return true;
                     if (/_fb_https?/.test(window.name)) return ES5(window.name, 'indexOf', true, '_fb_https') != -1;
                 })();
 
-            function w(x, y, z, aa) {
-                for (var ba in y) if (z || typeof x[ba] === 'undefined') x[ba] = aa ? aa(y[ba]) : y[ba];
-                return x;
+            function ba(ca, da, ea, fa) {
+                for (var ga in da) if (ea || typeof ca[ga] === 'undefined') ca[ga] = fa ? fa(da[ga]) : da[ga];
+                return ca;
             }
-            k(p, {
+            k(q, {
                 _apiKey: null,
                 _authResponse: null,
                 _userStatus: 'unknown',
                 _logging: true,
-                _inCanvas: t,
-                _https: v,
+                _inCanvas: y,
+                _https: aa,
                 onlyUseHttps: function() {
-                    return p._https === true;
+                    return q._https === true;
                 },
                 onlyUseHttp: function() {
-                    return p._https === false && location.protocol == 'http:';
+                    return q._https === false && location.protocol == 'http:';
                 },
                 _locale: null,
                 _localeIsRtl: false,
-                getDomain: function(x, y) {
-                    var z = !y && (window.location.protocol == 'https:' || p._https);
-                    switch (x) {
+                getDomain: function(ca, da) {
+                    var ea = !da && (window.location.protocol == 'https:' || q._https);
+                    switch (ca) {
                     case 'api':
-                        return p._domain.api;
+                        return q._domain.api;
                     case 'api_read':
-                        return p._domain.api_read;
+                        return q._domain.api_read;
                     case 'cdn':
-                        return z ? p._domain.https_cdn : p._domain.cdn;
+                        return ea ? q._domain.https_cdn : q._domain.cdn;
                     case 'cdn_foreign':
-                        return p._domain.cdn_foreign;
+                        return q._domain.cdn_foreign;
                     case 'https_cdn':
-                        return p._domain.https_cdn;
+                        return q._domain.https_cdn;
                     case 'graph':
-                        return p._domain.graph;
+                        return q._domain.graph;
                     case 'staticfb':
-                        return z ? p._domain.https_staticfb : p._domain.staticfb;
+                        return ea ? q._domain.https_staticfb : q._domain.staticfb;
                     case 'https_staticfb':
-                        return p._domain.https_staticfb;
+                        return q._domain.https_staticfb;
                     case 'www':
-                        return z ? p._domain.https_www : p._domain.www;
+                        return ea ? q._domain.https_www : q._domain.www;
                     case 'https_www':
-                        return p._domain.https_www;
+                        return q._domain.https_www;
                     case 'm':
-                        return z ? p._domain.https_m : p._domain.m;
+                        return ea ? q._domain.https_m : q._domain.m;
                     case 'https_m':
-                        return p._domain.https_m;
+                        return q._domain.https_m;
                     }
                 },
-                copy: w,
-                create: function(x, y) {
-                    var z = x.split('.');
-                    x = z.pop();
-                    var aa = z.length ? j(p, z.join('.'), true) : p;
-                    return x in aa ? aa[x] : aa[x] = (y || {});
+                copy: ba,
+                create: function(ca, da) {
+                    var ea = ca.split('.');
+                    ca = ea.pop();
+                    var fa = ea.length ? j(q, ea.join('.'), true) : q;
+                    return ca in fa ? fa[ca] : fa[ca] = (da || {});
                 },
-                provide: s,
+                provide: x,
                 guid: i,
-                log: function(x) {
-                    if (p._logging) if (window.Debug && window.Debug.writeln) {
-                        window.Debug.writeln(x);
-                    } else if (window.console) window.console.log(x);
-                    if (p.Event) p.Event.fire('fb.log', x);
+                log: function(ca) {
+                    if (q._logging) if (window.Debug && window.Debug.writeln) {
+                        window.Debug.writeln(ca);
+                    } else if (window.console) window.console.log(ca);
+                    if (q.Event) q.Event.fire('fb.log', ca);
                 },
-                $: function(x) {
-                    return document.getElementById(x);
+                $: function(ca) {
+                    return document.getElementById(ca);
                 },
                 dotAccess: j,
                 applyWithGuard: h,
                 safeEval: l
             });
-            if (q) k(q, {
-                provide: s
+            if (r) k(r, {
+                provide: x
             });
-            e.exports = p;
+            e.exports = q;
         });
         __d("legacy:fb.api", ["ApiClient", "FB", "SDKConfig"], function(a, b, c, d) {
             var e = c('SDKConfig'),
@@ -2093,9 +2139,7 @@ window.FB || (function() {
                                 return;
                             }
                             l.debug('received message %s from %s', w, x);
-                            if (x != 'native') if (w.substring(0, u.length) == u) {
-                                w = w.substring(u.length);
-                            } else return;
+                            if (w.substring(0, u.length) == u) w = w.substring(u.length);
                             t.onMessage(w, x);
                         });
                         t.whenReady(v);
@@ -2752,7 +2796,7 @@ window.FB || (function() {
             if (document.addEventListener) {
                 document.addEventListener('DOMContentLoaded', a, false);
             } else if (document.attachEvent) document.attachEvent('onreadystatechange', a);
-            if (FB.UA.ie() && window === top)(function() {
+            if (FB.UA.ie() && window == window.top)(function() {
                 try {
                     document.documentElement.doScroll('left');
                 } catch (c) {
@@ -3563,7 +3607,7 @@ window.FB || (function() {
                 var e = !FB._userID && a,
                     f = FB._userID && !a,
                     g = a && FB._userID != c,
-                    h = e || f || g,
+                    h = a != FB._authResponse,
                     i = b != FB._userStatus,
                     j = {
                         authResponse: a,
@@ -4235,6 +4279,9 @@ window.FB || (function() {
                 localName: 'connect-bar',
                 className: 'FB.XFBML.ConnectBar'
             }, {
+                localName: 'degrees',
+                className: 'FB.XFBML.Degrees'
+            }, {
                 localName: 'fan',
                 className: 'FB.XFBML.Fan'
             }, {
@@ -4262,6 +4309,9 @@ window.FB || (function() {
             }, {
                 localName: 'name',
                 className: 'FB.XFBML.Name'
+            }, {
+                localName: 'page-events',
+                className: 'FB.XFBML.PageEvents'
             }, {
                 localName: 'privacy-selector',
                 className: 'FB.XFBML.PrivacySelector'
@@ -4295,6 +4345,12 @@ window.FB || (function() {
             }, {
                 localName: 'subscribe',
                 className: 'FB.XFBML.Subscribe'
+            }, {
+                localName: 'typeahead',
+                className: 'FB.XFBML.Typeahead'
+            }, {
+                localName: 'want',
+                className: 'FB.XFBML.Want'
             }],
             _widgetPipeEnabledTagCount: 0,
             _widgetPipeIsEnabled: function() {
@@ -5626,6 +5682,31 @@ window.FB || (function() {
                 missingProfileUrl: 'pics/q_silhouette.gif'
             }
         });
+        FB.subclass('XFBML.Degrees', 'XFBML.IframeWidget', null, {
+            _showLoader: false,
+            setupAndValidate: function() {
+                this._attr = {
+                    api_key: FB._apiKey,
+                    channel_url: this.getChannelUrl(),
+                    font: this.getAttribute('font'),
+                    href: this.getAttribute('href'),
+                    colorscheme: this.getAttribute('color-scheme')
+                };
+                return true;
+            },
+            getSize: function() {
+                return {
+                    width: 500,
+                    height: 25
+                };
+            },
+            getUrlBits: function() {
+                return {
+                    name: 'degrees',
+                    params: this._attr
+                };
+            }
+        });
         FB.subclass('XFBML.Fan', 'XFBML.IframeWidget', null, {
             _visibleAfter: 'load',
             setupAndValidate: function() {
@@ -6341,6 +6422,24 @@ window.FB || (function() {
                 this.dom.innerHTML = c;
             }
         });
+        FB.subclass('XFBML.PageEvents', 'XFBML.IframeWidget', null, {
+            setupAndValidate: function() {
+                this._attr = {
+                    channel: this.getChannelUrl(),
+                    api_key: FB._apiKey,
+                    font: this.getAttribute('font'),
+                    colorscheme: this.getAttribute('colorscheme'),
+                    href: this.getAttribute('href')
+                };
+                return true;
+            },
+            getUrlBits: function() {
+                return {
+                    name: 'page_events',
+                    params: this._attr
+                };
+            }
+        });
         FB.subclass('XFBML.PrivacySelector', 'XFBML.IframeWidget', null, {
             getUrlBits: function() {
                 return {
@@ -6749,77 +6848,26 @@ window.FB || (function() {
                 };
             }
         });
-        FB.subclass('XFBML.ShareButton', 'XFBML.Element', null, {
-            process: function() {
-                this._href = this.getAttribute('href', window.location.href);
-                this._type = this.getAttribute('type', 'icon_link');
-                FB.Dom.addCss(this.dom, 'fb_share_count_hidden');
-                this._renderButton(true);
-            },
-            _renderButton: function(a) {
-                if (!this.isValid()) {
-                    this.fire('render');
-                    return;
-                }
-                var b = '',
-                    c = '',
-                    d = '',
-                    e = '',
-                    f = FB.Intl.tx._("Share"),
-                    g = '';
-                switch (this._type) {
-                case 'icon':
-                case 'icon_link':
-                    e = 'fb_button_simple';
-                    b = ('<span class="fb_button_text">' + (this._type == 'icon_link' ? f : '&nbsp;') + '</span>');
-                    a = false;
-                    break;
-                case 'link':
-                    b = FB.Intl.tx._("Share on Facebook");
-                    a = false;
-                    break;
-                case 'button':
-                    b = '<span class="fb_button_text">' + f + '</span>';
-                    e = 'fb_button fb_button_small';
-                    a = false;
-                    break;
-                case 'button_count':
-                    b = '<span class="fb_button_text">' + f + '</span>';
-                    c = ('<span class="fb_share_count_nub_right">&nbsp;</span>' + '<span class="fb_share_count fb_share_count_right">' + this._getCounterMarkup() + '</span>');
-                    e = 'fb_button fb_button_small';
-                    break;
-                default:
-                    b = '<span class="fb_button_text">' + f + '</span>';
-                    d = ('<span class="fb_share_count_nub_top">&nbsp;</span>' + '<span class="fb_share_count fb_share_count_top">' + this._getCounterMarkup() + '</span>');
-                    e = 'fb_button fb_button_small';
-                    g = 'fb_share_count_wrapper';
-                }
-                var h = FB.guid();
-                this.dom.innerHTML = FB.String.format('<span class="{0}">{4}<a id="{1}" class="{2}" ' + 'target="_blank">{3}</a>{5}</span>', g, h, e, b, d, c);
-                var i = document.getElementById(h);
-                i.href = this._href;
-                i.onclick = function() {
-                    FB.ui({
-                        method: 'stream.share',
-                        u: this.href
-                    });
-                    return false;
+        FB.subclass('XFBML.ShareButton', 'XFBML.IframeWidget', null, {
+            setupAndValidate: function() {
+                this._attr = {
+                    channel: this.getChannelUrl(),
+                    href: FB.URI.resolve(this.getAttribute('href')),
+                    type: this.getAttribute('type')
                 };
-                if (!a) this.fire('render');
+                return true;
             },
-            _getCounterMarkup: function() {
-                if (!this._count) this._count = FB.Data._selectByIndex(['total_count'], 'link_stat', 'url', this._href);
-                var a = '0';
-                if (this._count.value !== undefined) {
-                    if (this._count.value.length > 0) {
-                        var b = this._count.value[0].total_count;
-                        if (b > 3) {
-                            FB.Dom.removeCss(this.dom, 'fb_share_count_hidden');
-                            a = b >= 1e+07 ? Math.round(b / 1e+06) + 'M' : (b >= 10000 ? Math.round(b / 1000) + 'K' : b);
-                        }
-                    }
-                } else this._count.wait(ES5(this._renderButton, 'bind', true, this, false));
-                return '<span class="fb_share_count_inner">' + a + '</span>';
+            getUrlBits: function() {
+                return {
+                    name: 'share_button',
+                    params: this._attr
+                };
+            },
+            getSize: function() {
+                return {
+                    height: 60,
+                    width: 200
+                };
             }
         });
         FB.subclass('XFBML.SocialContext', 'XFBML.IframeWidget', null, {
@@ -6906,6 +6954,60 @@ window.FB || (function() {
                     d = e[a].min;
                 } else if (d > e[a].max) d = e[a].max;
                 return d;
+            }
+        });
+        FB.subclass('XFBML.Typeahead', 'XFBML.IframeWidget', null, {
+            getUrlBits: function() {
+                return {
+                    name: 'typeahead',
+                    params: this._attr
+                };
+            },
+            setupAndValidate: function() {
+                this._attr = {
+                    channel: this.getChannelUrl(),
+                    api_key: FB._apiKey,
+                    font: this.getAttribute('font'),
+                    width: this.getAttribute('width')
+                };
+                this._showLoader = false;
+                return true;
+            },
+            getSize: function() {
+                return {
+                    width: this._attr.width || 300,
+                    height: 22
+                };
+            }
+        });
+        FB.subclass('XFBML.Want', 'XFBML.IframeWidget', null, {
+            _showLoader: false,
+            setupAndValidate: function() {
+                this._attr = {
+                    api_key: FB._apiKey,
+                    channel_url: this.getChannelUrl(),
+                    font: this.getAttribute('font'),
+                    href: FB.URI.resolve(this.getAttribute('href', window.location.href)),
+                    colorscheme: this.getAttribute('color-scheme'),
+                    show_faces: this._getBoolAttribute('show-faces', true),
+                    width: this._getWidgetWidth()
+                };
+                return true;
+            },
+            getSize: function() {
+                return {
+                    width: this._getWidgetWidth(),
+                    height: this._getBoolAttribute('show-faces', true) ? 80 : 35
+                };
+            },
+            _getWidgetWidth: function() {
+                return Math.min(Math.max(this._getPxAttribute('width', 450), 225), 900);
+            },
+            getUrlBits: function() {
+                return {
+                    name: 'want',
+                    params: this._attr
+                };
             }
         });
         void(0);;
