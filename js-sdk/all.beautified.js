@@ -1,4 +1,4 @@
-/*1342648680,169917313,JIT Construction: v593183,en_US*/
+/*1343121836,169931635,JIT Construction: v596438,en_US*/
 
 window.FB || (function() {
     var ES5 = function() {
@@ -2540,7 +2540,7 @@ window.FB || (function() {
                 var b = window.document.getElementsByTagName('object');
                 for (var c = 0; c < b.length; c++) {
                     var d = b[c];
-                    if (d.type.toLowerCase() != "application/x-shockwave-flash" && d.classid.toUpperCase() != FB.Canvas._flashClassID) continue;
+                    if (d.type.toLowerCase() != "application/x-shockwave-flash" && (!d.classid || d.classid.toUpperCase() != FB.Canvas._flashClassID)) continue;
                     var e = false;
                     for (var f = 0; f < d.childNodes.length; f++) if (d.childNodes[f].nodeName.toLowerCase() == "param" && d.childNodes[f].name.toLowerCase() == "wmode") if (d.childNodes[f].value.toLowerCase() == "opaque" || d.childNodes[f].value.toLowerCase() == "transparent") e = true;
                     if (!e) {
@@ -6331,6 +6331,7 @@ window.FB || (function() {
         FB.subclass('XFBML.LoginButton', 'XFBML.IframeWidget', null, {
             _showLoader: false,
             setupAndValidate: function() {
+                var a = this.getAttribute('registration-url');
                 this._attr = {
                     channel: this.getChannelUrl(),
                     colorscheme: this.getAttribute('colorscheme'),
@@ -6340,16 +6341,16 @@ window.FB || (function() {
                     show_login_face: this._getBoolAttribute('show-login-face'),
                     size: this.getAttribute('size'),
                     login_text: this.dom.textContent || this.dom.innerText,
-                    registration_url: this.getAttribute('registration-url'),
+                    registration_url: a ? FB.URI.resolve(a) : null,
                     one_click: this.getAttribute('one-click'),
                     scope: this.getAttribute('scope') || this.getAttribute('perms'),
                     auto_logout_link: this._getBoolAttribute('auto-logout-link')
                 };
                 this.clear();
-                var a = this.getAttribute('on-login');
-                if (a) this.subscribe('xd.refreshLoginStatus', ES5(function() {
-                    FB.getLoginStatus(ES5(function(b) {
-                        FB.Helper.invokeHandler(a, this, [b]);
+                var b = this.getAttribute('on-login');
+                if (b) this.subscribe('xd.refreshLoginStatus', ES5(function() {
+                    FB.getLoginStatus(ES5(function(c) {
+                        FB.Helper.invokeHandler(b, this, [c]);
                     }, 'bind', true, this));
                 }, 'bind', true, this));
                 return true;
