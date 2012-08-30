@@ -1,4 +1,4 @@
-/*1346266690,169918328,JIT Construction: v618485,en_US*/
+/*1346370063,172678178,JIT Construction: v619492,en_US*/
 
 window.FB || (function(window) {
     var document = window.document;
@@ -548,7 +548,7 @@ window.FB || (function(window) {
         });
         __d("SDKConfig", [], {
             "xfbmlUseLegacy": true,
-            "migrate": true,
+            "migrate": false,
             "errorHandling": {
                 "rate": 2
             },
@@ -563,7 +563,7 @@ window.FB || (function(window) {
             }
         });
         __d("XDConfig", [], {
-            "XdUrl": "connect\/xd_arbiter.php?version=10",
+            "XdUrl": "connect\/xd_arbiter.php?version=11",
             "Flash": {
                 "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/ys\/r\/WON-TVLCpDP.swf"
             },
