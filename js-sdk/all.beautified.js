@@ -1,4 +1,4 @@
-/*1353010558,171860519,JIT Construction: v672478,en_US*/
+/*1353788320,171984440,JIT Construction: v677653,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -58,14 +58,21 @@ try {
                 return g.exports;
             };
             __d = function(e, f, g, h) {
-                if (typeof g === 'function') {
+                switch (typeof g) {
+                case 'function':
                     b[e] = {
                         factory: g,
                         deps: d.concat(f),
                         exports: {}
                     };
                     if (h === 3) require(e);
-                } else c[e] = g;
+                    break;
+                case 'object':
+                    c[e] = g;
+                    break;
+                default:
+                    throw new TypeError('Wrong type for factory object');
+                }
             };
         })(this);
 
@@ -624,13 +631,14 @@ try {
             "useCdn": true
         });
         __d("SDKConfig", [], {
+            "bustCache": true,
             "tagCountLogRate": 0.01,
             "errorHandling": {
                 "rate": 4
             },
             "api": {
                 "mode": "warn",
-                "whitelist": ["Arbiter", "Arbiter.inform", "Canvas", "Canvas.Prefetcher.addStaticResource", "Canvas.Prefetcher.setCollectionMode", "Canvas.getPageInfo", "Canvas.hideFlashElement", "Canvas.scrollTo", "Canvas.setAutoGrow", "Canvas.setDoneLoading", "Canvas.setSize", "Canvas.setUrlHandler", "Canvas.showFlashElement", "Canvas.startTimer", "Canvas.stopTimer", "Data", "Data.query", "Data.waitOn", "Dom", "Dom.addCssRules", "Event", "Event.subscribe", "Event.unsubscribe", "Insights", "Insights.impression", "Music", "Music.flashCallback", "Music.init", "Music.send", "Payment", "Payment.init", "Payment.setSize", "UA", "UA.nativeApp", "XD", "XD.onMessage", "XFBML", "XFBML.parse", "api", "getAccessToken", "getAuthResponse", "getLoginStatus", "getUserID", "init", "login", "logout", "ui", "ThirdPartyProvider", "ThirdPartyProvider.sendData", "ThirdPartyProvider.init", "ui:subscribe", "Data.query:wait", "Data.waitOn:wait", "Frictionless.isAllowed", "XFBML.RecommendationsBar", "XFBML.RecommendationsBar.markRead"]
+                "whitelist": ["Canvas", "Canvas.Prefetcher", "Canvas.Prefetcher.addStaticResource", "Canvas.Prefetcher.setCollectionMode", "Canvas.getHash", "Canvas.getPageInfo", "Canvas.hideFlashElement", "Canvas.scrollTo", "Canvas.setAutoGrow", "Canvas.setDoneLoading", "Canvas.setHash", "Canvas.setSize", "Canvas.setUrlHandler", "Canvas.showFlashElement", "Canvas.startTimer", "Canvas.stopTimer", "Data", "Data.process", "Data.query", "Data.waitOn", "Event", "Event.subscribe", "Event.unsubscribe", "Music.flashCallback", "Music.init", "Music.send", "Payment", "Payment.init", "Payment.setSize", "ThirdPartyProvider", "ThirdPartyProvider.init", "ThirdPartyProvider.sendData", "UA", "UA.nativeApp", "XFBML", "XFBML.RecommendationsBar", "XFBML.RecommendationsBar.markRead", "XFBML.parse", "addFriend", "api", "getAccessToken", "getAuthResponse", "getLoginStatus", "getUserID", "init", "login", "logout", "publish", "share", "ui", "ui:subscribe", "Data.query:wait", "Data.waitOn:wait"]
             },
             "initSitevars": {
                 "enableMobileComments": 1,
@@ -1173,8 +1181,11 @@ try {
                 opera: function() {
                     return v() || j;
                 },
-                safari: function() {
+                webkit: function() {
                     return v() || k;
+                },
+                safari: function() {
+                    return w.webkit();
                 },
                 chrome: function() {
                     return v() || l;
@@ -1652,8 +1663,10 @@ try {
         __d("resolveURI", [], function(a, b, c, d, e, f) {
             function g(h) {
                 if (!h) return window.location.href;
+                h = h.replace(/&/g, '&amp;')
+                    .replace(/"/g, '&quot;');
                 var i = document.createElement('div');
-                i.innerHTML = '<a href="' + h.replace(/"/g, '&quot;') + '"></a>';
+                i.innerHTML = '<a href="' + h + '"></a>';
                 return i.firstChild.href;
             }
             e.exports = g;
@@ -3855,11 +3868,11 @@ try {
                         },
                         transform: function(da) {
                             if (!w.getClientID()) {
-                                r.error('Log.errorin() called before FB.init().');
+                                r.error('FB.login() called before FB.init().');
                                 return;
                             }
                             if (g.getAuthResponse() && !da.params.scope) {
-                                r.error('Log.errorin() called when user is already connected.');
+                                r.error('FB.login() called when user is already connected.');
                                 da.cb && da.cb({
                                     status: w.getLoginStatus(),
                                     authResponse: g.getAuthResponse()
@@ -4294,7 +4307,6 @@ try {
                     }, n);
                 }
             });
-            i.provide('Auth', e);
             e.subscribe('logout', ES5(h.fire, 'bind', true, h, 'auth.logout'));
             e.subscribe('login', ES5(h.fire, 'bind', true, h, 'auth.login'));
             e.subscribe('authresponse.change', ES5(h.fire, 'bind', true, h, 'auth.authResponseChange'));
@@ -4305,7 +4317,7 @@ try {
                     e.setAuthResponse(n.authResponse, 'connected');
                 } else if (k.getUseCookie()) {
                     var o = f.loadSignedRequest();
-                    try {
+                    if (o) try {
                         var q = l.parse(o);
                         k.setUserID(q.user_id || 0);
                     } catch (p) {
@@ -4327,11 +4339,15 @@ try {
             function n() {
                 var r = g.getWindow()
                     .document,
-                    s = r.documentElement,
-                    t = ES5([r.scrollHeight, s.scrollHeight, r.offsetHeight, s.offsetHeight, r.clientHeight, s.clientHeight], 'filter', true, function(u) {
-                        return !!u;
-                    });
-                return Math.max.apply(Math, t);
+                    s = r.body,
+                    t = r.documentElement,
+                    u = Math.max(s.offsetTop, 0),
+                    v = Math.max(t.offsetTop, 0),
+                    w = s.scrollHeight + u,
+                    x = s.offsetHeight + u,
+                    y = t.scrollHeight + v,
+                    z = t.offsetHeight + v;
+                return Math.max(w, x, y, z);
             }
             function o(r) {
                 if (!j.getInitialized() && arguments.callee.caller != p) h.warn('FB.init is required for setSize to take effect');
@@ -4780,7 +4796,7 @@ try {
                 n = {
                     query: function(o, p) {
                         var q = new j()
-                            .parse(arguments);
+                            .parse(Array.prototype.slice.call(arguments));
                         n.queue.push(q);
                         n._waitToProcess();
                         return q;
