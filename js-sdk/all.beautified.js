@@ -1,4 +1,4 @@
-/*1354021230,171873064,JIT Construction: v679454,en_US*/
+/*1354130534,172635163,JIT Construction: v681130,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -638,7 +638,7 @@ try {
             },
             "api": {
                 "mode": "warn",
-                "whitelist": ["Canvas", "Canvas.Prefetcher", "Canvas.Prefetcher.addStaticResource", "Canvas.Prefetcher.setCollectionMode", "Canvas.getHash", "Canvas.getPageInfo", "Canvas.hideFlashElement", "Canvas.scrollTo", "Canvas.setAutoGrow", "Canvas.setDoneLoading", "Canvas.setHash", "Canvas.setSize", "Canvas.setUrlHandler", "Canvas.showFlashElement", "Canvas.startTimer", "Canvas.stopTimer", "Data", "Data.process", "Data.query", "Data.waitOn", "Event", "Event.subscribe", "Event.unsubscribe", "Music.flashCallback", "Music.init", "Music.send", "Payment", "Payment.init", "Payment.setSize", "ThirdPartyProvider", "ThirdPartyProvider.init", "ThirdPartyProvider.sendData", "UA", "UA.nativeApp", "XFBML", "XFBML.RecommendationsBar", "XFBML.RecommendationsBar.markRead", "XFBML.parse", "addFriend", "api", "getAccessToken", "getAuthResponse", "getLoginStatus", "getUserID", "init", "login", "logout", "publish", "share", "ui", "ui:subscribe", "Data.query:wait", "Data.waitOn:wait"]
+                "whitelist": ["Canvas", "Canvas.Prefetcher", "Canvas.Prefetcher.addStaticResource", "Canvas.Prefetcher.setCollectionMode", "Canvas.getPageInfo", "Canvas.hideFlashElement", "Canvas.scrollTo", "Canvas.setAutoGrow", "Canvas.setDoneLoading", "Canvas.setSize", "Canvas.setUrlHandler", "Canvas.showFlashElement", "Canvas.startTimer", "Canvas.stopTimer", "Data", "Data.process", "Data.query", "Data.query:wait", "Data.waitOn", "Data.waitOn:wait", "Event", "Event.subscribe", "Event.unsubscribe", "Music.flashCallback", "Music.init", "Music.send", "Payment", "Payment.init", "Payment.setSize", "ThirdPartyProvider", "ThirdPartyProvider.init", "ThirdPartyProvider.sendData", "UA", "UA.nativeApp", "XFBML", "XFBML.RecommendationsBar", "XFBML.RecommendationsBar.markRead", "XFBML.parse", "addFriend", "api", "getAccessToken", "getAuthResponse", "getLoginStatus", "getUserID", "init", "login", "logout", "publish", "share", "ui", "ui:subscribe"]
             },
             "initSitevars": {
                 "enableMobileComments": 1,
@@ -1008,7 +1008,7 @@ try {
                     Scope: undefined,
                     Secure: undefined,
                     UseCookie: false,
-                    UserID: 0
+                    UserID: ''
                 });
             h(k, {
                 ENVIRONMENTS: j,
@@ -2348,7 +2348,7 @@ try {
 
             function x(da, ea) {
                 var fa = p.getUserID(),
-                    ga = 0;
+                    ga = '';
                 if (da) if (da.userID) {
                     ga = da.userID;
                 } else if (da.signedRequest) {
@@ -3297,35 +3297,27 @@ try {
                 api: f
             });
         }, 3);
-        __d("sdk.Canvas.Environment", ["sdk.Runtime", "Log", "sdk.RPC"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Runtime'),
-                h = b('Log'),
-                i = b('sdk.RPC');
+        __d("sdk.Canvas.Environment", ["sdk.RPC"], function(a, b, c, d, e, f) {
+            var g = b('sdk.RPC');
 
-            function j(m) {
-                if (typeof m !== 'function') {
-                    h.error('FB.Canvas.getPageInfo called without a callback');
-                    return;
-                }
-                if (!g.getInitialized()) h.warn('FB.init is required for getPageInfo to take effect');
-                i.remote.getPageInfo(function(n) {
-                    m(n.result);
+            function h(k) {
+                g.remote.getPageInfo(function(l) {
+                    k(l.result);
                 });
             }
-            function k(m, n) {
-                if (!g.getInitialized()) h.warn('FB.init is required for scrollTo to take effect');
-                i.remote.scrollTo({
-                    x: m || 0,
-                    y: n || 0
+            function i(k, l) {
+                g.remote.scrollTo({
+                    x: k || 0,
+                    y: l || 0
                 });
             }
-            i.stub('getPageInfo');
-            i.stub('scrollTo');
-            var l = {
-                getPageInfo: j,
-                scrollTo: k
+            g.stub('getPageInfo');
+            g.stub('scrollTo');
+            var j = {
+                getPageInfo: h,
+                scrollTo: i
             };
-            e.exports = l;
+            e.exports = j;
         });
         __d("sdk.Intl", ["Log"], function(a, b, c, d, e, f) {
             var g = b('Log'),
@@ -3904,9 +3896,9 @@ try {
                         url: 'logout.php',
                         transform: function(da) {
                             if (!w.getClientID()) {
-                                r.error('Log.errorout() called before calling FB.init().');
+                                r.error('FB.logout() called before calling FB.init().');
                             } else if (!g.getAuthResponse()) {
-                                r.error('Log.errorout() called without an access token.');
+                                r.error('FB.logout() called without an access token.');
                             } else {
                                 da.params.next = ca.xdHandler(da.cb, da.id, 'parent', g.getAuthResponse(), 'logout');
                                 return da;
@@ -4200,6 +4192,7 @@ try {
                             try {
                                 if (fa.close) {
                                     fa.close();
+                                    window.focus();
                                     ca._popupCount--;
                                 }
                             } catch (ha) {}
@@ -4217,6 +4210,7 @@ try {
                         return ca._xdNextHandler(g.xdResponseWrapper(da, ga, ha), ea, fa, true);
                     }
                 };
+            v.stub('showDialog');
             e.exports = ca;
         });
         __d("sdk.ui", ["Assert", "copyProperties", "Log", "sdk.Runtime", "sdk.UIServer", "SDKConfig"], function(a, b, c, d, e, f) {
@@ -4319,7 +4313,7 @@ try {
                     var o = f.loadSignedRequest();
                     if (o) try {
                         var q = l.parse(o);
-                        k.setUserID(q.user_id || 0);
+                        k.setUserID(q.user_id || '');
                     } catch (p) {
                         f.clearSignedRequestCookie();
                     }
@@ -4327,103 +4321,6 @@ try {
                 }
             });
         }, 3);
-        __d("sdk.Canvas.IframeHandling", ["DOMWrapper", "Log", "sdk.RPC", "sdk.Runtime", "wrapFunction"], function(a, b, c, d, e, f) {
-            var g = b('DOMWrapper'),
-                h = b('Log'),
-                i = b('sdk.RPC'),
-                j = b('sdk.Runtime'),
-                k = b('wrapFunction'),
-                l = null,
-                m;
-
-            function n() {
-                var r = g.getWindow()
-                    .document,
-                    s = r.body,
-                    t = r.documentElement,
-                    u = Math.max(s.offsetTop, 0),
-                    v = Math.max(t.offsetTop, 0),
-                    w = s.scrollHeight + u,
-                    x = s.offsetHeight + u,
-                    y = t.scrollHeight + v,
-                    z = t.offsetHeight + v;
-                return Math.max(w, x, y, z);
-            }
-            function o(r) {
-                if (!j.getInitialized() && arguments.callee.caller != p) h.warn('FB.init is required for setSize to take effect');
-                if (typeof r != 'object') r = {};
-                var s = 0,
-                    t = 0;
-                if (!r.height) {
-                    r.height = n();
-                    s = 16;
-                    t = 4;
-                }
-                if (!r.frame) r.frame = window.name || 'iframe_canvas';
-                if (m) {
-                    var u = m.height,
-                        v = r.height - u;
-                    if (v <= t && v >= -s) return false;
-                }
-                m = r;
-                i.remote.setSize(r);
-                return true;
-            }
-            function p(r, s) {
-                if (!j.getInitialized()) h.warn('FB.init is required for setAutoGrow to take effect');
-                if (s === undefined && typeof r === 'number') {
-                    s = r;
-                    r = true;
-                }
-                if (r || r === undefined) {
-                    if (l === null) l = setInterval(k(function() {
-                        o();
-                    }, 'entry', 'setAutoGrow:setTimeout'), s || 100);
-                    o();
-                } else if (l !== null) {
-                    clearInterval(l);
-                    l = null;
-                }
-            }
-            i.stub('setSize');
-            var q = {
-                setSize: o,
-                setAutoGrow: p
-            };
-            e.exports = q;
-        });
-        __d("sdk.Canvas.Tti", ["sdk.RPC", "sdk.Runtime"], function(a, b, c, d, e, f) {
-            var g = b('sdk.RPC'),
-                h = b('sdk.Runtime');
-
-            function i(n, o) {
-                var p = {
-                    appId: h.getClientID(),
-                    time: ES5('Date', 'now', false),
-                    name: o
-                }, q = [p];
-                if (n) q.push(function(r) {
-                    n(r.result);
-                });
-                g.remote.logTtiMessage.apply(null, q);
-            }
-            function j() {
-                i(null, 'StartIframeAppTtiTimer');
-            }
-            function k(n) {
-                i(n, 'StopIframeAppTtiTimer');
-            }
-            function l(n) {
-                i(n, 'RecordIframeAppTti');
-            }
-            g.stub('logTtiMessage');
-            var m = {
-                setDoneLoading: l,
-                startTimer: j,
-                stopTimer: k
-            };
-            e.exports = m;
-        });
         __d("sdk.Canvas.Flash", ["sdk.api", "sdk.RPC", "Log", "sdk.Runtime", "createArrayFrom"], function(a, b, c, d, e, f) {
             var g = b('sdk.api'),
                 h = b('sdk.RPC'),
@@ -4489,71 +4386,190 @@ try {
             };
             e.exports = q;
         });
-        __d("sdk.Canvas.Navigation", ["Assert", "sdk.RPC", "Log", "sdk.Runtime"], function(a, b, c, d, e, f) {
-            var g = b('Assert'),
+        __d("sdk.Canvas.IframeHandling", ["DOMWrapper", "sdk.RPC", "wrapFunction"], function(a, b, c, d, e, f) {
+            var g = b('DOMWrapper'),
                 h = b('sdk.RPC'),
-                i = b('Log'),
-                j = b('sdk.Runtime');
+                i = b('wrapFunction'),
+                j = null,
+                k;
 
-            function k(o) {
-                g.isString(o, 'FB.Canvas.setHash must have a String as argument');
-                o = o.replace(/[{}<\[\]>#%"]/, encodeURIComponent);
-                h.remote.setHash(o);
+            function l() {
+                var p = g.getWindow()
+                    .document,
+                    q = p.body,
+                    r = p.documentElement,
+                    s = Math.max(q.offsetTop, 0),
+                    t = Math.max(r.offsetTop, 0),
+                    u = q.scrollHeight + s,
+                    v = q.offsetHeight + s,
+                    w = r.scrollHeight + t,
+                    x = r.offsetHeight + t;
+                return Math.max(u, v, w, x);
             }
-            function l(o) {
-                g.isFunction(o, 'FB.Canvas.getHash called without a callback');
-                h.remote.getHash(function(p) {
-                    o(p.result);
-                });
+            function m(p) {
+                if (typeof p != 'object') p = {};
+                var q = 0,
+                    r = 0;
+                if (!p.height) {
+                    p.height = l();
+                    q = 16;
+                    r = 4;
+                }
+                if (!p.frame) p.frame = window.name || 'iframe_canvas';
+                if (k) {
+                    var s = k.height,
+                        t = p.height - s;
+                    if (t <= r && t >= -q) return false;
+                }
+                k = p;
+                h.remote.setSize(p);
+                return true;
             }
-            function m(o) {
-                if (!j.getInitialized()) i.warn('FB.init is required for setUrlHandler to take effect');
-                h.local.navigate = function(p) {
-                    o({
-                        path: p
-                    });
-                };
-                h.remote.setNavigationEnabled(true);
+            function n(p, q) {
+                if (q === undefined && typeof p === 'number') {
+                    q = p;
+                    p = true;
+                }
+                if (p || p === undefined) {
+                    if (j === null) j = setInterval(i(function() {
+                        m();
+                    }, 'entry', 'setAutoGrow:setTimeout'), q || 100);
+                    m();
+                } else if (j !== null) {
+                    clearInterval(j);
+                    j = null;
+                }
             }
-            h.stub('setNavigationEnabled');
-            h.stub('getHash');
-            h.stub('setHash');
-            var n = {
-                getHash: l,
-                setHash: k,
-                setUrlHandler: m
+            h.stub('setSize');
+            var o = {
+                setSize: m,
+                setAutoGrow: n
             };
-            e.exports = n;
-        });
-        __d("sdk.Canvas", ["copyProperties", "sdk.RPC", "sdk.Runtime", "sdk.Canvas.IframeHandling", "sdk.Canvas.Environment", "sdk.Canvas.Tti", "sdk.Canvas.Flash", "sdk.Canvas.Navigation"], function(a, b, c, d, e, f) {
-            var g = b('copyProperties'),
-                h = b('sdk.RPC'),
-                i = b('sdk.Runtime'),
-                j = b('sdk.Canvas.IframeHandling'),
-                k = b('sdk.Canvas.Environment'),
-                l = b('sdk.Canvas.Tti'),
-                m = b('sdk.Canvas.Flash'),
-                n = b('sdk.Canvas.Navigation');
-            h.stub('showDialog');
-            var o = {};
-            g(o, j);
-            g(o, k);
-            g(o, l);
-            g(o, m);
-            g(o, n);
             e.exports = o;
         });
-        __d("legacy:fb.canvas", ["sdk.Canvas", "sdk.Event", "FB", "sdk.Runtime"], function(a, b, c, d) {
-            var e = b('sdk.Canvas'),
-                f = b('sdk.Event'),
-                g = b('FB'),
+        __d("sdk.Canvas.Navigation", ["sdk.RPC"], function(a, b, c, d, e, f) {
+            var g = b('sdk.RPC');
+
+            function h(l) {
+                l = l.replace(/[{}<\[\]>#%"]/, encodeURIComponent);
+                g.remote.setHash(l);
+            }
+            function i(l) {
+                g.remote.getHash(function(m) {
+                    l(m.result);
+                });
+            }
+            function j(l) {
+                g.local.navigate = function(m) {
+                    l({
+                        path: m
+                    });
+                };
+                g.remote.setNavigationEnabled(true);
+            }
+            g.stub('setNavigationEnabled');
+            g.stub('getHash');
+            g.stub('setHash');
+            var k = {
+                getHash: i,
+                setHash: h,
+                setUrlHandler: j
+            };
+            e.exports = k;
+        });
+        __d("sdk.Canvas.Tti", ["sdk.RPC", "sdk.Runtime"], function(a, b, c, d, e, f) {
+            var g = b('sdk.RPC'),
                 h = b('sdk.Runtime');
-            g.provide('Canvas', e);
-            g.provide('CanvasInsights', {
-                setDoneLoading: e.setDoneLoading
+
+            function i(n, o) {
+                var p = {
+                    appId: h.getClientID(),
+                    time: ES5('Date', 'now', false),
+                    name: o
+                }, q = [p];
+                if (n) q.push(function(r) {
+                    n(r.result);
+                });
+                g.remote.logTtiMessage.apply(null, q);
+            }
+            function j() {
+                i(null, 'StartIframeAppTtiTimer');
+            }
+            function k(n) {
+                i(n, 'StopIframeAppTtiTimer');
+            }
+            function l(n) {
+                i(n, 'RecordIframeAppTti');
+            }
+            g.stub('logTtiMessage');
+            var m = {
+                setDoneLoading: l,
+                startTimer: j,
+                stopTimer: k
+            };
+            e.exports = m;
+        });
+        __d("legacy:fb.canvas", ["Assert", "sdk.Canvas.Environment", "sdk.Event", "FB", "sdk.Canvas.Flash", "sdk.Canvas.IframeHandling", "Log", "sdk.Canvas.Navigation", "sdk.Runtime", "sdk.Canvas.Tti"], function(a, b, c, d) {
+            var e = b('Assert'),
+                f = b('sdk.Canvas.Environment'),
+                g = b('sdk.Event'),
+                h = b('FB'),
+                i = b('sdk.Canvas.Flash'),
+                j = b('sdk.Canvas.IframeHandling'),
+                k = b('Log'),
+                l = b('sdk.Canvas.Navigation'),
+                m = b('sdk.Runtime'),
+                n = b('sdk.Canvas.Tti');
+            h.provide('Canvas', {
+                setSize: function(o) {
+                    e.maybeObject(o, 'Invalid argument');
+                    return j.setSize.apply(null, arguments);
+                },
+                setAutoGrow: function() {
+                    return j.setAutoGrow.apply(null, arguments);
+                },
+                getPageInfo: function(o) {
+                    e.isFunction(o, 'Invalid argument');
+                    return f.getPageInfo.apply(null, arguments);
+                },
+                scrollTo: function(o, p) {
+                    e.maybeNumber(o, 'Invalid argument');
+                    e.maybeNumber(p, 'Invalid argument');
+                    return f.scrollTo.apply(null, arguments);
+                },
+                setDoneLoading: function(o) {
+                    e.maybeFunction(o, 'Invalid argument');
+                    return n.setDoneLoading.apply(null, arguments);
+                },
+                startTimer: function() {
+                    return n.startTimer.apply(null, arguments);
+                },
+                stopTimer: function(o) {
+                    e.maybeFunction(o, 'Invalid argument');
+                    return n.stopTimer.apply(null, arguments);
+                },
+                getHash: function(o) {
+                    e.isFunction(o, 'Invalid argument');
+                    return l.getHash.apply(null, arguments);
+                },
+                setHash: function(o) {
+                    e.isString(o, 'Invalid argument');
+                    return l.setHash.apply(null, arguments);
+                },
+                setUrlHandler: function(o) {
+                    e.isFunction(o, 'Invalid argument');
+                    return l.setUrlHandler.apply(null, arguments);
+                }
             });
-            f.subscribe('init:post', function(i) {
-                if (h.isEnvironment(h.ENVIRONMENTS.CANVAS)) e._setHideFlashCallback(i.hideFlashCallback);
+            h.provide('CanvasInsights', {
+                setDoneLoading: function(o) {
+                    k.warn('Deprecated: use FB.Canvas.setDoneLoading');
+                    e.maybeFunction(o, 'Invalid argument');
+                    return n.setDoneLoading.apply(null, arguments);
+                }
+            });
+            g.subscribe('init:post', function(o) {
+                if (m.isEnvironment(m.ENVIRONMENTS.CANVAS)) i._setHideFlashCallback(o.hideFlashCallback);
             });
         }, 3);
         __d("sdk.Canvas.Prefetcher", ["sdk.api", "createArrayFrom", "sdk.Runtime", "CanvasPrefetcherConfig"], function(a, b, c, d, e, f) {
@@ -5186,6 +5202,7 @@ try {
                     };
                 ES5(i(ca.getElementsByTagName('*')), 'forEach', true, function(ka) {
                     if (!ea && ka.getAttribute('fb-xfbml-state')) return;
+                    if (ka.nodeType !== 1) return;
                     var la = x(ka) || y(ka);
                     if (!la) return;
                     ga++;
@@ -7332,15 +7349,16 @@ try {
                 });
             e.exports = i;
         });
-        __d("legacy:fb.xfbml", ["sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.Fan", "sdk.XFBML.Like", "sdk.XFBML.LikeBox", "sdk.XFBML.LiveStream", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.ProfilePic", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration", "sdk.XFBML.Send", "sdk.XFBML.SocialContext"], function(a, b, c, d) {
-            var e = b('sdk.domReady'),
-                f = b('sdk.Event'),
-                g = b('FB'),
-                h = b('IframePlugin'),
-                i = b('PluginTags'),
-                j = b('wrapFunction'),
-                k = b('XFBML'),
-                l = {
+        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.Fan", "sdk.XFBML.Like", "sdk.XFBML.LikeBox", "sdk.XFBML.LiveStream", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.ProfilePic", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration", "sdk.XFBML.Send", "sdk.XFBML.SocialContext"], function(a, b, c, d) {
+            var e = b('Assert'),
+                f = b('sdk.domReady'),
+                g = b('sdk.Event'),
+                h = b('FB'),
+                i = b('IframePlugin'),
+                j = b('PluginTags'),
+                k = b('wrapFunction'),
+                l = b('XFBML'),
+                m = {
                     comments: b('sdk.XFBML.Comments'),
                     comments_count: b('sdk.XFBML.CommentsCount'),
                     connect_bar: b('sdk.XFBML.ConnectBar'),
@@ -7356,36 +7374,43 @@ try {
                     send: b('sdk.XFBML.Send'),
                     social_context: b('sdk.XFBML.SocialContext')
                 };
-            ES5(ES5('Object', 'keys', false, i), 'forEach', true, function(n) {
-                k.registerTag({
+            ES5(ES5('Object', 'keys', false, j), 'forEach', true, function(o) {
+                l.registerTag({
                     xmlns: 'fb',
-                    localName: n.replace(/_/g, '-'),
-                    ctor: h.withParams(i[n])
+                    localName: o.replace(/_/g, '-'),
+                    ctor: i.withParams(j[o])
                 });
             });
-            ES5(ES5('Object', 'keys', false, l), 'forEach', true, function(n) {
-                k.registerTag({
+            ES5(ES5('Object', 'keys', false, m), 'forEach', true, function(o) {
+                l.registerTag({
                     xmlns: 'fb',
-                    localName: n.replace(/_/g, '-'),
-                    ctor: l[n]
+                    localName: o.replace(/_/g, '-'),
+                    ctor: m[o]
                 });
             });
-            g.provide('XFBML', {
-                parse: k.parse
-            });
-            g.provide('XFBML.RecommendationsBar', {
-                markRead: function(n) {
-                    f.fire('xfbml.recommendationsbar.read', n || window.location.href);
+            h.provide('XFBML', {
+                parse: function(o) {
+                    e.maybeXfbml(o, 'Invalid argument');
+                    if (o && o.nodeType === 9) o = o.body;
+                    return l.parse.apply(null, arguments);
                 }
             });
-            k.subscribe('parse', ES5(f.fire, 'bind', true, f, 'xfbml.parse'));
-            k.subscribe('render', ES5(f.fire, 'bind', true, f, 'xfbml.render'));
-            f.subscribe('init:post', function(n) {
-                if (n.xfbml) setTimeout(j(ES5(e, 'bind', true, null, k.parse), 'entry', 'init:post:xfbml.parse'), 0);
+            h.provide('XFBML.RecommendationsBar', {
+                markRead: function(o) {
+                    g.fire('xfbml.recommendationsbar.read', o || window.location.href);
+                }
+            });
+            l.subscribe('parse', ES5(g.fire, 'bind', true, g, 'xfbml.parse'));
+            l.subscribe('render', ES5(g.fire, 'bind', true, g, 'xfbml.render'));
+            g.subscribe('init:post', function(o) {
+                if (o.xfbml) setTimeout(k(ES5(f, 'bind', true, null, l.parse), 'entry', 'init:post:xfbml.parse'), 0);
+            });
+            e.define('Xfbml', function(o) {
+                return (o.nodeType === 1 || o.nodeType === 9) && typeof o.nodeName === 'string';
             });
             try {
                 if (document.namespaces && !document.namespaces.item.fb) document.namespaces.add('fb');
-            } catch (m) {}
+            } catch (n) {}
         }, 3);
         void(0);
 
