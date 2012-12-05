@@ -1,4 +1,4 @@
-/*1354298542,173031757,JIT Construction: v683099,en_US*/
+/*1354749202,177613603,JIT Construction: v687022,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -636,6 +636,7 @@ try {
             "errorHandling": {
                 "rate": 4
             },
+            "usePluginPipe": true,
             "api": {
                 "mode": "warn",
                 "whitelist": ["Canvas", "Canvas.Prefetcher", "Canvas.Prefetcher.addStaticResource", "Canvas.Prefetcher.setCollectionMode", "Canvas.getPageInfo", "Canvas.hideFlashElement", "Canvas.scrollTo", "Canvas.setAutoGrow", "Canvas.setDoneLoading", "Canvas.setSize", "Canvas.setUrlHandler", "Canvas.showFlashElement", "Canvas.startTimer", "Canvas.stopTimer", "Data", "Data.process", "Data.query", "Data.query:wait", "Data.waitOn", "Data.waitOn:wait", "Event", "Event.subscribe", "Event.unsubscribe", "Music.flashCallback", "Music.init", "Music.send", "Payment", "Payment.init", "Payment.setSize", "ThirdPartyProvider", "ThirdPartyProvider.init", "ThirdPartyProvider.sendData", "UA", "UA.nativeApp", "XFBML", "XFBML.RecommendationsBar", "XFBML.RecommendationsBar.markRead", "XFBML.parse", "addFriend", "api", "getAccessToken", "getAuthResponse", "getLoginStatus", "getUserID", "init", "login", "logout", "publish", "share", "ui", "ui:subscribe"]
@@ -691,9 +692,7 @@ try {
         __d("PluginPipeConfig", [], {
             "threshold": 0,
             "enabledApps": {
-                "111476658864976": 1,
-                "cca6477272fc5cb805f85a84f20fca1d": 1,
-                "179150165472010": 1
+                "209753825810663": 1
             }
         });
         __d("ConnectBarConfig", [], {
@@ -3855,8 +3854,8 @@ try {
                     'permissions.oauth': {
                         url: 'dialog/oauth',
                         size: {
-                            width: (y.mobile() ? null : 627),
-                            height: (y.mobile() ? null : 326)
+                            width: (y.mobile() ? null : 440),
+                            height: (y.mobile() ? null : 196)
                         },
                         transform: function(da) {
                             if (!w.getClientID()) {
@@ -4450,32 +4449,19 @@ try {
         __d("sdk.Canvas.Navigation", ["sdk.RPC"], function(a, b, c, d, e, f) {
             var g = b('sdk.RPC');
 
-            function h(l) {
-                l = l.replace(/[{}<\[\]>#%"]/, encodeURIComponent);
-                g.remote.setHash(l);
-            }
-            function i(l) {
-                g.remote.getHash(function(m) {
-                    l(m.result);
-                });
-            }
-            function j(l) {
-                g.local.navigate = function(m) {
-                    l({
-                        path: m
+            function h(j) {
+                g.local.navigate = function(k) {
+                    j({
+                        path: k
                     });
                 };
                 g.remote.setNavigationEnabled(true);
             }
             g.stub('setNavigationEnabled');
-            g.stub('getHash');
-            g.stub('setHash');
-            var k = {
-                getHash: i,
-                setHash: h,
-                setUrlHandler: j
+            var i = {
+                setUrlHandler: h
             };
-            e.exports = k;
+            e.exports = i;
         });
         __d("sdk.Canvas.Tti", ["sdk.RPC", "sdk.Runtime"], function(a, b, c, d, e, f) {
             var g = b('sdk.RPC'),
@@ -5278,7 +5264,7 @@ try {
                 v = [];
 
             function w() {
-                return !!(p.usePluginPipe && (r.chrome() || r.firefox()) && m.enabledApps[o.getClientID()]);
+                return !!(p.usePluginPipe && o.getSecure() !== undefined && (r.chrome() || r.firefox()) && m.enabledApps[o.getClientID()]);
             }
             function x() {
                 var z = v;
@@ -5298,7 +5284,7 @@ try {
                 ES5(z, 'forEach', true, function(ca) {
                     var da = {};
                     for (var ea in ca.config) da[ea] = ca.config[ea];
-                    da.url = q.resolve('www') + '/plugins/plugin_pipe_shell.php';
+                    da.url = q.resolve('www', o.getSecure()) + '/plugins/plugin_pipe_shell.php';
                     da.onload = ba;
                     j(da);
                 });
@@ -5326,7 +5312,7 @@ try {
                     ga.onload = fa.config.onload;
                 });
                 j({
-                    url: q.resolve('www') + '/plugins/pipe/?' + ea,
+                    url: q.resolve('www', o.getSecure()) + '/plugins/pipe/?' + ea,
                     root: aa,
                     name: i(),
                     className: 'fb_hidden fb_invisible'
@@ -5519,6 +5505,11 @@ try {
                     action: 'string',
                     size: 'string',
                     max_rows: 'string'
+                },
+                follow: {
+                    href: 'url',
+                    layout: 'string',
+                    show_faces: 'bool'
                 },
                 page_events: {
                     href: 'url'
