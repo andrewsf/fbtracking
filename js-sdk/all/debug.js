@@ -1,4 +1,4 @@
-/*1354745297,180814417,JIT Construction: v687022,en_US*/
+/*1354880855,178522935,JIT Construction: v688594,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -6633,7 +6633,7 @@ var Methods = {
   'permissions.oauth': {
     url       : 'dialog/oauth',
     size      : { width: (UserAgent.mobile() ? null : 440),
-                  height: (UserAgent.mobile() ? null : 196) },
+                  height: (UserAgent.mobile() ? null : 186) },
     transform : function(/*object*/ call) /*object?*/ {/*TC*/__t([call,'object','call']); return __t([function(){/*/TC*/
       if (!Runtime.getClientID()) {
         Log.error('FB.login() called before FB.init().');
@@ -7248,7 +7248,17 @@ var UIServer = {
       try {
         if (frame.close) {
           frame.close();
-          window.focus();
+          
+          
+          
+          if (UserAgent.iphone()) {
+            var version = /Version\/([\d\.]+)/.test(navigator.userAgent)
+              ? parseFloat(RegExp.$1, 10)
+              : null;
+            if (version >= 6) {
+              window.focus();
+            }
+          }
           UIServer._popupCount--;
         }
       } catch (y) {

@@ -1,4 +1,4 @@
-/*1354749202,177613603,JIT Construction: v687022,en_US*/
+/*1354889263,181991253,JIT Construction: v688594,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -3855,7 +3855,7 @@ try {
                         url: 'dialog/oauth',
                         size: {
                             width: (y.mobile() ? null : 440),
-                            height: (y.mobile() ? null : 196)
+                            height: (y.mobile() ? null : 186)
                         },
                         transform: function(da) {
                             if (!w.getClientID()) {
@@ -4191,7 +4191,10 @@ try {
                             try {
                                 if (fa.close) {
                                     fa.close();
-                                    window.focus();
+                                    if (y.iphone()) {
+                                        var ia = /Version\/([\d\.]+)/.test(navigator.userAgent) ? parseFloat(RegExp.$1, 10) : null;
+                                        if (ia >= 6) window.focus();
+                                    }
                                     ca._popupCount--;
                                 }
                             } catch (ha) {}
