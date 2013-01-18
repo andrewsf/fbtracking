@@ -1,4 +1,4 @@
-/*1358455706,171875111,JIT Construction: v714711,en_US*/
+/*1358519494,180650277,JIT Construction: v715097,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -1091,33 +1091,119 @@ try {
             }
             e.exports = g;
         });
-        __d("sdk.createIframe", ["copyProperties", "guid"], function(a, b, c, d, e, f) {
-            var g = b('copyProperties'),
-                h = b('guid'),
-                i = function() {
-                    var k = document.createElement("form"),
-                        l = k.appendChild(document.createElement("input")),
-                        m;
-                    l.name = h();
-                    m = l !== k.elements[l.name];
-                    k = l = null;
-                    i = function() {
-                        return m;
-                    };
-                    return m;
-                };
+        __d("hasNamePropertyBug", ["guid"], function(a, b, c, d, e, f) {
+            var g = b('guid'),
+                h;
 
-            function j(k) {
-                var l = i() ? document.createElement('<iframe name="' + k.name + '"/>') : document.createElement("iframe");
-                if (k.style) g(l.style, k.style);
-                l.name = l.id = k.name;
-                l.src = "javascript:false";
-                k.root.appendChild(l);
-                l.src = k.url;
-                if (k.tabIndex) l.tabIndex = k.tabIndex;
-                return l;
+            function i() {
+                var k = document.createElement("form"),
+                    l = k.appendChild(document.createElement("input"));
+                l.name = g();
+                h = l !== k.elements[l.name];
+                k = l = null;
+                return h;
+            }
+            function j() {
+                return typeof h === 'undefined' ? i() : h;
             }
             e.exports = j;
+        });
+        __d("wrapFunction", [], function(a, b, c, d, e, f) {
+            var g = {};
+
+            function h(i, j, k) {
+                j = j || 'default';
+                return function() {
+                    var l = j in g ? g[j](i, k) : i;
+                    return l.apply(this, arguments);
+                };
+            }
+            h.setWrapper = function(i, j) {
+                j = j || 'default';
+                g[j] = i;
+            };
+            e.exports = h;
+        });
+        __d("DOMEventListener", ["wrapFunction"], function(a, b, c, d, e, f) {
+            var g = b('wrapFunction'),
+                h, i;
+            if (window.addEventListener) {
+                h = function(k, l, m) {
+                    m.wrapper = g(m, 'entry', k + ':' + l);
+                    k.addEventListener(l, m.wrapper, false);
+                };
+                i = function(k, l, m) {
+                    k.removeEventListener(l, m.wrapper, false);
+                };
+            } else if (window.attachEvent) {
+                h = function(k, l, m) {
+                    m.wrapper = g(m, 'entry', k + ':' + l);
+                    k.attachEvent('on' + l, m.wrapper);
+                };
+                i = function(k, l, m) {
+                    k.detachEvent('on' + l, m.wrapper);
+                };
+            }
+            var j = {
+                add: function(k, l, m) {
+                    h(k, l, m);
+                    return {
+                        remove: function() {
+                            i(k, l, m);
+                            k = null;
+                        }
+                    };
+                },
+                remove: i
+            };
+            e.exports = j;
+        });
+        __d("sdk.createIframe", ["copyProperties", "guid", "hasNamePropertyBug", "DOMEventListener"], function(a, b, c, d, e, f) {
+            var g = b('copyProperties'),
+                h = b('guid'),
+                i = b('hasNamePropertyBug'),
+                j = b('DOMEventListener');
+
+            function k(l) {
+                l = g({}, l);
+                var m, n = l.name || h(),
+                    o = l.root,
+                    p = l.style || {
+                        border: 'none'
+                    }, q = l.url,
+                    r = l.onload;
+                if (i()) {
+                    m = document.createElement('<iframe name="' + n + '"/>');
+                } else {
+                    m = document.createElement("iframe");
+                    m.name = n;
+                }
+                delete l.style;
+                delete l.name;
+                delete l.url;
+                delete l.root;
+                delete l.onload;
+                var s = g({
+                    frameBorder: 0,
+                    allowtransparency: true,
+                    scrolling: 'no'
+                }, l);
+                if (s.width) m.width = s.width + 'px';
+                if (s.height) m.height = s.height + 'px';
+                delete s.height;
+                delete s.width;
+                g(m, s);
+                g(m.style, p);
+                m.src = "javascript:false";
+                o.appendChild(m);
+                if (r) var t = j.add(m, 'load', function() {
+                    t.remove();
+                    r();
+                });
+                m.src = q;
+                return m;
+            }
+            e.exports = k;
         });
         __d("DOMWrapper", [], function(a, b, c, d, e, f) {
             var g, h, i = {
@@ -1787,56 +1873,6 @@ try {
                     }
                 };
             e.exports = l;
-        });
-        __d("wrapFunction", [], function(a, b, c, d, e, f) {
-            var g = {};
-
-            function h(i, j, k) {
-                j = j || 'default';
-                return function() {
-                    var l = j in g ? g[j](i, k) : i;
-                    return l.apply(this, arguments);
-                };
-            }
-            h.setWrapper = function(i, j) {
-                j = j || 'default';
-                g[j] = i;
-            };
-            e.exports = h;
-        });
-        __d("DOMEventListener", ["wrapFunction"], function(a, b, c, d, e, f) {
-            var g = b('wrapFunction'),
-                h, i;
-            if (window.addEventListener) {
-                h = function(k, l, m) {
-                    m.wrapper = g(m, 'entry', k + ':' + l);
-                    k.addEventListener(l, m.wrapper, false);
-                };
-                i = function(k, l, m) {
-                    k.removeEventListener(l, m.wrapper, false);
-                };
-            } else if (window.attachEvent) {
-                h = function(k, l, m) {
-                    m.wrapper = g(m, 'entry', k + ':' + l);
-                    k.attachEvent('on' + l, m.wrapper);
-                };
-                i = function(k, l, m) {
-                    k.detachEvent('on' + l, m.wrapper);
-                };
-            }
-            var j = {
-                add: function(k, l, m) {
-                    h(k, l, m);
-                    return {
-                        remove: function() {
-                            i(k, l, m);
-                            k = null;
-                        }
-                    };
-                },
-                remove: i
-            };
-            e.exports = j;
         });
         __d("emptyFunction", ["copyProperties"], function(a, b, c, d, e, f) {
             var g = b('copyProperties');
@@ -5363,21 +5399,21 @@ try {
             });
             e.exports = s;
         });
-        __d("IframePlugin", ["sdk.Auth", "sdk.DOM", "sdk.Event", "Log", "ObservableMixin", "PluginPipe", "QueryString", "sdk.Runtime", "Type", "UrlMap", "sdk.XD", "guid", "insertIframe", "resolveURI"], function(a, b, c, d, e, f) {
+        __d("IframePlugin", ["sdk.Auth", "sdk.createIframe", "sdk.DOM", "sdk.Event", "guid", "Log", "ObservableMixin", "PluginPipe", "QueryString", "resolveURI", "sdk.Runtime", "Type", "UrlMap", "sdk.XD"], function(a, b, c, d, e, f) {
             var g = b('sdk.Auth'),
-                h = b('sdk.DOM'),
-                i = b('sdk.Event'),
-                j = b('Log'),
-                k = b('ObservableMixin'),
-                l = b('PluginPipe'),
-                m = b('QueryString'),
-                n = b('sdk.Runtime'),
-                o = b('Type'),
-                p = b('UrlMap'),
-                q = b('sdk.XD'),
-                r = b('guid'),
-                s = b('insertIframe'),
-                t = b('resolveURI'),
+                h = b('sdk.createIframe'),
+                i = b('sdk.DOM'),
+                j = b('sdk.Event'),
+                k = b('guid'),
+                l = b('Log'),
+                m = b('ObservableMixin'),
+                n = b('PluginPipe'),
+                o = b('QueryString'),
+                p = b('resolveURI'),
+                q = b('sdk.Runtime'),
+                r = b('Type'),
+                s = b('UrlMap'),
+                t = b('sdk.XD'),
                 u = {
                     skin: 'string',
                     font: 'string',
@@ -5398,7 +5434,7 @@ try {
                         height: da.height,
                         pluginID: ca
                     };
-                    i.fire('xfbml.resize', ea);
+                    j.fire('xfbml.resize', ea);
                 };
             }
             var x = {
@@ -5410,10 +5446,10 @@ try {
                         .test(ca) : undefined;
                 },
                 url: function(ca) {
-                    return t(ca);
+                    return p(ca);
                 },
                 url_maybe: function(ca) {
-                    return ca ? t(ca) : ca;
+                    return ca ? p(ca) : ca;
                 },
                 hostname: function(ca) {
                     return ca || window.location.hostname;
@@ -5443,7 +5479,7 @@ try {
             function aa(ca) {
                 return ca || ca === '0' || ca === 0 ? parseInt(ca, 10) : undefined;
             }
-            var ba = o.extend({
+            var ba = r.extend({
                 constructor: function(ca, da, ea, fa) {
                     this.parent();
                     ea = ea.replace(/-/g, '_');
@@ -5455,22 +5491,33 @@ try {
                         this.updateLift();
                         clearTimeout(this._timeoutID);
                     }, 'bind', true, this));
-                    var ha = n.getSecure() || window.location.protocol == 'https:',
-                        ia = p.resolve('www', ha) + '/plugins/' + ea + '.php?',
+                    this.subscribe('xd.resize', ES5(function(na) {
+                        v(this._config.root, aa(na.width), aa(na.height));
+                        v(this._iframe, aa(na.width), aa(na.height));
+                        this.updateLift();
+                        clearTimeout(this._timeoutID);
+                    }, 'bind', true, this));
+                    this.subscribe('xd.resize.iframe', ES5(function(na) {
+                        v(this._iframe, aa(na.width), aa(na.height));
+                        this.updateLift();
+                        clearTimeout(this._timeoutID);
+                    }, 'bind', true, this));
+                    var ha = q.getSecure() || window.location.protocol == 'https:',
+                        ia = s.resolve('www', ha) + '/plugins/' + ea + '.php?',
                         ja = {};
                     z(this.getParams(), ca, fa, ja);
                     z(u, ca, fa, ja);
-                    ja.app_id = n.getClientID();
-                    ja.locale = n.getLocale();
+                    ja.app_id = q.getClientID();
+                    ja.locale = q.getLocale();
                     ja.sdk = 'joey';
                     var ka = ES5(function(na) {
                         this.inform('xd.' + na.type, na);
                     }, 'bind', true, this);
-                    ja.channel = q.handler(ka, 'parent.parent', true);
-                    h.addCss(ca, 'fb_iframe_widget');
-                    var la = r();
+                    ja.channel = t.handler(ka, 'parent.parent', true);
+                    i.addCss(ca, 'fb_iframe_widget');
+                    var la = k();
                     this.subscribe('xd.verify', function(na) {
-                        q.sendToFacebook(la, {
+                        t.sendToFacebook(la, {
                             method: 'xd/verify',
                             params: ES5('JSON', 'stringify', false, na.token)
                         });
@@ -5485,23 +5532,11 @@ try {
                     this._params = ja;
                     this._config = {
                         root: ma,
-                        url: ia + m.encode(ja),
+                        url: ia + o.encode(ja),
                         name: la,
                         width: ja.width || 1000,
                         height: ja.height || 1000,
                         onload: ES5(function() {
-                            this._iframe = this._config.root.getElementsByTagName('iframe')[0];
-                            this.subscribe('xd.resize', ES5(function(na) {
-                                v(this._config.root, aa(na.width), aa(na.height));
-                                v(this._iframe, aa(na.width), aa(na.height));
-                                this.updateLift();
-                                clearTimeout(this._timeoutID);
-                            }, 'bind', true, this));
-                            this.subscribe('xd.resize.iframe', ES5(function(na) {
-                                v(this._iframe, aa(na.width), aa(na.height));
-                                this.updateLift();
-                                clearTimeout(this._timeoutID);
-                            }, 'bind', true, this));
                             this.inform('render');
                         }, 'bind', true, this)
                     };
@@ -5510,15 +5545,16 @@ try {
                     this._element.innerHTML = '';
                     this._element.appendChild(this._config.root);
                     this._timeoutID = setTimeout(ES5(function() {
-                        j.warn('%s:%s failed to resize in 45s', this._ns, this._tag);
+                        this._iframe && v(this._iframe, 0, 0);
+                        l.warn('%s:%s failed to resize in 45s', this._ns, this._tag);
                     }, 'bind', true, this), 45 * 1000);
-                    if (!l.add(this)) s(this._config);
+                    if (!n.add(this)) this._iframe = h(this._config);
                 },
                 updateLift: function() {
                     var ca = this._iframe.style.width === this._config.root.style.width && this._iframe.style.height === this._config.root.style.height;
-                    h[ca ? 'removeCss' : 'addCss'](this._iframe, 'fb_iframe_widget_lift');
+                    i[ca ? 'removeCss' : 'addCss'](this._iframe, 'fb_iframe_widget_lift');
                 }
-            }, k);
+            }, m);
             ba.getVal = y;
             ba.withParams = function(ca) {
                 return ba.extend({
