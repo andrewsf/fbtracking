@@ -1,4 +1,4 @@
-/*1358519310,180795943,JIT Construction: v715097,en_US*/
+/*1358790423,172042550,JIT Construction: v716081,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -1307,7 +1307,7 @@ module.exports = ES5;
 return ES5.apply(null, arguments);
 };
 
-__d("sdk.RuntimeConfig",[],{"locale":"en_US","rtl":false});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("XDConfig",[],{"XdUrl":"connect\/xd_arbiter.php?version=18","Flash":{"path":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v1\/ys\/r\/WON-TVLCpDP.swf"},"useCdn":true});__d("SDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"api":{"mode":"warn","whitelist":["Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Data","Data.process","Data.query","Data.query:wait","Data.waitOn","Data.waitOn:wait","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.init","Payment.setSize","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui","ui:subscribe"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("CssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yA\/x\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/y6\/x\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yA\/x\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/y6\/x\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yA\/x\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/y6\/x\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n\/* \u0040noflip *\/\n.fb_dialog_top_left{background:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yR\/x\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_top_right{background:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yR\/x\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_left{background:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yR\/x\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_right{background:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yR\/x\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yD\/x\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100\u0025\n}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yc\/x\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yJ\/x\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{position:relative;display:-moz-inline-block;display:inline-block}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_iframe_widget span{position:relative;display:inline-block;vertical-align:text-bottom;text-align:justify}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yJ\/x\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_button_simple,\n.fb_button_simple_rtl{background-image:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yH\/x\/eIpbnVKI9lR.png);background-repeat:no-repeat;cursor:pointer;outline:none;text-decoration:none}\n.fb_button_simple_rtl{background-position:right 0}\n.fb_button_simple .fb_button_text{margin:0 0 0 20px;padding-bottom:1px}\n.fb_button_simple_rtl .fb_button_text{margin:0 10px 0 0}\na.fb_button_simple:hover .fb_button_text,\na.fb_button_simple_rtl:hover .fb_button_text,\n.fb_button_simple:hover .fb_button_text,\n.fb_button_simple_rtl:hover .fb_button_text{text-decoration:underline}\n.fb_button,\n.fb_button_rtl{background:#29447e url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yl\/x\/FGFbc80dUKj.png);background-repeat:no-repeat;cursor:pointer;display:inline-block;padding:0 0 0 1px;text-decoration:none;outline:none}\n.fb_button .fb_button_text,\n.fb_button_rtl .fb_button_text{background:#5f78ab url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yl\/x\/FGFbc80dUKj.png);border-top:solid 1px #879ac0;border-bottom:solid 1px #1a356e;color:#fff;display:block;font-family:\"lucida grande\",tahoma,verdana,arial,sans-serif;font-weight:bold;padding:2px 6px 3px 6px;margin:1px 1px 0 21px;text-shadow:none}\na.fb_button,\na.fb_button_rtl,\n.fb_button,\n.fb_button_rtl{text-decoration:none}\na.fb_button:active .fb_button_text,\na.fb_button_rtl:active .fb_button_text,\n.fb_button:active .fb_button_text,\n.fb_button_rtl:active .fb_button_text{border-bottom:solid 1px #29447e;border-top:solid 1px #45619d;background:#4f6aa3;text-shadow:none}\n.fb_button_xlarge,\n.fb_button_xlarge_rtl{background-position:left -60px;font-size:24px;line-height:30px}\n.fb_button_xlarge .fb_button_text{padding:3px 8px 3px 12px;margin-left:38px}\na.fb_button_xlarge:active{background-position:left -99px}\n.fb_button_xlarge_rtl{background-position:right -268px}\n.fb_button_xlarge_rtl .fb_button_text{padding:3px 8px 3px 12px;margin-right:39px}\na.fb_button_xlarge_rtl:active{background-position:right -307px}\n.fb_button_large,\n.fb_button_large_rtl{background-position:left -138px;font-size:13px;line-height:16px}\n.fb_button_large .fb_button_text{margin-left:24px;padding:2px 6px 4px 6px}\na.fb_button_large:active{background-position:left -163px}\n.fb_button_large_rtl{background-position:right -346px}\n.fb_button_large_rtl .fb_button_text{margin-right:25px}\na.fb_button_large_rtl:active{background-position:right -371px}\n.fb_button_medium,\n.fb_button_medium_rtl{background-position:left -188px;font-size:11px;line-height:14px}\na.fb_button_medium:active{background-position:left -210px}\n.fb_button_medium_rtl{background-position:right -396px}\n.fb_button_text_rtl,\n.fb_button_medium_rtl .fb_button_text{padding:2px 6px 3px 6px;margin-right:22px}\na.fb_button_medium_rtl:active{background-position:right -418px}\n.fb_button_small,\n.fb_button_small_rtl{background-position:left -232px;font-size:10px;line-height:10px}\n.fb_button_small .fb_button_text{padding:2px 6px 3px;margin-left:17px}\na.fb_button_small:active,\n.fb_button_small:active{background-position:left -250px}\n.fb_button_small_rtl{background-position:right -440px}\n.fb_button_small_rtl .fb_button_text{padding:2px 6px;margin-right:18px}\na.fb_button_small_rtl:active{background-position:right -458px}\n.fb_share_count_wrapper{position:relative;float:left}\n.fb_share_count{background:#b0b9ec none repeat scroll 0 0;color:#333;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;text-align:center}\n.fb_share_count_inner{background:#e8ebf2;display:block}\n.fb_share_count_right{margin-left:-1px;display:inline-block}\n.fb_share_count_right .fb_share_count_inner{border-top:solid 1px #e8ebf2;border-bottom:solid 1px #b0b9ec;margin:1px 1px 0 1px;font-size:10px;line-height:10px;padding:2px 6px 3px;font-weight:bold}\n.fb_share_count_top{display:block;letter-spacing:-1px;line-height:34px;margin-bottom:7px;font-size:22px;border:solid 1px #b0b9ec}\n.fb_share_count_nub_top{border:none;display:block;position:absolute;left:7px;top:35px;margin:0;padding:0;width:6px;height:7px;background-repeat:no-repeat;background-image:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yP\/x\/bSOHtKbCGYI.png)}\n.fb_share_count_nub_right{border:none;display:inline-block;padding:0;width:5px;height:10px;background-repeat:no-repeat;background-image:url(http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/x\/i_oIVTKMYsL.png);vertical-align:top;background-position:right 5px;z-index:10;left:2px;margin:0 2px 0 0;position:relative}\n.fb_share_no_count{display:none}\n.fb_share_size_Small .fb_share_count_right .fb_share_count_inner{font-size:10px}\n.fb_share_size_Medium .fb_share_count_right .fb_share_count_inner{font-size:11px;padding:2px 6px 3px;letter-spacing:-1px;line-height:14px}\n.fb_share_size_Large .fb_share_count_right .fb_share_count_inner{font-size:13px;line-height:16px;padding:2px 6px 4px;font-weight:normal;letter-spacing:-1px}\n.fb_share_count_hidden .fb_share_count_nub_top,\n.fb_share_count_hidden .fb_share_count_top,\n.fb_share_count_hidden .fb_share_count_nub_right,\n.fb_share_count_hidden .fb_share_count_right{visibility:hidden}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarleft{left:10px}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarright{right:10px}","components":["fb.css.base","fb.css.dialog","fb.css.iframewidget","fb.css.button","fb.css.sharebutton","fb.css.connectbarwidget","fb.css.edgecommentwidget","fb.css.sendbuttonformwidget","fb.css.plugin.recommendationsbar"]});__d("CanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("PluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});__d("ConnectBarConfig",[],{"imgs":{"buttonUrl":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png","missingProfileUrl":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"}});__d("ProfilePicConfig",[],{"defPicMap":{"pic":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v1\/yh\/r\/C5yt7Cqf3zU.jpg","pic_big":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/HsTZSDw4avx.gif","pic_big_with_logo":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/y5\/r\/SRDCaeCL7hM.gif","pic_small":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v1\/yi\/r\/odA9sNLrE86.jpg","pic_small_with_logo":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yD\/r\/k1xiRXKnlGd.gif","pic_square":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif","pic_square_with_logo":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yX\/r\/9dYJBPDHXwZ.gif","pic_with_logo":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v2\/yu\/r\/fPPR9f2FJ3t.gif"}});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"http:\/\/m-static.ak.fbcdn.net\/rsrc.php\/v1\/y5\/r\/SrnvQJBTxo-.swf"}});
+__d("sdk.RuntimeConfig",[],{"locale":"en_US","rtl":false});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("XDConfig",[],{"XdUrl":"connect\/xd_arbiter.php?version=18","Flash":{"path":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/ys\/r\/WON-TVLCpDP.swf"},"useCdn":true});__d("SDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"api":{"mode":"warn","whitelist":["Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Data","Data.process","Data.query","Data.query:wait","Data.waitOn","Data.waitOn:wait","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.init","Payment.setSize","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui","ui:subscribe"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("CssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yA\/x\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y6\/x\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yA\/x\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y6\/x\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yA\/x\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y6\/x\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n\/* \u0040noflip *\/\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yR\/x\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yR\/x\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yR\/x\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yR\/x\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yD\/x\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100\u0025\n}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yc\/x\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yJ\/x\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{position:relative;display:-moz-inline-block;display:inline-block}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_iframe_widget span{position:relative;display:inline-block;vertical-align:text-bottom;text-align:justify}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yJ\/x\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_button_simple,\n.fb_button_simple_rtl{background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yH\/x\/eIpbnVKI9lR.png);background-repeat:no-repeat;cursor:pointer;outline:none;text-decoration:none}\n.fb_button_simple_rtl{background-position:right 0}\n.fb_button_simple .fb_button_text{margin:0 0 0 20px;padding-bottom:1px}\n.fb_button_simple_rtl .fb_button_text{margin:0 10px 0 0}\na.fb_button_simple:hover .fb_button_text,\na.fb_button_simple_rtl:hover .fb_button_text,\n.fb_button_simple:hover .fb_button_text,\n.fb_button_simple_rtl:hover .fb_button_text{text-decoration:underline}\n.fb_button,\n.fb_button_rtl{background:#29447e url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yl\/x\/FGFbc80dUKj.png);background-repeat:no-repeat;cursor:pointer;display:inline-block;padding:0 0 0 1px;text-decoration:none;outline:none}\n.fb_button .fb_button_text,\n.fb_button_rtl .fb_button_text{background:#5f78ab url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yl\/x\/FGFbc80dUKj.png);border-top:solid 1px #879ac0;border-bottom:solid 1px #1a356e;color:#fff;display:block;font-family:\"lucida grande\",tahoma,verdana,arial,sans-serif;font-weight:bold;padding:2px 6px 3px 6px;margin:1px 1px 0 21px;text-shadow:none}\na.fb_button,\na.fb_button_rtl,\n.fb_button,\n.fb_button_rtl{text-decoration:none}\na.fb_button:active .fb_button_text,\na.fb_button_rtl:active .fb_button_text,\n.fb_button:active .fb_button_text,\n.fb_button_rtl:active .fb_button_text{border-bottom:solid 1px #29447e;border-top:solid 1px #45619d;background:#4f6aa3;text-shadow:none}\n.fb_button_xlarge,\n.fb_button_xlarge_rtl{background-position:left -60px;font-size:24px;line-height:30px}\n.fb_button_xlarge .fb_button_text{padding:3px 8px 3px 12px;margin-left:38px}\na.fb_button_xlarge:active{background-position:left -99px}\n.fb_button_xlarge_rtl{background-position:right -268px}\n.fb_button_xlarge_rtl .fb_button_text{padding:3px 8px 3px 12px;margin-right:39px}\na.fb_button_xlarge_rtl:active{background-position:right -307px}\n.fb_button_large,\n.fb_button_large_rtl{background-position:left -138px;font-size:13px;line-height:16px}\n.fb_button_large .fb_button_text{margin-left:24px;padding:2px 6px 4px 6px}\na.fb_button_large:active{background-position:left -163px}\n.fb_button_large_rtl{background-position:right -346px}\n.fb_button_large_rtl .fb_button_text{margin-right:25px}\na.fb_button_large_rtl:active{background-position:right -371px}\n.fb_button_medium,\n.fb_button_medium_rtl{background-position:left -188px;font-size:11px;line-height:14px}\na.fb_button_medium:active{background-position:left -210px}\n.fb_button_medium_rtl{background-position:right -396px}\n.fb_button_text_rtl,\n.fb_button_medium_rtl .fb_button_text{padding:2px 6px 3px 6px;margin-right:22px}\na.fb_button_medium_rtl:active{background-position:right -418px}\n.fb_button_small,\n.fb_button_small_rtl{background-position:left -232px;font-size:10px;line-height:10px}\n.fb_button_small .fb_button_text{padding:2px 6px 3px;margin-left:17px}\na.fb_button_small:active,\n.fb_button_small:active{background-position:left -250px}\n.fb_button_small_rtl{background-position:right -440px}\n.fb_button_small_rtl .fb_button_text{padding:2px 6px;margin-right:18px}\na.fb_button_small_rtl:active{background-position:right -458px}\n.fb_share_count_wrapper{position:relative;float:left}\n.fb_share_count{background:#b0b9ec none repeat scroll 0 0;color:#333;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;text-align:center}\n.fb_share_count_inner{background:#e8ebf2;display:block}\n.fb_share_count_right{margin-left:-1px;display:inline-block}\n.fb_share_count_right .fb_share_count_inner{border-top:solid 1px #e8ebf2;border-bottom:solid 1px #b0b9ec;margin:1px 1px 0 1px;font-size:10px;line-height:10px;padding:2px 6px 3px;font-weight:bold}\n.fb_share_count_top{display:block;letter-spacing:-1px;line-height:34px;margin-bottom:7px;font-size:22px;border:solid 1px #b0b9ec}\n.fb_share_count_nub_top{border:none;display:block;position:absolute;left:7px;top:35px;margin:0;padding:0;width:6px;height:7px;background-repeat:no-repeat;background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yP\/x\/bSOHtKbCGYI.png)}\n.fb_share_count_nub_right{border:none;display:inline-block;padding:0;width:5px;height:10px;background-repeat:no-repeat;background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/x\/i_oIVTKMYsL.png);vertical-align:top;background-position:right 5px;z-index:10;left:2px;margin:0 2px 0 0;position:relative}\n.fb_share_no_count{display:none}\n.fb_share_size_Small .fb_share_count_right .fb_share_count_inner{font-size:10px}\n.fb_share_size_Medium .fb_share_count_right .fb_share_count_inner{font-size:11px;padding:2px 6px 3px;letter-spacing:-1px;line-height:14px}\n.fb_share_size_Large .fb_share_count_right .fb_share_count_inner{font-size:13px;line-height:16px;padding:2px 6px 4px;font-weight:normal;letter-spacing:-1px}\n.fb_share_count_hidden .fb_share_count_nub_top,\n.fb_share_count_hidden .fb_share_count_top,\n.fb_share_count_hidden .fb_share_count_nub_right,\n.fb_share_count_hidden .fb_share_count_right{visibility:hidden}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarleft{left:10px}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarright{right:10px}","components":["fb.css.base","fb.css.dialog","fb.css.iframewidget","fb.css.button","fb.css.sharebutton","fb.css.connectbarwidget","fb.css.edgecommentwidget","fb.css.sendbuttonformwidget","fb.css.plugin.recommendationsbar"]});__d("CanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("PluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});__d("ConnectBarConfig",[],{"imgs":{"buttonUrl":"rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png","missingProfileUrl":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"}});__d("ProfilePicConfig",[],{"defPicMap":{"pic":"rsrc.php\/v1\/yh\/r\/C5yt7Cqf3zU.jpg","pic_big":"rsrc.php\/v2\/yL\/r\/HsTZSDw4avx.gif","pic_big_with_logo":"rsrc.php\/v2\/y5\/r\/SRDCaeCL7hM.gif","pic_small":"rsrc.php\/v1\/yi\/r\/odA9sNLrE86.jpg","pic_small_with_logo":"rsrc.php\/v2\/yD\/r\/k1xiRXKnlGd.gif","pic_square":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif","pic_square_with_logo":"rsrc.php\/v2\/yX\/r\/9dYJBPDHXwZ.gif","pic_with_logo":"rsrc.php\/v2\/yu\/r\/fPPR9f2FJ3t.gif"}});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/y5\/r\/SrnvQJBTxo-.swf"}});
 __d("QueryString",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 
@@ -1628,7 +1628,7 @@ function extend(/*function?*/ from, /*object?*/ prototype, mixins)
     from.apply(this, arguments);
   };
 
-  
+  // Allow the new type to call this.parentCall('method'/*, args*/);
   constructor.prototype.parentCall = function(/*string*/ method) {/*TC*/__t([method,'string','method']);/*/TC*/
     return from.prototype[method].apply(this,
       Array.prototype.slice.call(arguments, 1));
@@ -1679,7 +1679,7 @@ ObservableMixin.prototype = {
         try {
           list[i].apply(this, args);
         } catch(e) {
-          
+          // we want the loop to continue, but we don't want to swallow the
           
           setTimeout(function() { throw e; }, 0);
         }
@@ -1901,7 +1901,7 @@ var Cookie = {
   loadMeta: function() /*object?*/ {/*TC*/ return __t([function(){/*/TC*/
     var cookie = getRaw('fbm_');
     if (cookie) {
-      
+      // url encoded session stored as "sub-cookies"
       var meta = QueryString.decode(cookie);
       if (!domain) {
         
@@ -2037,7 +2037,7 @@ var DOMEventListener = {
     return {
       
       
-      
+      // someone is hanging on to this 'event' object.
       remove: function() {
         remove(target, name, listener);
         target = null;
@@ -2075,7 +2075,7 @@ function createIframe(/*object*/ opts) /*DOMElement*/ {/*TC*/__t([opts,'object',
     frame.name = name;
   }
 
-  
+  // delete attributes that we're setting directly
   delete opts.style;
   delete opts.name;
   delete opts.url;
@@ -2102,9 +2102,9 @@ function createIframe(/*object*/ opts) /*DOMElement*/ {/*TC*/__t([opts,'object',
   copyProperties(frame.style, style);
 
   
+  //       into the container, so we set it to "javascript:false" as a
   
-  
-  
+  //       instead default to "about:blank", which causes SSL mixed-content
   
   frame.src = "javascript:false";
   root.appendChild(frame);
@@ -2116,7 +2116,7 @@ function createIframe(/*object*/ opts) /*DOMElement*/ {/*TC*/__t([opts,'object',
   }
 
   
-  
+  // "javascript:false" to work around the IE issue mentioned above)
   frame.src = src;
   return frame;
 /*TC*/}.apply(this, arguments), 'DOMElement']);/*/TC*/}
@@ -2130,7 +2130,7 @@ var rootElement,
     windowRef;
 
 
-
+// `obj || default` pattern to account for 'resetting'.
 var DOMWrapper = {
   setRoot: function(/*DOMElement?*/ root) {/*TC*/__t([root,'DOMElement?','root']);/*/TC*/
     rootElement = root;
@@ -2176,7 +2176,8 @@ function _populate() {
 
   _populated = true;
 
-  
+  // To work around buggy JS libraries that can't handle multi-digit
+  // version numbers, Opera 10's user agent string claims it's Opera
   
   
   
@@ -2191,10 +2192,10 @@ function _populate() {
   _mobile = /Mobile/i.exec(uas);
 
   
+  // for 'Win64; x64'.  But MSDN then reveals that you can actually be coming
   
-  
-  
-  
+  // as in indicator of whether you're in 64-bit IE.  32-bit IE on 64-bit
+  // Windows will send 'WOW64' instead.
   _win64 = !!(/Win64/.exec(uas));
 
   if (agent) {
@@ -2208,7 +2209,7 @@ function _populate() {
     _webkit  = agent[4] ? parseFloat(agent[4]) : NaN;
     if (_webkit) {
       
-      
+      // match 'safari' only since 'AppleWebKit' appears before 'Chrome' in
       
       agent = /(?:Chrome\/(\d+\.\d+))/.exec(uas);
       _chrome = agent && agent[1] ? parseFloat(agent[1]) : NaN;
@@ -2403,8 +2404,8 @@ function en3(c) {
 }
 
 
-
-
+// Position 0 corresponds to '+' (ASCII 43), and underscores are padding.
+// The octal sequence \13 is used because IE doesn't recognize \v
 var de =
   '>___?456789:;<=_______' +
   '\0\1\2\3\4\5\6\7\b\t\n\13\f\r\16\17\20\21\22\23\24\25\26\27\30\31' +
@@ -2771,6 +2772,7 @@ var Content = {
           visibleRoot = root = document.createElement('div');
           root.id = 'fb-root';
           
+          // that the body has loaded to avoid potential "operation aborted"
           
           
           
@@ -3058,7 +3060,7 @@ function resolveURI(/*string?*/ uri) /*string*/ {/*TC*/__t([uri,'string?','uri']
            .replace(/"/g, '&quot;'); 
 
   var div = document.createElement('div');
-  
+  // This uses `innerHTML` because anything else doesn't resolve properly or
   
   div.innerHTML = '<a href="' + uri + '"></a>';
 
@@ -3079,7 +3081,7 @@ function resolveWindow(path) {
   try {
     for (var i = 0; i < parts.length; i++) {
       var part = parts[i];
-      
+      // the regex has the `feature' of fixing some badly quote strings
       var matches = /^frames\[['"]?([a-zA-Z0-9\-_]+)['"]?\]$/.exec(part);
 
       if (matches) {
@@ -3329,7 +3331,7 @@ var Flash = {
 
   
   embed: function(src, container, params, flashvars) {
-    
+    // Always give SWFs unique id's in order to kill instance caching.
     var id = guid();
     
     src = encodeURI(src);
@@ -3631,7 +3633,7 @@ XDM.register('postmessage', (function() {
             
             windowRef.postMessage('_FB_' + channel + message, origin);
           };
-          
+          // IE8's postMessage is syncronous, meaning that if you have a
           
           
           
@@ -3939,8 +3941,8 @@ function init(/*string?*/ channelUrl, /*string?*/ xdProxyName) {/*TC*/__t([chann
 
 
 var XD = {
-  
-  
+  // needs to be exposed in a more controlled way once we're more
+  // into 'CJS land'.
   rpc: RPC,
 
   _callbacks: {},
@@ -3975,7 +3977,7 @@ var XD = {
       ? UrlMap.resolve('cdn', location.protocol == 'https:')
       : location.protocol + '//www.facebook.com';
 
-    
+    // This url isn't actually used, the channel_url is merely used to pass
     
     
     return handlerDomain + '/' + XDConfig.XdUrl + '#' + QueryString.encode({
@@ -4056,9 +4058,9 @@ function setAuthResponse(/*object?*/ authResponse, /*string*/ status) {/*TC*/__t
   var currentUserID = Runtime.getUserID();
   var userID = '';
   if (authResponse) {
+    // if there's an auth record, then there are a few ways we might
     
-    
-    
+    // then go with that.  If there's no explicit user ID, but there's a valid
     
     if (authResponse.userID) {
       userID = authResponse.userID;
@@ -4128,7 +4130,7 @@ function xdResponseWrapper(/*function*/ cb, /*object?*/ authResponse,
 
       if (Runtime.getUseCookie()) {
         var expirationTime = authResponse.expiresIn === 0
-          ? 0 
+          ? 0 // make this a session cookie if it's for offline access
           : ES5('Date', 'now', false) + authResponse.expiresIn * 1000;
         var baseDomain = Cookie.getDomain();
         if (!baseDomain && params.base_domain) {
@@ -4232,7 +4234,7 @@ function getLoginStatus(/*function?*/ cb, /*boolean?*/ force) {/*TC*/__t([cb,'fu
     }
   }
 
-  
+  // if we're already loading, and this is not a force load, we're done
   if (!force && loadState == 'loading') {
     return;
   }
@@ -4437,7 +4439,7 @@ function getStyle(/*DOMElement*/ dom, /*string*/ styleProp) /*string*/ {/*TC*/__
   Assert.isTruthy(dom, 'element not specified');
   Assert.isString(styleProp);
 
-  
+  // camelCase (e.g. 'marginTop')
   styleProp = styleProp.replace(/-(\w)/g, function(m, g1) {
     return g1.toUpperCase();
   });
@@ -4448,8 +4450,8 @@ function getStyle(/*DOMElement*/ dom, /*string*/ styleProp) /*string*/ {/*TC*/__
   var computedStyle = currentStyle[styleProp];
 
   
-  
-  
+  // for some reason it doesn't return '0%' for defaults. so needed to
+  // translate 'top' and 'left' into '0px'
   if (/backgroundPosition?/.test(styleProp) &&
       /top|left/.test(computedStyle)) {
     computedStyle = '0%';
@@ -4462,7 +4464,7 @@ function setStyle(/*DOMElement*/ dom, /*string*/ styleProp, value) {/*TC*/__t([d
   Assert.isTruthy(dom, 'element not specified');
   Assert.isString(styleProp);
 
-  
+  // camelCase (e.g. 'marginTop')
   styleProp = styleProp.replace(/-(\w)/g, function(m, g1) {
     return g1.toUpperCase();
   });
@@ -4620,7 +4622,7 @@ function normalizeError(err) /*object*/ {/*TC*/ return __t([function(){/*/TC*/
   
   info._originalError = err;
 
-  
+  // Chrome: There's no script/line info in Error objects, and if you rethrow
   
   
   
@@ -4730,8 +4732,8 @@ __d("GlobalCallback",["wrapFunction","dotAccess"],function(global,require,requir
 var wrapFunction = require('wrapFunction');
 var dotAccess = require('dotAccess');
 
-
-
+// window is the same as the 'global' object in the browser, but the variable
+// 'global' might be shadowed.
 var rootObject;
 var callbackPrefix;
 var counter = 0;
@@ -4891,7 +4893,7 @@ domReady(function() {
 
 Runtime.subscribe('AccessToken.change', function(/*string?*/ value) {/*TC*/__t([value,'string?','value']);/*/TC*/
   if (!value && Runtime.getLoginStatus() === 'connected') {
-    
+    // The access token was invalidated, but we're still connected
     
     Auth.getLoginStatus(null, true);
   }
@@ -4956,9 +4958,9 @@ function protect(/*function*/ fn, /*string*/ accessor, /*string*/ key,
             return val.__wrapped;
           }
           
-          
-          
-          
+          // throwing an error during execution, it doesn't bubble up through
+          // the JS SDK's callstack.
+          // Due to FF's typeof returning 'function' for HTMLObjectElement,
           
           return typeof val === 'function' && /^function/.test(val.toString())
             ? ErrorHandling.unguard(val)
@@ -4972,9 +4974,9 @@ function protect(/*function*/ fn, /*string*/ accessor, /*string*/ key,
         var isPlainObject = true;
 
         if (result && typeof result === 'object') {
+          // This crazy block here creates a 'facade' object that we can return
           
-          
-          
+          // object, they aren't subject to the same limitations :)
           var F = Function();
           F.prototype = result;
           facade = new F();
@@ -5025,7 +5027,7 @@ function provide(/*string*/ name, /*object*/ source) {/*TC*/__t([name,'string','
 
 
 Runtime.setSecure((function() /*boolean?*/ {/*TC*/ return __t([function(){/*/TC*/
-  
+  // Resolve whether we're in a canvas context or not
   var inCanvas = /iframe_canvas|app_runner/.test(window.name);
   var inDialog = /dialog/.test(window.name);
 
@@ -5666,7 +5668,7 @@ var _punctCharClass = (
     '\u3002' +  
     '\uFF01' +  
     '\uFF1F' +  
-    '\u0964' +  
+    '\u0964' +  // Hindi "full stop"
     '\u2026' +  
     '\u0EAF' +  
     '\u1801' +  
@@ -5686,12 +5688,12 @@ function _endsInPunct(/*string?*/ str) /*boolean*/ {/*TC*/__t([str,'string?','st
     '[' +
       ')"' +
       "'" +
+      // JavaScript doesn't support Unicode character
       
       
-      
-      
-      
-      
+      // abbreviated list of the "final punctuation"
+      // and "close punctuation" Unicode codepoints,
+      // excluding symbols we're unlikely to ever
       
       '\u00BB' +  
       '\u0F3B' +  
@@ -5733,8 +5735,8 @@ function _substituteTokens(/*string*/ str, /*object?*/ args) /*string*/ {/*TC*/_
       var regexp;
       for (var key in args) {
         if (args.hasOwnProperty(key)) {
-          
-          
+          // _substituteTokens("You are a {what}.", {what:'cow!'}) should be
+          // "You are a cow!" rather than "You are a cow!."
 
           if (_endsInPunct(args[key])) {
             
@@ -5758,7 +5760,7 @@ function tx() {
   throw new Error('Placeholder function');
 }
 
-
+// FB.Intl.tx('key') is rewritten to FB.Intl.tx._('Translated value')
 tx._ = _substituteTokens;
 
 
@@ -5850,7 +5852,7 @@ var Dialog = {
 
   _createMobileLoader: function() /*DOMElement*/ {/*TC*/ return __t([function(){/*/TC*/
     
-    
+    // We're copying the HTML/CSS output of an XHP element here
     
     
     
@@ -5919,7 +5921,7 @@ var Dialog = {
         : Dialog._createWWWLoader(width));
     }
 
-    
+    // this needs to be done for each invocation of showLoader. since we don't
     
     
     
@@ -5991,7 +5993,7 @@ var Dialog = {
     var left = view.scrollLeft + (view.width - width) / 2;
 
     
-    
+    // these ensure that the dialog is always within the iframe's
     
     
     
@@ -6017,7 +6019,7 @@ var Dialog = {
       top = maxTop;
     }
 
-    
+    // offset by the iframe's scroll
     top += view.scrollTop;
 
     
@@ -6026,18 +6028,19 @@ var Dialog = {
       
       
       
+      // space. If page doesn't have enough height, then OS will effectively
       
       
       
       
       
       
+      // down, then the "click" event may fire from a differnt DOM element and
       
       
       
       
-      
-      
+      // such that page won't be forced to scroll beyeond its limit when
       
       
       
@@ -6087,7 +6090,7 @@ var Dialog = {
         };
       } else if (UserAgent.android()) {
         
-        
+        // window.innerWidth/Height doesn't return correct values
         return {
           width: screen.availWidth,
           height: screen.availHeight
@@ -6098,7 +6101,7 @@ var Dialog = {
         var isLandscape = width / height > 1.2;
         
         
-        
+        // window.innerHeight is not good enough because it doesn't take into
         
         
         
@@ -6124,6 +6127,7 @@ var Dialog = {
     
     
     
+    // "orientation" event, but change shortly after (50-150ms later).
     
     
     
@@ -6281,11 +6285,11 @@ var Dialog = {
       }
 
       
+      // flash crap. seriously, don't ever ask me about it.
+      // if we remove this without deferring, then in IE only, we'll get an
       
-      
-      
-      
-      
+      // traces. the 3 second delay isn't a problem because the <div> is
+      // already hidden, it's just not removed from the DOM yet.
       setTimeout(function() {
         dialog.parentNode.removeChild(dialog);
       }, 3000);
@@ -6414,12 +6418,14 @@ function insertIframe(/*object*/ opts) {/*TC*/__t([opts,'object','opts']);/*/TC*
 
   
   
+  
+
 
   opts.id = opts.id || guid();
   opts.name = opts.name || guid();
 
   
-  
+  // browsers (e.g. Webkit) appear to try to do the "right thing" and will fire
   
   
   
@@ -6436,7 +6442,7 @@ function insertIframe(/*object*/ opts) {/*TC*/__t([opts,'object','opts']);/*/TC*
 
   
   
-  
+  // Dear Webkit, you're okay. Works either way.
 
   if (document.attachEvent) {
     
@@ -6461,11 +6467,11 @@ function insertIframe(/*object*/ opts) {/*TC*/__t([opts,'object','opts']);/*/TC*
 
     
     
+    // actually sets the content to the HTML we created above, and because it's
     
     
     
-    
-    
+    // the string 'false', we set the iframe height to 1px so that it gets
     
     opts.root.innerHTML = (
       '<iframe src="javascript:false"' +
@@ -6474,7 +6480,7 @@ function insertIframe(/*object*/ opts) {/*TC*/__t([opts,'object','opts']);/*/TC*
         ' style="height:1px"></iframe>'
     );
 
-    
+    // Now we'll be setting the real src.
     srcSet = true;
 
     
@@ -6489,7 +6495,7 @@ function insertIframe(/*object*/ opts) {/*TC*/__t([opts,'object','opts']);/*/TC*
     }, 0);
 
   } else {
-    
+    // This block works for all non-IE browsers, but it's specifically designed
     
     
     var node = document.createElement('iframe');
@@ -6517,7 +6523,7 @@ function insertIframe(/*object*/ opts) {/*TC*/__t([opts,'object','opts']);/*/TC*
     }
     opts.root.appendChild(node);
 
-    
+    // Now we'll be setting the real src.
     srcSet = true;
 
     node.src = opts.url;
@@ -6540,7 +6546,7 @@ var Native = {
 
   
   onready: function(/*function*/ func) {/*TC*/__t([func,'function','func']);/*/TC*/
-    
+    // Check that we're within a native container
     if (!UserAgent.nativeApp()) {
       Log.error('FB.Native.onready only works when the page is rendered ' +
              'in a WebView of the native Facebook app. Test if this is the ' +
@@ -6548,7 +6554,7 @@ var Native = {
       return;
     }
 
-    
+    // if the native container has injected JS but we haven't copied it
     
     
     
@@ -6560,7 +6566,7 @@ var Native = {
     if (this.nativeReady) {
       func();
     } else {
-      
+      // If the native interfaces haven't been injected yet,
       
       var nativeReadyCallback = function(evt) {
         window.removeEventListener(NATIVE_READY_EVENT, nativeReadyCallback);
@@ -6657,7 +6663,7 @@ var Methods = {
 
         if (Frictionless.isAllowed(call.params.to)) {
           
-          
+          // for frictionless request that's already
           
           
           call.params.display = 'iframe';
@@ -6819,7 +6825,7 @@ var UIServer = {
     
     params.display = UIServer.getDisplayMode(method, params);
 
-    
+    // set the default dialog URL if one doesn't exist
     if (!method.url) {
       method.url = 'dialog/' + name;
     }
@@ -6892,8 +6898,8 @@ var UIServer = {
     var encodedQS = QueryString.encode(call.params);
 
     
-    
-    
+    // (the fb native app is an exception because it doesn't
+    // doesn't support POST for dialogs).
     if (!UserAgent.nativeApp() &&
         UIServer.urlTooLongForIE(call.url + '?' + encodedQS)) {
       call.post = true;
@@ -6926,7 +6932,7 @@ var UIServer = {
       return 'touch';
     }
 
-    
+    // cannot use an iframe "dialog" if an access token is not available
     if (!Runtime.getAccessToken() &&
         params.display == 'dialog' &&
         !method.loggedOutIframe) {
@@ -6938,7 +6944,7 @@ var UIServer = {
       return method.connectDisplay;
     }
 
-    
+    // TODO change "dialog" to "iframe" once moved to uiserver
     return params.display || (Runtime.getAccessToken() ? 'dialog' : 'popup');
   /*TC*/}.apply(this, arguments), 'string']);/*/TC*/},
 
@@ -7019,11 +7025,11 @@ var UIServer = {
 
     
     if (!popup) {
-      //TODO: signal failure
+      
       return;
     }
 
-    
+    // if there's a default close action, setup the monitor for it
     if (call.id in UIServer._defaultCb) {
       UIServer._popupMonitor();
     }
@@ -7033,7 +7039,7 @@ var UIServer = {
     if (call.params && call.params.display != 'popup') {
       
       
-      
+      // you can't set a property on an https popup window in IE.
       node.fbCallID = call.id;
     }
     node = {
@@ -7094,7 +7100,7 @@ var UIServer = {
       Native.onready(function() {
         
         
-        
+        // Native.open doesn't accept a name parameter that it
         
         
         
@@ -7128,7 +7134,7 @@ var UIServer = {
   _insertIframe: function(/*object*/ call) {/*TC*/__t([call,'object','call']);/*/TC*/
     
     
-    
+    // from the _frames nodes, and we won't add the node back in.
     UIServer._loadedNodes[call.id] = false;
     var activate = function(/*DOMElement*/ node) {/*TC*/__t([node,'DOMElement','node']);/*/TC*/
       if (call.id in UIServer._loadedNodes) {
@@ -7228,10 +7234,10 @@ var UIServer = {
     }
 
     if (found && !UIServer._popupInterval) {
-      
+      // start the monitor if needed and it's not already running
       UIServer._popupInterval = setInterval(UIServer._popupMonitor, 100);
     } else if (!found && UIServer._popupInterval) {
-      
+      // shutdown if we have nothing to monitor but it's running
       clearInterval(UIServer._popupInterval);
       UIServer._popupInterval = null;
     }
@@ -7279,7 +7285,7 @@ var UIServer = {
       try {
         if (DOM.containsCss(frame, 'FB_UI_Hidden')) {
           
-          
+          // async flash crap. seriously, don't ever ask me about it.
           setTimeout(function() {
             
             frame.parentNode.parentNode.removeChild(frame.parentNode);
@@ -7377,15 +7383,15 @@ function ui(/*object*/ params, /*function?*/ cb) /*object?*/ {/*TC*/__t([params,
     if (perms) {
       var requested_perms = perms.split(/\s|,/g);
       
-      
+      // we previously accepted comma delimited strings.  We'll accept both.
       for (var i = 0; i < requested_perms.length; i++) {
         var perm = ES5(requested_perms[i],'trim', true);
-        
+        // force a popup if we are not in the whitelist or we're set as
         
         if (perm && !SDKConfig.initSitevars.iframePermissions[perm]) {
           params.display = 'popup';
           
-          
+          // and make sure we'll pass the right parameters.
           break;
         }
       }
@@ -7397,7 +7403,7 @@ function ui(/*object*/ params, /*function?*/ cb) /*object?*/ {/*TC*/__t([params,
     return null;
   }
 
-  
+  // each allowed "display" value maps to a function
   var displayName = call.params.display;
   if (displayName === 'dialog') { 
                                  
@@ -7489,7 +7495,7 @@ Event.subscribe('init:post', function(/*object*/ options) {/*TC*/__t([options,'o
     if (options.authResponse) {
       Auth.setAuthResponse(options.authResponse, 'connected');
     } else if (Runtime.getUseCookie()) {
-      
+      // we don't have an access token yet, but we might have a user
       
       var signedRequest = Cookie.loadSignedRequest();
       if (signedRequest) {
@@ -7662,7 +7668,7 @@ function setAutoGrow(on, interval) {
 
   if (on || on === undefined) {
     if (autoGrowTimer === null) {
-      
+      // Wrap the call in a function to avoid having FF pass in the 'Lateness'
       
       autoGrowTimer = setInterval(function() {
         setSize();
@@ -7976,7 +7982,7 @@ FB.provide('', {
   }
 });
 
-
+// the "fake" UIServer method was called auth.login
 UIServer.Methods['auth.login'] = UIServer.Methods['permissions.request'];
 
 },3);
@@ -8601,14 +8607,14 @@ function encode(s) {
   
   var parts = s.match(/\w+|\W+/g);
 
-  
+  // Create dictionary we'll use to encode, but initialize it to part counts
   
   var dict = {};
   for (var i = 0; i < parts.length; i++) {
     dict[parts[i]] = (dict[parts[i]] || 0) + 1;
   }
 
-  
+  // Create array of part strings we'll use to decode, sort by frequency so
   
   var byCount = ES5('Object', 'keys', false,dict);
   byCount.sort(function(a,b) {
@@ -8649,7 +8655,7 @@ function decode(s) {
   var codes = fields.pop();
   codes = codes.match(/[0-9a-v]*[\-w-zA-Z_]/g);
 
-  
+  // Patch up any place we split on an escaped '\~'
   var dict = fields;
 
   var decodeMap = getIndexMap(nKeys).decode;
@@ -8729,7 +8735,7 @@ function propStr(object, /*string*/ property) /*string*/ {/*TC*/__t([property,'s
 /*TC*/}.apply(this, arguments), 'string']);/*/TC*/}
 
 function nodeNameIE(/*DOMElement*/ element) /*string*/ {/*TC*/__t([element,'DOMElement','element']); return __t([function(){/*/TC*/
-  
+  // In old IE (< 9), element.nodeName doesn't include the namespace so we use
   
   return element.scopeName
     ? (element.scopeName + ':' + element.nodeName)
@@ -8750,9 +8756,9 @@ function html5Info(/*DOMElement*/ element) /*object?*/ {/*TC*/__t([element,'DOME
   }
 
   
+  // like <div class="fb-like"><fb:like></fb:like></div>; unless the subtree is
   
-  
-  
+  // <div class="fb-login-button">Log In with Facebook</div> will work; and
   
   
   if (!element.childNodes ||
@@ -8783,7 +8789,7 @@ function parse(/*DOMElement*/ dom, /*function*/ callback, /*boolean*/ reparse) {
 
   
   
-  
+  // ensure that we don't hit 0 until we have finished queuing up all the tags.
   
   var count = 1;
   var tags = 0;
@@ -8815,8 +8821,8 @@ function parse(/*DOMElement*/ dom, /*function*/ callback, /*boolean*/ reparse) {
       if (!info) {
         return;
       }
-      
-      
+      // In IE<9 we want to switch out the custom tag so as to avoid 'Unknown
+      // runtime error' when touching innerHTML
       if (feature('convert_xfbml', /*default*/ true) && UserAgent.ie() < 9) {
         
         var oldElement = element;
@@ -8861,7 +8867,7 @@ function parse(/*DOMElement*/ dom, /*function*/ callback, /*boolean*/ reparse) {
       
       
       if (element.getAttribute('fb-xfbml-state') == 'parsed') {
-        
+        // We can't render a tag if it's in the parsed-but-not-rendered state
         
         XFBML.subscribe('render.queue', render);
       } else {
@@ -9086,7 +9092,7 @@ function resizeBubbler(/*string?*/ pluginID) /*function*/ {/*TC*/__t([pluginID,'
 /*TC*/}.apply(this, arguments), 'function']);/*/TC*/}
 
 var types = {
-  
+  // TODO: Move the 'bool' and 'px' parsing to the server?
   string: function(/*string?*/ value) /*string?*/ {/*TC*/__t([value,'string?','value']); return __t([function(){/*/TC*/
     return value;
   /*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
@@ -9229,7 +9235,7 @@ var IframePlugin = Type.extend({
 
     
     
-    
+    if (!PluginPipe.add(this)) {
       this._iframe = createIframe(this._config);
     }
   },
@@ -9487,15 +9493,19 @@ var IframeWidget = Element.extend({
   
   _borderReset: false,
 
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  
+  
+  
+
   
   getUrlBits: function() /*object*/ {/*TC*/ return __t([function(){/*/TC*/
     throw new Error('Inheriting class needs to implement getUrlBits().');
   /*TC*/}.apply(this, arguments), 'object']);/*/TC*/},
 
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  
+  
+  
+
   
   setupAndValidate: function() /*boolean*/ {/*TC*/ return __t([function(){/*/TC*/
     return true;
@@ -9515,8 +9525,10 @@ var IframeWidget = Element.extend({
   
   getIframeTitle: function() /*string?*/ {/*TC*/ return __t([function(){/*/TC*//*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
 
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  
+  
+  
+
   
   getChannelUrl: function() /*string*/ {/*TC*/ return __t([function(){/*/TC*/
     if (!this._channelUrl) {
@@ -9559,8 +9571,10 @@ var IframeWidget = Element.extend({
     return UrlMap.resolve('www');
   /*TC*/}.apply(this, arguments), 'string']);/*/TC*/},
 
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  
+  
+  
+
   
   process: function(/*boolean?*/ force) {/*TC*/__t([force,'boolean?','force']);/*/TC*/
     
@@ -9576,7 +9590,7 @@ var IframeWidget = Element.extend({
 
     this._iframeName = this.getIframeName() || this._iframeName || guid();
     if (!this.setupAndValidate()) {
-      
+      // failure to validate means we're done rendering what we can
       this.fire('render');
       return;
     }
@@ -9586,7 +9600,7 @@ var IframeWidget = Element.extend({
       this._addLoader();
     }
 
-    
+    // it's always hidden by default
     DOM.addCss(this.dom, 'fb_iframe_widget');
     if (this._visibleAfter != 'immediate') {
       DOM.addCss(this.dom, 'fb_hide_iframes');
@@ -9631,7 +9645,7 @@ var IframeWidget = Element.extend({
   
   getFullyQualifiedURL: function() /*string*/ {/*TC*/ return __t([function(){/*/TC*/
     
-    
+    // a <form> POST. we prefer a GET because it prevents the "POST resend"
     
     var url = this._getURL();
     url += '?' + QueryString.encode(this._getQS());
@@ -9928,7 +9942,7 @@ var Comments = IframeWidget.extend({
 
       
       if (!attr.xid) {
-        
+        // We always want the URL minus the hash "#" also note the encoding here
         
         
         var index = ES5(document.URL, 'indexOf', true,'#');
@@ -9967,7 +9981,7 @@ var Comments = IframeWidget.extend({
         attr.fb_comment_id = fb_comment_id;
         this.subscribe('render',
                        ES5(function() {
-                           
+                           // don't nuke the hash if it currently
                            
                            
                            if (!window.location.hash) {
@@ -10016,7 +10030,7 @@ var Comments = IframeWidget.extend({
 
   
   _handleCommentMsg: function(/*object*/ message) {/*TC*/__t([message,'object','message']);/*/TC*/
-    //TODO (naitik) what should we be giving the developers here? is there a
+    
     
     if (!this.isValid()) {
       return;
@@ -10120,7 +10134,7 @@ var Anim = {
           var value = props[prop];
           if (!from[prop]) { 
             var style = DOM.getStyle(dom, prop);
-            
+            // check for can't animate this, bad prop for this browser
             if (style === false) { return; }
             from[prop] = this._parseCSS(style+''); 
           }
@@ -10135,7 +10149,7 @@ var Anim = {
             
             } else if (isNaN(pair.numPart)) {
               next = pair.textPart;
-            
+            // yay it's animate-able!
             } else {
               next +=
                 (pair.numPart + 
@@ -10284,7 +10298,7 @@ var ConnectBar = Element.extend({
   _initialHeight: null,
   _initTopMargin: 0,
   _picFieldName: 'pic_square',
-  _page: null, 
+  _page: null, // the external site's content parent node
   _displayed: false, 
   _notDisplayed: false, 
   _container: null,
@@ -10515,7 +10529,7 @@ var Fan = IframeWidget.extend({
       width       : this._getPxAttribute('width', 300)
     };
 
-    
+    // "id" or "name" is required
     if (!this._attr.id && !this._attr.name) {
       Log.error('<fb:fan> requires one of the "id" or "name" attributes.');
       return false;
@@ -10580,8 +10594,10 @@ var Widget = IframeWidget.extend({
     DOM.addCss(this.dom, 'fb_edge_comment_widget');
   },
 
-  ///////////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////////
+  
+  
+  
+
   
   _visibleAfter: 'load',
   _showLoader: false,
@@ -10930,7 +10946,7 @@ var SendButtonFormWidget = EdgeCommentWidget.extend({
   },
   
   
-  
+  // there will be a very small delay. So in meantime, let's show a loader
   _showLoader: true,
 
   getUrlBits: function() /*object*/ {/*TC*/ return __t([function(){/*/TC*/
@@ -10966,7 +10982,7 @@ var Like = EdgeWidget.extend({
       /*DOMElement*/ comment_node) /*object*/ {/*TC*/__t([message,'object','message'],[comment_node,'DOMElement','comment_node']); return __t([function(){/*/TC*/
     
     
-    
+    // send="true"></fb:like>)
     if ('send' in this._attr &&
         'widget_type' in message &&
         message.widget_type == 'send') {
@@ -11027,7 +11043,7 @@ var LikeBox = EdgeWidget.extend({
       this._attr.show_faces = true;
     }
 
-    
+    // "id" or "name" or "href" (for Open Graph) is required
     if (!this._attr.id && !this._attr.name && !this._attr.href) {
       Log.error('<fb:like-box> requires one of the "id" or "name" attributes.');
       return false;
@@ -11059,7 +11075,7 @@ var LikeBox = EdgeWidget.extend({
 
     this._attr.height = height;
 
-    
+    // listen for the XD 'likeboxLiked' and 'likeboxUnliked' events
     this.subscribe('xd.likeboxLiked', ES5(this._onLiked, 'bind', true,this));
     this.subscribe('xd.likeboxUnliked', ES5(this._onUnliked, 'bind', true,this));
 
@@ -11230,7 +11246,7 @@ var Name = Element.extend({
       }
 
       if (!this._uid) {
-        return; 
+        return; // don't do anything yet
       }
 
       if (Helper.isUser(this._uid)) {
@@ -11378,7 +11394,7 @@ var Name = Element.extend({
       if (null === userInfo.last_name) {
         userInfo.last_name = '';
       }
-      
+      // Structures that don't exist will return undefined
       
       
       
@@ -11508,7 +11524,7 @@ var ProfilePic = Element.extend({
 
     
     Event.monitor('auth.statusChange', ES5(function() /*boolean?*/ {/*TC*/ return __t([function(){/*/TC*/
-      //Is Element still in DOM tree
+      
       if (!this.isValid()) {
         this.fire('render');
         return true; 
@@ -11730,7 +11746,7 @@ var Bar = IframeWidget.extend({
         var elem = this.dom.getBoundingClientRect().top;
         return elem <= fold;
 
-      default: 
+      default: // "80%", etc.
         var scroll = window.pageYOffset || document.body.scrollTop;
         var height = document.documentElement.scrollHeight; 
         return (scroll + fold) / height >= this._attr.trigger;
@@ -12072,7 +12088,7 @@ try {
      document.namespaces.add('fb');
   }
 } catch(e) {
-  
+  // introspection doesn't yield any identifiable information to scope
 }
 
 },3);
