@@ -1,4 +1,4 @@
-/*1359485213,171889985,JIT Construction: v722438,en_US*/
+/*1360123996,179359829,JIT Construction: v729873,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -40,10 +40,13 @@ var __t = (function() {
       // HTMLObjectElements has a typeof function in FF
       if (type === 'object' || type === 'function') {
         // Do not use instanceof Element etc. as eg. MooTools shadow this
-        if (value.nodeType === 1 && typeof value.nodeName === 'string') {
+        if ((value.nodeType === 1 || value.nodeType === 11)
+            && typeof value.nodeName === 'string') {
           // If it's an HTMLElement, extract the subtype
-           type = 'DOMElement';
-           subType = value.nodeName.toUpperCase();
+          type = 'DOMElement';
+          subType = value.nodeType === 11
+            ? 'FRAGMENT'
+            : value.nodeName.toUpperCase();
         } else {
           // else, check if it is actually an array
           type = toString.call(value).slice(8, -1);
@@ -117,7 +120,7 @@ var __t = (function() {
 })();
 /*/TC*/
 
-/* c-V_LBdYVL5 */
+/* nLo6n2z200O */
 /**
  * This is a lightweigh implementation of require and __d which is used by the
  * JavaScript SDK.
@@ -195,7 +198,7 @@ var require, __d;
   };
 })(this);
 
-/* 99zP4BCXitD */
+/* 3K-c5mDztxp */
 var ES5 = function(){
 __d("ES5ArrayPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5ArrayPrototype
@@ -311,7 +314,7 @@ ES5ArrayPrototype.indexOf = function(val, index) {
 
 module.exports = ES5ArrayPrototype;
 
-/* -2FGXaW0Og6 */});
+/* 8dsJuhKsQ6G */});
 __d("ES5FunctionPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5FunctionPrototype
  */
@@ -346,7 +349,7 @@ ES5FunctionPrototype.bind = function(context /*, args... */) {
 
 module.exports = ES5FunctionPrototype;
 
-/* SH5DJAyJDi5 */});
+/* _FHIXsV3eGg */});
 __d("ES5StringPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5StringPrototype
  */
@@ -367,7 +370,7 @@ ES5StringPrototype.trim = function() {
 
 module.exports = ES5StringPrototype;
 
-/* 8b5Jvr248rh */});
+/* dbYs0tmPht4 */});
 __d("ES5Array",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5Array
  */
@@ -380,7 +383,7 @@ ES5Array.isArray = function(object) {
 
 module.exports = ES5Array;
 
-/* _qJ3bbk1L2n */});
+/* KWc-LfDWEyQ */});
 __d("ES5Object",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5Object
  */
@@ -451,7 +454,7 @@ ES5Object.keys = function(object) {
 
 module.exports = ES5Object;
 
-/* Ap77zLbRzDh */});
+/* rwYcAvu4u7O */});
 __d("ES5Date",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5Date
  */
@@ -463,7 +466,7 @@ ES5Date.now = function() {
 
 module.exports = ES5Date;
 
-/* 3lGgQMOIIpv */});
+/* HjJH7ozT9Sd */});
 __d("JSON3",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule JSON3
  * @option preserve-header
@@ -1220,7 +1223,7 @@ __d("JSON3",[],function(global,require,requireDynamic,requireLazy,module,exports
   }
 }).call(this);
 
-/* zMWzJkK02AX */});
+/* 5XANJ9LaCZt */});
 __d("ES5",["ES5ArrayPrototype","ES5FunctionPrototype","ES5StringPrototype","ES5Array","ES5Object","ES5Date","JSON3"],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5
  *
@@ -1303,7 +1306,7 @@ function ES5(lhs, rhs, proto/*, args*/) {
 
 module.exports = ES5;
 
-/* lLVzAb3N-a1 */});ES5 = require('ES5');
+/* EQa_GDJGIpD */});ES5 = require('ES5');
 return ES5.apply(null, arguments);
 };
 
@@ -6607,7 +6610,7 @@ var insertIframe = require('insertIframe');
 var Log = require('Log');
 var Native = require('sdk.Native');
 var QueryString = require('QueryString');
-var resolveURI = require('resolveURI')
+var resolveURI = require('resolveURI');
 var RPC = require('sdk.RPC');
 var Runtime = require('sdk.Runtime');
 var UrlMap = require('UrlMap');
@@ -6699,7 +6702,7 @@ var Methods = {
   'permissions.oauth': {
     url       : 'dialog/oauth',
     size      : { width: (UserAgent.mobile() ? null : 440),
-                  height: (UserAgent.mobile() ? null : 186) },
+                  height: (UserAgent.mobile() ? null : 183) },
     transform : function(/*object*/ call) /*object?*/ {/*TC*/__t([call,'object','call']); return __t([function(){/*/TC*/
       if (!Runtime.getClientID()) {
         Log.error('FB.login() called before FB.init().');
@@ -9511,6 +9514,10 @@ var IframeWidget = Element.extend({
   _borderReset: false,
 
   
+  _repositioned: false,
+
+
+  
   
   
 
@@ -9776,6 +9783,9 @@ var IframeWidget = Element.extend({
 
   _resizeIframe: function(/*object*/ message) {/*TC*/__t([message,'object','message']);/*/TC*/
     var iframe = this.getIframeNode();
+    if (message.reposition) {
+      this._repositionIframe(message);
+    }
     message.height && (iframe.style.height = message.height + 'px');
     message.width && (iframe.style.width = message.width + 'px');
     this._updateIframeZIndex();
@@ -9795,6 +9805,23 @@ var IframeWidget = Element.extend({
       iframe.style.width === span.style.width;
     var method = identical ? 'removeCss' : 'addCss';
     DOM[method](iframe, 'fb_iframe_widget_lift');
+  },
+
+  _repositionIframe: function(/*object*/ message) {/*TC*/__t([message,'object','message']);/*/TC*/
+    var iframe = this.getIframeNode();
+    var iframe_width = parseInt(DOM.getStyle(iframe, 'width'), 10);
+    var left = DOM.getPosition(iframe).x;
+    var screen_width = DOM.getViewportInfo().width;
+    var comment_width = parseInt(message.width, 10);
+    if (left + comment_width > screen_width) {
+      iframe.style.left = iframe_width - comment_width + 'px';
+      this.arbiterInform('xd/reposition', {type: 'horizontal'});
+      this._repositioned = true;
+    } else if (this._repositioned) {
+      iframe.style.left = '0px';
+      this.arbiterInform('xd/reposition', {type: 'restore'});
+      this._repositioned = false;
+    }
   },
 
   
