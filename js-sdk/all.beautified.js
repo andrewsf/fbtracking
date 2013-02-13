@@ -1,4 +1,4 @@
-/*1360645360,180796999,JIT Construction: v734528,en_US*/
+/*1360771694,179313955,JIT Construction: v735892,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -3662,6 +3662,7 @@ try {
                     },
                     hide: function(r) {
                         var s = q._findRoot(r);
+                        q._hideLoader();
                         if (s == q._active) {
                             q._lowerActive();
                             q._restoreBodyPosition();
@@ -5913,7 +5914,7 @@ try {
                             ea = k.getViewportInfo()
                                 .width,
                             fa = parseInt(aa.width, 10);
-                        if (da + fa > ea) {
+                        if (da + fa > ea && da > fa) {
                             ba.style.left = ca - fa + 'px';
                             this.arbiterInform('xd/reposition', {
                                 type: 'horizontal'
