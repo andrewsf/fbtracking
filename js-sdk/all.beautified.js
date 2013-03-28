@@ -1,4 +1,4 @@
-/*1363032883,171205407,JIT Construction: v753781,en_US*/
+/*1364494471,173072473,JIT Construction: v769135,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -624,7 +624,7 @@ try {
             "cdn_https": "s-static.ak.facebook.com"
         });
         __d("XDConfig", [], {
-            "XdUrl": "connect\/xd_arbiter.php?version=19",
+            "XdUrl": "connect\/xd_arbiter.php?version=20",
             "Flash": {
                 "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/y2\/r\/4SqLWH0DQtN.swf"
             },
@@ -2339,6 +2339,7 @@ try {
                             if (q.getSecure() !== true) z = h({
                                 url: xa + wa,
                                 name: 'fb_xdm_frame_http',
+                                id: 'fb_xdm_frame_http',
                                 root: sa,
                                 'aria-hidden': true,
                                 title: ga,
@@ -2347,6 +2348,7 @@ try {
                             aa = h({
                                 url: ya + wa,
                                 name: 'fb_xdm_frame_https',
+                                id: 'fb_xdm_frame_https',
                                 root: sa,
                                 'aria-hidden': true,
                                 title: ga,
@@ -4722,10 +4724,12 @@ try {
             e.exports = g;
         });
         __d("safeEval", [], function(a, b, c, d, e, f) {
-            function g(h) {
+            function g(h, i) {
                 if (h === null || typeof h === 'undefined') return;
                 if (typeof h !== 'string') return h;
-                return Function('return eval("' + h.replace(/"/g, '\\"') + '");')();
+                if (/^\w+$/.test(h) && typeof window[h] === 'function') return window[h].apply(null, i || []);
+                return Function('return eval("' + h.replace(/"/g, '\\"') + '");')
+                    .apply(null, i || []);
             }
             e.exports = g;
         });
@@ -6235,7 +6239,7 @@ try {
                     },
                     invokeHandler: function(l, m, n) {
                         if (l) if (typeof l === 'string') {
-                            g.unguard(i)(l);
+                            g.unguard(i)(l, n);
                         } else if (l.apply) g.unguard(l)
                             .apply(m, n || []);
                     },
@@ -6434,55 +6438,6 @@ try {
                     }
                 });
             e.exports = x;
-        });
-        __d("sdk.XFBML.Fan", ["sdk.XFBML.IframeWidget", "sdk.Runtime", "Log"], function(a, b, c, d, e, f) {
-            var g = b('sdk.XFBML.IframeWidget'),
-                h = b('sdk.Runtime'),
-                i = b('Log'),
-                j = g.extend({
-                    _visibleAfter: 'load',
-                    setupAndValidate: function() {
-                        this._attr = {
-                            api_key: h.getClientID(),
-                            connections: this.getAttribute('connections', '10'),
-                            css: this.getAttribute('css'),
-                            height: this._getPxAttribute('height'),
-                            id: this.getAttribute('profile-id'),
-                            logobar: this._getBoolAttribute('logo-bar'),
-                            name: this.getAttribute('name'),
-                            stream: this._getBoolAttribute('stream', true),
-                            width: this._getPxAttribute('width', 300)
-                        };
-                        if (!this._attr.id && !this._attr.name) {
-                            i.error('<fb:fan> requires one of the "id" or "name" attributes.');
-                            return false;
-                        }
-                        var k = this._attr.height;
-                        if (!k) if ((!this._attr.connections || this._attr.connections === '0') && !this._attr.stream) {
-                            k = 65;
-                        } else if (!this._attr.connections || this._attr.connections === '0') {
-                            k = 375;
-                        } else if (!this._attr.stream) {
-                            k = 250;
-                        } else k = 550;
-                        if (this._attr.logobar) k += 25;
-                        this._attr.height = k;
-                        return true;
-                    },
-                    getSize: function() {
-                        return {
-                            width: this._attr.width,
-                            height: this._attr.height
-                        };
-                    },
-                    getUrlBits: function() {
-                        return {
-                            name: 'fan',
-                            params: this._attr
-                        };
-                    }
-                });
-            e.exports = j;
         });
         __d("sdk.XFBML.EdgeCommentWidget", ["sdk.XFBML.IframeWidget", "sdk.DOM"], function(a, b, c, d, e, f) {
             var g = b('sdk.XFBML.IframeWidget'),
@@ -6744,70 +6699,6 @@ try {
                 });
             e.exports = l;
         });
-        __d("sdk.XFBML.SendButtonFormWidget", ["sdk.XFBML.EdgeCommentWidget", "sdk.DOM", "sdk.Event"], function(a, b, c, d, e, f) {
-            var g = b('sdk.XFBML.EdgeCommentWidget'),
-                h = b('sdk.DOM'),
-                i = b('sdk.Event'),
-                j = g.extend({
-                    constructor: function(k) {
-                        this.parent(k);
-                        h.addCss(this.dom, 'fb_send_button_form_widget');
-                        h.addCss(this.dom, k.colorscheme);
-                        h.addCss(this.dom, (typeof k.siderender != 'undefined' && k.siderender) ? 'siderender' : '');
-                        this._attr.nodeImageURL = k.nodeImageURL;
-                        this._attr.nodeRef = k.nodeRef;
-                        this._attr.nodeTitle = k.nodeTitle;
-                        this._attr.nodeURL = k.nodeURL;
-                        this._attr.nodeSummary = k.nodeSummary;
-                        this._attr.offsetX = k.relativeWidthOffset;
-                        this._attr.offsetY = k.relativeHeightOffset;
-                        this._attr.anchorTargetX = k.anchorTargetX;
-                        this._attr.anchorTargetY = k.anchorTargetY;
-                        this._attr.channel = this.getChannelUrl();
-                        this._attr.controllerID = k.controllerID;
-                        this._attr.colorscheme = k.colorscheme;
-                        this._attr.error = k.error;
-                        this._attr.siderender = k.siderender;
-                        this._attr.extended_social_context = k.extended_social_context;
-                    },
-                    _showLoader: true,
-                    getUrlBits: function() {
-                        return {
-                            name: 'send_button_form_shell',
-                            params: this._attr
-                        };
-                    },
-                    oneTimeSetup: function() {
-                        this.subscribe('xd.messageSent', ES5(this._onMessageSent, 'bind', true, this));
-                    },
-                    _onMessageSent: function() {
-                        i.fire('message.send', this._attr.nodeURL, this);
-                    }
-                });
-            e.exports = j;
-        });
-        __d("sdk.XFBML.Like", ["sdk.XFBML.EdgeWidget", "sdk.XFBML.SendButtonFormWidget"], function(a, b, c, d, e, f) {
-            var g = b('sdk.XFBML.EdgeWidget'),
-                h = b('sdk.XFBML.SendButtonFormWidget'),
-                i = g.extend({
-                    getUrlBits: function() {
-                        return {
-                            name: 'like',
-                            params: this._attr
-                        };
-                    },
-                    _createEdgeCommentWidget: function(j, k) {
-                        if ('send' in this._attr && 'widget_type' in j && j.widget_type == 'send') {
-                            var l = this._getCommonEdgeCommentWidgetOpts(j, k);
-                            return new h(l);
-                        } else return this.parentCall("_createEdgeCommentWidget", j, k);
-                    },
-                    getIframeTitle: function() {
-                        return 'Like this content on Facebook.';
-                    }
-                });
-            e.exports = i;
-        });
         __d("sdk.XFBML.LikeBox", ["sdk.XFBML.EdgeWidget", "sdk.Helper", "Log", "sdk.Runtime"], function(a, b, c, d, e, f) {
             var g = b('sdk.XFBML.EdgeWidget'),
                 h = b('sdk.Helper'),
@@ -6875,6 +6766,70 @@ try {
                     }
                 });
             e.exports = k;
+        });
+        __d("sdk.XFBML.SendButtonFormWidget", ["sdk.XFBML.EdgeCommentWidget", "sdk.DOM", "sdk.Event"], function(a, b, c, d, e, f) {
+            var g = b('sdk.XFBML.EdgeCommentWidget'),
+                h = b('sdk.DOM'),
+                i = b('sdk.Event'),
+                j = g.extend({
+                    constructor: function(k) {
+                        this.parent(k);
+                        h.addCss(this.dom, 'fb_send_button_form_widget');
+                        h.addCss(this.dom, k.colorscheme);
+                        h.addCss(this.dom, (typeof k.siderender != 'undefined' && k.siderender) ? 'siderender' : '');
+                        this._attr.nodeImageURL = k.nodeImageURL;
+                        this._attr.nodeRef = k.nodeRef;
+                        this._attr.nodeTitle = k.nodeTitle;
+                        this._attr.nodeURL = k.nodeURL;
+                        this._attr.nodeSummary = k.nodeSummary;
+                        this._attr.offsetX = k.relativeWidthOffset;
+                        this._attr.offsetY = k.relativeHeightOffset;
+                        this._attr.anchorTargetX = k.anchorTargetX;
+                        this._attr.anchorTargetY = k.anchorTargetY;
+                        this._attr.channel = this.getChannelUrl();
+                        this._attr.controllerID = k.controllerID;
+                        this._attr.colorscheme = k.colorscheme;
+                        this._attr.error = k.error;
+                        this._attr.siderender = k.siderender;
+                        this._attr.extended_social_context = k.extended_social_context;
+                    },
+                    _showLoader: true,
+                    getUrlBits: function() {
+                        return {
+                            name: 'send_button_form_shell',
+                            params: this._attr
+                        };
+                    },
+                    oneTimeSetup: function() {
+                        this.subscribe('xd.messageSent', ES5(this._onMessageSent, 'bind', true, this));
+                    },
+                    _onMessageSent: function() {
+                        i.fire('message.send', this._attr.nodeURL, this);
+                    }
+                });
+            e.exports = j;
+        });
+        __d("sdk.XFBML.Like", ["sdk.XFBML.EdgeWidget", "sdk.XFBML.SendButtonFormWidget"], function(a, b, c, d, e, f) {
+            var g = b('sdk.XFBML.EdgeWidget'),
+                h = b('sdk.XFBML.SendButtonFormWidget'),
+                i = g.extend({
+                    getUrlBits: function() {
+                        return {
+                            name: 'like',
+                            params: this._attr
+                        };
+                    },
+                    _createEdgeCommentWidget: function(j, k) {
+                        if ('send' in this._attr && 'widget_type' in j && j.widget_type == 'send') {
+                            var l = this._getCommonEdgeCommentWidgetOpts(j, k);
+                            return new h(l);
+                        } else return this.parentCall("_createEdgeCommentWidget", j, k);
+                    },
+                    getIframeTitle: function() {
+                        return 'Like this content on Facebook.';
+                    }
+                });
+            e.exports = i;
         });
         __d("sdk.XFBML.LiveStream", ["sdk.XFBML.IframeWidget"], function(a, b, c, d, e, f) {
             var g = b('sdk.XFBML.IframeWidget'),
@@ -7469,7 +7424,7 @@ try {
                 });
             e.exports = i;
         });
-        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.Fan", "sdk.XFBML.Like", "sdk.XFBML.LikeBox", "sdk.XFBML.LiveStream", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.ProfilePic", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration", "sdk.XFBML.Send", "sdk.XFBML.SocialContext"], function(a, b, c, d) {
+        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.LikeBox", "sdk.XFBML.Like", "sdk.XFBML.LiveStream", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.ProfilePic", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration", "sdk.XFBML.Send", "sdk.XFBML.SocialContext"], function(a, b, c, d) {
             var e = b('Assert'),
                 f = b('sdk.domReady'),
                 g = b('sdk.Event'),
@@ -7482,7 +7437,7 @@ try {
                     comments: b('sdk.XFBML.Comments'),
                     comments_count: b('sdk.XFBML.CommentsCount'),
                     connect_bar: b('sdk.XFBML.ConnectBar'),
-                    fan: b('sdk.XFBML.Fan'),
+                    fan: b('sdk.XFBML.LikeBox'),
                     like: b('sdk.XFBML.Like'),
                     like_box: b('sdk.XFBML.LikeBox'),
                     live_stream: b('sdk.XFBML.LiveStream'),

@@ -1,4 +1,4 @@
-/*1363014533,180756051,JIT Construction: v753338,en_US*/
+/*1364494535,168606013,JIT Construction: v769135,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -11,6 +11,19 @@ var self = window, document = window.document;
 var setTimeout = window.setTimeout, setInterval = window.setInterval;var __DEV__ = 0;
 function emptyFunction() {};
 /**
+ * @generated SignedSource<<f9ec321cb7c9f206efdca78d5c5e6c4b>>
+ * 
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * !! This file is a check-in of a static_upstream project!      !!
+ * !!                                                            !!
+ * !! You should not modify this file directly. Instead:         !!
+ * !! 1) Use `fjs use-upstream` to temporarily replace this with !!
+ * !!    the latest version from upstream.                       !!
+ * !! 2) Make your changes, test them, etc.                      !!
+ * !! 3) Use `fjs push-upstream` to copy your changes back to    !!
+ * !!    static_upstream.                                        !!
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * 
  * This is a very basic typechecker that does primitives as well as boxed
  * versions of the primitives.
  *
@@ -76,8 +89,12 @@ var __t = (function() {
 
   function matches(expected, actual) {
     // Allow nullable types
-    if (/null|undefined/.test(actual) && /\?$/.test(expected)) {
-      return true;
+    if (/^\?/.test(expected)) {
+      if (/null|undefined/.test(actual)) {
+        return true;
+      } else {
+        expected = expected.substring(1);
+      }
     }
 
     actual = actual.replace(/>*$|$/, '<');
@@ -85,7 +102,7 @@ var __t = (function() {
     var allowed = expected.split('|'), i = allowed.length;
     while (i--) {
       // Normalize in order to match using the longest applicable selector
-      expected = allowed[i].replace(/>*$|\?|$/, '<');
+      expected = allowed[i].replace(/>*$|$/, '<');
       var overlap = Math.min(expected.length, actual.length);
 
       if (expected.substring(0, overlap) === actual.substring(0, overlap)) {
@@ -131,7 +148,7 @@ var __t = (function() {
 })();
 /*/TC*/
 
-/* ReR1wWUhxL0 */
+/* 1fnKNH4WfsF */
 /**
  * This is a lightweigh implementation of require and __d which is used by the
  * JavaScript SDK.
@@ -149,7 +166,7 @@ var require, __d;
   var defaultDeps =
     ['global', 'require', 'requireDynamic', 'requireLazy', 'module', 'exports'];
 
-  require = function(/*string*/ id, /*boolean?*/ soft) {/*TC*/__t([id,'string','id'],[soft,'boolean?','soft']);/*/TC*/
+  require = function(/*string*/ id, /*boolean?*/ soft) {/*TC*/__t([id,'string','id'],[soft,'?boolean','soft']);/*/TC*/
     if (resolved.hasOwnProperty(id)) {
       return resolved[id];
     }
@@ -183,7 +200,7 @@ var require, __d;
   };
 
   __d = function(/*string*/ id, /*array<string>*/ deps, factory,
-      /*number?*/ _special) {/*TC*/__t([id,'string','id'],[deps,'array<string>','deps'],[_special,'number?','_special']);/*/TC*/
+      /*number?*/ _special) {/*TC*/__t([id,'string','id'],[deps,'array<string>','deps'],[_special,'?number','_special']);/*/TC*/
 
     switch(typeof factory) {
       case  'function':
@@ -209,7 +226,7 @@ var require, __d;
   };
 })(this);
 
-/* KHB8H_BTfTk */
+/* 4UsSO62WGDm */
 var ES5 = function(){
 __d("ES5ArrayPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5ArrayPrototype
@@ -325,7 +342,7 @@ ES5ArrayPrototype.indexOf = function(val, index) {
 
 module.exports = ES5ArrayPrototype;
 
-/* qA34O0bKLmh */});
+/* Q2hBEaqXBES */});
 __d("ES5FunctionPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5FunctionPrototype
  */
@@ -360,7 +377,7 @@ ES5FunctionPrototype.bind = function(context /*, args... */) {
 
 module.exports = ES5FunctionPrototype;
 
-/* 2VR9dNObu2C */});
+/* XxOJOrM1GjP */});
 __d("ES5StringPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5StringPrototype
  */
@@ -381,7 +398,7 @@ ES5StringPrototype.trim = function() {
 
 module.exports = ES5StringPrototype;
 
-/* MGtckTEKfvh */});
+/* HEYdCfqjH6C */});
 __d("ES5Array",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5Array
  */
@@ -394,7 +411,7 @@ ES5Array.isArray = function(object) {
 
 module.exports = ES5Array;
 
-/* TYoyd7b9ecL */});
+/* rlt3LgTHVvq */});
 __d("ES5Object",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5Object
  */
@@ -465,7 +482,7 @@ ES5Object.keys = function(object) {
 
 module.exports = ES5Object;
 
-/* Qy0LuytuIAO */});
+/* DEKbqnhFCK1 */});
 __d("ES5Date",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5Date
  */
@@ -477,7 +494,7 @@ ES5Date.now = function() {
 
 module.exports = ES5Date;
 
-/* Cam6v10lfc4 */});
+/* txLlRiHlYEh */});
 __d("JSON3",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule JSON3
  * @option preserve-header
@@ -1234,7 +1251,7 @@ __d("JSON3",[],function(global,require,requireDynamic,requireLazy,module,exports
   }
 }).call(this);
 
-/* scGy-gqtdCM */});
+/* Du5mlGQR6qM */});
 __d("ES5",["ES5ArrayPrototype","ES5FunctionPrototype","ES5StringPrototype","ES5Array","ES5Object","ES5Date","JSON3"],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5
  *
@@ -1317,11 +1334,11 @@ function ES5(lhs, rhs, proto/*, args*/) {
 
 module.exports = ES5;
 
-/* q3-walA2KWu */});ES5 = require('ES5');
+/* aHlPBZWe2cC */});ES5 = require('ES5');
 return ES5.apply(null, arguments);
 };
 
-__d("sdk.RuntimeConfig",[],{"locale":"en_US","rtl":false});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("XDConfig",[],{"XdUrl":"connect\/xd_arbiter.php?version=19","Flash":{"path":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/y2\/r\/4SqLWH0DQtN.swf"},"useCdn":true});__d("SDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"api":{"mode":"warn","whitelist":["Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Data","Data.process","Data.query","Data.query:wait","Data.waitOn","Data.waitOn:wait","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.init","Payment.setSize","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui","ui:subscribe"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("CssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n\/* \u0040noflip *\/\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100\u0025\n}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{position:relative;display:-moz-inline-block;display:inline-block}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify;vertical-align:text-bottom}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_button_simple,\n.fb_button_simple_rtl{background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yH\/r\/eIpbnVKI9lR.png);background-repeat:no-repeat;cursor:pointer;outline:none;text-decoration:none}\n.fb_button_simple_rtl{background-position:right 0}\n.fb_button_simple .fb_button_text{margin:0 0 0 20px;padding-bottom:1px}\n.fb_button_simple_rtl .fb_button_text{margin:0 10px 0 0}\na.fb_button_simple:hover .fb_button_text,\na.fb_button_simple_rtl:hover .fb_button_text,\n.fb_button_simple:hover .fb_button_text,\n.fb_button_simple_rtl:hover .fb_button_text{text-decoration:underline}\n.fb_button,\n.fb_button_rtl{background:#29447e url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/FGFbc80dUKj.png);background-repeat:no-repeat;cursor:pointer;display:inline-block;padding:0 0 0 1px;text-decoration:none;outline:none}\n.fb_button .fb_button_text,\n.fb_button_rtl .fb_button_text{background:#5f78ab url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/FGFbc80dUKj.png);border-top:solid 1px #879ac0;border-bottom:solid 1px #1a356e;color:#fff;display:block;font-family:\"lucida grande\",tahoma,verdana,arial,sans-serif;font-weight:bold;padding:2px 6px 3px 6px;margin:1px 1px 0 21px;text-shadow:none}\na.fb_button,\na.fb_button_rtl,\n.fb_button,\n.fb_button_rtl{text-decoration:none}\na.fb_button:active .fb_button_text,\na.fb_button_rtl:active .fb_button_text,\n.fb_button:active .fb_button_text,\n.fb_button_rtl:active .fb_button_text{border-bottom:solid 1px #29447e;border-top:solid 1px #45619d;background:#4f6aa3;text-shadow:none}\n.fb_button_xlarge,\n.fb_button_xlarge_rtl{background-position:left -60px;font-size:24px;line-height:30px}\n.fb_button_xlarge .fb_button_text{padding:3px 8px 3px 12px;margin-left:38px}\na.fb_button_xlarge:active{background-position:left -99px}\n.fb_button_xlarge_rtl{background-position:right -268px}\n.fb_button_xlarge_rtl .fb_button_text{padding:3px 8px 3px 12px;margin-right:39px}\na.fb_button_xlarge_rtl:active{background-position:right -307px}\n.fb_button_large,\n.fb_button_large_rtl{background-position:left -138px;font-size:13px;line-height:16px}\n.fb_button_large .fb_button_text{margin-left:24px;padding:2px 6px 4px 6px}\na.fb_button_large:active{background-position:left -163px}\n.fb_button_large_rtl{background-position:right -346px}\n.fb_button_large_rtl .fb_button_text{margin-right:25px}\na.fb_button_large_rtl:active{background-position:right -371px}\n.fb_button_medium,\n.fb_button_medium_rtl{background-position:left -188px;font-size:11px;line-height:14px}\na.fb_button_medium:active{background-position:left -210px}\n.fb_button_medium_rtl{background-position:right -396px}\n.fb_button_text_rtl,\n.fb_button_medium_rtl .fb_button_text{padding:2px 6px 3px 6px;margin-right:22px}\na.fb_button_medium_rtl:active{background-position:right -418px}\n.fb_button_small,\n.fb_button_small_rtl{background-position:left -232px;font-size:10px;line-height:10px}\n.fb_button_small .fb_button_text{padding:2px 6px 3px;margin-left:17px}\na.fb_button_small:active,\n.fb_button_small:active{background-position:left -250px}\n.fb_button_small_rtl{background-position:right -440px}\n.fb_button_small_rtl .fb_button_text{padding:2px 6px;margin-right:18px}\na.fb_button_small_rtl:active{background-position:right -458px}\n.fb_share_count_wrapper{position:relative;float:left}\n.fb_share_count{background:#b0b9ec none repeat scroll 0 0;color:#333;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;text-align:center}\n.fb_share_count_inner{background:#e8ebf2;display:block}\n.fb_share_count_right{margin-left:-1px;display:inline-block}\n.fb_share_count_right .fb_share_count_inner{border-top:solid 1px #e8ebf2;border-bottom:solid 1px #b0b9ec;margin:1px 1px 0 1px;font-size:10px;line-height:10px;padding:2px 6px 3px;font-weight:bold}\n.fb_share_count_top{display:block;letter-spacing:-1px;line-height:34px;margin-bottom:7px;font-size:22px;border:solid 1px #b0b9ec}\n.fb_share_count_nub_top{border:none;display:block;position:absolute;left:7px;top:35px;margin:0;padding:0;width:6px;height:7px;background-repeat:no-repeat;background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yU\/r\/bSOHtKbCGYI.png)}\n.fb_share_count_nub_right{border:none;display:inline-block;padding:0;width:5px;height:10px;background-repeat:no-repeat;background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yX\/r\/i_oIVTKMYsL.png);vertical-align:top;background-position:right 5px;z-index:10;left:2px;margin:0 2px 0 0;position:relative}\n.fb_share_no_count{display:none}\n.fb_share_size_Small .fb_share_count_right .fb_share_count_inner{font-size:10px}\n.fb_share_size_Medium .fb_share_count_right .fb_share_count_inner{font-size:11px;padding:2px 6px 3px;letter-spacing:-1px;line-height:14px}\n.fb_share_size_Large .fb_share_count_right .fb_share_count_inner{font-size:13px;line-height:16px;padding:2px 6px 4px;font-weight:normal;letter-spacing:-1px}\n.fb_share_count_hidden .fb_share_count_nub_top,\n.fb_share_count_hidden .fb_share_count_top,\n.fb_share_count_hidden .fb_share_count_nub_right,\n.fb_share_count_hidden .fb_share_count_right{visibility:hidden}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarleft{left:10px}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarright{right:10px}","components":["fb.css.base","fb.css.dialog","fb.css.iframewidget","fb.css.button","fb.css.sharebutton","fb.css.connectbarwidget","fb.css.edgecommentwidget","fb.css.sendbuttonformwidget","fb.css.plugin.recommendationsbar"]});__d("CanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("PluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});__d("ConnectBarConfig",[],{"imgs":{"buttonUrl":"rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png","missingProfileUrl":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"}});__d("ProfilePicConfig",[],{"defPicMap":{"pic":"rsrc.php\/v1\/yh\/r\/C5yt7Cqf3zU.jpg","pic_big":"rsrc.php\/v2\/yL\/r\/HsTZSDw4avx.gif","pic_big_with_logo":"rsrc.php\/v2\/y5\/r\/SRDCaeCL7hM.gif","pic_small":"rsrc.php\/v1\/yi\/r\/odA9sNLrE86.jpg","pic_small_with_logo":"rsrc.php\/v2\/yD\/r\/k1xiRXKnlGd.gif","pic_square":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif","pic_square_with_logo":"rsrc.php\/v2\/yX\/r\/9dYJBPDHXwZ.gif","pic_with_logo":"rsrc.php\/v2\/yu\/r\/fPPR9f2FJ3t.gif"}});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yr\/r\/Sa8GHJqdqJn.swf"}});
+__d("sdk.RuntimeConfig",[],{"locale":"en_US","rtl":false});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("XDConfig",[],{"XdUrl":"connect\/xd_arbiter.php?version=20","Flash":{"path":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/y2\/r\/4SqLWH0DQtN.swf"},"useCdn":true});__d("SDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"api":{"mode":"warn","whitelist":["Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Data","Data.process","Data.query","Data.query:wait","Data.waitOn","Data.waitOn:wait","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.init","Payment.setSize","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui","ui:subscribe"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("CssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n\/* \u0040noflip *\/\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100\u0025\n}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{position:relative;display:-moz-inline-block;display:inline-block}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify;vertical-align:text-bottom}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_button_simple,\n.fb_button_simple_rtl{background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yH\/r\/eIpbnVKI9lR.png);background-repeat:no-repeat;cursor:pointer;outline:none;text-decoration:none}\n.fb_button_simple_rtl{background-position:right 0}\n.fb_button_simple .fb_button_text{margin:0 0 0 20px;padding-bottom:1px}\n.fb_button_simple_rtl .fb_button_text{margin:0 10px 0 0}\na.fb_button_simple:hover .fb_button_text,\na.fb_button_simple_rtl:hover .fb_button_text,\n.fb_button_simple:hover .fb_button_text,\n.fb_button_simple_rtl:hover .fb_button_text{text-decoration:underline}\n.fb_button,\n.fb_button_rtl{background:#29447e url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/FGFbc80dUKj.png);background-repeat:no-repeat;cursor:pointer;display:inline-block;padding:0 0 0 1px;text-decoration:none;outline:none}\n.fb_button .fb_button_text,\n.fb_button_rtl .fb_button_text{background:#5f78ab url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/FGFbc80dUKj.png);border-top:solid 1px #879ac0;border-bottom:solid 1px #1a356e;color:#fff;display:block;font-family:\"lucida grande\",tahoma,verdana,arial,sans-serif;font-weight:bold;padding:2px 6px 3px 6px;margin:1px 1px 0 21px;text-shadow:none}\na.fb_button,\na.fb_button_rtl,\n.fb_button,\n.fb_button_rtl{text-decoration:none}\na.fb_button:active .fb_button_text,\na.fb_button_rtl:active .fb_button_text,\n.fb_button:active .fb_button_text,\n.fb_button_rtl:active .fb_button_text{border-bottom:solid 1px #29447e;border-top:solid 1px #45619d;background:#4f6aa3;text-shadow:none}\n.fb_button_xlarge,\n.fb_button_xlarge_rtl{background-position:left -60px;font-size:24px;line-height:30px}\n.fb_button_xlarge .fb_button_text{padding:3px 8px 3px 12px;margin-left:38px}\na.fb_button_xlarge:active{background-position:left -99px}\n.fb_button_xlarge_rtl{background-position:right -268px}\n.fb_button_xlarge_rtl .fb_button_text{padding:3px 8px 3px 12px;margin-right:39px}\na.fb_button_xlarge_rtl:active{background-position:right -307px}\n.fb_button_large,\n.fb_button_large_rtl{background-position:left -138px;font-size:13px;line-height:16px}\n.fb_button_large .fb_button_text{margin-left:24px;padding:2px 6px 4px 6px}\na.fb_button_large:active{background-position:left -163px}\n.fb_button_large_rtl{background-position:right -346px}\n.fb_button_large_rtl .fb_button_text{margin-right:25px}\na.fb_button_large_rtl:active{background-position:right -371px}\n.fb_button_medium,\n.fb_button_medium_rtl{background-position:left -188px;font-size:11px;line-height:14px}\na.fb_button_medium:active{background-position:left -210px}\n.fb_button_medium_rtl{background-position:right -396px}\n.fb_button_text_rtl,\n.fb_button_medium_rtl .fb_button_text{padding:2px 6px 3px 6px;margin-right:22px}\na.fb_button_medium_rtl:active{background-position:right -418px}\n.fb_button_small,\n.fb_button_small_rtl{background-position:left -232px;font-size:10px;line-height:10px}\n.fb_button_small .fb_button_text{padding:2px 6px 3px;margin-left:17px}\na.fb_button_small:active,\n.fb_button_small:active{background-position:left -250px}\n.fb_button_small_rtl{background-position:right -440px}\n.fb_button_small_rtl .fb_button_text{padding:2px 6px;margin-right:18px}\na.fb_button_small_rtl:active{background-position:right -458px}\n.fb_share_count_wrapper{position:relative;float:left}\n.fb_share_count{background:#b0b9ec none repeat scroll 0 0;color:#333;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;text-align:center}\n.fb_share_count_inner{background:#e8ebf2;display:block}\n.fb_share_count_right{margin-left:-1px;display:inline-block}\n.fb_share_count_right .fb_share_count_inner{border-top:solid 1px #e8ebf2;border-bottom:solid 1px #b0b9ec;margin:1px 1px 0 1px;font-size:10px;line-height:10px;padding:2px 6px 3px;font-weight:bold}\n.fb_share_count_top{display:block;letter-spacing:-1px;line-height:34px;margin-bottom:7px;font-size:22px;border:solid 1px #b0b9ec}\n.fb_share_count_nub_top{border:none;display:block;position:absolute;left:7px;top:35px;margin:0;padding:0;width:6px;height:7px;background-repeat:no-repeat;background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yU\/r\/bSOHtKbCGYI.png)}\n.fb_share_count_nub_right{border:none;display:inline-block;padding:0;width:5px;height:10px;background-repeat:no-repeat;background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yX\/r\/i_oIVTKMYsL.png);vertical-align:top;background-position:right 5px;z-index:10;left:2px;margin:0 2px 0 0;position:relative}\n.fb_share_no_count{display:none}\n.fb_share_size_Small .fb_share_count_right .fb_share_count_inner{font-size:10px}\n.fb_share_size_Medium .fb_share_count_right .fb_share_count_inner{font-size:11px;padding:2px 6px 3px;letter-spacing:-1px;line-height:14px}\n.fb_share_size_Large .fb_share_count_right .fb_share_count_inner{font-size:13px;line-height:16px;padding:2px 6px 4px;font-weight:normal;letter-spacing:-1px}\n.fb_share_count_hidden .fb_share_count_nub_top,\n.fb_share_count_hidden .fb_share_count_top,\n.fb_share_count_hidden .fb_share_count_nub_right,\n.fb_share_count_hidden .fb_share_count_right{visibility:hidden}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarleft{left:10px}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarright{right:10px}","components":["fb.css.base","fb.css.dialog","fb.css.iframewidget","fb.css.button","fb.css.sharebutton","fb.css.connectbarwidget","fb.css.edgecommentwidget","fb.css.sendbuttonformwidget","fb.css.plugin.recommendationsbar"]});__d("CanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("PluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});__d("ConnectBarConfig",[],{"imgs":{"buttonUrl":"rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png","missingProfileUrl":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"}});__d("ProfilePicConfig",[],{"defPicMap":{"pic":"rsrc.php\/v1\/yh\/r\/C5yt7Cqf3zU.jpg","pic_big":"rsrc.php\/v2\/yL\/r\/HsTZSDw4avx.gif","pic_big_with_logo":"rsrc.php\/v2\/y5\/r\/SRDCaeCL7hM.gif","pic_small":"rsrc.php\/v1\/yi\/r\/odA9sNLrE86.jpg","pic_small_with_logo":"rsrc.php\/v2\/yD\/r\/k1xiRXKnlGd.gif","pic_square":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif","pic_square_with_logo":"rsrc.php\/v2\/yX\/r\/9dYJBPDHXwZ.gif","pic_with_logo":"rsrc.php\/v2\/yu\/r\/fPPR9f2FJ3t.gif"}});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yr\/r\/Sa8GHJqdqJn.swf"}});
 __d("QueryString",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 
@@ -1348,7 +1365,7 @@ function encode(/*object*/ bag) /*string*/ {/*TC*/__t([bag,'object','bag']); ret
 /*TC*/}.apply(this, arguments), 'string']);/*/TC*/}
 
 
-function decode(/*string*/ str, /*boolean?*/ strict) /*object*/ {/*TC*/__t([str,'string','str'],[strict,'boolean?','strict']); return __t([function(){/*/TC*/
+function decode(/*string*/ str, /*boolean?*/ strict) /*object*/ {/*TC*/__t([str,'string','str'],[strict,'?boolean','strict']); return __t([function(){/*/TC*/
   var data = {};
   if (str === '') {
     return data;
@@ -1468,7 +1485,7 @@ var AssertionError = require('AssertionError');
 var sprintf = require('sprintf');
 
 
-function assert(/*boolean*/ expression, /*string?*/ message) /*boolean*/ {/*TC*/__t([expression,'boolean','expression'],[message,'string?','message']); return __t([function(){/*/TC*/
+function assert(/*boolean*/ expression, /*string?*/ message) /*boolean*/ {/*TC*/__t([expression,'boolean','expression'],[message,'?string','message']); return __t([function(){/*/TC*/
   if (!expression) {
     throw new AssertionError(message);
   }
@@ -1476,7 +1493,7 @@ function assert(/*boolean*/ expression, /*string?*/ message) /*boolean*/ {/*TC*/
 /*TC*/}.apply(this, arguments), 'boolean']);/*/TC*/}
 
 
-function assertType(/*string*/ type, expression, /*string?*/ message) {/*TC*/__t([type,'string','type'],[message,'string?','message']);/*/TC*/
+function assertType(/*string*/ type, expression, /*string?*/ message) {/*TC*/__t([type,'string','type'],[message,'?string','message']);/*/TC*/
   var actualType;
 
   if (expression === undefined) {
@@ -1496,7 +1513,7 @@ function assertType(/*string*/ type, expression, /*string?*/ message) {/*TC*/__t
 }
 
 
-function assertInstanceOf(/*function*/ type, expression, /*string?*/ message) {/*TC*/__t([type,'function','type'],[message,'string?','message']);/*/TC*/
+function assertInstanceOf(/*function*/ type, expression, /*string?*/ message) {/*TC*/__t([type,'function','type'],[message,'?string','message']);/*/TC*/
   assert(
     expression instanceof type,
     message || 'Expression not instance of type'
@@ -1517,7 +1534,7 @@ function define(/*string*/ type, /*function*/ test) {/*TC*/__t([type,'string','t
 var Assert = {
   isInstanceOf: assertInstanceOf,
   isTrue      : assert,
-  isTruthy    : function(expression, /*string?*/ message) /*boolean*/ {/*TC*/__t([message,'string?','message']); return __t([function(){/*/TC*/
+  isTruthy    : function(expression, /*string?*/ message) /*boolean*/ {/*TC*/__t([message,'?string','message']); return __t([function(){/*/TC*/
     return assert(!!expression, message);
   /*TC*/}.apply(this, arguments), 'boolean']);/*/TC*/},
   type        : assertType,
@@ -1606,7 +1623,7 @@ function mixin(/*function*/ to, from) {/*TC*/__t([to,'function','to']);/*/TC*/
 
 
 function extend(/*function?*/ from, /*object?*/ prototype, mixins)
-    /*function*/ {/*TC*/__t([from,'function?','from'],[prototype,'object?','prototype']); return __t([function(){/*/TC*/
+    /*function*/ {/*TC*/__t([from,'?function','from'],[prototype,'?object','prototype']); return __t([function(){/*/TC*/
   var constructor = prototype && prototype.hasOwnProperty('constructor')
     ? prototype.constructor
     : function() {this.parent.apply(this, arguments);};
@@ -1648,7 +1665,7 @@ function extend(/*function?*/ from, /*object?*/ prototype, mixins)
       Array.prototype.slice.call(arguments, 1));
   };
 
-  constructor.extend = function(/*object?*/ prototype, mixins) {/*TC*/__t([prototype,'object?','prototype']);/*/TC*/
+  constructor.extend = function(/*object?*/ prototype, mixins) {/*TC*/__t([prototype,'?object','prototype']);/*/TC*/
     return extend(this, prototype, mixins);
   };
   return constructor;
@@ -1894,10 +1911,10 @@ function getRaw(/*string*/ prefix) /*string?*/ {/*TC*/__t([prefix,'string','pref
   return regExp.test(document.cookie)
     ? RegExp.$1
     : null;
-/*TC*/}.apply(this, arguments), 'string?']);/*/TC*/}
+/*TC*/}.apply(this, arguments), '?string']);/*/TC*/}
 
 var Cookie = {
-  setDomain: function(/*string?*/ val) {/*TC*/__t([val,'string?','val']);/*/TC*/
+  setDomain: function(/*string?*/ val) {/*TC*/__t([val,'?string','val']);/*/TC*/
     domain = val;
     
     var meta  = QueryString.encode({
@@ -1910,7 +1927,7 @@ var Cookie = {
 
   getDomain: function() /*string?*/ {/*TC*/ return __t([function(){/*/TC*/
     return domain;
-  /*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?string']);/*/TC*/},
 
   
   loadMeta: function() /*object?*/ {/*TC*/ return __t([function(){/*/TC*/
@@ -1924,12 +1941,12 @@ var Cookie = {
       }
       return meta;
     }
-  /*TC*/}.apply(this, arguments), 'object?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?object']);/*/TC*/},
 
   
   loadSignedRequest: function() /*string?*/ {/*TC*/ return __t([function(){/*/TC*/
     return getRaw('fbsr_');
-  /*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?string']);/*/TC*/},
 
   
   setSignedRequestCookie: function(/*string*/ signedRequest,
@@ -1992,7 +2009,7 @@ __d("wrapFunction",[],function(global,require,requireDynamic,requireLazy,module,
 
 var wrappers = {};
 function wrapFunction(/*function*/ fn, /*string?*/ type, /*string?*/ source)
-    /*function*/ {/*TC*/__t([fn,'function','fn'],[type,'string?','type'],[source,'string?','source']); return __t([function(){/*/TC*/
+    /*function*/ {/*TC*/__t([fn,'function','fn'],[type,'?string','type'],[source,'?string','source']); return __t([function(){/*/TC*/
   type = type || 'default';
 
   return function() {
@@ -2004,7 +2021,7 @@ function wrapFunction(/*function*/ fn, /*string?*/ type, /*string?*/ source)
   };
 /*TC*/}.apply(this, arguments), 'function']);/*/TC*/}
 
-wrapFunction.setWrapper = function(/*function*/ fn, /*string?*/ type) {/*TC*/__t([fn,'function','fn'],[type,'string?','type']);/*/TC*/
+wrapFunction.setWrapper = function(/*function*/ fn, /*string?*/ type) {/*TC*/__t([fn,'function','fn'],[type,'?string','type']);/*/TC*/
   type = type || 'default';
   wrappers[type] = fn;
 };
@@ -2153,7 +2170,7 @@ var rootElement,
 
 // `obj || default` pattern to account for 'resetting'.
 var DOMWrapper = {
-  setRoot: function(/*DOMElement?*/ root) {/*TC*/__t([root,'DOMElement?','root']);/*/TC*/
+  setRoot: function(/*DOMElement?*/ root) {/*TC*/__t([root,'?DOMElement','root']);/*/TC*/
     rootElement = root;
   },
   getRoot: function() /*DOMElement*/ {/*TC*/ return __t([function(){/*/TC*/
@@ -2478,7 +2495,7 @@ __d("sdk.SignedRequest",["Base64"],function(global,require,requireDynamic,requir
 
 var Base64 = require('Base64');
 
-function parse(/*string?*/ signed_request) /*object?*/ {/*TC*/__t([signed_request,'string?','signed_request']); return __t([function(){/*/TC*/
+function parse(/*string?*/ signed_request) /*object?*/ {/*TC*/__t([signed_request,'?string','signed_request']); return __t([function(){/*/TC*/
   if (!signed_request) {
     return null;
   }
@@ -2487,7 +2504,7 @@ function parse(/*string?*/ signed_request) /*object?*/ {/*TC*/__t([signed_reques
   var payload = signed_request.split('.', 2)[1]
     .replace(/\-/g, '+').replace(/\_/g, '/');
   return Base64.decodeObject(payload);
-/*TC*/}.apply(this, arguments), 'object?']);/*/TC*/}
+/*TC*/}.apply(this, arguments), '?object']);/*/TC*/}
 
 
 var SignedRequest = {
@@ -2503,7 +2520,7 @@ var UrlMapConfig = require('UrlMapConfig');
 
 var UrlMap = {
   
-  resolve: function(/*string*/ key, /*boolean?*/ https) /*string*/ {/*TC*/__t([key,'string','key'],[https,'boolean?','https']); return __t([function(){/*/TC*/
+  resolve: function(/*string*/ key, /*boolean?*/ https) /*string*/ {/*TC*/__t([key,'string','key'],[https,'?boolean','https']); return __t([function(){/*/TC*/
     var protocol = typeof https == 'undefined'
       ? location.protocol.replace(':', '')
       : https ? 'https' : 'http';
@@ -2700,7 +2717,7 @@ copyProperties(URL, {
     return document.referrer
       ? new URL(document.referrer)
       : null;
-  /*TC*/}.apply(this, arguments), 'object?']);/*/TC*/}
+  /*TC*/}.apply(this, arguments), '?object']);/*/TC*/}
 
 });
 
@@ -2782,7 +2799,7 @@ var hiddenRoot;
 var Content = {
 
   
-  append: function(content, /*DOMElement?*/ root) /*DOMElement*/{/*TC*/__t([root,'DOMElement?','root']);/*/TC*/
+  append: function(content, /*DOMElement?*/ root) /*DOMElement*/{/*TC*/__t([root,'?DOMElement','root']);/*/TC*/
     
     if (!root) {
       if (!visibleRoot) {
@@ -2837,7 +2854,7 @@ var Content = {
   /*TC*/}.apply(this, arguments), 'DOMElement']);/*/TC*/},
 
   
-  submitToTarget: function(/*object*/ opts, /*boolean?*/ get) {/*TC*/__t([opts,'object','opts'],[get,'boolean?','get']);/*/TC*/
+  submitToTarget: function(/*object*/ opts, /*boolean?*/ get) {/*TC*/__t([opts,'object','opts'],[get,'?boolean','get']);/*/TC*/
     var form = document.createElement('form');
     form.action = opts.url;
     form.target = opts.target;
@@ -3072,7 +3089,7 @@ module.exports = Queue;
 });
 __d("resolveURI",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-function resolveURI(/*string?*/ uri) /*string*/ {/*TC*/__t([uri,'string?','uri']); return __t([function(){/*/TC*/
+function resolveURI(/*string?*/ uri) /*string*/ {/*TC*/__t([uri,'?string','uri']); return __t([function(){/*/TC*/
   if (!uri) { 
     return window.location.href;
   }
@@ -3478,7 +3495,7 @@ var GlobalCallback = {
     callbackPrefix = prefix;
   },
 
-  create: function(/*function*/ fn, /*string?*/ description) /*string*/ {/*TC*/__t([fn,'function','fn'],[description,'string?','description']); return __t([function(){/*/TC*/
+  create: function(/*function*/ fn, /*string?*/ description) /*string*/ {/*TC*/__t([fn,'function','fn'],[description,'?string','description']); return __t([function(){/*/TC*/
     if (!rootObject) {
       
       
@@ -3798,7 +3815,7 @@ function onRegister(/*string*/ registeredAs) {/*TC*/__t([registeredAs,'string','
       : Runtime.ENVIRONMENTS.PAGETAB);
 }
 
-function handleAction(/*object*/ message, /*string?*/ senderOrigin) {/*TC*/__t([message,'object','message'],[senderOrigin,'string?','senderOrigin']);/*/TC*/
+function handleAction(/*object*/ message, /*string?*/ senderOrigin) {/*TC*/__t([message,'object','message'],[senderOrigin,'?string','senderOrigin']);/*/TC*/
   if (!senderOrigin) {
     Log.error('No senderOrigin');
     throw new Error();
@@ -3938,7 +3955,7 @@ RPC.getOutQueue().start(function(/*string*/ message) {/*TC*/__t([message,'string
   sendToFacebook('facebook', 'FB_RPC:' + message);
 });
 
-function init(/*string?*/ channelUrl, /*string?*/ xdProxyName) {/*TC*/__t([channelUrl,'string?','channelUrl'],[xdProxyName,'string?','xdProxyName']);/*/TC*/
+function init(/*string?*/ channelUrl, /*string?*/ xdProxyName) {/*TC*/__t([channelUrl,'?string','channelUrl'],[xdProxyName,'?string','xdProxyName']);/*/TC*/
   if (inited) {
     return;
   }
@@ -3987,12 +4004,16 @@ function init(/*string?*/ channelUrl, /*string?*/ xdProxyName) {/*TC*/__t([chann
 
       
       
+
+      
+      
       if (Runtime.getSecure() !== true) {
         
         
         httpProxyFrame = createIframe({
           url: httpDomain + proxyUrl,
           name: 'fb_xdm_frame_http',
+          id: 'fb_xdm_frame_http',
           root: container,
           'aria-hidden':true,
           title: IFRAME_TITLE,
@@ -4005,6 +4026,7 @@ function init(/*string?*/ channelUrl, /*string?*/ xdProxyName) {/*TC*/__t([chann
       httpsProxyFrame = createIframe({
         url: httpsDomain + proxyUrl,
         name: 'fb_xdm_frame_https',
+        id: 'fb_xdm_frame_https',
         root: container,
         'aria-hidden':true,
         title: IFRAME_TITLE,
@@ -4043,7 +4065,7 @@ var XD = {
 
   
   inform: function(/*string*/ method, /*object?*/ params, /*string?*/ relation,
-      /*string?*/ behavior) {/*TC*/__t([method,'string','method'],[params,'object?','params'],[relation,'string?','relation'],[behavior,'string?','behavior']);/*/TC*/
+      /*string?*/ behavior) {/*TC*/__t([method,'string','method'],[params,'?object','params'],[relation,'?string','relation'],[behavior,'?string','behavior']);/*/TC*/
     sendToFacebook('facebook', {
       method: method,
       params: ES5('JSON', 'stringify', false,params || {}),
@@ -4054,7 +4076,7 @@ var XD = {
 
   
   handler: function(/*function*/ cb, /*string?*/ relation, /*boolean?*/ forever,
-      /*string?*/ id) /*string*/ {/*TC*/__t([cb,'function','cb'],[relation,'string?','relation'],[forever,'boolean?','forever'],[id,'string?','id']); return __t([function(){/*/TC*/
+      /*string?*/ id) /*string*/ {/*TC*/__t([cb,'function','cb'],[relation,'?string','relation'],[forever,'?boolean','forever'],[id,'?string','id']); return __t([function(){/*/TC*/
     var handlerDomain = XDConfig.useCdn
       ? UrlMap.resolve('cdn', location.protocol == 'https:')
       : location.protocol + '//www.facebook.com';
@@ -4071,7 +4093,7 @@ var XD = {
   /*TC*/}.apply(this, arguments), 'string']);/*/TC*/},
 
   registerCallback: function(/*function*/ cb, /*boolean?*/ persistent,
-      /*string?*/ id) /*string*/ {/*TC*/__t([cb,'function','cb'],[persistent,'boolean?','persistent'],[id,'string?','id']); return __t([function(){/*/TC*/
+      /*string?*/ id) /*string*/ {/*TC*/__t([cb,'function','cb'],[persistent,'?boolean','persistent'],[id,'?string','id']); return __t([function(){/*/TC*/
     id = id || guid();
     if (persistent) {
       XD._forever[id] = true;
@@ -4136,7 +4158,7 @@ var timer;
 
 var Auth = new ObservableMixin();
 
-function setAuthResponse(/*object?*/ authResponse, /*string*/ status) {/*TC*/__t([authResponse,'object?','authResponse'],[status,'string','status']);/*/TC*/
+function setAuthResponse(/*object?*/ authResponse, /*string*/ status) {/*TC*/__t([authResponse,'?object','authResponse'],[status,'string','status']);/*/TC*/
   var currentUserID = Runtime.getUserID();
   var userID = '';
   if (authResponse) {
@@ -4194,11 +4216,11 @@ function setAuthResponse(/*object?*/ authResponse, /*string*/ status) {/*TC*/__t
 
 function getAuthResponse() /*object?*/ {/*TC*/ return __t([function(){/*/TC*/
   return currentAuthResponse;
-/*TC*/}.apply(this, arguments), 'object?']);/*/TC*/}
+/*TC*/}.apply(this, arguments), '?object']);/*/TC*/}
 
 function xdResponseWrapper(/*function*/ cb, /*object?*/ authResponse,
-    /*string?*/ method) /*function*/ {/*TC*/__t([cb,'function','cb'],[authResponse,'object?','authResponse'],[method,'string?','method']); return __t([function(){/*/TC*/
-  return function (/*object?*/ params) /*object?*/ {/*TC*/__t([params,'object?','params']); return __t([function(){/*/TC*/
+    /*string?*/ method) /*function*/ {/*TC*/__t([cb,'function','cb'],[authResponse,'?object','authResponse'],[method,'?string','method']); return __t([function(){/*/TC*/
+  return function (/*object?*/ params) /*object?*/ {/*TC*/__t([params,'?object','params']); return __t([function(){/*/TC*/
     var status;
 
     if (params && params.access_token) {
@@ -4256,7 +4278,7 @@ function xdResponseWrapper(/*function*/ cb, /*object?*/ authResponse,
       });
     }
     return authResponse;
-  /*TC*/}.apply(this, arguments), 'object?']);/*/TC*/};
+  /*TC*/}.apply(this, arguments), '?object']);/*/TC*/};
 /*TC*/}.apply(this, arguments), 'function']);/*/TC*/}
 
 function fetchLoginStatus(/*function*/ fn) {/*TC*/__t([fn,'function','fn']);/*/TC*/
@@ -4299,7 +4321,7 @@ function fetchLoginStatus(/*function*/ fn) {/*TC*/__t([fn,'function','fn']);/*/T
 }
 
 var loadState;
-function getLoginStatus(/*function?*/ cb, /*boolean?*/ force) {/*TC*/__t([cb,'function?','cb'],[force,'boolean?','force']);/*/TC*/
+function getLoginStatus(/*function?*/ cb, /*boolean?*/ force) {/*TC*/__t([cb,'?function','cb'],[force,'?boolean','force']);/*/TC*/
   if (!Runtime.getClientID()) {
     Log.warn('FB.getLoginStatus() called before calling FB.init().');
     return;
@@ -4325,7 +4347,7 @@ function getLoginStatus(/*function?*/ cb, /*boolean?*/ force) {/*TC*/__t([cb,'fu
   loadState = 'loading';
 
   
-  var lsCb = function(/*object?*/ response) {/*TC*/__t([response,'object?','response']);/*/TC*/
+  var lsCb = function(/*object?*/ response) {/*TC*/__t([response,'?object','response']);/*/TC*/
     
     loadState = 'loaded';
 
@@ -4423,14 +4445,14 @@ function getAttr(/*DOMElement*/ dom, /*string*/ name) /*string?*/ {/*TC*/__t([do
   return attribute
     ? String(attribute)
     : null;
-/*TC*/}.apply(this, arguments), 'string?']);/*/TC*/}
+/*TC*/}.apply(this, arguments), '?string']);/*/TC*/}
 
 function getBoolAttr(/*DOMElement*/ dom, /*string*/ name) /*boolean?*/ {/*TC*/__t([dom,'DOMElement','dom'],[name,'string','name']); return __t([function(){/*/TC*/
   var attribute = getAttr(dom, name);
   return attribute
     ? /^(true|1|yes|on)$/.test(attribute)
     : null;
-/*TC*/}.apply(this, arguments), 'boolean?']);/*/TC*/}
+/*TC*/}.apply(this, arguments), '?boolean']);/*/TC*/}
 
 function getProp(/*DOMElement*/ dom, /*string*/ name) /*string*/ {/*TC*/__t([dom,'DOMElement','dom'],[name,'string','name']); return __t([function(){/*/TC*/
   Assert.isTruthy(dom, 'element not specified');
@@ -4707,7 +4729,7 @@ function normalizeError(err) /*object*/ {/*TC*/ return __t([function(){/*/TC*/
   return info;
 /*TC*/}.apply(this, arguments), 'object']);/*/TC*/}
 
-function guard(/*function*/ func, /*string?*/ entry) /*function*/ {/*TC*/__t([func,'function','func'],[entry,'string?','entry']); return __t([function(){/*/TC*/
+function guard(/*function*/ func, /*string?*/ entry) /*function*/ {/*TC*/__t([func,'function','func'],[entry,'?string','entry']); return __t([function(){/*/TC*/
   return function() {
     
     
@@ -4921,7 +4943,7 @@ domReady(function() {
   }
 });
 
-Runtime.subscribe('AccessToken.change', function(/*string?*/ value) {/*TC*/__t([value,'string?','value']);/*/TC*/
+Runtime.subscribe('AccessToken.change', function(/*string?*/ value) {/*TC*/__t([value,'?string','value']);/*/TC*/
   if (!value && Runtime.getLoginStatus() === 'connected') {
     // The access token was invalidated, but we're still connected
     
@@ -5032,7 +5054,7 @@ function protect(/*function*/ fn, /*string*/ accessor, /*string*/ key,
           : facade;
       }, accessor);
   }
-/*TC*/}.apply(this, arguments), 'function?']);/*/TC*/}
+/*TC*/}.apply(this, arguments), '?function']);/*/TC*/}
 
 
 function provide(/*string*/ name, /*object*/ source) {/*TC*/__t([name,'string','name'],[source,'object','source']);/*/TC*/
@@ -5076,7 +5098,7 @@ Runtime.setSecure((function() /*boolean?*/ {/*TC*/ return __t([function(){/*/TC*
   if (/_fb_https?/.test(window.name)) {
     return ES5(window.name, 'indexOf', true,'_fb_https') != -1;
   }
-/*TC*/}.apply(this, arguments), 'boolean?']);/*/TC*/})());
+/*TC*/}.apply(this, arguments), '?boolean']);/*/TC*/})());
 
 
 copyProperties(FB, {
@@ -5191,7 +5213,7 @@ function createCORSRequest(/*string*/ method, /*string*/ url) /*object?*/ {/*TC*
    };
 
    return wrapper;
-/*TC*/}.apply(this, arguments), 'object?']);/*/TC*/}
+/*TC*/}.apply(this, arguments), '?object']);/*/TC*/}
 
 function execute(/*string*/ url, /*string*/ method, /*object*/ params,
     /*function*/ cb) /*boolean*/ {/*TC*/__t([url,'string','url'],[method,'string','method'],[params,'object','params'],[cb,'function','cb']); return __t([function(){/*/TC*/
@@ -5476,7 +5498,7 @@ var READONLYCALLS = {
 
 
 function request(/*string*/ url, /*string*/ method, /*object*/ params,
-    /*function?*/ cb) {/*TC*/__t([url,'string','url'],[method,'string','method'],[params,'object','params'],[cb,'function?','cb']);/*/TC*/
+    /*function?*/ cb) {/*TC*/__t([url,'string','url'],[method,'string','method'],[params,'object','params'],[cb,'?function','cb']);/*/TC*/
   if (!params.access_token) {
     params.access_token = accessToken;
   }
@@ -5573,7 +5595,7 @@ function requestUsingGraph(/*string*/ path) {/*TC*/__t([path,'string','path']);/
 }
 
 
-function requestUsingRest(/*object*/ params, /*function?*/ cb) {/*TC*/__t([params,'object','params'],[cb,'function?','cb']);/*/TC*/
+function requestUsingRest(/*object*/ params, /*function?*/ cb) {/*TC*/__t([params,'object','params'],[cb,'?function','cb']);/*/TC*/
   Assert.isObject(params);
   Assert.isString(params.method, 'method missing');
 
@@ -5587,16 +5609,16 @@ function requestUsingRest(/*object*/ params, /*function?*/ cb) {/*TC*/__t([param
 }
 
 var ApiClient = {
-  setAccessToken: function(/*string?*/ access_token) {/*TC*/__t([access_token,'string?','access_token']);/*/TC*/
+  setAccessToken: function(/*string?*/ access_token) {/*TC*/__t([access_token,'?string','access_token']);/*/TC*/
     accessToken = access_token;
   },
-  setInvalidAccessTokenHandler: function(/*function?*/ invalid_token_callback) {/*TC*/__t([invalid_token_callback,'function?','invalid_token_callback']);/*/TC*/
+  setInvalidAccessTokenHandler: function(/*function?*/ invalid_token_callback) {/*TC*/__t([invalid_token_callback,'?function','invalid_token_callback']);/*/TC*/
     invalidTokenCallback = invalid_token_callback;
   },
-  setClientID: function(/*string?*/ client_id) {/*TC*/__t([client_id,'string?','client_id']);/*/TC*/
+  setClientID: function(/*string?*/ client_id) {/*TC*/__t([client_id,'?string','client_id']);/*/TC*/
     clientID = client_id;
   },
-  setDefaultParams: function(/*object?*/ default_params) {/*TC*/__t([default_params,'object?','default_params']);/*/TC*/
+  setDefaultParams: function(/*object?*/ default_params) {/*TC*/__t([default_params,'?object','default_params']);/*/TC*/
     defaultParams = default_params;
   },
   rest: requestUsingRest,
@@ -5616,11 +5638,11 @@ var Runtime    = require('sdk.Runtime');
 
 var currentAccessToken;
 
-Runtime.subscribe('ClientID.change', function(/*string?*/ value) {/*TC*/__t([value,'string?','value']);/*/TC*/
+Runtime.subscribe('ClientID.change', function(/*string?*/ value) {/*TC*/__t([value,'?string','value']);/*/TC*/
   ApiClient.setClientID(value);
 });
 
-Runtime.subscribe('AccessToken.change', function(/*string?*/ value) {/*TC*/__t([value,'string?','value']);/*/TC*/
+Runtime.subscribe('AccessToken.change', function(/*string?*/ value) {/*TC*/__t([value,'?string','value']);/*/TC*/
   currentAccessToken = value;
   ApiClient.setAccessToken(value);
 });
@@ -5671,7 +5693,7 @@ function getPageInfo(/*function*/ appCallback) {/*TC*/__t([appCallback,'function
   });
 }
 
-function scrollTo(/*number?*/ x, /*number?*/ y) {/*TC*/__t([x,'number?','x'],[y,'number?','y']);/*/TC*/
+function scrollTo(/*number?*/ x, /*number?*/ y) {/*TC*/__t([x,'?number','x'],[y,'?number','y']);/*/TC*/
   RPC.remote.scrollTo({ x: x || 0, y: y || 0 });
 }
 
@@ -5708,7 +5730,7 @@ var _punctCharClass = (
 );
 
 
-function _endsInPunct(/*string?*/ str) /*boolean*/ {/*TC*/__t([str,'string?','str']); return __t([function(){/*/TC*/
+function _endsInPunct(/*string?*/ str) /*boolean*/ {/*TC*/__t([str,'?string','str']); return __t([function(){/*/TC*/
   if (typeof str != 'string') {
     return false;
   }
@@ -5752,7 +5774,7 @@ function _endsInPunct(/*string?*/ str) /*boolean*/ {/*TC*/__t([str,'string?','st
 /*TC*/}.apply(this, arguments), 'boolean']);/*/TC*/}
 
 
-function _substituteTokens(/*string*/ str, /*object?*/ args) /*string*/ {/*TC*/__t([str,'string','str'],[args,'object?','args']); return __t([function(){/*/TC*/
+function _substituteTokens(/*string*/ str, /*object?*/ args) /*string*/ {/*TC*/__t([str,'string','str'],[args,'?object','args']); return __t([function(){/*/TC*/
   
   
   if (args !== undefined) {
@@ -5942,7 +5964,7 @@ var Dialog = {
   },
 
   
-  showLoader: function(/*function?*/ cb, /*number*/ width) {/*TC*/__t([cb,'function?','cb'],[width,'number','width']);/*/TC*/
+  showLoader: function(/*function?*/ cb, /*number*/ width) {/*TC*/__t([cb,'?function','cb'],[width,'number','width']);/*/TC*/
     Dialog._showIPadOverlay();
 
     if (!Dialog._loaderEl) {
@@ -6011,7 +6033,7 @@ var Dialog = {
   },
 
   
-  _centerActive: function(/*object?*/ pageInfo) {/*TC*/__t([pageInfo,'object?','pageInfo']);/*/TC*/
+  _centerActive: function(/*object?*/ pageInfo) {/*TC*/__t([pageInfo,'?object','pageInfo']);/*/TC*/
     var dialog = Dialog._active;
     if (!dialog) {
       return;
@@ -6384,7 +6406,7 @@ var Frictionless = {
   
   _processRequestResponse: function(/*function*/ cb, /*boolean? */hidden)
       /*function*/ {/*TC*/__t([cb,'function','cb']); return __t([function(){/*/TC*/
-    return function(/*object?*/ params) {/*TC*/__t([params,'object?','params']);/*/TC*/
+    return function(/*object?*/ params) {/*TC*/__t([params,'?object','params']);/*/TC*/
       var updated = params && params.updated_frictionless;
       if (Frictionless._useFrictionless && updated) {
         
@@ -6770,7 +6792,7 @@ var Methods = {
       }
 
       return call;
-    /*TC*/}.apply(this, arguments), 'object?']);/*/TC*/}
+    /*TC*/}.apply(this, arguments), '?object']);/*/TC*/}
   },
 
   'auth.logout': {
@@ -6788,7 +6810,7 @@ var Methods = {
                                              'logout');
         return call;
       }
-    /*TC*/}.apply(this, arguments), 'object?']);/*/TC*/}
+    /*TC*/}.apply(this, arguments), '?object']);/*/TC*/}
   },
 
   'login.status': {
@@ -6912,7 +6934,7 @@ var UIServer = {
     call = UIServer.prepareParams(call);
 
     return call;
-  /*TC*/}.apply(this, arguments), 'object?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?object']);/*/TC*/},
 
   prepareParams: function(/*object*/ call) /*object*/ {/*TC*/__t([call,'object','call']); return __t([function(){/*/TC*/
     var method = call.params.method;
@@ -7066,7 +7088,7 @@ var UIServer = {
     }
   },
 
-  setLoadedNode: function(/*object*/ call, node, /*string?*/ type) {/*TC*/__t([call,'object','call'],[type,'string?','type']);/*/TC*/
+  setLoadedNode: function(/*object*/ call, node, /*string?*/ type) {/*TC*/__t([call,'object','call'],[type,'?string','type']);/*/TC*/
     if (call.params && call.params.display != 'popup') {
       
       
@@ -7370,7 +7392,7 @@ var UIServer = {
   /*TC*/}.apply(this, arguments), 'string']);/*/TC*/},
 
   xdHandler: function(/*function*/ cb, /*string*/ frame, /*string*/ target,
-      /*object?*/ authResponse, /*string*/ method) /*string*/ {/*TC*/__t([cb,'function','cb'],[frame,'string','frame'],[target,'string','target'],[authResponse,'object?','authResponse'],[method,'string','method']); return __t([function(){/*/TC*/
+      /*object?*/ authResponse, /*string*/ method) /*string*/ {/*TC*/__t([cb,'function','cb'],[frame,'string','frame'],[target,'string','target'],[authResponse,'?object','authResponse'],[method,'string','method']); return __t([function(){/*/TC*/
     return UIServer._xdNextHandler(
       Auth.xdResponseWrapper(cb, authResponse, method),
       frame,
@@ -7394,7 +7416,7 @@ var SDKConfig = requireDynamic('SDKConfig');
 var UIServer = require('sdk.UIServer');
 
 
-function ui(/*object*/ params, /*function?*/ cb) /*object?*/ {/*TC*/__t([params,'object','params'],[cb,'function?','cb']); return __t([function(){/*/TC*/
+function ui(/*object*/ params, /*function?*/ cb) /*object?*/ {/*TC*/__t([params,'object','params'],[cb,'?function','cb']); return __t([function(){/*/TC*/
   Assert.isObject(params);
   Assert.maybeFunction(cb);
 
@@ -7452,7 +7474,7 @@ function ui(/*object*/ params, /*function?*/ cb) /*object?*/ {/*TC*/__t([params,
 
   displayFn(call);
   return call.dialog;
-/*TC*/}.apply(this, arguments), 'object?']);/*/TC*/}
+/*TC*/}.apply(this, arguments), '?object']);/*/TC*/}
 
 module.exports = ui;
 
@@ -7473,21 +7495,21 @@ FB.provide('', {
 
   getLoginStatus: function() /*object?*/ {/*TC*/ return __t([function(){/*/TC*/
     return Auth.getLoginStatus.apply(Auth, arguments);
-  /*TC*/}.apply(this, arguments), 'object?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?object']);/*/TC*/},
 
   getAuthResponse: function() /*object?*/ {/*TC*/ return __t([function(){/*/TC*/
     return Auth.getAuthResponse();
-  /*TC*/}.apply(this, arguments), 'object?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?object']);/*/TC*/},
 
   getAccessToken: function() /*string?*/ {/*TC*/ return __t([function(){/*/TC*/
     return Runtime.getAccessToken() || null;
-  /*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?string']);/*/TC*/},
 
   getUserID: function() /*string?*/ {/*TC*/ return __t([function(){/*/TC*/
     return Runtime.getUserID() || Runtime.getCookieUserID();
-  /*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?string']);/*/TC*/},
 
-  login: function(/*function?*/ cb, /*object?*/ opts) {/*TC*/__t([cb,'function?','cb'],[opts,'object?','opts']);/*/TC*/
+  login: function(/*function?*/ cb, /*object?*/ opts) {/*TC*/__t([cb,'?function','cb'],[opts,'?object','opts']);/*/TC*/
     if (opts && opts.perms && !opts.scope) {
       opts.scope = opts.perms;
       delete opts.perms;
@@ -7507,7 +7529,7 @@ FB.provide('', {
   },
 
 
-  logout: function(/*function?*/ cb) {/*TC*/__t([cb,'function?','cb']);/*/TC*/
+  logout: function(/*function?*/ cb) {/*TC*/__t([cb,'?function','cb']);/*/TC*/
     ui({ method: 'auth.logout', display: 'hidden' }, cb);
   }
 });
@@ -7626,7 +7648,7 @@ RPC.local.showFlashObjects = function() {
 
 var Flash = {
   
-  _setHideFlashCallback: function(/*function?*/ callback) {/*TC*/__t([callback,'function?','callback']);/*/TC*/
+  _setHideFlashCallback: function(/*function?*/ callback) {/*TC*/__t([callback,'?function','callback']);/*/TC*/
     devHideFlashCallback = callback;
   },
 
@@ -7659,7 +7681,7 @@ function getHeight() {
   return Math.max(bodyScroll, bodyOffset, docScroll, docOffset);
 }
 
-function setSize(/*object?*/ params) /*boolean*/ {/*TC*/__t([params,'object?','params']); return __t([function(){/*/TC*/
+function setSize(/*object?*/ params) /*boolean*/ {/*TC*/__t([params,'?object','params']); return __t([function(){/*/TC*/
   
   if (typeof params != 'object') {
     params = {};
@@ -7753,7 +7775,7 @@ __d("sdk.Canvas.Tti",["sdk.RPC","sdk.Runtime"],function(global,require,requireDy
 var RPC = require('sdk.RPC');
 var Runtime = require('sdk.Runtime');
 
-function passAppTtiMessage(/*function?*/ callback, /*string*/ messageName) {/*TC*/__t([callback,'function?','callback'],[messageName,'string','messageName']);/*/TC*/
+function passAppTtiMessage(/*function?*/ callback, /*string*/ messageName) {/*TC*/__t([callback,'?function','callback'],[messageName,'string','messageName']);/*/TC*/
   var params = {
     appId: Runtime.getClientID(),
     time: ES5('Date', 'now', false),
@@ -7775,12 +7797,12 @@ function startTimer() {
   passAppTtiMessage(null, 'StartIframeAppTtiTimer');
 }
 
-function stopTimer(/*function?*/ callback) {/*TC*/__t([callback,'function?','callback']);/*/TC*/
+function stopTimer(/*function?*/ callback) {/*TC*/__t([callback,'?function','callback']);/*/TC*/
   passAppTtiMessage(callback, 'StopIframeAppTtiTimer');
 }
 
 
-function setDoneLoading(/*function?*/ callback) {/*TC*/__t([callback,'function?','callback']);/*/TC*/
+function setDoneLoading(/*function?*/ callback) {/*TC*/__t([callback,'?function','callback']);/*/TC*/
   passAppTtiMessage(callback, 'RecordIframeAppTti');
 }
 
@@ -8048,7 +8070,7 @@ module.exports = format;
 });
 __d("safeEval",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-function safeEval(source) {
+function safeEval(source, /*?array*/ args) {/*TC*/__t([args,'?array','args']);/*/TC*/
   if (source === null || typeof source === 'undefined') {
     return;
   }
@@ -8056,7 +8078,14 @@ function safeEval(source) {
     return source;
   }
 
-  return Function('return eval("' + source.replace(/"/g, '\\"') + '");')();
+  // We're asked to invoke a global function
+  if (/^\w+$/.test(source) && typeof window[source] === 'function') {
+    return window[source].apply(null, args || []);
+  }
+
+  // We're asked to eval code
+  return Function('return eval("' + source.replace(/"/g, '\\"')  + '");')
+    .apply(null, args || []);
 }
 
 module.exports = safeEval;
@@ -8079,7 +8108,7 @@ var Waitable = Model.extend({
   },
 
   
-  wait: function(/*function?*/ callback, /*function?*/ errorHandler) {/*TC*/__t([callback,'function?','callback'],[errorHandler,'function?','errorHandler']);/*/TC*/
+  wait: function(/*function?*/ callback, /*function?*/ errorHandler) {/*TC*/__t([callback,'?function','callback'],[errorHandler,'?function','errorHandler']);/*/TC*/
     
     if (errorHandler) {
       this.subscribe('error', errorHandler);
@@ -8093,7 +8122,7 @@ var Waitable = Model.extend({
         callback(value);
         return true;
       }
-    /*TC*/}.apply(this, arguments), 'boolean?']);/*/TC*/}, 'bind', true,this));
+    /*TC*/}.apply(this, arguments), '?boolean']);/*/TC*/}, 'bind', true,this));
   }
 });
 
@@ -8163,7 +8192,7 @@ var Query = Waitable.extend({
     this.name = 'v_' + counter++;
   },
   
-  hasDependency: function(/*boolean?*/ value) /*boolean*/ {/*TC*/__t([value,'boolean?','value']); return __t([function(){/*/TC*/
+  hasDependency: function(/*boolean?*/ value) /*boolean*/ {/*TC*/__t([value,'?boolean','value']); return __t([function(){/*/TC*/
     if (arguments.length) {
       this._hasDependency = value;
     }
@@ -8276,7 +8305,7 @@ var Data = {
   /*TC*/}.apply(this, arguments), 'object']);/*/TC*/},
 
   
-  process: function(/*string?*/ token) {/*TC*/__t([token,'string?','token']);/*/TC*/
+  process: function(/*string?*/ token) {/*TC*/__t([token,'?string','token']);/*/TC*/
     Data._process(token);
   },
 
@@ -8309,7 +8338,7 @@ var Data = {
   },
 
   
-  _process: function(/*string?*/ token) {/*TC*/__t([token,'string?','token']);/*/TC*/
+  _process: function(/*string?*/ token) {/*TC*/__t([token,'?string','token']);/*/TC*/
     Data.timer = -1;
 
     var
@@ -8357,7 +8386,7 @@ var Data = {
   },
 
   
-  _mergeIndexQuery: function(/*object*/ item, /*array<object>*/ mqueries) {/*TC*/__t([item,'object','item'],[mqueries,'array<object>','mqueries']);/*/TC*/
+  _mergeIndexQuery: function(/*object*/ item, /*object*/ mqueries) {/*TC*/__t([item,'object','item'],[mqueries,'object','mqueries']);/*/TC*/
     var key = item.where.key,
     value = item.where.value;
 
@@ -8549,7 +8578,7 @@ var DEF_ERROR_MSG = {
 };
 
 var callbackWrapper = function(/*function*/ callback) /*function*/ {/*TC*/__t([callback,'function','callback']); return __t([function(){/*/TC*/
-  return function(/*object?*/ msg) {/*TC*/__t([msg,'object?','msg']);/*/TC*/
+  return function(/*object?*/ msg) {/*TC*/__t([msg,'?object','msg']);/*/TC*/
     callback(msg && msg.response
       ? ES5('JSON', 'parse', false,msg.response)
       : DEF_ERROR_MSG
@@ -8588,7 +8617,7 @@ copyProperties(UIServer.Methods, {
       call.params.uiserver = true;
 
       XD.inform('Pay.Prompt', call.params);
-    /*TC*/}.apply(this, arguments), 'object?']);/*/TC*/}
+    /*TC*/}.apply(this, arguments), '?object']);/*/TC*/}
   }
 });
 
@@ -8778,7 +8807,7 @@ function nodeNameIE(/*DOMElement*/ element) /*string*/ {/*TC*/__t([element,'DOME
 function xfbmlInfo(/*DOMElement*/ element) /*object?*/ {/*TC*/__t([element,'DOMElement','element']); return __t([function(){/*/TC*/
   return xfbml[propStr(element, 'nodeName').toLowerCase()]
     || xfbml[nodeNameIE(element).toLowerCase()];
-/*TC*/}.apply(this, arguments), 'object?']);/*/TC*/}
+/*TC*/}.apply(this, arguments), '?object']);/*/TC*/}
 
 function html5Info(/*DOMElement*/ element) /*object?*/ {/*TC*/__t([element,'DOMElement','element']); return __t([function(){/*/TC*/
   var classNames = ES5(ES5(propStr(element, 'className'),'trim', true).split(/\s+/), 'filter', true,
@@ -8801,7 +8830,7 @@ function html5Info(/*DOMElement*/ element) /*object?*/ {/*TC*/__t([element,'DOME
       element.getAttribute('fb-xfbml-state')) {
     return html5[classNames[0]];
   }
-/*TC*/}.apply(this, arguments), 'object?']);/*/TC*/}
+/*TC*/}.apply(this, arguments), '?object']);/*/TC*/}
 
 function attr(/*DOMElement*/ element) /*object*/ {/*TC*/__t([element,'DOMElement','element']); return __t([function(){/*/TC*/
   var attrs = {};
@@ -8945,7 +8974,7 @@ copyProperties(XFBML, {
     html5[info.xmlns + '-' + info.localName] = info;
   },
 
-  parse: function(/*DOMElement?*/ dom, /*function?*/ cb) {/*TC*/__t([dom,'DOMElement?','dom'],[cb,'function?','cb']);/*/TC*/
+  parse: function(/*DOMElement?*/ dom, /*function?*/ cb) {/*TC*/__t([dom,'?DOMElement','dom'],[cb,'?function','cb']);/*/TC*/
     parse(dom || document.body, cb || function(){},  true);
   },
 
@@ -9108,7 +9137,7 @@ var baseParams = {
   color_scheme: 'string' 
 };
 
-function resize(/*DOMElement*/ elem, /*number?*/ width, /*number?*/ height) {/*TC*/__t([elem,'DOMElement','elem'],[width,'number?','width'],[height,'number?','height']);/*/TC*/
+function resize(/*DOMElement*/ elem, /*number?*/ width, /*number?*/ height) {/*TC*/__t([elem,'DOMElement','elem'],[width,'?number','width'],[height,'?number','height']);/*/TC*/
   if (width || width === 0) {
     elem.style.width = width + 'px';
   }
@@ -9117,7 +9146,7 @@ function resize(/*DOMElement*/ elem, /*number?*/ width, /*number?*/ height) {/*T
   }
 }
 
-function resizeBubbler(/*string?*/ pluginID) /*function*/ {/*TC*/__t([pluginID,'string?','pluginID']); return __t([function(){/*/TC*/
+function resizeBubbler(/*string?*/ pluginID) /*function*/ {/*TC*/__t([pluginID,'?string','pluginID']); return __t([function(){/*/TC*/
   return function(/*object*/ msg) {/*TC*/__t([msg,'object','msg']);/*/TC*/
     var message = { width: msg.width, height: msg.height, pluginID: pluginID };
     Event.fire('xfbml.resize', message);
@@ -9126,27 +9155,27 @@ function resizeBubbler(/*string?*/ pluginID) /*function*/ {/*TC*/__t([pluginID,'
 
 var types = {
   // TODO: Move the 'bool' and 'px' parsing to the server?
-  string: function(/*string?*/ value) /*string?*/ {/*TC*/__t([value,'string?','value']); return __t([function(){/*/TC*/
+  string: function(/*string?*/ value) /*string?*/ {/*TC*/__t([value,'?string','value']); return __t([function(){/*/TC*/
     return value;
-  /*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
-  bool: function(/*string?*/ value) /*boolean?*/ {/*TC*/__t([value,'string?','value']); return __t([function(){/*/TC*/
+  /*TC*/}.apply(this, arguments), '?string']);/*/TC*/},
+  bool: function(/*string?*/ value) /*boolean?*/ {/*TC*/__t([value,'?string','value']); return __t([function(){/*/TC*/
     return value ? (/^(?:true|1|yes|on)$/i).test(value) : undefined;
-  /*TC*/}.apply(this, arguments), 'boolean?']);/*/TC*/},
-  url: function(/*string?*/ value) /*string?*/ {/*TC*/__t([value,'string?','value']); return __t([function(){/*/TC*/
+  /*TC*/}.apply(this, arguments), '?boolean']);/*/TC*/},
+  url: function(/*string?*/ value) /*string?*/ {/*TC*/__t([value,'?string','value']); return __t([function(){/*/TC*/
     return resolveURI(value);
-  /*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
-  url_maybe: function(/*string?*/ value) /*string?*/ {/*TC*/__t([value,'string?','value']); return __t([function(){/*/TC*/
+  /*TC*/}.apply(this, arguments), '?string']);/*/TC*/},
+  url_maybe: function(/*string?*/ value) /*string?*/ {/*TC*/__t([value,'?string','value']); return __t([function(){/*/TC*/
     return value ? resolveURI(value) : value;
-  /*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
-  hostname: function(/*string?*/ value) /*string?*/ {/*TC*/__t([value,'string?','value']); return __t([function(){/*/TC*/
+  /*TC*/}.apply(this, arguments), '?string']);/*/TC*/},
+  hostname: function(/*string?*/ value) /*string?*/ {/*TC*/__t([value,'?string','value']); return __t([function(){/*/TC*/
     return value || window.location.hostname;
-  /*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
-  px: function(/*string?*/ value) /*number?*/ {/*TC*/__t([value,'string?','value']); return __t([function(){/*/TC*/
+  /*TC*/}.apply(this, arguments), '?string']);/*/TC*/},
+  px: function(/*string?*/ value) /*number?*/ {/*TC*/__t([value,'?string','value']); return __t([function(){/*/TC*/
     return (/^(\d+)(?:px)?$/).test(value) ? parseInt(RegExp.$1, 10) : undefined;
-  /*TC*/}.apply(this, arguments), 'number?']);/*/TC*/},
-  text: function(/*string?*/ value) /*string?*/ {/*TC*/__t([value,'string?','value']); return __t([function(){/*/TC*/
+  /*TC*/}.apply(this, arguments), '?number']);/*/TC*/},
+  text: function(/*string?*/ value) /*string?*/ {/*TC*/__t([value,'?string','value']); return __t([function(){/*/TC*/
     return value;
-  /*TC*/}.apply(this, arguments), 'string?']);/*/TC*/}
+  /*TC*/}.apply(this, arguments), '?string']);/*/TC*/}
 };
 
 function getVal(/*object*/ attr, /*string*/ key) {/*TC*/__t([attr,'object','attr'],[key,'string','key']);/*/TC*/
@@ -9426,7 +9455,7 @@ var Element = Type.extend({
 
   
   getAttribute: function(/*string*/ name, defaultValue,
-      /*function?*/ transform) {/*TC*/__t([name,'string','name'],[transform,'function?','transform']);/*/TC*/
+      /*function?*/ transform) {/*TC*/__t([name,'string','name'],[transform,'?function','transform']);/*/TC*/
     var value = DOM.getAttr(this.dom, name);
     return value
       ? transform
@@ -9437,16 +9466,16 @@ var Element = Type.extend({
 
   
   _getBoolAttribute: function(/*string*/ name, /*boolean?*/ defaultValue)
-      /*boolean?*/ {/*TC*/__t([name,'string','name'],[defaultValue,'boolean?','defaultValue']); return __t([function(){/*/TC*/
+      /*boolean?*/ {/*TC*/__t([name,'string','name'],[defaultValue,'?boolean','defaultValue']); return __t([function(){/*/TC*/
     var value = DOM.getBoolAttr(this.dom, name);
     return value === null
       ? defaultValue
       : value;
-  /*TC*/}.apply(this, arguments), 'boolean?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?boolean']);/*/TC*/},
 
   
   _getPxAttribute: function(/*string*/ name, /*number?*/ defaultValue)
-      /*number?*/ {/*TC*/__t([name,'string','name'],[defaultValue,'number?','defaultValue']); return __t([function(){/*/TC*/
+      /*number?*/ {/*TC*/__t([name,'string','name'],[defaultValue,'?number','defaultValue']); return __t([function(){/*/TC*/
     return this.getAttribute(name, defaultValue, function(/*string*/ s)
         /*number?*/ {/*TC*/__t([s,'string','s']); return __t([function(){/*/TC*/
       var size = parseInt(s.replace('px', ''), 10);
@@ -9455,8 +9484,8 @@ var Element = Type.extend({
       } else {
         return size;
       }
-    /*TC*/}.apply(this, arguments), 'number?']);/*/TC*/});
-  /*TC*/}.apply(this, arguments), 'number?']);/*/TC*/},
+    /*TC*/}.apply(this, arguments), '?number']);/*/TC*/});
+  /*TC*/}.apply(this, arguments), '?number']);/*/TC*/},
 
   
   _getAttributeFromList: function(/*string*/ name, /*string*/ defaultValue,
@@ -9477,7 +9506,7 @@ var Element = Type.extend({
         return true;
       }
     }
-  /*TC*/}.apply(this, arguments), 'boolean?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?boolean']);/*/TC*/},
 
   
   clear: function() {
@@ -9563,10 +9592,10 @@ var IframeWidget = Element.extend({
   
   getIframeName: function() /*string?*/ {/*TC*/ return __t([function(){/*/TC*/
     return this._iframeName;
-  /*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?string']);/*/TC*/},
 
   
-  getIframeTitle: function() /*string?*/ {/*TC*/ return __t([function(){/*/TC*//*TC*/}.apply(this, arguments), 'string?']);/*/TC*/},
+  getIframeTitle: function() /*string?*/ {/*TC*/ return __t([function(){/*/TC*//*TC*/}.apply(this, arguments), '?string']);/*/TC*/},
 
   
   
@@ -9590,11 +9619,11 @@ var IframeWidget = Element.extend({
     
     
     return this.dom.getElementsByTagName('iframe')[0];
-  /*TC*/}.apply(this, arguments), 'DOMElement?']);/*/TC*/},
+  /*TC*/}.apply(this, arguments), '?DOMElement']);/*/TC*/},
 
   
   arbiterInform: function(/*string*/ event, /*object?*/ message,
-      /*string?*/ behavior) {/*TC*/__t([event,'string','event'],[message,'object?','message'],[behavior,'string?','behavior']);/*/TC*/
+      /*string?*/ behavior) {/*TC*/__t([event,'string','event'],[message,'?object','message'],[behavior,'?string','behavior']);/*/TC*/
     XD.sendToFacebook(
       this.getIframeName(), {
         method: event,
@@ -9604,7 +9633,7 @@ var IframeWidget = Element.extend({
   },
 
   _arbiterInform: function(/*string*/ event, /*object*/  message,
-      /*string?*/ behavior) {/*TC*/__t([event,'string','event'],[behavior,'string?','behavior']);/*/TC*/
+      /*string?*/ behavior) {/*TC*/__t([event,'string','event'],[behavior,'?string','behavior']);/*/TC*/
     var relation = 'parent.frames["' + this.getIframeNode().name + '"]';
     XD.inform(event, message, relation, behavior);
   },
@@ -9619,7 +9648,7 @@ var IframeWidget = Element.extend({
   
 
   
-  process: function(/*boolean?*/ force) {/*TC*/__t([force,'boolean?','force']);/*/TC*/
+  process: function(/*boolean?*/ force) {/*TC*/__t([force,'?boolean','force']);/*/TC*/
     
     if (this._done) {
       if (!this._allowReProcess && !force) {
@@ -10178,7 +10207,7 @@ var DOM = require('sdk.DOM');
 var Anim = {
   
   ate: function(/*DOMElement*/ dom, /*object*/ props, /*number?*/ duration,
-      /*function?*/ callback) {/*TC*/__t([dom,'DOMElement','dom'],[props,'object','props'],[duration,'number?','duration'],[callback,'function?','callback']);/*/TC*/
+      /*function?*/ callback) {/*TC*/__t([dom,'DOMElement','dom'],[props,'object','props'],[duration,'?number','duration'],[callback,'?function','callback']);/*/TC*/
     duration = !isNaN(parseFloat(duration)) && duration >= 0
       ? duration
       : 750;
@@ -10294,7 +10323,7 @@ var Helper = {
 
   
   getProfileLink: function(/*object?*/ userInfo, /*string*/ html,
-      /*string?*/ href) /*string*/ {/*TC*/__t([userInfo,'object?','userInfo'],[html,'string','html'],[href,'string?','href']); return __t([function(){/*/TC*/
+      /*string?*/ href) /*string*/ {/*TC*/__t([userInfo,'?object','userInfo'],[html,'string','html'],[href,'?string','href']); return __t([function(){/*/TC*/
     href = href || (userInfo ? UrlMap.resolve('www') + '/profile.php?id=' +
                     userInfo.uid : null);
     if (href) {
@@ -10304,10 +10333,10 @@ var Helper = {
   /*TC*/}.apply(this, arguments), 'string']);/*/TC*/},
 
   
-  invokeHandler: function(handler, /*object?*/ scope, /*array?*/ args) {/*TC*/__t([scope,'object?','scope'],[args,'array?','args']);/*/TC*/
+  invokeHandler: function(handler, /*object?*/ scope, /*array?*/ args) {/*TC*/__t([scope,'?object','scope'],[args,'?array','args']);/*/TC*/
     if (handler) {
       if (typeof handler === 'string') {
-        ErrorHandling.unguard(safeEval)(handler);
+        ErrorHandling.unguard(safeEval)(handler, args);
       } else if (handler.apply) {
         ErrorHandling.unguard(handler).apply(scope, args || []);
       }
@@ -10568,71 +10597,6 @@ var ConnectBar = Element.extend({
 });
 
 module.exports = ConnectBar;
-
-});
-__d("sdk.XFBML.Fan",["sdk.XFBML.IframeWidget","sdk.Runtime","Log"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-var IframeWidget = require('sdk.XFBML.IframeWidget');
-var Runtime = require('sdk.Runtime');
-var Log = require('Log');
-
-var Fan = IframeWidget.extend({
-  _visibleAfter: 'load',
-
-  
-  setupAndValidate: function() /*boolean*/ {/*TC*/ return __t([function(){/*/TC*/
-    this._attr = {
-      api_key     : Runtime.getClientID(),
-      connections : this.getAttribute('connections', '10'),
-      css         : this.getAttribute('css'),
-      height      : this._getPxAttribute('height'),
-      id          : this.getAttribute('profile-id'),
-      logobar     : this._getBoolAttribute('logo-bar'),
-      name        : this.getAttribute('name'),
-      stream      : this._getBoolAttribute('stream', true),
-      width       : this._getPxAttribute('width', 300)
-    };
-
-    // "id" or "name" is required
-    if (!this._attr.id && !this._attr.name) {
-      Log.error('<fb:fan> requires one of the "id" or "name" attributes.');
-      return false;
-    }
-
-    var height = this._attr.height;
-    if (!height) {
-      if ((!this._attr.connections || this._attr.connections === '0') &&
-          !this._attr.stream) {
-        height = 65;
-      } else if (!this._attr.connections || this._attr.connections === '0') {
-        height = 375;
-      } else if (!this._attr.stream) {
-        height = 250;
-      } else {
-        height = 550;
-      }
-    }
-    
-    if (this._attr.logobar) {
-      height += 25;
-    }
-
-    this._attr.height = height;
-    return true;
-  /*TC*/}.apply(this, arguments), 'boolean']);/*/TC*/},
-
-  
-  getSize: function() /*object*/ {/*TC*/ return __t([function(){/*/TC*/
-    return { width: this._attr.width, height: this._attr.height };
-  /*TC*/}.apply(this, arguments), 'object']);/*/TC*/},
-
-  
-  getUrlBits: function() /*object*/ {/*TC*/ return __t([function(){/*/TC*/
-    return { name: 'fan', params: this._attr };
-  /*TC*/}.apply(this, arguments), 'object']);/*/TC*/}
-});
-
-module.exports = Fan;
 
 });
 __d("sdk.XFBML.EdgeCommentWidget",["sdk.XFBML.IframeWidget","sdk.DOM"],function(global,require,requireDynamic,requireLazy,module,exports) {
@@ -10961,111 +10925,6 @@ var EdgeWidget = IframeWidget.extend({
 module.exports = EdgeWidget;
 
 });
-__d("sdk.XFBML.SendButtonFormWidget",["sdk.XFBML.EdgeCommentWidget","sdk.DOM","sdk.Event"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-var EdgeCommentWidget = require('sdk.XFBML.EdgeCommentWidget');
-var DOM = require('sdk.DOM');
-var Event = require('sdk.Event');
-
-var SendButtonFormWidget = EdgeCommentWidget.extend({
-  constructor: function(/*object*/ opts) {/*TC*/__t([opts,'object','opts']);/*/TC*/
-    this.parent(opts);
-
-    DOM.addCss(this.dom, 'fb_send_button_form_widget');
-    DOM.addCss(this.dom, opts.colorscheme);
-    DOM.addCss(this.dom,
-      (typeof opts.siderender != 'undefined' && opts.siderender) ?
-        'siderender' : '');
-
-    
-    this._attr.nodeImageURL = opts.nodeImageURL;
-    this._attr.nodeRef      = opts.nodeRef;
-    this._attr.nodeTitle    = opts.nodeTitle;
-    this._attr.nodeURL      = opts.nodeURL;
-    this._attr.nodeSummary  = opts.nodeSummary;
-    this._attr.offsetX      = opts.relativeWidthOffset;
-    this._attr.offsetY      = opts.relativeHeightOffset;
-    this._attr.anchorTargetX = opts.anchorTargetX;
-    this._attr.anchorTargetY = opts.anchorTargetY;
-
-    
-    this._attr.channel      = this.getChannelUrl();
-
-    
-    
-    
-    this._attr.controllerID = opts.controllerID;
-
-    
-    this._attr.colorscheme  = opts.colorscheme;
-
-    
-    this._attr.error        = opts.error;
-
-    
-    this._attr.siderender   = opts.siderender;
-
-    
-    this._attr.extended_social_context = opts.extended_social_context;
-  },
-  
-  
-  // there will be a very small delay. So in meantime, let's show a loader
-  _showLoader: true,
-
-  getUrlBits: function() /*object*/ {/*TC*/ return __t([function(){/*/TC*/
-    return { name: 'send_button_form_shell', params: this._attr };
-  /*TC*/}.apply(this, arguments), 'object']);/*/TC*/},
-
-  oneTimeSetup: function() {
-    this.subscribe('xd.messageSent', ES5(this._onMessageSent, 'bind', true,this));
-  },
-
-  _onMessageSent: function() {
-    Event.fire('message.send', this._attr.nodeURL, this);
-  }
-});
-
-module.exports = SendButtonFormWidget;
-
-});
-__d("sdk.XFBML.Like",["sdk.XFBML.EdgeWidget","sdk.XFBML.SendButtonFormWidget"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-var EdgeWidget = require('sdk.XFBML.EdgeWidget');
-var SendButtonFormWidget = require('sdk.XFBML.SendButtonFormWidget');
-
-var Like = EdgeWidget.extend({
-
-  
-  getUrlBits: function() /*object*/ {/*TC*/ return __t([function(){/*/TC*/
-    return { name: 'like', params: this._attr };
-  /*TC*/}.apply(this, arguments), 'object']);/*/TC*/},
-
-  
-  _createEdgeCommentWidget: function(/*object*/ message,
-      /*DOMElement*/ comment_node) /*object*/ {/*TC*/__t([message,'object','message'],[comment_node,'DOMElement','comment_node']); return __t([function(){/*/TC*/
-    
-    
-    // send="true"></fb:like>)
-    if ('send' in this._attr &&
-        'widget_type' in message &&
-        message.widget_type == 'send') {
-      var opts = this._getCommonEdgeCommentWidgetOpts(message, comment_node);
-      return new SendButtonFormWidget(opts);
-    } else {
-      return this.parentCall("_createEdgeCommentWidget", message, comment_node);
-    }
-  /*TC*/}.apply(this, arguments), 'object']);/*/TC*/},
-
-  
-  getIframeTitle: function() /*string*/ {/*TC*/ return __t([function(){/*/TC*/
-    return 'Like this content on Facebook.';
-  /*TC*/}.apply(this, arguments), 'string']);/*/TC*/}
-});
-
-module.exports = Like;
-
-});
 __d("sdk.XFBML.LikeBox",["sdk.XFBML.EdgeWidget","sdk.Helper","Log","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 var EdgeWidget = require('sdk.XFBML.EdgeWidget');
@@ -11169,6 +11028,111 @@ var LikeBox = EdgeWidget.extend({
 });
 
 module.exports = LikeBox;
+
+});
+__d("sdk.XFBML.SendButtonFormWidget",["sdk.XFBML.EdgeCommentWidget","sdk.DOM","sdk.Event"],function(global,require,requireDynamic,requireLazy,module,exports) {
+
+var EdgeCommentWidget = require('sdk.XFBML.EdgeCommentWidget');
+var DOM = require('sdk.DOM');
+var Event = require('sdk.Event');
+
+var SendButtonFormWidget = EdgeCommentWidget.extend({
+  constructor: function(/*object*/ opts) {/*TC*/__t([opts,'object','opts']);/*/TC*/
+    this.parent(opts);
+
+    DOM.addCss(this.dom, 'fb_send_button_form_widget');
+    DOM.addCss(this.dom, opts.colorscheme);
+    DOM.addCss(this.dom,
+      (typeof opts.siderender != 'undefined' && opts.siderender) ?
+        'siderender' : '');
+
+    
+    this._attr.nodeImageURL = opts.nodeImageURL;
+    this._attr.nodeRef      = opts.nodeRef;
+    this._attr.nodeTitle    = opts.nodeTitle;
+    this._attr.nodeURL      = opts.nodeURL;
+    this._attr.nodeSummary  = opts.nodeSummary;
+    this._attr.offsetX      = opts.relativeWidthOffset;
+    this._attr.offsetY      = opts.relativeHeightOffset;
+    this._attr.anchorTargetX = opts.anchorTargetX;
+    this._attr.anchorTargetY = opts.anchorTargetY;
+
+    
+    this._attr.channel      = this.getChannelUrl();
+
+    
+    
+    
+    this._attr.controllerID = opts.controllerID;
+
+    
+    this._attr.colorscheme  = opts.colorscheme;
+
+    
+    this._attr.error        = opts.error;
+
+    
+    this._attr.siderender   = opts.siderender;
+
+    
+    this._attr.extended_social_context = opts.extended_social_context;
+  },
+  
+  
+  // there will be a very small delay. So in meantime, let's show a loader
+  _showLoader: true,
+
+  getUrlBits: function() /*object*/ {/*TC*/ return __t([function(){/*/TC*/
+    return { name: 'send_button_form_shell', params: this._attr };
+  /*TC*/}.apply(this, arguments), 'object']);/*/TC*/},
+
+  oneTimeSetup: function() {
+    this.subscribe('xd.messageSent', ES5(this._onMessageSent, 'bind', true,this));
+  },
+
+  _onMessageSent: function() {
+    Event.fire('message.send', this._attr.nodeURL, this);
+  }
+});
+
+module.exports = SendButtonFormWidget;
+
+});
+__d("sdk.XFBML.Like",["sdk.XFBML.EdgeWidget","sdk.XFBML.SendButtonFormWidget"],function(global,require,requireDynamic,requireLazy,module,exports) {
+
+var EdgeWidget = require('sdk.XFBML.EdgeWidget');
+var SendButtonFormWidget = require('sdk.XFBML.SendButtonFormWidget');
+
+var Like = EdgeWidget.extend({
+
+  
+  getUrlBits: function() /*object*/ {/*TC*/ return __t([function(){/*/TC*/
+    return { name: 'like', params: this._attr };
+  /*TC*/}.apply(this, arguments), 'object']);/*/TC*/},
+
+  
+  _createEdgeCommentWidget: function(/*object*/ message,
+      /*DOMElement*/ comment_node) /*object*/ {/*TC*/__t([message,'object','message'],[comment_node,'DOMElement','comment_node']); return __t([function(){/*/TC*/
+    
+    
+    // send="true"></fb:like>)
+    if ('send' in this._attr &&
+        'widget_type' in message &&
+        message.widget_type == 'send') {
+      var opts = this._getCommonEdgeCommentWidgetOpts(message, comment_node);
+      return new SendButtonFormWidget(opts);
+    } else {
+      return this.parentCall("_createEdgeCommentWidget", message, comment_node);
+    }
+  /*TC*/}.apply(this, arguments), 'object']);/*/TC*/},
+
+  
+  getIframeTitle: function() /*string*/ {/*TC*/ return __t([function(){/*/TC*/
+    return 'Like this content on Facebook.';
+  /*TC*/}.apply(this, arguments), 'string']);/*/TC*/}
+});
+
+module.exports = Like;
 
 });
 __d("sdk.XFBML.LiveStream",["sdk.XFBML.IframeWidget"],function(global,require,requireDynamic,requireLazy,module,exports) {
@@ -11613,7 +11577,7 @@ var ProfilePic = Element.extend({
         
         renderFn();
       }
-    /*TC*/}.apply(this, arguments), 'boolean?']);/*/TC*/}, 'bind', true,this));
+    /*TC*/}.apply(this, arguments), '?boolean']);/*/TC*/}, 'bind', true,this));
   }
 });
 
@@ -11661,7 +11625,7 @@ var Bar = IframeWidget.extend({
       /*TC*/}.apply(this, arguments), 'boolean']);/*/TC*/};
     /*TC*/}.apply(this, arguments), 'function']);/*/TC*/}
 
-    function validate_trigger(/*string?*/ trigger) {/*TC*/__t([trigger,'string?','trigger']);/*/TC*/
+    function validate_trigger(/*string?*/ trigger) {/*TC*/__t([trigger,'?string','trigger']);/*/TC*/
       if (trigger.match(/^\d+(?:\.\d+)?%$/)) {
         
         var percent = Math.min(Math.max(parseInt(trigger, 10), 0), 100);
@@ -11672,11 +11636,11 @@ var Bar = IframeWidget.extend({
       return trigger;
     }
 
-    function validate_read_time(/*string?*/ read_time) /*number*/ {/*TC*/__t([read_time,'string?','read_time']); return __t([function(){/*/TC*/
+    function validate_read_time(/*string?*/ read_time) /*number*/ {/*TC*/__t([read_time,'?string','read_time']); return __t([function(){/*/TC*/
       return Math.max(parseInt(read_time, 10) || 30, 10);
     /*TC*/}.apply(this, arguments), 'number']);/*/TC*/}
 
-    function validate_side(/*string?*/ side) /*string*/ {/*TC*/__t([side,'string?','side']); return __t([function(){/*/TC*/
+    function validate_side(/*string?*/ side) /*string*/ {/*TC*/__t([side,'?string','side']); return __t([function(){/*/TC*/
       if (side == 'left' || side == 'right') { 
         return side;
       }
@@ -12058,7 +12022,7 @@ var SocialContext = IframeWidget.extend({
 module.exports = SocialContext;
 
 });
-__d("legacy:fb.xfbml",["Assert","sdk.domReady","sdk.Event","FB","IframePlugin","PluginTags","wrapFunction","XFBML","sdk.XFBML.Comments","sdk.XFBML.CommentsCount","sdk.XFBML.ConnectBar","sdk.XFBML.Fan","sdk.XFBML.Like","sdk.XFBML.LikeBox","sdk.XFBML.LiveStream","sdk.XFBML.LoginButton","sdk.XFBML.Name","sdk.XFBML.ProfilePic","sdk.XFBML.RecommendationsBar","sdk.XFBML.Registration","sdk.XFBML.Send","sdk.XFBML.SocialContext"],function(global,require,requireDynamic,requireLazy) {
+__d("legacy:fb.xfbml",["Assert","sdk.domReady","sdk.Event","FB","IframePlugin","PluginTags","wrapFunction","XFBML","sdk.XFBML.Comments","sdk.XFBML.CommentsCount","sdk.XFBML.ConnectBar","sdk.XFBML.LikeBox","sdk.XFBML.Like","sdk.XFBML.LiveStream","sdk.XFBML.LoginButton","sdk.XFBML.Name","sdk.XFBML.ProfilePic","sdk.XFBML.RecommendationsBar","sdk.XFBML.Registration","sdk.XFBML.Send","sdk.XFBML.SocialContext"],function(global,require,requireDynamic,requireLazy) {
 
 var Assert = require('Assert');
 var domReady = require('sdk.domReady');
@@ -12073,7 +12037,7 @@ var customTags = {
   comments: require('sdk.XFBML.Comments'),
   comments_count: require('sdk.XFBML.CommentsCount'),
   connect_bar: require('sdk.XFBML.ConnectBar'),
-  fan: require('sdk.XFBML.Fan'),
+  fan: require('sdk.XFBML.LikeBox'),
   like: require('sdk.XFBML.Like'),
   like_box: require('sdk.XFBML.LikeBox'),
   live_stream: require('sdk.XFBML.LiveStream'),
