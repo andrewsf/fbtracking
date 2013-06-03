@@ -1,4 +1,4 @@
-/*1368590870,182134579,JIT Construction: v815671,en_US*/
+/*1370294261,180682057,JIT Construction: v834072,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -611,6 +611,58 @@ try {
             "locale": "en_US",
             "rtl": false
         });
+        __d("XDConfig", [], {
+            "XdUrl": "connect\/xd_arbiter.php?version=24",
+            "Flash": {
+                "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yX\/r\/VpkNidONSDC.swf"
+            },
+            "useCdn": true
+        });
+        __d("UrlMapConfig", [], {
+            "www": "www.facebook.com",
+            "m": "m.facebook.com",
+            "connect": "connect.facebook.net",
+            "api_https": "api.facebook.com",
+            "api_read_https": "api-read.facebook.com",
+            "graph_https": "graph.facebook.com",
+            "fbcdn_http": "static.ak.fbcdn.net",
+            "fbcdn_https": "fbstatic-a.akamaihd.net",
+            "cdn_http": "static.ak.facebook.com",
+            "cdn_https": "s-static.ak.facebook.com"
+        });
+        __d("ProfilePicConfig", [], {
+            "defPicMap": {
+                "pic": "rsrc.php\/v1\/yh\/r\/C5yt7Cqf3zU.jpg",
+                "pic_big": "rsrc.php\/v2\/yL\/r\/HsTZSDw4avx.gif",
+                "pic_big_with_logo": "rsrc.php\/v2\/y5\/r\/SRDCaeCL7hM.gif",
+                "pic_small": "rsrc.php\/v1\/yi\/r\/odA9sNLrE86.jpg",
+                "pic_small_with_logo": "rsrc.php\/v2\/yD\/r\/k1xiRXKnlGd.gif",
+                "pic_square": "rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif",
+                "pic_square_with_logo": "rsrc.php\/v2\/yX\/r\/9dYJBPDHXwZ.gif",
+                "pic_with_logo": "rsrc.php\/v2\/yu\/r\/fPPR9f2FJ3t.gif"
+            }
+        });
+        __d("PluginPipeConfig", [], {
+            "threshold": 0,
+            "enabledApps": {
+                "209753825810663": 1,
+                "187288694643718": 1
+            }
+        });
+        __d("CssConfig", [], {
+            "rules": ".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_reset > div{overflow:hidden}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n\/* \u0040noflip *\/\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100\u0025\n}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarleft{left:10px}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarright{right:10px}",
+            "components": ["fb.css.base", "fb.css.dialog", "fb.css.iframewidget", "fb.css.connectbarwidget", "fb.css.edgecommentwidget", "fb.css.sendbuttonformwidget", "fb.css.plugin.recommendationsbar"]
+        });
+        __d("CanvasPrefetcherConfig", [], {
+            "blacklist": [144959615576466],
+            "sampleRate": 500
+        });
+        __d("ConnectBarConfig", [], {
+            "imgs": {
+                "buttonUrl": "rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png",
+                "missingProfileUrl": "rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"
+            }
+        });
         __d("SDKConfig", [], {
             "bustCache": true,
             "tagCountLogRate": 0.01,
@@ -620,8 +672,12 @@ try {
             "usePluginPipe": true,
             "features": {
                 "xfbml_profile_pic_server": true,
-                "error_handling": 4,
-                "oauth_ping": false
+                "error_handling": {
+                    "rate": 4
+                },
+                "e2e_ping_tracking": {
+                    "rate": 1.0e-6
+                }
             },
             "api": {
                 "mode": "warn",
@@ -660,58 +716,6 @@ try {
                     "manage_groups": false,
                     "read_deals": false
                 }
-            }
-        });
-        __d("UrlMapConfig", [], {
-            "www": "www.facebook.com",
-            "m": "m.facebook.com",
-            "connect": "connect.facebook.net",
-            "api_https": "api.facebook.com",
-            "api_read_https": "api-read.facebook.com",
-            "graph_https": "graph.facebook.com",
-            "fbcdn_http": "static.ak.fbcdn.net",
-            "fbcdn_https": "fbstatic-a.akamaihd.net",
-            "cdn_http": "static.ak.facebook.com",
-            "cdn_https": "s-static.ak.facebook.com"
-        });
-        __d("XDConfig", [], {
-            "XdUrl": "connect\/xd_arbiter.php?version=24",
-            "Flash": {
-                "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yX\/r\/VpkNidONSDC.swf"
-            },
-            "useCdn": true
-        });
-        __d("CssConfig", [], {
-            "rules": ".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n\/* \u0040noflip *\/\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n\/* \u0040noflip *\/\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100\u0025\n}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarleft{left:10px}\n\/* \u0040noflip *\/\n.fbpluginrecommendationsbarright{right:10px}",
-            "components": ["fb.css.base", "fb.css.dialog", "fb.css.iframewidget", "fb.css.connectbarwidget", "fb.css.edgecommentwidget", "fb.css.sendbuttonformwidget", "fb.css.plugin.recommendationsbar"]
-        });
-        __d("CanvasPrefetcherConfig", [], {
-            "blacklist": [144959615576466],
-            "sampleRate": 500
-        });
-        __d("PluginPipeConfig", [], {
-            "threshold": 0,
-            "enabledApps": {
-                "209753825810663": 1,
-                "187288694643718": 1
-            }
-        });
-        __d("ConnectBarConfig", [], {
-            "imgs": {
-                "buttonUrl": "rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png",
-                "missingProfileUrl": "rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"
-            }
-        });
-        __d("ProfilePicConfig", [], {
-            "defPicMap": {
-                "pic": "rsrc.php\/v1\/yh\/r\/C5yt7Cqf3zU.jpg",
-                "pic_big": "rsrc.php\/v2\/yL\/r\/HsTZSDw4avx.gif",
-                "pic_big_with_logo": "rsrc.php\/v2\/y5\/r\/SRDCaeCL7hM.gif",
-                "pic_small": "rsrc.php\/v1\/yi\/r\/odA9sNLrE86.jpg",
-                "pic_small_with_logo": "rsrc.php\/v2\/yD\/r\/k1xiRXKnlGd.gif",
-                "pic_square": "rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif",
-                "pic_square_with_logo": "rsrc.php\/v2\/yX\/r\/9dYJBPDHXwZ.gif",
-                "pic_with_logo": "rsrc.php\/v2\/yu\/r\/fPPR9f2FJ3t.gif"
             }
         });
         __d("ApiClientConfig", [], {
@@ -1229,22 +1233,6 @@ try {
                 }
             };
             e.exports = i;
-        });
-        __d("sdk.feature", ["SDKConfig"], function(a, b, c, d, e, f) {
-            var g = c('SDKConfig');
-
-            function h(i, j) {
-                if (g.features && i in g.features) {
-                    var k = g.features[i];
-                    if (typeof k === 'object' && typeof k.rate === 'number') {
-                        if (k.rate && Math.floor(Math.random() * 100) + 1 <= k.rate) {
-                            return k.value || true;
-                        } else return k.value ? null : false;
-                    } else return k;
-                }
-                return typeof j !== 'undefined' ? j : null;
-            }
-            e.exports = h;
         });
         __d("UserAgent", [], function(a, b, c, d, e, f) {
             var g = false,
@@ -2440,154 +2428,151 @@ try {
             });
             e.exports = oa;
         });
-        __d("sdk.Auth", ["sdk.Cookie", "copyProperties", "sdk.createIframe", "DOMWrapper", "sdk.feature", "sdk.getContextType", "guid", "Log", "ObservableMixin", "QueryString", "sdk.Runtime", "sdk.SignedRequest", "UrlMap", "URL", "sdk.XD"], function(a, b, c, d, e, f) {
+        __d("sdk.Auth", ["sdk.Cookie", "copyProperties", "sdk.createIframe", "DOMWrapper", "sdk.getContextType", "guid", "Log", "ObservableMixin", "QueryString", "sdk.Runtime", "sdk.SignedRequest", "UrlMap", "URL", "sdk.XD"], function(a, b, c, d, e, f) {
             var g = b('sdk.Cookie'),
                 h = b('copyProperties'),
                 i = b('sdk.createIframe'),
                 j = b('DOMWrapper'),
-                k = b('sdk.feature'),
-                l = b('sdk.getContextType'),
-                m = b('guid'),
-                n = b('Log'),
-                o = b('ObservableMixin'),
-                p = b('QueryString'),
-                q = b('sdk.Runtime'),
-                r = b('sdk.SignedRequest'),
-                s = b('UrlMap'),
-                t = b('URL'),
-                u = b('sdk.XD'),
-                v, w, x = new o();
+                k = b('sdk.getContextType'),
+                l = b('guid'),
+                m = b('Log'),
+                n = b('ObservableMixin'),
+                o = b('QueryString'),
+                p = b('sdk.Runtime'),
+                q = b('sdk.SignedRequest'),
+                r = b('UrlMap'),
+                s = b('URL'),
+                t = b('sdk.XD'),
+                u, v, w = new n();
 
-            function y(ea, fa) {
-                var ga = q.getUserID(),
-                    ha = '';
-                if (ea) if (ea.userID) {
-                    ha = ea.userID;
-                } else if (ea.signedRequest) {
-                    var ia = r.parse(ea.signedRequest);
-                    if (ia && ia.user_id) ha = ia.user_id;
+            function x(da, ea) {
+                var fa = p.getUserID(),
+                    ga = '';
+                if (da) if (da.userID) {
+                    ga = da.userID;
+                } else if (da.signedRequest) {
+                    var ha = q.parse(da.signedRequest);
+                    if (ha && ha.user_id) ga = ha.user_id;
                 }
-                var ja = q.getLoginStatus(),
-                    ka = (ja === 'unknown' && ea) || (q.getUseCookie() && q.getCookieUserID() !== ha),
-                    la = ga && !ea,
-                    ma = ea && ga && ga != ha,
-                    na = ea != v,
-                    oa = fa != (ja || 'unknown');
-                q.setLoginStatus(fa);
-                q.setAccessToken(ea && ea.accessToken || null);
-                q.setUserID(ha);
-                v = ea;
-                var pa = {
-                    authResponse: ea,
-                    status: fa
+                var ia = p.getLoginStatus(),
+                    ja = (ia === 'unknown' && da) || (p.getUseCookie() && p.getCookieUserID() !== ga),
+                    ka = fa && !da,
+                    la = da && fa && fa != ga,
+                    ma = da != u,
+                    na = ea != (ia || 'unknown');
+                p.setLoginStatus(ea);
+                p.setAccessToken(da && da.accessToken || null);
+                p.setUserID(ga);
+                u = da;
+                var oa = {
+                    authResponse: da,
+                    status: ea
                 };
-                if (la || ma) x.inform('logout', pa);
-                if (ka || ma) x.inform('login', pa);
-                if (na) x.inform('authresponse.change', pa);
-                if (oa) x.inform('status.change', pa);
-                return pa;
+                if (ka || la) w.inform('logout', oa);
+                if (ja || la) w.inform('login', oa);
+                if (ma) w.inform('authresponse.change', oa);
+                if (na) w.inform('status.change', oa);
+                return oa;
             }
-            function z() {
-                return v;
+            function y() {
+                return u;
             }
-            function aa(ea, fa, ga) {
-                return function(ha) {
-                    var ia;
-                    if (ha && ha.access_token) {
-                        var ja = r.parse(ha.signed_request);
-                        fa = {
-                            accessToken: ha.access_token,
-                            userID: ja.user_id,
-                            expiresIn: parseInt(ha.expires_in, 10),
-                            signedRequest: ha.signed_request
+            function z(da, ea, fa) {
+                return function(ga) {
+                    var ha;
+                    if (ga && ga.access_token) {
+                        var ia = q.parse(ga.signed_request);
+                        ea = {
+                            accessToken: ga.access_token,
+                            userID: ia.user_id,
+                            expiresIn: parseInt(ga.expires_in, 10),
+                            signedRequest: ga.signed_request
                         };
-                        if (q.getUseCookie()) {
-                            var ka = fa.expiresIn === 0 ? 0 : ES5('Date', 'now', false) + fa.expiresIn * 1000,
-                                la = g.getDomain();
-                            if (!la && ha.base_domain) g.setDomain('.' + ha.base_domain);
-                            g.setSignedRequestCookie(ha.signed_request, ka);
+                        if (p.getUseCookie()) {
+                            var ja = ea.expiresIn === 0 ? 0 : ES5('Date', 'now', false) + ea.expiresIn * 1000,
+                                ka = g.getDomain();
+                            if (!ka && ga.base_domain) g.setDomain('.' + ga.base_domain);
+                            g.setSignedRequestCookie(ga.signed_request, ja);
                         }
-                        ia = 'connected';
-                        y(fa, ia);
-                    } else if (ga === 'logout' || ga === 'login_status') {
-                        if (ha.error && ha.error === 'not_authorized') {
-                            ia = 'not_authorized';
-                        } else ia = 'unknown';
-                        y(null, ia);
-                        if (q.getUseCookie()) g.clearSignedRequestCookie();
+                        ha = 'connected';
+                        x(ea, ha);
+                    } else if (fa === 'logout' || fa === 'login_status') {
+                        if (ga.error && ga.error === 'not_authorized') {
+                            ha = 'not_authorized';
+                        } else ha = 'unknown';
+                        x(null, ha);
+                        if (p.getUseCookie()) g.clearSignedRequestCookie();
                     }
-                    if (ha && ha.https == 1) q.setSecure(true);
-                    if (ea) ea({
-                        authResponse: fa,
-                        status: q.getLoginStatus()
+                    if (ga && ga.https == 1) p.setSecure(true);
+                    if (da) da({
+                        authResponse: ea,
+                        status: p.getLoginStatus()
                     });
-                    return fa;
+                    return ea;
                 };
             }
-            function ba(ea) {
-                var fa;
-                if (w) {
-                    clearTimeout(w);
-                    w = null;
+            function aa(da) {
+                var ea;
+                if (v) {
+                    clearTimeout(v);
+                    v = null;
                 }
-                var ga = aa(ea, v, 'login_status'),
-                    ha = k('oauth_ping', true) ? '/connect/ping' : '/dialog/oauth',
-                    ia = t(s.resolve('www', true) + ha)
-                        .setSearch(p.encode({
-                        client_id: q.getClientID(),
+                var fa = z(da, u, 'login_status'),
+                    ga = s(r.resolve('www', true) + '/connect/ping')
+                        .setSearch(o.encode({
+                        client_id: p.getClientID(),
                         response_type: 'token,signed_request,code',
-                        display: 'none',
                         domain: location.hostname,
-                        origin: l(),
-                        redirect_uri: u.handler(function(ja) {
-                            fa.parentNode.removeChild(fa);
-                            if (ga(ja)) w = setTimeout(function() {
-                                ba(function() {});
+                        origin: k(),
+                        redirect_uri: t.handler(function(ha) {
+                            ea.parentNode.removeChild(ea);
+                            if (fa(ha)) v = setTimeout(function() {
+                                aa(function() {});
                             }, 1200000);
                         }, 'parent'),
                         sdk: 'joey'
                     }));
-                fa = i({
+                ea = i({
                     root: j.getRoot(),
-                    name: m(),
-                    url: ia.toString(),
+                    name: l(),
+                    url: ga.toString(),
                     style: {
                         display: 'none'
                     }
                 });
             }
-            var ca;
+            var ba;
 
-            function da(ea, fa) {
-                if (!q.getClientID()) {
-                    n.warn('FB.getLoginStatus() called before calling FB.init().');
+            function ca(da, ea) {
+                if (!p.getClientID()) {
+                    m.warn('FB.getLoginStatus() called before calling FB.init().');
                     return;
                 }
-                if (ea) if (!fa && ca == 'loaded') {
-                    ea({
-                        status: q.getLoginStatus(),
-                        authResponse: z()
+                if (da) if (!ea && ba == 'loaded') {
+                    da({
+                        status: p.getLoginStatus(),
+                        authResponse: y()
                     });
                     return;
-                } else x.subscribe('FB.loginStatus', ea);
-                if (!fa && ca == 'loading') return;
-                ca = 'loading';
-                var ga = function(ha) {
-                    ca = 'loaded';
-                    x.inform('FB.loginStatus', ha);
-                    x.clearSubscribers('FB.loginStatus');
+                } else w.subscribe('FB.loginStatus', da);
+                if (!ea && ba == 'loading') return;
+                ba = 'loading';
+                var fa = function(ga) {
+                    ba = 'loaded';
+                    w.inform('FB.loginStatus', ga);
+                    w.clearSubscribers('FB.loginStatus');
                 };
-                ba(ga);
+                aa(fa);
             }
-            h(x, {
-                getLoginStatus: da,
-                fetchLoginStatus: ba,
-                setAuthResponse: y,
-                getAuthResponse: z,
-                parseSignedRequest: r.parse,
-                xdResponseWrapper: aa
+            h(w, {
+                getLoginStatus: ca,
+                fetchLoginStatus: aa,
+                setAuthResponse: x,
+                getAuthResponse: y,
+                parseSignedRequest: q.parse,
+                xdResponseWrapper: z
             });
-            e.exports = x;
+            e.exports = w;
         });
         __d("hasArrayNature", [], function(a, b, c, d, e, f) {
             function g(h) {
@@ -2748,6 +2733,22 @@ try {
                 ready: i
             };
             e.exports = y;
+        });
+        __d("sdk.feature", ["SDKConfig"], function(a, b, c, d, e, f) {
+            var g = c('SDKConfig');
+
+            function h(i, j) {
+                if (g.features && i in g.features) {
+                    var k = g.features[i];
+                    if (typeof k === 'object' && typeof k.rate === 'number') {
+                        if (k.rate && Math.floor(Math.random() * 100) + 1 <= k.rate) {
+                            return k.value || true;
+                        } else return k.value ? null : false;
+                    } else return k;
+                }
+                return typeof j !== 'undefined' ? j : null;
+            }
+            e.exports = h;
         });
         __d("sdk.Scribe", ["UrlMap", "QueryString"], function(a, b, c, d, e, f) {
             var g = b('UrlMap'),
