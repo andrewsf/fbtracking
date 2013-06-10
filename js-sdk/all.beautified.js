@@ -1,4 +1,4 @@
-/*1370294261,180682057,JIT Construction: v834072,en_US*/
+/*1370854463,173064499,JIT Construction: v839974,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -1234,6 +1234,22 @@ try {
             };
             e.exports = i;
         });
+        __d("sdk.feature", ["SDKConfig"], function(a, b, c, d, e, f) {
+            var g = c('SDKConfig');
+
+            function h(i, j) {
+                if (g.features && i in g.features) {
+                    var k = g.features[i];
+                    if (typeof k === 'object' && typeof k.rate === 'number') {
+                        if (k.rate && Math.random() * 100 <= k.rate) {
+                            return k.value || true;
+                        } else return k.value ? null : false;
+                    } else return k;
+                }
+                return typeof j !== 'undefined' ? j : null;
+            }
+            e.exports = h;
+        });
         __d("UserAgent", [], function(a, b, c, d, e, f) {
             var g = false,
                 h, i, j, k, l, m, n, o, p, q, r, s, t, u;
@@ -1331,6 +1347,43 @@ try {
             }
             e.exports = i;
         });
+        __d("UrlMap", ["UrlMapConfig"], function(a, b, c, d, e, f) {
+            var g = b('UrlMapConfig'),
+                h = {
+                    resolve: function(i, j) {
+                        var k = typeof j == 'undefined' ? location.protocol.replace(':', '') : j ? 'https' : 'http';
+                        if (i in g) return k + '://' + g[i];
+                        if (typeof j == 'undefined' && i + '_' + k in g) return k + '://' + g[i + '_' + k];
+                        if (j !== true && i + '_http' in g) return 'http://' + g[i + '_http'];
+                        if (j !== false && i + '_https' in g) return 'https://' + g[i + '_https'];
+                    }
+                };
+            e.exports = h;
+        });
+        __d("sdk.Impressions", ["guid", "QueryString", "sdk.Runtime", "UrlMap"], function(a, b, c, d, e, f) {
+            var g = b('guid'),
+                h = b('QueryString'),
+                i = b('sdk.Runtime'),
+                j = b('UrlMap');
+
+            function k(m) {
+                var n = i.getClientID();
+                if (!m.api_key && n) m.api_key = n;
+                var o = new Image();
+                o.src = h.appendToUrl(j.resolve('www', true) + '/impression.php/' + g() + '/', m);
+            }
+            var l = {
+                log: function(m, n) {
+                    if (!n.source) n.source = 'jssdk';
+                    k({
+                        lid: m,
+                        payload: ES5('JSON', 'stringify', false, n)
+                    });
+                },
+                impression: k
+            };
+            e.exports = l;
+        });
         __d("Log", ["sprintf"], function(a, b, c, d, e, f) {
             var g = b('sprintf'),
                 h = {
@@ -1416,19 +1469,6 @@ try {
                 parse: h
             };
             e.exports = i;
-        });
-        __d("UrlMap", ["UrlMapConfig"], function(a, b, c, d, e, f) {
-            var g = b('UrlMapConfig'),
-                h = {
-                    resolve: function(i, j) {
-                        var k = typeof j == 'undefined' ? location.protocol.replace(':', '') : j ? 'https' : 'http';
-                        if (i in g) return k + '://' + g[i];
-                        if (typeof j == 'undefined' && i + '_' + k in g) return k + '://' + g[i + '_' + k];
-                        if (j !== true && i + '_http' in g) return 'http://' + g[i + '_http'];
-                        if (j !== false && i + '_https' in g) return 'https://' + g[i + '_https'];
-                    }
-                };
-            e.exports = h;
         });
         __d("URL", ["Assert", "copyProperties", "QueryString", "Log"], function(a, b, c, d, e, f) {
             var g = b('Assert'),
@@ -1907,9 +1947,6 @@ try {
                 },
                 thatReturnsArgument: function(j) {
                     return j;
-                },
-                mustImplement: function(j, k) {
-                    return function() {};
                 }
             });
             e.exports = i;
@@ -2428,151 +2465,164 @@ try {
             });
             e.exports = oa;
         });
-        __d("sdk.Auth", ["sdk.Cookie", "copyProperties", "sdk.createIframe", "DOMWrapper", "sdk.getContextType", "guid", "Log", "ObservableMixin", "QueryString", "sdk.Runtime", "sdk.SignedRequest", "UrlMap", "URL", "sdk.XD"], function(a, b, c, d, e, f) {
+        __d("sdk.Auth", ["sdk.Cookie", "copyProperties", "sdk.createIframe", "DOMWrapper", "sdk.feature", "sdk.getContextType", "guid", "sdk.Impressions", "Log", "ObservableMixin", "QueryString", "sdk.Runtime", "sdk.SignedRequest", "UrlMap", "URL", "sdk.XD"], function(a, b, c, d, e, f) {
             var g = b('sdk.Cookie'),
                 h = b('copyProperties'),
                 i = b('sdk.createIframe'),
                 j = b('DOMWrapper'),
-                k = b('sdk.getContextType'),
-                l = b('guid'),
-                m = b('Log'),
-                n = b('ObservableMixin'),
-                o = b('QueryString'),
-                p = b('sdk.Runtime'),
-                q = b('sdk.SignedRequest'),
-                r = b('UrlMap'),
-                s = b('URL'),
-                t = b('sdk.XD'),
-                u, v, w = new n();
+                k = b('sdk.feature'),
+                l = b('sdk.getContextType'),
+                m = b('guid'),
+                n = b('sdk.Impressions'),
+                o = b('Log'),
+                p = b('ObservableMixin'),
+                q = b('QueryString'),
+                r = b('sdk.Runtime'),
+                s = b('sdk.SignedRequest'),
+                t = b('UrlMap'),
+                u = b('URL'),
+                v = b('sdk.XD'),
+                w, x, y = new p();
 
-            function x(da, ea) {
-                var fa = p.getUserID(),
-                    ga = '';
-                if (da) if (da.userID) {
-                    ga = da.userID;
-                } else if (da.signedRequest) {
-                    var ha = q.parse(da.signedRequest);
-                    if (ha && ha.user_id) ga = ha.user_id;
+            function z(fa, ga) {
+                var ha = r.getUserID(),
+                    ia = '';
+                if (fa) if (fa.userID) {
+                    ia = fa.userID;
+                } else if (fa.signedRequest) {
+                    var ja = s.parse(fa.signedRequest);
+                    if (ja && ja.user_id) ia = ja.user_id;
                 }
-                var ia = p.getLoginStatus(),
-                    ja = (ia === 'unknown' && da) || (p.getUseCookie() && p.getCookieUserID() !== ga),
-                    ka = fa && !da,
-                    la = da && fa && fa != ga,
-                    ma = da != u,
-                    na = ea != (ia || 'unknown');
-                p.setLoginStatus(ea);
-                p.setAccessToken(da && da.accessToken || null);
-                p.setUserID(ga);
-                u = da;
-                var oa = {
-                    authResponse: da,
-                    status: ea
+                var ka = r.getLoginStatus(),
+                    la = (ka === 'unknown' && fa) || (r.getUseCookie() && r.getCookieUserID() !== ia),
+                    ma = ha && !fa,
+                    na = fa && ha && ha != ia,
+                    oa = fa != w,
+                    pa = ga != (ka || 'unknown');
+                r.setLoginStatus(ga);
+                r.setAccessToken(fa && fa.accessToken || null);
+                r.setUserID(ia);
+                w = fa;
+                var qa = {
+                    authResponse: fa,
+                    status: ga
                 };
-                if (ka || la) w.inform('logout', oa);
-                if (ja || la) w.inform('login', oa);
-                if (ma) w.inform('authresponse.change', oa);
-                if (na) w.inform('status.change', oa);
-                return oa;
+                if (ma || na) y.inform('logout', qa);
+                if (la || na) y.inform('login', qa);
+                if (oa) y.inform('authresponse.change', qa);
+                if (pa) y.inform('status.change', qa);
+                return qa;
             }
-            function y() {
-                return u;
+            function aa() {
+                return w;
             }
-            function z(da, ea, fa) {
-                return function(ga) {
-                    var ha;
-                    if (ga && ga.access_token) {
-                        var ia = q.parse(ga.signed_request);
-                        ea = {
-                            accessToken: ga.access_token,
-                            userID: ia.user_id,
-                            expiresIn: parseInt(ga.expires_in, 10),
-                            signedRequest: ga.signed_request
+            function ba(fa, ga, ha) {
+                return function(ia) {
+                    var ja;
+                    if (ia && ia.access_token) {
+                        var ka = s.parse(ia.signed_request);
+                        ga = {
+                            accessToken: ia.access_token,
+                            userID: ka.user_id,
+                            expiresIn: parseInt(ia.expires_in, 10),
+                            signedRequest: ia.signed_request
                         };
-                        if (p.getUseCookie()) {
-                            var ja = ea.expiresIn === 0 ? 0 : ES5('Date', 'now', false) + ea.expiresIn * 1000,
-                                ka = g.getDomain();
-                            if (!ka && ga.base_domain) g.setDomain('.' + ga.base_domain);
-                            g.setSignedRequestCookie(ga.signed_request, ja);
+                        if (r.getUseCookie()) {
+                            var la = ga.expiresIn === 0 ? 0 : ES5('Date', 'now', false) + ga.expiresIn * 1000,
+                                ma = g.getDomain();
+                            if (!ma && ia.base_domain) g.setDomain('.' + ia.base_domain);
+                            g.setSignedRequestCookie(ia.signed_request, la);
                         }
-                        ha = 'connected';
-                        x(ea, ha);
-                    } else if (fa === 'logout' || fa === 'login_status') {
-                        if (ga.error && ga.error === 'not_authorized') {
-                            ha = 'not_authorized';
-                        } else ha = 'unknown';
-                        x(null, ha);
-                        if (p.getUseCookie()) g.clearSignedRequestCookie();
+                        ja = 'connected';
+                        z(ga, ja);
+                    } else if (ha === 'logout' || ha === 'login_status') {
+                        if (ia.error && ia.error === 'not_authorized') {
+                            ja = 'not_authorized';
+                        } else ja = 'unknown';
+                        z(null, ja);
+                        if (r.getUseCookie()) g.clearSignedRequestCookie();
                     }
-                    if (ga && ga.https == 1) p.setSecure(true);
-                    if (da) da({
-                        authResponse: ea,
-                        status: p.getLoginStatus()
+                    if (ia && ia.https == 1) r.setSecure(true);
+                    if (fa) fa({
+                        authResponse: ga,
+                        status: r.getLoginStatus()
                     });
-                    return ea;
+                    return ga;
                 };
             }
-            function aa(da) {
-                var ea;
-                if (v) {
-                    clearTimeout(v);
-                    v = null;
+            function ca(fa) {
+                var ga, ha = ES5('Date', 'now', false);
+                if (x) {
+                    clearTimeout(x);
+                    x = null;
                 }
-                var fa = z(da, u, 'login_status'),
-                    ga = s(r.resolve('www', true) + '/connect/ping')
-                        .setSearch(o.encode({
-                        client_id: p.getClientID(),
+                var ia = ba(fa, w, 'login_status'),
+                    ja = u(t.resolve('www', true) + '/connect/ping')
+                        .setSearch(q.encode({
+                        client_id: r.getClientID(),
                         response_type: 'token,signed_request,code',
                         domain: location.hostname,
-                        origin: k(),
-                        redirect_uri: t.handler(function(ha) {
-                            ea.parentNode.removeChild(ea);
-                            if (fa(ha)) v = setTimeout(function() {
-                                aa(function() {});
+                        origin: l(),
+                        redirect_uri: v.handler(function(ka) {
+                            if (k('e2e_ping_tracking', true)) {
+                                var la = {
+                                    init: ha,
+                                    close: ES5('Date', 'now', false),
+                                    method: 'ping'
+                                };
+                                o.debug('e2e: %s', ES5('JSON', 'stringify', false, la));
+                                n.log(114, {
+                                    payload: la
+                                });
+                            }
+                            ga.parentNode.removeChild(ga);
+                            if (ia(ka)) x = setTimeout(function() {
+                                ca(function() {});
                             }, 1200000);
                         }, 'parent'),
                         sdk: 'joey'
                     }));
-                ea = i({
+                ga = i({
                     root: j.getRoot(),
-                    name: l(),
-                    url: ga.toString(),
+                    name: m(),
+                    url: ja.toString(),
                     style: {
                         display: 'none'
                     }
                 });
             }
-            var ba;
+            var da;
 
-            function ca(da, ea) {
-                if (!p.getClientID()) {
-                    m.warn('FB.getLoginStatus() called before calling FB.init().');
+            function ea(fa, ga) {
+                if (!r.getClientID()) {
+                    o.warn('FB.getLoginStatus() called before calling FB.init().');
                     return;
                 }
-                if (da) if (!ea && ba == 'loaded') {
-                    da({
-                        status: p.getLoginStatus(),
-                        authResponse: y()
+                if (fa) if (!ga && da == 'loaded') {
+                    fa({
+                        status: r.getLoginStatus(),
+                        authResponse: aa()
                     });
                     return;
-                } else w.subscribe('FB.loginStatus', da);
-                if (!ea && ba == 'loading') return;
-                ba = 'loading';
-                var fa = function(ga) {
-                    ba = 'loaded';
-                    w.inform('FB.loginStatus', ga);
-                    w.clearSubscribers('FB.loginStatus');
+                } else y.subscribe('FB.loginStatus', fa);
+                if (!ga && da == 'loading') return;
+                da = 'loading';
+                var ha = function(ia) {
+                    da = 'loaded';
+                    y.inform('FB.loginStatus', ia);
+                    y.clearSubscribers('FB.loginStatus');
                 };
-                aa(fa);
+                ca(ha);
             }
-            h(w, {
-                getLoginStatus: ca,
-                fetchLoginStatus: aa,
-                setAuthResponse: x,
-                getAuthResponse: y,
-                parseSignedRequest: q.parse,
-                xdResponseWrapper: z
+            h(y, {
+                getLoginStatus: ea,
+                fetchLoginStatus: ca,
+                setAuthResponse: z,
+                getAuthResponse: aa,
+                parseSignedRequest: s.parse,
+                xdResponseWrapper: ba
             });
-            e.exports = w;
+            e.exports = y;
         });
         __d("hasArrayNature", [], function(a, b, c, d, e, f) {
             function g(h) {
@@ -2734,22 +2784,6 @@ try {
             };
             e.exports = y;
         });
-        __d("sdk.feature", ["SDKConfig"], function(a, b, c, d, e, f) {
-            var g = c('SDKConfig');
-
-            function h(i, j) {
-                if (g.features && i in g.features) {
-                    var k = g.features[i];
-                    if (typeof k === 'object' && typeof k.rate === 'number') {
-                        if (k.rate && Math.floor(Math.random() * 100) + 1 <= k.rate) {
-                            return k.value || true;
-                        } else return k.value ? null : false;
-                    } else return k;
-                }
-                return typeof j !== 'undefined' ? j : null;
-            }
-            e.exports = h;
-        });
         __d("sdk.Scribe", ["UrlMap", "QueryString"], function(a, b, c, d, e, f) {
             var g = b('UrlMap'),
                 h = b('QueryString');
@@ -2854,30 +2888,6 @@ try {
                 unguard: r
             };
             e.exports = t;
-        });
-        __d("sdk.Impressions", ["guid", "QueryString", "sdk.Runtime", "UrlMap"], function(a, b, c, d, e, f) {
-            var g = b('guid'),
-                h = b('QueryString'),
-                i = b('sdk.Runtime'),
-                j = b('UrlMap');
-
-            function k(m) {
-                var n = i.getClientID();
-                if (!m.api_key && n) m.api_key = n;
-                var o = new Image();
-                o.src = h.appendToUrl(j.resolve('www', true) + '/impression.php/' + g() + '/', m);
-            }
-            var l = {
-                log: function(m, n) {
-                    if (!n.source) n.source = 'jssdk';
-                    k({
-                        lid: m,
-                        payload: ES5('JSON', 'stringify', false, n)
-                    });
-                },
-                impression: k
-            };
-            e.exports = l;
         });
         __d("sdk.Insights", ["sdk.Impressions"], function(a, b, c, d, e, f) {
             var g = b('sdk.Impressions'),
@@ -3018,20 +3028,15 @@ try {
             });
             e.exports = z;
         });
-        __d("flattenObject", [], function(a, b, c, d, e, f) {
-            function g(h) {
-                var i = {};
-                for (var j in h) if (h.hasOwnProperty(j)) {
-                    var k = h[j];
-                    if (null === k || undefined === k) {
-                        continue;
-                    } else if (typeof k == 'string') {
-                        i[j] = k;
-                    } else i[j] = ES5('JSON', 'stringify', false, k);
-                }
-                return i;
+        __d("ArgumentError", ["ManagedError"], function(a, b, c, d, e, f) {
+            var g = b('ManagedError');
+
+            function h(i, j) {
+                g.prototype.constructor.apply(this, arguments);
             }
-            e.exports = g;
+            h.prototype = new g();
+            h.prototype.constructor = h;
+            e.exports = h;
         });
         __d("CORSRequest", ["wrapFunction", "QueryString"], function(a, b, c, d, e, f) {
             var g = b('wrapFunction'),
@@ -3178,6 +3183,21 @@ try {
             };
             e.exports = r;
         });
+        __d("flattenObject", [], function(a, b, c, d, e, f) {
+            function g(h) {
+                var i = {};
+                for (var j in h) if (h.hasOwnProperty(j)) {
+                    var k = h[j];
+                    if (null === k || undefined === k) {
+                        continue;
+                    } else if (typeof k == 'string') {
+                        i[j] = k;
+                    } else i[j] = ES5('JSON', 'stringify', false, k);
+                }
+                return i;
+            }
+            e.exports = g;
+        });
         __d("JSONPRequest", ["DOMWrapper", "GlobalCallback", "QueryString"], function(a, b, c, d, e, f) {
             var g = b('DOMWrapper'),
                 h = b('GlobalCallback'),
@@ -3231,30 +3251,21 @@ try {
             };
             e.exports = k;
         });
-        __d("ArgumentError", ["ManagedError"], function(a, b, c, d, e, f) {
-            var g = b('ManagedError');
-
-            function h(i, j) {
-                g.prototype.constructor.apply(this, arguments);
-            }
-            h.prototype = new g();
-            h.prototype.constructor = h;
-            e.exports = h;
-        });
-        __d("ApiClient", ["copyProperties", "flattenObject", "sprintf", "CORSRequest", "FlashRequest", "JSONPRequest", "Log", "UrlMap", "URL", "ArgumentError", "Assert", "ApiClientConfig"], function(a, b, c, d, e, f) {
-            var g = b('copyProperties'),
-                h = b('flattenObject'),
-                i = b('sprintf'),
+        __d("ApiClient", ["ArgumentError", "Assert", "copyProperties", "CORSRequest", "FlashRequest", "flattenObject", "JSONPRequest", "Log", "ObservableMixin", "sprintf", "UrlMap", "URL", "ApiClientConfig"], function(a, b, c, d, e, f) {
+            var g = b('ArgumentError'),
+                h = b('Assert'),
+                i = b('copyProperties'),
                 j = b('CORSRequest'),
                 k = b('FlashRequest'),
-                l = b('JSONPRequest'),
-                m = b('Log'),
-                n = b('UrlMap'),
-                o = b('URL'),
-                p = b('ArgumentError'),
-                q = b('Assert'),
-                r = b('ApiClientConfig'),
-                s, t, u, v, w = {
+                l = b('flattenObject'),
+                m = b('JSONPRequest'),
+                n = b('Log'),
+                o = b('ObservableMixin'),
+                p = b('sprintf'),
+                q = b('UrlMap'),
+                r = b('URL'),
+                s = b('ApiClientConfig'),
+                t, u, v, w = {
                     get: true,
                     post: true,
                     'delete': true,
@@ -3268,95 +3279,86 @@ try {
                     users_getinfo: true
                 };
 
-            function y(ca, da, ea, fa) {
-                if (!ea.access_token) ea.access_token = s;
-                ea.pretty = 0;
-                if (v) g(ea, v);
-                ea = h(ea);
-                if (!fa) {
-                    m.warn('No callback passed to the ApiClient for %s', ca);
-                    fa = function() {};
-                }
-                var ga = {
-                    jsonp: l,
+            function y(da, ea, fa, ga) {
+                if (!fa.access_token) fa.access_token = t;
+                fa.pretty = 0;
+                if (v) i(fa, v);
+                fa = l(fa);
+                var ha = {
+                    jsonp: m,
                     cors: j,
                     flash: k
-                }, ha;
-                if (ea.transport) {
-                    ha = [ea.transport];
-                    delete ea.transport;
-                } else ha = ['jsonp', 'cors', 'flash'];
-                var ia = function(ma) {
-                    var na = false;
-                    if (t && ma && typeof ma == 'object') {
-                        if (ma.error) {
-                            if (ma.error == 'invalid_token' || (ma.error.type == 'OAuthException' && ma.error.code == 190)) na = true;
-                        } else if (ma.error_code) if (ma.error_code == '190') na = true;
-                        if (na) t();
-                    }
-                    fa(ma);
-                };
-                for (var ja = 0; ja < ha.length; ja++) {
-                    var ka = ga[ha[ja]],
-                        la = g({}, ea);
-                    if (ka.execute(ca, da, la, ia)) return;
+                }, ia;
+                if (fa.transport) {
+                    ia = [fa.transport];
+                    delete fa.transport;
+                } else ia = ['jsonp', 'cors', 'flash'];
+                for (var ja = 0; ja < ia.length; ja++) {
+                    var ka = ha[ia[ja]],
+                        la = i({}, fa);
+                    if (ka.execute(da, ea, la, ga)) return;
                 }
-                fa({
+                ga({
                     error: {
                         type: 'no-transport',
                         message: 'Could not find a usable transport for request'
                     }
                 });
             }
-            function z(ca) {
-                q.isString(ca, 'Invalid path');
-                var da, ea = {};
+            function z(da, ea, fa, ga, ha) {
+                ca.inform('request.complete', ea, fa, ga, ha);
+                if (da) da(ha);
+            }
+            function aa(da) {
+                h.isString(da, 'Invalid path');
+                var ea, fa = {};
                 try {
-                    da = new o(ca);
-                } catch (fa) {
-                    throw new p(fa.message, fa);
+                    ea = new r(da);
+                } catch (ga) {
+                    throw new g(ga.message, ga);
                 }
-                ES5(Array.prototype.slice.call(arguments, 1), 'forEach', true, function(ja) {
-                    ea[typeof ja] = ja;
+                ES5(Array.prototype.slice.call(arguments, 1), 'forEach', true, function(la) {
+                    fa[typeof la] = la;
                 });
-                var ga = (ea.string || 'get')
+                var ha = (fa.string || 'get')
                     .toLowerCase(),
-                    ha = g(ea.object || {}, da.getParsedSearch()),
-                    ia = ea['function'];
-                q.isTrue(ga in w, i('Invalid method passed to ApiClient: %s', ga));
-                ha.method = ga;
-                da = n.resolve('graph') + da.getPath();
-                y(da, ga == 'get' ? 'get' : 'post', ha, ia);
+                    ia = i(fa.object || {}, ea.getParsedSearch()),
+                    ja = fa['function'];
+                if (!ja) n.warn('No callback passed to the ApiClient');
+                var ka = ES5(z, 'bind', true, null, ja, ea.getPath(), ha, ia);
+                h.isTrue(ha in w, p('Invalid method passed to ApiClient: %s', ha));
+                ia.method = ha;
+                ea = q.resolve('graph') + ea.getPath();
+                y(ea, ha == 'get' ? 'get' : 'post', ia, ka);
             }
-            function aa(ca, da) {
-                q.isObject(ca);
-                q.isString(ca.method, 'method missing');
-                var ea = ca.method.toLowerCase()
+            function ba(da, ea) {
+                h.isObject(da);
+                h.isString(da.method, 'method missing');
+                if (!ea) n.warn('No callback passed to the ApiClient');
+                var fa = da.method.toLowerCase()
                     .replace('.', '_');
-                ca.format = 'json-strings';
-                ca.api_key = u;
-                var fa = ea in x ? 'api_read' : 'api',
-                    ga = n.resolve(fa) + '/restserver.php';
-                y(ga, 'get', ca, da);
+                da.format = 'json-strings';
+                da.api_key = u;
+                var ga = fa in x ? 'api_read' : 'api',
+                    ha = q.resolve(ga) + '/restserver.php',
+                    ia = ES5(z, 'bind', true, null, ea, '/restserver.php', 'get', da);
+                y(ha, 'get', da, ia);
             }
-            var ba = {
-                setAccessToken: function(ca) {
-                    s = ca;
+            var ca = i(new o(), {
+                setAccessToken: function(da) {
+                    t = da;
                 },
-                setInvalidAccessTokenHandler: function(ca) {
-                    t = ca;
+                setClientID: function(da) {
+                    u = da;
                 },
-                setClientID: function(ca) {
-                    u = ca;
+                setDefaultParams: function(da) {
+                    v = da;
                 },
-                setDefaultParams: function(ca) {
-                    v = ca;
-                },
-                rest: aa,
-                graph: z
-            };
-            k.setSwfUrl(r.FlashRequest.swfUrl);
-            e.exports = ba;
+                rest: ba,
+                graph: aa
+            });
+            k.setSwfUrl(s.FlashRequest.swfUrl);
+            e.exports = ca;
         });
         __d("sdk.api", ["ApiClient", "sdk.Runtime"], function(a, b, c, d, e, f) {
             var g = b('ApiClient'),
@@ -3372,8 +3374,15 @@ try {
             g.setDefaultParams({
                 sdk: 'joey'
             });
-            g.setInvalidAccessTokenHandler(function() {
-                if (i === h.getAccessToken()) h.setAccessToken(null);
+            g.subscribe('request.complete', function(k, l, m, n) {
+                var o = false;
+                if (n && typeof n == 'object') if (n.error) {
+                    if (n.error == 'invalid_token' || (n.error.type == 'OAuthException' && n.error.code == 190)) o = true;
+                } else if (n.error_code) if (n.error_code == '190') o = true;
+                if (o && i === h.getAccessToken()) h.setAccessToken(null);
+            });
+            g.subscribe('request.complete', function(k, l, m, n) {
+                if (((k == '/me/permissions' && l === 'delete') || (k == '/restserver.php' && m.method == 'Auth.revokeAuthorization')) && n === true) h.setAccessToken(null);
             });
 
             function j() {

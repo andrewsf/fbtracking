@@ -1,4 +1,4 @@
-/*1370294462,173029921,JIT Construction: v834072,en_US*/
+/*1370854645,180681011,JIT Construction: v839974,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -11,7 +11,7 @@ var self = window, document = window.document;
 var setTimeout = window.setTimeout, setInterval = window.setInterval;var __DEV__ = 0;
 function emptyFunction() {};
 /**
- * @generated SignedSource<<872ac42bd1eff864629de7f5adaaecb7>>
+ * @generated SignedSource<<709ed10ca3e597282e758fffeab09427>>
  * 
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  * !! This file is a check-in of a static_upstream project!      !!
@@ -40,6 +40,15 @@ function emptyFunction() {};
   var toString = Object.prototype.toString;
   var handler;
   var currentType;
+
+  /**
+   * Mapping from types to interfaces that they implement.
+   */
+  var typeInterfaces = {
+    'DOMElement': ['DOMEventTarget'],
+    'DOMDocument': ['DOMEventTarget'],
+    'DOMWindow': ['DOMEventTarget']
+  };
 
   /**
    * A recursive descent analyzer which takes a value and a typehint, validating
@@ -83,18 +92,20 @@ function emptyFunction() {};
     } else {
       // HTMLObjectElements has a typeof function in FF
       if (type === 'object' || type === 'function') {
-        if (value.constructor
-            && value.constructor.__TCmeta
-            && value.constructor.__TCmeta.type) {
-          // let custom types also match 'object'
+        var constructor = value.constructor;
+        if (constructor && constructor.__TCmeta) {
+          // The value is a custom type
+          // Let custom types also match 'object'
           if (node === 'object') {
             type = 'object';
           } else {
-            // TODO: support prototypal intheritance
-            // This isn't possible without support from the framework setting up
-            // the inheritance, as we have to be able to traverse and inspect
-            // each object in the prototype chain
-            type = value.constructor.__TCmeta.type;
+            while (constructor && constructor.__TCmeta) {
+              if (constructor.__TCmeta.type == node) {
+                type = node;
+                break;
+              }
+              constructor = constructor.__TCmeta.superClass;
+            }
           }
         } else if ((value.nodeType === 1 || value.nodeType === 11)
                    && typeof value.nodeName === 'string') {
@@ -108,6 +119,8 @@ function emptyFunction() {};
           type = 'DOMDocument';
         } else if (value.nodeType === 3) {
           type = 'DOMTextNode';
+        } else if (value == value.window && value == value.self) {
+          type = 'DOMWindow';
         } else {
           // else, check if it is actually an array
           switch (toStringType) {
@@ -134,6 +147,16 @@ function emptyFunction() {};
 
     if (nullable && /undefined|null/.test(type)) {
       return true;
+    }
+
+    if (type in typeInterfaces) {
+      var interfaces = typeInterfaces[type], i = interfaces.length;
+      while (i--) {
+        if (interfaces[i] === node) {
+          type = node;
+          break;
+        }
+      }
     }
 
     currentType.push(type);
@@ -224,7 +247,7 @@ function emptyFunction() {};
 })();
 /*/TC*/
 
-/* pMpIwZeFaRk */
+/* wdZPCVxbZpy */
 /**
  * This is a lightweigh implementation of require and __d which is used by the
  * JavaScript SDK.
@@ -2268,6 +2291,32 @@ var DOMWrapper = {
 module.exports = DOMWrapper;
 
 });
+__d("sdk.feature",["SDKConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
+
+var SDKConfig = requireDynamic('SDKConfig');
+
+function feature(/*string*/ name, defaultValue) {__t([name,'string','name']);
+  if (SDKConfig.features && name in SDKConfig.features) {
+    var value = SDKConfig.features[name];
+    if (typeof value === 'object' && typeof value.rate === 'number') {
+      if (value.rate && Math.random() * 100 <= value.rate) {
+        return value.value || true;
+      } else {
+        return value.value ? null : false;
+      }
+    } else {
+      return value;
+    }
+  }
+
+  return typeof defaultValue !== 'undefined'
+    ? defaultValue
+    : null;
+}__w(feature,{"signature":"function(string)"});
+
+module.exports = feature;
+
+});
 __d("UserAgent",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 
@@ -2469,6 +2518,83 @@ function getContextType() /*number*/ {/*jshint validthis: true*/return __t([func
 module.exports = getContextType;
 
 });
+__d("UrlMap",["UrlMapConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
+
+var UrlMapConfig = require('UrlMapConfig');
+
+var UrlMap = {
+  
+  resolve: __w(function(/*string*/ key, /*boolean?*/ https) /*string*/ {__t([key,'string','key'],[https,'?boolean','https']);/*jshint validthis: true*/return __t([function(){
+    var protocol = typeof https == 'undefined'
+      ? location.protocol.replace(':', '')
+      : https ? 'https' : 'http';
+
+    
+    if (key in UrlMapConfig) {
+      return protocol + '://' + UrlMapConfig[key];
+    }
+
+    
+    if (typeof https == 'undefined' && key + '_' + protocol in UrlMapConfig) {
+      return protocol + '://' + UrlMapConfig[key + '_' + protocol];
+    }
+
+    
+    if (https !== true && key + '_http' in UrlMapConfig) {
+      return 'http://' + UrlMapConfig[key + '_http'];
+    }
+
+    
+    if (https !== false && key + '_https' in UrlMapConfig) {
+      return 'https://' + UrlMapConfig[key + '_https'];
+    }
+  }.apply(this,arguments), 'string']);},{"signature":"function(string,?boolean):string"})
+};
+
+module.exports = UrlMap;
+
+});
+__d("sdk.Impressions",["guid","QueryString","sdk.Runtime","UrlMap"],function(global,require,requireDynamic,requireLazy,module,exports) {
+
+var guid = require('guid');
+var QueryString = require('QueryString');
+var Runtime = require('sdk.Runtime');
+var UrlMap = require('UrlMap');
+
+function request(/*object*/ params) {__t([params,'object','params']);
+  var clientID = Runtime.getClientID();
+
+  if (!params.api_key && clientID) {
+    params.api_key = clientID;
+  }
+
+  var image = new Image();
+
+  image.src = QueryString.appendToUrl(
+    UrlMap.resolve('www', /*force ssl*/true) +
+      '/impression.php/' + guid() + '/',
+    params
+  );
+}__w(request,{"signature":"function(object)"});
+
+var Impressions = {
+  log: __w(function(/*number*/ lid, /*object*/ payload) {__t([lid,'number','lid'],[payload,'object','payload']);
+    if (!payload.source) {
+      payload.source = 'jssdk';
+    }
+
+    request({
+      lid: lid, 
+      payload: ES5('JSON', 'stringify', false,payload)
+    });
+  },{"signature":"function(number,object)"}),
+
+  impression: request
+};
+
+module.exports = Impressions;
+
+});
 __d("Log",["sprintf"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 var sprintf = require('sprintf');
@@ -2591,42 +2717,6 @@ var SignedRequest = {
 };
 
 module.exports = SignedRequest;
-
-});
-__d("UrlMap",["UrlMapConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-var UrlMapConfig = require('UrlMapConfig');
-
-var UrlMap = {
-  
-  resolve: __w(function(/*string*/ key, /*boolean?*/ https) /*string*/ {__t([key,'string','key'],[https,'?boolean','https']);/*jshint validthis: true*/return __t([function(){
-    var protocol = typeof https == 'undefined'
-      ? location.protocol.replace(':', '')
-      : https ? 'https' : 'http';
-
-    
-    if (key in UrlMapConfig) {
-      return protocol + '://' + UrlMapConfig[key];
-    }
-
-    
-    if (typeof https == 'undefined' && key + '_' + protocol in UrlMapConfig) {
-      return protocol + '://' + UrlMapConfig[key + '_' + protocol];
-    }
-
-    
-    if (https !== true && key + '_http' in UrlMapConfig) {
-      return 'http://' + UrlMapConfig[key + '_http'];
-    }
-
-    
-    if (https !== false && key + '_https' in UrlMapConfig) {
-      return 'https://' + UrlMapConfig[key + '_https'];
-    }
-  }.apply(this,arguments), 'string']);},{"signature":"function(string,?boolean):string"})
-};
-
-module.exports = UrlMap;
 
 });
 __d("URL",["Assert","copyProperties","QueryString","Log"],function(global,require,requireDynamic,requireLazy,module,exports) {
@@ -3391,14 +3481,7 @@ copyProperties(emptyFunction, {
   thatReturnsTrue: makeEmptyFunction(true),
   thatReturnsNull: makeEmptyFunction(null),
   thatReturnsThis: function() { return this; },
-  thatReturnsArgument: function(arg) { return arg; },
-  mustImplement: function(module, property) {
-    return function() {
-      if (__DEV__) {
-        throw new Error(module + '.' + property + ' must be implemented!');
-      }
-    };
-  }
+  thatReturnsArgument: function(arg) { return arg; }
 });
 
 module.exports = emptyFunction;
@@ -4227,14 +4310,16 @@ Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options,'obj
 module.exports = XD;
 
 });
-__d("sdk.Auth",["sdk.Cookie","copyProperties","sdk.createIframe","DOMWrapper","sdk.getContextType","guid","Log","ObservableMixin","QueryString","sdk.Runtime","sdk.SignedRequest","UrlMap","URL","sdk.XD"],function(global,require,requireDynamic,requireLazy,module,exports) {
+__d("sdk.Auth",["sdk.Cookie","copyProperties","sdk.createIframe","DOMWrapper","sdk.feature","sdk.getContextType","guid","sdk.Impressions","Log","ObservableMixin","QueryString","sdk.Runtime","sdk.SignedRequest","UrlMap","URL","sdk.XD"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 var Cookie = require('sdk.Cookie');
 var copyProperties = require('copyProperties');
 var createIframe = require('sdk.createIframe');
 var DOMWrapper = require('DOMWrapper');
+var feature = require('sdk.feature');
 var getContextType = require('sdk.getContextType');
 var guid = require('guid');
+var Impressions = require('sdk.Impressions');
 var Log = require('Log');
 var ObservableMixin = require('ObservableMixin');
 var QueryString = require('QueryString');
@@ -4374,7 +4459,7 @@ function xdResponseWrapper(/*function*/ cb, /*?object*/ authResponse,
 }.apply(this,arguments), 'function']);}__w(xdResponseWrapper,{"signature":"function(function,?object,?string):function"});
 
 function fetchLoginStatus(/*function*/ fn) {__t([fn,'function','fn']);
-  var frame;
+  var frame, fetchStart = ES5('Date', 'now', false);
 
   if (timer) {
     clearTimeout(timer);
@@ -4391,6 +4476,18 @@ function fetchLoginStatus(/*function*/ fn) {__t([fn,'function','fn']);
       domain: location.hostname,
       origin: getContextType(),
       redirect_uri: XD.handler(__w(function(/*object*/ response) {__t([response,'object','response']);
+        if (feature('e2e_ping_tracking', true)) {
+          var events = {
+            init: fetchStart,
+            close: ES5('Date', 'now', false),
+            method: 'ping'
+          };
+          Log.debug('e2e: %s', ES5('JSON', 'stringify', false,events));
+          
+          Impressions.log(114, {
+            payload: events
+          });
+        }
         frame.parentNode.removeChild(frame);
         if (handleResponse(response)) {
           
@@ -4745,32 +4842,6 @@ var DOM = {
 module.exports = DOM;
 
 });
-__d("sdk.feature",["SDKConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-var SDKConfig = requireDynamic('SDKConfig');
-
-function feature(/*string*/ name, defaultValue) {__t([name,'string','name']);
-  if (SDKConfig.features && name in SDKConfig.features) {
-    var value = SDKConfig.features[name];
-    if (typeof value === 'object' && typeof value.rate === 'number') {
-      if (value.rate && Math.floor(Math.random() * 100) + 1 <= value.rate) {
-        return value.value || true;
-      } else {
-        return value.value ? null : false;
-      }
-    } else {
-      return value;
-    }
-  }
-
-  return typeof defaultValue !== 'undefined'
-    ? defaultValue
-    : null;
-}__w(feature,{"signature":"function(string)"});
-
-module.exports = feature;
-
-});
 __d("sdk.Scribe",["UrlMap","QueryString"],function(global,require,requireDynamic,requireLazy,module,exports) {
 var UrlMap = require('UrlMap');
 var QueryString = require('QueryString');
@@ -4926,47 +4997,6 @@ var ErrorHandler = {
 };
 
 module.exports = ErrorHandler;
-
-});
-__d("sdk.Impressions",["guid","QueryString","sdk.Runtime","UrlMap"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-var guid = require('guid');
-var QueryString = require('QueryString');
-var Runtime = require('sdk.Runtime');
-var UrlMap = require('UrlMap');
-
-function request(/*object*/ params) {__t([params,'object','params']);
-  var clientID = Runtime.getClientID();
-
-  if (!params.api_key && clientID) {
-    params.api_key = clientID;
-  }
-
-  var image = new Image();
-
-  image.src = QueryString.appendToUrl(
-    UrlMap.resolve('www', /*force ssl*/true) +
-      '/impression.php/' + guid() + '/',
-    params
-  );
-}__w(request,{"signature":"function(object)"});
-
-var Impressions = {
-  log: __w(function(/*number*/ lid, /*object*/ payload) {__t([lid,'number','lid'],[payload,'object','payload']);
-    if (!payload.source) {
-      payload.source = 'jssdk';
-    }
-
-    request({
-      lid: lid, 
-      payload: ES5('JSON', 'stringify', false,payload)
-    });
-  },{"signature":"function(number,object)"}),
-
-  impression: request
-};
-
-module.exports = Impressions;
 
 });
 __d("sdk.Insights",["sdk.Impressions"],function(global,require,requireDynamic,requireLazy,module,exports) {
@@ -5221,26 +5251,17 @@ copyProperties(FB, {
 module.exports = FB;
 
 });
-__d("flattenObject",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+__d("ArgumentError",["ManagedError"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+var ManagedError = require('ManagedError');
 
-function flattenObject(/*object*/ obj) /*object*/ {__t([obj,'object','obj']);/*jshint validthis: true*/return __t([function(){
-  var flat = {};
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      var value = obj[key];
-      if (null === value || undefined === value) {
-        continue;
-      } else if (typeof value == 'string') {
-        flat[key] = value;
-      } else {
-        flat[key] = ES5('JSON', 'stringify', false,value); }
-    }
-  }
-  return flat;
-}.apply(this,arguments), 'object']);}__w(flattenObject,{"signature":"function(object):object"});
+function ArgumentError(message, innerError) {
+  ManagedError.prototype.constructor.apply(this, arguments);
+}
+ArgumentError.prototype = new ManagedError();
+ArgumentError.prototype.constructor = ArgumentError;
 
-module.exports = flattenObject;
+module.exports = ArgumentError;
 
 });
 __d("CORSRequest",["wrapFunction","QueryString"],function(global,require,requireDynamic,requireLazy,module,exports) {
@@ -5480,6 +5501,28 @@ var FlashRequest = {
 module.exports = FlashRequest;
 
 });
+__d("flattenObject",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+
+
+function flattenObject(/*object*/ obj) /*object*/ {__t([obj,'object','obj']);/*jshint validthis: true*/return __t([function(){
+  var flat = {};
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      var value = obj[key];
+      if (null === value || undefined === value) {
+        continue;
+      } else if (typeof value == 'string') {
+        flat[key] = value;
+      } else {
+        flat[key] = ES5('JSON', 'stringify', false,value); }
+    }
+  }
+  return flat;
+}.apply(this,arguments), 'object']);}__w(flattenObject,{"signature":"function(object):object"});
+
+module.exports = flattenObject;
+
+});
 __d("JSONPRequest",["DOMWrapper","GlobalCallback","QueryString"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 var DOMWrapper     = require('DOMWrapper');
@@ -5556,37 +5599,24 @@ var JSONPRequest = {
 module.exports = JSONPRequest;
 
 });
-__d("ArgumentError",["ManagedError"],function(global,require,requireDynamic,requireLazy,module,exports) {
+__d("ApiClient",["ArgumentError","Assert","copyProperties","CORSRequest","FlashRequest","flattenObject","JSONPRequest","Log","ObservableMixin","sprintf","UrlMap","URL","ApiClientConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var ManagedError = require('ManagedError');
-
-function ArgumentError(message, innerError) {
-  ManagedError.prototype.constructor.apply(this, arguments);
-}
-ArgumentError.prototype = new ManagedError();
-ArgumentError.prototype.constructor = ArgumentError;
-
-module.exports = ArgumentError;
-
-});
-__d("ApiClient",["copyProperties","flattenObject","sprintf","CORSRequest","FlashRequest","JSONPRequest","Log","UrlMap","URL","ArgumentError","Assert","ApiClientConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-var copyProperties = require('copyProperties');
-var flattenObject  = require('flattenObject');
-var sprintf        = require('sprintf');
-var CORSRequest    = require('CORSRequest');
-var FlashRequest   = require('FlashRequest');
-var JSONPRequest   = require('JSONPRequest');
-var Log            = require('Log');
-var UrlMap         = require('UrlMap');
-var URL            = require('URL');
 var ArgumentError  = require('ArgumentError');
 var Assert         = require('Assert');
+var copyProperties = require('copyProperties');
+var CORSRequest    = require('CORSRequest');
+var FlashRequest   = require('FlashRequest');
+var flattenObject  = require('flattenObject');
+var JSONPRequest   = require('JSONPRequest');
+var Log            = require('Log');
+var ObservableMixin = require('ObservableMixin');
+var sprintf        = require('sprintf');
+var UrlMap         = require('UrlMap');
+var URL            = require('URL');
 
 var ApiClientConfig = require('ApiClientConfig');
 
 var accessToken;
-var invalidTokenCallback;
 var clientID;
 var defaultParams;
 
@@ -5608,7 +5638,7 @@ var READONLYCALLS = {
 
 
 function request(/*string*/ url, /*string*/ method, /*object*/ params,
-    /*?function*/ cb) {__t([url,'string','url'],[method,'string','method'],[params,'object','params'],[cb,'?function','cb']);
+    /*function*/ cb) {__t([url,'string','url'],[method,'string','method'],[params,'object','params'],[cb,'function','cb']);
   if (!params.access_token) {
     params.access_token = accessToken;
   }
@@ -5618,11 +5648,6 @@ function request(/*string*/ url, /*string*/ method, /*object*/ params,
   }
 
   params = flattenObject(params);
-  if (!cb) {
-    Log.warn('No callback passed to the ApiClient for %s', url);
-    cb = function() {};
-  }
-
   var availableTransports = {
     jsonp: JSONPRequest,
     cors : CORSRequest,
@@ -5639,30 +5664,10 @@ function request(/*string*/ url, /*string*/ method, /*object*/ params,
     transports = ['jsonp', 'cors', 'flash'];
   }
 
-  var responseInspector = function(data) {
-    var invalidateToken = false;
-    if (invalidTokenCallback && data && typeof data == 'object') {
-      if (data.error) {
-        if (data.error == 'invalid_token' ||
-           (data.error.type == 'OAuthException' && data.error.code == 190)) {
-          invalidateToken = true;
-        }
-      } else if (data.error_code) {
-        if (data.error_code == '190') {
-          invalidateToken = true;
-        }
-      }
-      if (invalidateToken) {
-        invalidTokenCallback();
-      }
-    }
-    cb(data);
-  };
-
   for (var i = 0; i < transports.length; i++) {
     var transport = availableTransports[transports[i]];
     var paramsCopy = copyProperties({}, params);
-    if (transport.execute(url, method, paramsCopy, responseInspector)) {
+    if (transport.execute(url, method, paramsCopy, cb)) {
       return;
     }
   }
@@ -5673,7 +5678,15 @@ function request(/*string*/ url, /*string*/ method, /*object*/ params,
       message: 'Could not find a usable transport for request'
     }
   });
-}__w(request,{"signature":"function(string,string,object,?function)"});
+}__w(request,{"signature":"function(string,string,object,function)"});
+
+function inspect(/*?function*/ callback, /*string*/ endpoint, /*string*/ method,
+    /*object*/ params, response) {__t([callback,'?function','callback'],[endpoint,'string','endpoint'],[method,'string','method'],[params,'object','params']);
+  ApiClient.inform('request.complete', endpoint, method, params, response);
+  if (callback) {
+    callback(response);
+  }
+}__w(inspect,{"signature":"function(?function,string,string,object)"});
 
 
 function requestUsingGraph(/*string*/ path) {__t([path,'string','path']);
@@ -5695,13 +5708,18 @@ function requestUsingGraph(/*string*/ path) {__t([path,'string','path']);
   var method = (args.string || 'get').toLowerCase();
   var params = copyProperties(args.object || {}, url.getParsedSearch());
   var callback = args['function'];
+  if (!callback) {
+    Log.warn('No callback passed to the ApiClient');
+  }
+
+  var inspector = ES5(inspect, 'bind', true,null, callback, url.getPath(), method, params);
 
   Assert.isTrue(method in METHODS,
     sprintf('Invalid method passed to ApiClient: %s', method));
 
   params.method = method;
   url = UrlMap.resolve('graph') + url.getPath();
-  request(url, method == 'get' ? 'get' : 'post', params, callback);
+  request(url, method == 'get' ? 'get' : 'post', params, inspector);
 }__w(requestUsingGraph,{"signature":"function(string)"});
 
 
@@ -5709,22 +5727,23 @@ function requestUsingRest(/*object*/ params, /*?function*/ cb) {__t([params,'obj
   Assert.isObject(params);
   Assert.isString(params.method, 'method missing');
 
+  if (!cb) {
+    Log.warn('No callback passed to the ApiClient');
+  }
   var method = params.method.toLowerCase().replace('.', '_');
   params.format = 'json-strings';
   params.api_key = clientID;
 
   var domain = method in READONLYCALLS ? 'api_read' : 'api';
   var url = UrlMap.resolve(domain) + '/restserver.php';
-  request(url, 'get', params, cb);
+  var inspector = ES5(inspect, 'bind', true,null, cb, '/restserver.php', 'get', params);
+  request(url, 'get', params, inspector);
 }__w(requestUsingRest,{"signature":"function(object,?function)"});
 
-var ApiClient = {
+var ApiClient = copyProperties(new ObservableMixin(), {
   setAccessToken: __w(function(/*?string*/ access_token) {__t([access_token,'?string','access_token']);
     accessToken = access_token;
   },{"signature":"function(?string)"}),
-  setInvalidAccessTokenHandler: __w(function(/*?function*/ invalid_token_callback) {__t([invalid_token_callback,'?function','invalid_token_callback']);
-    invalidTokenCallback = invalid_token_callback;
-  },{"signature":"function(?function)"}),
   setClientID: __w(function(/*?string*/ client_id) {__t([client_id,'?string','client_id']);
     clientID = client_id;
   },{"signature":"function(?string)"}),
@@ -5733,7 +5752,7 @@ var ApiClient = {
   },{"signature":"function(?object)"}),
   rest: requestUsingRest,
   graph: requestUsingGraph
-};
+});
 
 
 FlashRequest.setSwfUrl(ApiClientConfig.FlashRequest.swfUrl);
@@ -5748,11 +5767,11 @@ var Runtime    = require('sdk.Runtime');
 
 var currentAccessToken;
 
-Runtime.subscribe('ClientID.change', __w(function(/*string?*/ value) {__t([value,'?string','value']);
+Runtime.subscribe('ClientID.change', __w(function(/*?string*/ value) {__t([value,'?string','value']);
   ApiClient.setClientID(value);
 },{"signature":"function(?string)"}));
 
-Runtime.subscribe('AccessToken.change', __w(function(/*string?*/ value) {__t([value,'?string','value']);
+Runtime.subscribe('AccessToken.change', __w(function(/*?string*/ value) {__t([value,'?string','value']);
   currentAccessToken = value;
   ApiClient.setAccessToken(value);
 },{"signature":"function(?string)"}));
@@ -5761,13 +5780,41 @@ ApiClient.setDefaultParams({
   sdk: 'joey'
 });
 
-ApiClient.setInvalidAccessTokenHandler(function() {
-  
-  if (currentAccessToken === Runtime.getAccessToken()) {
+
+ApiClient.subscribe('request.complete', __w(function(/*string*/ endpoint,
+    /*string*/ method, /*object*/ params, /*?object|boolean*/ response) {__t([endpoint,'string','endpoint'],[method,'string','method'],[params,'object','params'],[response,'?object|boolean','response']);
+    var invalidateToken = false;
+    if (response && typeof response == 'object') {
+      if (response.error) {
+        if (response.error == 'invalid_token'
+            || (response.error.type == 'OAuthException'
+                && response.error.code == 190)) {
+          invalidateToken = true;
+        }
+      } else if (response.error_code) {
+        if (response.error_code == '190') {
+          invalidateToken = true;
+        }
+      }
+    }
+  if (invalidateToken
+      && currentAccessToken === Runtime.getAccessToken()) {
     
     Runtime.setAccessToken(null);
   }
-});
+},{"signature":"function(string,string,object,?object|boolean)"}));
+
+// Inspector for calls that untos'es the app
+ApiClient.subscribe('request.complete', __w(function(/*string*/ endpoint,
+    /*string*/ method, /*object*/ params, /*?object|boolean*/ response) {__t([endpoint,'string','endpoint'],[method,'string','method'],[params,'object','params'],[response,'?object|boolean','response']);
+  if (((endpoint == '/me/permissions'
+        && method === 'delete')
+       || (endpoint == '/restserver.php'
+            && params.method == 'Auth.revokeAuthorization'))
+      && response === true) {
+    Runtime.setAccessToken(null);
+  }
+},{"signature":"function(string,string,object,?object|boolean)"}));
 
 
 function api() {
