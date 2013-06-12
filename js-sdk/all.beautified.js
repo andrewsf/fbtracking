@@ -1,4 +1,4 @@
-/*1370854463,173064499,JIT Construction: v839974,en_US*/
+/*1371074385,173060173,JIT Construction: v843928,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -612,9 +612,9 @@ try {
             "rtl": false
         });
         __d("XDConfig", [], {
-            "XdUrl": "connect\/xd_arbiter.php?version=24",
+            "XdUrl": "connect\/xd_arbiter.php?version=25",
             "Flash": {
-                "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yX\/r\/VpkNidONSDC.swf"
+                "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yY\/r\/tkKkN2MZL-q.swf"
             },
             "useCdn": true
         });
@@ -629,18 +629,6 @@ try {
             "fbcdn_https": "fbstatic-a.akamaihd.net",
             "cdn_http": "static.ak.facebook.com",
             "cdn_https": "s-static.ak.facebook.com"
-        });
-        __d("ProfilePicConfig", [], {
-            "defPicMap": {
-                "pic": "rsrc.php\/v1\/yh\/r\/C5yt7Cqf3zU.jpg",
-                "pic_big": "rsrc.php\/v2\/yL\/r\/HsTZSDw4avx.gif",
-                "pic_big_with_logo": "rsrc.php\/v2\/y5\/r\/SRDCaeCL7hM.gif",
-                "pic_small": "rsrc.php\/v1\/yi\/r\/odA9sNLrE86.jpg",
-                "pic_small_with_logo": "rsrc.php\/v2\/yD\/r\/k1xiRXKnlGd.gif",
-                "pic_square": "rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif",
-                "pic_square_with_logo": "rsrc.php\/v2\/yX\/r\/9dYJBPDHXwZ.gif",
-                "pic_with_logo": "rsrc.php\/v2\/yu\/r\/fPPR9f2FJ3t.gif"
-            }
         });
         __d("PluginPipeConfig", [], {
             "threshold": 0,
@@ -1016,6 +1004,7 @@ try {
                     ClientID: '',
                     Environment: j.UNKNOWN,
                     Initialized: false,
+                    KidDirectedSite: undefined,
                     Locale: h.locale,
                     LoginStatus: undefined,
                     Rtl: h.rtl,
@@ -1369,6 +1358,7 @@ try {
             function k(m) {
                 var n = i.getClientID();
                 if (!m.api_key && n) m.api_key = n;
+                m.kid_directed_site = i.getKidDirectedSite();
                 var o = new Image();
                 o.src = h.appendToUrl(j.resolve('www', true) + '/impression.php/' + g() + '/', m);
             }
@@ -2142,12 +2132,16 @@ try {
                             }
                         };
                         if (u) {
-                            y.whenReady(z);
+                            setTimeout(function() {
+                                y.whenReady(z);
+                            }, 0);
                             return;
                         }
                         v = y.root;
                         u = true;
-                        y.whenReady(z);
+                        setTimeout(function() {
+                            y.whenReady(z);
+                        }, 0);
                     }
                 };
             })());
@@ -2580,7 +2574,8 @@ try {
                                 ca(function() {});
                             }, 1200000);
                         }, 'parent'),
-                        sdk: 'joey'
+                        sdk: 'joey',
+                        kid_directed_site: r.getKidDirectedSite()
                     }));
                 ga = i({
                     root: j.getRoot(),
@@ -5073,6 +5068,7 @@ try {
                     n.setUseCookie(true);
                     if (typeof p.cookie === 'string') g.setDomain(p.cookie);
                 }
+                if (p.kidDirectedSite) n.setKidDirectedSite(true);
                 n.setInitialized(true);
                 k.fire('init:post', p);
             }
@@ -5586,6 +5582,7 @@ try {
                     ja.app_id = q.getClientID();
                     ja.locale = q.getLocale();
                     ja.sdk = 'joey';
+                    ja.kid_directed_site = q.getKidDirectedSite();
                     var ka = ES5(function(na) {
                         this.inform('xd.' + na.type, na);
                     }, 'bind', true, this);
@@ -5653,7 +5650,6 @@ try {
         __d("PluginTags", [], function(a, b, c, d, e, f) {
             var g = {
                 activity: {
-                    border_color: 'string',
                     filter: 'string',
                     action: 'string',
                     max_age: 'string',
@@ -5674,16 +5670,22 @@ try {
                     max_rows: 'string',
                     show_count: 'bool'
                 },
-                friendpile: {
-                    href: 'string',
-                    action: 'string',
-                    size: 'string',
-                    max_rows: 'string'
-                },
                 follow: {
                     href: 'url',
                     layout: 'string',
                     show_faces: 'bool'
+                },
+                like_box: {
+                    href: 'string',
+                    show_faces: 'bool',
+                    header: 'bool',
+                    stream: 'bool',
+                    force_wall: 'bool',
+                    show_border: 'bool',
+                    id: 'string',
+                    connections: 'string',
+                    profile_id: 'string',
+                    name: 'string'
                 },
                 open_graph: {
                     href: 'url',
@@ -5704,8 +5706,14 @@ try {
                     href: 'url'
                 },
                 privacy_selector: {},
+                profile_pic: {
+                    uid: 'string',
+                    linked: 'bool',
+                    href: 'string',
+                    size: 'string',
+                    facebook_logo: 'bool'
+                },
                 recommendations: {
-                    border_color: 'string',
                     filter: 'string',
                     action: 'string',
                     max_age: 'string',
@@ -5720,6 +5728,9 @@ try {
                 shared_activity: {
                     header: 'bool'
                 },
+                send: {
+                    href: 'url'
+                },
                 send_to_mobile: {
                     max_rows: 'string',
                     show_faces: 'bool',
@@ -5729,17 +5740,20 @@ try {
                     href: 'url',
                     show_border: 'bool'
                 },
-                subscribe: {
-                    href: 'url',
-                    layout: 'string',
-                    show_faces: 'bool'
-                },
                 want: {
                     href: 'url',
                     layout: 'string',
                     show_faces: 'bool'
                 }
+            }, h = {
+                subscribe: 'follow',
+                fan: 'like_box',
+                likebox: 'like_box',
+                friendpile: 'facepile'
             };
+            ES5(ES5('Object', 'keys', false, h), 'forEach', true, function(i) {
+                g[i] = g[h[i]];
+            });
             e.exports = g;
         });
         __d("sdk.Arbiter", [], function(a, b, c, d, e, f) {
@@ -6032,6 +6046,7 @@ try {
                             api_key: q.getClientID(),
                             locale: q.getLocale(),
                             sdk: 'joey',
+                            kid_directed_site: q.getKidDirectedSite(),
                             ref: this.getAttribute('ref')
                         }, this.getUrlBits()
                             .params);
@@ -6751,74 +6766,6 @@ try {
                 });
             e.exports = l;
         });
-        __d("sdk.XFBML.LikeBox", ["sdk.XFBML.EdgeWidget", "sdk.Helper", "Log", "sdk.Runtime"], function(a, b, c, d, e, f) {
-            var g = b('sdk.XFBML.EdgeWidget'),
-                h = b('sdk.Helper'),
-                i = b('Log'),
-                j = b('sdk.Runtime'),
-                k = g.extend({
-                    _visibleAfter: 'load',
-                    setupAndValidate: function() {
-                        this._attr = {
-                            channel: this.getChannelUrl(),
-                            api_key: j.getClientID(),
-                            connections: this.getAttribute('connections'),
-                            css: this.getAttribute('css'),
-                            height: this.getAttribute('height'),
-                            id: this.getAttribute('profile-id'),
-                            header: this._getBoolAttribute('header', true),
-                            name: this.getAttribute('name'),
-                            show_faces: this._getBoolAttribute('show-faces', true),
-                            stream: this._getBoolAttribute('stream', true),
-                            width: this._getPxAttribute('width', 300),
-                            href: this.getAttribute('href'),
-                            colorscheme: this.getAttribute('colorscheme', 'light'),
-                            border_color: this.getAttribute('border_color'),
-                            show_border: this._getBoolAttribute('show-border', true)
-                        };
-                        if (this._getBoolAttribute('force_wall', false)) this._attr.force_wall = true;
-                        if (this._attr.connections === '0') {
-                            this._attr.show_faces = false;
-                        } else if (this._attr.connections) this._attr.show_faces = true;
-                        if (!this._attr.id && !this._attr.name && !this._attr.href) {
-                            i.error('<fb:like-box> requires one of the "id" or "name" attributes.');
-                            return false;
-                        }
-                        var l = this._attr.height;
-                        if (!l) if (!this._attr.show_faces && !this._attr.stream) {
-                            l = 62;
-                        } else {
-                            l = 95;
-                            if (this._attr.show_faces) l += 163;
-                            if (this._attr.stream) l += 300;
-                            if (this._attr.header && this._attr.header !== '0') l += 32;
-                        }
-                        this._attr.height = l;
-                        this.subscribe('xd.likeboxLiked', ES5(this._onLiked, 'bind', true, this));
-                        this.subscribe('xd.likeboxUnliked', ES5(this._onUnliked, 'bind', true, this));
-                        return true;
-                    },
-                    getSize: function() {
-                        return {
-                            width: this._attr.width,
-                            height: this._attr.height
-                        };
-                    },
-                    getUrlBits: function() {
-                        return {
-                            name: 'likebox',
-                            params: this._attr
-                        };
-                    },
-                    _onLiked: function() {
-                        h.fireEvent('edge.create', this);
-                    },
-                    _onUnliked: function() {
-                        h.fireEvent('edge.remove', this);
-                    }
-                });
-            e.exports = k;
-        });
         __d("sdk.XFBML.SendButtonFormWidget", ["sdk.XFBML.EdgeCommentWidget", "sdk.DOM", "sdk.Event"], function(a, b, c, d, e, f) {
             var g = b('sdk.XFBML.EdgeCommentWidget'),
                 h = b('sdk.DOM'),
@@ -7330,48 +7277,6 @@ try {
                 });
             e.exports = l;
         });
-        __d("sdk.XFBML.Send", ["sdk.DOM", "sdk.XFBML.EdgeWidget", "sdk.Runtime", "sdk.XFBML.SendButtonFormWidget"], function(a, b, c, d, e, f) {
-            var g = b('sdk.DOM'),
-                h = b('sdk.XFBML.EdgeWidget'),
-                i = b('sdk.Runtime'),
-                j = b('sdk.XFBML.SendButtonFormWidget'),
-                k = h.extend({
-                    setupAndValidate: function() {
-                        g.addCss(this.dom, 'fb_edge_widget_with_comment');
-                        this._attr = {
-                            channel: this.getChannelUrl(),
-                            api_key: i.getClientID(),
-                            font: this.getAttribute('font'),
-                            colorscheme: this.getAttribute('colorscheme', 'light'),
-                            href: this.getAttribute('href', window.location.href),
-                            ref: this.getAttribute('ref'),
-                            extended_social_context: this.getAttribute('extended_social_context', false)
-                        };
-                        this._rootPadding = {
-                            left: parseFloat(g.getStyle(this.dom, 'paddingLeft')),
-                            top: parseFloat(g.getStyle(this.dom, 'paddingTop'))
-                        };
-                        return true;
-                    },
-                    getUrlBits: function() {
-                        return {
-                            name: 'send',
-                            params: this._attr
-                        };
-                    },
-                    _createEdgeCommentWidget: function(l, m) {
-                        var n = this._getCommonEdgeCommentWidgetOpts(l, m);
-                        return new j(n);
-                    },
-                    getSize: function() {
-                        return {
-                            width: 80,
-                            height: 25
-                        };
-                    }
-                });
-            e.exports = k;
-        });
         __d("sdk.XFBML.SocialContext", ["sdk.Event", "sdk.XFBML.IframeWidget"], function(a, b, c, d, e, f) {
             var g = b('sdk.Event'),
                 h = b('sdk.XFBML.IframeWidget'),
@@ -7413,140 +7318,64 @@ try {
                 });
             e.exports = i;
         });
-        __d("sdk.XFBML.ProfilePic", ["sdk.Data", "sdk.DOM", "escapeHTML", "sdk.XFBML.Element", "sdk.Event", "format", "sdk.Helper", "sdk.Runtime", "UrlMap", "ProfilePicConfig"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Data'),
-                h = b('sdk.DOM'),
-                i = b('escapeHTML'),
-                j = c('ProfilePicConfig'),
-                k = b('sdk.XFBML.Element'),
-                l = b('sdk.Event'),
-                m = b('format'),
-                n = b('sdk.Helper'),
-                o = b('sdk.Runtime'),
-                p = b('UrlMap'),
-                q = {
-                    n: 'pic_big',
-                    normal: 'pic_big',
-                    q: 'pic_square',
-                    s: 'pic',
-                    small: 'pic',
-                    square: 'pic_square',
-                    t: 'pic_small',
-                    thumb: 'pic_small'
-                }, r = k.extend({
-                    process: function() {
-                        var s = this.getAttribute('size', 'thumb'),
-                            t = q[s],
-                            u = this._getPxAttribute('width'),
-                            v = this._getPxAttribute('height'),
-                            w = this.dom.style,
-                            x = this.getAttribute('uid');
-                        if (this._getBoolAttribute('facebook-logo')) t += '_with_logo';
-                        if (u) {
-                            u = u + 'px';
-                            w.width = u;
-                        }
-                        if (v) {
-                            v = v + 'px';
-                            w.height = v;
-                        }
-                        var y = ES5(function(z) {
-                            var aa = z ? z[0] : null,
-                                ba = aa ? aa[t] : null;
-                            if (!ba) ba = p.resolve('fbcdn') + '/' + j.defPicMap[t];
-                            var ca = ((u ? 'width:' + u + ';' : '') + (v ? 'height:' + u + ';' : '')),
-                                da = m('<img src="{0}" alt="{1}" title="{1}" style="{2}" class="{3}" />', ba, aa ? i(aa.name) : '', ca, this.dom.className);
-                            if (this._getBoolAttribute('linked', true)) da = n.getProfileLink(aa, da, this.getAttribute('href', null));
-                            this.dom.innerHTML = da;
-                            h.addCss(this.dom, 'fb_profile_pic_rendered');
-                            this.fire('render');
-                        }, 'bind', true, this);
-                        l.monitor('auth.statusChange', ES5(function() {
-                            if (!this.isValid()) {
-                                this.fire('render');
-                                return true;
-                            }
-                            if (this.getAttribute('uid', null) == 'loggedinuser') x = o.getUserID();
-                            if (o.getLoginStatus() !== 'unknown' && x) {
-                                g._selectByIndex(['name', t], n.isUser(x) ? 'user' : 'profile', n.isUser(x) ? 'uid' : 'id', x)
-                                    .wait(y);
-                            } else y();
-                        }, 'bind', true, this));
-                    }
-                });
-            e.exports = r;
-        });
-        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "sdk.feature", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.LikeBox", "sdk.XFBML.Like", "sdk.XFBML.LiveStream", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration", "sdk.XFBML.Send", "sdk.XFBML.SocialContext", "sdk.XFBML.ProfilePic"], function(a, b, c, d) {
+        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.Like", "sdk.XFBML.LiveStream", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration", "sdk.XFBML.SocialContext"], function(a, b, c, d) {
             var e = b('Assert'),
                 f = b('sdk.domReady'),
                 g = b('sdk.Event'),
-                h = b('sdk.feature'),
-                i = b('FB'),
-                j = b('IframePlugin'),
-                k = b('PluginTags'),
-                l = b('wrapFunction'),
-                m = b('XFBML'),
-                n = {
+                h = b('FB'),
+                i = b('IframePlugin'),
+                j = b('PluginTags'),
+                k = b('wrapFunction'),
+                l = b('XFBML'),
+                m = {
                     comments: b('sdk.XFBML.Comments'),
                     comments_count: b('sdk.XFBML.CommentsCount'),
                     connect_bar: b('sdk.XFBML.ConnectBar'),
-                    fan: b('sdk.XFBML.LikeBox'),
                     like: b('sdk.XFBML.Like'),
-                    like_box: b('sdk.XFBML.LikeBox'),
                     live_stream: b('sdk.XFBML.LiveStream'),
                     login_button: b('sdk.XFBML.LoginButton'),
                     name: b('sdk.XFBML.Name'),
                     recommendations_bar: b('sdk.XFBML.RecommendationsBar'),
                     registration: b('sdk.XFBML.Registration'),
-                    send: b('sdk.XFBML.Send'),
                     social_context: b('sdk.XFBML.SocialContext')
                 };
-            if (h('xfbml_profile_pic_server', false)) {
-                k.profile_pic = {
-                    uid: 'string',
-                    linked: 'bool',
-                    href: 'string',
-                    size: 'string',
-                    facebook_logo: 'bool'
-                };
-            } else n.profile_pic = b('sdk.XFBML.ProfilePic');
-            ES5(ES5('Object', 'keys', false, k), 'forEach', true, function(p) {
-                m.registerTag({
+            ES5(ES5('Object', 'keys', false, j), 'forEach', true, function(o) {
+                l.registerTag({
                     xmlns: 'fb',
-                    localName: p.replace(/_/g, '-'),
-                    ctor: j.withParams(k[p])
+                    localName: o.replace(/_/g, '-'),
+                    ctor: i.withParams(j[o])
                 });
             });
-            ES5(ES5('Object', 'keys', false, n), 'forEach', true, function(p) {
-                m.registerTag({
+            ES5(ES5('Object', 'keys', false, m), 'forEach', true, function(o) {
+                l.registerTag({
                     xmlns: 'fb',
-                    localName: p.replace(/_/g, '-'),
-                    ctor: n[p]
+                    localName: o.replace(/_/g, '-'),
+                    ctor: m[o]
                 });
             });
-            i.provide('XFBML', {
-                parse: function(p) {
-                    e.maybeXfbml(p, 'Invalid argument');
-                    if (p && p.nodeType === 9) p = p.body;
-                    return m.parse.apply(null, arguments);
+            h.provide('XFBML', {
+                parse: function(o) {
+                    e.maybeXfbml(o, 'Invalid argument');
+                    if (o && o.nodeType === 9) o = o.body;
+                    return l.parse.apply(null, arguments);
                 }
             });
-            i.provide('XFBML.RecommendationsBar', {
-                markRead: function(p) {
-                    g.fire('xfbml.recommendationsbar.read', p || window.location.href);
+            h.provide('XFBML.RecommendationsBar', {
+                markRead: function(o) {
+                    g.fire('xfbml.recommendationsbar.read', o || window.location.href);
                 }
             });
-            m.subscribe('parse', ES5(g.fire, 'bind', true, g, 'xfbml.parse'));
-            m.subscribe('render', ES5(g.fire, 'bind', true, g, 'xfbml.render'));
-            g.subscribe('init:post', function(p) {
-                if (p.xfbml) setTimeout(l(ES5(f, 'bind', true, null, m.parse), 'entry', 'init:post:xfbml.parse'), 0);
+            l.subscribe('parse', ES5(g.fire, 'bind', true, g, 'xfbml.parse'));
+            l.subscribe('render', ES5(g.fire, 'bind', true, g, 'xfbml.render'));
+            g.subscribe('init:post', function(o) {
+                if (o.xfbml) setTimeout(k(ES5(f, 'bind', true, null, l.parse), 'entry', 'init:post:xfbml.parse'), 0);
             });
-            e.define('Xfbml', function(p) {
-                return (p.nodeType === 1 || p.nodeType === 9) && typeof p.nodeName === 'string';
+            e.define('Xfbml', function(o) {
+                return (o.nodeType === 1 || o.nodeType === 9) && typeof o.nodeName === 'string';
             });
             try {
                 if (document.namespaces && !document.namespaces.item.fb) document.namespaces.add('fb');
-            } catch (o) {}
+            } catch (n) {}
         }, 3);
         void(0);
     })
