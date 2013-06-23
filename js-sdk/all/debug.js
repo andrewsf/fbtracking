@@ -1,4 +1,4 @@
-/*1371074216,180642073,JIT Construction: v843928,en_US*/
+/*1372029152,173038641,JIT Construction: v854578,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -7800,7 +7800,7 @@ Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options,'obj
 },{"signature":"function(object)"}));
 
 },3);
-__d("sdk.Canvas.Flash",["sdk.api","sdk.RPC","Log","sdk.Runtime","createArrayFrom"],function(global,require,requireDynamic,requireLazy,module,exports) {
+__d("sdk.Canvas.Plugin",["sdk.api","sdk.RPC","Log","sdk.Runtime","createArrayFrom"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 var api = require('sdk.api');
 var RPC = require('sdk.RPC');
@@ -7809,86 +7809,157 @@ var Runtime = require('sdk.Runtime');
 var createArrayFrom = require('createArrayFrom');
 
 var flashClassID = 'CLSID:D27CDB6E-AE6D-11CF-96B8-444553540000';
-var devHideFlashCallback = null;
+var unityClassID = 'CLSID:444785F1-DE89-4295-863A-D46C3A781394';
+var devHidePluginCallback = null;
+
+
+function hideUnityElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+  elem._hideunity_savedstyle = {};
+  elem._hideunity_savedstyle.left = elem.style.left;
+  elem._hideunity_savedstyle.position = elem.style.position;
+  elem._hideunity_savedstyle.width = elem.style.width;
+  elem._hideunity_savedstyle.height = elem.style.height;
+  elem.style.left = '-10000px';
+  elem.style.position = 'absolute';
+  elem.style.width = '1px';
+  elem.style.height = '1px';
+}__w(hideUnityElement,{"signature":"function(DOMElement)"});
+
+
+function showUnityElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+  if (elem._hideunity_savedstyle) {
+    elem.style.left     = elem._hideunity_savedstyle.left;
+    elem.style.position = elem._hideunity_savedstyle.position;
+    elem.style.width    = elem._hideunity_savedstyle.width;
+    elem.style.height   = elem._hideunity_savedstyle.height;
+  }
+}__w(showUnityElement,{"signature":"function(DOMElement)"});
 
 
 function hideFlashElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+  elem._old_visibility = elem.style.visibility;
   elem.style.visibility = 'hidden';
 }__w(hideFlashElement,{"signature":"function(DOMElement)"});
 
 
 function showFlashElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
-  elem.style.visibility = '';
+  elem.style.visibility = elem._old_visibility || '';
+  delete elem._old_visibility;
 }__w(showFlashElement,{"signature":"function(DOMElement)"});
 
+function isHideableFlashElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+  var isHideable = elem.type.toLowerCase() === 'application/x-shockwave-flash'
+        || (elem.classid && elem.classid.toUpperCase() == flashClassID);
 
-function hideFlashCallback(/*object*/ params) {__t([params,'object','params']);
-  Log.info('hideFlashCallback called with %s', params.state);
+  if (!isHideable) {
+    return false;
+  }
 
-  var candidates = window.document.getElementsByTagName('object');
-  ES5(createArrayFrom(candidates), 'forEach', true,__w(function(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
-    if (elem.type.toLowerCase() != "application/x-shockwave-flash" &&
-        (!elem.classid ||
-        elem.classid.toUpperCase() != flashClassID)) {
+  // for flash elements we don't need to hide if it is in wmode
+  
+  var keepvisibleRegex = /opaque|transparent/i;
+  if (keepvisibleRegex.test(elem.getAttribute('wmode'))) {
+    return false;
+  }
+
+  for (var j = 0; j < elem.childNodes.length; j++) {
+    var node = elem.childNodes[j];
+    if (/param/i.test(node.nodeName) && /wmode/i.test(node.name) &&
+      keepvisibleRegex.test(node.value)) {
+      return false;
+    }
+  }
+  return true;
+}__w(isHideableFlashElement,{"signature":"function(DOMElement)"});
+
+function isHideableUnityElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+  return elem.type.toLowerCase() === 'application/vnd.unity'
+    || (elem.classid && elem.classid.toUpperCase() == unityClassID);
+
+}__w(isHideableUnityElement,{"signature":"function(DOMElement)"});
+
+
+function hidePluginCallback(/*object*/ params) {__t([params,'object','params']);
+  var candidates = createArrayFrom(
+    window.document.getElementsByTagName('object')
+  );
+  candidates = candidates.concat(
+    createArrayFrom(window.document.getElementsByTagName('embed'))
+  );
+  ES5(candidates, 'forEach', true,__w(function(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+    var isFlashElement = isHideableFlashElement(elem);
+    var isUnityElement = isHideableUnityElement(elem);
+    if (!isFlashElement && !isUnityElement) {
       return;
     }
 
-    for (var j = 0; j < elem.childNodes.length; j++) {
-      var node = elem.childNodes[j];
-      if (/param/i.test(node.nodeName) && /wmode/i.test(node.name) &&
-          /opaque|transparent/i.test(node.value)) {
-        return;
+    var visibilityToggleCb = function() {
+      if (params.state === 'opened') {
+        if (isFlashElement) {
+          hideFlashElement(elem);
+        } else {
+          hideUnityElement(elem);
+        }
+      } else {
+        if (isFlashElement) {
+          showFlashElement(elem);
+        } else {
+          showUnityElement(elem);
+        }
       }
-    }
+    };
 
-    if (devHideFlashCallback) {
+    if (devHidePluginCallback) {
       Log.info('Calling developer specified callback');
       
       
       
       var devArgs = { state : params.state, elem : elem };
-      devHideFlashCallback(devArgs);
-      setTimeout(function() {
-        if (devArgs.state == 'opened') {
-          hideFlashElement(elem);
-        } else {
-          showFlashElement(elem);
-        }
-      }, 200);
+      devHidePluginCallback(devArgs);
+      setTimeout(visibilityToggleCb, 200);
     } else {
-      if (params.state == 'opened') {
-        elem._old_visibility = elem.style.visibility;
-        elem.style.visibility = 'hidden';
-      } else if (params.state == 'closed') {
-        elem.style.visibility = elem._old_visibility || '';
-        delete elem._old_visibility;
-      }
+      visibilityToggleCb();
     }
 
     if (Math.random() <= 1 / 1000) {
       api(Runtime.getClientID() + '/occludespopups', 'post', {});
     }
   },{"signature":"function(DOMElement)"}));
-}__w(hideFlashCallback,{"signature":"function(object)"});
+}__w(hidePluginCallback,{"signature":"function(object)"});
 
-RPC.local.hideFlashObjects = function() {
-  hideFlashCallback({state: 'opened'});
+RPC.local.hidePluginObjects = function() {
+  Log.info('hidePluginObjects called');
+  hidePluginCallback({state: 'opened'});
 };
-RPC.local.showFlashObjects = function() {
-  hideFlashCallback({state: 'closed'});
+RPC.local.showPluginObjects = function() {
+  Log.info('showPluginObjects called');
+  hidePluginCallback({state: 'closed'});
 };
 
-var Flash = {
+
+RPC.local.showFlashObjects = RPC.local.showPluginObjects;
+RPC.local.hideFlashObjects = RPC.local.hidePluginObjects;
+
+function hidePluginElement() {
+  hideFlashElement();
+  hideUnityElement();
+}
+function showPluginElement() {
+  showFlashElement();
+  showUnityElement();
+}
+
+var Plugin = {
   
-  _setHideFlashCallback: __w(function(/*function?*/ callback) {__t([callback,'?function','callback']);
-    devHideFlashCallback = callback;
+  _setHidePluginCallback: __w(function(/*?function*/ callback) {__t([callback,'?function','callback']);
+    devHidePluginCallback = callback;
   },{"signature":"function(?function)"}),
 
-  hideFlashElement: hideFlashElement,
-  showFlashElement: showFlashElement
+  hidePluginElement: hidePluginElement,
+  showPluginElement: showPluginElement
 };
 
-module.exports = Flash;
+module.exports = Plugin;
 
 });
 __d("sdk.Canvas.IframeHandling",["DOMWrapper","sdk.RPC"],function(global,require,requireDynamic,requireLazy,module,exports) {
@@ -8049,13 +8120,13 @@ var Tti = {
 module.exports = Tti;
 
 });
-__d("legacy:fb.canvas",["Assert","sdk.Canvas.Environment","sdk.Event","FB","sdk.Canvas.Flash","sdk.Canvas.IframeHandling","Log","sdk.Canvas.Navigation","sdk.Runtime","sdk.Canvas.Tti"],function(global,require,requireDynamic,requireLazy) {
+__d("legacy:fb.canvas",["Assert","sdk.Canvas.Environment","sdk.Event","FB","sdk.Canvas.Plugin","sdk.Canvas.IframeHandling","Log","sdk.Canvas.Navigation","sdk.Runtime","sdk.Canvas.Tti"],function(global,require,requireDynamic,requireLazy) {
 
 var Assert = require('Assert');
 var Environment = require('sdk.Canvas.Environment');
 var Event = require('sdk.Event');
 var FB = require('FB');
-var Flash = require('sdk.Canvas.Flash');
+var Plugin = require('sdk.Canvas.Plugin');
 var IframeHandling = require('sdk.Canvas.IframeHandling');
 var Log = require('Log');
 var Navigation = require('sdk.Canvas.Navigation');
@@ -8121,7 +8192,14 @@ FB.provide('CanvasInsights', {
 
 Event.subscribe('init:post', function(options) {
   if (Runtime.isEnvironment(Runtime.ENVIRONMENTS.CANVAS)) {
-    Flash._setHideFlashCallback(options.hideFlashCallback);
+    Assert.isTrue(
+      !options.hideFlashCallback || !options.hidePluginCallback,
+      'cannot specify deprecated hideFlashCallback and new hidePluginCallback'
+    );
+    Plugin._setHidePluginCallback(
+      options.hidePluginCallback ||
+        options.hideFlashCallback 
+    );
   }
 });
 
@@ -9562,6 +9640,11 @@ var PluginTags = {
     site: 'hostname'
   },
 
+  composer: {
+    action_type: 'string',
+    action_properties: 'string'
+  },
+
   create_event_button: {
   },
 
@@ -9602,11 +9685,6 @@ var PluginTags = {
     href: 'url',
     layout: 'string',
     show_faces: 'bool',
-    action_type: 'string',
-    action_properties: 'string'
-  },
-
-  open_graph_composer: {
     action_type: 'string',
     action_properties: 'string'
   },

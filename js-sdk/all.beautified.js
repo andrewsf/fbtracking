@@ -1,4 +1,4 @@
-/*1371074385,173060173,JIT Construction: v843928,en_US*/
+/*1372028431,173085775,JIT Construction: v854578,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -4437,70 +4437,116 @@ try {
                 }
             });
         }, 3);
-        __d("sdk.Canvas.Flash", ["sdk.api", "sdk.RPC", "Log", "sdk.Runtime", "createArrayFrom"], function(a, b, c, d, e, f) {
+        __d("sdk.Canvas.Plugin", ["sdk.api", "sdk.RPC", "Log", "sdk.Runtime", "createArrayFrom"], function(a, b, c, d, e, f) {
             var g = b('sdk.api'),
                 h = b('sdk.RPC'),
                 i = b('Log'),
                 j = b('sdk.Runtime'),
                 k = b('createArrayFrom'),
                 l = 'CLSID:D27CDB6E-AE6D-11CF-96B8-444553540000',
-                m = null;
+                m = 'CLSID:444785F1-DE89-4295-863A-D46C3A781394',
+                n = null;
 
-            function n(r) {
-                r.style.visibility = 'hidden';
+            function o(y) {
+                y._hideunity_savedstyle = {};
+                y._hideunity_savedstyle.left = y.style.left;
+                y._hideunity_savedstyle.position = y.style.position;
+                y._hideunity_savedstyle.width = y.style.width;
+                y._hideunity_savedstyle.height = y.style.height;
+                y.style.left = '-10000px';
+                y.style.position = 'absolute';
+                y.style.width = '1px';
+                y.style.height = '1px';
             }
-            function o(r) {
-                r.style.visibility = '';
+            function p(y) {
+                if (y._hideunity_savedstyle) {
+                    y.style.left = y._hideunity_savedstyle.left;
+                    y.style.position = y._hideunity_savedstyle.position;
+                    y.style.width = y._hideunity_savedstyle.width;
+                    y.style.height = y._hideunity_savedstyle.height;
+                }
             }
-            function p(r) {
-                i.info('hideFlashCallback called with %s', r.state);
-                var s = window.document.getElementsByTagName('object');
-                ES5(k(s), 'forEach', true, function(t) {
-                    if (t.type.toLowerCase() != "application/x-shockwave-flash" && (!t.classid || t.classid.toUpperCase() != l)) return;
-                    for (var u = 0; u < t.childNodes.length; u++) {
-                        var v = t.childNodes[u];
-                        if (/param/i.test(v.nodeName) && /wmode/i.test(v.name) && /opaque|transparent/i.test(v.value)) return;
-                    }
-                    if (m) {
+            function q(y) {
+                y._old_visibility = y.style.visibility;
+                y.style.visibility = 'hidden';
+            }
+            function r(y) {
+                y.style.visibility = y._old_visibility || '';
+                delete y._old_visibility;
+            }
+            function s(y) {
+                var z = y.type.toLowerCase() === 'application/x-shockwave-flash' || (y.classid && y.classid.toUpperCase() == l);
+                if (!z) return false;
+                var aa = /opaque|transparent/i;
+                if (aa.test(y.getAttribute('wmode'))) return false;
+                for (var ba = 0; ba < y.childNodes.length; ba++) {
+                    var ca = y.childNodes[ba];
+                    if (/param/i.test(ca.nodeName) && /wmode/i.test(ca.name) && aa.test(ca.value)) return false;
+                }
+                return true;
+            }
+            function t(y) {
+                return y.type.toLowerCase() === 'application/vnd.unity' || (y.classid && y.classid.toUpperCase() == m);
+            }
+            function u(y) {
+                var z = k(window.document.getElementsByTagName('object'));
+                z = z.concat(k(window.document.getElementsByTagName('embed')));
+                ES5(z, 'forEach', true, function(aa) {
+                    var ba = s(aa),
+                        ca = t(aa);
+                    if (!ba && !ca) return;
+                    var da = function() {
+                        if (y.state === 'opened') {
+                            if (ba) {
+                                q(aa);
+                            } else o(aa);
+                        } else if (ba) {
+                            r(aa);
+                        } else p(aa);
+                    };
+                    if (n) {
                         i.info('Calling developer specified callback');
-                        var w = {
-                            state: r.state,
-                            elem: t
+                        var ea = {
+                            state: y.state,
+                            elem: aa
                         };
-                        m(w);
-                        setTimeout(function() {
-                            if (w.state == 'opened') {
-                                n(t);
-                            } else o(t);
-                        }, 200);
-                    } else if (r.state == 'opened') {
-                        t._old_visibility = t.style.visibility;
-                        t.style.visibility = 'hidden';
-                    } else if (r.state == 'closed') {
-                        t.style.visibility = t._old_visibility || '';
-                        delete t._old_visibility;
-                    }
+                        n(ea);
+                        setTimeout(da, 200);
+                    } else da();
                     if (Math.random() <= 1 / 1000) g(j.getClientID() + '/occludespopups', 'post', {});
                 });
             }
-            h.local.hideFlashObjects = function() {
-                p({
+            h.local.hidePluginObjects = function() {
+                i.info('hidePluginObjects called');
+                u({
                     state: 'opened'
                 });
             };
-            h.local.showFlashObjects = function() {
-                p({
+            h.local.showPluginObjects = function() {
+                i.info('showPluginObjects called');
+                u({
                     state: 'closed'
                 });
             };
-            var q = {
-                _setHideFlashCallback: function(r) {
-                    m = r;
+            h.local.showFlashObjects = h.local.showPluginObjects;
+            h.local.hideFlashObjects = h.local.hidePluginObjects;
+
+            function v() {
+                q();
+                o();
+            }
+            function w() {
+                r();
+                p();
+            }
+            var x = {
+                _setHidePluginCallback: function(y) {
+                    n = y;
                 },
-                hideFlashElement: n,
-                showFlashElement: o
+                hidePluginElement: v,
+                showPluginElement: w
             };
-            e.exports = q;
+            e.exports = x;
         });
         __d("sdk.Canvas.IframeHandling", ["DOMWrapper", "sdk.RPC"], function(a, b, c, d, e, f) {
             var g = b('DOMWrapper'),
@@ -4611,12 +4657,12 @@ try {
             };
             e.exports = m;
         });
-        __d("legacy:fb.canvas", ["Assert", "sdk.Canvas.Environment", "sdk.Event", "FB", "sdk.Canvas.Flash", "sdk.Canvas.IframeHandling", "Log", "sdk.Canvas.Navigation", "sdk.Runtime", "sdk.Canvas.Tti"], function(a, b, c, d) {
+        __d("legacy:fb.canvas", ["Assert", "sdk.Canvas.Environment", "sdk.Event", "FB", "sdk.Canvas.Plugin", "sdk.Canvas.IframeHandling", "Log", "sdk.Canvas.Navigation", "sdk.Runtime", "sdk.Canvas.Tti"], function(a, b, c, d) {
             var e = b('Assert'),
                 f = b('sdk.Canvas.Environment'),
                 g = b('sdk.Event'),
                 h = b('FB'),
-                i = b('sdk.Canvas.Flash'),
+                i = b('sdk.Canvas.Plugin'),
                 j = b('sdk.Canvas.IframeHandling'),
                 k = b('Log'),
                 l = b('sdk.Canvas.Navigation'),
@@ -4671,7 +4717,10 @@ try {
                 }
             });
             g.subscribe('init:post', function(o) {
-                if (m.isEnvironment(m.ENVIRONMENTS.CANVAS)) i._setHideFlashCallback(o.hideFlashCallback);
+                if (m.isEnvironment(m.ENVIRONMENTS.CANVAS)) {
+                    e.isTrue(!o.hideFlashCallback || !o.hidePluginCallback, 'cannot specify deprecated hideFlashCallback and new hidePluginCallback');
+                    i._setHidePluginCallback(o.hidePluginCallback || o.hideFlashCallback);
+                }
             });
         }, 3);
         __d("sdk.Canvas.Prefetcher", ["sdk.api", "createArrayFrom", "sdk.Runtime", "CanvasPrefetcherConfig"], function(a, b, c, d, e, f) {
@@ -5658,6 +5707,10 @@ try {
                     recommendations: 'bool',
                     site: 'hostname'
                 },
+                composer: {
+                    action_type: 'string',
+                    action_properties: 'string'
+                },
                 create_event_button: {},
                 degrees: {
                     href: 'url',
@@ -5691,10 +5744,6 @@ try {
                     href: 'url',
                     layout: 'string',
                     show_faces: 'bool',
-                    action_type: 'string',
-                    action_properties: 'string'
-                },
-                open_graph_composer: {
                     action_type: 'string',
                     action_properties: 'string'
                 },
