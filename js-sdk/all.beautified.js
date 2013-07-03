@@ -1,4 +1,4 @@
-/*1372028431,173085775,JIT Construction: v854578,en_US*/
+/*1372811977,173055039,JIT Construction: v864753,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -3952,7 +3952,7 @@ try {
                     'permissions.oauth': {
                         url: 'dialog/oauth',
                         size: {
-                            width: (z.mobile() ? null : 440),
+                            width: (z.mobile() ? null : 475),
                             height: (z.mobile() ? null : 183)
                         },
                         transform: function(ea) {
@@ -5713,8 +5713,7 @@ try {
                 },
                 create_event_button: {},
                 degrees: {
-                    href: 'url',
-                    limit_profile_visibility: 'bool'
+                    href: 'url'
                 },
                 facepile: {
                     href: 'string',
