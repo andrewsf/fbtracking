@@ -1,4 +1,4 @@
-/*1374520465,173038625,JIT Construction: v883898,en_US*/
+/*1374700405,180635413,JIT Construction: v886739,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -2627,7 +2627,7 @@ try {
         });
         __d("hasArrayNature", [], function(a, b, c, d, e, f) {
             function g(h) {
-                return ( !! h && (typeof h == 'object' || typeof h == 'function') && ('length' in h) && !('setInterval' in h) && (Object.prototype.toString.call(h) === "[object Array]" || ('callee' in h) || ('item' in h)));
+                return ( !! h && (typeof h == 'object' || typeof h == 'function') && ('length' in h) && !('setInterval' in h) && (typeof h.nodeType != 'number') && (ES5('Array', 'isArray', false, h) || ('callee' in h) || ('item' in h)));
             }
             e.exports = g;
         });
@@ -3281,9 +3281,9 @@ try {
                 };
 
             function y(da, ea, fa, ga) {
-                if (!fa.access_token) fa.access_token = t;
-                fa.pretty = 0;
-                if (v) i(fa, v);
+                if (v) fa = i({}, v, fa);
+                fa.access_token = fa.access_token || t;
+                fa.pretty = fa.pretty || 0;
                 fa = l(fa);
                 var ha = {
                     jsonp: m,
