@@ -1,4 +1,4 @@
-/*1375119687,180677967,JIT Construction: v891315,en_US*/
+/*1375389635,173062741,JIT Construction: v895306,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -12,7 +12,7 @@ var setTimeout = window.setTimeout, setInterval = window.setInterval;var __DEV__
 function emptyFunction() {};
 var __w, __t;
 /**
- * @generated SignedSource<<dd344f0634af0c01f3c7238a217b4cd6>>
+ * @generated SignedSource<<67a8aacbcf72a96431d1207a036f093d>>
  * 
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  * !! This file is a check-in of a static_upstream project!      !!
@@ -62,7 +62,6 @@ var __w, __t;
    */
   function equals(value, node) {
     var type = typeof value;
-    var toStringType = toString.call(value).slice(8, -1);
     var subType;
     var nextNode;
     var nextValue;
@@ -81,73 +80,86 @@ var __w, __t;
       node = node.substring(0, indexOfFirstAngle);
     }
 
-    if (value === undefined) {
-      type = 'undefined';
-    } else if (value === null) {
-      type = 'null';
-    } else if (toStringType === 'Function') {
-      // let functions with signatures also match 'function'
-      type = value.__TCmeta && node !== 'function'
-        ? value.__TCmeta.signature
-        : 'function';
-    } else {
-      // HTMLObjectElements has a typeof function in FF
-      if (type === 'object' || type === 'function') {
-        var constructor = value.constructor;
-        if (constructor && constructor.__TCmeta) {
-          // The value is a custom type
-          // Let custom types also match 'object'
-          if (node === 'object') {
-            type = 'object';
-          } else {
-            while (constructor && constructor.__TCmeta) {
-              if (constructor.__TCmeta.type == node) {
-                type = node;
-                break;
+    // http://jsperf.com/switch-if-else/41 shows that switch is faster in most
+    // browsers
+    switch (type) {
+      // start by testing the most common types
+      case 'boolean':
+      case 'number':
+      case 'string':
+      case 'undefined':
+        break;
+      default:
+        // defer calling toString on the value since this would force boxing of
+        // primitives
+        var toStringType = toString.call(value).slice(8, -1);
+        // Then go on to the more complex tests
+        if (value === null) {
+          type = 'null';
+        } else if (toStringType === 'Function') {
+          // let functions with signatures also match 'function'
+          type = value.__TCmeta && node !== 'function'
+            ? value.__TCmeta.signature
+            : 'function';
+        } else if (type === 'object' || type === 'function') {
+          // HTMLObjectElements has a typeof function in FF
+          var constructor = value.constructor;
+          if (constructor && constructor.__TCmeta) {
+            // The value is a custom type
+            // Let custom types also match 'object'
+            if (node === 'object') {
+              type = 'object';
+            } else {
+              while (constructor && constructor.__TCmeta) {
+                if (constructor.__TCmeta.type == node) {
+                  type = node;
+                  break;
+                }
+                constructor = constructor.__TCmeta.superClass;
               }
-              constructor = constructor.__TCmeta.superClass;
+            }
+          } else if (typeof value.nodeType === 'number'
+                     && typeof value.nodeName === 'string') {
+            // Do not use instanceof Element etc. as eg. MooTools shadow this
+            switch (value.nodeType) {
+              case 1: type = 'DOMElement';
+                subType = value.nodeName.toUpperCase();
+                break;
+              case 3: type = 'DOMTextNode'; break;
+              case 8: type = 'Comment'; break;
+              case 9: type = 'DOMDocument'; break;
+              case 11: type = 'DOMElement';
+                subType = 'FRAGMENT';
+                break;
+            }
+          } else if (value == value.window && value == value.self) {
+            type = 'DOMWindow';
+          } else if (toStringType == 'XMLHttpRequest'
+                     || 'setRequestHeader' in value) {
+            // XMLHttpRequest stringType is "Object" on IE7/8 so we duck-type it
+            type = 'XMLHttpRequest';
+          } else {
+            // else, check if it is actually an array
+            switch (toStringType) {
+              case 'Error':
+                // let Error match inherited objects
+                type = node === 'Error'
+                  ? 'Error'
+                  : value.name;
+                break;
+              case 'Array':
+                if (value.length) {
+                  nextValue = value[0];
+                }
+                // fall through
+              case 'Object':
+              case 'RegExp':
+              case 'Date':
+                type = toStringType.toLowerCase();
+                break;
             }
           }
-        } else if ((value.nodeType === 1 || value.nodeType === 11)
-                   && typeof value.nodeName === 'string') {
-          // Do not use instanceof Element etc. as eg. MooTools shadow this
-          // If it's an HTMLElement, extract the subtype
-          type = 'DOMElement';
-          subType = value.nodeType === 11
-            ? 'FRAGMENT'
-            : value.nodeName.toUpperCase();
-        } else if (value.nodeType === 9) {
-          type = 'DOMDocument';
-        } else if (value.nodeType === 3) {
-          type = 'DOMTextNode';
-        } else if (value == value.window && value == value.self) {
-          type = 'DOMWindow';
-        } else if (toStringType == 'XMLHttpRequest'
-                   || 'setRequestHeader' in value) {
-          // XMLHttpRequest stringType is "Object" on IE7/8 so we duck-type it
-          type = 'XMLHttpRequest';
-        } else {
-          // else, check if it is actually an array
-          switch (toStringType) {
-            case 'Error':
-              // let Error match inherited objects
-              type = node === 'Error'
-                ? 'Error'
-                : value.name;
-              break;
-            case 'Array':
-              if (value.length) {
-                nextValue = value[0];
-              }
-              // fall through
-            case 'Object':
-            case 'RegExp':
-            case 'Date':
-              type = toStringType.toLowerCase();
-              break;
-          }
         }
-      }
     }
 
     if (nullable && /undefined|null/.test(type)) {
@@ -188,6 +200,20 @@ var __w, __t;
     return false;
   }
 
+  function report(error, framesToPop) {
+    try {
+      throw error;
+    } catch (e) {
+      // Pop to the frame calling the checked function, or to the
+      // checked function
+      e.framesToPop = framesToPop;
+      if (handler) {
+        handler(e);
+      } else {
+        console.error(error.message);
+      }
+    }
+  }
   /**
    * This function will loop over all arguments, where each argment is expected
    * to be in the form of `[variable, 'typehint', 'variablename']`.
@@ -209,22 +235,13 @@ var __w, __t;
         while (currentType.length) {
           actual += '<' + currentType.shift() + '>';
         }
-        var error = new TypeError('Type Mismatch for ' + name +
-                                  ': expected `' + expected +
-                                  '`, actual `' + actual +
-                                  '` (' + toString.call(value) + ')');
-        try {
-          throw error;
-        } catch (e) {
-          // Pop to the frame calling the checked function, or to the
-          // checked function
-          e.framesToPop = args[i][2] ? 2 : 1;
-          if (handler) {
-            handler(e);
-          } else {
-            console.error(error.message);
-          }
-        }
+        report(
+          new TypeError('Type Mismatch for ' + name +
+                        ': expected `' + expected +
+                        '`, actual `' + actual +
+                        '` (' + toString.call(value) + ')'),
+          args[i][2] ? 2 : 1
+        );
       }
     }
 
@@ -255,7 +272,7 @@ var __w, __t;
 })();
 /*/TC*/
 
-/* -yWVGvT20_M */
+/* _Psav_YfWfI */
 /**
  * This is a lightweigh implementation of require and __d which is used by the
  * JavaScript SDK.
@@ -4609,7 +4626,7 @@ __d("createArrayFrom",["hasArrayNature"],function(global,require,requireDynamic,
 var hasArrayNature = require('hasArrayNature');
 
 
-function createArrayFrom(obj) {
+function createArrayFrom(obj) {/*jshint validthis: true*/return __t([function(){
   if (!hasArrayNature(obj)) {
     return [obj];
   }
@@ -4620,7 +4637,7 @@ function createArrayFrom(obj) {
     return ret;
   }
   return Array.prototype.slice.call(obj);
-}
+}.apply(this,arguments), 'array']);}__w(createArrayFrom,{"signature":"function():array"});
 
 module.exports = createArrayFrom;
 
@@ -9536,7 +9553,7 @@ var IframePlugin = Type.extend({
     this.subscribe('xd.sdk_event', __w(function(/*object*/ message) {__t([message,'object','message']);
       var data = ES5('JSON', 'parse', false,message.data);
       data.pluginID = pluginId;
-      Event.fire(message.event, data);
+      Event.fire(message.event, data, elem);
     },{"signature":"function(object)"}));
 
 
@@ -11009,7 +11026,7 @@ var EdgeWidget = IframeWidget.extend({
 
   oneTimeSetup : function() {
     this.subscribe('xd.sdk_event', ES5(__w(function(/*object*/ message) {__t([message,'object','message']);
-      Event.fire(message.event, ES5('JSON', 'parse', false,message.data));
+      Event.fire(message.event, ES5('JSON', 'parse', false,message.data), this.dom);
       if (message.event == 'edge.create') {
         Helper.invokeHandler(
           this.getAttribute('on-create'), this, [this._attr.href]);
