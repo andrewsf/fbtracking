@@ -1,4 +1,4 @@
-/*1375389635,173062741,JIT Construction: v895306,en_US*/
+/*1380757324,168588863,JIT Construction: v955235,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -12,8 +12,8 @@ var setTimeout = window.setTimeout, setInterval = window.setInterval;var __DEV__
 function emptyFunction() {};
 var __w, __t;
 /**
- * @generated SignedSource<<67a8aacbcf72a96431d1207a036f093d>>
- * 
+ * @generated SignedSource<<1363a41e98760bd6b341e89953226306>>
+ *
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  * !! This file is a check-in of a static_upstream project!      !!
  * !!                                                            !!
@@ -24,7 +24,7 @@ var __w, __t;
  * !! 3) Use `fjs push-upstream` to copy your changes back to    !!
  * !!    static_upstream.                                        !!
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- * 
+ *
  * This is a very basic typechecker that does primitives as well as boxed
  * versions of the primitives.
  *
@@ -41,14 +41,17 @@ var __w, __t;
   var handler;
   var currentType;
   var toString = Object.prototype.toString;
+  var paused = false; // pause when there's a type check error in current tick
 
   /**
    * Mapping from types to interfaces that they implement.
    */
   var typeInterfaces = {
-    'DOMElement': ['DOMEventTarget'],
-    'DOMDocument': ['DOMEventTarget'],
-    'DOMWindow': ['DOMEventTarget']
+    'DOMElement': ['DOMEventTarget', 'DOMNode'],
+    'DOMDocument': ['DOMEventTarget', 'DOMNode'],
+    'DOMWindow': ['DOMEventTarget'],
+    'DOMTextNode': ['DOMNode'],
+    'Comment': ['DOMNode']
   };
 
   /**
@@ -223,30 +226,36 @@ var __w, __t;
    * the first variable is returned.
    */
   function check(/*check1, check2, ..*/) {
-    var args = Array.prototype.slice.call(arguments);
-    var i = args.length;
-    while (i--) {
-      var value = args[i][0];
-      var expected = args[i][1];
-      var name = args[i][2] || 'return value';
+    if (!paused) {
+      var args = Array.prototype.slice.call(arguments);
+      var i = args.length;
+      while (i--) {
+        var value = args[i][0];
+        var expected = args[i][1];
+        var name = args[i][2] || 'return value';
 
-      if (!matches(value, expected)) {
-        var actual = currentType.shift();
-        while (currentType.length) {
-          actual += '<' + currentType.shift() + '>';
+        if (!matches(value, expected)) {
+          var actual = currentType.shift();
+          while (currentType.length) {
+            actual += '<' + currentType.shift() + '>';
+          }
+          report(
+            new TypeError('Type Mismatch for ' + name +
+                          ': expected `' + expected +
+                          '`, actual `' + actual +
+                          '` (' + toString.call(value) + ')'),
+            args[i][2] ? 2 : 1
+          );
+          paused = true;
+          setTimeout(function()  {
+            paused = false;
+          }, 0);
         }
-        report(
-          new TypeError('Type Mismatch for ' + name +
-                        ': expected `' + expected +
-                        '`, actual `' + actual +
-                        '` (' + toString.call(value) + ')'),
-          args[i][2] ? 2 : 1
-        );
       }
     }
 
     // Always return the first value checked
-    return args[0][0];
+    return arguments[0][0];
   }
 
   /**
@@ -272,7 +281,7 @@ var __w, __t;
 })();
 /*/TC*/
 
-/* _Psav_YfWfI */
+/* YhVmBZdqnmG */
 /**
  * This is a lightweigh implementation of require and __d which is used by the
  * JavaScript SDK.
@@ -290,7 +299,7 @@ var require, __d;
   var defaultDeps =
     ['global', 'require', 'requireDynamic', 'requireLazy', 'module', 'exports'];
 
-  require = (/*TC*/__w(/*/TC*/ function(/*string*/ id, /*boolean?*/ soft) { /*TC*/__t([id,'string','id'],[soft,'?boolean','soft']);/*/TC*/ 
+  require = __w(function(/*string*/ id, /*boolean?*/ soft) {__t([id, 'string', 'id'], [soft, '?boolean', 'soft']);
     if (resolved.hasOwnProperty(id)) {
       return resolved[id];
     }
@@ -314,17 +323,17 @@ var require, __d;
         case 'require'       : dep = require; break;
         case 'requireDynamic': dep = require; break;
         case 'requireLazy'   : dep = null; break;
-        default              : dep = require(deps[i]);
+        default              : dep = require.call(null, deps[i]);
       }
       args.push(dep);
     }
     module.factory.apply(global, args);
     resolved[id] = module.exports;
     return module.exports;
-  } /*TC*/,{"signature":"function(string,?boolean)"})/*/TC*/);
+  }, {"signature":"function(string,?boolean)"});
 
-  __d = (/*TC*/__w(/*/TC*/ function(/*string*/ id, /*array<string>*/ deps, factory,
-      /*number?*/ _special) { /*TC*/__t([id,'string','id'],[deps,'array<string>','deps'],[_special,'?number','_special']);/*/TC*/ 
+  __d = __w(function(/*string*/ id, /*array<string>*/ deps, factory,
+      /*number?*/ _special) {__t([id, 'string', 'id'], [deps, 'array<string>', 'deps'], [_special, '?number', '_special']);
 
     switch(typeof factory) {
       case  'function':
@@ -336,7 +345,7 @@ var require, __d;
 
         // 3 signifies that this should be executed immediately
         if (_special === 3) {
-          require(id);
+          require.call(null, id);
         }
         break;
 
@@ -347,10 +356,10 @@ var require, __d;
       default:
         throw new TypeError('Wrong type for factory object');
     }
-  } /*TC*/,{"signature":"function(string,array<string>,?number)"})/*/TC*/);
+  }, {"signature":"function(string,array<string>,?number)"});
 })(this);
 
-/* RKKSzUmnACo */
+/* uCie8R2eCQ0 */
 var ES5 = function(){
 __d("ES5ArrayPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5ArrayPrototype
@@ -466,7 +475,7 @@ ES5ArrayPrototype.indexOf = function(val, index) {
 
 module.exports = ES5ArrayPrototype;
 
-/* NAP-RuTLpnZ */});
+/* qhAWVZe8x9s */});
 __d("ES5FunctionPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5FunctionPrototype
  */
@@ -501,7 +510,7 @@ ES5FunctionPrototype.bind = function(context /*, args... */) {
 
 module.exports = ES5FunctionPrototype;
 
-/* _NvX4wS43vs */});
+/* E-HyJezrgQm */});
 __d("ES5StringPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5StringPrototype
  */
@@ -522,7 +531,7 @@ ES5StringPrototype.trim = function() {
 
 module.exports = ES5StringPrototype;
 
-/* RMbdS-q0KlH */});
+/* qNiKjYXBLFg */});
 __d("ES5Array",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5Array
  */
@@ -535,7 +544,7 @@ ES5Array.isArray = function(object) {
 
 module.exports = ES5Array;
 
-/* KneucaVKSHb */});
+/* l1hzaJEXeLt */});
 __d("ES5Object",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5Object
  */
@@ -606,7 +615,7 @@ ES5Object.keys = function(object) {
 
 module.exports = ES5Object;
 
-/* kPRE0tsyoBt */});
+/* AthxqEMCBRt */});
 __d("ES5Date",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5Date
  */
@@ -618,10 +627,10 @@ ES5Date.now = function() {
 
 module.exports = ES5Date;
 
-/* Fr1Gig53nlp */});
+/* gWLwAqneaJw */});
 __d("JSON3",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule JSON3
- * @option preserve-header
+ * @preserve-header
  *
  *! JSON v3.2.3 | http://bestiejs.github.com/json3 | Copyright 2012, Kit Cambridge | http://kit.mit-license.org
  */
@@ -1375,7 +1384,7 @@ __d("JSON3",[],function(global,require,requireDynamic,requireLazy,module,exports
   }
 }).call(this);
 
-/* up5uXCxmxRq */});
+/* SsCtFuyH_ff */});
 __d("ES5",["ES5ArrayPrototype","ES5FunctionPrototype","ES5StringPrototype","ES5Array","ES5Object","ES5Date","JSON3"],function(global,require,requireDynamic,requireLazy,module,exports) {/**
  * @providesModule ES5
  *
@@ -1458,18 +1467,18 @@ function ES5(lhs, rhs, proto/*, args*/) {
 
 module.exports = ES5;
 
-/* E4LBGjrVKdW */});ES5 = require('ES5');
+/* 7aaOszGTdDe */});ES5 = require('ES5');
 return ES5.apply(null, arguments);
 };
 
-__d("sdk.RuntimeConfig",[],{"locale":"en_US","rtl":false});__d("XDConfig",[],{"XdUrl":"connect\/xd_arbiter.php?version=25","Flash":{"path":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yY\/r\/tkKkN2MZL-q.swf"},"useCdn":true});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("PluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});__d("CssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_reset > div{overflow:hidden}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100\u0025\n}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n.fbpluginrecommendationsbarleft{left:10px}\n.fbpluginrecommendationsbarright{right:10px}","components":["fb.css.base","fb.css.dialog","fb.css.iframewidget","fb.css.connectbarwidget","fb.css.edgecommentwidget","fb.css.sendbuttonformwidget","fb.css.plugin.recommendationsbar"]});__d("CanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("ConnectBarConfig",[],{"imgs":{"buttonUrl":"rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png","missingProfileUrl":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"}});__d("SDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"features":{"xfbml_profile_pic_server":true,"error_handling":{"rate":4},"e2e_ping_tracking":{"rate":1.0e-6}},"api":{"mode":"warn","whitelist":["Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Data","Data.process","Data.query","Data.query:wait","Data.waitOn","Data.waitOn:wait","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.cancelFlow","Payment.continueFlow","Payment.init","Payment.parse","Payment.setSize","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui","ui:subscribe"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yB\/r\/YV5wijq5fkW.swf"}});
+__d("sdk.RuntimeConfig",[],{"locale":"en_US","rtl":false});__d("XDConfig",[],{"XdUrl":"connect\/xd_arbiter.php?version=27","Flash":{"path":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yb\/r\/e3FGq1GkcH5.swf"},"useCdn":true});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("PluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});__d("CssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_reset > div{overflow:hidden}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n.fbpluginrecommendationsbarleft{left:10px}\n.fbpluginrecommendationsbarright{right:10px}","components":["fb.css.base","fb.css.dialog","fb.css.iframewidget","fb.css.connectbarwidget","fb.css.edgecommentwidget","fb.css.sendbuttonformwidget","fb.css.plugin.recommendationsbar"]});__d("CanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("ConnectBarConfig",[],{"imgs":{"buttonUrl":"rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png","missingProfileUrl":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"}});__d("SDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"features":{"xfbml_profile_pic_server":true,"error_handling":{"rate":4},"e2e_ping_tracking":{"rate":1.0e-6}},"api":{"mode":"warn","whitelist":["Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Data","Data.process","Data.query","Data.query:wait","Data.waitOn","Data.waitOn:wait","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.cancelFlow","Payment.continueFlow","Payment.init","Payment.parse","Payment.setSize","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui","ui:subscribe"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yB\/r\/YV5wijq5fkW.swf"}});
 __d("QueryString",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 
 
-function encode(/*object*/ bag) /*string*/ {__t([bag,'object','bag']);/*jshint validthis: true*/return __t([function(){
+function encode(/*object*/ bag) /*string*/ {__t([bag, 'object', 'bag']);return __t([function() {
   var pairs = [];
-  ES5(ES5('Object', 'keys', false,bag), 'forEach', true,function(key) {
+  ES5(ES5('Object', 'keys', false,bag).sort(), 'forEach', true,function(key) {
     var value = bag[key];
     
     if (typeof value === 'undefined') {
@@ -1486,10 +1495,10 @@ function encode(/*object*/ bag) /*string*/ {__t([bag,'object','bag']);/*jshint v
                encodeURIComponent(value));
   });
   return pairs.join('&');
-}.apply(this,arguments), 'string']);}__w(encode,{"signature":"function(object):string"});
+}.apply(this, arguments), 'string']);}__w(encode, {"signature":"function(object):string"}); 
 
 
-function decode(/*string*/ str, /*boolean?*/ strict) /*object*/ {__t([str,'string','str'],[strict,'?boolean','strict']);/*jshint validthis: true*/return __t([function(){
+function decode(/*string*/ str, /*?boolean*/ strict) /*object*/ {__t([str, 'string', 'str'], [strict, '?boolean', 'strict']);return __t([function() {
   var data = {};
   if (str === '') {
     return data;
@@ -1507,16 +1516,16 @@ function decode(/*string*/ str, /*boolean?*/ strict) /*object*/ {__t([str,'strin
       : null;
   }
   return data;
-}.apply(this,arguments), 'object']);}__w(decode,{"signature":"function(string,?boolean):object"});
+}.apply(this, arguments), 'object']);}__w(decode, {"signature":"function(string,?boolean):object"}); 
 
 
-function appendToUrl(/*string*/ url, params) /*string*/ {__t([url,'string','url']);/*jshint validthis: true*/return __t([function(){
+function appendToUrl(/*string*/ url, params) /*string*/ {__t([url, 'string', 'url']);return __t([function() {
   return url +
     (~ES5(url, 'indexOf', true,'?') ? '&' : '?') +
     (typeof params === 'string'
       ? params
       : QueryString.encode(params));
-}.apply(this,arguments), 'string']);}__w(appendToUrl,{"signature":"function(string):string"});
+}.apply(this, arguments), 'string']);}__w(appendToUrl, {"signature":"function(string):string"}); 
 
 var QueryString = {
   encode: encode,
@@ -1591,13 +1600,10 @@ module.exports = AssertionError;
 __d("sprintf",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 
-function sprintf(/*string*/ str, argsdotdot) /*string*/ {__t([str,'string','str']);/*jshint validthis: true*/return __t([function(){
-  argsdotdot = Array.prototype.slice.call(arguments, 1);
+function sprintf(format ) {__t([format, 'string', 'format']);var args=Array.prototype.slice.call(arguments,1);
   var index = 0;
-  return str.replace(/%s/g, function(match) {
-    return argsdotdot[index++];
-  });
-}.apply(this,arguments), 'string']);}__w(sprintf,{"signature":"function(string):string"});
+  return format.replace(/%s/g, function(match)  {return args[index++];});
+}__w(sprintf, {"signature":"function(string)"}); 
 
 module.exports = sprintf;
 
@@ -1609,15 +1615,15 @@ var AssertionError = require('AssertionError');
 var sprintf = require('sprintf');
 
 
-function assert(/*boolean*/ expression, /*?string*/ message) /*boolean*/ {__t([expression,'boolean','expression'],[message,'?string','message']);/*jshint validthis: true*/return __t([function(){
+function assert(/*boolean*/ expression, /*?string*/ message) /*boolean*/ {__t([expression, 'boolean', 'expression'], [message, '?string', 'message']);return __t([function() {
   if (typeof expression !== 'boolean' || !expression) {
     throw new AssertionError(message);
   }
   return expression;
-}.apply(this,arguments), 'boolean']);}__w(assert,{"signature":"function(boolean,?string):boolean"});
+}.apply(this, arguments), 'boolean']);}__w(assert, {"signature":"function(boolean,?string):boolean"}); 
 
 
-function assertType(/*string*/ type, expression, /*?string*/ message) {__t([type,'string','type'],[message,'?string','message']);
+function assertType(/*string*/ type, expression, /*?string*/ message) {__t([type, 'string', 'type'], [message, '?string', 'message']);
   var actualType;
 
   if (expression === undefined) {
@@ -1634,18 +1640,18 @@ function assertType(/*string*/ type, expression, /*?string*/ message) {__t([type
     message || sprintf('Expression is of type %s, not %s', actualType, type)
   );
   return expression;
-}__w(assertType,{"signature":"function(string,?string)"});
+}__w(assertType, {"signature":"function(string,?string)"}); 
 
 
-function assertInstanceOf(/*function*/ type, expression, /*?string*/ message) {__t([type,'function','type'],[message,'?string','message']);
+function assertInstanceOf(/*function*/ type, expression, /*?string*/ message) {__t([type, 'function', 'type'], [message, '?string', 'message']);
   assert(
     expression instanceof type,
     message || 'Expression not instance of type'
   );
   return expression;
-}__w(assertInstanceOf,{"signature":"function(function,?string)"});
+}__w(assertInstanceOf, {"signature":"function(function,?string)"}); 
 
-function define(/*string*/ type, /*function*/ test) {__t([type,'string','type'],[test,'function','test']);
+function define(/*string*/ type, /*function*/ test) {__t([type, 'string', 'type'], [test, 'function', 'test']);
   Assert['is' + type] = test;
   Assert['maybe' + type] = function(expression, message) {
     
@@ -1653,23 +1659,23 @@ function define(/*string*/ type, /*function*/ test) {__t([type,'string','type'],
       test(expression, message);
     }
   };
-}__w(define,{"signature":"function(string,function)"});
+}__w(define, {"signature":"function(string,function)"}); 
 
 var Assert = {
   isInstanceOf: assertInstanceOf,
   isTrue      : assert,
-  isTruthy    : __w(function(expression, /*?string*/ message) /*boolean*/ {__t([message,'?string','message']);/*jshint validthis: true*/return __t([function(){
+  isTruthy    : __w(function(expression, /*?string*/ message) /*boolean*/ {__t([message, '?string', 'message']);return __t([function() {
     return assert(!!expression, message);
-  }.apply(this,arguments), 'boolean']);},{"signature":"function(?string):boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function(?string):boolean"}),
   type        : assertType,
-  define      : __w(function(/*string*/ type, /*function*/ fn) {__t([type,'string','type'],[fn,'function','fn']);
+  define      : __w(function(/*string*/ type, /*function*/ fn) {__t([type, 'string', 'type'], [fn, 'function', 'fn']);
     type = type.substring(0, 1).toUpperCase() +
       type.substring(1).toLowerCase();
 
     define(type, function(expression, message) {
       assert(fn(expression), message);
     });
-  },{"signature":"function(string,function)"})
+  }, {"signature":"function(string,function)"})
 };
 
 
@@ -1682,9 +1688,9 @@ ES5(['Array',
  'Object',
  'Regexp',
  'String',
- 'Undefined'], 'forEach', true,__w(function(/*string*/ type) {__t([type,'string','type']);
+ 'Undefined'], 'forEach', true,__w(function(/*string*/ type) {__t([type, 'string', 'type']);
    define(type, ES5(assertType, 'bind', true,null, type.toLowerCase()));
- },{"signature":"function(string)"}));
+ }, {"signature":"function(string)"}));
 
 module.exports = Assert;
 
@@ -1701,10 +1707,10 @@ function Type() {
       mixins[i].apply(this, arguments);
     }
   }
-}__w(Type,{"type":"Type"});
+}__w(Type, {"type":"Type"}); 
 
 
-function instanceOf(/*function*/ constructor, which) /*boolean*/ {__t([constructor,'function','constructor']);/*jshint validthis: true*/return __t([function(){
+function instanceOf(/*function*/ constructor, which) /*boolean*/ {__t([constructor, 'function', 'constructor']);return __t([function() {
 
   
   if (which instanceof constructor) {
@@ -1721,10 +1727,10 @@ function instanceOf(/*function*/ constructor, which) /*boolean*/ {__t([construct
   }
 
   return false;
-}.apply(this,arguments), 'boolean']);}__w(instanceOf,{"signature":"function(function):boolean"});
+}.apply(this, arguments), 'boolean']);}__w(instanceOf, {"signature":"function(function):boolean"}); 
 
 
-function mixin(/*function*/ to, from) {__t([to,'function','to']);
+function mixin(/*function*/ to, from) {__t([to, 'function', 'to']);
   var prototype = to.prototype;
 
   if (!ES5('Array', 'isArray', false,from)) {
@@ -1743,11 +1749,11 @@ function mixin(/*function*/ to, from) {__t([to,'function','to']);
       prototype[key] = mixinFrom[key];
     });
   }
-}__w(mixin,{"signature":"function(function)"});
+}__w(mixin, {"signature":"function(function)"}); 
 
 
 function extend(/*?function*/ from, /*?object*/ prototype, mixins)
-    /*function*/ {__t([from,'?function','from'],[prototype,'?object','prototype']);/*jshint validthis: true*/return __t([function(){
+    /*function*/ {__t([from, '?function', 'from'], [prototype, '?object', 'prototype']);return __t([function() {
   var constructor = prototype && prototype.hasOwnProperty('constructor')
     ? prototype.constructor
     : function() {this.parent.apply(this, arguments);};
@@ -1789,29 +1795,29 @@ function extend(/*?function*/ from, /*?object*/ prototype, mixins)
   };
 
   // Allow the new type to call this.parentCall('method'/*, args*/);
-  constructor.prototype.parentCall = __w(function(/*string*/ method) {__t([method,'string','method']);
+  constructor.prototype.parentCall = __w(function(/*string*/ method) {__t([method, 'string', 'method']);
     return from.prototype[method].apply(this,
       Array.prototype.slice.call(arguments, 1));
-  },{"signature":"function(string)"});
+  }, {"signature":"function(string)"});
 
-  constructor.extend = __w(function(/*?object*/ prototype, mixins) {__t([prototype,'?object','prototype']);
+  constructor.extend = __w(function(/*?object*/ prototype, mixins) {__t([prototype, '?object', 'prototype']);
     return extend(this, prototype, mixins);
-  },{"signature":"function(?object)"});
+  }, {"signature":"function(?object)"});
   return constructor;
-}.apply(this,arguments), 'function']);}__w(extend,{"signature":"function(?function,?object):function"});
+}.apply(this, arguments), 'function']);}__w(extend, {"signature":"function(?function,?object):function"}); 
 
 copyProperties(Type.prototype, {
-  instanceOf: __w(function(/*function*/ type) /*boolean*/ {__t([type,'function','type']);/*jshint validthis: true*/return __t([function(){
+  instanceOf: __w(function(/*function*/ type) /*boolean*/ {__t([type, 'function', 'type']);return __t([function() {
     return instanceOf(type, this);
-  }.apply(this,arguments), 'boolean']);},{"signature":"function(function):boolean"})
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function(function):boolean"})
 });
 
 copyProperties(Type, {
-  extend: __w(function(prototype, mixins) /*function*/ {/*jshint validthis: true*/return __t([function(){
+  extend: __w(function(prototype, mixins) /*function*/ {return __t([function() {
     return typeof prototype === 'function'
       ? extend.apply(null, arguments)
       : extend(null, prototype, mixins);
-  }.apply(this,arguments), 'function']);},{"signature":"function():function"}),
+  }.apply(this, arguments), 'function']);}, {"signature":"function():function"}),
   instanceOf: instanceOf
 });
 
@@ -1822,12 +1828,12 @@ __d("ObservableMixin",[],function(global,require,requireDynamic,requireLazy,modu
 
 function ObservableMixin() {
   this.__observableEvents = {};
-}__w(ObservableMixin,{"type":"ObservableMixin"});
+}__w(ObservableMixin, {"type":"ObservableMixin"}); 
 
 ObservableMixin.prototype = {
 
   
-  inform: __w(function(/*string*/ what /*, args*/) {__t([what,'string','what']);
+  inform: __w(function(/*string*/ what /*, args*/) {__t([what, 'string', 'what']);
 
     var args = Array.prototype.slice.call(arguments, 1);
     var list = Array.prototype.slice.call(this.getSubscribers(what));
@@ -1846,23 +1852,23 @@ ObservableMixin.prototype = {
       }
     }
     return this;
-  },{"signature":"function(string)"}),
+  }, {"signature":"function(string)"}),
 
   
-  getSubscribers: __w(function(/*string*/ toWhat) /*array*/ {__t([toWhat,'string','toWhat']);/*jshint validthis: true*/return __t([function(){
+  getSubscribers: __w(function(/*string*/ toWhat) /*array*/ {__t([toWhat, 'string', 'toWhat']);return __t([function() {
 
     return this.__observableEvents[toWhat] ||
       (this.__observableEvents[toWhat] = []);
-  }.apply(this,arguments), 'array']);},{"signature":"function(string):array"}),
+  }.apply(this, arguments), 'array']);}, {"signature":"function(string):array"}),
 
   
-  clearSubscribers: __w(function(/*string*/ toWhat) {__t([toWhat,'string','toWhat']);
+  clearSubscribers: __w(function(/*string*/ toWhat) {__t([toWhat, 'string', 'toWhat']);
 
     if (toWhat) {
       this.__observableEvents[toWhat] = [];
     }
     return this;
-  },{"signature":"function(string)"}),
+  }, {"signature":"function(string)"}),
 
   
   clearAllSubscribers: function() {
@@ -1871,15 +1877,15 @@ ObservableMixin.prototype = {
   },
 
   
-  subscribe: __w(function(/*string*/ toWhat, /*function*/ withWhat) {__t([toWhat,'string','toWhat'],[withWhat,'function','withWhat']);
+  subscribe: __w(function(/*string*/ toWhat, /*function*/ withWhat) {__t([toWhat, 'string', 'toWhat'], [withWhat, 'function', 'withWhat']);
 
     var list = this.getSubscribers(toWhat);
     list.push(withWhat);
     return this;
-  },{"signature":"function(string,function)"}),
+  }, {"signature":"function(string,function)"}),
 
   
-  unsubscribe: __w(function(/*string*/ toWhat, /*function*/ withWhat) {__t([toWhat,'string','toWhat'],[withWhat,'function','withWhat']);
+  unsubscribe: __w(function(/*string*/ toWhat, /*function*/ withWhat) {__t([toWhat, 'string', 'toWhat'], [withWhat, 'function', 'withWhat']);
 
     var list = this.getSubscribers(toWhat);
     for (var i = 0; i < list.length; i++) {
@@ -1889,10 +1895,10 @@ ObservableMixin.prototype = {
       }
     }
     return this;
-  },{"signature":"function(string,function)"}),
+  }, {"signature":"function(string,function)"}),
 
   
-  monitor: __w(function(/*string*/ toWhat, /*function*/ withWhat) {__t([toWhat,'string','toWhat'],[withWhat,'function','withWhat']);
+  monitor: __w(function(/*string*/ toWhat, /*function*/ withWhat) {__t([toWhat, 'string', 'toWhat'], [withWhat, 'function', 'withWhat']);
     if (!withWhat()) {
       var monitor = ES5(function(value) {
         if (withWhat.apply(withWhat, arguments)) {
@@ -1902,7 +1908,7 @@ ObservableMixin.prototype = {
       this.subscribe(toWhat, monitor);
     }
     return this;
-  },{"signature":"function(string,function)"})
+  }, {"signature":"function(string,function)"})
 
 };
 
@@ -1916,14 +1922,14 @@ var Type = require('Type');
 var ObservableMixin = require('ObservableMixin');
 
 var Model = Type.extend({
-  constructor: __w(function(/*object*/ properties) {__t([properties,'object','properties']);
+  constructor: __w(function(/*object*/ properties) {__t([properties, 'object', 'properties']);
     this.parent();
 
     
     var propContainer = {};
     var model = this;
 
-    ES5(ES5('Object', 'keys', false,properties), 'forEach', true,__w(function(/*string*/ name) {__t([name,'string','name']);
+    ES5(ES5('Object', 'keys', false,properties), 'forEach', true,__w(function(/*string*/ name) {__t([name, 'string', 'name']);
       
       propContainer[name] = properties[name];
 
@@ -1941,8 +1947,8 @@ var Model = Type.extend({
       model['get' + name] = function() {
         return propContainer[name];
       };
-    },{"signature":"function(string)"}));
-  },{"signature":"function(object)"})
+    }, {"signature":"function(string)"}));
+  }, {"signature":"function(object)"})
 }, ObservableMixin);
 
 module.exports = Model;
@@ -1982,10 +1988,10 @@ copyProperties(Runtime, {
 
   ENVIRONMENTS: ENVIRONMENTS,
 
-  isEnvironment: __w(function(/*number*/ target) /*boolean*/ {__t([target,'number','target']);/*jshint validthis: true*/return __t([function(){
+  isEnvironment: __w(function(/*number*/ target) /*boolean*/ {__t([target, 'number', 'target']);return __t([function() {
     var environment = this.getEnvironment();
     return (target | environment) === environment;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function(number):boolean"})
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function(number):boolean"})
 });
 
 (function() {
@@ -2015,7 +2021,7 @@ var Runtime = require('sdk.Runtime');
 var domain = null;
 
 
-function setRaw(/*string*/ prefix, /*string*/ val, /*number*/ ts) {__t([prefix,'string','prefix'],[val,'string','val'],[ts,'number','ts']);
+function setRaw(/*string*/ prefix, /*string*/ val, /*number*/ ts) {__t([prefix, 'string', 'prefix'], [val, 'string', 'val'], [ts, 'number', 'ts']);
   prefix = prefix + Runtime.getClientID();
 
   var useDomain = domain && domain !== '.';
@@ -2033,18 +2039,18 @@ function setRaw(/*string*/ prefix, /*string*/ val, /*number*/ ts) {__t([prefix,'
     (val && ts === 0 ? '' : '; expires=' + expires) +
     '; path=/' +
     (useDomain ? '; domain=' + domain : '');
-}__w(setRaw,{"signature":"function(string,string,number)"});
+}__w(setRaw, {"signature":"function(string,string,number)"}); 
 
-function getRaw(/*string*/ prefix) /*string?*/ {__t([prefix,'string','prefix']);/*jshint validthis: true*/return __t([function(){
+function getRaw(/*string*/ prefix) /*string?*/ {__t([prefix, 'string', 'prefix']);return __t([function() {
   prefix = prefix + Runtime.getClientID();
   var regExp = new RegExp('\\b' + prefix + '=([^;]*)\\b');
   return regExp.test(document.cookie)
     ? RegExp.$1
     : null;
-}.apply(this,arguments), '?string']);}__w(getRaw,{"signature":"function(string):string?"});
+}.apply(this, arguments), '?string']);}__w(getRaw, {"signature":"function(string):string?"}); 
 
 var Cookie = {
-  setDomain: __w(function(/*string?*/ val) {__t([val,'?string','val']);
+  setDomain: __w(function(/*string?*/ val) {__t([val, '?string', 'val']);
     domain = val;
     
     var meta  = QueryString.encode({
@@ -2053,14 +2059,14 @@ var Cookie = {
     var expiration = new Date();
     expiration.setFullYear(expiration.getFullYear() + 1);
     setRaw('fbm_', meta, expiration.getTime());
-  },{"signature":"function(?string)"}),
+  }, {"signature":"function(?string)"}),
 
-  getDomain: __w(function() /*string?*/ {/*jshint validthis: true*/return __t([function(){
+  getDomain: __w(function() /*string?*/ {return __t([function() {
     return domain;
-  }.apply(this,arguments), '?string']);},{"signature":"function():string?"}),
+  }.apply(this, arguments), '?string']);}, {"signature":"function():string?"}),
 
   
-  loadMeta: __w(function() /*object?*/ {/*jshint validthis: true*/return __t([function(){
+  loadMeta: __w(function() /*object?*/ {return __t([function() {
     var cookie = getRaw('fbm_');
     if (cookie) {
       // url encoded session stored as "sub-cookies"
@@ -2071,22 +2077,22 @@ var Cookie = {
       }
       return meta;
     }
-  }.apply(this,arguments), '?object']);},{"signature":"function():object?"}),
+  }.apply(this, arguments), '?object']);}, {"signature":"function():object?"}),
 
   
-  loadSignedRequest: __w(function() /*string?*/ {/*jshint validthis: true*/return __t([function(){
+  loadSignedRequest: __w(function() /*string?*/ {return __t([function() {
     return getRaw('fbsr_');
-  }.apply(this,arguments), '?string']);},{"signature":"function():string?"}),
+  }.apply(this, arguments), '?string']);}, {"signature":"function():string?"}),
 
   
   setSignedRequestCookie: __w(function(/*string*/ signedRequest,
-      /*number*/ expiration) {__t([signedRequest,'string','signedRequest'],[expiration,'number','expiration']);
+      /*number*/ expiration) {__t([signedRequest, 'string', 'signedRequest'], [expiration, 'number', 'expiration']);
     if (!signedRequest) {
       throw new Error('Value passed to Cookie.setSignedRequestCookie ' +
                       'was empty.');
     }
     setRaw('fbsr_', signedRequest, expiration);
-  },{"signature":"function(string,number)"}),
+  }, {"signature":"function(string,number)"}),
 
   
   clearSignedRequestCookie: function() {
@@ -2117,20 +2123,20 @@ var hasBug;
 
 
 
-function test() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+function test() /*boolean*/ {return __t([function() {
     var form = document.createElement("form"),
         input = form.appendChild(document.createElement("input"));
     input.name = guid();
     hasBug = input !== form.elements[input.name];
     form = input = null;
     return hasBug;
-}.apply(this,arguments), 'boolean']);}__w(test,{"signature":"function():boolean"});
+}.apply(this, arguments), 'boolean']);}__w(test, {"signature":"function():boolean"}); 
 
-function hasNamePropertyBug() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+function hasNamePropertyBug() /*boolean*/ {return __t([function() {
   return typeof hasBug === 'undefined'
     ? test()
     : hasBug;
-}.apply(this,arguments), 'boolean']);}__w(hasNamePropertyBug,{"signature":"function():boolean"});
+}.apply(this, arguments), 'boolean']);}__w(hasNamePropertyBug, {"signature":"function():boolean"}); 
 
 module.exports = hasNamePropertyBug;
 
@@ -2139,7 +2145,7 @@ __d("wrapFunction",[],function(global,require,requireDynamic,requireLazy,module,
 
 var wrappers = {};
 function wrapFunction(/*function*/ fn, /*string?*/ type, /*string?*/ source)
-    /*function*/ {__t([fn,'function','fn'],[type,'?string','type'],[source,'?string','source']);/*jshint validthis: true*/return __t([function(){
+    /*function*/ {__t([fn, 'function', 'fn'], [type, '?string', 'type'], [source, '?string', 'source']);return __t([function() {
   type = type || 'default';
 
   return function() {
@@ -2149,12 +2155,12 @@ function wrapFunction(/*function*/ fn, /*string?*/ type, /*string?*/ source)
 
     return callee.apply(this, arguments);
   };
-}.apply(this,arguments), 'function']);}__w(wrapFunction,{"signature":"function(function,?string,?string):function"});
+}.apply(this, arguments), 'function']);}__w(wrapFunction, {"signature":"function(function,?string,?string):function"}); 
 
-wrapFunction.setWrapper = __w(function(/*function*/ fn, /*string?*/ type) {__t([fn,'function','fn'],[type,'?string','type']);
+wrapFunction.setWrapper = __w(function(/*function*/ fn, /*string?*/ type) {__t([fn, 'function', 'fn'], [type, '?string', 'type']);
   type = type || 'default';
   wrappers[type] = fn;
-},{"signature":"function(function,?string)"});
+}, {"signature":"function(function,?string)"});
 
 module.exports = wrapFunction;
 
@@ -2168,31 +2174,31 @@ var add, remove;
 if (window.addEventListener) {
 
   
-  add = __w(function(target, /*string*/ name, /*function*/ listener) {__t([name,'string','name'],[listener,'function','listener']);
+  add = __w(function(target, /*string*/ name, /*function*/ listener) {__t([name, 'string', 'name'], [listener, 'function', 'listener']);
     listener.wrapper = wrapFunction(listener, 'entry', target + ':' + name);
     target.addEventListener(name, listener.wrapper, false);
-  },{"signature":"function(string,function)"});
-  remove = __w(function(target, /*string*/ name, /*function*/ listener) {__t([name,'string','name'],[listener,'function','listener']);
+  }, {"signature":"function(string,function)"});
+  remove = __w(function(target, /*string*/ name, /*function*/ listener) {__t([name, 'string', 'name'], [listener, 'function', 'listener']);
     target.removeEventListener(name, listener.wrapper, false);
-  },{"signature":"function(string,function)"});
+  }, {"signature":"function(string,function)"});
 
 } else if (window.attachEvent) {
 
   
-  add = __w(function(target, /*string*/ name, /*function*/ listener) {__t([name,'string','name'],[listener,'function','listener']);
+  add = __w(function(target, /*string*/ name, /*function*/ listener) {__t([name, 'string', 'name'], [listener, 'function', 'listener']);
     listener.wrapper = wrapFunction(listener, 'entry', target + ':' + name);
     target.attachEvent('on' + name, listener.wrapper);
-  },{"signature":"function(string,function)"});
-  remove = __w(function(target, /*string*/ name, /*function*/ listener) {__t([name,'string','name'],[listener,'function','listener']);
+  }, {"signature":"function(string,function)"});
+  remove = __w(function(target, /*string*/ name, /*function*/ listener) {__t([name, 'string', 'name'], [listener, 'function', 'listener']);
     target.detachEvent('on' + name, listener.wrapper);
-  },{"signature":"function(string,function)"});
+  }, {"signature":"function(string,function)"});
 
 }
 
 var DOMEventListener = {
 
   
-  add: __w(function(target, /*string*/ name, /*function*/ listener) {__t([name,'string','name'],[listener,'function','listener']);
+  add: __w(function(target, /*string*/ name, /*function*/ listener) {__t([name, 'string', 'name'], [listener, 'function', 'listener']);
     
     
     add(target, name, listener);
@@ -2205,7 +2211,7 @@ var DOMEventListener = {
         target = null;
       }
     };
-  },{"signature":"function(string,function)"}),
+  }, {"signature":"function(string,function)"}),
 
   
   remove: remove
@@ -2221,7 +2227,7 @@ var guid = require('guid');
 var hasNamePropertyBug = require('hasNamePropertyBug');
 var DOMEventListener = require('DOMEventListener');
 
-function createIframe(/*object*/ opts) /*DOMElement*/ {__t([opts,'object','opts']);/*jshint validthis: true*/return __t([function(){
+function createIframe(/*object*/ opts) /*DOMElement*/ {__t([opts, 'object', 'opts']);return __t([function() {
   opts = copyProperties({}, opts);
   var frame;
   var name = opts.name || guid();
@@ -2287,7 +2293,7 @@ function createIframe(/*object*/ opts) /*DOMElement*/ {__t([opts,'object','opts'
   // "javascript:false" to work around the IE issue mentioned above)
   frame.src = src;
   return frame;
-}.apply(this,arguments), 'DOMElement']);}__w(createIframe,{"signature":"function(object):DOMElement"});
+}.apply(this, arguments), 'DOMElement']);}__w(createIframe, {"signature":"function(object):DOMElement"}); 
 
 module.exports = createIframe;
 
@@ -2300,12 +2306,12 @@ var rootElement,
 
 // `obj || default` pattern to account for 'resetting'.
 var DOMWrapper = {
-  setRoot: __w(function(/*DOMElement?*/ root) {__t([root,'?DOMElement','root']);
+  setRoot: __w(function(/*DOMElement?*/ root) {__t([root, '?DOMElement', 'root']);
     rootElement = root;
-  },{"signature":"function(?DOMElement)"}),
-  getRoot: __w(function() /*DOMElement*/ {/*jshint validthis: true*/return __t([function(){
+  }, {"signature":"function(?DOMElement)"}),
+  getRoot: __w(function() /*DOMElement*/ {return __t([function() {
     return rootElement || document.body;
-  }.apply(this,arguments), 'DOMElement']);},{"signature":"function():DOMElement"}),
+  }.apply(this, arguments), 'DOMElement']);}, {"signature":"function():DOMElement"}),
   setWindow: function(win) {
     windowRef = win;
   },
@@ -2321,7 +2327,7 @@ __d("sdk.feature",["SDKConfig"],function(global,require,requireDynamic,requireLa
 
 var SDKConfig = requireDynamic('SDKConfig');
 
-function feature(/*string*/ name, defaultValue) {__t([name,'string','name']);
+function feature(/*string*/ name, defaultValue) {__t([name, 'string', 'name']);
   if (SDKConfig.features && name in SDKConfig.features) {
     var value = SDKConfig.features[name];
     if (typeof value === 'object' && typeof value.rate === 'number') {
@@ -2338,7 +2344,7 @@ function feature(/*string*/ name, defaultValue) {__t([name,'string','name']);
   return typeof defaultValue !== 'undefined'
     ? defaultValue
     : null;
-}__w(feature,{"signature":"function(string)"});
+}__w(feature, {"signature":"function(string)"}); 
 
 module.exports = feature;
 
@@ -2376,7 +2382,7 @@ function _populate() {
   
   
   var uas = navigator.userAgent;
-  var agent = /(?:MSIE.(\d+\.\d+))|(?:(?:Firefox|GranParadiso|Iceweasel).(\d+\.\d+))|(?:Opera(?:.+Version.|.)(\d+\.\d+))|(?:AppleWebKit.(\d+(?:\.\d+)?))/.exec(uas);
+  var agent = /(?:MSIE.(\d+\.\d+))|(?:(?:Firefox|GranParadiso|Iceweasel).(\d+\.\d+))|(?:Opera(?:.+Version.|.)(\d+\.\d+))|(?:AppleWebKit.(\d+(?:\.\d+)?))|(?:Trident\/\d+\.\d+.*rv:(\d+\.\d+))/.exec(uas);
   var os    = /(Mac OS X)|(Windows)|(Linux)/.exec(uas);
 
   _iphone = /\b(iPhone|iP[ao]d)/.exec(uas);
@@ -2393,7 +2399,8 @@ function _populate() {
   _win64 = !!(/Win64/.exec(uas));
 
   if (agent) {
-    _ie = agent[1] ? parseFloat(agent[1]) : NaN;
+    _ie = agent[1] ? parseFloat(agent[1]) : (
+          agent[5] ? parseFloat(agent[5]) : NaN);
     
     if (_ie && document.documentMode) {
       _ie = document.documentMode;
@@ -2522,7 +2529,7 @@ __d("sdk.getContextType",["UserAgent","sdk.Runtime"],function(global,require,req
 var UserAgent = require('UserAgent');
 var Runtime = require('sdk.Runtime');
 
-function getContextType() /*number*/ {/*jshint validthis: true*/return __t([function(){
+function getContextType() /*number*/ {return __t([function() {
   
   
   
@@ -2539,7 +2546,7 @@ function getContextType() /*number*/ {/*jshint validthis: true*/return __t([func
     return 5;
   }
   return 1;
-}.apply(this,arguments), 'number']);}__w(getContextType,{"signature":"function():number"});
+}.apply(this, arguments), 'number']);}__w(getContextType, {"signature":"function():number"}); 
 
 module.exports = getContextType;
 
@@ -2550,7 +2557,7 @@ var UrlMapConfig = require('UrlMapConfig');
 
 var UrlMap = {
   
-  resolve: __w(function(/*string*/ key, /*boolean?*/ https) /*string*/ {__t([key,'string','key'],[https,'?boolean','https']);/*jshint validthis: true*/return __t([function(){
+  resolve: __w(function(/*string*/ key, /*boolean?*/ https) /*string*/ {__t([key, 'string', 'key'], [https, '?boolean', 'https']);return __t([function() {
     var protocol = typeof https == 'undefined'
       ? location.protocol.replace(':', '')
       : https ? 'https' : 'http';
@@ -2574,7 +2581,7 @@ var UrlMap = {
     if (https !== false && key + '_https' in UrlMapConfig) {
       return 'https://' + UrlMapConfig[key + '_https'];
     }
-  }.apply(this,arguments), 'string']);},{"signature":"function(string,?boolean):string"})
+  }.apply(this, arguments), 'string']);}, {"signature":"function(string,?boolean):string"})
 };
 
 module.exports = UrlMap;
@@ -2587,7 +2594,7 @@ var QueryString = require('QueryString');
 var Runtime = require('sdk.Runtime');
 var UrlMap = require('UrlMap');
 
-function request(/*object*/ params) {__t([params,'object','params']);
+function request(/*object*/ params) {__t([params, 'object', 'params']);
   var clientID = Runtime.getClientID();
 
   if (!params.api_key && clientID) {
@@ -2603,10 +2610,10 @@ function request(/*object*/ params) {__t([params,'object','params']);
       '/impression.php/' + guid() + '/',
     params
   );
-}__w(request,{"signature":"function(object)"});
+}__w(request, {"signature":"function(object)"}); 
 
 var Impressions = {
-  log: __w(function(/*number*/ lid, /*object*/ payload) {__t([lid,'number','lid'],[payload,'object','payload']);
+  log: __w(function(/*number*/ lid, /*object*/ payload) {__t([lid, 'number', 'lid'], [payload, 'object', 'payload']);
     if (!payload.source) {
       payload.source = 'jssdk';
     }
@@ -2615,7 +2622,7 @@ var Impressions = {
       lid: lid, 
       payload: ES5('JSON', 'stringify', false,payload)
     });
-  },{"signature":"function(number,object)"}),
+  }, {"signature":"function(number,object)"}),
 
   impression: request
 };
@@ -2634,14 +2641,14 @@ var Level = {
   ERROR    : 0
 };
 
-function log(/*string*/ name, /*number*/ level/*, args*/ ) {__t([name,'string','name'],[level,'number','level']);
+function log(/*string*/ name, /*number*/ level/*, args*/ ) {__t([name, 'string', 'name'], [level, 'number', 'level']);
   var args = Array.prototype.slice.call(arguments, 2);
   var msg = sprintf.apply(null, args);
   var console = window.console;
   if (console && Log.level >= level) {
     console[name in console ? name : 'log'](msg);
   }
-}__w(log,{"signature":"function(string,number)"});
+}__w(log, {"signature":"function(string,number)"}); 
 
 var Log = {
   
@@ -2728,7 +2735,7 @@ __d("sdk.SignedRequest",["Base64"],function(global,require,requireDynamic,requir
 
 var Base64 = require('Base64');
 
-function parse(/*string?*/ signed_request) /*object?*/ {__t([signed_request,'?string','signed_request']);/*jshint validthis: true*/return __t([function(){
+function parse(/*string?*/ signed_request) /*object?*/ {__t([signed_request, '?string', 'signed_request']);return __t([function() {
   if (!signed_request) {
     return null;
   }
@@ -2737,7 +2744,7 @@ function parse(/*string?*/ signed_request) /*object?*/ {__t([signed_request,'?st
   var payload = signed_request.split('.', 2)[1]
     .replace(/\-/g, '+').replace(/\_/g, '/');
   return Base64.decodeObject(payload);
-}.apply(this,arguments), '?object']);}__w(parse,{"signature":"function(?string):object?"});
+}.apply(this, arguments), '?object']);}__w(parse, {"signature":"function(?string):object?"}); 
 
 
 var SignedRequest = {
@@ -2778,7 +2785,7 @@ var domainRe = /^[a-z0-9.][a-z0-9\-\.]+[a-z0-9.]$/;
 var facebookRe = /\.facebook\.com$/;
 
 
-function URL(/*string*/ url) {__t([url,'string','url']);
+function URL(/*string*/ url) {__t([url, 'string', 'url']);
   Assert.isString(url, 'The passed argument was of invalid type.');
 
   if (bannedRe.test(url)) {
@@ -2826,95 +2833,95 @@ function URL(/*string*/ url) {__t([url,'string','url']);
     Log.error('Invalid characters found in domain name: %s', this._domain);
     throw new URIError('Domain contained invalid characters.');
   }
-}__w(URL,{"type":"URL","signature":"function(string)"});
+}__w(URL, {"type":"URL","signature":"function(string)"}); 
 
 copyProperties(URL.prototype, {
   constructor : URL,
 
-  getProtocol: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getProtocol: __w(function() /*string*/ {return __t([function() {
     return this._protocol;
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
-  setProtocol: __w(function(/*string*/ protocol) /*URL*/ {__t([protocol,'string','protocol']);/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
+  setProtocol: __w(function(/*string*/ protocol) /*URL*/ {__t([protocol, 'string', 'protocol']);return __t([function() {
     this._protocol = protocol;
     return this;
-  }.apply(this,arguments), 'URL']);},{"signature":"function(string):URL"}),
+  }.apply(this, arguments), 'URL']);}, {"signature":"function(string):URL"}),
 
-  getDomain: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getDomain: __w(function() /*string*/ {return __t([function() {
     return this._domain;
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
-  setDomain: __w(function(/*string*/ domain) /*URL*/ {__t([domain,'string','domain']);/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
+  setDomain: __w(function(/*string*/ domain) /*URL*/ {__t([domain, 'string', 'domain']);return __t([function() {
     this._domain = domain;
     return this;
-  }.apply(this,arguments), 'URL']);},{"signature":"function(string):URL"}),
+  }.apply(this, arguments), 'URL']);}, {"signature":"function(string):URL"}),
 
-  getPort: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getPort: __w(function() /*string*/ {return __t([function() {
     return this._port;
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
-  setPort: __w(function(port) /*URL*/ {/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
+  setPort: __w(function(port) /*URL*/ {return __t([function() {
     this._port = port;
     return this;
-  }.apply(this,arguments), 'URL']);},{"signature":"function():URL"}),
+  }.apply(this, arguments), 'URL']);}, {"signature":"function():URL"}),
 
-  getPath: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getPath: __w(function() /*string*/ {return __t([function() {
     return this._path;
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
-  setPath: __w(function(path) /*URL*/ {/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
+  setPath: __w(function(path) /*URL*/ {return __t([function() {
     this._path = path;
     return this;
-  }.apply(this,arguments), 'URL']);},{"signature":"function():URL"}),
+  }.apply(this, arguments), 'URL']);}, {"signature":"function():URL"}),
 
-  getSearch: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getSearch: __w(function() /*string*/ {return __t([function() {
     return this._search;
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
-  setSearch: __w(function(search) /*URL*/ {/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
+  setSearch: __w(function(search) /*URL*/ {return __t([function() {
     this._search = search;
     return this;
-  }.apply(this,arguments), 'URL']);},{"signature":"function():URL"}),
+  }.apply(this, arguments), 'URL']);}, {"signature":"function():URL"}),
 
-  getFragment: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getFragment: __w(function() /*string*/ {return __t([function() {
     return this._fragment;
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
-  setFragment: __w(function(fragment) /*URL*/ {/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
+  setFragment: __w(function(fragment) /*URL*/ {return __t([function() {
     this._fragment = fragment;
     return this;
-  }.apply(this,arguments), 'URL']);},{"signature":"function():URL"}),
+  }.apply(this, arguments), 'URL']);}, {"signature":"function():URL"}),
 
-  getParsedSearch: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getParsedSearch: __w(function() /*object*/ {return __t([function() {
     return QueryString.decode(this._search);
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
-  getParsedFragment: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getParsedFragment: __w(function() /*object*/ {return __t([function() {
     return QueryString.decode(this._fragment);
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
-  isFacebookURL: __w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  isFacebookURL: __w(function() /*boolean*/ {return __t([function() {
     return facebookRe.test(this._domain);
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
 
-  toString: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  toString: __w(function() /*string*/ {return __t([function() {
     return (this._protocol ? this._protocol + ':' : '') +
       (this._domain ? '//' + this._domain : '') +
       (this._port ? ':' + this._port : '') +
       this._path +
       (this._search ? '?' + this._search : '') +
       (this._fragment ? '#' + this._fragment : '');
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
-  valueOf: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
+  valueOf: __w(function() /*string*/ {return __t([function() {
     return this.toString();
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"})
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"})
 });
 
 copyProperties(URL, {
 
-  getCurrent: __w(function() /*URL*/ {/*jshint validthis: true*/return __t([function(){
+  getCurrent: __w(function() /*URL*/ {return __t([function() {
     return new URL(location.href);
-  }.apply(this,arguments), 'URL']);},{"signature":"function():URL"}),
+  }.apply(this, arguments), 'URL']);}, {"signature":"function():URL"}),
 
-  getReferrer: __w(function() /*URL?*/ {/*jshint validthis: true*/return __t([function(){
+  getReferrer: __w(function() /*URL?*/ {return __t([function() {
     return document.referrer
       ? new URL(document.referrer)
       : null;
-  }.apply(this,arguments), '?URL']);},{"signature":"function():URL?"})
+  }.apply(this, arguments), '?URL']);}, {"signature":"function():URL?"})
 
 });
 
@@ -2944,14 +2951,14 @@ function flush() {
   queue = null;
 }
 
-function domReady(/*function*/ fn) {__t([fn,'function','fn']);
+function domReady(/*function*/ fn) {__t([fn, 'function', 'fn']);
   if (queue) {
     queue.push(fn);
     return;
   } else {
     fn();
   }
-}__w(domReady,{"signature":"function(function)"});
+}__w(domReady, {"signature":"function(function)"}); 
 
 if(!domIsReady) {
   queue = [];
@@ -2997,7 +3004,7 @@ var Content = {
 
   
   append: __w(function(/*DOMElement|string*/ content, /*?DOMElement*/ root)
-      /*DOMElement*/ {__t([content,'DOMElement|string','content'],[root,'?DOMElement','root']);/*jshint validthis: true*/return __t([function(){
+      /*DOMElement*/ {__t([content, 'DOMElement|string', 'content'], [root, '?DOMElement', 'root']);return __t([function() {
 
     
     if (!root) {
@@ -3035,10 +3042,10 @@ var Content = {
     } else {
       return root.appendChild(content);
     }
-  }.apply(this,arguments), 'DOMElement']);},{"signature":"function(DOMElement|string,?DOMElement):DOMElement"}),
+  }.apply(this, arguments), 'DOMElement']);}, {"signature":"function(DOMElement|string,?DOMElement):DOMElement"}),
 
   
-  appendHidden: __w(function(/*DOMElement|string*/ content) /*DOMElement*/ {__t([content,'DOMElement|string','content']);/*jshint validthis: true*/return __t([function(){
+  appendHidden: __w(function(/*DOMElement|string*/ content) /*DOMElement*/ {__t([content, 'DOMElement|string', 'content']);return __t([function() {
     if (!hiddenRoot) {
       var
         hiddenRoot = document.createElement('div'),
@@ -3050,10 +3057,10 @@ var Content = {
     }
 
     return Content.append(content, hiddenRoot);
-  }.apply(this,arguments), 'DOMElement']);},{"signature":"function(DOMElement|string):DOMElement"}),
+  }.apply(this, arguments), 'DOMElement']);}, {"signature":"function(DOMElement|string):DOMElement"}),
 
   
-  submitToTarget: __w(function(/*object*/ opts, /*?boolean*/ get) {__t([opts,'object','opts'],[get,'?boolean','get']);
+  submitToTarget: __w(function(/*object*/ opts, /*?boolean*/ get) {__t([opts, 'object', 'opts'], [get, '?boolean', 'get']);
     var form = document.createElement('form');
     form.action = opts.url;
     form.target = opts.target;
@@ -3074,7 +3081,7 @@ var Content = {
 
     form.submit();
     form.parentNode.removeChild(form);
-  },{"signature":"function(object,?boolean)"})
+  }, {"signature":"function(object,?boolean)"})
 };
 
 module.exports = Content;
@@ -3084,7 +3091,7 @@ __d("sdk.Event",[],function(global,require,requireDynamic,requireLazy,module,exp
 
 var Event = {
   
-  subscribers: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  subscribers: __w(function() /*object*/ {return __t([function() {
     
     
     
@@ -3093,10 +3100,10 @@ var Event = {
       this._subscribersMap = {};
     }
     return this._subscribersMap;
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
-  subscribe: __w(function(/*string*/ name, /*function*/ cb) {__t([name,'string','name'],[cb,'function','cb']);
+  subscribe: __w(function(/*string*/ name, /*function*/ cb) {__t([name, 'string', 'name'], [cb, 'function', 'cb']);
     var subs = this.subscribers();
 
     if (!subs[name]) {
@@ -3104,10 +3111,10 @@ var Event = {
     } else {
       subs[name].push(cb);
     }
-  },{"signature":"function(string,function)"}),
+  }, {"signature":"function(string,function)"}),
 
   
-  unsubscribe: __w(function(/*string*/ name, /*function*/ cb) {__t([name,'string','name'],[cb,'function','cb']);
+  unsubscribe: __w(function(/*string*/ name, /*function*/ cb) {__t([name, 'string', 'name'], [cb, 'function', 'cb']);
     var subs = this.subscribers()[name];
     if (subs) {
       ES5(subs, 'forEach', true,function(value, key) {
@@ -3116,10 +3123,10 @@ var Event = {
         }
       });
     }
-  },{"signature":"function(string,function)"}),
+  }, {"signature":"function(string,function)"}),
 
   
-  monitor: __w(function(/*string*/ name, /*function*/ callback) {__t([name,'string','name'],[callback,'function','callback']);
+  monitor: __w(function(/*string*/ name, /*function*/ callback) {__t([name, 'string', 'name'], [callback, 'function', 'callback']);
     if (!callback()) {
       var
         ctx = this,
@@ -3131,15 +3138,15 @@ var Event = {
 
       this.subscribe(name, fn);
     }
-  },{"signature":"function(string,function)"}),
+  }, {"signature":"function(string,function)"}),
 
   
-  clear: __w(function(/*string*/ name) {__t([name,'string','name']);
+  clear: __w(function(/*string*/ name) {__t([name, 'string', 'name']);
     delete this.subscribers()[name];
-  },{"signature":"function(string)"}),
+  }, {"signature":"function(string)"}),
 
   
-  fire: __w(function(/*string*/ name) {__t([name,'string','name']);
+  fire: __w(function(/*string*/ name) {__t([name, 'string', 'name']);
     var
       args = Array.prototype.slice.call(arguments, 1),
       subs = this.subscribers()[name];
@@ -3153,7 +3160,7 @@ var Event = {
         }
       });
     }
-  },{"signature":"function(string)"})
+  }, {"signature":"function(string)"})
 };
 
 module.exports = Event;
@@ -3167,23 +3174,21 @@ var copyProperties = require('copyProperties');
 var registry = {};
 
 
-function Queue(opts) {
   
-  this._opts = copyProperties({
-    interval: 0,
-    processor: null
-  }, opts);
+  function Queue(opts) {"use strict";
+    
+    this._opts = copyProperties({
+      interval: 0,
+      processor: null
+    }, opts);
 
-  
-  this._queue = [];
-  this._stopped = true;
-}
-
-
-copyProperties(Queue.prototype, {
+    
+    this._queue = [];
+    this._stopped = true;
+  }
 
   
-  _dispatch: function(force) {
+  Queue.prototype._dispatch=function(force) {"use strict";
     if (this._stopped || this._queue.length === 0) {
       return;
     }
@@ -3203,63 +3208,58 @@ copyProperties(Queue.prototype, {
         this._opts.processor.call(this, this._queue.shift());
       }
     }
-  },
+  };
 
   
-  enqueue: function(message) {
+  Queue.prototype.enqueue=function(message) {"use strict";
     if (this._opts.processor && !this._stopped) {
       this._opts.processor.call(this, message);
     } else {
       this._queue.push(message);
     }
     return this;
-  },
+  };
 
   
-  start: function(processor) {
+  Queue.prototype.start=function(processor) {"use strict";
     if (processor) {
       this._opts.processor = processor;
     }
     this._stopped = false;
     this._dispatch();
     return this;
-  },
+  };
 
   
-  dispatch: function() {
+  Queue.prototype.dispatch=function() {"use strict";
     this._dispatch(true);
-  },
+  };
 
   
-  stop: function(scheduled) {
+  Queue.prototype.stop=function(scheduled) {"use strict";
     this._stopped = true;
     if (scheduled) {
       clearTimeout(this._timeout);
     }
     return this;
-  },
+  };
 
   
-  merge: function(queue, prepend) {
+  Queue.prototype.merge=function(queue, prepend) {"use strict";
     this._queue[prepend ? 'unshift' : 'push']
       .apply(this._queue, queue._queue);
     queue._queue = [];
     this._dispatch();
     return this;
-  },
+  };
 
   
-  getLength: function() {
+  Queue.prototype.getLength=function() {"use strict";
     return this._queue.length;
-  }
-
-});
-
-
-copyProperties(Queue, {
+  };
 
   
-  get: function(name, opts) {
+  Queue.get=function(name, opts) {"use strict";
    var queue;
    if (name in registry) {
      queue = registry[name];
@@ -3267,19 +3267,18 @@ copyProperties(Queue, {
     queue = registry[name] = new Queue(opts);
    }
    return queue;
-  },
+  };
 
   
-  exists: function(name) {
+  Queue.exists=function(name) {"use strict";
     return name in registry;
-  },
+  };
 
   
-  remove: function(name) {
+  Queue.remove=function(name) {"use strict";
     return delete registry[name];
-  }
+  };
 
-});
 
 
 module.exports = Queue;
@@ -3287,7 +3286,7 @@ module.exports = Queue;
 });
 __d("resolveURI",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-function resolveURI(/*string?*/ uri) /*string*/ {__t([uri,'?string','uri']);/*jshint validthis: true*/return __t([function(){
+function resolveURI(/*string?*/ uri) /*string*/ {__t([uri, '?string', 'uri']);return __t([function() {
   if (!uri) { 
     return window.location.href;
   }
@@ -3301,7 +3300,7 @@ function resolveURI(/*string?*/ uri) /*string*/ {__t([uri,'?string','uri']);/*js
   div.innerHTML = '<a href="' + uri + '"></a>';
 
   return div.firstChild.href; 
-}.apply(this,arguments), 'string']);}__w(resolveURI,{"signature":"function(?string):string"});
+}.apply(this, arguments), 'string']);}__w(resolveURI, {"signature":"function(?string):string"}); 
 
 module.exports = resolveURI;
 
@@ -3343,7 +3342,7 @@ __d("JSONRPC",["copyProperties","Log"],function(global,require,requireDynamic,re
 var copyProperties = require('copyProperties');
 var Log = require('Log');
 
-function JSONRPC(/*function*/ write) {__t([write,'function','write']);
+function JSONRPC(/*function*/ write) {__t([write, 'function', 'write']);
   this._counter = 0;
   this._callbacks = {};
 
@@ -3355,12 +3354,12 @@ function JSONRPC(/*function*/ write) {__t([write,'function','write']);
   this.local = {};
 
   this._write = write;
-}__w(JSONRPC,{"type":"JSONRPC","signature":"function(function)"});
+}__w(JSONRPC, {"type":"JSONRPC","signature":"function(function)"}); 
 
 copyProperties(JSONRPC.prototype, {
 
   
-  stub: __w(function(/*string*/ stub) {__t([stub,'string','stub']);
+  stub: __w(function(/*string*/ stub) {__t([stub, 'string', 'stub']);
     this.remote[stub] = ES5(function() {
       var args = Array.prototype.slice.call(arguments),
           message = {
@@ -3377,10 +3376,10 @@ copyProperties(JSONRPC.prototype, {
 
       this._write(ES5('JSON', 'stringify', false,message), this._context || {method: stub });
     }, 'bind', true,this);
-  },{"signature":"function(string)"}),
+  }, {"signature":"function(string)"}),
 
   
-  read: __w(function(/*string*/ message, context) {__t([message,'string','message']);
+  read: __w(function(/*string*/ message, context) {__t([message, 'string', 'message']);
     var rpc = ES5('JSON', 'parse', false,message), id = rpc.id;
 
     if (!rpc.method) {
@@ -3403,7 +3402,7 @@ copyProperties(JSONRPC.prototype, {
     var instance = this, method = this.local[rpc.method], send;
     if (id) {
       
-      send = __w(function(/*string*/ type, value) {__t([type,'string','type']);
+      send = __w(function(/*string*/ type, value) {__t([type, 'string', 'type']);
         var response = {
           jsonrpc: '2.0',
           id: id
@@ -3415,7 +3414,7 @@ copyProperties(JSONRPC.prototype, {
         setTimeout(function() {
           instance._write(ES5('JSON', 'stringify', false,response), context);
         }, 0);
-      },{"signature":"function(string)"});
+      }, {"signature":"function(string)"});
     } else {
       
       send = function() {};
@@ -3453,7 +3452,7 @@ copyProperties(JSONRPC.prototype, {
         data: rpcEx.message
       });
     }
-  },{"signature":"function(string)"})
+  }, {"signature":"function(string)"})
 
 });
 
@@ -3467,24 +3466,24 @@ var JSONRPC = require('JSONRPC');
 var Queue = require('Queue');
 
 var outQueue = new Queue();
-var jsonrpc = new JSONRPC(__w(function(/*string*/ message) {__t([message,'string','message']);
+var jsonrpc = new JSONRPC(__w(function(/*string*/ message) {__t([message, 'string', 'message']);
   outQueue.enqueue(message);
-},{"signature":"function(string)"}));
+}, {"signature":"function(string)"}));
 
 var RPC = {
   local: jsonrpc.local,
   remote: jsonrpc.remote,
   stub: ES5(jsonrpc.stub, 'bind', true,jsonrpc),
-  setInQueue: __w(function(/*object*/ queue) {__t([queue,'object','queue']);
+  setInQueue: __w(function(/*object*/ queue) {__t([queue, 'object', 'queue']);
     Assert.isInstanceOf(Queue, queue);
 
-    queue.start(__w(function(/*string*/ message) {__t([message,'string','message']);
+    queue.start(__w(function(/*string*/ message) {__t([message, 'string', 'message']);
       jsonrpc.read(message);
-    },{"signature":"function(string)"}));
-  },{"signature":"function(object)"}),
-  getOutQueue: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+    }, {"signature":"function(string)"}));
+  }, {"signature":"function(object)"}),
+  getOutQueue: __w(function() /*object*/ {return __t([function() {
     return outQueue;
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"})
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"})
 };
 
 module.exports = RPC;
@@ -3692,12 +3691,12 @@ var callbackPrefix;
 
 var GlobalCallback = {
 
-  setPrefix: __w(function(/*string*/ prefix) {__t([prefix,'string','prefix']);
+  setPrefix: __w(function(/*string*/ prefix) {__t([prefix, 'string', 'prefix']);
     rootObject = dotAccess(DOMWrapper.getWindow(), prefix, true);
     callbackPrefix = prefix;
-  },{"signature":"function(string)"}),
+  }, {"signature":"function(string)"}),
 
-  create: __w(function(/*function*/ fn, /*string?*/ description) /*string*/ {__t([fn,'function','fn'],[description,'?string','description']);/*jshint validthis: true*/return __t([function(){
+  create: __w(function(/*function*/ fn, /*string?*/ description) /*string*/ {__t([fn, 'function', 'fn'], [description, '?string', 'description']);return __t([function() {
     if (!rootObject) {
       
       
@@ -3707,12 +3706,12 @@ var GlobalCallback = {
     rootObject[id] = wrapFunction(fn, 'entry', description || 'GlobalCallback');
 
     return callbackPrefix + '.' + id;
-  }.apply(this,arguments), 'string']);},{"signature":"function(function,?string):string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function(function,?string):string"}),
 
-  remove: __w(function(/*string*/ name) {__t([name,'string','name']);
+  remove: __w(function(/*string*/ name) {__t([name, 'string', 'name']);
     var id = name.substring(callbackPrefix.length + 1);
     delete rootObject[id];
-  },{"signature":"function(string)"})
+  }, {"signature":"function(string)"})
 
 };
 
@@ -4012,15 +4011,15 @@ var pluginRegistry = {};
 var rpcQueue = new Queue();
 RPC.setInQueue(rpcQueue);
 
-function onRegister(/*string*/ registeredAs) {__t([registeredAs,'string','registeredAs']);
+function onRegister(/*string*/ registeredAs) {__t([registeredAs, 'string', 'registeredAs']);
   Log.info('Remote XD can talk to facebook.com (%s)', registeredAs);
   Runtime.setEnvironment(
     registeredAs === 'canvas'
       ? Runtime.ENVIRONMENTS.CANVAS
       : Runtime.ENVIRONMENTS.PAGETAB);
-}__w(onRegister,{"signature":"function(string)"});
+}__w(onRegister, {"signature":"function(string)"}); 
 
-function handleAction(/*object*/ message, /*string*/ senderOrigin) {__t([message,'object','message'],[senderOrigin,'string','senderOrigin']);
+function handleAction(/*object*/ message, /*string*/ senderOrigin) {__t([message, 'object', 'message'], [senderOrigin, 'string', 'senderOrigin']);
   if (!senderOrigin) {
     Log.error('No senderOrigin');
     throw new Error();
@@ -4049,14 +4048,14 @@ function handleAction(/*object*/ message, /*string*/ senderOrigin) {__t([message
       Log.info('Proxy ready, starting queue %s containing %s messages',
         protocol + 'ProxyQueue', proxyQueue.getLength());
 
-      proxyQueue.start(__w(function(/*string|object*/ message) {__t([message,'string|object','message']);
+      proxyQueue.start(__w(function(/*string|object*/ message) {__t([message, 'string|object', 'message']);
         xdm.send(
           typeof message === 'string' ? message : QueryString.encode(message),
           senderOrigin,
           targetProxyFrame.contentWindow,
           channel + '_' + protocol
         );
-      },{"signature":"function(string|object)"}));
+      }, {"signature":"function(string|object)"}));
       break;
 
     case 'plugin_ready':
@@ -4076,12 +4075,12 @@ function handleAction(/*object*/ message, /*string*/ senderOrigin) {__t([message
   if (message.data) {
     onMessage(message.data, senderOrigin);
   }
-}__w(handleAction,{"signature":"function(object,string)"});
+}__w(handleAction, {"signature":"function(object,string)"}); 
 
 
 
 
-function onMessage(/*string|object*/ message, /*?string*/ senderOrigin) {__t([message,'string|object','message'],[senderOrigin,'?string','senderOrigin']);
+function onMessage(/*string|object*/ message, /*?string*/ senderOrigin) {__t([message, 'string|object', 'message'], [senderOrigin, '?string', 'senderOrigin']);
   if (senderOrigin && senderOrigin !== 'native' &&
       !URL(senderOrigin).isFacebookURL()) {
     return;
@@ -4133,9 +4132,9 @@ function onMessage(/*string|object*/ message, /*?string*/ senderOrigin) {__t([me
       cb(message);
     }
   }
-}__w(onMessage,{"signature":"function(string|object,?string)"});
+}__w(onMessage, {"signature":"function(string|object,?string)"}); 
 
-function sendToFacebook(/*string*/ recipient, /*object|string*/ message) {__t([recipient,'string','recipient'],[message,'object|string','message']);
+function sendToFacebook(/*string*/ recipient, /*object|string*/ message) {__t([recipient, 'string', 'recipient'], [message, 'object|string', 'message']);
   if (recipient == 'facebook') {
     message.relation = 'parent.parent';
     facebookQueue.enqueue(message);
@@ -4153,14 +4152,14 @@ function sendToFacebook(/*string*/ recipient, /*object|string*/ message) {__t([r
       Queue.get(recipient).enqueue(message);
     }
   }
-}__w(sendToFacebook,{"signature":"function(string,object|string)"});
+}__w(sendToFacebook, {"signature":"function(string,object|string)"}); 
 
 
-RPC.getOutQueue().start(__w(function(/*string*/ message) {__t([message,'string','message']);
+RPC.getOutQueue().start(__w(function(/*string*/ message) {__t([message, 'string', 'message']);
   sendToFacebook('facebook', 'FB_RPC:' + message);
-},{"signature":"function(string)"}));
+}, {"signature":"function(string)"}));
 
-function init(/*?string*/ channelUrl, /*?string*/ xdProxyName) {__t([channelUrl,'?string','channelUrl'],[xdProxyName,'?string','xdProxyName']);
+function init(/*?string*/ channelUrl, /*?string*/ xdProxyName) {__t([channelUrl, '?string', 'channelUrl'], [xdProxyName, '?string', 'xdProxyName']);
   if (inited) {
     return;
   }
@@ -4183,7 +4182,7 @@ function init(/*?string*/ channelUrl, /*?string*/ xdProxyName) {__t([channelUrl,
     channel: channel,
     channelPath: '/' + XDConfig.XdUrl + '#',
     flashUrl: XDConfig.Flash.path,
-    whenReady: __w(function(/*object*/ instance) {__t([instance,'object','instance']);
+    whenReady: __w(function(/*object*/ instance) {__t([instance, 'object', 'instance']);
       xdm = instance;
       
       var proxyData = {
@@ -4237,7 +4236,7 @@ function init(/*?string*/ channelUrl, /*?string*/ xdProxyName) {__t([channelUrl,
         title: IFRAME_TITLE,
         'tab-index': -1
       });
-    },{"signature":"function(object)"}),
+    }, {"signature":"function(object)"}),
     onMessage: onMessage
   });
 
@@ -4246,7 +4245,7 @@ function init(/*?string*/ channelUrl, /*?string*/ xdProxyName) {__t([channelUrl,
   }
 
   inited = true;
-}__w(init,{"signature":"function(?string,?string)"});
+}__w(init, {"signature":"function(?string,?string)"}); 
 
 
 var XD = {
@@ -4270,18 +4269,18 @@ var XD = {
 
   
   inform: __w(function(/*string*/ method, /*?object*/ params, /*?string*/ relation,
-      /*?string*/ behavior) {__t([method,'string','method'],[params,'?object','params'],[relation,'?string','relation'],[behavior,'?string','behavior']);
+      /*?string*/ behavior) {__t([method, 'string', 'method'], [params, '?object', 'params'], [relation, '?string', 'relation'], [behavior, '?string', 'behavior']);
     sendToFacebook('facebook', {
       method: method,
       params: ES5('JSON', 'stringify', false,params || {}),
       behavior: behavior || 'p',
       relation: relation
     });
-  },{"signature":"function(string,?object,?string,?string)"}),
+  }, {"signature":"function(string,?object,?string,?string)"}),
 
   
   handler: __w(function(/*function*/ cb, /*?string*/ relation, /*?boolean*/ forever,
-      /*?string*/ id) /*string*/ {__t([cb,'function','cb'],[relation,'?string','relation'],[forever,'?boolean','forever'],[id,'?string','id']);/*jshint validthis: true*/return __t([function(){
+      /*?string*/ id) /*string*/ {__t([cb, 'function', 'cb'], [relation, '?string', 'relation'], [forever, '?boolean', 'forever'], [id, '?string', 'id']);return __t([function() {
     var handlerDomain = XDConfig.useCdn
       ? UrlMap.resolve('cdn', location.protocol == 'https:')
       : location.protocol + '//www.facebook.com';
@@ -4295,17 +4294,17 @@ var XD = {
       domain    : location.hostname,
       relation  : relation || 'opener'
     });
-  }.apply(this,arguments), 'string']);},{"signature":"function(function,?string,?boolean,?string):string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function(function,?string,?boolean,?string):string"}),
 
   registerCallback: __w(function(/*function*/ cb, /*?boolean*/ persistent,
-      /*?string*/ id) /*string*/ {__t([cb,'function','cb'],[persistent,'?boolean','persistent'],[id,'?string','id']);/*jshint validthis: true*/return __t([function(){
+      /*?string*/ id) /*string*/ {__t([cb, 'function', 'cb'], [persistent, '?boolean', 'persistent'], [id, '?string', 'id']);return __t([function() {
     id = id || guid();
     if (persistent) {
       XD._forever[id] = true;
     }
     XD._callbacks[id] = cb;
     return id;
-  }.apply(this,arguments), 'string']);},{"signature":"function(function,?boolean,?string):string"})
+  }.apply(this, arguments), 'string']);}, {"signature":"function(function,?boolean,?string):string"})
 };
 
 
@@ -4329,12 +4328,12 @@ var XD = {
   }
 })();
 
-Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options,'object','options']);
+Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options, 'object', 'options']);
   init(
     options.channelUrl ? resolveURI(options.channelUrl) : null,
     options.xdProxyName
   );
-},{"signature":"function(object)"}));
+}, {"signature":"function(object)"}));
 
 
 module.exports = XD;
@@ -4365,7 +4364,7 @@ var timer;
 
 var Auth = new ObservableMixin();
 
-function setAuthResponse(/*?object*/ authResponse, /*string*/ status) {__t([authResponse,'?object','authResponse'],[status,'string','status']);
+function setAuthResponse(/*?object*/ authResponse, /*string*/ status) {__t([authResponse, '?object', 'authResponse'], [status, 'string', 'status']);
   var currentUserID = Runtime.getUserID();
   var userID = '';
   if (authResponse) {
@@ -4419,15 +4418,15 @@ function setAuthResponse(/*?object*/ authResponse, /*string*/ status) {__t([auth
     Auth.inform('status.change', response);
   }
   return response;
-}__w(setAuthResponse,{"signature":"function(?object,string)"});
+}__w(setAuthResponse, {"signature":"function(?object,string)"}); 
 
-function getAuthResponse() /*?object*/ {/*jshint validthis: true*/return __t([function(){
+function getAuthResponse() /*?object*/ {return __t([function() {
   return currentAuthResponse;
-}.apply(this,arguments), '?object']);}__w(getAuthResponse,{"signature":"function():?object"});
+}.apply(this, arguments), '?object']);}__w(getAuthResponse, {"signature":"function():?object"}); 
 
 function xdResponseWrapper(/*function*/ cb, /*?object*/ authResponse,
-    /*?string*/ method) /*function*/ {__t([cb,'function','cb'],[authResponse,'?object','authResponse'],[method,'?string','method']);/*jshint validthis: true*/return __t([function(){
-  return __w(function (/*?object*/ params) /*?object*/ {__t([params,'?object','params']);/*jshint validthis: true*/return __t([function(){
+    /*?string*/ method) /*function*/ {__t([cb, 'function', 'cb'], [authResponse, '?object', 'authResponse'], [method, '?string', 'method']);return __t([function() {
+  return __w(function (/*?object*/ params) /*?object*/ {__t([params, '?object', 'params']);return __t([function() {
     var status;
 
     if (params && params.access_token) {
@@ -4485,10 +4484,10 @@ function xdResponseWrapper(/*function*/ cb, /*?object*/ authResponse,
       });
     }
     return authResponse;
-  }.apply(this,arguments), '?object']);},{"signature":"function(?object):?object"});
-}.apply(this,arguments), 'function']);}__w(xdResponseWrapper,{"signature":"function(function,?object,?string):function"});
+  }.apply(this, arguments), '?object']);}, {"signature":"function(?object):?object"});
+}.apply(this, arguments), 'function']);}__w(xdResponseWrapper, {"signature":"function(function,?object,?string):function"}); 
 
-function fetchLoginStatus(/*function*/ fn) {__t([fn,'function','fn']);
+function fetchLoginStatus(/*function*/ fn) {__t([fn, 'function', 'fn']);
   var frame, fetchStart = ES5('Date', 'now', false);
 
   if (timer) {
@@ -4505,7 +4504,7 @@ function fetchLoginStatus(/*function*/ fn) {__t([fn,'function','fn']);
       response_type: 'token,signed_request,code',
       domain: location.hostname,
       origin: getContextType(),
-      redirect_uri: XD.handler(__w(function(/*object*/ response) {__t([response,'object','response']);
+      redirect_uri: XD.handler(__w(function(/*object*/ response) {__t([response, 'object', 'response']);
         if (feature('e2e_ping_tracking', true)) {
           var events = {
             init: fetchStart,
@@ -4525,7 +4524,7 @@ function fetchLoginStatus(/*function*/ fn) {__t([fn,'function','fn']);
             fetchLoginStatus(function() {});
           }, 1200000); 
         }
-      },{"signature":"function(object)"}), 'parent'),
+      }, {"signature":"function(object)"}), 'parent'),
       sdk: 'joey',
       kid_directed_site: Runtime.getKidDirectedSite()
     }));
@@ -4537,10 +4536,10 @@ function fetchLoginStatus(/*function*/ fn) {__t([fn,'function','fn']);
     style: { display: 'none' }
   });
 
-}__w(fetchLoginStatus,{"signature":"function(function)"});
+}__w(fetchLoginStatus, {"signature":"function(function)"}); 
 
 var loadState;
-function getLoginStatus(/*?function*/ cb, /*?boolean*/ force) {__t([cb,'?function','cb'],[force,'?boolean','force']);
+function getLoginStatus(/*?function*/ cb, /*?boolean*/ force) {__t([cb, '?function', 'cb'], [force, '?boolean', 'force']);
   if (!Runtime.getClientID()) {
     Log.warn('FB.getLoginStatus() called before calling FB.init().');
     return;
@@ -4566,17 +4565,17 @@ function getLoginStatus(/*?function*/ cb, /*?boolean*/ force) {__t([cb,'?functio
   loadState = 'loading';
 
   
-  var lsCb = __w(function(/*?object*/ response) {__t([response,'?object','response']);
+  var lsCb = __w(function(/*?object*/ response) {__t([response, '?object', 'response']);
     
     loadState = 'loaded';
 
     
     Auth.inform('FB.loginStatus', response);
     Auth.clearSubscribers('FB.loginStatus');
-  },{"signature":"function(?object)"});
+  }, {"signature":"function(?object)"});
 
   fetchLoginStatus(lsCb);
-}__w(getLoginStatus,{"signature":"function(?function,?boolean)"});
+}__w(getLoginStatus, {"signature":"function(?function,?boolean)"}); 
 
 copyProperties(Auth, {
   getLoginStatus: getLoginStatus,
@@ -4591,10 +4590,10 @@ copyProperties(Auth, {
 module.exports = Auth;
 
 });
-__d("hasArrayNature",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+__d("createArrayFrom",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 
-function hasArrayNature(obj) {
+function hasArrayNature(obj) {return __t([function() {
   return (
     
     !!obj &&
@@ -4605,7 +4604,7 @@ function hasArrayNature(obj) {
     
     !('setInterval' in obj) &&
     
-    // a 'select' element has 'length' and 'item' properties
+    // a 'select' element has 'length' and 'item' properties on IE8
     (typeof obj.nodeType != 'number') &&
     (
       
@@ -4616,17 +4615,10 @@ function hasArrayNature(obj) {
       ('item' in obj)
     )
   );
-}
-
-module.exports = hasArrayNature;
-
-});
-__d("createArrayFrom",["hasArrayNature"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-var hasArrayNature = require('hasArrayNature');
+}.apply(this, arguments), 'boolean']);}__w(hasArrayNature, {"signature":"function():boolean"}); 
 
 
-function createArrayFrom(obj) {/*jshint validthis: true*/return __t([function(){
+function createArrayFrom(obj) {return __t([function() {
   if (!hasArrayNature(obj)) {
     return [obj];
   }
@@ -4637,7 +4629,7 @@ function createArrayFrom(obj) {/*jshint validthis: true*/return __t([function(){
     return ret;
   }
   return Array.prototype.slice.call(obj);
-}.apply(this,arguments), 'array']);}__w(createArrayFrom,{"signature":"function():array"});
+}.apply(this, arguments), 'array']);}__w(createArrayFrom, {"signature":"function():array"}); 
 
 module.exports = createArrayFrom;
 
@@ -4651,7 +4643,7 @@ var UserAgent = require('UserAgent');
 
 var cssRules = {};
 
-function getAttr(/*DOMElement*/ dom, /*string*/ name) /*string?*/ {__t([dom,'DOMElement','dom'],[name,'string','name']);/*jshint validthis: true*/return __t([function(){
+function getAttr(/*DOMElement*/ dom, /*string*/ name) /*string?*/ {__t([dom, 'DOMElement', 'dom'], [name, 'string', 'name']);return __t([function() {
   var attribute = (
     dom.getAttribute(name) ||
     dom.getAttribute(name.replace(/_/g, '-')) ||
@@ -4667,16 +4659,16 @@ function getAttr(/*DOMElement*/ dom, /*string*/ name) /*string?*/ {__t([dom,'DOM
   return attribute
     ? String(attribute)
     : null;
-}.apply(this,arguments), '?string']);}__w(getAttr,{"signature":"function(DOMElement,string):string?"});
+}.apply(this, arguments), '?string']);}__w(getAttr, {"signature":"function(DOMElement,string):string?"}); 
 
-function getBoolAttr(/*DOMElement*/ dom, /*string*/ name) /*boolean?*/ {__t([dom,'DOMElement','dom'],[name,'string','name']);/*jshint validthis: true*/return __t([function(){
+function getBoolAttr(/*DOMElement*/ dom, /*string*/ name) /*boolean?*/ {__t([dom, 'DOMElement', 'dom'], [name, 'string', 'name']);return __t([function() {
   var attribute = getAttr(dom, name);
   return attribute
     ? /^(true|1|yes|on)$/.test(attribute)
     : null;
-}.apply(this,arguments), '?boolean']);}__w(getBoolAttr,{"signature":"function(DOMElement,string):boolean?"});
+}.apply(this, arguments), '?boolean']);}__w(getBoolAttr, {"signature":"function(DOMElement,string):boolean?"}); 
 
-function getProp(/*DOMElement*/ dom, /*string*/ name) /*string*/ {__t([dom,'DOMElement','dom'],[name,'string','name']);/*jshint validthis: true*/return __t([function(){
+function getProp(/*DOMElement*/ dom, /*string*/ name) /*string*/ {__t([dom, 'DOMElement', 'dom'], [name, 'string', 'name']);return __t([function() {
   Assert.isTruthy(dom, 'element not specified');
   Assert.isString(name);
 
@@ -4685,9 +4677,9 @@ function getProp(/*DOMElement*/ dom, /*string*/ name) /*string*/ {__t([dom,'DOME
   } catch (e) {
     throw new Error('Could not read property ' + name + ' : ' + e.message);
   }
-}.apply(this,arguments), 'string']);}__w(getProp,{"signature":"function(DOMElement,string):string"});
+}.apply(this, arguments), 'string']);}__w(getProp, {"signature":"function(DOMElement,string):string"}); 
 
-function html(/*DOMElement*/ dom, /*string*/ content) {__t([dom,'DOMElement','dom'],[content,'string','content']);
+function html(/*DOMElement*/ dom, /*string*/ content) {__t([dom, 'DOMElement', 'dom'], [content, 'string', 'content']);
   Assert.isTruthy(dom, 'element not specified');
   Assert.isString(content);
 
@@ -4696,38 +4688,38 @@ function html(/*DOMElement*/ dom, /*string*/ content) {__t([dom,'DOMElement','do
   } catch (e) {
     throw new Error('Could not set innerHTML : ' + e.message);
   }
-}__w(html,{"signature":"function(DOMElement,string)"});
+}__w(html, {"signature":"function(DOMElement,string)"}); 
 
 
-function hasClass(/*DOMElement*/ dom, /*string*/ className) /*boolean*/ {__t([dom,'DOMElement','dom'],[className,'string','className']);/*jshint validthis: true*/return __t([function(){
+function hasClass(/*DOMElement*/ dom, /*string*/ className) /*boolean*/ {__t([dom, 'DOMElement', 'dom'], [className, 'string', 'className']);return __t([function() {
   Assert.isTruthy(dom, 'element not specified');
   Assert.isString(className);
 
   var cssClassWithSpace = ' ' + getProp(dom, 'className') + ' ';
   return ES5(cssClassWithSpace, 'indexOf', true,' ' + className + ' ') >= 0;
-}.apply(this,arguments), 'boolean']);}__w(hasClass,{"signature":"function(DOMElement,string):boolean"});
+}.apply(this, arguments), 'boolean']);}__w(hasClass, {"signature":"function(DOMElement,string):boolean"}); 
 
 
-function addClass(/*DOMElement*/ dom, /*string*/ className) {__t([dom,'DOMElement','dom'],[className,'string','className']);
+function addClass(/*DOMElement*/ dom, /*string*/ className) {__t([dom, 'DOMElement', 'dom'], [className, 'string', 'className']);
   Assert.isTruthy(dom, 'element not specified');
   Assert.isString(className);
 
   if (!hasClass(dom, className)) {
     dom.className = getProp(dom, 'className') + ' ' + className;
   }
-}__w(addClass,{"signature":"function(DOMElement,string)"});
+}__w(addClass, {"signature":"function(DOMElement,string)"}); 
 
 
-function removeClass(/*DOMElement*/ dom, /*string*/ className) {__t([dom,'DOMElement','dom'],[className,'string','className']);
+function removeClass(/*DOMElement*/ dom, /*string*/ className) {__t([dom, 'DOMElement', 'dom'], [className, 'string', 'className']);
   Assert.isTruthy(dom, 'element not specified');
   Assert.isString(className);
 
   var regExp = new RegExp('\\s*' + className, 'g');
   dom.className = ES5(getProp(dom, 'className').replace(regExp, ''),'trim', true);
-}__w(removeClass,{"signature":"function(DOMElement,string)"});
+}__w(removeClass, {"signature":"function(DOMElement,string)"}); 
 
 
-function getByClass(/*string*/ className, dom, tagName) /*array<DOMElement>*/ {__t([className,'string','className']);/*jshint validthis: true*/return __t([function(){
+function getByClass(/*string*/ className, dom, tagName) /*array<DOMElement>*/ {__t([className, 'string', 'className']);return __t([function() {
   Assert.isString(className);
 
   dom = dom || document.body;
@@ -4745,10 +4737,10 @@ function getByClass(/*string*/ className, dom, tagName) /*array<DOMElement>*/ {_
     }
   }
   return els;
-}.apply(this,arguments), 'array<DOMElement>']);}__w(getByClass,{"signature":"function(string):array<DOMElement>"});
+}.apply(this, arguments), 'array<DOMElement>']);}__w(getByClass, {"signature":"function(string):array<DOMElement>"}); 
 
 
-function getStyle(/*DOMElement*/ dom, /*string*/ styleProp) /*string*/ {__t([dom,'DOMElement','dom'],[styleProp,'string','styleProp']);/*jshint validthis: true*/return __t([function(){
+function getStyle(/*DOMElement*/ dom, /*string*/ styleProp) /*string*/ {__t([dom, 'DOMElement', 'dom'], [styleProp, 'string', 'styleProp']);return __t([function() {
   Assert.isTruthy(dom, 'element not specified');
   Assert.isString(styleProp);
 
@@ -4770,10 +4762,10 @@ function getStyle(/*DOMElement*/ dom, /*string*/ styleProp) /*string*/ {__t([dom
     computedStyle = '0%';
   }
   return computedStyle;
-}.apply(this,arguments), 'string']);}__w(getStyle,{"signature":"function(DOMElement,string):string"});
+}.apply(this, arguments), 'string']);}__w(getStyle, {"signature":"function(DOMElement,string):string"}); 
 
 
-function setStyle(/*DOMElement*/ dom, /*string*/ styleProp, value) {__t([dom,'DOMElement','dom'],[styleProp,'string','styleProp']);
+function setStyle(/*DOMElement*/ dom, /*string*/ styleProp, value) {__t([dom, 'DOMElement', 'dom'], [styleProp, 'string', 'styleProp']);
   Assert.isTruthy(dom, 'element not specified');
   Assert.isString(styleProp);
 
@@ -4782,10 +4774,10 @@ function setStyle(/*DOMElement*/ dom, /*string*/ styleProp, value) {__t([dom,'DO
     return g1.toUpperCase();
   });
   dom.style[styleProp] = value;
-}__w(setStyle,{"signature":"function(DOMElement,string)"});
+}__w(setStyle, {"signature":"function(DOMElement,string)"}); 
 
 
-function addCssRules(/*string*/ styles, /*array<string>*/ names) {__t([styles,'string','styles'],[names,'array<string>','names']);
+function addCssRules(/*string*/ styles, /*array<string>*/ names) {__t([styles, 'string', 'styles'], [names, 'array<string>', 'names']);
   
   
   var allIncluded = true;
@@ -4817,10 +4809,10 @@ function addCssRules(/*string*/ styles, /*array<string>*/ names) {__t([styles,'s
       }
     }
   }
-}__w(addCssRules,{"signature":"function(string,array<string>)"});
+}__w(addCssRules, {"signature":"function(string,array<string>)"}); 
 
 
-function getViewportInfo() /*object*/ {/*jshint validthis: true*/return __t([function(){
+function getViewportInfo() /*object*/ {return __t([function() {
   
   var root = (document.documentElement && document.compatMode == 'CSS1Compat')
     ? document.documentElement
@@ -4833,10 +4825,10 @@ function getViewportInfo() /*object*/ {/*jshint validthis: true*/return __t([fun
     width      : window.innerWidth  ? window.innerWidth  : root.clientWidth,
     height     : window.innerHeight ? window.innerHeight : root.clientHeight
   };
-}.apply(this,arguments), 'object']);}__w(getViewportInfo,{"signature":"function():object"});
+}.apply(this, arguments), 'object']);}__w(getViewportInfo, {"signature":"function():object"}); 
 
 
-function getPosition(/*DOMElement*/ node) /*object*/ {__t([node,'DOMElement','node']);/*jshint validthis: true*/return __t([function(){
+function getPosition(/*DOMElement*/ node) /*object*/ {__t([node, 'DOMElement', 'node']);return __t([function() {
   Assert.isTruthy(node, 'element not specified');
 
   var x = 0,
@@ -4847,7 +4839,7 @@ function getPosition(/*DOMElement*/ node) /*object*/ {__t([node,'DOMElement','no
   } while (node = node.offsetParent);
 
   return {x: x, y: y};
-}.apply(this,arguments), 'object']);}__w(getPosition,{"signature":"function(DOMElement):object"});
+}.apply(this, arguments), 'object']);}__w(getPosition, {"signature":"function(DOMElement):object"}); 
 
 
 var DOM = {
@@ -4880,7 +4872,7 @@ __d("sdk.Scribe",["UrlMap","QueryString"],function(global,require,requireDynamic
 var UrlMap = require('UrlMap');
 var QueryString = require('QueryString');
 
-function log(/*string*/ category, /*object*/ data) {__t([category,'string','category'],[data,'object','data']);
+function log(/*string*/ category, /*object*/ data) {__t([category, 'string', 'category'], [data, 'object', 'data']);
   (new Image()).src = QueryString.appendToUrl(
     UrlMap.resolve('www', /*force ssl*/true) + '/common/scribe_endpoint.php',
     {
@@ -4888,7 +4880,7 @@ function log(/*string*/ category, /*object*/ data) {__t([category,'string','cate
       m: ES5('JSON', 'stringify', false,data)
     }
   );
-}__w(log,{"signature":"function(string,object)"});
+}__w(log, {"signature":"function(string,object)"}); 
 
 var Scribe = {
   log: log
@@ -4909,7 +4901,7 @@ var wrapFunction = require('wrapFunction');
 var handleError = feature('error_handling', false);
 var currentEntry = '';
 
-function errorHandler(/*object*/ error) {__t([error,'object','error']);
+function errorHandler(/*object*/ error) {__t([error, 'object', 'error']);
   var originalError = error._originalError;
   delete error._originalError;
   Scribe.log('jssdk_error', {
@@ -4920,10 +4912,10 @@ function errorHandler(/*object*/ error) {__t([error,'object','error']);
 
   
   throw originalError;
-}__w(errorHandler,{"signature":"function(object)"});
+}__w(errorHandler, {"signature":"function(object)"}); 
 
 
-function normalizeError(err) /*object*/ {/*jshint validthis: true*/return __t([function(){
+function normalizeError(err) /*object*/ {return __t([function() {
   var info = {
     line: err.lineNumber || err.line,
     message: err.message,
@@ -4949,9 +4941,9 @@ function normalizeError(err) /*object*/ {/*jshint validthis: true*/return __t([f
     (info[k] == null && delete info[k]);
   }
   return info;
-}.apply(this,arguments), 'object']);}__w(normalizeError,{"signature":"function():object"});
+}.apply(this, arguments), 'object']);}__w(normalizeError, {"signature":"function():object"}); 
 
-function guard(/*function*/ func, /*string?*/ entry) /*function*/ {__t([func,'function','func'],[entry,'?string','entry']);/*jshint validthis: true*/return __t([function(){
+function guard(/*function*/ func, /*string?*/ entry) /*function*/ {__t([func, 'function', 'func'], [entry, '?string', 'entry']);return __t([function() {
   return function() {
     
     
@@ -4986,9 +4978,9 @@ function guard(/*function*/ func, /*string?*/ entry) /*function*/ {__t([func,'fu
       currentEntry = '';
     }
   };
-}.apply(this,arguments), 'function']);}__w(guard,{"signature":"function(function,?string):function"});
+}.apply(this, arguments), 'function']);}__w(guard, {"signature":"function(function,?string):function"}); 
 
-function unguard(/*function*/ func) /*function*/ {__t([func,'function','func']);/*jshint validthis: true*/return __t([function(){
+function unguard(/*function*/ func) /*function*/ {__t([func, 'function', 'func']);return __t([function() {
   if (!func.__wrapper) {
     func.__wrapper = function() {
       try {
@@ -5003,7 +4995,7 @@ function unguard(/*function*/ func) /*function*/ {__t([func,'function','func']);
     };
   }
   return func.__wrapper;
-}.apply(this,arguments), 'function']);}__w(unguard,{"signature":"function(function):function"});
+}.apply(this, arguments), 'function']);}__w(unguard, {"signature":"function(function):function"}); 
 
 function wrap(real, entry) {
   return function(fn, delay) {
@@ -5049,7 +5041,7 @@ var Insights = {
   },
 
   
-  log: __w(function(/*string*/ type, /*string*/ category, /*string*/ content) {__t([type,'string','type'],[category,'string','category'],[content,'string','content']);
+  log: __w(function(/*string*/ type, /*string*/ category, /*string*/ content) {__t([type, 'string', 'type'], [category, 'string', 'category'], [content, 'string', 'content']);
     var payload = {
       source: 'jssdk',
       type: type,
@@ -5061,7 +5053,7 @@ var Insights = {
       113, 
       payload
     );
-  },{"signature":"function(string,string,string)"}),
+  }, {"signature":"function(string,string,string)"}),
   
   impression: Impressions.impression
 };
@@ -5117,25 +5109,25 @@ domReady(function() {
   }
 });
 
-Runtime.subscribe('AccessToken.change', __w(function(/*string?*/ value) {__t([value,'?string','value']);
+Runtime.subscribe('AccessToken.change', __w(function(/*string?*/ value) {__t([value, '?string', 'value']);
   if (!value && Runtime.getLoginStatus() === 'connected') {
     // The access token was invalidated, but we're still connected
     
     Auth.getLoginStatus(null, true);
   }
-},{"signature":"function(?string)"}));
+}, {"signature":"function(?string)"}));
 
 
 
 if (dotAccess(SDKConfig, 'api.whitelist.length')) {
   apiWhitelist = {};
-  ES5(SDKConfig.api.whitelist, 'forEach', true,__w(function(/*string*/ key) {__t([key,'string','key']);
+  ES5(SDKConfig.api.whitelist, 'forEach', true,__w(function(/*string*/ key) {__t([key, 'string', 'key']);
     apiWhitelist[key] = 1;
-  },{"signature":"function(string)"}));
+  }, {"signature":"function(string)"}));
 }
 
 function protect(/*function*/ fn, /*string*/ accessor, /*string*/ key,
-    /*object*/ context) /*function?*/ {__t([fn,'function','fn'],[accessor,'string','accessor'],[key,'string','key'],[context,'object','context']);/*jshint validthis: true*/return __t([function(){
+    /*object*/ context) /*function?*/ {__t([fn, 'function', 'fn'], [accessor, 'string', 'accessor'], [key, 'string', 'key'], [context, 'object', 'context']);return __t([function() {
   var exportMode;
   if (/^_/.test(key)) {
     exportMode = 'hide';
@@ -5228,15 +5220,15 @@ function protect(/*function*/ fn, /*string*/ accessor, /*string*/ key,
           : facade;
       }, accessor);
   }
-}.apply(this,arguments), '?function']);}__w(protect,{"signature":"function(function,string,string,object):function?"});
+}.apply(this, arguments), '?function']);}__w(protect, {"signature":"function(function,string,string,object):function?"}); 
 
 
-function provide(/*string*/ name, /*object*/ source) {__t([name,'string','name'],[source,'object','source']);
+function provide(/*string*/ name, /*object*/ source) {__t([name, 'string', 'name'], [source, 'object', 'source']);
   var externalTarget = name
     ? dotAccess(externalInterface, name, true)
     : externalInterface;
 
-  ES5(ES5('Object', 'keys', false,source), 'forEach', true,__w(function(/*string*/ key) {__t([key,'string','key']);
+  ES5(ES5('Object', 'keys', false,source), 'forEach', true,__w(function(/*string*/ key) {__t([key, 'string', 'key']);
     var value = source[key];
 
     
@@ -5247,12 +5239,12 @@ function provide(/*string*/ name, /*object*/ source) {__t([name,'string','name']
         externalTarget[key] = exportedProperty;
       }
     }
-  },{"signature":"function(string)"}));
-}__w(provide,{"signature":"function(string,object)"});
+  }, {"signature":"function(string)"}));
+}__w(provide, {"signature":"function(string,object)"}); 
 
 
 
-Runtime.setSecure((__w(function() /*boolean?*/ {/*jshint validthis: true*/return __t([function(){
+Runtime.setSecure((__w(function() /*boolean?*/ {return __t([function() {
   // Resolve whether we're in a canvas context or not
   var inCanvas = /iframe_canvas|app_runner/.test(window.name);
   var inDialog = /dialog/.test(window.name);
@@ -5272,7 +5264,7 @@ Runtime.setSecure((__w(function() /*boolean?*/ {/*jshint validthis: true*/return
   if (/_fb_https?/.test(window.name)) {
     return ES5(window.name, 'indexOf', true,'_fb_https') != -1;
   }
-}.apply(this,arguments), '?boolean']);},{"signature":"function():boolean?"}))());
+}.apply(this, arguments), '?boolean']);}, {"signature":"function():boolean?"}))());
 
 
 copyProperties(FB, {
@@ -5303,7 +5295,7 @@ __d("CORSRequest",["wrapFunction","QueryString"],function(global,require,require
 var wrapFunction = require('wrapFunction');
 var QueryString = require('QueryString');
 
-function createCORSRequest(/*string*/ method, /*string*/ url) /*?object*/ {__t([method,'string','method'],[url,'string','url']);/*jshint validthis: true*/return __t([function(){
+function createCORSRequest(/*string*/ method, /*string*/ url) /*?object*/ {__t([method, 'string', 'method'], [url, 'string', 'url']);return __t([function() {
    if (!self.XMLHttpRequest) {
     return null;
    }
@@ -5337,9 +5329,9 @@ function createCORSRequest(/*string*/ method, /*string*/ url) /*?object*/ {__t([
    }
 
    var wrapper = {
-     send: __w(function(/*string*/ data) {__t([data,'string','data']);
+     send: __w(function(/*string*/ data) {__t([data, 'string', 'data']);
        xhr.send(data);
-     },{"signature":"function(string)"})
+     }, {"signature":"function(string)"})
    };
    var onload = wrapFunction(function() {
      onload = noop;
@@ -5378,10 +5370,10 @@ function createCORSRequest(/*string*/ method, /*string*/ url) /*?object*/ {__t([
    };
 
    return wrapper;
-}.apply(this,arguments), '?object']);}__w(createCORSRequest,{"signature":"function(string,string):?object"});
+}.apply(this, arguments), '?object']);}__w(createCORSRequest, {"signature":"function(string,string):?object"}); 
 
 function execute(/*string*/ url, /*string*/ method, /*object*/ params,
-    /*function*/ cb) /*boolean*/ {__t([url,'string','url'],[method,'string','method'],[params,'object','params'],[cb,'function','cb']);/*jshint validthis: true*/return __t([function(){
+    /*function*/ cb) /*boolean*/ {__t([url, 'string', 'url'], [method, 'string', 'method'], [params, 'object', 'params'], [cb, 'function', 'cb']);return __t([function() {
   params.suppress_http_code = 1;
   var data = QueryString.encode(params);
 
@@ -5413,7 +5405,7 @@ function execute(/*string*/ url, /*string*/ method, /*object*/ params,
   };
   request.send(data);
   return true;
-}.apply(this,arguments), 'boolean']);}__w(execute,{"signature":"function(string,string,object,function):boolean"});
+}.apply(this, arguments), 'boolean']);}__w(execute, {"signature":"function(string,string,object,function):boolean"}); 
 
 var CORSRequest = {
   execute: execute
@@ -5440,7 +5432,7 @@ function initFlash() {
   }
 
   var initCallback = GlobalCallback.create(function() {
-    flashQueue.start(__w(function(/*object*/ item) {__t([item,'object','item']);
+    flashQueue.start(__w(function(/*object*/ item) {__t([item, 'object', 'item']);
       var id = swf.execute(
         item.method,
         item.url,
@@ -5450,12 +5442,12 @@ function initFlash() {
         throw new Error('Could create request');
       }
       requestCallbacks[id] = item.callback;
-    },{"signature":"function(object)"}));
+    }, {"signature":"function(object)"}));
   });
 
   
   var requestCallback = GlobalCallback.create(__w(function(/*number*/ id,
-      /*number*/ status, /*string*/ response) {__t([id,'number','id'],[status,'number','status'],[response,'string','response']);
+      /*number*/ status, /*string*/ response) {__t([id, 'number', 'id'], [status, 'number', 'status'], [response, 'string', 'response']);
     var data;
     try {
       data = ES5('JSON', 'parse', false,decodeURIComponent(response));
@@ -5472,7 +5464,7 @@ function initFlash() {
 
     requestCallbacks[id](data);
     delete requestCallbacks[id];
-  },{"signature":"function(number,number,string)"}));
+  }, {"signature":"function(number,number,string)"}));
 
   swf = Flash.embed(swfUrl, DOMWrapper.getRoot(), null, {
     log: __DEV__ ? true : false,
@@ -5483,7 +5475,7 @@ function initFlash() {
 
 
 function execute(/*string*/ url, /*string*/ method, /*object*/ params,
-    /*function*/ cb) /*boolean*/ {__t([url,'string','url'],[method,'string','method'],[params,'object','params'],[cb,'function','cb']);/*jshint validthis: true*/return __t([function(){
+    /*function*/ cb) /*boolean*/ {__t([url, 'string', 'url'], [method, 'string', 'method'], [params, 'object', 'params'], [cb, 'function', 'cb']);return __t([function() {
   
   
   params.suppress_http_code = 1;
@@ -5523,12 +5515,12 @@ function execute(/*string*/ url, /*string*/ method, /*object*/ params,
     callback: cb
   });
   return true;
-}.apply(this,arguments), 'boolean']);}__w(execute,{"signature":"function(string,string,object,function):boolean"});
+}.apply(this, arguments), 'boolean']);}__w(execute, {"signature":"function(string,string,object,function):boolean"}); 
 
 var FlashRequest = {
-  setSwfUrl: __w(function(/*string*/ swf_url) {__t([swf_url,'string','swf_url']);
+  setSwfUrl: __w(function(/*string*/ swf_url) {__t([swf_url, 'string', 'swf_url']);
     swfUrl = swf_url;
-  },{"signature":"function(string)"}),
+  }, {"signature":"function(string)"}),
   execute: execute
 };
 
@@ -5538,7 +5530,7 @@ module.exports = FlashRequest;
 __d("flattenObject",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 
-function flattenObject(/*object*/ obj) /*object*/ {__t([obj,'object','obj']);/*jshint validthis: true*/return __t([function(){
+function flattenObject(/*object*/ obj) /*object*/ {__t([obj, 'object', 'obj']);return __t([function() {
   var flat = {};
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
@@ -5552,7 +5544,7 @@ function flattenObject(/*object*/ obj) /*object*/ {__t([obj,'object','obj']);/*j
     }
   }
   return flat;
-}.apply(this,arguments), 'object']);}__w(flattenObject,{"signature":"function(object):object"});
+}.apply(this, arguments), 'object']);}__w(flattenObject, {"signature":"function(object):object"}); 
 
 module.exports = flattenObject;
 
@@ -5565,7 +5557,7 @@ var QueryString    = require('QueryString');
 
 
 function execute(/*string*/ url, /*string*/ method, /*object*/ params,
-    /*function*/ cb) /*boolean*/ {__t([url,'string','url'],[method,'string','method'],[params,'object','params'],[cb,'function','cb']);/*jshint validthis: true*/return __t([function(){
+    /*function*/ cb) /*boolean*/ {__t([url, 'string', 'url'], [method, 'string', 'method'], [params, 'object', 'params'], [cb, 'function', 'cb']);return __t([function() {
   var script = document.createElement('script');
 
   var callbackWrapper = function(response) {
@@ -5624,7 +5616,7 @@ function execute(/*string*/ url, /*string*/ method, /*object*/ params,
   script.src = url;
   DOMWrapper.getRoot().appendChild(script);
   return true;
-}.apply(this,arguments), 'boolean']);}__w(execute,{"signature":"function(string,string,object,function):boolean"});
+}.apply(this, arguments), 'boolean']);}__w(execute, {"signature":"function(string,string,object,function):boolean"}); 
 
 var JSONPRequest = {
   execute: execute
@@ -5672,7 +5664,7 @@ var READONLYCALLS = {
 
 
 function request(/*string*/ url, /*string*/ method, /*object*/ params,
-    /*function*/ cb) {__t([url,'string','url'],[method,'string','method'],[params,'object','params'],[cb,'function','cb']);
+    /*function*/ cb) {__t([url, 'string', 'url'], [method, 'string', 'method'], [params, 'object', 'params'], [cb, 'function', 'cb']);
   if (defaultParams) {
     params = copyProperties({}, defaultParams, params);
   }
@@ -5711,18 +5703,18 @@ function request(/*string*/ url, /*string*/ method, /*object*/ params,
       message: 'Could not find a usable transport for request'
     }
   });
-}__w(request,{"signature":"function(string,string,object,function)"});
+}__w(request, {"signature":"function(string,string,object,function)"}); 
 
 function inspect(/*?function*/ callback, /*string*/ endpoint, /*string*/ method,
-    /*object*/ params, response) {__t([callback,'?function','callback'],[endpoint,'string','endpoint'],[method,'string','method'],[params,'object','params']);
+    /*object*/ params, response) {__t([callback, '?function', 'callback'], [endpoint, 'string', 'endpoint'], [method, 'string', 'method'], [params, 'object', 'params']);
   ApiClient.inform('request.complete', endpoint, method, params, response);
   if (callback) {
     callback(response);
   }
-}__w(inspect,{"signature":"function(?function,string,string,object)"});
+}__w(inspect, {"signature":"function(?function,string,string,object)"}); 
 
 
-function requestUsingGraph(/*string*/ path) {__t([path,'string','path']);
+function requestUsingGraph(/*string*/ path) {__t([path, 'string', 'path']);
   Assert.isString(path, 'Invalid path');
   var url;
   var args = {};
@@ -5753,10 +5745,10 @@ function requestUsingGraph(/*string*/ path) {__t([path,'string','path']);
   params.method = method;
   url = UrlMap.resolve('graph') + url.getPath();
   request(url, method == 'get' ? 'get' : 'post', params, inspector);
-}__w(requestUsingGraph,{"signature":"function(string)"});
+}__w(requestUsingGraph, {"signature":"function(string)"}); 
 
 
-function requestUsingRest(/*object*/ params, /*?function*/ cb) {__t([params,'object','params'],[cb,'?function','cb']);
+function requestUsingRest(/*object*/ params, /*?function*/ cb) {__t([params, 'object', 'params'], [cb, '?function', 'cb']);
   Assert.isObject(params);
   Assert.isString(params.method, 'method missing');
 
@@ -5771,18 +5763,18 @@ function requestUsingRest(/*object*/ params, /*?function*/ cb) {__t([params,'obj
   var url = UrlMap.resolve(domain) + '/restserver.php';
   var inspector = ES5(inspect, 'bind', true,null, cb, '/restserver.php', 'get', params);
   request(url, 'get', params, inspector);
-}__w(requestUsingRest,{"signature":"function(object,?function)"});
+}__w(requestUsingRest, {"signature":"function(object,?function)"}); 
 
 var ApiClient = copyProperties(new ObservableMixin(), {
-  setAccessToken: __w(function(/*?string*/ access_token) {__t([access_token,'?string','access_token']);
+  setAccessToken: __w(function(/*?string*/ access_token) {__t([access_token, '?string', 'access_token']);
     accessToken = access_token;
-  },{"signature":"function(?string)"}),
-  setClientID: __w(function(/*?string*/ client_id) {__t([client_id,'?string','client_id']);
+  }, {"signature":"function(?string)"}),
+  setClientID: __w(function(/*?string*/ client_id) {__t([client_id, '?string', 'client_id']);
     clientID = client_id;
-  },{"signature":"function(?string)"}),
-  setDefaultParams: __w(function(/*?object*/ default_params) {__t([default_params,'?object','default_params']);
+  }, {"signature":"function(?string)"}),
+  setDefaultParams: __w(function(/*?object*/ default_params) {__t([default_params, '?object', 'default_params']);
     defaultParams = default_params;
-  },{"signature":"function(?object)"}),
+  }, {"signature":"function(?object)"}),
   rest: requestUsingRest,
   graph: requestUsingGraph
 });
@@ -5800,14 +5792,14 @@ var Runtime    = require('sdk.Runtime');
 
 var currentAccessToken;
 
-Runtime.subscribe('ClientID.change', __w(function(/*?string*/ value) {__t([value,'?string','value']);
+Runtime.subscribe('ClientID.change', __w(function(/*?string*/ value) {__t([value, '?string', 'value']);
   ApiClient.setClientID(value);
-},{"signature":"function(?string)"}));
+}, {"signature":"function(?string)"}));
 
-Runtime.subscribe('AccessToken.change', __w(function(/*?string*/ value) {__t([value,'?string','value']);
+Runtime.subscribe('AccessToken.change', __w(function(/*?string*/ value) {__t([value, '?string', 'value']);
   currentAccessToken = value;
   ApiClient.setAccessToken(value);
-},{"signature":"function(?string)"}));
+}, {"signature":"function(?string)"}));
 
 ApiClient.setDefaultParams({
   sdk: 'joey'
@@ -5815,7 +5807,7 @@ ApiClient.setDefaultParams({
 
 
 ApiClient.subscribe('request.complete', __w(function(/*string*/ endpoint,
-    /*string*/ method, /*object*/ params, response) {__t([endpoint,'string','endpoint'],[method,'string','method'],[params,'object','params']);
+    /*string*/ method, /*object*/ params, response) {__t([endpoint, 'string', 'endpoint'], [method, 'string', 'method'], [params, 'object', 'params']);
     var invalidateToken = false;
     if (response && typeof response == 'object') {
       if (response.error) {
@@ -5835,11 +5827,11 @@ ApiClient.subscribe('request.complete', __w(function(/*string*/ endpoint,
     
     Runtime.setAccessToken(null);
   }
-},{"signature":"function(string,string,object)"}));
+}, {"signature":"function(string,string,object)"}));
 
 // Inspector for calls that untos'es the app
 ApiClient.subscribe('request.complete', __w(function(/*string*/ endpoint,
-    /*string*/ method, /*object*/ params, response) {__t([endpoint,'string','endpoint'],[method,'string','method'],[params,'object','params']);
+    /*string*/ method, /*object*/ params, response) {__t([endpoint, 'string', 'endpoint'], [method, 'string', 'method'], [params, 'object', 'params']);
   if (((endpoint == '/me/permissions'
         && method === 'delete')
        || (endpoint == '/restserver.php'
@@ -5847,7 +5839,7 @@ ApiClient.subscribe('request.complete', __w(function(/*string*/ endpoint,
       && response === true) {
     Runtime.setAccessToken(null);
   }
-},{"signature":"function(string,string,object)"}));
+}, {"signature":"function(string,string,object)"}));
 
 
 function api() {
@@ -5877,15 +5869,15 @@ __d("sdk.Canvas.Environment",["sdk.RPC"],function(global,require,requireDynamic,
 
 var RPC = require('sdk.RPC');
 
-function getPageInfo(/*function*/ appCallback) {__t([appCallback,'function','appCallback']);
-  RPC.remote.getPageInfo(__w(function(/*object*/ response) {__t([response,'object','response']);
+function getPageInfo(/*function*/ appCallback) {__t([appCallback, 'function', 'appCallback']);
+  RPC.remote.getPageInfo(__w(function(/*object*/ response) {__t([response, 'object', 'response']);
     appCallback(response.result);
-  },{"signature":"function(object)"}));
-}__w(getPageInfo,{"signature":"function(function)"});
+  }, {"signature":"function(object)"}));
+}__w(getPageInfo, {"signature":"function(function)"}); 
 
-function scrollTo(/*number?*/ x, /*number?*/ y) {__t([x,'?number','x'],[y,'?number','y']);
+function scrollTo(/*number?*/ x, /*number?*/ y) {__t([x, '?number', 'x'], [y, '?number', 'y']);
   RPC.remote.scrollTo({ x: x || 0, y: y || 0 });
-}__w(scrollTo,{"signature":"function(?number,?number)"});
+}__w(scrollTo, {"signature":"function(?number,?number)"}); 
 
 
 RPC.stub('getPageInfo');
@@ -5920,7 +5912,7 @@ var _punctCharClass = (
 );
 
 
-function _endsInPunct(/*string?*/ str) /*boolean*/ {__t([str,'?string','str']);/*jshint validthis: true*/return __t([function(){
+function _endsInPunct(/*string?*/ str) /*boolean*/ {__t([str, '?string', 'str']);return __t([function() {
   if (typeof str != 'string') {
     return false;
   }
@@ -5961,10 +5953,10 @@ function _endsInPunct(/*string?*/ str) /*boolean*/ {__t([str,'?string','str']);/
       '\\s' +
     ']*$'
   ));
-}.apply(this,arguments), 'boolean']);}__w(_endsInPunct,{"signature":"function(?string):boolean"});
+}.apply(this, arguments), 'boolean']);}__w(_endsInPunct, {"signature":"function(?string):boolean"}); 
 
 
-function _substituteTokens(/*string*/ str, /*object?*/ args) /*string*/ {__t([str,'string','str'],[args,'?object','args']);/*jshint validthis: true*/return __t([function(){
+function _substituteTokens(/*string*/ str, /*object?*/ args) /*string*/ {__t([str, 'string', 'str'], [args, '?object', 'args']);return __t([function() {
   
   
   if (args !== undefined) {
@@ -5995,7 +5987,7 @@ function _substituteTokens(/*string*/ str, /*object?*/ args) /*string*/ {__t([st
     }
   }
   return str;
-}.apply(this,arguments), 'string']);}__w(_substituteTokens,{"signature":"function(string,?object):string"});
+}.apply(this, arguments), 'string']);}__w(_substituteTokens, {"signature":"function(string,?object):string"}); 
 
 
 function tx() {
@@ -6025,7 +6017,7 @@ var UserAgent = require('UserAgent');
 
 
 var SdkDialog = Type.extend({
-  constructor: __w(function SdkDialog(/*string*/ id, /*string*/ display) {__t([id,'string','id'],[display,'string','display']);
+  constructor: __w(function SdkDialog(/*string*/ id, /*string*/ display) {__t([id, 'string', 'id'], [display, 'string', 'display']);
     this.parent();
     this.id = id;
     this.display = display;
@@ -6038,9 +6030,9 @@ var SdkDialog = Type.extend({
     }
     Dialog._dialogs[id] = this;
     this.trackEvent('init');
-  },{"type":"SdkDialog","signature":"function(string,string)"}),
+  }, {"type":"SdkDialog","signature":"function(string,string)"}),
 
-  trackEvent: __w(function(/*string*/ name, /*?number*/ time) /*SdkDialog*/ {__t([name,'string','name'],[time,'?number','time']);/*jshint validthis: true*/return __t([function(){
+  trackEvent: __w(function(/*string*/ name, /*?number*/ time) /*SdkDialog*/ {__t([name, 'string', 'name'], [time, '?number', 'time']);return __t([function() {
     if (this._e2e[name]) {
       return this;
     }
@@ -6050,9 +6042,9 @@ var SdkDialog = Type.extend({
       this.inform('e2e:end', this._e2e);
     }
     return this;
-  }.apply(this,arguments), 'SdkDialog']);},{"signature":"function(string,?number):SdkDialog"}),
+  }.apply(this, arguments), 'SdkDialog']);}, {"signature":"function(string,?number):SdkDialog"}),
 
-  trackEvents: __w(function(/*?string|object*/ events) /*SdkDialog*/ {__t([events,'?string|object','events']);/*jshint validthis: true*/return __t([function(){
+  trackEvents: __w(function(/*?string|object*/ events) /*SdkDialog*/ {__t([events, '?string|object', 'events']);return __t([function() {
     if (!events) {
       return this;
     }
@@ -6065,13 +6057,13 @@ var SdkDialog = Type.extend({
       }
     }
     return this;
-  }.apply(this,arguments), 'SdkDialog']);},{"signature":"function(?string|object):SdkDialog"})
+  }.apply(this, arguments), 'SdkDialog']);}, {"signature":"function(?string|object):SdkDialog"})
 }, ObservableMixin);
 
 var Dialog = {
-  newInstance: __w(function(/*string*/ id, /*string*/ display) /*SdkDialog*/ {__t([id,'string','id'],[display,'string','display']);/*jshint validthis: true*/return __t([function(){
+  newInstance: __w(function(/*string*/ id, /*string*/ display) /*SdkDialog*/ {__t([id, 'string', 'id'], [display, 'string', 'display']);return __t([function() {
     return new SdkDialog(id, display);
-  }.apply(this,arguments), 'SdkDialog']);},{"signature":"function(string,string):SdkDialog"}),
+  }.apply(this, arguments), 'SdkDialog']);}, {"signature":"function(string,string):SdkDialog"}),
 
   
   _dialogs: null,
@@ -6090,22 +6082,22 @@ var Dialog = {
   _active: null,
 
   
-  get: __w(function(/*string*/ id) /*SdkDialog*/ {__t([id,'string','id']);/*jshint validthis: true*/return __t([function(){
+  get: __w(function(/*string*/ id) /*SdkDialog*/ {__t([id, 'string', 'id']);return __t([function() {
     return Dialog._dialogs[id];
-  }.apply(this,arguments), 'SdkDialog']);},{"signature":"function(string):SdkDialog"}),
+  }.apply(this, arguments), 'SdkDialog']);}, {"signature":"function(string):SdkDialog"}),
 
 
   
-  _findRoot: __w(function(/*DOMElement*/ node) /*DOMElement*/ {__t([node,'DOMElement','node']);/*jshint validthis: true*/return __t([function(){
+  _findRoot: __w(function(/*DOMElement*/ node) /*DOMElement*/ {__t([node, 'DOMElement', 'node']);return __t([function() {
     while (node) {
       if (DOM.containsCss(node, 'fb_dialog')) {
         return node;
       }
       node = node.parentNode;
     }
-  }.apply(this,arguments), 'DOMElement']);},{"signature":"function(DOMElement):DOMElement"}),
+  }.apply(this, arguments), 'DOMElement']);}, {"signature":"function(DOMElement):DOMElement"}),
 
-  _createWWWLoader: __w(function(/*number*/ width) /*DOMElement*/ {__t([width,'number','width']);/*jshint validthis: true*/return __t([function(){
+  _createWWWLoader: __w(function(/*number*/ width) /*DOMElement*/ {__t([width, 'number', 'width']);return __t([function() {
     width = width ? width : 460;
     return Dialog.create({
       content: (
@@ -6120,9 +6112,9 @@ var Dialog = {
       '<div class="dialog_footer"></div>'),
       width: width
     });
-  }.apply(this,arguments), 'DOMElement']);},{"signature":"function(number):DOMElement"}),
+  }.apply(this, arguments), 'DOMElement']);}, {"signature":"function(number):DOMElement"}),
 
-  _createMobileLoader: __w(function() /*DOMElement*/ {/*jshint validthis: true*/return __t([function(){
+  _createMobileLoader: __w(function() /*DOMElement*/ {return __t([function() {
     
     // We're copying the HTML/CSS output of an XHP element here
     
@@ -6156,7 +6148,7 @@ var Dialog = {
           chrome +
         '</div>')
     });
-  }.apply(this,arguments), 'DOMElement']);},{"signature":"function():DOMElement"}),
+  }.apply(this, arguments), 'DOMElement']);}, {"signature":"function():DOMElement"}),
 
   _restoreBodyPosition: function() {
     if (!UserAgent.ipad()) {
@@ -6184,7 +6176,7 @@ var Dialog = {
   },
 
   
-  showLoader: __w(function(/*function?*/ cb, /*number*/ width) {__t([cb,'?function','cb'],[width,'number','width']);
+  showLoader: __w(function(/*?function*/ cb, /*number*/ width) {__t([cb, '?function', 'cb'], [width, 'number', 'width']);
     Dialog._showIPadOverlay();
 
     if (!Dialog._loaderEl) {
@@ -6214,7 +6206,7 @@ var Dialog = {
     }
 
     Dialog._makeActive(Dialog._loaderEl);
-  },{"signature":"function(?function,number)"}),
+  }, {"signature":"function(?function,number)"}),
 
   
   _hideLoader: function() {
@@ -6224,7 +6216,7 @@ var Dialog = {
   },
 
   
-  _makeActive: __w(function(/*DOMElement*/ el) {__t([el,'DOMElement','el']);
+  _makeActive: __w(function(/*DOMElement*/ el) {__t([el, 'DOMElement', 'el']);
     Dialog._setDialogSizes();
     Dialog._lowerActive();
     Dialog._active = el;
@@ -6234,7 +6226,7 @@ var Dialog = {
       });
     }
     Dialog._centerActive();
-  },{"signature":"function(DOMElement)"}),
+  }, {"signature":"function(DOMElement)"}),
 
   
   _lowerActive: function() {
@@ -6246,14 +6238,14 @@ var Dialog = {
   },
 
   
-  _removeStacked: __w(function(/*DOMElement*/ dialog) {__t([dialog,'DOMElement','dialog']);
+  _removeStacked: __w(function(/*DOMElement*/ dialog) {__t([dialog, 'DOMElement', 'dialog']);
     Dialog._stack = ES5(Dialog._stack, 'filter', true,function(node) {
       return node != dialog;
     });
-  },{"signature":"function(DOMElement)"}),
+  }, {"signature":"function(DOMElement)"}),
 
   
-  _centerActive: __w(function(/*object?*/ pageInfo) {__t([pageInfo,'?object','pageInfo']);
+  _centerActive: __w(function(/*?object*/ pageInfo) {__t([pageInfo, '?object', 'pageInfo']);
     var dialog = Dialog._active;
     if (!dialog) {
       return;
@@ -6325,7 +6317,6 @@ var Dialog = {
       } else {
         var body = document.getElementsByTagName('body')[0];
         DOM.addCss(body, 'fb_hidden');
-        left = 10000;
         top = 10000;
       }
 
@@ -6337,7 +6328,7 @@ var Dialog = {
 
     dialog.style.left = (left > 0 ? left : 0) + 'px';
     dialog.style.top = (top > 0 ? top : 0) + 'px';
-  },{"signature":"function(?object)"}),
+  }, {"signature":"function(?object)"}),
 
   _setDialogSizes: function() {
     if (!UserAgent.mobile() || UserAgent.ipad()) {
@@ -6353,7 +6344,7 @@ var Dialog = {
       }
     }
   },
-  getDefaultSize: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getDefaultSize: __w(function() /*object*/ {return __t([function() {
     if (UserAgent.mobile()) {
       if (UserAgent.ipad()) {
         return {
@@ -6390,7 +6381,7 @@ var Dialog = {
       }
     }
     return {width: 575, height: 240};
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
 
   
@@ -6445,7 +6436,7 @@ var Dialog = {
   },
 
   
-  create: __w(function(/*object*/ opts) /*DOMElement*/ {__t([opts,'object','opts']);/*jshint validthis: true*/return __t([function(){
+  create: __w(function(/*object*/ opts) /*DOMElement*/ {__t([opts, 'object', 'opts']);return __t([function() {
     opts = opts || {};
 
     var
@@ -6473,11 +6464,11 @@ var Dialog = {
         'top_left',
         'top_right',
         'bottom_left',
-        'bottom_right'], 'forEach', true,__w(function(/*string*/ name) {__t([name,'string','name']);
+        'bottom_right'], 'forEach', true,__w(function(/*string*/ name) {__t([name, 'string', 'name']);
           var span = document.createElement('span');
           span.className = 'fb_dialog_' + name;
           dialog.appendChild(span);
-        },{"signature":"function(string)"}));
+        }, {"signature":"function(string)"}));
     } else {
       className += UserAgent.mobile()
         ? ' fb_dialog_mobile'
@@ -6508,10 +6499,10 @@ var Dialog = {
     }
 
     return contentRoot;
-  }.apply(this,arguments), 'DOMElement']);},{"signature":"function(object):DOMElement"}),
+  }.apply(this, arguments), 'DOMElement']);}, {"signature":"function(object):DOMElement"}),
 
   
-  show: __w(function(/*DOMElement*/ dialog) {__t([dialog,'DOMElement','dialog']);
+  show: __w(function(/*DOMElement*/ dialog) {__t([dialog, 'DOMElement', 'dialog']);
     var root = Dialog._findRoot(dialog);
     if (root) {
       Dialog._removeStacked(root);
@@ -6524,10 +6515,10 @@ var Dialog = {
           .trackEvent('show');
       }
     }
-  },{"signature":"function(DOMElement)"}),
+  }, {"signature":"function(DOMElement)"}),
 
   
-  hide: __w(function(/*DOMElement*/ dialog) {__t([dialog,'DOMElement','dialog']);
+  hide: __w(function(/*DOMElement*/ dialog) {__t([dialog, 'DOMElement', 'dialog']);
     var root = Dialog._findRoot(dialog);
     Dialog._hideLoader();
     if (root == Dialog._active) {
@@ -6540,10 +6531,10 @@ var Dialog = {
           .trackEvent('hide');
       }
     }
-  },{"signature":"function(DOMElement)"}),
+  }, {"signature":"function(DOMElement)"}),
 
   
-  remove: __w(function(/*DOMElement*/ dialog) {__t([dialog,'DOMElement','dialog']);
+  remove: __w(function(/*DOMElement*/ dialog) {__t([dialog, 'DOMElement', 'dialog']);
     dialog = Dialog._findRoot(dialog);
     if (dialog) {
       var is_active = Dialog._active == dialog;
@@ -6571,13 +6562,13 @@ var Dialog = {
         dialog.parentNode.removeChild(dialog);
       }, 3000);
     }
-  },{"signature":"function(DOMElement)"}),
+  }, {"signature":"function(DOMElement)"}),
 
   
-  isActive: __w(function(/*DOMElement*/ node) /*boolean*/ {__t([node,'DOMElement','node']);/*jshint validthis: true*/return __t([function(){
+  isActive: __w(function(/*DOMElement*/ node) /*boolean*/ {__t([node, 'DOMElement', 'node']);return __t([function() {
     var root = Dialog._findRoot(node);
     return root && root === Dialog._active;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function(DOMElement):boolean"})
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function(DOMElement):boolean"})
 
 };
 
@@ -6606,31 +6597,31 @@ var Frictionless = {
       if (!response || response.error) {
         return;
       }
-      ES5(response.data, 'forEach', true,__w(function(/*object*/ recipient) {__t([recipient,'object','recipient']);
+      ES5(response.data, 'forEach', true,__w(function(/*object*/ recipient) {__t([recipient, 'object', 'recipient']);
         Frictionless._allowedRecipients[recipient.recipient_id] = true;
-      },{"signature":"function(object)"}));
+      }, {"signature":"function(object)"}));
     });
   },
 
   
   init: function() {
     Frictionless._useFrictionless = true;
-    Auth.getLoginStatus(__w(function(/*object*/ response) {__t([response,'object','response']);
+    Auth.getLoginStatus(__w(function(/*object*/ response) {__t([response, 'object', 'response']);
       if (response.status == 'connected') {
         Frictionless._updateRecipients();
       }
-    },{"signature":"function(object)"}));
-    Event.subscribe('auth.login', __w(function(/*object*/ login) {__t([login,'object','login']);
+    }, {"signature":"function(object)"}));
+    Event.subscribe('auth.login', __w(function(/*object*/ login) {__t([login, 'object', 'login']);
       if (login.authResponse) {
         Frictionless._updateRecipients();
       }
-    },{"signature":"function(object)"}));
+    }, {"signature":"function(object)"}));
   },
 
   
   _processRequestResponse: __w(function(/*function*/ cb, /*boolean? */hidden)
-      /*function*/ {__t([cb,'function','cb']);/*jshint validthis: true*/return __t([function(){
-    return __w(function(/*object?*/ params) {__t([params,'?object','params']);
+      /*function*/ {__t([cb, 'function', 'cb']);return __t([function() {
+    return __w(function(/*object?*/ params) {__t([params, '?object', 'params']);
       var updated = params && params.updated_frictionless;
       if (Frictionless._useFrictionless && updated) {
         
@@ -6649,11 +6640,11 @@ var Frictionless = {
       }
       
       cb && cb(params);
-    },{"signature":"function(?object)"});
-  }.apply(this,arguments), 'function']);},{"signature":"function(function):function"}),
+    }, {"signature":"function(?object)"});
+  }.apply(this, arguments), 'function']);}, {"signature":"function(function):function"}),
 
   
-  isAllowed: __w(function(user_ids) /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  isAllowed: __w(function(user_ids) /*boolean*/ {return __t([function() {
     if (!user_ids) {
       return false;
     }
@@ -6668,19 +6659,19 @@ var Frictionless = {
 
     var allowed = true;
     var has_user_ids = false;
-    ES5(user_ids, 'forEach', true,__w(function(/*string*/ user_id) {__t([user_id,'string','user_id']);
+    ES5(user_ids, 'forEach', true,__w(function(/*string*/ user_id) {__t([user_id, 'string', 'user_id']);
       allowed = allowed && user_id in Frictionless._allowedRecipients;
       has_user_ids = true;
-    },{"signature":"function(string)"}));
+    }, {"signature":"function(string)"}));
     return allowed && has_user_ids;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"})
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"})
 };
 
-Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options,'object','options']);
+Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options, 'object', 'options']);
   if (options.frictionlessRequests) {
     Frictionless.init();
   }
-},{"signature":"function(object)"}));
+}, {"signature":"function(object)"}));
 
 
 module.exports = Frictionless;
@@ -6691,7 +6682,7 @@ __d("insertIframe",["guid","GlobalCallback"],function(global,require,requireDyna
 var guid = require('guid');
 var GlobalCallback = require('GlobalCallback');
 
-function insertIframe(/*object*/ opts) {__t([opts,'object','opts']);
+function insertIframe(/*object*/ opts) {__t([opts, 'object', 'opts']);
 
   
   
@@ -6806,7 +6797,7 @@ function insertIframe(/*object*/ opts) {__t([opts,'object','opts']);
     node.src = opts.url;
     opts.onInsert && opts.onInsert(node);
   }
-}__w(insertIframe,{"signature":"function(object)"});
+}__w(insertIframe, {"signature":"function(object)"}); 
 
 module.exports = insertIframe;
 
@@ -6822,7 +6813,7 @@ var NATIVE_READY_EVENT = 'fbNativeReady';
 var Native = {
 
   
-  onready: __w(function(/*function*/ func) {__t([func,'function','func']);
+  onready: __w(function(/*function*/ func) {__t([func, 'function', 'func']);
     // Check that we're within a native container
     if (!UserAgent.nativeApp()) {
       Log.error('FB.Native.onready only works when the page is rendered ' +
@@ -6851,7 +6842,7 @@ var Native = {
       };
       window.addEventListener(NATIVE_READY_EVENT, nativeReadyCallback, false);
     }
-  },{"signature":"function(function)"})
+  }, {"signature":"function(function)"})
 };
 
 module.exports = Native;
@@ -6882,7 +6873,7 @@ var UserAgent = require('UserAgent');
 var XD = require('sdk.XD');
 
 var MobileIframeable = {
-  transform: __w(function(/*object*/ call) /*object*/ {__t([call,'object','call']);/*jshint validthis: true*/return __t([function(){
+  transform: __w(function(/*object*/ call) /*object*/ {__t([call, 'object', 'call']);return __t([function() {
     
     
     
@@ -6904,8 +6895,8 @@ var MobileIframeable = {
     } else {
       return UIServer.genericTransform(call);
     }
-  }.apply(this,arguments), 'object']);},{"signature":"function(object):object"}),
-  getXdRelation: __w(function(/*object*/ params) /*string*/ {__t([params,'object','params']);/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), 'object']);}, {"signature":"function(object):object"}),
+  getXdRelation: __w(function(/*object*/ params) /*string*/ {__t([params, 'object', 'params']);return __t([function() {
     var display = params.display;
     if (display === 'touch' && window.postMessage && params.in_iframe) {
       
@@ -6914,25 +6905,25 @@ var MobileIframeable = {
       return 'parent';
     }
     return UIServer.getXdRelation(params);
-  }.apply(this,arguments), 'string']);},{"signature":"function(object):string"})
+  }.apply(this, arguments), 'string']);}, {"signature":"function(object):string"})
 };
 
 var Methods = {
   'stream.share': {
     size      : { width: 670, height: 340 },
     url       : 'sharer.php',
-    transform : __w(function(/*object*/ call) /*object*/ {__t([call,'object','call']);/*jshint validthis: true*/return __t([function(){
+    transform : __w(function(/*object*/ call) /*object*/ {__t([call, 'object', 'call']);return __t([function() {
       if (!call.params.u) {
         call.params.u = window.location.toString();
       }
       call.params.display = 'popup';
       return call;
-    }.apply(this,arguments), 'object']);},{"signature":"function(object):object"})
+    }.apply(this, arguments), 'object']);}, {"signature":"function(object):object"})
   },
 
   
   'apprequests': {
-    transform: __w(function(/*object*/ call) /*object*/ {__t([call,'object','call']);/*jshint validthis: true*/return __t([function(){
+    transform: __w(function(/*object*/ call) /*object*/ {__t([call, 'object', 'call']);return __t([function() {
       call = MobileIframeable.transform(call);
 
       call.params.frictionless = Frictionless &&
@@ -6960,7 +6951,7 @@ var Methods = {
       
       call.closeIcon = false;
       return call;
-    }.apply(this,arguments), 'object']);},{"signature":"function(object):object"}),
+    }.apply(this, arguments), 'object']);}, {"signature":"function(object):object"}),
     getXdRelation: MobileIframeable.getXdRelation
   },
 
@@ -6970,7 +6961,7 @@ var Methods = {
     url       : 'dialog/oauth',
     size      : { width: (UserAgent.mobile() ? null : 475),
                   height: (UserAgent.mobile() ? null : 183) },
-    transform : __w(function(/*object*/ call) /*?object*/ {__t([call,'object','call']);/*jshint validthis: true*/return __t([function(){
+    transform : __w(function(/*object*/ call) /*?object*/ {__t([call, 'object', 'call']);return __t([function() {
       if (!Runtime.getClientID()) {
         Log.error('FB.login() called before FB.init().');
         return;
@@ -6979,7 +6970,9 @@ var Methods = {
       
       
       
-      if (Auth.getAuthResponse() && !call.params.scope) {
+      if (Auth.getAuthResponse()
+          && !call.params.scope
+          && !call.params.auth_type) {
         Log.error('FB.login() called when user is already connected.');
         call.cb && call.cb({ status: Runtime.getLoginStatus(),
                              authResponse: Auth.getAuthResponse()});
@@ -7020,12 +7013,12 @@ var Methods = {
       }
 
       return call;
-    }.apply(this,arguments), '?object']);},{"signature":"function(object):?object"})
+    }.apply(this, arguments), '?object']);}, {"signature":"function(object):?object"})
   },
 
   'auth.logout': {
     url       : 'logout.php',
-    transform : __w(function(/*object*/ call) /*?object*/ {__t([call,'object','call']);/*jshint validthis: true*/return __t([function(){
+    transform : __w(function(/*object*/ call) /*?object*/ {__t([call, 'object', 'call']);return __t([function() {
       if (!Runtime.getClientID()) {
         Log.error('FB.logout() called before calling FB.init().');
       } else if (!Auth.getAuthResponse()) {
@@ -7038,12 +7031,12 @@ var Methods = {
                                              'logout');
         return call;
       }
-    }.apply(this,arguments), '?object']);},{"signature":"function(object):?object"})
+    }.apply(this, arguments), '?object']);}, {"signature":"function(object):?object"})
   },
 
   'login.status': {
     url       : 'dialog/oauth',
-    transform : __w(function(/*object*/ call) /*object*/ {__t([call,'object','call']);/*jshint validthis: true*/return __t([function(){
+    transform : __w(function(/*object*/ call) /*object*/ {__t([call, 'object', 'call']);return __t([function() {
       var
         cb = call.cb,
         id = call.id;
@@ -7061,7 +7054,7 @@ var Methods = {
       });
 
       return call;
-    }.apply(this,arguments), 'object']);},{"signature":"function(object):object"})
+    }.apply(this, arguments), 'object']);}, {"signature":"function(object):object"})
   }
 };
 
@@ -7074,7 +7067,7 @@ var UIServer = {
   _resultToken   : '"xxRESULTTOKENxx"',
 
   
-  genericTransform: __w(function(/*object*/ call) /*object*/ {__t([call,'object','call']);/*jshint validthis: true*/return __t([function(){
+  genericTransform: __w(function(/*object*/ call) /*object*/ {__t([call, 'object', 'call']);return __t([function() {
     if (call.params.display == 'dialog' || call.params.display == 'iframe') {
       copyProperties(call.params, {
         display: 'iframe',
@@ -7083,7 +7076,7 @@ var UIServer = {
     }
 
     return call;
-  }.apply(this,arguments), 'object']);},{"signature":"function(object):object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function(object):object"}),
 
   
   checkOauthDisplay: function(params) {
@@ -7103,7 +7096,7 @@ var UIServer = {
   },
 
   
-  prepareCall: __w(function(/*object*/ params, /*function*/ cb) /*?object*/ {__t([params,'object','params'],[cb,'function','cb']);/*jshint validthis: true*/return __t([function(){
+  prepareCall: __w(function(/*object*/ params, /*function*/ cb) /*?object*/ {__t([params, 'object', 'params'], [cb, 'function', 'cb']);return __t([function() {
     var
       name   = params.method.toLowerCase(),
       method = copyProperties({}, UIServer.Methods[name]),
@@ -7183,9 +7176,9 @@ var UIServer = {
     call = UIServer.prepareParams(call);
 
     return call;
-  }.apply(this,arguments), '?object']);},{"signature":"function(object,function):?object"}),
+  }.apply(this, arguments), '?object']);}, {"signature":"function(object,function):?object"}),
 
-  prepareParams: __w(function(/*object*/ call) /*object*/ {__t([call,'object','call']);/*jshint validthis: true*/return __t([function(){
+  prepareParams: __w(function(/*object*/ call) /*object*/ {__t([call, 'object', 'call']);return __t([function() {
     var method = call.params.method;
     
     
@@ -7210,14 +7203,14 @@ var UIServer = {
     }
 
     return call;
-  }.apply(this,arguments), 'object']);},{"signature":"function(object):object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function(object):object"}),
 
-  urlTooLongForIE: __w(function(/*string*/ fullURL) /*boolean*/ {__t([fullURL,'string','fullURL']);/*jshint validthis: true*/return __t([function(){
+  urlTooLongForIE: __w(function(/*string*/ fullURL) /*boolean*/ {__t([fullURL, 'string', 'fullURL']);return __t([function() {
     return fullURL.length > 2000;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function(string):boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function(string):boolean"}),
 
   
-  getDisplayMode: __w(function(/*object*/ method, /*object*/ params) /*string*/ {__t([method,'object','method'],[params,'object','params']);/*jshint validthis: true*/return __t([function(){
+  getDisplayMode: __w(function(/*object*/ method, /*object*/ params) /*string*/ {__t([method, 'object', 'method'], [params, 'object', 'params']);return __t([function() {
     if (params.display === 'hidden' ||
         params.display === 'none') {
       return params.display;
@@ -7248,10 +7241,10 @@ var UIServer = {
 
     // TODO change "dialog" to "iframe" once moved to uiserver
     return params.display || (Runtime.getAccessToken() ? 'dialog' : 'popup');
-  }.apply(this,arguments), 'string']);},{"signature":"function(object,object):string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function(object,object):string"}),
 
   
-  getXdRelation: __w(function(/*object*/ params) /*string*/ {__t([params,'object','params']);/*jshint validthis: true*/return __t([function(){
+  getXdRelation: __w(function(/*object*/ params) /*string*/ {__t([params, 'object', 'params']);return __t([function() {
     var display = params.display;
     if (display === 'popup' || display === 'touch') {
       return 'opener';
@@ -7263,10 +7256,10 @@ var UIServer = {
     if (display === 'async') {
       return 'parent.frames[' + window.name + ']';
     }
-  }.apply(this,arguments), 'string']);},{"signature":"function(object):string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function(object):string"}),
 
   
-  popup: __w(function(/*object*/ call) {__t([call,'object','call']);
+  popup: __w(function(/*object*/ call) {__t([call, 'object', 'call']);
     
     var
       _screenX   = typeof window.screenX      != 'undefined'
@@ -7335,9 +7328,9 @@ var UIServer = {
     if (call.id in UIServer._defaultCb) {
       UIServer._popupMonitor();
     }
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
-  setLoadedNode: __w(function(/*object*/ call, node, /*?string*/ type) {__t([call,'object','call'],[type,'?string','type']);
+  setLoadedNode: __w(function(/*object*/ call, node, /*?string*/ type) {__t([call, 'object', 'call'], [type, '?string', 'type']);
     if (call.params && call.params.display != 'popup') {
       
       
@@ -7350,7 +7343,7 @@ var UIServer = {
       fbCallID: call.id
     };
     UIServer._loadedNodes[call.id] = node;
-  },{"signature":"function(object,?string)"}),
+  }, {"signature":"function(object,?string)"}),
 
   getLoadedNode: function(call) {
     var id = typeof call == 'object' ? call.id : call,
@@ -7359,14 +7352,14 @@ var UIServer = {
   },
 
   
-  hidden: __w(function(/*object*/ call) {__t([call,'object','call']);
+  hidden: __w(function(/*object*/ call) {__t([call, 'object', 'call']);
     call.className = 'FB_UI_Hidden';
     call.root = Content.appendHidden('');
     UIServer._insertIframe(call);
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
-  iframe: __w(function(/*object*/ call) {__t([call,'object','call']);
+  iframe: __w(function(/*object*/ call) {__t([call, 'object', 'call']);
     call.className = 'FB_UI_Dialog';
     var onClose = function() {
       UIServer._triggerDefault(call.id);
@@ -7381,10 +7374,10 @@ var UIServer = {
     }
     DOM.addCss(call.root, 'fb_dialog_iframe');
     UIServer._insertIframe(call);
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
-  touch: __w(function(/*object*/ call) {__t([call,'object','call']);
+  touch: __w(function(/*object*/ call) {__t([call, 'object', 'call']);
     if (call.params && call.params.in_iframe) {
       
       
@@ -7416,15 +7409,15 @@ var UIServer = {
       
       UIServer.popup(call);
     }
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
-  async: __w(function(/*object*/ call) {__t([call,'object','call']);
+  async: __w(function(/*object*/ call) {__t([call, 'object', 'call']);
     call.params.redirect_uri = location.protocol + '//' +
       location.host + location.pathname;
     delete call.params.access_token;
 
-    RPC.remote.showDialog(call.params, __w(function(/*object*/ response) {__t([response,'object','response']);
+    RPC.remote.showDialog(call.params, __w(function(/*object*/ response) {__t([response, 'object', 'response']);
       var dialog = Dialog.get(call.id);
       if (response.result) {
         
@@ -7432,24 +7425,24 @@ var UIServer = {
       }
       dialog.trackEvent('close');
       call.cb(response.result);
-    },{"signature":"function(object)"}));
-  },{"signature":"function(object)"}),
+    }, {"signature":"function(object)"}));
+  }, {"signature":"function(object)"}),
 
-  getDefaultSize: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getDefaultSize: __w(function() /*object*/ {return __t([function() {
     return Dialog.getDefaultSize();
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
-  _insertIframe: __w(function(/*object*/ call) {__t([call,'object','call']);
+  _insertIframe: __w(function(/*object*/ call) {__t([call, 'object', 'call']);
     
     
     // from the _frames nodes, and we won't add the node back in.
     UIServer._loadedNodes[call.id] = false;
-    var activate = __w(function(/*DOMElement*/ node) {__t([node,'DOMElement','node']);
+    var activate = __w(function(/*DOMElement*/ node) {__t([node, 'DOMElement', 'node']);
       if (call.id in UIServer._loadedNodes) {
         UIServer.setLoadedNode(call, node, 'iframe');
       }
-    },{"signature":"function(DOMElement)"});
+    }, {"signature":"function(DOMElement)"});
 
     
     if (call.post) {
@@ -7461,13 +7454,13 @@ var UIServer = {
         height    : call.size.height,
         id        : call.id,
         onInsert  : activate,
-        onload    : __w(function(/*DOMElement*/ node) {__t([node,'DOMElement','node']);
+        onload    : __w(function(/*DOMElement*/ node) {__t([node, 'DOMElement', 'node']);
           Content.submitToTarget({
             url    : call.url,
             target : node.name,
             params : call.params
           });
-        },{"signature":"function(DOMElement)"})
+        }, {"signature":"function(DOMElement)"})
       });
     } else {
       insertIframe({
@@ -7481,10 +7474,10 @@ var UIServer = {
         onInsert  : activate
       });
     }
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
-  _handleResizeMessage: __w(function(/*string*/ frame, /*object*/ data) {__t([frame,'string','frame'],[data,'object','data']);
+  _handleResizeMessage: __w(function(/*string*/ frame, /*object*/ data) {__t([frame, 'string', 'frame'], [data, 'object', 'data']);
     var node = UIServer.getLoadedNode(frame);
     if (!node) {
       return;
@@ -7505,15 +7498,15 @@ var UIServer = {
     if (!Dialog.isActive(node)) {
       Dialog.show(node);
     }
-  },{"signature":"function(string,object)"}),
+  }, {"signature":"function(string,object)"}),
 
   
-  _triggerDefault: __w(function(/*string*/ id) {__t([id,'string','id']);
+  _triggerDefault: __w(function(/*string*/ id) {__t([id, 'string', 'id']);
     UIServer._xdRecv(
       { frame: id },
       UIServer._defaultCb[id] || function() {}
     );
-  },{"signature":"function(string)"}),
+  }, {"signature":"function(string)"}),
 
   
   _popupMonitor: function() {
@@ -7554,8 +7547,8 @@ var UIServer = {
 
   
   _xdChannelHandler: __w(function(/*string*/ frame, /*string*/ relation)
-      /*string*/ {__t([frame,'string','frame'],[relation,'string','relation']);/*jshint validthis: true*/return __t([function(){
-    return XD.handler(__w(function(/*object*/ data) {__t([data,'object','data']);
+      /*string*/ {__t([frame, 'string', 'frame'], [relation, 'string', 'relation']);return __t([function() {
+    return XD.handler(__w(function(/*object*/ data) {__t([data, 'object', 'data']);
       var node = UIServer.getLoadedNode(frame);
       if (!node) { 
         return;
@@ -7571,12 +7564,12 @@ var UIServer = {
       } else if (data.type == 'fireevent') {
         Event.fire(data.event);
       }
-    },{"signature":"function(object)"}), relation, true, null);
-  }.apply(this,arguments), 'string']);},{"signature":"function(string,string):string"}),
+    }, {"signature":"function(object)"}), relation, true, null);
+  }.apply(this, arguments), 'string']);}, {"signature":"function(string,string):string"}),
 
   
   _xdNextHandler: __w(function(/*function*/ cb, /*string*/ frame,
-       /*string*/ relation, /*boolean*/ isDefault) /*string*/ {__t([cb,'function','cb'],[frame,'string','frame'],[relation,'string','relation'],[isDefault,'boolean','isDefault']);/*jshint validthis: true*/return __t([function(){
+       /*string*/ relation, /*boolean*/ isDefault) /*string*/ {__t([cb, 'function', 'cb'], [frame, 'string', 'frame'], [relation, 'string', 'relation'], [isDefault, 'boolean', 'isDefault']);return __t([function() {
     if (isDefault) {
       UIServer._defaultCb[frame] = cb;
     }
@@ -7584,14 +7577,29 @@ var UIServer = {
     return XD.handler(function(data) {
       UIServer._xdRecv(data, cb);
     }, relation) + '&frame=' + frame;
-  }.apply(this,arguments), 'string']);},{"signature":"function(function,string,string,boolean):string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function(function,string,string,boolean):string"}),
 
   
-  _xdRecv: __w(function(/*object*/ data, /*function*/ cb) {__t([data,'object','data'],[cb,'function','cb']);
+  _xdRecv: __w(function(/*object*/ data, /*function*/ cb) {__t([data, 'object', 'data'], [cb, 'function', 'cb']);
     var frame = UIServer.getLoadedNode(data.frame);
     if (frame) {
-      
-      try {
+      if (frame.close) {
+        
+        try {
+          frame.close();
+          
+          
+          
+          if (/iPhone.*Version\/(5|6)/.test(navigator.userAgent)
+              && RegExp.$1 !== '5') {
+            window.focus();
+          }
+          UIServer._popupCount--;
+        } catch (y) {
+          
+        }
+      } else {
+        
         if (DOM.containsCss(frame, 'FB_UI_Hidden')) {
           
           // async flash crap. seriously, don't ever ask me about it.
@@ -7602,27 +7610,7 @@ var UIServer = {
         } else if (DOM.containsCss(frame, 'FB_UI_Dialog')) {
           Dialog.remove(frame);
         }
-      } catch (x) {
-        
       }
-
-      
-      try {
-        if (frame.close) {
-          frame.close();
-          
-          
-          
-          if (/iPhone.*Version\/(5|6)/.test(navigator.userAgent)
-              && RegExp.$1 !== '5') {
-            window.focus();
-          }
-          UIServer._popupCount--;
-        }
-      } catch (y) {
-        
-      }
-
     }
     
     delete UIServer._loadedNodes[data.frame];
@@ -7632,11 +7620,11 @@ var UIServer = {
     dialog.trackEvents(data.e2e);
     dialog.trackEvent('close');
     cb(data);
-  },{"signature":"function(object,function)"}),
+  }, {"signature":"function(object,function)"}),
 
   
   _xdResult: __w(function(/*function*/ cb, /*string*/ frame, /*string*/ target,
-      /*boolean*/ isDefault) /*string*/ {__t([cb,'function','cb'],[frame,'string','frame'],[target,'string','target'],[isDefault,'boolean','isDefault']);/*jshint validthis: true*/return __t([function(){
+      /*boolean*/ isDefault) /*string*/ {__t([cb, 'function', 'cb'], [frame, 'string', 'frame'], [target, 'string', 'target'], [isDefault, 'boolean', 'isDefault']);return __t([function() {
     return (
       UIServer._xdNextHandler(function(params) {
         cb && cb(params.result &&
@@ -7645,16 +7633,16 @@ var UIServer = {
       }, frame, target, isDefault) +
       '&result=' + encodeURIComponent(UIServer._resultToken)
     );
-  }.apply(this,arguments), 'string']);},{"signature":"function(function,string,string,boolean):string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function(function,string,string,boolean):string"}),
 
   xdHandler: __w(function(/*function*/ cb, /*string*/ frame, /*string*/ target,
-      /*?object*/ authResponse, /*string*/ method) /*string*/ {__t([cb,'function','cb'],[frame,'string','frame'],[target,'string','target'],[authResponse,'?object','authResponse'],[method,'string','method']);/*jshint validthis: true*/return __t([function(){
+      /*?object*/ authResponse, /*string*/ method) /*string*/ {__t([cb, 'function', 'cb'], [frame, 'string', 'frame'], [target, 'string', 'target'], [authResponse, '?object', 'authResponse'], [method, 'string', 'method']);return __t([function() {
     return UIServer._xdNextHandler(
       Auth.xdResponseWrapper(cb, authResponse, method),
       frame,
       target,
       true);
-  }.apply(this,arguments), 'string']);},{"signature":"function(function,string,string,?object,string):string"})
+  }.apply(this, arguments), 'string']);}, {"signature":"function(function,string,string,?object,string):string"})
 
 };
 
@@ -7672,7 +7660,7 @@ var Log = require('Log');
 var UIServer = require('sdk.UIServer');
 
 
-function ui(/*object*/ params, /*?function*/ cb) /*?object*/ {__t([params,'object','params'],[cb,'?function','cb']);/*jshint validthis: true*/return __t([function(){
+function ui(/*object*/ params, /*?function*/ cb) /*?object*/ {__t([params, 'object', 'params'], [cb, '?function', 'cb']);return __t([function() {
   Assert.isObject(params);
   Assert.maybeFunction(cb);
 
@@ -7721,7 +7709,7 @@ function ui(/*object*/ params, /*?function*/ cb) /*?object*/ {__t([params,'objec
   }
 
   if (enableE2E) {
-    call.dialog.subscribe('e2e:end', __w(function(/*object*/ events) {__t([events,'object','events']);
+    call.dialog.subscribe('e2e:end', __w(function(/*object*/ events) {__t([events, 'object', 'events']);
       events.method = method;
       events.display = displayName;
       Log.debug('e2e: %s', ES5('JSON', 'stringify', false,events));
@@ -7729,11 +7717,11 @@ function ui(/*object*/ params, /*?function*/ cb) /*?object*/ {__t([params,'objec
       Impressions.log(114, {
         payload: events
       });
-    },{"signature":"function(object)"}));
+    }, {"signature":"function(object)"}));
   }
   displayFn(call);
   return call.dialog;
-}.apply(this,arguments), '?object']);}__w(ui,{"signature":"function(object,?function):?object"});
+}.apply(this, arguments), '?object']);}__w(ui, {"signature":"function(object,?function):?object"}); 
 
 module.exports = ui;
 
@@ -7752,23 +7740,23 @@ var ui = require('sdk.ui');
 
 FB.provide('', {
 
-  getLoginStatus: __w(function() /*object?*/ {/*jshint validthis: true*/return __t([function(){
+  getLoginStatus: __w(function() /*object?*/ {return __t([function() {
     return Auth.getLoginStatus.apply(Auth, arguments);
-  }.apply(this,arguments), '?object']);},{"signature":"function():object?"}),
+  }.apply(this, arguments), '?object']);}, {"signature":"function():object?"}),
 
-  getAuthResponse: __w(function() /*object?*/ {/*jshint validthis: true*/return __t([function(){
+  getAuthResponse: __w(function() /*object?*/ {return __t([function() {
     return Auth.getAuthResponse();
-  }.apply(this,arguments), '?object']);},{"signature":"function():object?"}),
+  }.apply(this, arguments), '?object']);}, {"signature":"function():object?"}),
 
-  getAccessToken: __w(function() /*string?*/ {/*jshint validthis: true*/return __t([function(){
+  getAccessToken: __w(function() /*string?*/ {return __t([function() {
     return Runtime.getAccessToken() || null;
-  }.apply(this,arguments), '?string']);},{"signature":"function():string?"}),
+  }.apply(this, arguments), '?string']);}, {"signature":"function():string?"}),
 
-  getUserID: __w(function() /*string?*/ {/*jshint validthis: true*/return __t([function(){
+  getUserID: __w(function() /*string?*/ {return __t([function() {
     return Runtime.getUserID() || Runtime.getCookieUserID();
-  }.apply(this,arguments), '?string']);},{"signature":"function():string?"}),
+  }.apply(this, arguments), '?string']);}, {"signature":"function():string?"}),
 
-  login: __w(function(/*function?*/ cb, /*object?*/ opts) {__t([cb,'?function','cb'],[opts,'?object','opts']);
+  login: __w(function(/*function?*/ cb, /*object?*/ opts) {__t([cb, '?function', 'cb'], [opts, '?object', 'opts']);
     if (opts && opts.perms && !opts.scope) {
       opts.scope = opts.perms;
       delete opts.perms;
@@ -7785,12 +7773,12 @@ FB.provide('', {
         domain: location.hostname
       }, opts || {}),
     cb);
-  },{"signature":"function(?function,?object)"}),
+  }, {"signature":"function(?function,?object)"}),
 
 
-  logout: __w(function(/*function?*/ cb) {__t([cb,'?function','cb']);
+  logout: __w(function(/*function?*/ cb) {__t([cb, '?function', 'cb']);
     ui({ method: 'auth.logout', display: 'hidden' }, cb);
-  },{"signature":"function(?function)"})
+  }, {"signature":"function(?function)"})
 });
 
 Auth.subscribe('logout', ES5(Event.fire, 'bind', true,Event, 'auth.logout'));
@@ -7799,7 +7787,7 @@ Auth.subscribe('authresponse.change', ES5(Event.fire, 'bind', true,Event,
   'auth.authResponseChange'));
 Auth.subscribe('status.change', ES5(Event.fire, 'bind', true,Event, 'auth.statusChange'));
 
-Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options,'object','options']);
+Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options, 'object', 'options']);
   if (options.status) {
     Auth.getLoginStatus();
   }
@@ -7824,7 +7812,7 @@ Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options,'obj
       Cookie.loadMeta();
     }
   }
-},{"signature":"function(object)"}));
+}, {"signature":"function(object)"}));
 
 },3);
 __d("sdk.Canvas.Plugin",["sdk.api","sdk.RPC","Log","sdk.Runtime","createArrayFrom"],function(global,require,requireDynamic,requireLazy,module,exports) {
@@ -7840,7 +7828,7 @@ var unityClassID = 'CLSID:444785F1-DE89-4295-863A-D46C3A781394';
 var devHidePluginCallback = null;
 
 
-function hideUnityElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+function hideUnityElement(/*DOMElement*/ elem) {__t([elem, 'DOMElement', 'elem']);
   elem._hideunity_savedstyle = {};
   elem._hideunity_savedstyle.left = elem.style.left;
   elem._hideunity_savedstyle.position = elem.style.position;
@@ -7850,31 +7838,31 @@ function hideUnityElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
   elem.style.position = 'absolute';
   elem.style.width = '1px';
   elem.style.height = '1px';
-}__w(hideUnityElement,{"signature":"function(DOMElement)"});
+}__w(hideUnityElement, {"signature":"function(DOMElement)"}); 
 
 
-function showUnityElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+function showUnityElement(/*DOMElement*/ elem) {__t([elem, 'DOMElement', 'elem']);
   if (elem._hideunity_savedstyle) {
     elem.style.left     = elem._hideunity_savedstyle.left;
     elem.style.position = elem._hideunity_savedstyle.position;
     elem.style.width    = elem._hideunity_savedstyle.width;
     elem.style.height   = elem._hideunity_savedstyle.height;
   }
-}__w(showUnityElement,{"signature":"function(DOMElement)"});
+}__w(showUnityElement, {"signature":"function(DOMElement)"}); 
 
 
-function hideFlashElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+function hideFlashElement(/*DOMElement*/ elem) {__t([elem, 'DOMElement', 'elem']);
   elem._old_visibility = elem.style.visibility;
   elem.style.visibility = 'hidden';
-}__w(hideFlashElement,{"signature":"function(DOMElement)"});
+}__w(hideFlashElement, {"signature":"function(DOMElement)"}); 
 
 
-function showFlashElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+function showFlashElement(/*DOMElement*/ elem) {__t([elem, 'DOMElement', 'elem']);
   elem.style.visibility = elem._old_visibility || '';
   delete elem._old_visibility;
-}__w(showFlashElement,{"signature":"function(DOMElement)"});
+}__w(showFlashElement, {"signature":"function(DOMElement)"}); 
 
-function isHideableFlashElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+function isHideableFlashElement(/*DOMElement*/ elem) {__t([elem, 'DOMElement', 'elem']);
   var isHideable = elem.type.toLowerCase() === 'application/x-shockwave-flash'
         || (elem.classid && elem.classid.toUpperCase() == flashClassID);
 
@@ -7897,23 +7885,23 @@ function isHideableFlashElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','el
     }
   }
   return true;
-}__w(isHideableFlashElement,{"signature":"function(DOMElement)"});
+}__w(isHideableFlashElement, {"signature":"function(DOMElement)"}); 
 
-function isHideableUnityElement(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+function isHideableUnityElement(/*DOMElement*/ elem) {__t([elem, 'DOMElement', 'elem']);
   return elem.type.toLowerCase() === 'application/vnd.unity'
     || (elem.classid && elem.classid.toUpperCase() == unityClassID);
 
-}__w(isHideableUnityElement,{"signature":"function(DOMElement)"});
+}__w(isHideableUnityElement, {"signature":"function(DOMElement)"}); 
 
 
-function hidePluginCallback(/*object*/ params) {__t([params,'object','params']);
+function hidePluginCallback(/*object*/ params) {__t([params, 'object', 'params']);
   var candidates = createArrayFrom(
     window.document.getElementsByTagName('object')
   );
   candidates = candidates.concat(
     createArrayFrom(window.document.getElementsByTagName('embed'))
   );
-  ES5(candidates, 'forEach', true,__w(function(/*DOMElement*/ elem) {__t([elem,'DOMElement','elem']);
+  ES5(candidates, 'forEach', true,__w(function(/*DOMElement*/ elem) {__t([elem, 'DOMElement', 'elem']);
     var isFlashElement = isHideableFlashElement(elem);
     var isUnityElement = isHideableUnityElement(elem);
     if (!isFlashElement && !isUnityElement) {
@@ -7951,8 +7939,8 @@ function hidePluginCallback(/*object*/ params) {__t([params,'object','params']);
     if (Math.random() <= 1 / 1000) {
       api(Runtime.getClientID() + '/occludespopups', 'post', {});
     }
-  },{"signature":"function(DOMElement)"}));
-}__w(hidePluginCallback,{"signature":"function(object)"});
+  }, {"signature":"function(DOMElement)"}));
+}__w(hidePluginCallback, {"signature":"function(object)"}); 
 
 RPC.local.hidePluginObjects = function() {
   Log.info('hidePluginObjects called');
@@ -7978,9 +7966,9 @@ function showPluginElement() {
 
 var Plugin = {
   
-  _setHidePluginCallback: __w(function(/*?function*/ callback) {__t([callback,'?function','callback']);
+  _setHidePluginCallback: __w(function(/*?function*/ callback) {__t([callback, '?function', 'callback']);
     devHidePluginCallback = callback;
-  },{"signature":"function(?function)"}),
+  }, {"signature":"function(?function)"}),
 
   hidePluginElement: hidePluginElement,
   showPluginElement: showPluginElement
@@ -8011,7 +7999,7 @@ function getHeight() {
   return Math.max(bodyScroll, bodyOffset, docScroll, docOffset);
 }
 
-function setSize(/*object?*/ params) /*boolean*/ {__t([params,'?object','params']);/*jshint validthis: true*/return __t([function(){
+function setSize(/*object?*/ params) /*boolean*/ {__t([params, '?object', 'params']);return __t([function() {
   
   if (typeof params != 'object') {
     params = {};
@@ -8043,7 +8031,7 @@ function setSize(/*object?*/ params) /*boolean*/ {__t([params,'?object','params'
   autoGrowLastSize = params;
   RPC.remote.setSize(params);
   return true;
-}.apply(this,arguments), 'boolean']);}__w(setSize,{"signature":"function(?object):boolean"});
+}.apply(this, arguments), 'boolean']);}__w(setSize, {"signature":"function(?object):boolean"}); 
 
 function setAutoGrow(on, interval) {
   if (interval === undefined && typeof on === 'number') {
@@ -8083,12 +8071,12 @@ __d("sdk.Canvas.Navigation",["sdk.RPC"],function(global,require,requireDynamic,r
 var RPC = require('sdk.RPC');
 
 
-function setUrlHandler(/*function*/ callback) {__t([callback,'function','callback']);
-  RPC.local.navigate = __w(function(/*string*/ path) {__t([path,'string','path']);
+function setUrlHandler(/*function*/ callback) {__t([callback, 'function', 'callback']);
+  RPC.local.navigate = __w(function(/*string*/ path) {__t([path, 'string', 'path']);
     callback({ path: path });
-  },{"signature":"function(string)"});
+  }, {"signature":"function(string)"});
   RPC.remote.setNavigationEnabled(true);
-}__w(setUrlHandler,{"signature":"function(function)"});
+}__w(setUrlHandler, {"signature":"function(function)"}); 
 
 
 RPC.stub('setNavigationEnabled');
@@ -8105,7 +8093,7 @@ __d("sdk.Canvas.Tti",["sdk.RPC","sdk.Runtime"],function(global,require,requireDy
 var RPC = require('sdk.RPC');
 var Runtime = require('sdk.Runtime');
 
-function passAppTtiMessage(/*function?*/ callback, /*string*/ messageName) {__t([callback,'?function','callback'],[messageName,'string','messageName']);
+function passAppTtiMessage(/*function?*/ callback, /*string*/ messageName) {__t([callback, '?function', 'callback'], [messageName, 'string', 'messageName']);
   var params = {
     appId: Runtime.getClientID(),
     time: ES5('Date', 'now', false),
@@ -8114,27 +8102,27 @@ function passAppTtiMessage(/*function?*/ callback, /*string*/ messageName) {__t(
 
   var args = [params];
   if (callback) {
-    args.push(__w(function(/*object*/ response) {__t([response,'object','response']);
+    args.push(__w(function(/*object*/ response) {__t([response, 'object', 'response']);
       callback(response.result);
-    },{"signature":"function(object)"}));
+    }, {"signature":"function(object)"}));
   }
 
   RPC.remote.logTtiMessage.apply(null, args);
-}__w(passAppTtiMessage,{"signature":"function(?function,string)"});
+}__w(passAppTtiMessage, {"signature":"function(?function,string)"}); 
 
 
 function startTimer() {
   passAppTtiMessage(null, 'StartIframeAppTtiTimer');
 }
 
-function stopTimer(/*function?*/ callback) {__t([callback,'?function','callback']);
+function stopTimer(/*function?*/ callback) {__t([callback, '?function', 'callback']);
   passAppTtiMessage(callback, 'StopIframeAppTtiTimer');
-}__w(stopTimer,{"signature":"function(?function)"});
+}__w(stopTimer, {"signature":"function(?function)"}); 
 
 
-function setDoneLoading(/*function?*/ callback) {__t([callback,'?function','callback']);
+function setDoneLoading(/*function?*/ callback) {__t([callback, '?function', 'callback']);
   passAppTtiMessage(callback, 'RecordIframeAppTti');
-}__w(setDoneLoading,{"signature":"function(?function)"});
+}__w(setDoneLoading, {"signature":"function(?function)"}); 
 
 RPC.stub('logTtiMessage');
 
@@ -8257,14 +8245,14 @@ function sample() {
   };
 
   if (collectionMode == COLLECT.AUTOMATIC) {
-    ES5(ES5('Object', 'keys', false,resourceFieldsByTag), 'forEach', true,__w(function(/*string*/ tagName) {__t([tagName,'string','tagName']);
+    ES5(ES5('Object', 'keys', false,resourceFieldsByTag), 'forEach', true,__w(function(/*string*/ tagName) {__t([tagName, 'string', 'tagName']);
       var propertyName = resourceFieldsByTag[tagName];
-      ES5(createArrayFrom(document.getElementsByTagName(tagName)), 'forEach', true,__w(function(/*DOMElement*/ tag) {__t([tag,'DOMElement','tag']);
+      ES5(createArrayFrom(document.getElementsByTagName(tagName)), 'forEach', true,__w(function(/*DOMElement*/ tag) {__t([tag, 'DOMElement', 'tag']);
           if (tag[propertyName]) {
             links.push(tag[propertyName]);
           }
-        },{"signature":"function(DOMElement)"}));
-    },{"signature":"function(string)"}));
+        }, {"signature":"function(DOMElement)"}));
+    }, {"signature":"function(string)"}));
   }
 
   if (links.length === 0) {
@@ -8297,14 +8285,14 @@ function maybeSample() {
 }
 
 
-function setCollectionMode(/*number*/ mode) {__t([mode,'number','mode']);
+function setCollectionMode(/*number*/ mode) {__t([mode, 'number', 'mode']);
   collectionMode = mode;
-}__w(setCollectionMode,{"signature":"function(number)"});
+}__w(setCollectionMode, {"signature":"function(number)"}); 
 
 
-function addStaticResource(/*string*/ url) {__t([url,'string','url']);
+function addStaticResource(/*string*/ url) {__t([url, 'string', 'url']);
   links.push(url);
-}__w(addStaticResource,{"signature":"function(string)"});
+}__w(addStaticResource, {"signature":"function(string)"}); 
 
 var CanvasPrefetcher = {
   COLLECT_AUTOMATIC : COLLECT.AUTOMATIC,
@@ -8380,20 +8368,20 @@ UIServer.Methods['auth.login'] = UIServer.Methods['permissions.request'];
 },3);
 __d("mergeArrays",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-function mergeArrays(/*array*/ target, /*array*/ source) /*array*/ {__t([target,'array','target'],[source,'array','source']);/*jshint validthis: true*/return __t([function(){
+function mergeArrays(/*array*/ target, /*array*/ source) /*array*/ {__t([target, 'array', 'target'], [source, 'array', 'source']);return __t([function() {
   for (var i=0; i < source.length; i++) {
     if (ES5(target, 'indexOf', true,source[i]) < 0) {
       target.push(source[i]);
     }
   }
   return target;
-}.apply(this,arguments), 'array']);}__w(mergeArrays,{"signature":"function(array,array):array"});
+}.apply(this, arguments), 'array']);}__w(mergeArrays, {"signature":"function(array,array):array"}); 
 module.exports = mergeArrays;
 
 });
 __d("format",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-function format(/*string*/ str, argsdotdot) /*string*/ {__t([str,'string','str']);/*jshint validthis: true*/return __t([function(){
+function format(/*string*/ str, argsdotdot) /*string*/ {__t([str, 'string', 'str']);return __t([function() {
   argsdotdot = Array.prototype.slice.call(arguments, 1);
   return str.replace(/\{(\d+)\}/g, function(_, index) {
     var value = argsdotdot[Number(index)];
@@ -8401,13 +8389,13 @@ function format(/*string*/ str, argsdotdot) /*string*/ {__t([str,'string','str']
      ? ''
      : value.toString();
   });
-}.apply(this,arguments), 'string']);}__w(format,{"signature":"function(string):string"});
+}.apply(this, arguments), 'string']);}__w(format, {"signature":"function(string):string"}); 
 module.exports = format;
 
 });
 __d("safeEval",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-function safeEval(source, /*?array*/ args) {__t([args,'?array','args']);
+function safeEval(source, /*?array*/ args) {__t([args, '?array', 'args']);
   if (source === null || typeof source === 'undefined') {
     return;
   }
@@ -8423,7 +8411,7 @@ function safeEval(source, /*?array*/ args) {__t([args,'?array','args']);
   // We're asked to eval code
   return Function('return eval("' + source.replace(/"/g, '\\"')  + '");')
     .apply(null, args || []);
-}__w(safeEval,{"signature":"function(?array)"});
+}__w(safeEval, {"signature":"function(?array)"}); 
 
 module.exports = safeEval;
 
@@ -8440,18 +8428,18 @@ var Waitable = Model.extend({
   },
 
   
-  error: __w(function(/*Error*/ ex) {__t([ex,'Error','ex']);
+  error: __w(function(/*Error*/ ex) {__t([ex, 'Error', 'ex']);
     this.inform("error", ex);
-  },{"signature":"function(Error)"}),
+  }, {"signature":"function(Error)"}),
 
   
-  wait: __w(function(/*function?*/ callback, /*function?*/ errorHandler) {__t([callback,'?function','callback'],[errorHandler,'?function','errorHandler']);
+  wait: __w(function(/*function?*/ callback, /*function?*/ errorHandler) {__t([callback, '?function', 'callback'], [errorHandler, '?function', 'errorHandler']);
     
     if (errorHandler) {
       this.subscribe('error', errorHandler);
     }
 
-    this.monitor('Value.change', ES5(__w(function() /*boolean?*/ {/*jshint validthis: true*/return __t([function(){
+    this.monitor('Value.change', ES5(__w(function() /*boolean?*/ {return __t([function() {
       var value = this.getValue();
       if (value !== undefined) {
         
@@ -8459,8 +8447,8 @@ var Waitable = Model.extend({
         callback(value);
         return true;
       }
-    }.apply(this,arguments), '?boolean']);},{"signature":"function():boolean?"}), 'bind', true,this));
-  },{"signature":"function(?function,?function)"})
+    }.apply(this, arguments), '?boolean']);}, {"signature":"function():boolean?"}), 'bind', true,this));
+  }, {"signature":"function(?function,?function)"})
 });
 
 module.exports = Waitable;
@@ -8477,12 +8465,12 @@ var Waitable = require('sdk.Waitable');
 
 
 
-function toFields(/*string*/ s) /*array<string>*/ {__t([s,'string','s']);/*jshint validthis: true*/return __t([function(){
+function toFields(/*string*/ s) /*array<string>*/ {__t([s, 'string', 's']);return __t([function() {
   return ES5(s.split(','), 'map', true,function(s) {return ES5(s,'trim', true);});
-}.apply(this,arguments), 'array<string>']);}__w(toFields,{"signature":"function(string):array<string>"});
+}.apply(this, arguments), 'array<string>']);}__w(toFields, {"signature":"function(string):array<string>"}); 
 
 
-function parseWhere(/*string*/ s) /*object*/ {__t([s,'string','s']);/*jshint validthis: true*/return __t([function(){
+function parseWhere(/*string*/ s) /*object*/ {__t([s, 'string', 's']);return __t([function() {
   
   
   var
@@ -8513,13 +8501,13 @@ function parseWhere(/*string*/ s) /*object*/ {__t([s,'string','s']);/*jshint val
     result = { type: 'unknown', value: s };
   }
   return result;
-}.apply(this,arguments), 'object']);}__w(parseWhere,{"signature":"function(string):object"});
+}.apply(this, arguments), 'object']);}__w(parseWhere, {"signature":"function(string):object"}); 
 
-function encode(value) /*string*/ {/*jshint validthis: true*/return __t([function(){
+function encode(value) /*string*/ {return __t([function() {
   return typeof value === 'string'
     ? ES5('JSON', 'stringify', false,value)
     : value;
-}.apply(this,arguments), 'string']);}__w(encode,{"signature":"function():string"});
+}.apply(this, arguments), 'string']);}__w(encode, {"signature":"function():string"}); 
 
 var counter = 1;
 
@@ -8529,15 +8517,15 @@ var Query = Waitable.extend({
     this.name = 'v_' + counter++;
   },
   
-  hasDependency: __w(function(/*boolean?*/ value) /*boolean*/ {__t([value,'?boolean','value']);/*jshint validthis: true*/return __t([function(){
+  hasDependency: __w(function(/*boolean?*/ value) /*boolean*/ {__t([value, '?boolean', 'value']);return __t([function() {
     if (arguments.length) {
       this._hasDependency = value;
     }
     return !!this._hasDependency;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function(?boolean):boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function(?boolean):boolean"}),
 
   
-  parse: __w(function(/*array*/ args) /*object*/ {__t([args,'array','args']);/*jshint validthis: true*/return __t([function(){
+  parse: __w(function(/*array*/ args) /*object*/ {__t([args, 'array', 'args']);return __t([function() {
     var
       fql = format.apply(null, args),
       re = (/^select (.*?) from (\w+)\s+where (.*)$/i).exec(fql); 
@@ -8554,10 +8542,10 @@ var Query = Waitable.extend({
     }
 
     return this;
-  }.apply(this,arguments), 'object']);},{"signature":"function(array):object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function(array):object"}),
 
   
-  toFql: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  toFql: __w(function() /*string*/ {return __t([function() {
     var s = 'select ' + this.fields.join(',') + ' from ' +
             this.table + ' where ';
     switch (this.where.type) {
@@ -8577,13 +8565,13 @@ var Query = Waitable.extend({
         break;
     }
     return s;
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
 
 
   
-  toString: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  toString: __w(function() /*string*/ {return __t([function() {
     return '#' + this.name;
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"})
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"})
 });
 
 module.exports = Query;
@@ -8602,15 +8590,15 @@ var Waitable = require('sdk.Waitable');
 
 var Data = {
   
-  query: __w(function(/*string*/ template, data) /*object*/ {__t([template,'string','template']);/*jshint validthis: true*/return __t([function(){
+  query: __w(function(/*string*/ template, data) /*object*/ {__t([template, 'string', 'template']);return __t([function() {
     var query = new Query().parse(Array.prototype.slice.call(arguments));
     Data.queue.push(query);
     Data._waitToProcess();
     return query;
-  }.apply(this,arguments), 'object']);},{"signature":"function(string):object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function(string):object"}),
 
   
-  waitOn: __w(function(/*array*/ dependencies, /*function*/ callback) /*Waitable*/ {__t([dependencies,'array','dependencies'],[callback,'function','callback']);/*jshint validthis: true*/return __t([function(){
+  waitOn: __w(function(/*array*/ dependencies, /*function*/ callback) /*Waitable*/ {__t([dependencies, 'array', 'dependencies'], [callback, 'function', 'callback']);return __t([function() {
     var
       result = new Waitable(),
       count = dependencies.length;
@@ -8622,7 +8610,7 @@ var Data = {
       callback = ErrorHandling.unguard(function() { return safeEval(s); });
     }
 
-    ES5(dependencies, 'forEach', true,__w(function(/*object*/ item) {__t([item,'object','item']);
+    ES5(dependencies, 'forEach', true,__w(function(/*object*/ item) {__t([item, 'object', 'item']);
       item.monitor('Value.change', function() {
         var done = false;
         if (Data._getValue(item) !== undefined) {
@@ -8637,14 +8625,14 @@ var Data = {
         }
         return done;
       });
-    },{"signature":"function(object)"}));
+    }, {"signature":"function(object)"}));
     return result;
-  }.apply(this,arguments), 'Waitable']);},{"signature":"function(array,function):Waitable"}),
+  }.apply(this, arguments), 'Waitable']);}, {"signature":"function(array,function):Waitable"}),
 
   
-  process: __w(function(/*?string*/ token) {__t([token,'?string','token']);
+  process: __w(function(/*?string*/ token) {__t([token, '?string', 'token']);
     Data._process(token);
-  },{"signature":"function(?string)"}),
+  }, {"signature":"function(?string)"}),
 
   
   _getValue: function(item) {
@@ -8655,7 +8643,7 @@ var Data = {
 
   
   _selectByIndex: __w(function(/*array*/ fields, /*string*/ table, /*string*/ name,
-      /*string*/ value) /*object*/ {__t([fields,'array','fields'],[table,'string','table'],[name,'string','name'],[value,'string','value']);/*jshint validthis: true*/return __t([function(){
+      /*string*/ value) /*object*/ {__t([fields, 'array', 'fields'], [table, 'string', 'table'], [name, 'string', 'name'], [value, 'string', 'value']);return __t([function() {
     var query = new Query();
     query.fields = fields;
     query.table = table;
@@ -8663,7 +8651,7 @@ var Data = {
     Data.queue.push(query);
     Data._waitToProcess();
     return query;
-  }.apply(this,arguments), 'object']);},{"signature":"function(array,string,string,string):object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function(array,string,string,string):object"}),
 
   
   _waitToProcess: function() {
@@ -8675,7 +8663,7 @@ var Data = {
   },
 
   
-  _process: __w(function(/*?string*/ token) {__t([token,'?string','token']);
+  _process: __w(function(/*?string*/ token) {__t([token, '?string', 'token']);
     Data.timer = -1;
 
     var
@@ -8709,21 +8697,21 @@ var Data = {
       params.access_token = token;
     }
 
-    api('/fql', 'GET', params, __w(function(/*object*/ result) {__t([result,'object','result']);
+    api('/fql', 'GET', params, __w(function(/*object*/ result) {__t([result, 'object', 'result']);
       if (result.error) {
-        ES5(ES5('Object', 'keys', false,mqueries), 'forEach', true,__w(function(/*string*/ key) {__t([key,'string','key']);
+        ES5(ES5('Object', 'keys', false,mqueries), 'forEach', true,__w(function(/*string*/ key) {__t([key, 'string', 'key']);
           mqueries[key].error(new Error(result.error.message));
-        },{"signature":"function(string)"}));
+        }, {"signature":"function(string)"}));
       } else {
-        ES5(result.data, 'forEach', true,__w(function(/*object*/ o) {__t([o,'object','o']);
+        ES5(result.data, 'forEach', true,__w(function(/*object*/ o) {__t([o, 'object', 'o']);
           mqueries[o.name].setValue(o.fql_result_set);
-        },{"signature":"function(object)"}));
+        }, {"signature":"function(object)"}));
       }
-    },{"signature":"function(object)"}));
-  },{"signature":"function(?string)"}),
+    }, {"signature":"function(object)"}));
+  }, {"signature":"function(?string)"}),
 
   
-  _mergeIndexQuery: __w(function(/*object*/ item, /*object*/ mqueries) {__t([item,'object','item'],[mqueries,'object','mqueries']);
+  _mergeIndexQuery: __w(function(/*object*/ item, /*object*/ mqueries) {__t([item, 'object', 'item'], [mqueries, 'object', 'mqueries']);
     var key = item.where.key,
     value = item.where.value;
 
@@ -8741,12 +8729,12 @@ var Data = {
     mergeArrays(master.where.value, [value]);
 
     
-    master.wait(__w(function(/*array<object>*/ r) {__t([r,'array<object>','r']);
-      item.setValue(ES5(r, 'filter', true,__w(function(/*object*/ x) {__t([x,'object','x']);
+    master.wait(__w(function(/*array<object>*/ r) {__t([r, 'array<object>', 'r']);
+      item.setValue(ES5(r, 'filter', true,__w(function(/*object*/ x) {__t([x, 'object', 'x']);
         return x[key] == value;
-      },{"signature":"function(object)"})));
-    },{"signature":"function(array<object>)"}));
-  },{"signature":"function(object,object)"}),
+      }, {"signature":"function(object)"})));
+    }, {"signature":"function(array<object>)"}));
+  }, {"signature":"function(object,object)"}),
 
   timer: -1,
   queue: []
@@ -8790,7 +8778,24 @@ var QueryString = require('QueryString');
 var Runtime = require('sdk.Runtime');
 
 
-function init(options) {
+
+
+// It checks that it's either a positive integer, or an alphanumeric api key,
+// and returns null if it's invalid, or the id as a string otherwise.
+function parseAppId(/*string|number*/ appId) /*?string*/ {__t([appId, 'string|number', 'appId']);return __t([function() {
+  var looksValid =
+    (typeof appId == 'number' && appId > 0) ||
+    (typeof appId == 'string' && /^[0-9a-f]{21,}$|^[0-9]{1,21}$/.test(appId));
+  if (looksValid) {
+    return appId.toString();
+  }
+  Log.warn('Invalid App Id: Must be a number or numeric string representing ' +
+      'the application id.');
+  return null;
+}.apply(this, arguments), '?string']);}__w(parseAppId, {"signature":"function(string|number):?string"}); 
+
+
+function init(/*object|number|string*/ options) {__t([options, 'object|number|string', 'options']);
   if (Runtime.getInitialized()) {
     Log.warn(
       'FB.init has already been called - this could indicate a problem');
@@ -8807,9 +8812,9 @@ function init(options) {
     status: true
   }, options || {});
 
-  var appId = options.appId || options.apiKey;
-  if (/number|string/.test(typeof appId)) {
-    Runtime.setClientID(appId.toString());
+  var appId = parseAppId(options.appId || options.apiKey);
+  if (appId !== null) {
+    Runtime.setClientID(appId);
   }
 
   if ('scope' in options) {
@@ -8829,7 +8834,7 @@ function init(options) {
 
   Runtime.setInitialized(true);
   Event.fire('init:post', options);
-}
+}__w(init, {"signature":"function(object|number|string)"}); 
 
 
 
@@ -8917,19 +8922,19 @@ var DEF_ERROR_MSG = {
   'error_message': 'An unknown error caused the dialog to be closed'
 };
 
-var callbackWrapper = __w(function(/*function*/ callback) /*function*/ {__t([callback,'function','callback']);/*jshint validthis: true*/return __t([function(){
-  return __w(function(/*object?*/ msg) {__t([msg,'?object','msg']);
+var callbackWrapper = __w(function(/*function*/ callback) /*function*/ {__t([callback, 'function', 'callback']);return __t([function() {
+  return __w(function(/*object?*/ msg) {__t([msg, '?object', 'msg']);
     callback(msg && msg.response
       ? ES5('JSON', 'parse', false,msg.response)
       : DEF_ERROR_MSG
     );
-  },{"signature":"function(?object)"});
-}.apply(this,arguments), 'function']);},{"signature":"function(function):function"});
+  }, {"signature":"function(?object)"});
+}.apply(this, arguments), 'function']);}, {"signature":"function(function):function"});
 
 
 copyProperties(UIServer.Methods, {
   'pay.prompt': {
-    transform : __w(function(/*object*/ call) {__t([call,'object','call']);
+    transform : __w(function(/*object*/ call) {__t([call, 'object', 'call']);
       var handler = XD.handler(
         callbackWrapper(call.cb),
         'parent.frames[' + (window.name || 'iframe_canvas') + ']');
@@ -8937,12 +8942,12 @@ copyProperties(UIServer.Methods, {
       call.params.channel = handler;
 
       XD.inform('Pay.Prompt', call.params);
-    },{"signature":"function(object)"})
+    }, {"signature":"function(object)"})
   },
   'pay': {
     size      : { width: 555, height: 120 },
     connectDisplay : 'popup',
-    transform : __w(function(/*object*/ call) /*object?*/ {__t([call,'object','call']);/*jshint validthis: true*/return __t([function(){
+    transform : __w(function(/*object*/ call) /*object?*/ {__t([call, 'object', 'call']);return __t([function() {
       call.cb = callbackWrapper(call.cb);
       if (!Runtime.isEnvironment(Runtime.ENVIRONMENTS.CANVAS)) {
         
@@ -8957,7 +8962,7 @@ copyProperties(UIServer.Methods, {
       call.params.uiserver = true;
 
       XD.inform('Pay.Prompt', call.params);
-    }.apply(this,arguments), '?object']);},{"signature":"function(object):object?"})
+    }.apply(this, arguments), '?object']);}, {"signature":"function(object):object?"})
   }
 });
 
@@ -9114,24 +9119,24 @@ var parseCount = 0;
 
 var XFBML = new ObservableMixin();
 
-function propStr(object, /*string*/ property) /*string*/ {__t([property,'string','property']);/*jshint validthis: true*/return __t([function(){
+function propStr(object, /*string*/ property) /*string*/ {__t([property, 'string', 'property']);return __t([function() {
   return object[property] + '';
-}.apply(this,arguments), 'string']);}__w(propStr,{"signature":"function(string):string"});
+}.apply(this, arguments), 'string']);}__w(propStr, {"signature":"function(string):string"}); 
 
-function nodeNameIE(/*DOMElement*/ element) /*string*/ {__t([element,'DOMElement','element']);/*jshint validthis: true*/return __t([function(){
+function nodeNameIE(/*DOMElement*/ element) /*string*/ {__t([element, 'DOMElement', 'element']);return __t([function() {
   // In old IE (< 9), element.nodeName doesn't include the namespace so we use
   
   return element.scopeName
     ? (element.scopeName + ':' + element.nodeName)
     : '';
-}.apply(this,arguments), 'string']);}__w(nodeNameIE,{"signature":"function(DOMElement):string"});
+}.apply(this, arguments), 'string']);}__w(nodeNameIE, {"signature":"function(DOMElement):string"}); 
 
-function xfbmlInfo(/*DOMElement*/ element) /*?object*/ {__t([element,'DOMElement','element']);/*jshint validthis: true*/return __t([function(){
+function xfbmlInfo(/*DOMElement*/ element) /*?object*/ {__t([element, 'DOMElement', 'element']);return __t([function() {
   return xfbml[propStr(element, 'nodeName').toLowerCase()]
     || xfbml[nodeNameIE(element).toLowerCase()];
-}.apply(this,arguments), '?object']);}__w(xfbmlInfo,{"signature":"function(DOMElement):?object"});
+}.apply(this, arguments), '?object']);}__w(xfbmlInfo, {"signature":"function(DOMElement):?object"}); 
 
-function html5Info(/*DOMElement*/ element) /*?object*/ {__t([element,'DOMElement','element']);/*jshint validthis: true*/return __t([function(){
+function html5Info(/*DOMElement*/ element) /*?object*/ {__t([element, 'DOMElement', 'element']);return __t([function() {
   var classNames = ES5(ES5(propStr(element, 'className'),'trim', true).split(/\s+/), 'filter', true,
     function(className) { return html5.hasOwnProperty(className); });
 
@@ -9140,30 +9145,41 @@ function html5Info(/*DOMElement*/ element) /*?object*/ {__t([element,'DOMElement
   }
 
   
-  // like <div class="fb-like"><fb:like></fb:like></div>; unless the subtree is
-  
-  // <div class="fb-login-button">Log In with Facebook</div> will work; and
+  // like <div class="fb-like"><fb:like></fb:like></div>;
   
   
-  if (!element.childNodes ||
-      element.childNodes.length === 0 ||
-      (element.childNodes.length == 1 &&
-       element.childNodes[0].nodeType == 3 ) ||
-      element.getAttribute('fb-xfbml-state')) {
+  
+  
+  //    eg. <div class="fb-login-button">Log In with Facebook</div>
+  // - it's contains a specially marked container 'fb-xfbml-parse-ignore'
+  //    eg. <div class="fb-post">
+  //          <div class="fb-xfbml-parse-ignore">
+  
+  
+  
+  if (
+    element.getAttribute('fb-xfbml-state') ||
+    !element.childNodes ||
+    element.childNodes.length === 0 ||
+    (element.childNodes.length === 1 &&
+      element.childNodes[0].nodeType === 3 /*Node.TEXT_NODE*/) ||
+    (element.children.length === 1 &&
+      propStr(element.children[0], 'className') === 'fb-xfbml-parse-ignore')
+  ) {
     return html5[classNames[0]];
   }
-}.apply(this,arguments), '?object']);}__w(html5Info,{"signature":"function(DOMElement):?object"});
+}.apply(this, arguments), '?object']);}__w(html5Info, {"signature":"function(DOMElement):?object"}); 
 
-function attr(/*DOMElement*/ element) /*object*/ {__t([element,'DOMElement','element']);/*jshint validthis: true*/return __t([function(){
+function attr(/*DOMElement*/ element) /*object*/ {__t([element, 'DOMElement', 'element']);return __t([function() {
   var attrs = {};
   ES5(createArrayFrom(element.attributes), 'forEach', true,function(at) {
     attrs[propStr(at, 'name')] = propStr(at, 'value');
   });
   return attrs;
-}.apply(this,arguments), 'object']);}__w(attr,{"signature":"function(DOMElement):object"});
+}.apply(this, arguments), 'object']);}__w(attr, {"signature":"function(DOMElement):object"}); 
 
 function convertSyntax(
-  /*DOMElement*/ element, /*string*/ ns, /*string*/ ln) /*DOMElement*/ {__t([element,'DOMElement','element'],[ns,'string','ns'],[ln,'string','ln']);/*jshint validthis: true*/return __t([function(){
+  /*DOMElement*/ element, /*string*/ ns, /*string*/ ln) /*DOMElement*/ {__t([element, 'DOMElement', 'element'], [ns, 'string', 'ns'], [ln, 'string', 'ln']);return __t([function() {
   var replacement = document.createElement('div');
   DOM.addCss(element, ns + '-' + ln);
   ES5(createArrayFrom(element.childNodes), 'forEach', true,function(child) {
@@ -9174,9 +9190,9 @@ function convertSyntax(
   });
   element.parentNode.replaceChild(replacement, element);
   return replacement;
-}.apply(this,arguments), 'DOMElement']);}__w(convertSyntax,{"signature":"function(DOMElement,string,string):DOMElement"});
+}.apply(this, arguments), 'DOMElement']);}__w(convertSyntax, {"signature":"function(DOMElement,string,string):DOMElement"}); 
 
-function parse(/*DOMElement*/ dom, /*function*/ callback, /*boolean*/ reparse) {__t([dom,'DOMElement','dom'],[callback,'function','callback'],[reparse,'boolean','reparse']);
+function parse(/*DOMElement*/ dom, /*function*/ callback, /*boolean*/ reparse) {__t([dom, 'DOMElement', 'dom'], [callback, 'function', 'callback'], [reparse, 'boolean', 'reparse']);
   Assert.isTrue(
     dom && dom.nodeType && dom.nodeType === 1 && !!dom.getElementsByTagName,
     'Invalid DOM node passed to FB.XFBML.parse()');
@@ -9264,7 +9280,7 @@ function parse(/*DOMElement*/ dom, /*function*/ callback, /*boolean*/ reparse) {
   }, timeout);
 
   onrender(); 
-}__w(parse,{"signature":"function(DOMElement,function,boolean)"});
+}__w(parse, {"signature":"function(DOMElement,function,boolean)"}); 
 
 XFBML.subscribe('render', function() {
   var q = XFBML.getSubscribers('render.queue');
@@ -9276,7 +9292,7 @@ XFBML.subscribe('render', function() {
 
 copyProperties(XFBML, {
 
-  registerTag: __w(function(/*object*/ info) {__t([info,'object','info']);
+  registerTag: __w(function(/*object*/ info) {__t([info, 'object', 'info']);
     var fqn = info.xmlns + ':' + info.localName;
     Assert.isUndefined(xfbml[fqn], fqn + ' already registered');
 
@@ -9285,11 +9301,11 @@ copyProperties(XFBML, {
     
     
     html5[info.xmlns + '-' + info.localName] = info;
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
-  parse: __w(function(/*?DOMElement*/ dom, /*?function*/ cb) {__t([dom,'?DOMElement','dom'],[cb,'?function','cb']);
+  parse: __w(function(/*?DOMElement*/ dom, /*?function*/ cb) {__t([dom, '?DOMElement', 'dom'], [cb, '?function', 'cb']);
     parse(dom || document.body, cb || function(){},  true);
-  },{"signature":"function(?DOMElement,?function)"}),
+  }, {"signature":"function(?DOMElement,?function)"}),
 
   parseNew: function() {
     parse(document.body, function(){},  false);
@@ -9297,12 +9313,12 @@ copyProperties(XFBML, {
 });
 
 if (feature('log_tag_count')) {
-  var logTagCount = __w(function(/*number*/ parseCount, /*number*/ numTags) {__t([parseCount,'number','parseCount'],[numTags,'number','numTags']);
+  var logTagCount = __w(function(/*number*/ parseCount, /*number*/ numTags) {__t([parseCount, 'number', 'parseCount'], [numTags, 'number', 'numTags']);
     XFBML.unsubscribe('parse', logTagCount);
     
     
     setTimeout(ES5(Impressions.log, 'bind', true,null, 102, {tag_count: numTags}), 5000);
-  },{"signature":"function(number,number)"});
+  }, {"signature":"function(number,number)"});
   XFBML.subscribe('parse', logTagCount);
 }
 
@@ -9328,21 +9344,21 @@ var PluginPipe = new ObservableMixin();
 var threshold = PluginPipeConfig.threshold;
 var queued = [];
 
-function isEnabled() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+function isEnabled() /*boolean*/ {return __t([function() {
   return !!(feature('plugin_pipe') &&
          Runtime.getSecure() !== undefined &&
          (UserAgent.chrome() || UserAgent.firefox()) &&
          PluginPipeConfig.enabledApps[Runtime.getClientID()]);
-}.apply(this,arguments), 'boolean']);}__w(isEnabled,{"signature":"function():boolean"});
+}.apply(this, arguments), 'boolean']);}__w(isEnabled, {"signature":"function():boolean"}); 
 
 function insertPlugins() {
   var q = queued;
   queued = [];
 
   if (q.length <= threshold) {
-    ES5(q, 'forEach', true,__w(function(/*object*/ plugin) {__t([plugin,'object','plugin']);
+    ES5(q, 'forEach', true,__w(function(/*object*/ plugin) {__t([plugin, 'object', 'plugin']);
       insertIframe(plugin.config);
-    },{"signature":"function(object)"}));
+    }, {"signature":"function(object)"}));
     return;
   }
 
@@ -9354,7 +9370,7 @@ function insertPlugins() {
     }
   }
 
-  ES5(q, 'forEach', true,__w(function(/*object*/ plugin) {__t([plugin,'object','plugin']);
+  ES5(q, 'forEach', true,__w(function(/*object*/ plugin) {__t([plugin, 'object', 'plugin']);
     var config = {};
     for (var key in plugin.config) {
       config[key] = plugin.config[key];
@@ -9363,32 +9379,32 @@ function insertPlugins() {
       '/plugins/plugin_pipe_shell.php';
     config.onload = onrender;
     insertIframe(config);
-  },{"signature":"function(object)"}));
+  }, {"signature":"function(object)"}));
 
   onrender();
 }
 
 XFBML.subscribe('parse', insertPlugins);
 
-function insertPipe(/*array<object>*/ plugins) {__t([plugins,'array<object>','plugins']);
+function insertPipe(/*array<object>*/ plugins) {__t([plugins, 'array<object>', 'plugins']);
   var root = document.createElement('span');
   Content.appendHidden(root);
 
   var params = {};
-  ES5(plugins, 'forEach', true,__w(function(/*object*/ plugin){__t([plugin,'object','plugin']);
+  ES5(plugins, 'forEach', true,__w(function(/*object*/ plugin){__t([plugin, 'object', 'plugin']);
     params[plugin.config.name] = {
       plugin: plugin.tag,
       params: plugin.params
     };
-  },{"signature":"function(object)"}));
+  }, {"signature":"function(object)"}));
 
   var raw = ES5('JSON', 'stringify', false,params);
   var miny = Miny.encode(raw);
 
-  ES5(plugins, 'forEach', true,__w(function(/*object*/ plugin) {__t([plugin,'object','plugin']);
+  ES5(plugins, 'forEach', true,__w(function(/*object*/ plugin) {__t([plugin, 'object', 'plugin']);
     var frame = document.getElementsByName(plugin.config.name)[0];
     frame.onload = plugin.config.onload;
-  },{"signature":"function(object)"}));
+  }, {"signature":"function(object)"}));
 
   var url = UrlMap.resolve('www', Runtime.getSecure()) + '/plugins/pipe.php';
   var name = guid();
@@ -9407,10 +9423,10 @@ function insertPipe(/*array<object>*/ plugins) {__t([plugins,'array<object>','pl
       }});
     }
   });
-}__w(insertPipe,{"signature":"function(array<object>)"});
+}__w(insertPipe, {"signature":"function(array<object>)"}); 
 
 copyProperties(PluginPipe, {
-  add: __w(function(/*object*/ plugin) /*boolean*/ {__t([plugin,'object','plugin']);/*jshint validthis: true*/return __t([function(){
+  add: __w(function(/*object*/ plugin) /*boolean*/ {__t([plugin, 'object', 'plugin']);return __t([function() {
     var enabled = isEnabled();
     enabled && queued.push({
       config: plugin._config,
@@ -9418,16 +9434,17 @@ copyProperties(PluginPipe, {
       params: plugin._params
     });
     return enabled;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function(object):boolean"})
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function(object):boolean"})
 });
 
 module.exports = PluginPipe;
 
 });
-__d("IframePlugin",["sdk.Auth","sdk.createIframe","sdk.DOM","sdk.Event","guid","Log","ObservableMixin","PluginPipe","QueryString","resolveURI","sdk.Runtime","Type","UrlMap","sdk.XD"],function(global,require,requireDynamic,requireLazy,module,exports) {
+__d("IframePlugin",["sdk.Auth","sdk.createIframe","copyProperties","sdk.DOM","sdk.Event","guid","Log","ObservableMixin","PluginPipe","QueryString","resolveURI","sdk.Runtime","Type","UrlMap","UserAgent","sdk.XD"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 var Auth = require('sdk.Auth');
 var createIframe = require('sdk.createIframe');
+var copyProperties = require('copyProperties');
 var DOM = require('sdk.DOM');
 var Event = require('sdk.Event');
 var guid = require('guid');
@@ -9439,6 +9456,7 @@ var resolveURI = require('resolveURI');
 var Runtime = require('sdk.Runtime');
 var Type = require('Type');
 var UrlMap = require('UrlMap');
+var UserAgent = require('UserAgent');
 var XD = require('sdk.XD');
 
 var baseParams = {
@@ -9450,48 +9468,49 @@ var baseParams = {
   color_scheme: 'string' 
 };
 
-function resize(/*DOMElement*/ elem, /*?number*/ width, /*?number*/ height) {__t([elem,'DOMElement','elem'],[width,'?number','width'],[height,'?number','height']);
+function resize(/*DOMElement*/ elem, /*?number*/ width, /*?number*/ height) {__t([elem, 'DOMElement', 'elem'], [width, '?number', 'width'], [height, '?number', 'height']);
   if (width || width === 0) {
     elem.style.width = width + 'px';
   }
+
   if (height || height === 0) {
     elem.style.height = height + 'px';
   }
-}__w(resize,{"signature":"function(DOMElement,?number,?number)"});
+}__w(resize, {"signature":"function(DOMElement,?number,?number)"}); 
 
-function resizeBubbler(/*?string*/ pluginID) /*function*/ {__t([pluginID,'?string','pluginID']);/*jshint validthis: true*/return __t([function(){
-  return __w(function(/*object*/ msg) {__t([msg,'object','msg']);
+function resizeBubbler(/*?string*/ pluginID) /*function*/ {__t([pluginID, '?string', 'pluginID']);return __t([function() {
+  return __w(function(/*object*/ msg) {__t([msg, 'object', 'msg']);
     var message = { width: msg.width, height: msg.height, pluginID: pluginID };
     Event.fire('xfbml.resize', message);
-  },{"signature":"function(object)"});
-}.apply(this,arguments), 'function']);}__w(resizeBubbler,{"signature":"function(?string):function"});
+  }, {"signature":"function(object)"});
+}.apply(this, arguments), 'function']);}__w(resizeBubbler, {"signature":"function(?string):function"}); 
 
 var types = {
   // TODO: Move the 'bool' and 'px' parsing to the server?
-  string: __w(function(/*?string*/ value) /*?string*/ {__t([value,'?string','value']);/*jshint validthis: true*/return __t([function(){
+  string: __w(function(/*?string*/ value) /*?string*/ {__t([value, '?string', 'value']);return __t([function() {
     return value;
-  }.apply(this,arguments), '?string']);},{"signature":"function(?string):?string"}),
-  bool: __w(function(/*?string*/ value) /*?boolean*/ {__t([value,'?string','value']);/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), '?string']);}, {"signature":"function(?string):?string"}),
+  bool: __w(function(/*?string*/ value) /*?boolean*/ {__t([value, '?string', 'value']);return __t([function() {
     return value ? (/^(?:true|1|yes|on)$/i).test(value) : undefined;
-  }.apply(this,arguments), '?boolean']);},{"signature":"function(?string):?boolean"}),
-  url: __w(function(/*?string*/ value) /*?string*/ {__t([value,'?string','value']);/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), '?boolean']);}, {"signature":"function(?string):?boolean"}),
+  url: __w(function(/*?string*/ value) /*?string*/ {__t([value, '?string', 'value']);return __t([function() {
     return resolveURI(value);
-  }.apply(this,arguments), '?string']);},{"signature":"function(?string):?string"}),
-  url_maybe: __w(function(/*?string*/ value) /*?string*/ {__t([value,'?string','value']);/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), '?string']);}, {"signature":"function(?string):?string"}),
+  url_maybe: __w(function(/*?string*/ value) /*?string*/ {__t([value, '?string', 'value']);return __t([function() {
     return value ? resolveURI(value) : value;
-  }.apply(this,arguments), '?string']);},{"signature":"function(?string):?string"}),
-  hostname: __w(function(/*?string*/ value) /*?string*/ {__t([value,'?string','value']);/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), '?string']);}, {"signature":"function(?string):?string"}),
+  hostname: __w(function(/*?string*/ value) /*?string*/ {__t([value, '?string', 'value']);return __t([function() {
     return value || window.location.hostname;
-  }.apply(this,arguments), '?string']);},{"signature":"function(?string):?string"}),
-  px: __w(function(/*?string*/ value) /*?number*/ {__t([value,'?string','value']);/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), '?string']);}, {"signature":"function(?string):?string"}),
+  px: __w(function(/*?string*/ value) /*?number*/ {__t([value, '?string', 'value']);return __t([function() {
     return (/^(\d+)(?:px)?$/).test(value) ? parseInt(RegExp.$1, 10) : undefined;
-  }.apply(this,arguments), '?number']);},{"signature":"function(?string):?number"}),
-  text: __w(function(/*?string*/ value) /*?string*/ {__t([value,'?string','value']);/*jshint validthis: true*/return __t([function(){
+  }.apply(this, arguments), '?number']);}, {"signature":"function(?string):?number"}),
+  text: __w(function(/*?string*/ value) /*?string*/ {__t([value, '?string', 'value']);return __t([function() {
     return value;
-  }.apply(this,arguments), '?string']);},{"signature":"function(?string):?string"})
+  }.apply(this, arguments), '?string']);}, {"signature":"function(?string):?string"})
 };
 
-function getVal(/*object*/ attr, /*string*/ key) {__t([attr,'object','attr'],[key,'string','key']);
+function getVal(/*object*/ attr, /*string*/ key) {__t([attr, 'object', 'attr'], [key, 'string', 'key']);
   var val =
     attr[key] ||
     attr[key.replace(/_/g, '-')] ||
@@ -9501,10 +9520,10 @@ function getVal(/*object*/ attr, /*string*/ key) {__t([attr,'object','attr'],[ke
     attr['data-' + key.replace(/_/g, '')] ||
     undefined;
   return val;
-}__w(getVal,{"signature":"function(object,string)"});
+}__w(getVal, {"signature":"function(object,string)"}); 
 
 function validate(/*object*/ defn, /*DOMElement*/ elem, /*object*/ attr,
-    /*object*/ params) {__t([defn,'object','defn'],[elem,'DOMElement','elem'],[attr,'object','attr'],[params,'object','params']);
+    /*object*/ params) {__t([defn, 'object', 'defn'], [elem, 'DOMElement', 'elem'], [attr, 'object', 'attr'], [params, 'object', 'params']);
   ES5(ES5('Object', 'keys', false,defn), 'forEach', true,function(key) {
     if (defn[key] == 'text' && !attr[key]) {
       attr[key] = elem.textContent || elem.innerText || ''; 
@@ -9512,7 +9531,7 @@ function validate(/*object*/ defn, /*DOMElement*/ elem, /*object*/ attr,
     }
     params[key] = types[defn[key]](getVal(attr, key));
   });
-}__w(validate,{"signature":"function(object,DOMElement,object,object)"});
+}__w(validate, {"signature":"function(object,DOMElement,object,object)"}); 
 
 
 
@@ -9522,7 +9541,7 @@ function parse(dim) {
 
 var IframePlugin = Type.extend({
   constructor: __w(function(/*DOMElement*/ elem, /*string*/ ns, /*string*/ tag,
-      /*object*/ attr) {__t([elem,'DOMElement','elem'],[ns,'string','ns'],[tag,'string','tag'],[attr,'object','attr']);
+      /*object*/ attr) {__t([elem, 'DOMElement', 'elem'], [ns, 'string', 'ns'], [tag, 'string', 'tag'], [attr, 'object', 'attr']);
     this.parent();
     tag = tag.replace(/-/g, '_');
 
@@ -9530,31 +9549,31 @@ var IframePlugin = Type.extend({
     this.subscribe('xd.resize', resizeBubbler(pluginId));
     this.subscribe('xd.resize.flow', resizeBubbler(pluginId));
 
-    this.subscribe('xd.resize.flow', ES5(__w(function(/*object*/ message) {__t([message,'object','message']);
+    this.subscribe('xd.resize.flow', ES5(__w(function(/*object*/ message) {__t([message, 'object', 'message']);
       this._config.root.style.verticalAlign = 'bottom';
       resize(this._config.root, parse(message.width), parse(message.height));
       this.updateLift();
       clearTimeout(this._timeoutID);
-    },{"signature":"function(object)"}), 'bind', true,this));
+    }, {"signature":"function(object)"}), 'bind', true,this));
 
-    this.subscribe('xd.resize', ES5(__w(function(/*object*/ message) {__t([message,'object','message']);
+    this.subscribe('xd.resize', ES5(__w(function(/*object*/ message) {__t([message, 'object', 'message']);
       this._config.root.style.verticalAlign = 'bottom';
       resize(this._config.root, parse(message.width), parse(message.height));
       resize(this._iframe, parse(message.width), parse(message.height));
       this.updateLift();
       clearTimeout(this._timeoutID);
-    },{"signature":"function(object)"}), 'bind', true,this));
-    this.subscribe('xd.resize.iframe', ES5(__w(function(/*object*/ message) {__t([message,'object','message']);
+    }, {"signature":"function(object)"}), 'bind', true,this));
+    this.subscribe('xd.resize.iframe', ES5(__w(function(/*object*/ message) {__t([message, 'object', 'message']);
       resize(this._iframe, parse(message.width), parse(message.height));
       this.updateLift();
       clearTimeout(this._timeoutID);
-    },{"signature":"function(object)"}), 'bind', true,this));
+    }, {"signature":"function(object)"}), 'bind', true,this));
 
-    this.subscribe('xd.sdk_event', __w(function(/*object*/ message) {__t([message,'object','message']);
+    this.subscribe('xd.sdk_event', __w(function(/*object*/ message) {__t([message, 'object', 'message']);
       var data = ES5('JSON', 'parse', false,message.data);
       data.pluginID = pluginId;
       Event.fire(message.event, data, elem);
-    },{"signature":"function(object)"}));
+    }, {"signature":"function(object)"}));
 
 
     var secure = Runtime.getSecure() || window.location.protocol == 'https:';
@@ -9573,10 +9592,10 @@ var IframePlugin = Type.extend({
     DOM.addCss(elem, 'fb_iframe_widget');
 
     var name = guid();
-    this.subscribe('xd.verify', __w(function(/*object*/ msg) {__t([msg,'object','msg']);
+    this.subscribe('xd.verify', __w(function(/*object*/ msg) {__t([msg, 'object', 'msg']);
       XD.sendToFacebook(
         name, { method: 'xd/verify', params: ES5('JSON', 'stringify', false,msg.token) });
-    },{"signature":"function(object)"}));
+    }, {"signature":"function(object)"}));
 
     this.subscribe(
       'xd.refreshLoginStatus', ES5(Auth.getLoginStatus, 'bind', true,
@@ -9590,10 +9609,6 @@ var IframePlugin = Type.extend({
     flow.style.width = '0px';
     flow.style.height = '0px';
 
-    this.subscribe('render', function() {
-      this._iframe.style.visibility = 'visible';
-    });
-
     this._element = elem;
     this._ns = ns;
     this._tag = tag;
@@ -9606,7 +9621,8 @@ var IframePlugin = Type.extend({
       
       
       
-      width: params.width || 1000,
+      
+      width: params.width || (UserAgent.mobile() ? undefined : 1000),
       height: params.height || 1000,
       style: { border: 'none', visibility: 'hidden' },
       title: this._ns + ':' + this._tag + ' Facebook Social Plugin',
@@ -9614,15 +9630,38 @@ var IframePlugin = Type.extend({
         this.inform('render');
       }, 'bind', true,this)
     };
-  },{"signature":"function(DOMElement,string,string,object)"}),
+  }, {"signature":"function(DOMElement,string,string,object)"}),
 
   process: function() {
-    this._element.innerHTML = '';
+    // This implements an optimization to skip rendering if we've already
+    
+    var params = copyProperties({}, this._params);
+    delete params.channel; // Unique per-plugin, doesn't change rendering
+    var query = QueryString.encode(params);
+    if (this._element.getAttribute('fb-iframe-plugin-query') == query) {
+      Log.info('Skipping render: %s:%s %s', this._ns, this._tag, query);
+      this.inform('render');
+      return;
+    }
+    this._element.setAttribute('fb-iframe-plugin-query', query);
+
+    this.subscribe('render', function() {
+      this._iframe.style.visibility = 'visible';
+    });
+    while (this._element.firstChild) {
+      this._element.removeChild(this._element.firstChild);
+    }
     this._element.appendChild(this._config.root);
+    var timeout = UserAgent.mobile() ? 120 : 45;
     this._timeoutID = setTimeout(ES5(function() {
       this._iframe && resize(this._iframe, 0, 0);
-      Log.warn('%s:%s failed to resize in 45s', this._ns, this._tag);
-    }, 'bind', true,this), 45 * 1000);
+      Log.warn(
+        '%s:%s failed to resize in %ss',
+        this._ns,
+        this._tag,
+        timeout
+      );
+    }, 'bind', true,this), timeout * 1000);
     
     
     
@@ -9632,6 +9671,12 @@ var IframePlugin = Type.extend({
     if (!PluginPipe.add(this)) {
       this._iframe = createIframe(this._config);
     }
+    if (UserAgent.mobile()) {
+      DOM.addCss(this._element, 'fb_iframe_widget_fluid');
+      this._iframe.style.width = '100%';
+      this._config.root.style.width = '100%';
+    }
+
   },
 
   updateLift: function() { 
@@ -9644,9 +9689,9 @@ var IframePlugin = Type.extend({
 
 IframePlugin.getVal = getVal;
 
-IframePlugin.withParams = __w(function(/*object*/ params) /*function*/ {__t([params,'object','params']);/*jshint validthis: true*/return __t([function(){
+IframePlugin.withParams = __w(function(/*object*/ params) /*function*/ {__t([params, 'object', 'params']);return __t([function() {
   return IframePlugin.extend({ getParams: function() { return params; } });
-}.apply(this,arguments), 'function']);},{"signature":"function(object):function"});
+}.apply(this, arguments), 'function']);}, {"signature":"function(object):function"});
 
 module.exports = IframePlugin;
 
@@ -9811,10 +9856,10 @@ var ObservableMixin = require('ObservableMixin');
 
 var Element = Type.extend({
   
-  constructor: __w(function(/*DOMElement*/ dom) {__t([dom,'DOMElement','dom']);
+  constructor: __w(function(/*DOMElement*/ dom) {__t([dom, 'DOMElement', 'dom']);
     this.parent();
     this.dom = dom;
-  },{"signature":"function(DOMElement)"}),
+  }, {"signature":"function(DOMElement)"}),
 
   fire: function() {
     this.inform.apply(this, arguments);
@@ -9822,58 +9867,58 @@ var Element = Type.extend({
 
   
   getAttribute: __w(function(/*string*/ name, defaultValue,
-      /*function?*/ transform) {__t([name,'string','name'],[transform,'?function','transform']);
+      /*function?*/ transform) {__t([name, 'string', 'name'], [transform, '?function', 'transform']);
     var value = DOM.getAttr(this.dom, name);
     return value
       ? transform
         ? transform(value)
         : value
       : defaultValue;
-  },{"signature":"function(string,?function)"}),
+  }, {"signature":"function(string,?function)"}),
 
   
   _getBoolAttribute: __w(function(/*string*/ name, /*boolean?*/ defaultValue)
-      /*boolean?*/ {__t([name,'string','name'],[defaultValue,'?boolean','defaultValue']);/*jshint validthis: true*/return __t([function(){
+      /*boolean?*/ {__t([name, 'string', 'name'], [defaultValue, '?boolean', 'defaultValue']);return __t([function() {
     var value = DOM.getBoolAttr(this.dom, name);
     return value === null
       ? defaultValue
       : value;
-  }.apply(this,arguments), '?boolean']);},{"signature":"function(string,?boolean):boolean?"}),
+  }.apply(this, arguments), '?boolean']);}, {"signature":"function(string,?boolean):boolean?"}),
 
   
   _getPxAttribute: __w(function(/*string*/ name, /*number?*/ defaultValue)
-      /*number?*/ {__t([name,'string','name'],[defaultValue,'?number','defaultValue']);/*jshint validthis: true*/return __t([function(){
+      /*number?*/ {__t([name, 'string', 'name'], [defaultValue, '?number', 'defaultValue']);return __t([function() {
     return this.getAttribute(name, defaultValue, __w(function(/*string*/ s)
-        /*number?*/ {__t([s,'string','s']);/*jshint validthis: true*/return __t([function(){
+        /*number?*/ {__t([s, 'string', 's']);return __t([function() {
       var size = parseInt(s.replace('px', ''), 10);
       if (isNaN(size)) {
         return defaultValue;
       } else {
         return size;
       }
-    }.apply(this,arguments), '?number']);},{"signature":"function(string):number?"}));
-  }.apply(this,arguments), '?number']);},{"signature":"function(string,?number):number?"}),
+    }.apply(this, arguments), '?number']);}, {"signature":"function(string):number?"}));
+  }.apply(this, arguments), '?number']);}, {"signature":"function(string,?number):number?"}),
 
   
   _getAttributeFromList: __w(function(/*string*/ name, /*string*/ defaultValue,
-      /*array<string>*/ allowed) /*string*/ {__t([name,'string','name'],[defaultValue,'string','defaultValue'],[allowed,'array<string>','allowed']);/*jshint validthis: true*/return __t([function(){
+      /*array<string>*/ allowed) /*string*/ {__t([name, 'string', 'name'], [defaultValue, 'string', 'defaultValue'], [allowed, 'array<string>', 'allowed']);return __t([function() {
     return this.getAttribute(name, defaultValue, __w(function(/*string*/ s)
-        /*string*/ {__t([s,'string','s']);/*jshint validthis: true*/return __t([function(){
+        /*string*/ {__t([s, 'string', 's']);return __t([function() {
       s = s.toLowerCase();
       return (ES5(allowed, 'indexOf', true,s) > -1)
         ? s
         : defaultValue;
-    }.apply(this,arguments), 'string']);},{"signature":"function(string):string"}));
-  }.apply(this,arguments), 'string']);},{"signature":"function(string,string,array<string>):string"}),
+    }.apply(this, arguments), 'string']);}, {"signature":"function(string):string"}));
+  }.apply(this, arguments), 'string']);}, {"signature":"function(string,string,array<string>):string"}),
 
   
-  isValid: __w(function() /*boolean?*/ {/*jshint validthis: true*/return __t([function(){
+  isValid: __w(function() /*boolean?*/ {return __t([function() {
     for (var dom = this.dom; dom; dom = dom.parentNode) {
       if (dom == document.body) {
         return true;
       }
     }
-  }.apply(this,arguments), '?boolean']);},{"signature":"function():boolean?"}),
+  }.apply(this, arguments), '?boolean']);}, {"signature":"function():boolean?"}),
 
   
   clear: function() {
@@ -9937,41 +9982,41 @@ var IframeWidget = Element.extend({
   
 
   
-  getUrlBits: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getUrlBits: __w(function() /*object*/ {return __t([function() {
     throw new Error('Inheriting class needs to implement getUrlBits().');
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
   
   
 
   
-  setupAndValidate: __w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  setupAndValidate: __w(function() /*boolean*/ {return __t([function() {
     return true;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
 
   
   oneTimeSetup: function() {},
 
   
-  getSize: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){}.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  getSize: __w(function() /*object*/ {return __t([function() {}.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
-  getIframeName: __w(function() /*?string*/ {/*jshint validthis: true*/return __t([function(){
+  getIframeName: __w(function() /*?string*/ {return __t([function() {
     return this._iframeName;
-  }.apply(this,arguments), '?string']);},{"signature":"function():?string"}),
+  }.apply(this, arguments), '?string']);}, {"signature":"function():?string"}),
 
   
-  getIframeTitle: __w(function() /*?string*/ {/*jshint validthis: true*/return __t([function(){
+  getIframeTitle: __w(function() /*?string*/ {return __t([function() {
     return 'Facebook Social Plugin';
-  }.apply(this,arguments), '?string']);},{"signature":"function():?string"}),
+  }.apply(this, arguments), '?string']);}, {"signature":"function():?string"}),
 
   
   
   
 
   
-  getChannelUrl: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getChannelUrl: __w(function() /*string*/ {return __t([function() {
     if (!this._channelUrl) {
       
       
@@ -9981,43 +10026,43 @@ var IframeWidget = Element.extend({
       }, 'parent.parent', true);
     }
     return this._channelUrl;
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
 
   
-  getIframeNode: __w(function() /*?DOMElement*/ {/*jshint validthis: true*/return __t([function(){
+  getIframeNode: __w(function() /*?DOMElement*/ {return __t([function() {
     
     
     return this.dom.getElementsByTagName('iframe')[0];
-  }.apply(this,arguments), '?DOMElement']);},{"signature":"function():?DOMElement"}),
+  }.apply(this, arguments), '?DOMElement']);}, {"signature":"function():?DOMElement"}),
 
   
   arbiterInform: __w(function(/*string*/ event, /*?object*/ message,
-      /*?string*/ behavior) {__t([event,'string','event'],[message,'?object','message'],[behavior,'?string','behavior']);
+      /*?string*/ behavior) {__t([event, 'string', 'event'], [message, '?object', 'message'], [behavior, '?string', 'behavior']);
     XD.sendToFacebook(
       this.getIframeName(), {
         method: event,
         params: ES5('JSON', 'stringify', false,message || {}),
         behavior: behavior || Arbiter.BEHAVIOR_PERSISTENT
       });
-  },{"signature":"function(string,?object,?string)"}),
+  }, {"signature":"function(string,?object,?string)"}),
 
   _arbiterInform: __w(function(/*string*/ event, /*object*/  message,
-      /*?string*/ behavior) {__t([event,'string','event'],[behavior,'?string','behavior']);
+      /*?string*/ behavior) {__t([event, 'string', 'event'], [behavior, '?string', 'behavior']);
     var relation = 'parent.frames["' + this.getIframeNode().name + '"]';
     XD.inform(event, message, relation, behavior);
-  },{"signature":"function(string,?string)"}),
+  }, {"signature":"function(string,?string)"}),
 
   
-  getDefaultWebDomain: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getDefaultWebDomain: __w(function() /*string*/ {return __t([function() {
     return UrlMap.resolve('www');
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
 
   
   
   
 
   
-  process: __w(function(/*?boolean*/ force) {__t([force,'?boolean','force']);
+  process: __w(function(/*?boolean*/ force) {__t([force, '?boolean', 'force']);
     
     if (this._done) {
       if (!this._allowReProcess && !force) {
@@ -10075,16 +10120,16 @@ var IframeWidget = Element.extend({
     this.subscribe('iframe.onload', ES5(function() {
       this.loaded = true;
     }, 'bind', true,this));
-  },{"signature":"function(?boolean)"}),
+  }, {"signature":"function(?boolean)"}),
 
   
-  generateWidgetPipeIframeName: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  generateWidgetPipeIframeName: __w(function() /*string*/ {return __t([function() {
     widgetPipeIframeCount++;
     return 'fb_iframe_' + widgetPipeIframeCount;
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
 
   
-  getFullyQualifiedURL: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getFullyQualifiedURL: __w(function() /*string*/ {return __t([function() {
     
     // a <form> POST. we prefer a GET because it prevents the "POST resend"
     
@@ -10102,13 +10147,13 @@ var IframeWidget = Element.extend({
     }
 
     return url;
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
 
    
 
-  _getWidgetPipeShell: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  _getWidgetPipeShell: __w(function() /*string*/ {return __t([function() {
     return UrlMap.resolve('www') + '/common/widget_pipe_shell.php';
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
 
   
   _oneTimeSetup: function() {
@@ -10156,9 +10201,9 @@ var IframeWidget = Element.extend({
 
   
   _setupAuthRefresh: function() {
-    Auth.getLoginStatus(ES5(__w(function(/*object*/ response) {__t([response,'object','response']);
+    Auth.getLoginStatus(ES5(__w(function(/*object*/ response) {__t([response, 'object', 'response']);
       var lastStatus = response.status;
-      Event.subscribe('auth.statusChange', ES5(__w(function(/*object*/ response) {__t([response,'object','response']);
+      Event.subscribe('auth.statusChange', ES5(__w(function(/*object*/ response) {__t([response, 'object', 'response']);
         if (!this.isValid()) {
           return;
         }
@@ -10167,12 +10212,12 @@ var IframeWidget = Element.extend({
           this.process(true);
         }
         lastStatus = response.status;
-      },{"signature":"function(object)"}), 'bind', true,this));
-    },{"signature":"function(object)"}), 'bind', true,this));
+      }, {"signature":"function(object)"}), 'bind', true,this));
+    }, {"signature":"function(object)"}), 'bind', true,this));
   },
 
   
-  _handleResizeMsg: __w(function(/*object*/ message) {__t([message,'object','message']);
+  _handleResizeMsg: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     if (!this.isValid()) {
       return;
     }
@@ -10185,10 +10230,10 @@ var IframeWidget = Element.extend({
     }
 
     this._makeVisible();
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
-  _bubbleResizeEvent: __w(function(/*object*/ message) {__t([message,'object','message']);
+  _bubbleResizeEvent: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     var filtered_message = {
       height: message.height,
       width: message.width,
@@ -10196,9 +10241,9 @@ var IframeWidget = Element.extend({
     };
 
     Event.fire('xfbml.resize', filtered_message);
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
-  _resizeIframe: __w(function(/*object*/ message) {__t([message,'object','message']);
+  _resizeIframe: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     var iframe = this.getIframeNode();
     if (message.reposition === "true") {
       this._repositionIframe(message);
@@ -10206,14 +10251,14 @@ var IframeWidget = Element.extend({
     message.height && (iframe.style.height = message.height + 'px');
     message.width && (iframe.style.width = message.width + 'px');
     this._updateIframeZIndex();
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
-  _resizeFlow: __w(function(/*object*/ message) {__t([message,'object','message']);
+  _resizeFlow: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     var span = this.dom.getElementsByTagName('span')[0];
     message.height && (span.style.height = message.height + 'px');
     message.width && (span.style.width = message.width + 'px');
     this._updateIframeZIndex();
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   _updateIframeZIndex: function() {
     var span = this.dom.getElementsByTagName('span')[0];
@@ -10224,7 +10269,7 @@ var IframeWidget = Element.extend({
     DOM[method](iframe, 'fb_iframe_widget_lift');
   },
 
-  _repositionIframe: __w(function(/*object*/ message) {__t([message,'object','message']);
+  _repositionIframe: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     var iframe = this.getIframeNode();
     var iframe_width = parseInt(DOM.getStyle(iframe, 'width'), 10);
     var left = DOM.getPosition(iframe).x;
@@ -10240,7 +10285,7 @@ var IframeWidget = Element.extend({
       this.arbiterInform('xd/reposition', {type: 'restore'});
       this._repositioned = false;
     }
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
   _addLoader: function() {
@@ -10264,7 +10309,7 @@ var IframeWidget = Element.extend({
   },
 
   
-  _getQS: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  _getQS: __w(function() /*object*/ {return __t([function() {
     return copyProperties({
       api_key      : Runtime.getClientID(),
       locale       : Runtime.getLocale(),
@@ -10272,17 +10317,17 @@ var IframeWidget = Element.extend({
       kid_directed_site: Runtime.getKidDirectedSite(),
       ref          : this.getAttribute('ref')
     }, this.getUrlBits().params);
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
-  _getURL: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  _getURL: __w(function() /*string*/ {return __t([function() {
     var
       domain = this.getDefaultWebDomain(),
       static_path = '';
 
     return domain + '/plugins/' + static_path +
            this.getUrlBits().name + '.php';
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
 
   
   _postRequest: function() {
@@ -10297,7 +10342,7 @@ var IframeWidget = Element.extend({
 var widgetPipeIframeCount = 0;
 var allWidgetPipeIframes = {};
 
-function groupWidgetPipeDescriptions() /*object*/ {/*jshint validthis: true*/return __t([function(){
+function groupWidgetPipeDescriptions() /*object*/ {return __t([function() {
   var widgetPipeDescriptions = {};
   for (var key in allWidgetPipeIframes) {
     var controller = allWidgetPipeIframes[key];
@@ -10309,7 +10354,7 @@ function groupWidgetPipeDescriptions() /*object*/ {/*jshint validthis: true*/ret
   }
 
   return widgetPipeDescriptions;
-}.apply(this,arguments), 'object']);}__w(groupWidgetPipeDescriptions,{"signature":"function():object"});
+}.apply(this, arguments), 'object']);}__w(groupWidgetPipeDescriptions, {"signature":"function():object"}); 
 
 module.exports = IframeWidget;
 
@@ -10331,7 +10376,7 @@ var Comments = IframeWidget.extend({
   _refreshOnAuthChange: true,
 
   
-  setupAndValidate: __w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  setupAndValidate: __w(function() /*boolean*/ {return __t([function() {
     
     var attr = {
       channel_url : this.getChannelUrl(),
@@ -10417,7 +10462,7 @@ var Comments = IframeWidget.extend({
 
     this._attr = attr;
     return true;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
 
   
   oneTimeSetup: function() {
@@ -10430,30 +10475,30 @@ var Comments = IframeWidget.extend({
   },
 
   
-  getSize: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getSize: __w(function() /*object*/ {return __t([function() {
     if (this._attr.mobile) {
       return { width: '100%', height: 160 };
     }
     return { width: this._attr.width, height: 160 };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
-  getUrlBits: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getUrlBits: __w(function() /*object*/ {return __t([function() {
     return { name: 'comments', params: this._attr };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
-  getDefaultWebDomain: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getDefaultWebDomain: __w(function() /*string*/ {return __t([function() {
     return UrlMap.resolve(
       this._attr.mobile
         ? 'm'
         : 'www',
       true
     );
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
 
   
-  _handleCommentMsg: __w(function(/*object*/ message) {__t([message,'object','message']);
+  _handleCommentMsg: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     
     
     if (!this.isValid()) {
@@ -10464,9 +10509,9 @@ var Comments = IframeWidget.extend({
       user: message.user,
       widget: this
     });
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
-  _handleCommentCreatedMsg: __w(function(/*object*/ message) {__t([message,'object','message']);
+  _handleCommentCreatedMsg: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     if (!this.isValid()) {
       return;
     }
@@ -10478,9 +10523,9 @@ var Comments = IframeWidget.extend({
     };
 
     Event.fire('comment.create', eventArgs);
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
-  _handleCommentRemovedMsg: __w(function(/*object*/ message) {__t([message,'object','message']);
+  _handleCommentRemovedMsg: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     if (!this.isValid()) {
       return;
     }
@@ -10491,7 +10536,7 @@ var Comments = IframeWidget.extend({
     };
 
     Event.fire('comment.remove', eventArgs);
-  },{"signature":"function(object)"})
+  }, {"signature":"function(object)"})
 });
 module.exports = Comments;
 
@@ -10511,7 +10556,7 @@ var CommentsCount = Element.extend({
     var href = this.getAttribute('href', window.location.href);
 
     Data._selectByIndex(['commentsbox_count'], 'link_stat', 'url', href)
-      .wait(ES5(__w(function(/*array<object>*/ value) {__t([value,'array<object>','value']);
+      .wait(ES5(__w(function(/*array<object>*/ value) {__t([value, 'array<object>', 'value']);
         var c = value[0].commentsbox_count;
 
         DOM.html(
@@ -10524,7 +10569,7 @@ var CommentsCount = Element.extend({
         }
 
         this.fire('render');
-      },{"signature":"function(array<object>)"}), 'bind', true,this));
+      }, {"signature":"function(array<object>)"}), 'bind', true,this));
   }
 
 });
@@ -10538,7 +10583,7 @@ var DOM = require('sdk.DOM');
 var Anim = {
   
   ate: __w(function(/*DOMElement*/ dom, /*object*/ props, /*number?*/ duration,
-      /*function?*/ callback) {__t([dom,'DOMElement','dom'],[props,'object','props'],[duration,'?number','duration'],[callback,'?function','callback']);
+      /*function?*/ callback) {__t([dom, 'DOMElement', 'dom'], [props, 'object', 'props'], [duration, '?number', 'duration'], [callback, '?function', 'callback']);
     duration = !isNaN(parseFloat(duration)) && duration >= 0
       ? duration
       : 750;
@@ -10566,7 +10611,7 @@ var Anim = {
             to[prop] = this._parseCSS(value.toString());
           }
           var next = ''; 
-          ES5(from[prop], 'forEach', true,__w(function(/*object*/ pair, /*number*/ i) {__t([pair,'object','pair'],[i,'number','i']);
+          ES5(from[prop], 'forEach', true,__w(function(/*object*/ pair, /*number*/ i) {__t([pair, 'object', 'pair'], [i, 'number', 'i']);
             
             if (isNaN(to[prop][i].numPart) && to[prop][i].textPart == '?') {
               next = pair.numPart + pair.textPart;
@@ -10581,7 +10626,7 @@ var Anim = {
                             Math.sin(Math.PI/2 * pd))) +
                 to[prop][i].textPart + ' '; 
             }
-          },{"signature":"function(object,number)"}));
+          }, {"signature":"function(object,number)"}));
           
           DOM.setStyle(dom, prop, next);
         }
@@ -10590,17 +10635,17 @@ var Anim = {
           if (callback) { callback(dom); }
         }
       }, 'bind', true,this), frame_speed);
-  },{"signature":"function(DOMElement,object,?number,?function)"}),
+  }, {"signature":"function(DOMElement,object,?number,?function)"}),
 
   
-  _parseCSS: __w(function(/*string*/ css) /*array<object>*/ {__t([css,'string','css']);/*jshint validthis: true*/return __t([function(){
+  _parseCSS: __w(function(/*string*/ css) /*array<object>*/ {__t([css, 'string', 'css']);return __t([function() {
     var ret = [];
     ES5(css.split(' '), 'forEach', true,function(peice) {
       var num = parseInt(peice, 10);
       ret.push({numPart: num, textPart: peice.replace(num,'')});
     });
     return ret;
-  }.apply(this,arguments), 'array<object>']);},{"signature":"function(string):array<object>"})
+  }.apply(this, arguments), 'array<object>']);}, {"signature":"function(string):array<object>"})
 };
 module.exports = Anim;
 
@@ -10617,11 +10662,11 @@ var map = {
   '/': '&#x2F;'
 };
 
-function escapeHTML(/*string*/ value) /*string*/ {__t([value,'string','value']);/*jshint validthis: true*/return __t([function(){
+function escapeHTML(/*string*/ value) /*string*/ {__t([value, 'string', 'value']);return __t([function() {
   return value.replace(re, function(m) {
     return map[m];
   });
-}.apply(this,arguments), 'string']);}__w(escapeHTML,{"signature":"function(string):string"});
+}.apply(this, arguments), 'string']);}__w(escapeHTML, {"signature":"function(string):string"}); 
 module.exports = escapeHTML;
 
 });
@@ -10634,37 +10679,37 @@ var UrlMap = require('UrlMap');
 
 var Helper = {
   
-  isUser: __w(function(id) /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  isUser: __w(function(id) /*boolean*/ {return __t([function() {
     return id < 2200000000 ||
       (id >= 100000000000000 &&  
        id <= 100099999989999) || 
       (id >= 89000000000000 &&   
        id <= 89999999999999);    
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
 
   
-  upperCaseFirstChar: __w(function(/*string*/ s) /*string*/ {__t([s,'string','s']);/*jshint validthis: true*/return __t([function(){
+  upperCaseFirstChar: __w(function(/*string*/ s) /*string*/ {__t([s, 'string', 's']);return __t([function() {
     if (s.length > 0) {
       return s.substr(0, 1).toUpperCase() + s.substr(1);
     }
     else {
       return s;
     }
-  }.apply(this,arguments), 'string']);},{"signature":"function(string):string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function(string):string"}),
 
   
   getProfileLink: __w(function(/*object?*/ userInfo, /*string*/ html,
-      /*string?*/ href) /*string*/ {__t([userInfo,'?object','userInfo'],[html,'string','html'],[href,'?string','href']);/*jshint validthis: true*/return __t([function(){
+      /*string?*/ href) /*string*/ {__t([userInfo, '?object', 'userInfo'], [html, 'string', 'html'], [href, '?string', 'href']);return __t([function() {
     href = href || (userInfo ? UrlMap.resolve('www') + '/profile.php?id=' +
                     userInfo.uid : null);
     if (href) {
       html = '<a class="fb_link" href="' + href + '">' + html + '</a>';
     }
     return html;
-  }.apply(this,arguments), 'string']);},{"signature":"function(?object,string,?string):string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function(?object,string,?string):string"}),
 
   
-  invokeHandler: __w(function(handler, /*object?*/ scope, /*array?*/ args) {__t([scope,'?object','scope'],[args,'?array','args']);
+  invokeHandler: __w(function(handler, /*object?*/ scope, /*array?*/ args) {__t([scope, '?object', 'scope'], [args, '?array', 'args']);
     if (handler) {
       if (typeof handler === 'string') {
         ErrorHandling.unguard(safeEval)(handler, args);
@@ -10672,17 +10717,17 @@ var Helper = {
         ErrorHandling.unguard(handler).apply(scope, args || []);
       }
     }
-  },{"signature":"function(?object,?array)"}),
+  }, {"signature":"function(?object,?array)"}),
 
   
-  fireEvent: __w(function(/*string*/ eventName, /*object*/ eventSource) {__t([eventName,'string','eventName'],[eventSource,'object','eventSource']);
+  fireEvent: __w(function(/*string*/ eventName, /*object*/ eventSource) {__t([eventName, 'string', 'eventName'], [eventSource, 'object', 'eventSource']);
     var href = eventSource._attr.href;
     eventSource.fire(eventName, href); 
     Event.fire(eventName, href, eventSource); 
-  },{"signature":"function(string,object)"}),
+  }, {"signature":"function(string,object)"}),
 
   
-  executeFunctionByName: __w(function(/*string*/ functionName /*, args */) {__t([functionName,'string','functionName']);
+  executeFunctionByName: __w(function(/*string*/ functionName /*, args */) {__t([functionName, 'string', 'functionName']);
     var args = Array.prototype.slice.call(arguments, 1);
     var namespaces = functionName.split(".");
     var func = namespaces.pop();
@@ -10691,7 +10736,7 @@ var Helper = {
       context = context[namespaces[i]];
     }
     return context[func].apply(this, args);
-  },{"signature":"function(string)"})
+  }, {"signature":"function(string)"})
 
 };
 
@@ -10731,8 +10776,8 @@ var ConnectBar = Element.extend({
   
   process: function() {
     
-    Auth.getLoginStatus(ES5(__w(function(/*object*/ resp) {__t([resp,'object','resp']);
-      Event.monitor('auth.statusChange', ES5(__w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+    Auth.getLoginStatus(ES5(__w(function(/*object*/ resp) {__t([resp, 'object', 'resp']);
+      Event.monitor('auth.statusChange', ES5(__w(function() /*boolean*/ {return __t([function() {
         
         if (this.isValid() && Runtime.getLoginStatus() == 'connected') {
           this._uid = Runtime.getUserID();
@@ -10750,8 +10795,8 @@ var ConnectBar = Element.extend({
           this._noRender();
         }
         return false; 
-      }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}), 'bind', true,this));
-    },{"signature":"function(object)"}), 'bind', true,this));
+      }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}), 'bind', true,this));
+    }, {"signature":"function(object)"}), 'bind', true,this));
   },
 
   
@@ -10761,7 +10806,7 @@ var ConnectBar = Element.extend({
                                     'user', 'uid', this._uid);
     var q2 = Data._selectByIndex(['display_name'], 'application',
                                     'api_key', Runtime.getClientID());
-    Data.waitOn([q1, q2], ES5(__w(function(/*array<array<object>>*/ data) {__t([data,'array<array<object>>','data']);
+    Data.waitOn([q1, q2], ES5(__w(function(/*array<array<object>>*/ data) {__t([data, 'array<array<object>>', 'data']);
       data[0][0].site_name = data[1][0].display_name;
       if (!this._displayed) {
         this._displayed = true;
@@ -10776,7 +10821,7 @@ var ConnectBar = Element.extend({
         Event.fire('connectbar.ondisplay', this);
         Helper.invokeHandler(this.getAttribute('on-display'), this);
       }
-    },{"signature":"function(array<array<object>>)"}), 'bind', true,this));
+    }, {"signature":"function(array<array<object>>)"}), 'bind', true,this));
   },
 
   
@@ -10795,7 +10840,7 @@ var ConnectBar = Element.extend({
   },
 
   
-  _renderConnectBar: __w(function(/*object*/ info) {__t([info,'object','info']);
+  _renderConnectBar: __w(function(/*object*/ info) {__t([info, 'object', 'info']);
     var bar = document.createElement('div'),
         container = document.createElement('div');
     
@@ -10835,9 +10880,9 @@ var ConnectBar = Element.extend({
       info.profile_url,
       UrlMap.resolve('www') + '/sitetour/connect.php'
     ));
-    ES5(createArrayFrom(bar.getElementsByTagName('a')), 'forEach', true,__w(function(/*DOMElement*/ el) {__t([el,'DOMElement','el']);
+    ES5(createArrayFrom(bar.getElementsByTagName('a')), 'forEach', true,__w(function(/*DOMElement*/ el) {__t([el, 'DOMElement', 'el']);
         el.onclick = ES5(this._clickHandler, 'bind', true,this);
-      },{"signature":"function(DOMElement)"}), this);
+      }, {"signature":"function(DOMElement)"}), this);
     this._page = document.body;
     var top_margin = 0;
     if (this._page.parentNode) {
@@ -10862,7 +10907,7 @@ var ConnectBar = Element.extend({
       move.backgroundPosition = '? ' + this._initialHeight + 'px'
     }
     Anim.ate(this._page, move, this._animationSpeed);
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
   _clickHandler : function(e) {
@@ -10918,9 +10963,9 @@ var ConnectBar = Element.extend({
     Anim.ate(this._page, move, speed);
     Anim.ate(this._container, {
       top: (-1 * this._initialHeight) + 'px'
-    }, speed, __w(function(/*DOMElement*/ el) {__t([el,'DOMElement','el']);
+    }, speed, __w(function(/*DOMElement*/ el) {__t([el, 'DOMElement', 'el']);
       el.parentNode.removeChild(el);
-    },{"signature":"function(DOMElement)"}));
+    }, {"signature":"function(DOMElement)"}));
     this.fire('connectbar.onclose');
     Event.fire('connectbar.onclose', this);
     Helper.invokeHandler(this.getAttribute('on-close'), this);
@@ -10938,7 +10983,7 @@ var DOM = require('sdk.DOM');
 var nextZIndex = 10000;
 
 var Widget = IframeWidget.extend({
-  constructor: __w(function(/*object*/ opts) {__t([opts,'object','opts']);
+  constructor: __w(function(/*object*/ opts) {__t([opts, 'object', 'opts']);
     this.parent(opts.commentNode);
     this._iframeWidth = opts.width + 1;
     this._iframeHeight = opts.height;
@@ -10951,7 +10996,7 @@ var Widget = IframeWidget.extend({
     this.dom.style.left = opts.relativeWidthOffset + 'px';
     this.dom.style.zIndex = nextZIndex++;
     DOM.addCss(this.dom, 'fb_edge_comment_widget');
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
   
@@ -10962,17 +11007,17 @@ var Widget = IframeWidget.extend({
   _showLoader: false,
 
   
-  getSize: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getSize: __w(function() /*object*/ {return __t([function() {
     return {
       width: this._iframeWidth,
       height: this._iframeHeight
     };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
-  getUrlBits: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getUrlBits: __w(function() /*object*/ {return __t([function() {
     return { name: 'comment_widget_shell', params: this._attr };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"})
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"})
 });
 
 module.exports = Widget;
@@ -10994,7 +11039,7 @@ var EdgeWidget = IframeWidget.extend({
   _rootPadding: null,
 
   
-  setupAndValidate : __w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  setupAndValidate : __w(function() /*boolean*/ {return __t([function() {
     DOM.addCss(this.dom, 'fb_edge_widget_with_comment');
     this._attr = {
       channel_url             : this.getChannelUrl(),
@@ -11022,10 +11067,10 @@ var EdgeWidget = IframeWidget.extend({
     };
 
     return true;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
 
   oneTimeSetup : function() {
-    this.subscribe('xd.sdk_event', ES5(__w(function(/*object*/ message) {__t([message,'object','message']);
+    this.subscribe('xd.sdk_event', ES5(__w(function(/*object*/ message) {__t([message, 'object', 'message']);
       Event.fire(message.event, ES5('JSON', 'parse', false,message.data), this.dom);
       if (message.event == 'edge.create') {
         Helper.invokeHandler(
@@ -11034,7 +11079,7 @@ var EdgeWidget = IframeWidget.extend({
         Helper.invokeHandler(
           this.getAttribute('on-remove'), this, [this._attr.href]);
       }
-    },{"signature":"function(object)"}), 'bind', true,this));
+    }, {"signature":"function(object)"}), 'bind', true,this));
     this.subscribe('xd.presentEdgeCommentDialog',
       ES5(this._handleEdgeCommentDialogPresentation, 'bind', true,this));
     this.subscribe('xd.dismissEdgeCommentDialog',
@@ -11046,15 +11091,15 @@ var EdgeWidget = IframeWidget.extend({
   },
 
   
-  getSize: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getSize: __w(function() /*object*/ {return __t([function() {
     return {
       width: this._getWidgetWidth(),
       height: this._getWidgetHeight()
     };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
-  _getWidgetHeight : __w(function() /*number*/ {/*jshint validthis: true*/return __t([function(){
+  _getWidgetHeight : __w(function() /*number*/ {return __t([function() {
     var layout = this._getLayout();
     var should_show_faces = this._shouldShowFaces() ? 'show' : 'hide';
     var send = this._getBoolAttribute('send');
@@ -11065,10 +11110,10 @@ var EdgeWidget = IframeWidget.extend({
         'button_count' : {'show': 21, 'hide': 21},
         'simple' : {'show': 20, 'hide': 20}};
     return layoutToDefaultHeightMap[layout][should_show_faces];
-  }.apply(this,arguments), 'number']);},{"signature":"function():number"}),
+  }.apply(this, arguments), 'number']);}, {"signature":"function():number"}),
 
   
-  _getWidgetWidth : __w(function() /*number*/ {/*jshint validthis: true*/return __t([function(){
+  _getWidgetWidth : __w(function() /*number*/ {return __t([function() {
     var layout = this._getLayout();
     var send = this._getBoolAttribute('send');
     var should_show_faces = this._shouldShowFaces() ? 'show' : 'hide';
@@ -11109,24 +11154,24 @@ var EdgeWidget = IframeWidget.extend({
     }
 
     return width;
-  }.apply(this,arguments), 'number']);},{"signature":"function():number"}),
+  }.apply(this, arguments), 'number']);}, {"signature":"function():number"}),
 
   
-  _getLayout : __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  _getLayout : __w(function() /*string*/ {return __t([function() {
     return this._getAttributeFromList(
       'layout',
       'standard',
       ['standard', 'button_count', 'box_count', 'simple']);
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
 
   
-  _shouldShowFaces : __w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  _shouldShowFaces : __w(function() /*boolean*/ {return __t([function() {
     return this._getLayout() === 'standard' &&
            this._getBoolAttribute('show-faces', true);
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
 
   
-  _handleEdgeCommentDialogPresentation : __w(function(/*object*/ message) {__t([message,'object','message']);
+  _handleEdgeCommentDialogPresentation : __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     if (!this.isValid()) {
       return;
     }
@@ -11135,11 +11180,11 @@ var EdgeWidget = IframeWidget.extend({
     this.dom.appendChild(comment_node);
     this._commentSlave.process();
     this._commentWidgetNode = comment_node;
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
   _createEdgeCommentWidget : __w(function(/*object*/ message,
-      /*DOMElement*/ comment_node) /*object*/ {__t([message,'object','message'],[comment_node,'DOMElement','comment_node']);/*jshint validthis: true*/return __t([function(){
+      /*DOMElement*/ comment_node) /*object*/ {__t([message, 'object', 'message'], [comment_node, 'DOMElement', 'comment_node']);return __t([function() {
     var opts = {
       commentNode          : comment_node,
       externalUrl          : message.externalURL,
@@ -11156,18 +11201,18 @@ var EdgeWidget = IframeWidget.extend({
       paddingLeft          : this._rootPadding.left
     };
     return new EdgeCommentWidget(opts);
-  }.apply(this,arguments), 'object']);},{"signature":"function(object,DOMElement):object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function(object,DOMElement):object"}),
 
   
 
-  _getHeightOffset : __w(function(/*object*/ message) /*number*/ {__t([message,'object','message']);/*jshint validthis: true*/return __t([function(){
+  _getHeightOffset : __w(function(/*object*/ message) /*number*/ {__t([message, 'object', 'message']);return __t([function() {
     return parseFloat(message['anchorGeometry[y]']) +
            parseFloat(message['anchorPosition[y]']) +
            this._rootPadding.top;
-  }.apply(this,arguments), 'number']);},{"signature":"function(object):number"}),
+  }.apply(this, arguments), 'number']);}, {"signature":"function(object):number"}),
 
   
-  _getWidthOffset : __w(function(/*object*/ message) /*number*/ {__t([message,'object','message']);/*jshint validthis: true*/return __t([function(){
+  _getWidthOffset : __w(function(/*object*/ message) /*number*/ {__t([message, 'object', 'message']);return __t([function() {
     var off = parseFloat(message['anchorPosition[x]']) + this._rootPadding.left;
     var plugin_left = DOM.getPosition(this.dom).x;
     var plugin_width = this.dom.offsetWidth;
@@ -11186,11 +11231,11 @@ var EdgeWidget = IframeWidget.extend({
     }
 
     return off;
-  }.apply(this,arguments), 'number']);},{"signature":"function(object):number"}),
+  }.apply(this, arguments), 'number']);}, {"signature":"function(object):number"}),
 
   
   _getCommonEdgeCommentWidgetOpts : __w(function(/*object*/ message,
-      /*DOMElement*/ comment_node) /*object*/ {__t([message,'object','message'],[comment_node,'DOMElement','comment_node']);/*jshint validthis: true*/return __t([function(){
+      /*DOMElement*/ comment_node) /*object*/ {__t([message, 'object', 'message'], [comment_node, 'DOMElement', 'comment_node']);return __t([function() {
     return {
       colorscheme             : this._attr.colorscheme,
       commentNode             : comment_node,
@@ -11212,15 +11257,15 @@ var EdgeWidget = IframeWidget.extend({
       anchorTargetY           : parseFloat(message['query[anchorTargetY]']) +
                                 this._rootPadding.top
     };
-  }.apply(this,arguments), 'object']);},{"signature":"function(object,DOMElement):object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function(object,DOMElement):object"}),
 
   
-  _handleEdgeCommentDialogDismissal : __w(function(/*object*/ message) {__t([message,'object','message']);
+  _handleEdgeCommentDialogDismissal : __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     if (this._commentWidgetNode) {
       this.dom.removeChild(this._commentWidgetNode);
       delete this._commentWidgetNode;
     }
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
   _handleEdgeCommentDialogHide: function() {
@@ -11248,7 +11293,7 @@ var DOM = require('sdk.DOM');
 var Event = require('sdk.Event');
 
 var SendButtonFormWidget = EdgeCommentWidget.extend({
-  constructor: __w(function(/*object*/ opts) {__t([opts,'object','opts']);
+  constructor: __w(function(/*object*/ opts) {__t([opts, 'object', 'opts']);
     this.parent(opts);
 
     DOM.addCss(this.dom, 'fb_send_button_form_widget');
@@ -11287,15 +11332,15 @@ var SendButtonFormWidget = EdgeCommentWidget.extend({
 
     
     this._attr.extended_social_context = opts.extended_social_context;
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
   
   
   // there will be a very small delay. So in meantime, let's show a loader
   _showLoader: true,
 
-  getUrlBits: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getUrlBits: __w(function() /*object*/ {return __t([function() {
     return { name: 'send_button_form_shell', params: this._attr };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   oneTimeSetup: function() {
     this.subscribe('xd.messageSent', ES5(this._onMessageSent, 'bind', true,this));
@@ -11317,13 +11362,13 @@ var SendButtonFormWidget = require('sdk.XFBML.SendButtonFormWidget');
 var Like = EdgeWidget.extend({
 
   
-  getUrlBits: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getUrlBits: __w(function() /*object*/ {return __t([function() {
     return { name: 'like', params: this._attr };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
   _createEdgeCommentWidget: __w(function(/*object*/ message,
-      /*DOMElement*/ comment_node) /*object*/ {__t([message,'object','message'],[comment_node,'DOMElement','comment_node']);/*jshint validthis: true*/return __t([function(){
+      /*DOMElement*/ comment_node) /*object*/ {__t([message, 'object', 'message'], [comment_node, 'DOMElement', 'comment_node']);return __t([function() {
     
     
     // send="true"></fb:like>)
@@ -11335,12 +11380,12 @@ var Like = EdgeWidget.extend({
     } else {
       return this.parentCall("_createEdgeCommentWidget", message, comment_node);
     }
-  }.apply(this,arguments), 'object']);},{"signature":"function(object,DOMElement):object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function(object,DOMElement):object"}),
 
   
-  getIframeTitle: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getIframeTitle: __w(function() /*string*/ {return __t([function() {
     return 'Like this content on Facebook.';
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"})
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"})
 });
 
 module.exports = Like;
@@ -11354,7 +11399,7 @@ var LiveStream = IframeWidget.extend({
   _visibleAfter: 'load',
 
   
-  setupAndValidate: __w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  setupAndValidate: __w(function() /*boolean*/ {return __t([function() {
     this._attr = {
       app_id : this.getAttribute('event-app-id'),
       href : this.getAttribute('href', window.location.href),
@@ -11368,21 +11413,21 @@ var LiveStream = IframeWidget.extend({
     };
 
     return true;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
 
   
-  getSize: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getSize: __w(function() /*object*/ {return __t([function() {
     return { width: this._attr.width, height: this._attr.height };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
-  getUrlBits: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getUrlBits: __w(function() /*object*/ {return __t([function() {
     var name = this._attr.redesigned ? 'live_stream_box' : 'livefeed';
     if (this._getBoolAttribute('modern', false)) {
       name = 'live_stream';
     }
     return { name: name, params: this._attr };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"})
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"})
 });
 
 module.exports = LiveStream;
@@ -11395,17 +11440,17 @@ var IframePlugin = require('IframePlugin');
 
 var LoginButton = IframePlugin.extend({
   constructor: __w(function(/*DOMElement*/ elem, /*string*/ ns, /*string*/ tag,
-      /*object*/ attr) {__t([elem,'DOMElement','elem'],[ns,'string','ns'],[tag,'string','tag'],[attr,'object','attr']);
+      /*object*/ attr) {__t([elem, 'DOMElement', 'elem'], [ns, 'string', 'ns'], [tag, 'string', 'tag'], [attr, 'object', 'attr']);
     this.parent(elem, ns, tag, attr);
     var onlogin = IframePlugin.getVal(attr, 'on_login');
     if (onlogin) {
-      this.subscribe('login.status', __w(function(/*object*/ response) {__t([response,'object','response']);
+      this.subscribe('login.status', __w(function(/*object*/ response) {__t([response, 'object', 'response']);
         Helper.invokeHandler(onlogin, null, [response]);
-      },{"signature":"function(object)"}));
+      }, {"signature":"function(object)"}));
     }
-  },{"signature":"function(DOMElement,string,string,object)"}),
+  }, {"signature":"function(DOMElement,string,string,object)"}),
 
-  getParams: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getParams: __w(function() /*object*/ {return __t([function() {
     return {
       scope: 'string',
       perms: 'string', 
@@ -11418,7 +11463,7 @@ var LoginButton = IframePlugin.extend({
       auto_logout_link: 'bool',
       one_click: 'bool'
     };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"})
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"})
 });
 
 module.exports = LoginButton;
@@ -11494,19 +11539,19 @@ var Name = Element.extend({
       } else {
         data = Data._selectByIndex(['name', 'id'], 'profile', 'id', this._uid);
       }
-      data.wait(ES5(__w(function(/*array<object>*/ data) {__t([data,'array<object>','data']);
+      data.wait(ES5(__w(function(/*array<object>*/ data) {__t([data, 'array<object>', 'data']);
         if (this._subjectId == this._uid) {
           this._renderPronoun(data[0]);
         } else {
           this._renderOther(data[0]);
         }
         this.fire('render');
-      },{"signature":"function(array<object>)"}), 'bind', true,this));
+      }, {"signature":"function(array<object>)"}), 'bind', true,this));
     }, 'bind', true,this));
   },
 
   
-  _renderPronoun: __w(function(/*object*/ userInfo) {__t([userInfo,'object','userInfo']);
+  _renderPronoun: __w(function(/*object*/ userInfo) {__t([userInfo, 'object', 'userInfo']);
     var
       word = '',
       objective = this._objective;
@@ -11602,10 +11647,10 @@ var Name = Element.extend({
       word = Helper.upperCaseFirstChar(word);
     }
     this.dom.innerHTML = word;
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
-  _renderOther: __w(function(/*object*/ userInfo) {__t([userInfo,'object','userInfo']);
+  _renderOther: __w(function(/*object*/ userInfo) {__t([userInfo, 'object', 'userInfo']);
     var
       name = '',
       html = '';
@@ -11669,7 +11714,7 @@ var Name = Element.extend({
       }
     }
     this.dom.innerHTML = html;
-  },{"signature":"function(object)"})
+  }, {"signature":"function(object)"})
 });
 
 module.exports = Name;
@@ -11686,15 +11731,15 @@ var Runtime = require('sdk.Runtime');
 
 var Bar = IframeWidget.extend({
 
-  getUrlBits: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getUrlBits: __w(function() /*object*/ {return __t([function() {
     return { name: 'recommendations_bar', params: this._attr };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
-  setupAndValidate: __w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  setupAndValidate: __w(function() /*boolean*/ {return __t([function() {
 
 
     function interval_queue(/*number*/ interval, /*function*/ func)
-        /*function*/ {__t([interval,'number','interval'],[func,'function','func']);/*jshint validthis: true*/return __t([function(){
+        /*function*/ {__t([interval, 'number', 'interval'], [func, 'function', 'func']);return __t([function() {
       var last_run = 0;
       var queued = null;
 
@@ -11703,7 +11748,7 @@ var Bar = IframeWidget.extend({
         queued = null;
         last_run = ES5('Date', 'now', false);
       }
-      return __w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+      return __w(function() /*boolean*/ {return __t([function() {
         if (!queued) {
           var now = ES5('Date', 'now', false);
           if (now - last_run < interval) {
@@ -11713,10 +11758,10 @@ var Bar = IframeWidget.extend({
           }
         }
         return true;
-      }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"});
-    }.apply(this,arguments), 'function']);}__w(interval_queue,{"signature":"function(number,function):function"});
+      }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"});
+    }.apply(this, arguments), 'function']);}__w(interval_queue, {"signature":"function(number,function):function"}); 
 
-    function validate_trigger(/*string?*/ trigger) {__t([trigger,'?string','trigger']);
+    function validate_trigger(/*string?*/ trigger) {__t([trigger, '?string', 'trigger']);
       if (trigger.match(/^\d+(?:\.\d+)?%$/)) {
         
         var percent = Math.min(Math.max(parseInt(trigger, 10), 0), 100);
@@ -11725,18 +11770,18 @@ var Bar = IframeWidget.extend({
         trigger = 'onvisible';
       }
       return trigger;
-    }__w(validate_trigger,{"signature":"function(?string)"});
+    }__w(validate_trigger, {"signature":"function(?string)"}); 
 
-    function validate_read_time(/*string?*/ read_time) /*number*/ {__t([read_time,'?string','read_time']);/*jshint validthis: true*/return __t([function(){
+    function validate_read_time(/*string?*/ read_time) /*number*/ {__t([read_time, '?string', 'read_time']);return __t([function() {
       return Math.max(parseInt(read_time, 10) || 30, 10);
-    }.apply(this,arguments), 'number']);}__w(validate_read_time,{"signature":"function(?string):number"});
+    }.apply(this, arguments), 'number']);}__w(validate_read_time, {"signature":"function(?string):number"}); 
 
-    function validate_side(/*string?*/ side) /*string*/ {__t([side,'?string','side']);/*jshint validthis: true*/return __t([function(){
+    function validate_side(/*string?*/ side) /*string*/ {__t([side, '?string', 'side']);return __t([function() {
       if (side == 'left' || side == 'right') { 
         return side;
       }
       return Runtime.getRtl() ? 'left' : 'right'; 
-    }.apply(this,arguments), 'string']);}__w(validate_side,{"signature":"function(?string):string"});
+    }.apply(this, arguments), 'string']);}__w(validate_side, {"signature":"function(?string):string"}); 
 
     this._attr = {
       channel      : this.getChannelUrl(),
@@ -11779,7 +11824,7 @@ var Bar = IframeWidget.extend({
     DOMEventListener.add(document.documentElement, 'mousemove', action);
 
     if (this._attr.trigger == "manual") {
-      var manual = ES5(__w(function(/*string*/ href) /*boolean*/ {__t([href,'string','href']);/*jshint validthis: true*/return __t([function(){
+      var manual = ES5(__w(function(/*string*/ href) /*boolean*/ {__t([href, 'string', 'href']);return __t([function() {
         if (href == this._attr.href) {
           Event.unsubscribe('xfbml.recommendationsbar.read', manual);
           this.arbiterInform(
@@ -11788,7 +11833,7 @@ var Bar = IframeWidget.extend({
             Arbiter.BEHAVIOR_STATE);
         }
         return true;
-      }.apply(this,arguments), 'boolean']);},{"signature":"function(string):boolean"}), 'bind', true,this);
+      }.apply(this, arguments), 'boolean']);}, {"signature":"function(string):boolean"}), 'bind', true,this);
       Event.subscribe('xfbml.recommendationsbar.read', manual);
     } else {
       var trigger = interval_queue(500, ES5(function() {
@@ -11821,10 +11866,10 @@ var Bar = IframeWidget.extend({
     visible(); 
 
     this.focused = true;
-    var toggleFocused = ES5(__w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+    var toggleFocused = ES5(__w(function() /*boolean*/ {return __t([function() {
       this.focused = !this.focused;
       return true;
-    }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}), 'bind', true,this);
+    }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}), 'bind', true,this);
     DOMEventListener.add(window, 'blur', toggleFocused);
     DOMEventListener.add(window, 'focus', toggleFocused);
 
@@ -11835,15 +11880,15 @@ var Bar = IframeWidget.extend({
     }, 'bind', true,this));
 
     return true;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
 
-  getSize: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getSize: __w(function() /*object*/ {return __t([function() {
     
     return {
       height: 25, width: (this._attr.action == 'recommend' ? 140 : 96) };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
-  calculateVisibility: __w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  calculateVisibility: __w(function() /*boolean*/ {return __t([function() {
     var fold = document.documentElement.clientHeight; 
 
     
@@ -11871,7 +11916,7 @@ var Bar = IframeWidget.extend({
         var height = document.documentElement.scrollHeight; 
         return (scroll + fold) / height >= this._attr.trigger;
     }
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"})
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"})
 });
 
 module.exports = Bar;
@@ -11904,7 +11949,7 @@ var Registration = IframeWidget.extend({
   _skinnyFieldHeight: 52,
 
   
-  setupAndValidate: __w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  setupAndValidate: __w(function() /*boolean*/ {return __t([function() {
     this._attr = {
       action       : this.getAttribute('action'),
       border_color : this.getAttribute('border-color'),
@@ -11925,7 +11970,7 @@ var Registration = IframeWidget.extend({
     
 
     if (this._attr.onvalidate) {
-      this.subscribe('xd.validate', ES5(__w(function(/*object*/ message) {__t([message,'object','message']);
+      this.subscribe('xd.validate', ES5(__w(function(/*object*/ message) {__t([message, 'object', 'message']);
         var value = ES5('JSON', 'parse', false,message.value);
         var callback = ES5(function(errors) {
           this.arbiterInform('Registration.Validation',
@@ -11940,21 +11985,21 @@ var Registration = IframeWidget.extend({
         if (response) {
           callback(response);
         }
-      },{"signature":"function(object)"}), 'bind', true,this));
+      }, {"signature":"function(object)"}), 'bind', true,this));
     }
 
     this.subscribe('xd.authLogin', ES5(this._onAuthLogin, 'bind', true,this));
     this.subscribe('xd.authLogout', ES5(this._onAuthLogout, 'bind', true,this));
 
     return true;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
 
   
-  getSize: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getSize: __w(function() /*object*/ {return __t([function() {
     return { width: this._attr.width, height: this._getHeight() };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
-  _getHeight: __w(function() /*number*/ {/*jshint validthis: true*/return __t([function(){
+  _getHeight: __w(function() /*number*/ {return __t([function() {
     if (this._attr.height) {
       return this._attr.height;
     }
@@ -11977,17 +12022,17 @@ var Registration = IframeWidget.extend({
     } else {
       return this._baseHeight + fields.length * this._fieldHeight;
     }
-  }.apply(this,arguments), 'number']);},{"signature":"function():number"}),
+  }.apply(this, arguments), 'number']);}, {"signature":"function():number"}),
 
   
-  getUrlBits: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getUrlBits: __w(function() /*object*/ {return __t([function() {
     return { name: 'registration', params: this._attr };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
-  getDefaultWebDomain: __w(function() /*string*/ {/*jshint validthis: true*/return __t([function(){
+  getDefaultWebDomain: __w(function() /*string*/ {return __t([function() {
     return UrlMap.resolve('www', true);
-  }.apply(this,arguments), 'string']);},{"signature":"function():string"}),
+  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
 
   
   _onAuthLogin: function() {
@@ -12017,7 +12062,7 @@ var IframeWidget = require('sdk.XFBML.IframeWidget');
 
 var SocialContext = IframeWidget.extend({
   
-  setupAndValidate: __w(function() /*boolean*/ {/*jshint validthis: true*/return __t([function(){
+  setupAndValidate: __w(function() /*boolean*/ {return __t([function() {
     var size = this.getAttribute('size', 'small');
     this._attr = {
       channel: this.getChannelUrl(),
@@ -12034,26 +12079,26 @@ var SocialContext = IframeWidget.extend({
       'xd.social_context_stats', ES5(this._bubbleSocialContextStats, 'bind', true,this));
 
     return true;
-  }.apply(this,arguments), 'boolean']);},{"signature":"function():boolean"}),
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
 
   
-  _bubbleSocialContextStats: __w(function(/*object*/ message) {__t([message,'object','message']);
+  _bubbleSocialContextStats: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     var filtered_message = {
       pluginID: this.getAttribute('plugin-id'),
       socialContextPageIDs: ES5('JSON', 'parse', false,message.social_context_page_ids)
     };
     Event.fire('xfbml.social_context_stats', filtered_message);
-  },{"signature":"function(object)"}),
+  }, {"signature":"function(object)"}),
 
   
-  getSize: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getSize: __w(function() /*object*/ {return __t([function() {
     return { width: this._attr.width, height: this._attr.height };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"}),
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
-  getUrlBits: __w(function() /*object*/ {/*jshint validthis: true*/return __t([function(){
+  getUrlBits: __w(function() /*object*/ {return __t([function() {
     return { name: 'social_context', params: this._attr };
-  }.apply(this,arguments), 'object']);},{"signature":"function():object"})
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"})
 });
 
 module.exports = SocialContext;
@@ -12155,8 +12200,6 @@ try {
 
 },3);
 
-
-void(0);
 
 
 }).call({}, window.inDapIF ? parent.window : window);
