@@ -1,4 +1,4 @@
-/*1382656576,173036639,JIT Construction: v979694,en_US*/
+/*1383864959,173051205,JIT Construction: v998703,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -618,9 +618,9 @@ try {
             "rtl": false
         });
         __d("XDConfig", [], {
-            "XdUrl": "connect\/xd_arbiter.php?version=27",
+            "XdUrl": "connect\/xd_arbiter.php?version=28",
             "Flash": {
-                "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yb\/r\/e3FGq1GkcH5.swf"
+                "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yS\/r\/NoZWYE2GRkt.swf"
             },
             "useCdn": true
         });
@@ -1716,6 +1716,7 @@ try {
                 h = {};
 
             function i(j) {
+                "use strict";
                 this._opts = g({
                     interval: 0,
                     processor: null
@@ -1724,6 +1725,7 @@ try {
                 this._stopped = true;
             }
             i.prototype._dispatch = function(j) {
+                "use strict";
                 if (this._stopped || this._queue.length === 0) return;
                 if (!this._opts.processor) {
                     this._stopped = true;
@@ -1735,35 +1737,42 @@ try {
                 } else while (this._queue.length) this._opts.processor.call(this, this._queue.shift());
             };
             i.prototype.enqueue = function(j) {
+                "use strict";
                 if (this._opts.processor && !this._stopped) {
                     this._opts.processor.call(this, j);
                 } else this._queue.push(j);
                 return this;
             };
             i.prototype.start = function(j) {
+                "use strict";
                 if (j) this._opts.processor = j;
                 this._stopped = false;
                 this._dispatch();
                 return this;
             };
             i.prototype.dispatch = function() {
+                "use strict";
                 this._dispatch(true);
             };
             i.prototype.stop = function(j) {
+                "use strict";
                 this._stopped = true;
                 if (j) clearTimeout(this._timeout);
                 return this;
             };
             i.prototype.merge = function(j, k) {
+                "use strict";
                 this._queue[k ? 'unshift' : 'push'].apply(this._queue, j._queue);
                 j._queue = [];
                 this._dispatch();
                 return this;
             };
             i.prototype.getLength = function() {
+                "use strict";
                 return this._queue.length;
             };
             i.get = function(j, k) {
+                "use strict";
                 var l;
                 if (j in h) {
                     l = h[j];
@@ -1771,9 +1780,11 @@ try {
                 return l;
             };
             i.exists = function(j) {
+                "use strict";
                 return j in h;
             };
             i.remove = function(j) {
+                "use strict";
                 return delete h[j];
             };
             e.exports = i;
@@ -6654,6 +6665,7 @@ try {
                             show_faces: this._shouldShowFaces(),
                             no_resize: this._getBoolAttribute('no_resize'),
                             send: this._getBoolAttribute('send'),
+                            share: this._getBoolAttribute('share'),
                             url_map: this.getAttribute('url_map'),
                             extended_social_context: this._getBoolAttribute('extended_social_context', false)
                         };
@@ -6684,7 +6696,7 @@ try {
                     _getWidgetHeight: function() {
                         var n = this._getLayout(),
                             o = this._shouldShowFaces() ? 'show' : 'hide',
-                            p = this._getBoolAttribute('send'),
+                            p = this._getBoolAttribute('send') || this._getBoolAttribute('share'),
                             q = 65 + (p ? 25 : 0),
                             r = {
                                 standard: {
@@ -6708,7 +6720,7 @@ try {
                     },
                     _getWidgetWidth: function() {
                         var n = this._getLayout(),
-                            o = this._getBoolAttribute('send'),
+                            o = this._getBoolAttribute('send') || this._getBoolAttribute('share'),
                             p = this._shouldShowFaces() ? 'show' : 'hide',
                             q = (this.getAttribute('action') === 'recommend'),
                             r = (q ? 265 : 225) + (o ? 60 : 0),
