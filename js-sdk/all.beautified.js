@@ -1,4 +1,4 @@
-/*1383864959,173051205,JIT Construction: v998703,en_US*/
+/*1386015860,179317541,JIT Construction: v1029287,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -645,7 +645,7 @@ try {
             }
         });
         __d("CssConfig", [], {
-            "rules": ".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_reset > div{overflow:hidden}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n.fbpluginrecommendationsbarleft{left:10px}\n.fbpluginrecommendationsbarright{right:10px}",
+            "rules": ".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_reset > div{overflow:hidden}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n.fbpluginrecommendationsbarleft{left:10px}\n.fbpluginrecommendationsbarright{right:10px}",
             "components": ["fb.css.base", "fb.css.dialog", "fb.css.iframewidget", "fb.css.connectbarwidget", "fb.css.edgecommentwidget", "fb.css.sendbuttonformwidget", "fb.css.plugin.recommendationsbar"]
         });
         __d("CanvasPrefetcherConfig", [], {
@@ -666,6 +666,7 @@ try {
             },
             "usePluginPipe": true,
             "features": {
+                "kill_fragment": true,
                 "xfbml_profile_pic_server": true,
                 "error_handling": {
                     "rate": 4
@@ -1138,7 +1139,7 @@ try {
                 h, i;
             if (window.addEventListener) {
                 h = function(k, l, m) {
-                    m.wrapper = g(m, 'entry', k + ':' + l);
+                    m.wrapper = g(m, 'entry', 'DOMEventListener.add ' + l);
                     k.addEventListener(l, m.wrapper, false);
                 };
                 i = function(k, l, m) {
@@ -1146,13 +1147,13 @@ try {
                 };
             } else if (window.attachEvent) {
                 h = function(k, l, m) {
-                    m.wrapper = g(m, 'entry', k + ':' + l);
+                    m.wrapper = g(m, 'entry', 'DOMEventListener.add ' + l);
                     k.attachEvent('on' + l, m.wrapper);
                 };
                 i = function(k, l, m) {
                     k.detachEvent('on' + l, m.wrapper);
                 };
-            }
+            } else i = h = function() {};
             var j = {
                 add: function(k, l, m) {
                     h(k, l, m);
@@ -1249,88 +1250,93 @@ try {
         });
         __d("UserAgent", [], function(a, b, c, d, e, f) {
             var g = false,
-                h, i, j, k, l, m, n, o, p, q, r, s, t, u;
+                h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
 
-            function v() {
+            function w() {
                 if (g) return;
                 g = true;
-                var x = navigator.userAgent,
-                    y = /(?:MSIE.(\d+\.\d+))|(?:(?:Firefox|GranParadiso|Iceweasel).(\d+\.\d+))|(?:Opera(?:.+Version.|.)(\d+\.\d+))|(?:AppleWebKit.(\d+(?:\.\d+)?))|(?:Trident\/\d+\.\d+.*rv:(\d+\.\d+))/.exec(x),
-                    z = /(Mac OS X)|(Windows)|(Linux)/.exec(x);
-                r = /\b(iPhone|iP[ao]d)/.exec(x);
-                s = /\b(iP[ao]d)/.exec(x);
-                p = /Android/i.exec(x);
-                t = /FBAN\/\w+;/i.exec(x);
-                u = /Mobile/i.exec(x);
-                q = !! (/Win64/.exec(x));
-                if (y) {
-                    h = y[1] ? parseFloat(y[1]) : (y[5] ? parseFloat(y[5]) : NaN);
-                    if (h && document.documentMode) h = document.documentMode;
-                    i = y[2] ? parseFloat(y[2]) : NaN;
-                    j = y[3] ? parseFloat(y[3]) : NaN;
-                    k = y[4] ? parseFloat(y[4]) : NaN;
+                var y = navigator.userAgent,
+                    z = /(?:MSIE.(\d+\.\d+))|(?:(?:Firefox|GranParadiso|Iceweasel).(\d+\.\d+))|(?:Opera(?:.+Version.|.)(\d+\.\d+))|(?:AppleWebKit.(\d+(?:\.\d+)?))|(?:Trident\/\d+\.\d+.*rv:(\d+\.\d+))/.exec(y),
+                    aa = /(Mac OS X)|(Windows)|(Linux)/.exec(y);
+                s = /\b(iPhone|iP[ao]d)/.exec(y);
+                t = /\b(iP[ao]d)/.exec(y);
+                q = /Android/i.exec(y);
+                u = /FBAN\/\w+;/i.exec(y);
+                v = /Mobile/i.exec(y);
+                r = !! (/Win64/.exec(y));
+                if (z) {
+                    h = z[1] ? parseFloat(z[1]) : (z[5] ? parseFloat(z[5]) : NaN);
+                    if (h && document && document.documentMode) h = document.documentMode;
+                    var ba = /(?:Trident\/(\d+.\d+))/.exec(y);
+                    m = ba ? parseFloat(ba[1]) + 4 : h;
+                    i = z[2] ? parseFloat(z[2]) : NaN;
+                    j = z[3] ? parseFloat(z[3]) : NaN;
+                    k = z[4] ? parseFloat(z[4]) : NaN;
                     if (k) {
-                        y = /(?:Chrome\/(\d+\.\d+))/.exec(x);
-                        l = y && y[1] ? parseFloat(y[1]) : NaN;
+                        z = /(?:Chrome\/(\d+\.\d+))/.exec(y);
+                        l = z && z[1] ? parseFloat(z[1]) : NaN;
                     } else l = NaN;
                 } else h = i = j = l = k = NaN;
-                if (z) {
-                    if (z[1]) {
-                        var aa = /(?:Mac OS X (\d+(?:[._]\d+)?))/.exec(x);
-                        m = aa ? parseFloat(aa[1].replace('_', '.')) : true;
-                    } else m = false;
-                    n = !! z[2];
-                    o = !! z[3];
-                } else m = n = o = false;
+                if (aa) {
+                    if (aa[1]) {
+                        var ca = /(?:Mac OS X (\d+(?:[._]\d+)?))/.exec(y);
+                        n = ca ? parseFloat(ca[1].replace('_', '.')) : true;
+                    } else n = false;
+                    o = !! aa[2];
+                    p = !! aa[3];
+                } else n = o = p = false;
             }
-            var w = {
+            var x = {
                 ie: function() {
-                    return v() || h;
+                    return w() || h;
+                },
+                ieCompatibilityMode: function() {
+                    return w() || (m > h);
                 },
                 ie64: function() {
-                    return w.ie() && q;
+                    return x.ie() && r;
                 },
                 firefox: function() {
-                    return v() || i;
+                    return w() || i;
                 },
                 opera: function() {
-                    return v() || j;
+                    return w() || j;
                 },
                 webkit: function() {
-                    return v() || k;
+                    return w() || k;
                 },
                 safari: function() {
-                    return w.webkit();
+                    return x.webkit();
                 },
                 chrome: function() {
-                    return v() || l;
+                    return w() || l;
                 },
                 windows: function() {
-                    return v() || n;
+                    return w() || o;
                 },
                 osx: function() {
-                    return v() || m;
+                    return w() || n;
                 },
                 linux: function() {
-                    return v() || o;
+                    return w() || p;
                 },
                 iphone: function() {
-                    return v() || r;
+                    return w() || s;
                 },
                 mobile: function() {
-                    return v() || (r || s || p || u);
+                    return w() || (s || t || q || v);
                 },
                 nativeApp: function() {
-                    return v() || t;
+                    return w() || u;
                 },
                 android: function() {
-                    return v() || p;
+                    return w() || q;
                 },
                 ipad: function() {
-                    return v() || s;
+                    return w() || t;
                 }
             };
-            e.exports = w;
+            e.exports = x;
         });
         __d("sdk.getContextType", ["UserAgent", "sdk.Runtime"], function(a, b, c, d, e, f) {
             var g = b('UserAgent'),
@@ -1997,10 +2003,10 @@ try {
                     if (typeof v.flashvars == 'object') v.flashvars = h.encode(v.flashvars);
                     var y = [];
                     for (var z in v) if (v.hasOwnProperty(z) && v[z]) y.push('<param name="' + encodeURI(z) + '" value="' + encodeURI(v[z]) + '">');
-                    var aa = n.createElement('div'),
-                        ba = '<object ' + (i.ie() ? 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ' : 'type="application/x-shockwave-flash"') + 'data="' + t + '" ' + 'id="' + x + '">' + y.join('') + '</object>';
+                    var aa = u.appendChild(n.createElement('span')),
+                        ba = '<object ' + (i.ie() ? 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ' : 'type="application/x-shockwave-flash"') + 'data="' + t + '" ' + (v.height ? 'height="' + v.height + '" ' : '') + (v.width ? 'width="' + v.width + '" ' : '') + 'id="' + x + '">' + y.join('') + '</object>';
                     aa.innerHTML = ba;
-                    var ca = u.appendChild(aa.firstChild);
+                    var ca = aa.firstChild;
                     r(x);
                     return ca;
                 },
@@ -2227,7 +2233,7 @@ try {
                                     var ca = function() {
                                         aa.postMessage('_FB_' + ba + y, z);
                                     };
-                                    if (n.ie() == 8) {
+                                    if (n.ie() == 8 || n.ieCompatibilityMode()) {
                                         setTimeout(ca, 0);
                                     } else ca();
                                 }
@@ -2254,225 +2260,228 @@ try {
             })());
             e.exports = t;
         });
-        __d("sdk.XD", ["sdk.Content", "sdk.createIframe", "sdk.Event", "guid", "Log", "QueryString", "Queue", "resolveURI", "resolveWindow", "sdk.RPC", "sdk.Runtime", "UrlMap", "URL", "wrapFunction", "XDM", "XDConfig"], function(a, b, c, d, e, f) {
+        __d("sdk.XD", ["sdk.Content", "sdk.createIframe", "sdk.feature", "sdk.Event", "guid", "Log", "QueryString", "Queue", "resolveURI", "resolveWindow", "sdk.RPC", "sdk.Runtime", "UrlMap", "URL", "wrapFunction", "XDM", "XDConfig"], function(a, b, c, d, e, f) {
             var g = b('sdk.Content'),
                 h = b('sdk.createIframe'),
-                i = b('sdk.Event'),
-                j = b('guid'),
-                k = b('Log'),
-                l = b('QueryString'),
-                m = b('Queue'),
-                n = b('resolveURI'),
-                o = b('resolveWindow'),
-                p = b('sdk.RPC'),
-                q = b('sdk.Runtime'),
-                r = b('UrlMap'),
-                s = b('URL'),
-                t = b('wrapFunction'),
-                u = c('XDConfig'),
-                v = b('XDM'),
-                w = new m(),
-                x = new m(),
-                y = new m(),
-                z, aa, ba = j(),
-                ca = j(),
-                da = location.protocol + '//' + location.host,
-                ea, fa = false,
-                ga = 'Facebook Cross Domain Communication Frame',
-                ha = {}, ia = new m();
-            p.setInQueue(ia);
+                i = b('sdk.feature'),
+                j = b('sdk.Event'),
+                k = b('guid'),
+                l = b('Log'),
+                m = b('QueryString'),
+                n = b('Queue'),
+                o = b('resolveURI'),
+                p = b('resolveWindow'),
+                q = b('sdk.RPC'),
+                r = b('sdk.Runtime'),
+                s = b('UrlMap'),
+                t = b('URL'),
+                u = b('wrapFunction'),
+                v = c('XDConfig'),
+                w = b('XDM'),
+                x = new n(),
+                y = new n(),
+                z = new n(),
+                aa, ba, ca = k(),
+                da = k(),
+                ea = location.protocol + '//' + location.host,
+                fa, ga = false,
+                ha = 'Facebook Cross Domain Communication Frame',
+                ia = {}, ja = new n();
+            q.setInQueue(ja);
 
-            function ja(pa) {
-                k.info('Remote XD can talk to facebook.com (%s)', pa);
-                q.setEnvironment(pa === 'canvas' ? q.ENVIRONMENTS.CANVAS : q.ENVIRONMENTS.PAGETAB);
+            function ka(qa) {
+                l.info('Remote XD can talk to facebook.com (%s)', qa);
+                r.setEnvironment(qa === 'canvas' ? r.ENVIRONMENTS.CANVAS : r.ENVIRONMENTS.PAGETAB);
             }
-            function ka(pa, qa) {
-                if (!qa) {
-                    k.error('No senderOrigin');
+            function la(qa, ra) {
+                if (!ra) {
+                    l.error('No senderOrigin');
                     throw new Error();
                 }
-                var ra = /^https?/.exec(qa)[0];
-                switch (pa.xd_action) {
+                var sa = /^https?/.exec(ra)[0];
+                switch (qa.xd_action) {
                 case 'proxy_ready':
-                    var sa, ta;
-                    if (ra == 'https') {
-                        sa = y;
-                        ta = aa;
-                    } else {
-                        sa = x;
+                    var ta, ua;
+                    if (sa == 'https') {
                         ta = z;
+                        ua = ba;
+                    } else {
+                        ta = y;
+                        ua = aa;
                     }
-                    if (pa.registered) {
-                        ja(pa.registered);
-                        w = sa.merge(w);
+                    if (qa.registered) {
+                        ka(qa.registered);
+                        x = ta.merge(x);
                     }
-                    k.info('Proxy ready, starting queue %s containing %s messages', ra + 'ProxyQueue', sa.getLength());
-                    sa.start(function(va) {
-                        ea.send(typeof va === 'string' ? va : l.encode(va), qa, ta.contentWindow, ca + '_' + ra);
+                    l.info('Proxy ready, starting queue %s containing %s messages', sa + 'ProxyQueue', ta.getLength());
+                    ta.start(function(wa) {
+                        fa.send(typeof wa === 'string' ? wa : m.encode(wa), ra, ua.contentWindow, da + '_' + sa);
                     });
                     break;
                 case 'plugin_ready':
-                    k.info('Plugin %s ready, protocol: %s', pa.name, ra);
-                    ha[pa.name] = {
-                        protocol: ra
+                    l.info('Plugin %s ready, protocol: %s', qa.name, sa);
+                    ia[qa.name] = {
+                        protocol: sa
                     };
-                    if (m.exists(pa.name)) {
-                        var ua = m.get(pa.name);
-                        k.debug('Enqueuing %s messages for %s in %s', ua.getLength(), pa.name, ra + 'ProxyQueue');
-                        (ra == 'https' ? y : x)
-                            .merge(ua);
+                    if (n.exists(qa.name)) {
+                        var va = n.get(qa.name);
+                        l.debug('Enqueuing %s messages for %s in %s', va.getLength(), qa.name, sa + 'ProxyQueue');
+                        (sa == 'https' ? z : y)
+                            .merge(va);
                     }
                     break;
                 }
-                if (pa.data) la(pa.data, qa);
+                if (qa.data) ma(qa.data, ra);
             }
-            function la(pa, qa) {
-                if (qa && qa !== 'native' && !s(qa)
+            function ma(qa, ra) {
+                if (ra && ra !== 'native' && !t(ra)
                     .isFacebookURL()) return;
-                if (typeof pa == 'string') {
-                    if (/^FB_RPC:/.test(pa)) {
-                        ia.enqueue(pa.substring(7));
+                if (typeof qa == 'string') {
+                    if (/^FB_RPC:/.test(qa)) {
+                        ja.enqueue(qa.substring(7));
                         return;
                     }
-                    if (pa.substring(0, 1) == '{') {
+                    if (qa.substring(0, 1) == '{') {
                         try {
-                            pa = ES5('JSON', 'parse', false, pa);
-                        } catch (ra) {
-                            k.warn('Failed to decode %s as JSON', pa);
+                            qa = ES5('JSON', 'parse', false, qa);
+                        } catch (sa) {
+                            l.warn('Failed to decode %s as JSON', qa);
                             return;
                         }
-                    } else pa = l.decode(pa);
+                    } else qa = m.decode(qa);
                 }
-                if (!qa) if (pa.xd_sig == ba) qa = pa.xd_origin;
-                if (pa.xd_action) {
-                    ka(pa, qa);
+                if (!ra) if (qa.xd_sig == ca) ra = qa.xd_origin;
+                if (qa.xd_action) {
+                    la(qa, ra);
                     return;
                 }
-                if (pa.access_token) q.setSecure(/^https/.test(da));
-                if (pa.cb) {
-                    var sa = oa._callbacks[pa.cb];
-                    if (!oa._forever[pa.cb]) delete oa._callbacks[pa.cb];
-                    if (sa) sa(pa);
+                if (qa.access_token) r.setSecure(/^https/.test(ea));
+                if (qa.cb) {
+                    var ta = pa._callbacks[qa.cb];
+                    if (!pa._forever[qa.cb]) delete pa._callbacks[qa.cb];
+                    if (ta) ta(qa);
                 }
             }
-            function ma(pa, qa) {
-                if (pa == 'facebook') {
-                    qa.relation = 'parent.parent';
-                    w.enqueue(qa);
+            function na(qa, ra) {
+                if (qa == 'facebook') {
+                    ra.relation = 'parent.parent';
+                    x.enqueue(ra);
                 } else {
-                    qa.relation = 'parent.frames["' + pa + '"]';
-                    var ra = ha[pa];
-                    if (ra) {
-                        k.debug('Enqueuing message for plugin %s in %s', pa, ra.protocol + 'ProxyQueue');
-                        (ra.protocol == 'https' ? y : x)
-                            .enqueue(qa);
+                    ra.relation = 'parent.frames["' + qa + '"]';
+                    var sa = ia[qa];
+                    if (sa) {
+                        l.debug('Enqueuing message for plugin %s in %s', qa, sa.protocol + 'ProxyQueue');
+                        (sa.protocol == 'https' ? z : y)
+                            .enqueue(ra);
                     } else {
-                        k.debug('Buffering message for plugin %s', pa);
-                        m.get(pa)
-                            .enqueue(qa);
+                        l.debug('Buffering message for plugin %s', qa);
+                        n.get(qa)
+                            .enqueue(ra);
                     }
                 }
             }
-            p.getOutQueue()
-                .start(function(pa) {
-                ma('facebook', 'FB_RPC:' + pa);
+            q.getOutQueue()
+                .start(function(qa) {
+                na('facebook', 'FB_RPC:' + qa);
             });
 
-            function na(pa, qa) {
-                if (fa) return;
-                var ra = pa ? /\/\/.*?(\/[^#]*)/.exec(pa)[1] : location.pathname + location.search;
-                ra += (~ES5(ra, 'indexOf', true, '?') ? '&' : '?') + 'fb_xd_fragment#xd_sig=' + ba + '&';
-                var sa = g.appendHidden(document.createElement('div')),
-                    ta = v.create({
-                        root: sa,
-                        channel: ca,
-                        channelPath: '/' + u.XdUrl + '#',
-                        flashUrl: u.Flash.path,
-                        whenReady: function(ua) {
-                            ea = ua;
-                            var va = {
-                                channel: ca,
+            function oa(qa, ra) {
+                if (ga) return;
+                var sa = qa ? /\/\/.*?(\/[^#]*)/.exec(qa)[1] : location.pathname + location.search;
+                sa += (~ES5(sa, 'indexOf', true, '?') ? '&' : '?') + 'fb_xd_fragment#xd_sig=' + ca + '&';
+                var ta = g.appendHidden(document.createElement('div')),
+                    ua = i('kill_fragment') ? ['fragment'] : null,
+                    va = w.create({
+                        blacklist: ua,
+                        root: ta,
+                        channel: da,
+                        channelPath: '/' + v.XdUrl + '#',
+                        flashUrl: v.Flash.path,
+                        whenReady: function(wa) {
+                            fa = wa;
+                            var xa = {
+                                channel: da,
                                 origin: location.protocol + '//' + location.host,
-                                channel_path: ra,
-                                transport: ta,
-                                xd_name: qa
-                            }, wa = '/' + u.XdUrl + '#' + l.encode(va),
-                                xa = u.useCdn ? r.resolve('cdn', false) : 'http://www.facebook.com',
-                                ya = u.useCdn ? r.resolve('cdn', true) : 'https://www.facebook.com';
-                            if (q.getSecure() !== true) z = h({
-                                url: xa + wa,
+                                channel_path: sa,
+                                transport: va,
+                                xd_name: ra
+                            }, ya = '/' + v.XdUrl + '#' + m.encode(xa),
+                                za = v.useCdn ? s.resolve('cdn', false) : 'http://www.facebook.com',
+                                ab = v.useCdn ? s.resolve('cdn', true) : 'https://www.facebook.com';
+                            if (r.getSecure() !== true) aa = h({
+                                url: za + ya,
                                 name: 'fb_xdm_frame_http',
                                 id: 'fb_xdm_frame_http',
-                                root: sa,
+                                root: ta,
                                 'aria-hidden': true,
-                                title: ga,
+                                title: ha,
                                 'tab-index': -1
                             });
-                            aa = h({
-                                url: ya + wa,
+                            ba = h({
+                                url: ab + ya,
                                 name: 'fb_xdm_frame_https',
                                 id: 'fb_xdm_frame_https',
-                                root: sa,
+                                root: ta,
                                 'aria-hidden': true,
-                                title: ga,
+                                title: ha,
                                 'tab-index': -1
                             });
                         },
-                        onMessage: la
+                        onMessage: ma
                     });
-                if (ta === 'fragment') window.FB_XD_onMessage = t(la, 'entry', 'XD:fragment');
-                fa = true;
+                if (va === 'fragment') window.FB_XD_onMessage = u(ma, 'entry', 'XD:fragment');
+                ga = true;
             }
-            var oa = {
-                rpc: p,
+            var pa = {
+                rpc: q,
                 _callbacks: {},
                 _forever: {},
-                _channel: ca,
-                _origin: da,
-                onMessage: la,
-                recv: la,
-                init: na,
-                sendToFacebook: ma,
-                inform: function(pa, qa, ra, sa) {
-                    ma('facebook', {
-                        method: pa,
-                        params: ES5('JSON', 'stringify', false, qa || {}),
-                        behavior: sa || 'p',
-                        relation: ra
+                _channel: da,
+                _origin: ea,
+                onMessage: ma,
+                recv: ma,
+                init: oa,
+                sendToFacebook: na,
+                inform: function(qa, ra, sa, ta) {
+                    na('facebook', {
+                        method: qa,
+                        params: ES5('JSON', 'stringify', false, ra || {}),
+                        behavior: ta || 'p',
+                        relation: sa
                     });
                 },
-                handler: function(pa, qa, ra, sa) {
-                    var ta = u.useCdn ? r.resolve('cdn', location.protocol == 'https:') : location.protocol + '//www.facebook.com';
-                    return ta + '/' + u.XdUrl + '#' + l.encode({
-                        cb: this.registerCallback(pa, ra, sa),
-                        origin: da + '/' + ca,
+                handler: function(qa, ra, sa, ta) {
+                    var ua = v.useCdn ? s.resolve('cdn', location.protocol == 'https:') : location.protocol + '//www.facebook.com';
+                    return ua + '/' + v.XdUrl + '#' + m.encode({
+                        cb: this.registerCallback(qa, sa, ta),
+                        origin: ea + '/' + da,
                         domain: location.hostname,
-                        relation: qa || 'opener'
+                        relation: ra || 'opener'
                     });
                 },
-                registerCallback: function(pa, qa, ra) {
-                    ra = ra || j();
-                    if (qa) oa._forever[ra] = true;
-                    oa._callbacks[ra] = pa;
-                    return ra;
+                registerCallback: function(qa, ra, sa) {
+                    sa = sa || k();
+                    if (ra) pa._forever[sa] = true;
+                    pa._callbacks[sa] = qa;
+                    return sa;
                 }
             };
             (function() {
-                var pa = location.href.match(/[?&]fb_xd_fragment#(.*)$/);
-                if (pa) {
+                var qa = location.href.match(/[?&]fb_xd_fragment#(.*)$/);
+                if (qa) {
                     document.documentElement.style.display = 'none';
-                    var qa = l.decode(pa[1]),
-                        ra = o(qa.xd_rel);
-                    k.debug('Passing fragment based message: %s', pa[1]);
-                    ra.FB_XD_onMessage(qa);
+                    var ra = m.decode(qa[1]),
+                        sa = p(ra.xd_rel);
+                    l.debug('Passing fragment based message: %s', qa[1]);
+                    sa.FB_XD_onMessage(ra);
                     document.open();
                     document.close();
                 }
             })();
-            i.subscribe('init:post', function(pa) {
-                na(pa.channelUrl ? n(pa.channelUrl) : null, pa.xdProxyName);
+            j.subscribe('init:post', function(qa) {
+                oa(qa.channelUrl ? o(qa.channelUrl) : null, qa.xdProxyName);
             });
-            e.exports = oa;
+            e.exports = pa;
         });
         __d("sdk.Auth", ["sdk.Cookie", "copyProperties", "sdk.createIframe", "DOMWrapper", "sdk.feature", "sdk.getContextType", "guid", "sdk.Impressions", "Log", "ObservableMixin", "QueryString", "sdk.Runtime", "sdk.SignedRequest", "UrlMap", "URL", "sdk.XD"], function(a, b, c, d, e, f) {
             var g = b('sdk.Cookie'),
@@ -2536,6 +2545,7 @@ try {
                             expiresIn: parseInt(ia.expires_in, 10),
                             signedRequest: ia.signed_request
                         };
+                        if (ia.granted_scopes) ga.grantedScopes = ia.granted_scopes;
                         if (r.getUseCookie()) {
                             var la = ga.expiresIn === 0 ? 0 : ES5('Date', 'now', false) + ga.expiresIn * 1000,
                                 ma = g.getDomain();
