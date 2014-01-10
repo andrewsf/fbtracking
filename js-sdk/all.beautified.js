@@ -1,4 +1,4 @@
-/*1386015860,179317541,JIT Construction: v1029287,en_US*/
+/*1389313893,179408691,JIT Construction: v1074582,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -65,21 +65,14 @@ try {
                 return g.exports;
             };
             __d = function(e, f, g, h) {
-                switch (typeof g) {
-                case 'function':
+                if (typeof g == 'function') {
                     b[e] = {
                         factory: g,
                         deps: d.concat(f),
                         exports: {}
                     };
                     if (h === 3) require.call(null, e);
-                    break;
-                case 'object':
-                    c[e] = g;
-                    break;
-                default:
-                    throw new TypeError('Wrong type for factory object');
-                }
+                } else c[e] = g;
             };
         })(this);
         var ES5 = function() {
@@ -646,7 +639,7 @@ try {
         });
         __d("CssConfig", [], {
             "rules": ".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_reset > div{overflow:hidden}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n.fbpluginrecommendationsbarleft{left:10px}\n.fbpluginrecommendationsbarright{right:10px}",
-            "components": ["fb.css.base", "fb.css.dialog", "fb.css.iframewidget", "fb.css.connectbarwidget", "fb.css.edgecommentwidget", "fb.css.sendbuttonformwidget", "fb.css.plugin.recommendationsbar"]
+            "components": ["css:fb.css.base", "css:fb.css.dialog", "css:fb.css.iframewidget", "css:fb.css.connectbarwidget", "css:fb.css.edgecommentwidget", "css:fb.css.sendbuttonformwidget", "css:fb.css.plugin.recommendationsbar"]
         });
         __d("CanvasPrefetcherConfig", [], {
             "blacklist": [144959615576466],
@@ -1962,82 +1955,106 @@ try {
             });
             e.exports = i;
         });
-        __d("Flash", ["DOMWrapper", "QueryString", "UserAgent", "copyProperties", "guid"], function(a, b, c, d, e, f) {
-            var g = b('DOMWrapper'),
-                h = b('QueryString'),
-                i = b('UserAgent'),
-                j = b('copyProperties'),
-                k = b('guid'),
-                l = {}, m, n = g.getWindow()
+        __d("htmlSpecialChars", [], function(a, b, c, d, e, f) {
+            var g = /&/g,
+                h = /</g,
+                i = />/g,
+                j = /"/g,
+                k = /'/g;
+
+            function l(m) {
+                if (typeof m == 'undefined' || m === null || !m.toString) return '';
+                if (m === false) {
+                    return '0';
+                } else if (m === true) return '1';
+                return m.toString()
+                    .replace(g, '&amp;')
+                    .replace(j, '&quot;')
+                    .replace(k, '&#039;')
+                    .replace(h, '&lt;')
+                    .replace(i, '&gt;');
+            }
+            e.exports = l;
+        });
+        __d("Flash", ["DOMEventListener", "DOMWrapper", "QueryString", "UserAgent", "copyProperties", "guid", "htmlSpecialChars"], function(a, b, c, d, e, f) {
+            var g = b('DOMEventListener'),
+                h = b('DOMWrapper'),
+                i = b('QueryString'),
+                j = b('UserAgent'),
+                k = b('copyProperties'),
+                l = b('guid'),
+                m = b('htmlSpecialChars'),
+                n = {}, o, p = h.getWindow()
                     .document;
 
-            function o(t) {
-                var u = n.getElementById(t);
-                if (u) u.parentNode.removeChild(u);
-                delete l[t];
+            function q(v) {
+                var w = p.getElementById(v);
+                if (w) w.parentNode.removeChild(w);
+                delete n[v];
             }
-            function p() {
-                for (var t in l) if (l.hasOwnProperty(t)) o(t);
+            function r() {
+                for (var v in n) if (n.hasOwnProperty(v)) q(v);
             }
-            function q(t) {
-                return t.replace(/\d+/g, function(u) {
-                    return '000'.substring(u.length) + u;
+            function s(v) {
+                return v.replace(/\d+/g, function(w) {
+                    return '000'.substring(w.length) + w;
                 });
             }
-            function r(t) {
-                if (!m) {
-                    if (i.ie() >= 9) window.attachEvent('onunload', p);
-                    m = true;
+            function t(v) {
+                if (!o) {
+                    if (j.ie() >= 9) g.add(window, 'unload', r);
+                    o = true;
                 }
-                l[t] = t;
+                n[v] = v;
             }
-            var s = {
-                embed: function(t, u, v, w) {
-                    var x = k();
-                    t = encodeURI(t);
-                    v = j({
+            var u = {
+                embed: function(v, w, x, y) {
+                    var z = l();
+                    v = m(v)
+                        .replace(/&amp;/g, '&');
+                    x = k({
                         allowscriptaccess: 'always',
-                        flashvars: w,
-                        movie: t
-                    }, v || {});
-                    if (typeof v.flashvars == 'object') v.flashvars = h.encode(v.flashvars);
-                    var y = [];
-                    for (var z in v) if (v.hasOwnProperty(z) && v[z]) y.push('<param name="' + encodeURI(z) + '" value="' + encodeURI(v[z]) + '">');
-                    var aa = u.appendChild(n.createElement('span')),
-                        ba = '<object ' + (i.ie() ? 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ' : 'type="application/x-shockwave-flash"') + 'data="' + t + '" ' + (v.height ? 'height="' + v.height + '" ' : '') + (v.width ? 'width="' + v.width + '" ' : '') + 'id="' + x + '">' + y.join('') + '</object>';
-                    aa.innerHTML = ba;
-                    var ca = aa.firstChild;
-                    r(x);
-                    return ca;
+                        flashvars: y,
+                        movie: v
+                    }, x || {});
+                    if (typeof x.flashvars == 'object') x.flashvars = i.encode(x.flashvars);
+                    var aa = [];
+                    for (var ba in x) if (x.hasOwnProperty(ba) && x[ba]) aa.push('<param name="' + m(ba) + '" value="' + m(x[ba]) + '">');
+                    var ca = w.appendChild(p.createElement('span')),
+                        da = '<object ' + (j.ie() ? 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ' : 'type="application/x-shockwave-flash"') + 'data="' + v + '" ' + (x.height ? 'height="' + x.height + '" ' : '') + (x.width ? 'width="' + x.width + '" ' : '') + 'id="' + z + '">' + aa.join('') + '</object>';
+                    ca.innerHTML = da;
+                    var ea = ca.firstChild;
+                    t(z);
+                    return ea;
                 },
-                remove: o,
+                remove: q,
                 getVersion: function() {
-                    var t = 'Shockwave Flash',
-                        u = 'application/x-shockwave-flash',
-                        v = 'ShockwaveFlash.ShockwaveFlash',
-                        w;
-                    if (navigator.plugins && typeof navigator.plugins[t] == 'object') {
-                        var x = navigator.plugins[t].description;
-                        if (x && navigator.mimeTypes && navigator.mimeTypes[u] && navigator.mimeTypes[u].enabledPlugin) w = x.match(/\d+/g);
+                    var v = 'Shockwave Flash',
+                        w = 'application/x-shockwave-flash',
+                        x = 'ShockwaveFlash.ShockwaveFlash',
+                        y;
+                    if (navigator.plugins && typeof navigator.plugins[v] == 'object') {
+                        var z = navigator.plugins[v].description;
+                        if (z && navigator.mimeTypes && navigator.mimeTypes[w] && navigator.mimeTypes[w].enabledPlugin) y = z.match(/\d+/g);
                     }
-                    if (!w) try {
-                        w = (new ActiveXObject(v))
+                    if (!y) try {
+                        y = (new ActiveXObject(x))
                             .GetVariable('$version')
                             .match(/(\d+),(\d+),(\d+),(\d+)/);
-                        w = Array.prototype.slice.call(w, 1);
-                    } catch (y) {}
-                    return w;
+                        y = Array.prototype.slice.call(y, 1);
+                    } catch (aa) {}
+                    return y;
                 },
-                checkMinVersion: function(t) {
-                    var u = s.getVersion();
-                    if (!u) return false;
-                    return q(u.join('.')) >= q(t);
+                checkMinVersion: function(v) {
+                    var w = u.getVersion();
+                    if (!w) return false;
+                    return s(w.join('.')) >= s(v);
                 },
                 isAvailable: function() {
-                    return !!s.getVersion();
+                    return !!u.getVersion();
                 }
             };
-            e.exports = s;
+            e.exports = u;
         });
         __d("dotAccess", [], function(a, b, c, d, e, f) {
             function g(h, i, j) {
@@ -2644,21 +2661,47 @@ try {
             });
             e.exports = y;
         });
-        __d("createArrayFrom", [], function(a, b, c, d, e, f) {
-            function g(i) {
-                return ( !! i && (typeof i == 'object' || typeof i == 'function') && ('length' in i) && !('setInterval' in i) && (typeof i.nodeType != 'number') && (ES5('Array', 'isArray', false, i) || ('callee' in i) || ('item' in i)));
-            }
-            function h(i) {
-                if (!g(i)) return [i];
-                if (i.item) {
-                    var j = i.length,
-                        k = new Array(j);
-                    while (j--) k[j] = i[j];
-                    return k;
+        __d("invariant", [], function(a, b, c, d, e, f) {
+            function g(h) {
+                if (!h) {
+                    var i = new Error('Invariant Violation');
+                    i.framesToPop = 1;
+                    throw i;
                 }
-                return Array.prototype.slice.call(i);
+            }
+            e.exports = g;
+        });
+        __d("toArray", ["invariant"], function(a, b, c, d, e, f) {
+            var g = b('invariant');
+
+            function h(i) {
+                var j = i.length;
+                g(!ES5('Array', 'isArray', false, i) && (typeof i === 'object' || typeof i === 'function'));
+                g(typeof j === 'number');
+                g(j === 0 || (j - 1) in i);
+                if (i.hasOwnProperty) try {
+                    return Array.prototype.slice.call(i);
+                } catch (k) {}
+                var l = Array(j);
+                for (var m = 0; m < j; m++) l[m] = i[m];
+                return l;
             }
             e.exports = h;
+        });
+        __d("createArrayFrom", ["toArray"], function(a, b, c, d, e, f) {
+            var g = b('toArray');
+
+            function h(j) {
+                return ( !! j && (typeof j == 'object' || typeof j == 'function') && ('length' in j) && !('setInterval' in j) && (typeof j.nodeType != 'number') && (ES5('Array', 'isArray', false, j) || ('callee' in j) || ('item' in j)));
+            }
+            function i(j) {
+                if (!h(j)) {
+                    return [j];
+                } else if (ES5('Array', 'isArray', false, j)) {
+                    return j.slice();
+                } else return g(j);
+            }
+            e.exports = i;
         });
         __d("sdk.DOM", ["Assert", "createArrayFrom", "sdk.domReady", "UserAgent"], function(a, b, c, d, e, f) {
             var g = b('Assert'),
@@ -3266,7 +3309,85 @@ try {
             };
             e.exports = k;
         });
-        __d("ApiClient", ["ArgumentError", "Assert", "copyProperties", "CORSRequest", "FlashRequest", "flattenObject", "JSONPRequest", "Log", "ObservableMixin", "sprintf", "UrlMap", "URL", "ApiClientConfig"], function(a, b, c, d, e, f) {
+        __d("keyMirror", ["invariant"], function(a, b, c, d, e, f) {
+            "use strict";
+            var g = b('invariant'),
+                h = function(i) {
+                    var j = {}, k;
+                    g(i instanceof Object && !ES5('Array', 'isArray', false, i));
+                    for (k in i) {
+                        if (!i.hasOwnProperty(k)) continue;
+                        j[k] = k;
+                    }
+                    return j;
+                };
+            e.exports = h;
+        });
+        __d("mergeHelpers", ["invariant", "keyMirror"], function(a, b, c, d, e, f) {
+            "use strict";
+            var g = b('invariant'),
+                h = b('keyMirror'),
+                i = 36,
+                j = function(l) {
+                    return typeof l !== 'object' || l === null;
+                }, k = {
+                    MAX_MERGE_DEPTH: i,
+                    isTerminal: j,
+                    normalizeMergeArg: function(l) {
+                        return l === undefined || l === null ? {} : l;
+                    },
+                    checkMergeArrayArgs: function(l, m) {
+                        g(ES5('Array', 'isArray', false, l) && ES5('Array', 'isArray', false, m));
+                    },
+                    checkMergeObjectArgs: function(l, m) {
+                        k.checkMergeObjectArg(l);
+                        k.checkMergeObjectArg(m);
+                    },
+                    checkMergeObjectArg: function(l) {
+                        g(!j(l) && !ES5('Array', 'isArray', false, l));
+                    },
+                    checkMergeLevel: function(l) {
+                        g(l < i);
+                    },
+                    checkArrayStrategy: function(l) {
+                        g(l === undefined || l in k.ArrayStrategies);
+                    },
+                    ArrayStrategies: h({
+                        Clobber: true,
+                        IndexByIndex: true
+                    })
+                };
+            e.exports = k;
+        });
+        __d("mergeInto", ["mergeHelpers"], function(a, b, c, d, e, f) {
+            "use strict";
+            var g = b('mergeHelpers'),
+                h = g.checkMergeObjectArg;
+
+            function i(j, k) {
+                h(j);
+                if (k != null) {
+                    h(k);
+                    for (var l in k) {
+                        if (!k.hasOwnProperty(l)) continue;
+                        j[l] = k[l];
+                    }
+                }
+            }
+            e.exports = i;
+        });
+        __d("merge", ["mergeInto"], function(a, b, c, d, e, f) {
+            "use strict";
+            var g = b('mergeInto'),
+                h = function(i, j) {
+                    var k = {};
+                    g(k, i);
+                    g(k, j);
+                    return k;
+                };
+            e.exports = h;
+        });
+        __d("ApiClient", ["ArgumentError", "Assert", "copyProperties", "CORSRequest", "FlashRequest", "flattenObject", "JSONPRequest", "Log", "merge", "ObservableMixin", "sprintf", "URL", "UrlMap", "ApiClientConfig"], function(a, b, c, d, e, f) {
             var g = b('ArgumentError'),
                 h = b('Assert'),
                 i = b('copyProperties'),
@@ -3275,17 +3396,18 @@ try {
                 l = b('flattenObject'),
                 m = b('JSONPRequest'),
                 n = b('Log'),
-                o = b('ObservableMixin'),
-                p = b('sprintf'),
-                q = b('UrlMap'),
+                o = b('merge'),
+                p = b('ObservableMixin'),
+                q = b('sprintf'),
                 r = b('URL'),
-                s = b('ApiClientConfig'),
-                t, u, v, w = {
+                s = b('UrlMap'),
+                t = b('ApiClientConfig'),
+                u, v, w, x = {
                     get: true,
                     post: true,
                     'delete': true,
                     put: true
-                }, x = {
+                }, y = {
                     fql_query: true,
                     fql_multiquery: true,
                     friends_get: true,
@@ -3294,86 +3416,86 @@ try {
                     users_getinfo: true
                 };
 
-            function y(da, ea, fa, ga) {
-                if (v) fa = i({}, v, fa);
-                fa.access_token = fa.access_token || t;
-                fa.pretty = fa.pretty || 0;
-                fa = l(fa);
-                var ha = {
+            function z(ea, fa, ga, ha) {
+                if (w) ga = i({}, w, ga);
+                ga.access_token = ga.access_token || u;
+                ga.pretty = ga.pretty || 0;
+                ga = l(ga);
+                var ia = {
                     jsonp: m,
                     cors: j,
                     flash: k
-                }, ia;
-                if (fa.transport) {
-                    ia = [fa.transport];
-                    delete fa.transport;
-                } else ia = ['jsonp', 'cors', 'flash'];
-                for (var ja = 0; ja < ia.length; ja++) {
-                    var ka = ha[ia[ja]],
-                        la = i({}, fa);
-                    if (ka.execute(da, ea, la, ga)) return;
+                }, ja;
+                if (ga.transport) {
+                    ja = [ga.transport];
+                    delete ga.transport;
+                } else ja = ['jsonp', 'cors', 'flash'];
+                for (var ka = 0; ka < ja.length; ka++) {
+                    var la = ia[ja[ka]],
+                        ma = i({}, ga);
+                    if (la.execute(ea, fa, ma, ha)) return;
                 }
-                ga({
+                ha({
                     error: {
                         type: 'no-transport',
                         message: 'Could not find a usable transport for request'
                     }
                 });
             }
-            function z(da, ea, fa, ga, ha) {
-                ca.inform('request.complete', ea, fa, ga, ha);
-                if (da) da(ha);
+            function aa(ea, fa, ga, ha, ia) {
+                da.inform('request.complete', fa, ga, ha, ia);
+                if (ea) ea(ia);
             }
-            function aa(da) {
-                h.isString(da, 'Invalid path');
-                var ea, fa = {};
+            function ba(ea) {
+                h.isString(ea, 'Invalid path');
+                var fa, ga = {};
                 try {
-                    ea = new r(da);
-                } catch (ga) {
-                    throw new g(ga.message, ga);
+                    fa = new r(ea);
+                } catch (ha) {
+                    throw new g(ha.message, ha);
                 }
-                ES5(Array.prototype.slice.call(arguments, 1), 'forEach', true, function(la) {
-                    fa[typeof la] = la;
+                ES5(Array.prototype.slice.call(arguments, 1), 'forEach', true, function(ma) {
+                    ga[typeof ma] = ma;
                 });
-                var ha = (fa.string || 'get')
+                var ia = (ga.string || 'get')
                     .toLowerCase(),
-                    ia = i(fa.object || {}, ea.getParsedSearch()),
-                    ja = fa['function'];
-                if (!ja) n.warn('No callback passed to the ApiClient');
-                var ka = ES5(z, 'bind', true, null, ja, ea.getPath(), ha, ia);
-                h.isTrue(ha in w, p('Invalid method passed to ApiClient: %s', ha));
-                ia.method = ha;
-                ea = q.resolve('graph') + ea.getPath();
-                y(ea, ha == 'get' ? 'get' : 'post', ia, ka);
+                    ja = o(ga.object || {}, fa.getParsedSearch()),
+                    ka = ga['function'];
+                if (!ka) n.warn('No callback passed to the ApiClient');
+                var la = ES5(aa, 'bind', true, null, ka, fa.getPath(), ia, ja);
+                h.isTrue(ia in x, q('Invalid method passed to ApiClient: %s', ia));
+                ja.method = ia;
+                fa = s.resolve('graph') + fa.getPath();
+                z(fa, ia == 'get' ? 'get' : 'post', ja, la);
             }
-            function ba(da, ea) {
-                h.isObject(da);
-                h.isString(da.method, 'method missing');
-                if (!ea) n.warn('No callback passed to the ApiClient');
-                var fa = da.method.toLowerCase()
+            function ca(ea, fa) {
+                h.isObject(ea);
+                h.isString(ea.method, 'method missing');
+                if (!fa) n.warn('No callback passed to the ApiClient');
+                var ga = ea.method.toLowerCase()
                     .replace('.', '_');
-                da.format = 'json-strings';
-                da.api_key = u;
-                var ga = fa in x ? 'api_read' : 'api',
-                    ha = q.resolve(ga) + '/restserver.php',
-                    ia = ES5(z, 'bind', true, null, ea, '/restserver.php', 'get', da);
-                y(ha, 'get', da, ia);
+                ea.format = 'json-strings';
+                ea.api_key = v;
+                var ha = ga in y ? 'api_read' : 'api',
+                    ia = s.resolve(ha) + '/restserver.php',
+                    ja = ES5(aa, 'bind', true, null, fa, '/restserver.php', 'get', ea);
+                z(ia, 'get', ea, ja);
             }
-            var ca = i(new o(), {
-                setAccessToken: function(da) {
-                    t = da;
+            var da = i(new p(), {
+                setAccessToken: function(ea) {
+                    u = ea;
                 },
-                setClientID: function(da) {
-                    u = da;
+                setClientID: function(ea) {
+                    v = ea;
                 },
-                setDefaultParams: function(da) {
-                    v = da;
+                setDefaultParams: function(ea) {
+                    w = ea;
                 },
-                rest: ba,
-                graph: aa
+                rest: ca,
+                graph: ba
             });
-            k.setSwfUrl(s.FlashRequest.swfUrl);
-            e.exports = ca;
+            k.setSwfUrl(t.FlashRequest.swfUrl);
+            e.exports = da;
         });
         __d("sdk.api", ["ApiClient", "sdk.Runtime"], function(a, b, c, d, e, f) {
             var g = b('ApiClient'),
@@ -4451,116 +4573,118 @@ try {
                 }
             });
         }, 3);
-        __d("sdk.Canvas.Plugin", ["sdk.api", "sdk.RPC", "Log", "sdk.Runtime", "createArrayFrom"], function(a, b, c, d, e, f) {
+        __d("sdk.Canvas.Plugin", ["sdk.api", "sdk.RPC", "Log", "UserAgent", "sdk.Runtime", "createArrayFrom"], function(a, b, c, d, e, f) {
             var g = b('sdk.api'),
                 h = b('sdk.RPC'),
                 i = b('Log'),
-                j = b('sdk.Runtime'),
-                k = b('createArrayFrom'),
-                l = 'CLSID:D27CDB6E-AE6D-11CF-96B8-444553540000',
-                m = 'CLSID:444785F1-DE89-4295-863A-D46C3A781394',
-                n = null;
+                j = b('UserAgent'),
+                k = b('sdk.Runtime'),
+                l = b('createArrayFrom'),
+                m = 'CLSID:D27CDB6E-AE6D-11CF-96B8-444553540000',
+                n = 'CLSID:444785F1-DE89-4295-863A-D46C3A781394',
+                o = null,
+                p = !(j.osx() >= 10.9 && (j.chrome() >= 31 || j.webkit() >= 537.71 || j.firefox() >= 25));
 
-            function o(y) {
-                y._hideunity_savedstyle = {};
-                y._hideunity_savedstyle.left = y.style.left;
-                y._hideunity_savedstyle.position = y.style.position;
-                y._hideunity_savedstyle.width = y.style.width;
-                y._hideunity_savedstyle.height = y.style.height;
-                y.style.left = '-10000px';
-                y.style.position = 'absolute';
-                y.style.width = '1px';
-                y.style.height = '1px';
+            function q(aa) {
+                aa._hideunity_savedstyle = {};
+                aa._hideunity_savedstyle.left = aa.style.left;
+                aa._hideunity_savedstyle.position = aa.style.position;
+                aa._hideunity_savedstyle.width = aa.style.width;
+                aa._hideunity_savedstyle.height = aa.style.height;
+                aa.style.left = '-10000px';
+                aa.style.position = 'absolute';
+                aa.style.width = '1px';
+                aa.style.height = '1px';
             }
-            function p(y) {
-                if (y._hideunity_savedstyle) {
-                    y.style.left = y._hideunity_savedstyle.left;
-                    y.style.position = y._hideunity_savedstyle.position;
-                    y.style.width = y._hideunity_savedstyle.width;
-                    y.style.height = y._hideunity_savedstyle.height;
+            function r(aa) {
+                if (aa._hideunity_savedstyle) {
+                    aa.style.left = aa._hideunity_savedstyle.left;
+                    aa.style.position = aa._hideunity_savedstyle.position;
+                    aa.style.width = aa._hideunity_savedstyle.width;
+                    aa.style.height = aa._hideunity_savedstyle.height;
                 }
             }
-            function q(y) {
-                y._old_visibility = y.style.visibility;
-                y.style.visibility = 'hidden';
+            function s(aa) {
+                aa._old_visibility = aa.style.visibility;
+                aa.style.visibility = 'hidden';
             }
-            function r(y) {
-                y.style.visibility = y._old_visibility || '';
-                delete y._old_visibility;
+            function t(aa) {
+                aa.style.visibility = aa._old_visibility || '';
+                delete aa._old_visibility;
             }
-            function s(y) {
-                var z = y.type.toLowerCase() === 'application/x-shockwave-flash' || (y.classid && y.classid.toUpperCase() == l);
-                if (!z) return false;
-                var aa = /opaque|transparent/i;
-                if (aa.test(y.getAttribute('wmode'))) return false;
-                for (var ba = 0; ba < y.childNodes.length; ba++) {
-                    var ca = y.childNodes[ba];
-                    if (/param/i.test(ca.nodeName) && /wmode/i.test(ca.name) && aa.test(ca.value)) return false;
+            function u(aa) {
+                var ba = aa.type.toLowerCase() === 'application/x-shockwave-flash' || (aa.classid && aa.classid.toUpperCase() == m);
+                if (!ba) return false;
+                var ca = /opaque|transparent/i;
+                if (ca.test(aa.getAttribute('wmode'))) return false;
+                for (var da = 0; da < aa.childNodes.length; da++) {
+                    var ea = aa.childNodes[da];
+                    if (/param/i.test(ea.nodeName) && /wmode/i.test(ea.name) && ca.test(ea.value)) return false;
                 }
                 return true;
             }
-            function t(y) {
-                return y.type.toLowerCase() === 'application/vnd.unity' || (y.classid && y.classid.toUpperCase() == m);
+            function v(aa) {
+                return aa.type.toLowerCase() === 'application/vnd.unity' || (aa.classid && aa.classid.toUpperCase() == n);
             }
-            function u(y) {
-                var z = k(window.document.getElementsByTagName('object'));
-                z = z.concat(k(window.document.getElementsByTagName('embed')));
-                ES5(z, 'forEach', true, function(aa) {
-                    var ba = s(aa),
-                        ca = t(aa);
-                    if (!ba && !ca) return;
-                    var da = function() {
-                        if (y.state === 'opened') {
-                            if (ba) {
-                                q(aa);
-                            } else o(aa);
-                        } else if (ba) {
-                            r(aa);
-                        } else p(aa);
+            function w(aa) {
+                var ba = l(window.document.getElementsByTagName('object'));
+                ba = ba.concat(l(window.document.getElementsByTagName('embed')));
+                ES5(ba, 'forEach', true, function(ca) {
+                    var da = u(ca),
+                        ea = p && v(ca);
+                    if (!da && !ea) return;
+                    var fa = function() {
+                        if (aa.state === 'opened') {
+                            if (da) {
+                                s(ca);
+                            } else q(ca);
+                        } else if (da) {
+                            t(ca);
+                        } else r(ca);
                     };
-                    if (n) {
+                    if (o) {
                         i.info('Calling developer specified callback');
-                        var ea = {
-                            state: y.state,
-                            elem: aa
+                        var ga = {
+                            state: aa.state,
+                            elem: ca
                         };
-                        n(ea);
-                        setTimeout(da, 200);
-                    } else da();
-                    if (Math.random() <= 1 / 1000) g(j.getClientID() + '/occludespopups', 'post', {});
+                        o(ga);
+                        setTimeout(fa, 200);
+                    } else fa();
+                    if (Math.random() <= 1 / 1000) g(k.getClientID() + '/occludespopups', 'post', {});
                 });
             }
             h.local.hidePluginObjects = function() {
                 i.info('hidePluginObjects called');
-                u({
+                w({
                     state: 'opened'
                 });
             };
             h.local.showPluginObjects = function() {
                 i.info('showPluginObjects called');
-                u({
+                w({
                     state: 'closed'
                 });
             };
             h.local.showFlashObjects = h.local.showPluginObjects;
             h.local.hideFlashObjects = h.local.hidePluginObjects;
 
-            function v() {
+            function x() {
+                s();
                 q();
-                o();
             }
-            function w() {
+            function y() {
+                t();
                 r();
-                p();
             }
-            var x = {
-                _setHidePluginCallback: function(y) {
-                    n = y;
+            var z = {
+                _setHidePluginCallback: function(aa) {
+                    o = aa;
                 },
-                hidePluginElement: v,
-                showPluginElement: w
+                hidePluginElement: x,
+                showPluginElement: y
             };
-            e.exports = x;
+            e.exports = z;
         });
         __d("sdk.Canvas.IframeHandling", ["DOMWrapper", "sdk.RPC"], function(a, b, c, d, e, f) {
             var g = b('DOMWrapper'),
@@ -6984,7 +7108,8 @@ try {
                             show_login_face: 'bool',
                             registration_url: 'url_maybe',
                             auto_logout_link: 'bool',
-                            one_click: 'bool'
+                            one_click: 'bool',
+                            show_banner: 'bool'
                         };
                     }
                 });
