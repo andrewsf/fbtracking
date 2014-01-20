@@ -1,4 +1,4 @@
-/*1389313893,179408691,JIT Construction: v1074582,en_US*/
+/*1390183507,172042791,JIT Construction: v1086465,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -3618,7 +3618,6 @@ try {
                         return this;
                     },
                     trackEvents: function(r) {
-                        if (!r) return this;
                         if (typeof r === 'string') r = ES5('JSON', 'parse', false, r);
                         for (var s in r) if (r.hasOwnProperty(s)) this.trackEvent(s, r[s]);
                         return this;
@@ -4333,10 +4332,14 @@ try {
                         ea.params.redirect_uri = location.protocol + '//' + location.host + location.pathname;
                         delete ea.params.access_token;
                         v.remote.showDialog(ea.params, function(fa) {
-                            var ga = j.get(ea.id);
-                            if (fa.result) ga.trackEvents(fa.result.e2e);
-                            ga.trackEvent('close');
-                            ea.cb(fa.result);
+                            var ga = fa.result;
+                            if (ga && ga.e2e) {
+                                var ha = j.get(ea.id);
+                                ha.trackEvents(ga.e2e);
+                                ha.trackEvent('close');
+                                delete ga.e2e;
+                            }
+                            ea.cb(ga);
                         });
                     },
                     getDefaultSize: function() {
@@ -4442,9 +4445,12 @@ try {
                         } else if (k.containsCss(ga, 'FB_UI_Dialog')) j.remove(ga);
                         delete da._loadedNodes[ea.frame];
                         delete da._defaultCb[ea.frame];
-                        var ia = j.get(ea.frame);
-                        ia.trackEvents(ea.e2e);
-                        ia.trackEvent('close');
+                        if (ea.e2e) {
+                            var ia = j.get(ea.frame);
+                            ia.trackEvents(ea.e2e);
+                            ia.trackEvent('close');
+                            delete ea.e2e;
+                        }
                         fa(ea);
                     },
                     _xdResult: function(ea, fa, ga, ha) {
@@ -4613,18 +4619,20 @@ try {
                 delete aa._old_visibility;
             }
             function u(aa) {
-                var ba = aa.type.toLowerCase() === 'application/x-shockwave-flash' || (aa.classid && aa.classid.toUpperCase() == m);
-                if (!ba) return false;
-                var ca = /opaque|transparent/i;
-                if (ca.test(aa.getAttribute('wmode'))) return false;
-                for (var da = 0; da < aa.childNodes.length; da++) {
-                    var ea = aa.childNodes[da];
-                    if (/param/i.test(ea.nodeName) && /wmode/i.test(ea.name) && ca.test(ea.value)) return false;
+                var ba = aa.type ? aa.type.toLowerCase() : null,
+                    ca = ba === 'application/x-shockwave-flash' || (aa.classid && aa.classid.toUpperCase() == m);
+                if (!ca) return false;
+                var da = /opaque|transparent/i;
+                if (da.test(aa.getAttribute('wmode'))) return false;
+                for (var ea = 0; ea < aa.childNodes.length; ea++) {
+                    var fa = aa.childNodes[ea];
+                    if (/param/i.test(fa.nodeName) && /wmode/i.test(fa.name) && da.test(fa.value)) return false;
                 }
                 return true;
             }
             function v(aa) {
-                return aa.type.toLowerCase() === 'application/vnd.unity' || (aa.classid && aa.classid.toUpperCase() == n);
+                var ba = aa.type ? aa.type.toLowerCase() : null;
+                return ba === 'application/vnd.unity' || (aa.classid && aa.classid.toUpperCase() == n);
             }
             function w(aa) {
                 var ba = l(window.document.getElementsByTagName('object'));
@@ -6513,47 +6521,48 @@ try {
             }
             e.exports = i;
         });
-        __d("sdk.Helper", ["sdk.ErrorHandling", "sdk.Event", "safeEval", "UrlMap"], function(a, b, c, d, e, f) {
+        __d("sdk.Helper", ["sdk.ErrorHandling", "sdk.Event", "UrlMap", "safeEval", "sprintf"], function(a, b, c, d, e, f) {
             var g = b('sdk.ErrorHandling'),
                 h = b('sdk.Event'),
-                i = b('safeEval'),
-                j = b('UrlMap'),
-                k = {
-                    isUser: function(l) {
-                        return l < 2.2e+09 || (l >= 1e+14 && l <= 100099999989999) || (l >= 8.9e+13 && l <= 89999999999999);
+                i = b('UrlMap'),
+                j = b('safeEval'),
+                k = b('sprintf'),
+                l = {
+                    isUser: function(m) {
+                        return m < 2.2e+09 || (m >= 1e+14 && m <= 100099999989999) || (m >= 8.9e+13 && m <= 89999999999999);
                     },
-                    upperCaseFirstChar: function(l) {
-                        if (l.length > 0) {
-                            return l.substr(0, 1)
-                                .toUpperCase() + l.substr(1);
-                        } else return l;
+                    upperCaseFirstChar: function(m) {
+                        if (m.length > 0) {
+                            return m.substr(0, 1)
+                                .toUpperCase() + m.substr(1);
+                        } else return m;
                     },
-                    getProfileLink: function(l, m, n) {
-                        n = n || (l ? j.resolve('www') + '/profile.php?id=' + l.uid : null);
-                        if (n) m = '<a class="fb_link" href="' + n + '">' + m + '</a>';
-                        return m;
+                    getProfileLink: function(m, n, o) {
+                        if (!o && m) o = k('%s/profile.php?id=%s', i.resolve('www'), m.uid || m.id);
+                        if (o) n = k('<a class="fb_link" href="%s">%s</a>', o, n);
+                        return n;
                     },
-                    invokeHandler: function(l, m, n) {
-                        if (l) if (typeof l === 'string') {
-                            g.unguard(i)(l, n);
-                        } else if (l.apply) g.unguard(l)
-                            .apply(m, n || []);
+                    invokeHandler: function(m, n, o) {
+                        if (m) if (typeof m === 'string') {
+                            g.unguard(j)(m, o);
+                        } else if (m.apply) g.unguard(m)
+                            .apply(n, o || []);
                     },
-                    fireEvent: function(l, m) {
-                        var n = m._attr.href;
-                        m.fire(l, n);
-                        h.fire(l, n, m);
+                    fireEvent: function(m, n) {
+                        var o = n._attr.href;
+                        n.fire(m, o);
+                        h.fire(m, o, n);
                     },
-                    executeFunctionByName: function(l) {
-                        var m = Array.prototype.slice.call(arguments, 1),
-                            n = l.split("."),
-                            o = n.pop(),
-                            p = window;
-                        for (var q = 0; q < n.length; q++) p = p[n[q]];
-                        return p[o].apply(this, m);
+                    executeFunctionByName: function(m) {
+                        var n = Array.prototype.slice.call(arguments, 1),
+                            o = m.split("."),
+                            p = o.pop(),
+                            q = window;
+                        for (var r = 0; r < o.length; r++) q = q[o[r]];
+                        return q[p].apply(this, n);
                     }
                 };
-            e.exports = k;
+            e.exports = l;
         });
         __d("sdk.XFBML.ConnectBar", ["sdk.Anim", "sdk.api", "sdk.Auth", "createArrayFrom", "sdk.Data", "sdk.DOM", "sdk.XFBML.Element", "escapeHTML", "sdk.Event", "format", "sdk.Helper", "sdk.Insights", "sdk.Intl", "sdk.Runtime", "UrlMap", "UserAgent", "ConnectBarConfig"], function(a, b, c, d, e, f) {
             var g = b('sdk.Anim'),
