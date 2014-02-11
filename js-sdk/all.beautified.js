@@ -1,4 +1,4 @@
-/*1390183507,172042791,JIT Construction: v1086465,en_US*/
+/*1392156772,180826203,JIT Construction: v1116978,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -610,47 +610,6 @@ try {
             "locale": "en_US",
             "rtl": false
         });
-        __d("XDConfig", [], {
-            "XdUrl": "connect\/xd_arbiter.php?version=28",
-            "Flash": {
-                "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yS\/r\/NoZWYE2GRkt.swf"
-            },
-            "useCdn": true
-        });
-        __d("UrlMapConfig", [], {
-            "www": "www.facebook.com",
-            "m": "m.facebook.com",
-            "connect": "connect.facebook.net",
-            "business": "business.facebook.com",
-            "api_https": "api.facebook.com",
-            "api_read_https": "api-read.facebook.com",
-            "graph_https": "graph.facebook.com",
-            "fbcdn_http": "static.ak.fbcdn.net",
-            "fbcdn_https": "fbstatic-a.akamaihd.net",
-            "cdn_http": "static.ak.facebook.com",
-            "cdn_https": "s-static.ak.facebook.com"
-        });
-        __d("PluginPipeConfig", [], {
-            "threshold": 0,
-            "enabledApps": {
-                "209753825810663": 1,
-                "187288694643718": 1
-            }
-        });
-        __d("CssConfig", [], {
-            "rules": ".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_reset > div{overflow:hidden}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fb_edge_widget_with_comment{position:relative;*z-index:1000}\n.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50\u0025 50\u0025;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}\n.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender\n.FB_Loader{margin-top:0}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n.fbpluginrecommendationsbarleft{left:10px}\n.fbpluginrecommendationsbarright{right:10px}",
-            "components": ["css:fb.css.base", "css:fb.css.dialog", "css:fb.css.iframewidget", "css:fb.css.connectbarwidget", "css:fb.css.edgecommentwidget", "css:fb.css.sendbuttonformwidget", "css:fb.css.plugin.recommendationsbar"]
-        });
-        __d("CanvasPrefetcherConfig", [], {
-            "blacklist": [144959615576466],
-            "sampleRate": 500
-        });
-        __d("ConnectBarConfig", [], {
-            "imgs": {
-                "buttonUrl": "rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png",
-                "missingProfileUrl": "rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"
-            }
-        });
         __d("SDKConfig", [], {
             "bustCache": true,
             "tagCountLogRate": 0.01,
@@ -705,6 +664,47 @@ try {
                     "manage_groups": false,
                     "read_deals": false
                 }
+            }
+        });
+        __d("UrlMapConfig", [], {
+            "www": "www.facebook.com",
+            "m": "m.facebook.com",
+            "connect": "connect.facebook.net",
+            "business": "business.facebook.com",
+            "api_https": "api.facebook.com",
+            "api_read_https": "api-read.facebook.com",
+            "graph_https": "graph.facebook.com",
+            "fbcdn_http": "static.ak.fbcdn.net",
+            "fbcdn_https": "fbstatic-a.akamaihd.net",
+            "cdn_http": "static.ak.facebook.com",
+            "cdn_https": "s-static.ak.facebook.com"
+        });
+        __d("XDConfig", [], {
+            "XdUrl": "connect\/xd_arbiter.php?version=40",
+            "Flash": {
+                "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yS\/r\/NoZWYE2GRkt.swf"
+            },
+            "useCdn": true
+        });
+        __d("CssConfig", [], {
+            "rules": ".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_reset > div{overflow:hidden}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n.fbpluginrecommendationsbarleft{left:10px}\n.fbpluginrecommendationsbarright{right:10px}",
+            "components": ["css:fb.css.base", "css:fb.css.dialog", "css:fb.css.iframewidget", "css:fb.css.connectbarwidget", "css:fb.css.plugin.recommendationsbar"]
+        });
+        __d("CanvasPrefetcherConfig", [], {
+            "blacklist": [144959615576466],
+            "sampleRate": 500
+        });
+        __d("PluginPipeConfig", [], {
+            "threshold": 0,
+            "enabledApps": {
+                "209753825810663": 1,
+                "187288694643718": 1
+            }
+        });
+        __d("ConnectBarConfig", [], {
+            "imgs": {
+                "buttonUrl": "rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png",
+                "missingProfileUrl": "rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"
             }
         });
         __d("ApiClientConfig", [], {
@@ -1788,38 +1788,6 @@ try {
             };
             e.exports = i;
         });
-        __d("resolveURI", [], function(a, b, c, d, e, f) {
-            function g(h) {
-                if (!h) return window.location.href;
-                h = h.replace(/&/g, '&amp;')
-                    .replace(/"/g, '&quot;');
-                var i = document.createElement('div');
-                i.innerHTML = '<a href="' + h + '"></a>';
-                return i.firstChild.href;
-            }
-            e.exports = g;
-        });
-        __d("resolveWindow", [], function(a, b, c, d, e, f) {
-            function g(h) {
-                var i = window,
-                    j = h.split('.');
-                try {
-                    for (var l = 0; l < j.length; l++) {
-                        var m = j[l],
-                            n = /^frames\[['"]?([a-zA-Z0-9\-_]+)['"]?\]$/.exec(m);
-                        if (n) {
-                            i = i.frames[n[1]];
-                        } else if (m === 'opener' || m === 'parent' || m === 'top') {
-                            i = i[m];
-                        } else return null;
-                    }
-                } catch (k) {
-                    return null;
-                }
-                return i;
-            }
-            e.exports = g;
-        });
         __d("JSONRPC", ["copyProperties", "Log"], function(a, b, c, d, e, f) {
             var g = b('copyProperties'),
                 h = b('Log');
@@ -2141,48 +2109,6 @@ try {
                     }
                 }
             };
-            t.register('fragment', (function() {
-                var u = false,
-                    v, w = location.protocol + '//' + location.host;
-
-                function x(y) {
-                    var z = document.createElement('iframe');
-                    z.src = 'javascript:false';
-                    var aa = g.add(z, 'load', function() {
-                        aa.remove();
-                        setTimeout(function() {
-                            z.parentNode.removeChild(z);
-                        }, 5000);
-                    });
-                    v.appendChild(z);
-                    z.src = y;
-                }
-                return {
-                    isAvailable: function() {
-                        return true;
-                    },
-                    init: function(y) {
-                        m.debug('init fragment');
-                        var z = {
-                            send: function(aa, ba, ca, da) {
-                                m.debug('sending to: %s (%s)', ba + y.channelPath, da);
-                                x(ba + y.channelPath + aa + '&xd_rel=parent.parent&relation=parent.parent&xd_origin=' + encodeURIComponent(w));
-                            }
-                        };
-                        if (u) {
-                            setTimeout(function() {
-                                y.whenReady(z);
-                            }, 0);
-                            return;
-                        }
-                        v = y.root;
-                        u = true;
-                        setTimeout(function() {
-                            y.whenReady(z);
-                        }, 0);
-                    }
-                };
-            })());
             t.register('flash', (function() {
                 var u = false,
                     v, w = false,
@@ -2277,228 +2203,206 @@ try {
             })());
             e.exports = t;
         });
-        __d("sdk.XD", ["sdk.Content", "sdk.createIframe", "sdk.feature", "sdk.Event", "guid", "Log", "QueryString", "Queue", "resolveURI", "resolveWindow", "sdk.RPC", "sdk.Runtime", "UrlMap", "URL", "wrapFunction", "XDM", "XDConfig"], function(a, b, c, d, e, f) {
+        __d("sdk.XD", ["sdk.Content", "sdk.createIframe", "sdk.Event", "guid", "Log", "QueryString", "Queue", "sdk.RPC", "sdk.Runtime", "UrlMap", "URL", "XDM", "XDConfig"], function(a, b, c, d, e, f) {
             var g = b('sdk.Content'),
                 h = b('sdk.createIframe'),
-                i = b('sdk.feature'),
-                j = b('sdk.Event'),
-                k = b('guid'),
-                l = b('Log'),
-                m = b('QueryString'),
-                n = b('Queue'),
-                o = b('resolveURI'),
-                p = b('resolveWindow'),
-                q = b('sdk.RPC'),
-                r = b('sdk.Runtime'),
-                s = b('UrlMap'),
-                t = b('URL'),
-                u = b('wrapFunction'),
-                v = c('XDConfig'),
-                w = b('XDM'),
-                x = new n(),
-                y = new n(),
-                z = new n(),
-                aa, ba, ca = k(),
-                da = k(),
-                ea = location.protocol + '//' + location.host,
-                fa, ga = false,
-                ha = 'Facebook Cross Domain Communication Frame',
-                ia = {}, ja = new n();
-            q.setInQueue(ja);
+                i = b('sdk.Event'),
+                j = b('guid'),
+                k = b('Log'),
+                l = b('QueryString'),
+                m = b('Queue'),
+                n = b('sdk.RPC'),
+                o = b('sdk.Runtime'),
+                p = b('UrlMap'),
+                q = b('URL'),
+                r = c('XDConfig'),
+                s = b('XDM'),
+                t = new m(),
+                u = new m(),
+                v = new m(),
+                w, x, y = j(),
+                z = j(),
+                aa = location.protocol + '//' + location.host,
+                ba, ca = false,
+                da = 'Facebook Cross Domain Communication Frame',
+                ea = {}, fa = new m();
+            n.setInQueue(fa);
 
-            function ka(qa) {
-                l.info('Remote XD can talk to facebook.com (%s)', qa);
-                r.setEnvironment(qa === 'canvas' ? r.ENVIRONMENTS.CANVAS : r.ENVIRONMENTS.PAGETAB);
+            function ga(ma) {
+                k.info('Remote XD can talk to facebook.com (%s)', ma);
+                o.setEnvironment(ma === 'canvas' ? o.ENVIRONMENTS.CANVAS : o.ENVIRONMENTS.PAGETAB);
             }
-            function la(qa, ra) {
-                if (!ra) {
-                    l.error('No senderOrigin');
+            function ha(ma, na) {
+                if (!na) {
+                    k.error('No senderOrigin');
                     throw new Error();
                 }
-                var sa = /^https?/.exec(ra)[0];
-                switch (qa.xd_action) {
+                var oa = /^https?/.exec(na)[0];
+                switch (ma.xd_action) {
                 case 'proxy_ready':
-                    var ta, ua;
-                    if (sa == 'https') {
-                        ta = z;
-                        ua = ba;
+                    var pa, qa;
+                    if (oa == 'https') {
+                        pa = v;
+                        qa = x;
                     } else {
-                        ta = y;
-                        ua = aa;
+                        pa = u;
+                        qa = w;
                     }
-                    if (qa.registered) {
-                        ka(qa.registered);
-                        x = ta.merge(x);
+                    if (ma.registered) {
+                        ga(ma.registered);
+                        t = pa.merge(t);
                     }
-                    l.info('Proxy ready, starting queue %s containing %s messages', sa + 'ProxyQueue', ta.getLength());
-                    ta.start(function(wa) {
-                        fa.send(typeof wa === 'string' ? wa : m.encode(wa), ra, ua.contentWindow, da + '_' + sa);
+                    k.info('Proxy ready, starting queue %s containing %s messages', oa + 'ProxyQueue', pa.getLength());
+                    pa.start(function(sa) {
+                        ba.send(typeof sa === 'string' ? sa : l.encode(sa), na, qa.contentWindow, z + '_' + oa);
                     });
                     break;
                 case 'plugin_ready':
-                    l.info('Plugin %s ready, protocol: %s', qa.name, sa);
-                    ia[qa.name] = {
-                        protocol: sa
+                    k.info('Plugin %s ready, protocol: %s', ma.name, oa);
+                    ea[ma.name] = {
+                        protocol: oa
                     };
-                    if (n.exists(qa.name)) {
-                        var va = n.get(qa.name);
-                        l.debug('Enqueuing %s messages for %s in %s', va.getLength(), qa.name, sa + 'ProxyQueue');
-                        (sa == 'https' ? z : y)
-                            .merge(va);
+                    if (m.exists(ma.name)) {
+                        var ra = m.get(ma.name);
+                        k.debug('Enqueuing %s messages for %s in %s', ra.getLength(), ma.name, oa + 'ProxyQueue');
+                        (oa == 'https' ? v : u)
+                            .merge(ra);
                     }
                     break;
                 }
-                if (qa.data) ma(qa.data, ra);
+                if (ma.data) ia(ma.data, na);
             }
-            function ma(qa, ra) {
-                if (ra && ra !== 'native' && !t(ra)
+            function ia(ma, na) {
+                if (na && na !== 'native' && !q(na)
                     .isFacebookURL()) return;
-                if (typeof qa == 'string') {
-                    if (/^FB_RPC:/.test(qa)) {
-                        ja.enqueue(qa.substring(7));
+                if (typeof ma == 'string') {
+                    if (/^FB_RPC:/.test(ma)) {
+                        fa.enqueue(ma.substring(7));
                         return;
                     }
-                    if (qa.substring(0, 1) == '{') {
+                    if (ma.substring(0, 1) == '{') {
                         try {
-                            qa = ES5('JSON', 'parse', false, qa);
-                        } catch (sa) {
-                            l.warn('Failed to decode %s as JSON', qa);
+                            ma = ES5('JSON', 'parse', false, ma);
+                        } catch (oa) {
+                            k.warn('Failed to decode %s as JSON', ma);
                             return;
                         }
-                    } else qa = m.decode(qa);
+                    } else ma = l.decode(ma);
                 }
-                if (!ra) if (qa.xd_sig == ca) ra = qa.xd_origin;
-                if (qa.xd_action) {
-                    la(qa, ra);
+                if (!na) if (ma.xd_sig == y) na = ma.xd_origin;
+                if (ma.xd_action) {
+                    ha(ma, na);
                     return;
                 }
-                if (qa.access_token) r.setSecure(/^https/.test(ea));
-                if (qa.cb) {
-                    var ta = pa._callbacks[qa.cb];
-                    if (!pa._forever[qa.cb]) delete pa._callbacks[qa.cb];
-                    if (ta) ta(qa);
+                if (ma.access_token) o.setSecure(/^https/.test(aa));
+                if (ma.cb) {
+                    var pa = la._callbacks[ma.cb];
+                    if (!la._forever[ma.cb]) delete la._callbacks[ma.cb];
+                    if (pa) pa(ma);
                 }
             }
-            function na(qa, ra) {
-                if (qa == 'facebook') {
-                    ra.relation = 'parent.parent';
-                    x.enqueue(ra);
+            function ja(ma, na) {
+                if (ma == 'facebook') {
+                    na.relation = 'parent.parent';
+                    t.enqueue(na);
                 } else {
-                    ra.relation = 'parent.frames["' + qa + '"]';
-                    var sa = ia[qa];
-                    if (sa) {
-                        l.debug('Enqueuing message for plugin %s in %s', qa, sa.protocol + 'ProxyQueue');
-                        (sa.protocol == 'https' ? z : y)
-                            .enqueue(ra);
+                    na.relation = 'parent.frames["' + ma + '"]';
+                    var oa = ea[ma];
+                    if (oa) {
+                        k.debug('Enqueuing message for plugin %s in %s', ma, oa.protocol + 'ProxyQueue');
+                        (oa.protocol == 'https' ? v : u)
+                            .enqueue(na);
                     } else {
-                        l.debug('Buffering message for plugin %s', qa);
-                        n.get(qa)
-                            .enqueue(ra);
+                        k.debug('Buffering message for plugin %s', ma);
+                        m.get(ma)
+                            .enqueue(na);
                     }
                 }
             }
-            q.getOutQueue()
-                .start(function(qa) {
-                na('facebook', 'FB_RPC:' + qa);
+            n.getOutQueue()
+                .start(function(ma) {
+                ja('facebook', 'FB_RPC:' + ma);
             });
 
-            function oa(qa, ra) {
-                if (ga) return;
-                var sa = qa ? /\/\/.*?(\/[^#]*)/.exec(qa)[1] : location.pathname + location.search;
-                sa += (~ES5(sa, 'indexOf', true, '?') ? '&' : '?') + 'fb_xd_fragment#xd_sig=' + ca + '&';
-                var ta = g.appendHidden(document.createElement('div')),
-                    ua = i('kill_fragment') ? ['fragment'] : null,
-                    va = w.create({
-                        blacklist: ua,
-                        root: ta,
-                        channel: da,
-                        channelPath: '/' + v.XdUrl + '#',
-                        flashUrl: v.Flash.path,
-                        whenReady: function(wa) {
-                            fa = wa;
-                            var xa = {
-                                channel: da,
+            function ka(ma) {
+                if (ca) return;
+                var na = g.appendHidden(document.createElement('div')),
+                    oa = s.create({
+                        blacklist: null,
+                        root: na,
+                        channel: z,
+                        flashUrl: r.Flash.path,
+                        whenReady: function(pa) {
+                            ba = pa;
+                            var qa = {
+                                channel: z,
                                 origin: location.protocol + '//' + location.host,
-                                channel_path: sa,
-                                transport: va,
-                                xd_name: ra
-                            }, ya = '/' + v.XdUrl + '#' + m.encode(xa),
-                                za = v.useCdn ? s.resolve('cdn', false) : 'http://www.facebook.com',
-                                ab = v.useCdn ? s.resolve('cdn', true) : 'https://www.facebook.com';
-                            if (r.getSecure() !== true) aa = h({
-                                url: za + ya,
+                                transport: oa,
+                                xd_name: ma
+                            }, ra = '/' + r.XdUrl + '#' + l.encode(qa),
+                                sa = r.useCdn ? p.resolve('cdn', false) : 'http://www.facebook.com',
+                                ta = r.useCdn ? p.resolve('cdn', true) : 'https://www.facebook.com';
+                            if (o.getSecure() !== true) w = h({
+                                url: sa + ra,
                                 name: 'fb_xdm_frame_http',
                                 id: 'fb_xdm_frame_http',
-                                root: ta,
+                                root: na,
                                 'aria-hidden': true,
-                                title: ha,
+                                title: da,
                                 'tab-index': -1
                             });
-                            ba = h({
-                                url: ab + ya,
+                            x = h({
+                                url: ta + ra,
                                 name: 'fb_xdm_frame_https',
                                 id: 'fb_xdm_frame_https',
-                                root: ta,
+                                root: na,
                                 'aria-hidden': true,
-                                title: ha,
+                                title: da,
                                 'tab-index': -1
                             });
                         },
-                        onMessage: ma
+                        onMessage: ia
                     });
-                if (va === 'fragment') window.FB_XD_onMessage = u(ma, 'entry', 'XD:fragment');
-                ga = true;
+                ca = true;
             }
-            var pa = {
-                rpc: q,
+            var la = {
+                rpc: n,
                 _callbacks: {},
                 _forever: {},
-                _channel: da,
-                _origin: ea,
-                onMessage: ma,
-                recv: ma,
-                init: oa,
-                sendToFacebook: na,
-                inform: function(qa, ra, sa, ta) {
-                    na('facebook', {
-                        method: qa,
-                        params: ES5('JSON', 'stringify', false, ra || {}),
-                        behavior: ta || 'p',
-                        relation: sa
+                _channel: z,
+                _origin: aa,
+                onMessage: ia,
+                recv: ia,
+                init: ka,
+                sendToFacebook: ja,
+                inform: function(ma, na, oa, pa) {
+                    ja('facebook', {
+                        method: ma,
+                        params: ES5('JSON', 'stringify', false, na || {}),
+                        behavior: pa || 'p',
+                        relation: oa
                     });
                 },
-                handler: function(qa, ra, sa, ta) {
-                    var ua = v.useCdn ? s.resolve('cdn', location.protocol == 'https:') : location.protocol + '//www.facebook.com';
-                    return ua + '/' + v.XdUrl + '#' + m.encode({
-                        cb: this.registerCallback(qa, sa, ta),
-                        origin: ea + '/' + da,
+                handler: function(ma, na, oa, pa) {
+                    var qa = r.useCdn ? p.resolve('cdn', location.protocol == 'https:') : location.protocol + '//www.facebook.com';
+                    return qa + '/' + r.XdUrl + '#' + l.encode({
+                        cb: this.registerCallback(ma, oa, pa),
+                        origin: aa + '/' + z,
                         domain: location.hostname,
-                        relation: ra || 'opener'
+                        relation: na || 'opener'
                     });
                 },
-                registerCallback: function(qa, ra, sa) {
-                    sa = sa || k();
-                    if (ra) pa._forever[sa] = true;
-                    pa._callbacks[sa] = qa;
-                    return sa;
+                registerCallback: function(ma, na, oa) {
+                    oa = oa || j();
+                    if (na) la._forever[oa] = true;
+                    la._callbacks[oa] = ma;
+                    return oa;
                 }
             };
-            (function() {
-                var qa = location.href.match(/[?&]fb_xd_fragment#(.*)$/);
-                if (qa) {
-                    document.documentElement.style.display = 'none';
-                    var ra = m.decode(qa[1]),
-                        sa = p(ra.xd_rel);
-                    l.debug('Passing fragment based message: %s', qa[1]);
-                    sa.FB_XD_onMessage(ra);
-                    document.open();
-                    document.close();
-                }
-            })();
-            j.subscribe('init:post', function(qa) {
-                oa(qa.channelUrl ? o(qa.channelUrl) : null, qa.xdProxyName);
+            i.subscribe('init:post', function(ma) {
+                ka(ma.xdProxyName);
             });
-            e.exports = pa;
+            e.exports = la;
         });
         __d("sdk.Auth", ["sdk.Cookie", "copyProperties", "sdk.createIframe", "DOMWrapper", "sdk.feature", "sdk.getContextType", "guid", "sdk.Impressions", "Log", "ObservableMixin", "QueryString", "sdk.Runtime", "sdk.SignedRequest", "UrlMap", "URL", "sdk.XD"], function(a, b, c, d, e, f) {
             var g = b('sdk.Cookie'),
@@ -2664,7 +2568,7 @@ try {
         __d("invariant", [], function(a, b, c, d, e, f) {
             function g(h) {
                 if (!h) {
-                    var i = new Error('Invariant Violation');
+                    var i = new Error('Minified exception occured, use the non-minified dev environment for ' + 'the full error message and additional helpful warnings.');
                     i.framesToPop = 1;
                     throw i;
                 }
@@ -3588,7 +3492,7 @@ try {
                 tx: k
             };
         });
-        __d("sdk.Dialog", ["sdk.Canvas.Environment", "sdk.Content", "sdk.DOM", "DOMEventListener", "sdk.Intl", "ObservableMixin", "sdk.Runtime", "Type", "UserAgent"], function(a, b, c, d, e, f) {
+        __d("sdk.Dialog", ["sdk.Canvas.Environment", "sdk.Content", "sdk.DOM", "DOMEventListener", "sdk.Intl", "ObservableMixin", "sdk.Runtime", "Type", "UserAgent", "sdk.feature"], function(a, b, c, d, e, f) {
             var g = b('sdk.Canvas.Environment'),
                 h = b('sdk.Content'),
                 i = b('sdk.DOM'),
@@ -3598,34 +3502,61 @@ try {
                 m = b('sdk.Runtime'),
                 n = b('Type'),
                 o = b('UserAgent'),
-                p = n.extend({
-                    constructor: function r(s, t) {
-                        this.parent();
-                        this.id = s;
-                        this.display = t;
-                        this._e2e = {};
-                        if (!q._dialogs) {
-                            q._dialogs = {};
-                            q._addOrientationHandler();
-                        }
-                        q._dialogs[s] = this;
-                        this.trackEvent('init');
-                    },
-                    trackEvent: function(r, s) {
-                        if (this._e2e[r]) return this;
-                        this._e2e[r] = s || ES5('Date', 'now', false);
-                        if (r == 'close') this.inform('e2e:end', this._e2e);
-                        return this;
-                    },
-                    trackEvents: function(r) {
-                        if (typeof r === 'string') r = ES5('JSON', 'parse', false, r);
-                        for (var s in r) if (r.hasOwnProperty(s)) this.trackEvent(s, r[s]);
-                        return this;
+                p = b('sdk.feature'),
+                q = 590,
+                r = 500,
+                s = 240,
+                t = 575,
+                u = function() {
+                    var y;
+                    if (p('dialog_resize_refactor')) {
+                        var z = v();
+                        y = z && (z.height >= q || z.width >= r);
+                    } else y = o.ipad();
+                    u = function() {
+                        return y;
+                    };
+                    return y;
+                };
+
+            function v() {
+                if (p('dialog_resize_refactor')) {
+                    var y = i.getViewportInfo();
+                    if (y.height && y.width) return {
+                        width: Math.min(y.width, q),
+                        height: Math.min(y.height, r)
+                    };
+                }
+                return null;
+            }
+            var w = n.extend({
+                constructor: function y(z, aa) {
+                    this.parent();
+                    this.id = z;
+                    this.display = aa;
+                    this._e2e = {};
+                    if (!x._dialogs) {
+                        x._dialogs = {};
+                        x._addOrientationHandler();
                     }
-                }, l),
-                q = {
-                    newInstance: function(r, s) {
-                        return new p(r, s);
+                    x._dialogs[z] = this;
+                    this.trackEvent('init');
+                },
+                trackEvent: function(y, z) {
+                    if (this._e2e[y]) return this;
+                    this._e2e[y] = z || ES5('Date', 'now', false);
+                    if (y == 'close') this.inform('e2e:end', this._e2e);
+                    return this;
+                },
+                trackEvents: function(y) {
+                    if (typeof y === 'string') y = ES5('JSON', 'parse', false, y);
+                    for (var z in y) if (y.hasOwnProperty(z)) this.trackEvent(z, y[z]);
+                    return this;
+                }
+            }, l),
+                x = {
+                    newInstance: function(y, z) {
+                        return new w(y, z);
                     },
                     _dialogs: null,
                     _lastYOffset: 0,
@@ -3633,261 +3564,268 @@ try {
                     _overlayEl: null,
                     _stack: [],
                     _active: null,
-                    get: function(r) {
-                        return q._dialogs[r];
+                    get: function(y) {
+                        return x._dialogs[y];
                     },
-                    _findRoot: function(r) {
-                        while (r) {
-                            if (i.containsCss(r, 'fb_dialog')) return r;
-                            r = r.parentNode;
+                    _findRoot: function(y) {
+                        while (y) {
+                            if (i.containsCss(y, 'fb_dialog')) return y;
+                            y = y.parentNode;
                         }
                     },
-                    _createWWWLoader: function(r) {
-                        r = r ? r : 460;
-                        return q.create({
+                    _createWWWLoader: function(y) {
+                        y = y ? y : 460;
+                        return x.create({
                             content: ('<div class="dialog_title">' + '  <a id="fb_dialog_loader_close">' + '    <div class="fb_dialog_close_icon"></div>' + '  </a>' + '  <span>Facebook</span>' + '  <div style="clear:both;"></div>' + '</div>' + '<div class="dialog_content"></div>' + '<div class="dialog_footer"></div>'),
-                            width: r
+                            width: y
                         });
                     },
                     _createMobileLoader: function() {
-                        var r = o.nativeApp() ? '' : ('<table>' + '  <tbody>' + '    <tr>' + '      <td class="header_left">' + '        <label class="touchable_button">' + '          <input type="submit" value="' + k.tx._("Cancel") + '"' + '            id="fb_dialog_loader_close"/>' + '        </label>' + '      </td>' + '      <td class="header_center">' + '        <div>' + k.tx._("Loading...") + '</div>' + '      </td>' + '      <td class="header_right">' + '      </td>' + '    </tr>' + '  </tbody>' + '</table>');
-                        return q.create({
-                            classes: 'loading' + (o.ipad() ? ' centered' : ''),
-                            content: ('<div class="dialog_header">' + r + '</div>')
+                        var y = o.nativeApp() ? '' : ('<table>' + '  <tbody>' + '    <tr>' + '      <td class="header_left">' + '        <label class="touchable_button">' + '          <input type="submit" value="' + k.tx._("Cancel") + '"' + '            id="fb_dialog_loader_close"/>' + '        </label>' + '      </td>' + '      <td class="header_center">' + '        <div>' + k.tx._("Loading...") + '</div>' + '      </td>' + '      <td class="header_right">' + '      </td>' + '    </tr>' + '  </tbody>' + '</table>');
+                        return x.create({
+                            classes: 'loading' + (u() ? ' centered' : ''),
+                            content: ('<div class="dialog_header">' + y + '</div>')
                         });
                     },
                     _restoreBodyPosition: function() {
-                        if (!o.ipad()) {
-                            var r = document.getElementsByTagName('body')[0];
-                            i.removeCss(r, 'fb_hidden');
+                        if (!u()) {
+                            var y = document.getElementsByTagName('body')[0];
+                            i.removeCss(y, 'fb_hidden');
                         }
                     },
-                    _showIPadOverlay: function() {
-                        if (!o.ipad()) return;
-                        if (!q._overlayEl) {
-                            q._overlayEl = document.createElement('div');
-                            q._overlayEl.setAttribute('id', 'fb_dialog_ipad_overlay');
-                            h.append(q._overlayEl, null);
+                    _showTabletOverlay: function() {
+                        if (!u()) return;
+                        if (!x._overlayEl) {
+                            x._overlayEl = document.createElement('div');
+                            x._overlayEl.setAttribute('id', 'fb_dialog_ipad_overlay');
+                            h.append(x._overlayEl, null);
                         }
-                        q._overlayEl.className = '';
+                        x._overlayEl.className = '';
                     },
-                    _hideIPadOverlay: function() {
-                        if (o.ipad()) q._overlayEl.className = 'hidden';
+                    _hideTabletOverlay: function() {
+                        if (u()) x._overlayEl.className = 'hidden';
                     },
-                    showLoader: function(r, s) {
-                        q._showIPadOverlay();
-                        if (!q._loaderEl) q._loaderEl = q._findRoot(o.mobile() ? q._createMobileLoader() : q._createWWWLoader(s));
-                        if (!r) r = function() {};
-                        var t = document.getElementById('fb_dialog_loader_close');
-                        i.removeCss(t, 'fb_hidden');
-                        t.onclick = function() {
-                            q._hideLoader();
-                            q._restoreBodyPosition();
-                            q._hideIPadOverlay();
-                            r();
+                    showLoader: function(y, z) {
+                        x._showTabletOverlay();
+                        if (!x._loaderEl) x._loaderEl = x._findRoot(o.mobile() ? x._createMobileLoader() : x._createWWWLoader(z));
+                        if (!y) y = function() {};
+                        var aa = document.getElementById('fb_dialog_loader_close');
+                        i.removeCss(aa, 'fb_hidden');
+                        aa.onclick = function() {
+                            x._hideLoader();
+                            x._restoreBodyPosition();
+                            x._hideTabletOverlay();
+                            y();
                         };
-                        var u = document.getElementById('fb_dialog_ipad_overlay');
-                        if (u) u.ontouchstart = t.onclick;
-                        q._makeActive(q._loaderEl);
+                        var ba = document.getElementById('fb_dialog_ipad_overlay');
+                        if (ba) ba.ontouchstart = aa.onclick;
+                        x._makeActive(x._loaderEl);
                     },
                     _hideLoader: function() {
-                        if (q._loaderEl && q._loaderEl == q._active) q._loaderEl.style.top = '-10000px';
+                        if (x._loaderEl && x._loaderEl == x._active) x._loaderEl.style.top = '-10000px';
                     },
-                    _makeActive: function(r) {
-                        q._setDialogSizes();
-                        q._lowerActive();
-                        q._active = r;
-                        if (m.isEnvironment(m.ENVIRONMENTS.CANVAS)) g.getPageInfo(function(s) {
-                            q._centerActive(s);
+                    _makeActive: function(y) {
+                        x._setDialogSizes();
+                        x._lowerActive();
+                        x._active = y;
+                        if (m.isEnvironment(m.ENVIRONMENTS.CANVAS)) g.getPageInfo(function(z) {
+                            x._centerActive(z);
                         });
-                        q._centerActive();
+                        x._centerActive();
                     },
                     _lowerActive: function() {
-                        if (!q._active) return;
-                        q._active.style.top = '-10000px';
-                        q._active = null;
+                        if (!x._active) return;
+                        x._active.style.top = '-10000px';
+                        x._active = null;
                     },
-                    _removeStacked: function(r) {
-                        q._stack = ES5(q._stack, 'filter', true, function(s) {
-                            return s != r;
+                    _removeStacked: function(y) {
+                        x._stack = ES5(x._stack, 'filter', true, function(z) {
+                            return z != y;
                         });
                     },
-                    _centerActive: function(r) {
-                        var s = q._active;
-                        if (!s) return;
-                        var t = i.getViewportInfo(),
-                            u = parseInt(s.offsetWidth, 10),
-                            v = parseInt(s.offsetHeight, 10),
-                            w = t.scrollLeft + (t.width - u) / 2,
-                            x = (t.height - v) / 2.5;
-                        if (w < x) x = w;
-                        var y = t.height - v - x,
-                            z = (t.height - v) / 2;
-                        if (r) z = r.scrollTop - r.offsetTop + (r.clientHeight - v) / 2;
-                        if (z < x) {
-                            z = x;
-                        } else if (z > y) z = y;
-                        z += t.scrollTop;
+                    _centerActive: function(y) {
+                        var z = x._active;
+                        if (!z) return;
+                        var aa = i.getViewportInfo(),
+                            ba = parseInt(z.offsetWidth, 10),
+                            ca = parseInt(z.offsetHeight, 10),
+                            da = aa.scrollLeft + (aa.width - ba) / 2,
+                            ea = (aa.height - ca) / 2.5;
+                        if (da < ea) ea = da;
+                        var fa = aa.height - ca - ea,
+                            ga = (aa.height - ca) / 2;
+                        if (y) ga = y.scrollTop - y.offsetTop + (y.clientHeight - ca) / 2;
+                        if (ga < ea) {
+                            ga = ea;
+                        } else if (ga > fa) ga = fa;
+                        ga += aa.scrollTop;
                         if (o.mobile()) {
-                            var aa = 100;
-                            if (o.ipad()) {
-                                aa += (t.height - v) / 2;
+                            var ha = 100;
+                            if (u()) {
+                                ha += (aa.height - ca) / 2;
                             } else {
-                                var ba = document.getElementsByTagName('body')[0];
-                                i.addCss(ba, 'fb_hidden');
-                                z = 10000;
+                                var ia = document.getElementsByTagName('body')[0];
+                                i.addCss(ia, 'fb_hidden');
+                                if (p('dialog_resize_refactor')) ia.style.width = 'auto';
+                                ga = 10000;
                             }
-                            var ca = i.getByClass('fb_dialog_padding', s);
-                            if (ca.length) ca[0].style.height = aa + 'px';
+                            var ja = i.getByClass('fb_dialog_padding', z);
+                            if (ja.length) ja[0].style.height = ha + 'px';
                         }
-                        s.style.left = (w > 0 ? w : 0) + 'px';
-                        s.style.top = (z > 0 ? z : 0) + 'px';
+                        z.style.left = (da > 0 ? da : 0) + 'px';
+                        z.style.top = (ga > 0 ? ga : 0) + 'px';
                     },
                     _setDialogSizes: function() {
-                        if (!o.mobile() || o.ipad()) return;
-                        for (var r in q._dialogs) if (q._dialogs.hasOwnProperty(r)) {
-                            var s = document.getElementById(r);
-                            if (s) {
-                                s.style.width = q.getDefaultSize()
+                        if (!o.mobile() || u()) return;
+                        for (var y in x._dialogs) if (x._dialogs.hasOwnProperty(y)) {
+                            var z = document.getElementById(y);
+                            if (z) {
+                                z.style.width = x.getDefaultSize()
                                     .width + 'px';
-                                s.style.height = q.getDefaultSize()
+                                z.style.height = x.getDefaultSize()
                                     .height + 'px';
                             }
                         }
                     },
                     getDefaultSize: function() {
-                        if (o.mobile()) if (o.ipad()) {
-                            return {
-                                width: 500,
-                                height: 590
-                            };
-                        } else if (o.android()) {
-                            return {
-                                width: screen.availWidth,
-                                height: screen.availHeight
-                            };
-                        } else {
-                            var r = window.innerWidth,
-                                s = window.innerHeight,
-                                t = r / s > 1.2;
-                            return {
+                        if (o.mobile()) {
+                            var y = v();
+                            if (y) return y;
+                            if (o.ipad()) return {
                                 width: r,
-                                height: Math.max(s, (t ? screen.width : screen.height))
+                                height: q
                             };
+                            if (o.android()) {
+                                return {
+                                    width: screen.availWidth,
+                                    height: screen.availHeight
+                                };
+                            } else {
+                                var z = window.innerWidth,
+                                    aa = window.innerHeight,
+                                    ba = z / aa > 1.2;
+                                return {
+                                    width: z,
+                                    height: Math.max(aa, (ba ? screen.width : screen.height))
+                                };
+                            }
                         }
                         return {
-                            width: 575,
-                            height: 240
+                            width: t,
+                            height: s
                         };
                     },
-                    _handleOrientationChange: function(r) {
-                        if (o.android() && screen.availWidth == q._availScreenWidth) {
-                            setTimeout(q._handleOrientationChange, 50);
+                    _handleOrientationChange: function(y) {
+                        var z = p('dialog_resize_refactor', false) ? i.getViewportInfo()
+                            .width : screen.availWidth;
+                        if (o.android() && z == x._availScreenWidth) {
+                            setTimeout(x._handleOrientationChange, 50);
                             return;
                         }
-                        q._availScreenWidth = screen.availWidth;
-                        if (o.ipad()) {
-                            q._centerActive();
+                        x._availScreenWidth = z;
+                        if (u()) {
+                            x._centerActive();
                         } else {
-                            var s = q.getDefaultSize()
+                            var aa = x.getDefaultSize()
                                 .width;
-                            for (var t in q._dialogs) if (q._dialogs.hasOwnProperty(t)) {
-                                var u = document.getElementById(t);
-                                if (u) u.style.width = s + 'px';
+                            for (var ba in x._dialogs) if (x._dialogs.hasOwnProperty(ba)) {
+                                var ca = document.getElementById(ba);
+                                if (ca) ca.style.width = aa + 'px';
                             }
                         }
                     },
                     _addOrientationHandler: function() {
                         if (!o.mobile()) return;
-                        var r = "onorientationchange" in window ? 'orientationchange' : 'resize';
-                        q._availScreenWidth = screen.availWidth;
-                        j.add(window, r, q._handleOrientationChange);
+                        var y = "onorientationchange" in window ? 'orientationchange' : 'resize';
+                        x._availScreenWidth = p('dialog_resize_refactor', false) ? i.getViewportInfo()
+                            .width : screen.availWidth;
+                        j.add(window, y, x._handleOrientationChange);
                     },
-                    create: function(r) {
-                        r = r || {};
-                        var s = document.createElement('div'),
-                            t = document.createElement('div'),
-                            u = 'fb_dialog';
-                        if (r.closeIcon && r.onClose) {
-                            var v = document.createElement('a');
-                            v.className = 'fb_dialog_close_icon';
-                            v.onclick = r.onClose;
-                            s.appendChild(v);
+                    create: function(y) {
+                        y = y || {};
+                        var z = document.createElement('div'),
+                            aa = document.createElement('div'),
+                            ba = 'fb_dialog';
+                        if (y.closeIcon && y.onClose) {
+                            var ca = document.createElement('a');
+                            ca.className = 'fb_dialog_close_icon';
+                            ca.onclick = y.onClose;
+                            z.appendChild(ca);
                         }
-                        u += ' ' + (r.classes || '');
+                        ba += ' ' + (y.classes || '');
                         if (o.ie()) {
-                            u += ' fb_dialog_legacy';
-                            ES5(['vert_left', 'vert_right', 'horiz_top', 'horiz_bottom', 'top_left', 'top_right', 'bottom_left', 'bottom_right'], 'forEach', true, function(y) {
-                                var z = document.createElement('span');
-                                z.className = 'fb_dialog_' + y;
-                                s.appendChild(z);
+                            ba += ' fb_dialog_legacy';
+                            ES5(['vert_left', 'vert_right', 'horiz_top', 'horiz_bottom', 'top_left', 'top_right', 'bottom_left', 'bottom_right'], 'forEach', true, function(fa) {
+                                var ga = document.createElement('span');
+                                ga.className = 'fb_dialog_' + fa;
+                                z.appendChild(ga);
                             });
-                        } else u += o.mobile() ? ' fb_dialog_mobile' : ' fb_dialog_advanced';
-                        if (r.content) h.append(r.content, t);
-                        s.className = u;
-                        var w = parseInt(r.width, 10);
-                        if (!isNaN(w)) s.style.width = w + 'px';
-                        t.className = 'fb_dialog_content';
-                        s.appendChild(t);
+                        } else ba += o.mobile() ? ' fb_dialog_mobile' : ' fb_dialog_advanced';
+                        if (y.content) h.append(y.content, aa);
+                        z.className = ba;
+                        var da = parseInt(y.width, 10);
+                        if (!isNaN(da)) z.style.width = da + 'px';
+                        aa.className = 'fb_dialog_content';
+                        z.appendChild(aa);
                         if (o.mobile()) {
-                            var x = document.createElement('div');
-                            x.className = 'fb_dialog_padding';
-                            s.appendChild(x);
+                            var ea = document.createElement('div');
+                            ea.className = 'fb_dialog_padding';
+                            z.appendChild(ea);
                         }
-                        h.append(s);
-                        if (r.visible) q.show(s);
-                        return t;
+                        h.append(z);
+                        if (y.visible) x.show(z);
+                        return aa;
                     },
-                    show: function(r) {
-                        var s = q._findRoot(r);
-                        if (s) {
-                            q._removeStacked(s);
-                            q._hideLoader();
-                            q._makeActive(s);
-                            q._stack.push(s);
-                            if ('fbCallID' in r) q.get(r.fbCallID)
+                    show: function(y) {
+                        var z = x._findRoot(y);
+                        if (z) {
+                            x._removeStacked(z);
+                            x._hideLoader();
+                            x._makeActive(z);
+                            x._stack.push(z);
+                            if ('fbCallID' in y) x.get(y.fbCallID)
                                 .inform('iframe_show')
                                 .trackEvent('show');
                         }
                     },
-                    hide: function(r) {
-                        var s = q._findRoot(r);
-                        q._hideLoader();
-                        if (s == q._active) {
-                            q._lowerActive();
-                            q._restoreBodyPosition();
-                            q._hideIPadOverlay();
-                            if ('fbCallID' in r) q.get(r.fbCallID)
+                    hide: function(y) {
+                        var z = x._findRoot(y);
+                        x._hideLoader();
+                        if (z == x._active) {
+                            x._lowerActive();
+                            x._restoreBodyPosition();
+                            x._hideTabletOverlay();
+                            if ('fbCallID' in y) x.get(y.fbCallID)
                                 .inform('iframe_hide')
                                 .trackEvent('hide');
                         }
                     },
-                    remove: function(r) {
-                        r = q._findRoot(r);
-                        if (r) {
-                            var s = q._active == r;
-                            q._removeStacked(r);
-                            if (s) {
-                                q._hideLoader();
-                                if (q._stack.length > 0) {
-                                    q.show(q._stack.pop());
+                    remove: function(y) {
+                        y = x._findRoot(y);
+                        if (y) {
+                            var z = x._active == y;
+                            x._removeStacked(y);
+                            if (z) {
+                                x._hideLoader();
+                                if (x._stack.length > 0) {
+                                    x.show(x._stack.pop());
                                 } else {
-                                    q._lowerActive();
-                                    q._restoreBodyPosition();
-                                    q._hideIPadOverlay();
+                                    x._lowerActive();
+                                    x._restoreBodyPosition();
+                                    x._hideTabletOverlay();
                                 }
-                            } else if (q._active === null && q._stack.length > 0) q.show(q._stack.pop());
+                            } else if (x._active === null && x._stack.length > 0) x.show(x._stack.pop());
                             setTimeout(function() {
-                                r.parentNode.removeChild(r);
+                                y.parentNode.removeChild(y);
                             }, 3000);
                         }
                     },
-                    isActive: function(r) {
-                        var s = q._findRoot(r);
-                        return s && s === q._active;
+                    isActive: function(y) {
+                        var z = x._findRoot(y);
+                        return z && z === x._active;
                     }
                 };
-            e.exports = q;
+            e.exports = x;
         });
         __d("sdk.Frictionless", ["sdk.Auth", "sdk.api", "sdk.Event", "sdk.Dialog"], function(a, b, c, d, e, f) {
             var g = b('sdk.Auth'),
@@ -4022,6 +3960,17 @@ try {
                     }
                 };
             e.exports = k;
+        });
+        __d("resolveURI", [], function(a, b, c, d, e, f) {
+            function g(h) {
+                if (!h) return window.location.href;
+                h = h.replace(/&/g, '&amp;')
+                    .replace(/"/g, '&quot;');
+                var i = document.createElement('div');
+                i.innerHTML = '<a href="' + h + '"></a>';
+                return i.firstChild.href;
+            }
+            e.exports = g;
         });
         __d("sdk.UIServer", ["sdk.Auth", "sdk.Content", "copyProperties", "sdk.Dialog", "sdk.DOM", "sdk.Event", "flattenObject", "sdk.Frictionless", "sdk.getContextType", "guid", "insertIframe", "Log", "sdk.Native", "QueryString", "resolveURI", "sdk.RPC", "sdk.Runtime", "UrlMap", "UserAgent", "sdk.XD", "SDKConfig"], function(a, b, c, d, e, f) {
             var g = b('sdk.Auth'),
@@ -4637,30 +4586,40 @@ try {
             function w(aa) {
                 var ba = l(window.document.getElementsByTagName('object'));
                 ba = ba.concat(l(window.document.getElementsByTagName('embed')));
-                ES5(ba, 'forEach', true, function(ca) {
-                    var da = u(ca),
-                        ea = p && v(ca);
-                    if (!da && !ea) return;
-                    var fa = function() {
+                var ca = false,
+                    da = false;
+                ES5(ba, 'forEach', true, function(fa) {
+                    var ga = u(fa),
+                        ha = p && v(fa);
+                    if (!ga && !ha) return;
+                    ca = ca || ga;
+                    da = da || ha;
+                    var ia = function() {
                         if (aa.state === 'opened') {
-                            if (da) {
-                                s(ca);
-                            } else q(ca);
-                        } else if (da) {
-                            t(ca);
-                        } else r(ca);
+                            if (ga) {
+                                s(fa);
+                            } else q(fa);
+                        } else if (ga) {
+                            t(fa);
+                        } else r(fa);
                     };
                     if (o) {
                         i.info('Calling developer specified callback');
-                        var ga = {
+                        var ja = {
                             state: aa.state,
-                            elem: ca
+                            elem: fa
                         };
-                        o(ga);
-                        setTimeout(fa, 200);
-                    } else fa();
-                    if (Math.random() <= 1 / 1000) g(k.getClientID() + '/occludespopups', 'post', {});
+                        o(ja);
+                        setTimeout(ia, 200);
+                    } else ia();
                 });
+                if (Math.random() <= 1 / 1000) {
+                    var ea = {
+                        unity: da,
+                        flash: ca
+                    };
+                    g(k.getClientID() + '/occludespopups', 'post', ea);
+                }
             }
             h.local.hidePluginObjects = function() {
                 i.info('hidePluginObjects called');
@@ -5906,6 +5865,14 @@ try {
                     layout: 'string',
                     show_faces: 'bool'
                 },
+                like: {
+                    href: 'url',
+                    layout: 'string',
+                    show_faces: 'bool',
+                    share: 'bool',
+                    action: 'string',
+                    send: 'bool'
+                },
                 like_box: {
                     href: 'string',
                     show_faces: 'bool',
@@ -6744,357 +6711,6 @@ try {
                 });
             e.exports = x;
         });
-        __d("sdk.XFBML.EdgeCommentWidget", ["sdk.XFBML.IframeWidget", "sdk.DOM"], function(a, b, c, d, e, f) {
-            var g = b('sdk.XFBML.IframeWidget'),
-                h = b('sdk.DOM'),
-                i = 10000,
-                j = g.extend({
-                    constructor: function(k) {
-                        this.parent(k.commentNode);
-                        this._iframeWidth = k.width + 1;
-                        this._iframeHeight = k.height;
-                        this._attr = {
-                            master_frame_name: k.masterFrameName,
-                            offsetX: k.relativeWidthOffset - k.paddingLeft
-                        };
-                        this.dom = k.commentNode;
-                        this.dom.style.top = k.relativeHeightOffset + 'px';
-                        this.dom.style.left = k.relativeWidthOffset + 'px';
-                        this.dom.style.zIndex = i++;
-                        h.addCss(this.dom, 'fb_edge_comment_widget');
-                    },
-                    _visibleAfter: 'load',
-                    _showLoader: false,
-                    getSize: function() {
-                        return {
-                            width: this._iframeWidth,
-                            height: this._iframeHeight
-                        };
-                    },
-                    getUrlBits: function() {
-                        return {
-                            name: 'comment_widget_shell',
-                            params: this._attr
-                        };
-                    }
-                });
-            e.exports = j;
-        });
-        __d("sdk.XFBML.EdgeWidget", ["sdk.Event", "sdk.XFBML.IframeWidget", "sdk.XFBML.EdgeCommentWidget", "sdk.DOM", "sdk.Helper", "sdk.Runtime"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Event'),
-                h = b('sdk.XFBML.IframeWidget'),
-                i = b('sdk.XFBML.EdgeCommentWidget'),
-                j = b('sdk.DOM'),
-                k = b('sdk.Helper'),
-                l = b('sdk.Runtime'),
-                m = h.extend({
-                    _visibleAfter: 'immediate',
-                    _showLoader: false,
-                    _rootPadding: null,
-                    setupAndValidate: function() {
-                        j.addCss(this.dom, 'fb_edge_widget_with_comment');
-                        this._attr = {
-                            channel_url: this.getChannelUrl(),
-                            debug: this._getBoolAttribute('debug'),
-                            href: this.getAttribute('href', window.location.href),
-                            is_permalink: this._getBoolAttribute('is-permalink'),
-                            node_type: this.getAttribute('node-type', 'link'),
-                            width: this._getWidgetWidth(),
-                            font: this.getAttribute('font'),
-                            layout: this._getLayout(),
-                            colorscheme: this.getAttribute('color-scheme', 'light'),
-                            action: this.getAttribute('action'),
-                            ref: this.getAttribute('ref'),
-                            show_faces: this._shouldShowFaces(),
-                            no_resize: this._getBoolAttribute('no_resize'),
-                            send: this._getBoolAttribute('send'),
-                            share: this._getBoolAttribute('share'),
-                            url_map: this.getAttribute('url_map'),
-                            extended_social_context: this._getBoolAttribute('extended_social_context', false)
-                        };
-                        this._rootPadding = {
-                            left: parseFloat(j.getStyle(this.dom, 'paddingLeft')),
-                            top: parseFloat(j.getStyle(this.dom, 'paddingTop'))
-                        };
-                        return true;
-                    },
-                    oneTimeSetup: function() {
-                        this.subscribe('xd.sdk_event', ES5(function(n) {
-                            g.fire(n.event, ES5('JSON', 'parse', false, n.data), this.dom);
-                            if (n.event == 'edge.create') {
-                                k.invokeHandler(this.getAttribute('on-create'), this, [this._attr.href]);
-                            } else if (n.event == 'edge.remove') k.invokeHandler(this.getAttribute('on-remove'), this, [this._attr.href]);
-                        }, 'bind', true, this));
-                        this.subscribe('xd.presentEdgeCommentDialog', ES5(this._handleEdgeCommentDialogPresentation, 'bind', true, this));
-                        this.subscribe('xd.dismissEdgeCommentDialog', ES5(this._handleEdgeCommentDialogDismissal, 'bind', true, this));
-                        this.subscribe('xd.hideEdgeCommentDialog', ES5(this._handleEdgeCommentDialogHide, 'bind', true, this));
-                        this.subscribe('xd.showEdgeCommentDialog', ES5(this._handleEdgeCommentDialogShow, 'bind', true, this));
-                    },
-                    getSize: function() {
-                        return {
-                            width: this._getWidgetWidth(),
-                            height: this._getWidgetHeight()
-                        };
-                    },
-                    _getWidgetHeight: function() {
-                        var n = this._getLayout(),
-                            o = this._shouldShowFaces() ? 'show' : 'hide',
-                            p = this._getBoolAttribute('send') || this._getBoolAttribute('share'),
-                            q = 65 + (p ? 25 : 0),
-                            r = {
-                                standard: {
-                                    show: 80,
-                                    hide: 35
-                                },
-                                box_count: {
-                                    show: q,
-                                    hide: q
-                                },
-                                button_count: {
-                                    show: 21,
-                                    hide: 21
-                                },
-                                simple: {
-                                    show: 20,
-                                    hide: 20
-                                }
-                            };
-                        return r[n][o];
-                    },
-                    _getWidgetWidth: function() {
-                        var n = this._getLayout(),
-                            o = this._getBoolAttribute('send') || this._getBoolAttribute('share'),
-                            p = this._shouldShowFaces() ? 'show' : 'hide',
-                            q = (this.getAttribute('action') === 'recommend'),
-                            r = (q ? 265 : 225) + (o ? 60 : 0),
-                            s = (q ? 130 : 90) + (o ? 60 : 0),
-                            t = this.getAttribute('action') === 'recommend' ? 100 : 55,
-                            u = this.getAttribute('action') === 'recommend' ? 90 : 50,
-                            v = {
-                                standard: {
-                                    show: 450,
-                                    hide: 450
-                                },
-                                box_count: {
-                                    show: t,
-                                    hide: t
-                                },
-                                button_count: {
-                                    show: s,
-                                    hide: s
-                                },
-                                simple: {
-                                    show: u,
-                                    hide: u
-                                }
-                            }, w = v[n][p],
-                            x = this._getPxAttribute('width', w),
-                            y = {
-                                standard: {
-                                    min: r,
-                                    max: 900
-                                },
-                                box_count: {
-                                    min: t,
-                                    max: 900
-                                },
-                                button_count: {
-                                    min: s,
-                                    max: 900
-                                },
-                                simple: {
-                                    min: 49,
-                                    max: 900
-                                }
-                            };
-                        if (x < y[n].min) {
-                            x = y[n].min;
-                        } else if (x > y[n].max) x = y[n].max;
-                        return x;
-                    },
-                    _getLayout: function() {
-                        return this._getAttributeFromList('layout', 'standard', ['standard', 'button_count', 'box_count', 'simple']);
-                    },
-                    _shouldShowFaces: function() {
-                        return this._getLayout() === 'standard' && this._getBoolAttribute('show-faces', true);
-                    },
-                    _handleEdgeCommentDialogPresentation: function(n) {
-                        if (!this.isValid()) return;
-                        var o = document.createElement('span');
-                        this._commentSlave = this._createEdgeCommentWidget(n, o);
-                        this.dom.appendChild(o);
-                        this._commentSlave.process();
-                        this._commentWidgetNode = o;
-                    },
-                    _createEdgeCommentWidget: function(n, o) {
-                        var p = {
-                            commentNode: o,
-                            externalUrl: n.externalURL,
-                            masterFrameName: n.masterFrameName,
-                            layout: this._getLayout(),
-                            relativeHeightOffset: this._getHeightOffset(n),
-                            relativeWidthOffset: this._getWidthOffset(n),
-                            anchorTargetX: parseFloat(n['query[anchorTargetX]']) + this._rootPadding.left,
-                            anchorTargetY: parseFloat(n['query[anchorTargetY]']) + this._rootPadding.top,
-                            width: parseFloat(n.width),
-                            height: parseFloat(n.height),
-                            paddingLeft: this._rootPadding.left
-                        };
-                        return new i(p);
-                    },
-                    _getHeightOffset: function(n) {
-                        return parseFloat(n['anchorGeometry[y]']) + parseFloat(n['anchorPosition[y]']) + this._rootPadding.top;
-                    },
-                    _getWidthOffset: function(n) {
-                        var o = parseFloat(n['anchorPosition[x]']) + this._rootPadding.left,
-                            p = j.getPosition(this.dom)
-                                .x,
-                            q = this.dom.offsetWidth,
-                            r = j.getViewportInfo()
-                                .width,
-                            s = parseFloat(n.width),
-                            t = false;
-                        if (l.getRtl()) {
-                            t = s < p;
-                        } else if ((p + s) > r) t = true;
-                        if (t) o += parseFloat(n['anchorGeometry[x]']) - s;
-                        return o;
-                    },
-                    _getCommonEdgeCommentWidgetOpts: function(n, o) {
-                        return {
-                            colorscheme: this._attr.colorscheme,
-                            commentNode: o,
-                            controllerID: n.controllerID,
-                            nodeImageURL: n.nodeImageURL,
-                            nodeRef: this._attr.ref,
-                            nodeTitle: n.nodeTitle,
-                            nodeURL: n.nodeURL,
-                            nodeSummary: n.nodeSummary,
-                            width: parseFloat(n.width),
-                            height: parseFloat(n.height),
-                            relativeHeightOffset: this._getHeightOffset(n),
-                            relativeWidthOffset: this._getWidthOffset(n),
-                            error: n.error,
-                            siderender: n.siderender,
-                            extended_social_context: n.extended_social_context,
-                            anchorTargetX: parseFloat(n['query[anchorTargetX]']) + this._rootPadding.left,
-                            anchorTargetY: parseFloat(n['query[anchorTargetY]']) + this._rootPadding.top
-                        };
-                    },
-                    _handleEdgeCommentDialogDismissal: function(n) {
-                        if (this._commentWidgetNode) {
-                            this.dom.removeChild(this._commentWidgetNode);
-                            delete this._commentWidgetNode;
-                        }
-                    },
-                    _handleEdgeCommentDialogHide: function() {
-                        if (this._commentWidgetNode) this._commentWidgetNode.style.display = "none";
-                    },
-                    _handleEdgeCommentDialogShow: function() {
-                        if (this._commentWidgetNode) this._commentWidgetNode.style.display = "block";
-                    }
-                });
-            e.exports = m;
-        });
-        __d("sdk.XFBML.SendButtonFormWidget", ["sdk.XFBML.EdgeCommentWidget", "sdk.DOM", "sdk.Event"], function(a, b, c, d, e, f) {
-            var g = b('sdk.XFBML.EdgeCommentWidget'),
-                h = b('sdk.DOM'),
-                i = b('sdk.Event'),
-                j = g.extend({
-                    constructor: function(k) {
-                        this.parent(k);
-                        h.addCss(this.dom, 'fb_send_button_form_widget');
-                        h.addCss(this.dom, k.colorscheme);
-                        h.addCss(this.dom, (typeof k.siderender != 'undefined' && k.siderender) ? 'siderender' : '');
-                        this._attr.nodeImageURL = k.nodeImageURL;
-                        this._attr.nodeRef = k.nodeRef;
-                        this._attr.nodeTitle = k.nodeTitle;
-                        this._attr.nodeURL = k.nodeURL;
-                        this._attr.nodeSummary = k.nodeSummary;
-                        this._attr.offsetX = k.relativeWidthOffset;
-                        this._attr.offsetY = k.relativeHeightOffset;
-                        this._attr.anchorTargetX = k.anchorTargetX;
-                        this._attr.anchorTargetY = k.anchorTargetY;
-                        this._attr.channel = this.getChannelUrl();
-                        this._attr.controllerID = k.controllerID;
-                        this._attr.colorscheme = k.colorscheme;
-                        this._attr.error = k.error;
-                        this._attr.siderender = k.siderender;
-                        this._attr.extended_social_context = k.extended_social_context;
-                    },
-                    _showLoader: true,
-                    getUrlBits: function() {
-                        return {
-                            name: 'send_button_form_shell',
-                            params: this._attr
-                        };
-                    },
-                    oneTimeSetup: function() {
-                        this.subscribe('xd.messageSent', ES5(this._onMessageSent, 'bind', true, this));
-                    },
-                    _onMessageSent: function() {
-                        i.fire('message.send', this._attr.nodeURL, this);
-                    }
-                });
-            e.exports = j;
-        });
-        __d("sdk.XFBML.Like", ["sdk.XFBML.EdgeWidget", "sdk.XFBML.SendButtonFormWidget"], function(a, b, c, d, e, f) {
-            var g = b('sdk.XFBML.EdgeWidget'),
-                h = b('sdk.XFBML.SendButtonFormWidget'),
-                i = g.extend({
-                    getUrlBits: function() {
-                        return {
-                            name: 'like',
-                            params: this._attr
-                        };
-                    },
-                    _createEdgeCommentWidget: function(j, k) {
-                        if ('send' in this._attr && 'widget_type' in j && j.widget_type == 'send') {
-                            var l = this._getCommonEdgeCommentWidgetOpts(j, k);
-                            return new h(l);
-                        } else return this.parentCall("_createEdgeCommentWidget", j, k);
-                    },
-                    getIframeTitle: function() {
-                        return 'Like this content on Facebook.';
-                    }
-                });
-            e.exports = i;
-        });
-        __d("sdk.XFBML.LiveStream", ["sdk.XFBML.IframeWidget"], function(a, b, c, d, e, f) {
-            var g = b('sdk.XFBML.IframeWidget'),
-                h = g.extend({
-                    _visibleAfter: 'load',
-                    setupAndValidate: function() {
-                        this._attr = {
-                            app_id: this.getAttribute('event-app-id'),
-                            href: this.getAttribute('href', window.location.href),
-                            height: this._getPxAttribute('height', 500),
-                            hideFriendsTab: this.getAttribute('hide-friends-tab'),
-                            redesigned: this._getBoolAttribute('redesigned-stream'),
-                            width: this._getPxAttribute('width', 400),
-                            xid: this.getAttribute('xid', 'default'),
-                            always_post_to_friends: this._getBoolAttribute('always-post-to-friends'),
-                            via_url: this.getAttribute('via_url')
-                        };
-                        return true;
-                    },
-                    getSize: function() {
-                        return {
-                            width: this._attr.width,
-                            height: this._attr.height
-                        };
-                    },
-                    getUrlBits: function() {
-                        var i = this._attr.redesigned ? 'live_stream_box' : 'livefeed';
-                        if (this._getBoolAttribute('modern', false)) i = 'live_stream';
-                        return {
-                            name: i,
-                            params: this._attr
-                        };
-                    }
-                });
-            e.exports = h;
-        });
         __d("sdk.XFBML.LoginButton", ["sdk.Helper", "IframePlugin"], function(a, b, c, d, e, f) {
             var g = b('sdk.Helper'),
                 h = b('IframePlugin'),
@@ -7549,7 +7165,7 @@ try {
                 });
             e.exports = i;
         });
-        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.Like", "sdk.XFBML.LiveStream", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration", "sdk.XFBML.SocialContext"], function(a, b, c, d) {
+        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration", "sdk.XFBML.SocialContext"], function(a, b, c, d) {
             var e = b('Assert'),
                 f = b('sdk.domReady'),
                 g = b('sdk.Event'),
@@ -7562,8 +7178,6 @@ try {
                     comments: b('sdk.XFBML.Comments'),
                     comments_count: b('sdk.XFBML.CommentsCount'),
                     connect_bar: b('sdk.XFBML.ConnectBar'),
-                    like: b('sdk.XFBML.Like'),
-                    live_stream: b('sdk.XFBML.LiveStream'),
                     login_button: b('sdk.XFBML.LoginButton'),
                     name: b('sdk.XFBML.Name'),
                     recommendations_bar: b('sdk.XFBML.RecommendationsBar'),

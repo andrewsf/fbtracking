@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR="`dirname \"$0\"`/.."
+DIR="$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)")"
 pushd $DIR/js-sdk/
 wget connect.facebook.net/en_US/all/debug.js -O all/debug.js;
 wget connect.facebook.net/en_US/all.js -O all.js;
