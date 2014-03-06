@@ -1,4 +1,4 @@
-/*1392156971,180829999,JIT Construction: v1116978,en_US*/
+/*1394065567,180779595,JIT Construction: v1149284,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -12,7 +12,7 @@ var setTimeout = window.setTimeout, setInterval = window.setInterval;var __DEV__
 function emptyFunction() {};
 var __w, __t;
 /**
- * @generated SignedSource<<ad899d9345eaf8c9f3bb9e77d702ca97>>
+ * @generated SignedSource<<1961bb2d3c82f9cd5810b46699c8eb6c>>
  *
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  * !! This file is a check-in of a static_upstream project!      !!
@@ -30,7 +30,6 @@ var __w, __t;
  *
  * @provides TypeChecker
  * @nostacktrace
- * @typechecks
  * @polyfill
  */
 
@@ -294,20 +293,6 @@ var __w, __t;
     return false;
   }
 
-  function report(error, framesToPop) {
-    try {
-      throw error;
-    } catch (e) {
-      // Pop to the frame calling the checked function, or to the
-      // checked function
-      e.framesToPop = framesToPop;
-      if (handler) {
-        handler(e);
-      } else {
-        console.error(error.message);
-      }
-    }
-  }
   /**
    * This function will loop over all arguments, where each argment is expected
    * to be in the form of `[variable, 'typehint', 'variablename']`.
@@ -330,17 +315,38 @@ var __w, __t;
           while (currentType.length) {
             actual += '<' + currentType.shift() + '>';
           }
-          report(
-            new TypeError('Type Mismatch for ' + name +
-                          ': expected `' + expected +
-                          '`, actual `' + actual +
-                          '` (' + toStringFunc.call(value) + ')'),
-            args[ii][2] ? 2 : 1
+
+          var isReturn = !!args[ii][2];
+          var stackBoundary;
+          try {
+            stackBoundary = isReturn ? arguments.callee.caller : check;
+          } catch (e) {
+            // If the caller is a strict function, we might be prevented from
+            // accessing the .caller property, so let's go with next best
+          }
+
+          var error = new TypeError(
+            'Type Mismatch for ' + name + ': expected `' + expected + '`, '
+            + 'actual `' + actual + '` (' + toStringFunc.call(value) + ')'
           );
-          paused = true;
-          setTimeout(function()  {
-            paused = false;
-          }, 0);
+
+          if (Error.captureStackTrace) {
+            Error.captureStackTrace(error, stackBoundary || check);
+          } else {
+            // Pop to the frame calling the checked function, or to the
+            // checked function
+            error.framesToPop = isReturn ? 2 : 1;
+          }
+
+          if (typeof handler == 'function') {
+            handler(error);
+            // Avoid double-reporting on transitive violations
+            paused = true;
+            // Reset on the next available tick
+            setTimeout(function()  {return paused = false;}, 0);
+          } else if (handler === 'throw') {
+            throw error;
+          }
         }
       }
     }
@@ -376,7 +382,7 @@ var __w, __t;
 })();
 /*/TC*/
 
-/* D6iHNll96KX */
+/* dMdVziMUT0v */
 /**
  * @generated SignedSource<<2d1ea45168ef6dcdf743e55ecc9e7073>>
  *
@@ -463,10 +469,10 @@ var require, __d;
 
 /* T7BwI_B4Uar */
 var ES5 = function(){
-__d("ES5ArrayPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
+/**
  * @providesModule ES5ArrayPrototype
  */
-
+__d("ES5ArrayPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var ES5ArrayPrototype = {};
 
 /**
@@ -578,10 +584,10 @@ ES5ArrayPrototype.indexOf = function(val, index) {
 module.exports = ES5ArrayPrototype;
 
 /* TfZtt8IJr02 */});
-__d("ES5FunctionPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
+/**
  * @providesModule ES5FunctionPrototype
  */
-
+__d("ES5FunctionPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var ES5FunctionPrototype = {};
 
 /**
@@ -613,10 +619,10 @@ ES5FunctionPrototype.bind = function(context /*, args... */) {
 module.exports = ES5FunctionPrototype;
 
 /* gA0hPn9APq5 */});
-__d("ES5StringPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
+/**
  * @providesModule ES5StringPrototype
  */
-
+__d("ES5StringPrototype",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var ES5StringPrototype = {};
 
 /**
@@ -631,13 +637,91 @@ ES5StringPrototype.trim = function() {
   return String.prototype.replace.call(this, /^\s+|\s+$/g, '');
 };
 
+ES5StringPrototype.startsWith = function(search) {
+  var string = String(this);
+  if (this == null) {
+    throw new TypeError(
+        'String.prototype.startsWith called on null or undefined');
+  }
+  var pos = arguments.length > 1 ? Number(arguments[1]) : 0;
+  if (isNaN(pos)) {
+    pos = 0;
+  }
+  var start = Math.min(Math.max(pos, 0), string.length);
+  return string.indexOf(String(search), pos) == start;
+};
+
+ES5StringPrototype.endsWith = function(search) {
+  var string = String(this);
+  if (this == null) {
+    throw new TypeError(
+        'String.prototype.endsWith called on null or undefined');
+  }
+  var stringLength = string.length;
+  var searchString = String(search);
+  var pos = arguments.length > 1 ? Number(arguments[1]) : stringLength;
+  if (isNaN(pos)) {
+    pos = 0;
+  }
+  var end = Math.min(Math.max(pos, 0), stringLength);
+  var start = end - searchString.length;
+  if (start < 0) {
+    return false;
+  }
+  return string.lastIndexOf(searchString, start) == start;
+};
+
+ES5StringPrototype.contains = function(search) {
+  if (this == null) {
+    throw new TypeError(
+        'String.prototype.contains called on null or undefined');
+  }
+  var string = String(this);
+  var pos = arguments.length > 1 ? Number(arguments[1]) : 0;
+  if (isNaN(pos)) {
+    pos = 0;
+  }
+  return string.indexOf(String(search), pos) != -1;
+};
+
+ES5StringPrototype.repeat = function(count) {
+  if (this == null) {
+    throw new TypeError(
+        'String.prototype.repeat called on null or undefined');
+  }
+  var string = String(this);
+  var n = count ? Number(count) : 0;
+  if (isNaN(n)) {
+    n = 0;
+  }
+  if (n < 0 || n === Infinity) {
+    throw RangeError();
+  }
+  if (n === 1) {
+    return string;
+  }
+  if (n === 0) {
+    return '';
+  }
+  var result = '';
+  while (n) {
+    if (n & 1) {
+      result += string;
+    }
+    if ((n >>= 1)) {
+      string += string;
+    }
+  }
+  return result;
+};
+
 module.exports = ES5StringPrototype;
 
-/* ff79Y2UDC1p */});
-__d("ES5Array",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
+/* LU1JJeuqBGZ */});
+/**
  * @providesModule ES5Array
  */
-
+__d("ES5Array",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var ES5Array = {};
 
 ES5Array.isArray = function(object) {
@@ -647,10 +731,10 @@ ES5Array.isArray = function(object) {
 module.exports = ES5Array;
 
 /* MSYhZmKvHdG */});
-__d("ES5Object",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
+/**
  * @providesModule ES5Object
  */
-
+__d("ES5Object",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var ES5Object = {};
 /**
  * Creates a new object with the specified prototype object.
@@ -718,10 +802,10 @@ ES5Object.keys = function(object) {
 module.exports = ES5Object;
 
 /* yHiOk9LP9ld */});
-__d("ES5Date",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
+/**
  * @providesModule ES5Date
  */
-
+__d("ES5Date",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var ES5Date = {};
 ES5Date.now = function() {
   return new Date().getTime();
@@ -730,12 +814,12 @@ ES5Date.now = function() {
 module.exports = ES5Date;
 
 /* Nh0WBu8zYRI */});
-__d("JSON3",[],function(global,require,requireDynamic,requireLazy,module,exports) {/**
+/**
  * @providesModule JSON3
  * @preserve-header
  *
  *! JSON v3.2.3 | http://bestiejs.github.com/json3 | Copyright 2012, Kit Cambridge | http://kit.mit-license.org
- */
+ */__d("JSON3",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 ;(function () {
   // Convenience aliases.
   var getClass = {}.toString, isProperty, forEach, undef;
@@ -1487,20 +1571,20 @@ __d("JSON3",[],function(global,require,requireDynamic,requireLazy,module,exports
 }).call(this);
 
 /* 2KL294koxM_ */});
-__d("ES5",["ES5ArrayPrototype","ES5FunctionPrototype","ES5StringPrototype","ES5Array","ES5Object","ES5Date","JSON3"],function(global,require,requireDynamic,requireLazy,module,exports) {/**
+/**
  * @providesModule ES5
  *
  * scripts/jssdk/default.spatch converts ES5 code into using this module in
  * ES3 style.
  */
-
-var ES5ArrayPrototype = require('ES5ArrayPrototype');
-var ES5FunctionPrototype = require('ES5FunctionPrototype');
-var ES5StringPrototype = require('ES5StringPrototype');
-var ES5Array= require('ES5Array');
-var ES5Object = require('ES5Object');
-var ES5Date = require('ES5Date');
-var JSON3 = require('JSON3');
+__d("ES5",["ES5ArrayPrototype","ES5FunctionPrototype","ES5StringPrototype","ES5Array","ES5Object","ES5Date","JSON3"],function(global,require,requireDynamic,requireLazy,module,exports,ES5ArrayPrototype,ES5FunctionPrototype,ES5StringPrototype,ES5Array,ES5Object,ES5Date,JSON3) {
+   
+   
+   
+  
+   
+   
+   
 
 var slice = Array.prototype.slice;
 var toString = Object.prototype.toString;
@@ -1573,9 +1657,9 @@ module.exports = ES5;
 return ES5.apply(null, arguments);
 };
 
-__d("sdk.RuntimeConfig",[],{"locale":"en_US","rtl":false});__d("SDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"features":{"kill_fragment":true,"xfbml_profile_pic_server":true,"error_handling":{"rate":4},"e2e_ping_tracking":{"rate":1.0e-6}},"api":{"mode":"warn","whitelist":["Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Data","Data.process","Data.query","Data.query:wait","Data.waitOn","Data.waitOn:wait","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.cancelFlow","Payment.continueFlow","Payment.init","Payment.lockForProcessing","Payment.unlockForProcessing","Payment.parse","Payment.setSize","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui","ui:subscribe"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","business":"business.facebook.com","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("XDConfig",[],{"XdUrl":"connect\/xd_arbiter.php?version=40","Flash":{"path":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yS\/r\/NoZWYE2GRkt.swf"},"useCdn":true});__d("CssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_reset > div{overflow:hidden}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n.fbpluginrecommendationsbarleft{left:10px}\n.fbpluginrecommendationsbarright{right:10px}","components":["css:fb.css.base","css:fb.css.dialog","css:fb.css.iframewidget","css:fb.css.connectbarwidget","css:fb.css.plugin.recommendationsbar"]});__d("CanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("PluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});__d("ConnectBarConfig",[],{"imgs":{"buttonUrl":"rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png","missingProfileUrl":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"}});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yB\/r\/YV5wijq5fkW.swf"}});
-__d("QueryString",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+__d("sdk.RuntimeConfig",[],{"locale":"en_US","rtl":false,"revision":"1149284"});__d("SDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"features":{"kill_fragment":true,"xfbml_profile_pic_server":true,"error_handling":{"rate":4},"e2e_ping_tracking":{"rate":1.0e-6},"xd_timeout":{"rate":4,"value":20000},"use_bundle":true},"api":{"mode":"warn","whitelist":["Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Data","Data.process","Data.query","Data.query:wait","Data.waitOn","Data.waitOn:wait","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.cancelFlow","Payment.continueFlow","Payment.init","Payment.lockForProcessing","Payment.unlockForProcessing","Payment.parse","Payment.setSize","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui","ui:subscribe"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","business":"business.facebook.com","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("XDConfig",[],{"XdUrl":"\/connect\/xd_arbiter.php?version=40","XdBundleUrl":"\/connect\/xd_arbiter\/y8jqy8Ygut-.js?version=40","Flash":{"path":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"},"useCdn":true});__d("CssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}\n.fb_invisible{display:none}\n.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}\n.fb_reset > div{overflow:hidden}\n.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}\n.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}\n.fb_dialog_content{background:#fff;color:#333}\n.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\\9;right:7px\\9}\n.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}\n.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}\n.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}\n.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}\n.fb_dialog_top_left,\n.fb_dialog_top_right,\n.fb_dialog_bottom_left,\n.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}\n.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}\n.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}\n.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}\n.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right,\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}\n.fb_dialog_vert_left,\n.fb_dialog_vert_right{width:10px;height:100\u0025}\n.fb_dialog_vert_left{margin-left:-10px}\n.fb_dialog_vert_right{right:0;margin-right:-10px}\n.fb_dialog_horiz_top,\n.fb_dialog_horiz_bottom{width:100\u0025;height:10px}\n.fb_dialog_horiz_top{margin-top:-10px}\n.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}\n.fb_dialog_iframe{line-height:0}\n.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}\n.fb_dialog_content .dialog_title > span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif)\nno-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}\nbody.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}\n.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif)\nwhite no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}\n.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}\n#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}\n#fb-root #fb_dialog_ipad_overlay.hidden{display:none}\n.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}\n.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}\n.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025\n}\n.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px\n}\n.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6),\ncolor-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,\nrgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}\n.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}\n.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}\n.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}\n#fb_dialog_loader_close{float:left}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}\n.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}\n.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}\n.fb_iframe_widget iframe{position:absolute}\n.fb_iframe_widget_lift{z-index:1}\n.fb_hide_iframes iframe{position:relative;left:-10000px}\n.fb_iframe_widget_loader{position:relative;display:inline-block}\n.fb_iframe_widget_fluid{display:inline}\n.fb_iframe_widget_fluid span{width:100\u0025}\n.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}\n.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,\n.fb_connect_bar_container span,\n.fb_connect_bar_container a,\n.fb_connect_bar_container img,\n.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}\n.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}\n.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}\n.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}\n.fb_connect_bar a:hover{color:#fff}\n.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}\n.fb_connect_bar div a,\n.fb_connect_bar span,\n.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}\n.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fbpluginrecommendationsbarleft,\n.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}\n.fbpluginrecommendationsbarleft{left:10px}\n.fbpluginrecommendationsbarright{right:10px}","components":["css:fb.css.base","css:fb.css.dialog","css:fb.css.iframewidget","css:fb.css.connectbarwidget","css:fb.css.plugin.recommendationsbar"]});__d("CanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("PluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});__d("ConnectBarConfig",[],{"imgs":{"buttonUrl":"rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png","missingProfileUrl":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"}});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yW\/r\/PvklbuW2Ycn.swf"}});
 
+__d("QueryString",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 
 function encode(/*object*/ bag) /*string*/ {__t([bag, 'object', 'bag']);return __t([function() {
@@ -1638,8 +1722,8 @@ var QueryString = {
 module.exports = QueryString;
 
 });
-__d("copyProperties",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("copyProperties",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 function copyProperties(obj, a, b, c, d, e, f) {
   obj = obj || {};
@@ -1672,8 +1756,8 @@ function copyProperties(obj, a, b, c, d, e, f) {
 module.exports = copyProperties;
 
 });
-__d("ManagedError",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("ManagedError",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 function ManagedError(message, innerError) {
   Error.prototype.constructor.call(this, message);
   this.message = message;
@@ -1685,9 +1769,9 @@ ManagedError.prototype.constructor = ManagedError;
 module.exports = ManagedError;
 
 });
-__d("AssertionError",["ManagedError"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var ManagedError = require('ManagedError');
+__d("AssertionError",["ManagedError"],function(global,require,requireDynamic,requireLazy,module,exports,ManagedError) {
+   
 
 function AssertionError(message) {
   ManagedError.prototype.constructor.apply(this, arguments);
@@ -1699,8 +1783,8 @@ module.exports = AssertionError;
 
 
 });
-__d("sprintf",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("sprintf",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 function sprintf(format ) {__t([format, 'string', 'format']);var args=Array.prototype.slice.call(arguments,1);
   var index = 0;
@@ -1710,11 +1794,11 @@ function sprintf(format ) {__t([format, 'string', 'format']);var args=Array.prot
 module.exports = sprintf;
 
 });
-__d("Assert",["AssertionError","sprintf"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var AssertionError = require('AssertionError');
+__d("Assert",["AssertionError","sprintf"],function(global,require,requireDynamic,requireLazy,module,exports,AssertionError,sprintf) {
+   
 
-var sprintf = require('sprintf');
+   
 
 
 function assert(/*boolean*/ expression, /*?string*/ message) /*boolean*/ {__t([expression, 'boolean', 'expression'], [message, '?string', 'message']);return __t([function() {
@@ -1797,9 +1881,9 @@ ES5(['Array',
 module.exports = Assert;
 
 });
-__d("Type",["copyProperties","Assert"],function(global,require,requireDynamic,requireLazy,module,exports) {
-var copyProperties = require('copyProperties');
-var Assert = require('Assert');
+__d("Type",["copyProperties","Assert"],function(global,require,requireDynamic,requireLazy,module,exports,copyProperties,Assert) {
+   
+   
 
 
 function Type() {
@@ -1926,8 +2010,8 @@ copyProperties(Type, {
 module.exports = Type;
 
 });
-__d("ObservableMixin",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("ObservableMixin",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 function ObservableMixin() {
   this.__observableEvents = {};
 }__w(ObservableMixin, {"type":"ObservableMixin"}); 
@@ -2018,10 +2102,10 @@ ObservableMixin.prototype = {
 module.exports = ObservableMixin;
 
 });
-__d("sdk.Model",["Type","ObservableMixin"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Type = require('Type');
-var ObservableMixin = require('ObservableMixin');
+__d("sdk.Model",["Type","ObservableMixin"],function(global,require,requireDynamic,requireLazy,module,exports,Type,ObservableMixin) {
+   
+   
 
 var Model = Type.extend({
   constructor: __w(function(/*object*/ properties) {__t([properties, 'object', 'properties']);
@@ -2056,12 +2140,12 @@ var Model = Type.extend({
 module.exports = Model;
 
 });
-__d("sdk.Runtime",["sdk.Model","copyProperties","sdk.RuntimeConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Model = require('sdk.Model');
-var RuntimeConfig = requireDynamic('sdk.RuntimeConfig');
+__d("sdk.Runtime",["sdk.Model","sdk.RuntimeConfig","copyProperties"],function(global,require,requireDynamic,requireLazy,module,exports,Model,RuntimeConfig,copyProperties) {
+   
+   
 
-var copyProperties = require('copyProperties');
+   
 
 var ENVIRONMENTS = {
   UNKNOWN: 0,
@@ -2073,17 +2157,18 @@ var ENVIRONMENTS = {
 var Runtime = new Model({
   AccessToken: '',
   ClientID: '',
+  CookieUserID: '',
   Environment: ENVIRONMENTS.UNKNOWN,
   Initialized: false,
   KidDirectedSite: undefined,
   Locale: RuntimeConfig.locale,
   LoginStatus: undefined,
+  Revision: RuntimeConfig.revision,
   Rtl: RuntimeConfig.rtl,
   Scope: undefined,
   Secure: undefined,
   UseCookie: false,
-  UserID: '',
-  CookieUserID: ''
+  UserID: ''
 });
 
 copyProperties(Runtime, {
@@ -2113,10 +2198,10 @@ copyProperties(Runtime, {
 module.exports = Runtime;
 
 });
-__d("sdk.Cookie",["QueryString","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var QueryString = require('QueryString');
-var Runtime = require('sdk.Runtime');
+__d("sdk.Cookie",["QueryString","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports,QueryString,Runtime) {
+   
+   
 
 
 
@@ -2207,8 +2292,8 @@ var Cookie = {
 module.exports = Cookie;
 
 });
-__d("guid",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("guid",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 function guid() {
   return 'f' + (Math.random() * (1 << 30)).toString(16).replace('.', '');
 }
@@ -2216,9 +2301,9 @@ function guid() {
 module.exports = guid;
 
 });
-__d("hasNamePropertyBug",["guid"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var guid = require('guid');
+__d("hasNamePropertyBug",["guid"],function(global,require,requireDynamic,requireLazy,module,exports,guid) {
+   
 
 var hasBug;
 
@@ -2243,8 +2328,8 @@ function hasNamePropertyBug() /*boolean*/ {return __t([function() {
 module.exports = hasNamePropertyBug;
 
 });
-__d("wrapFunction",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("wrapFunction",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var wrappers = {};
 function wrapFunction(/*function*/ fn, /*?string*/ type, /*?string*/ source)
     /*function*/ {__t([fn, 'function', 'fn'], [type, '?string', 'type'], [source, '?string', 'source']);return __t([function() {
@@ -2267,9 +2352,9 @@ wrapFunction.setWrapper = __w(function(/*function*/ fn, /*?string*/ type) {__t([
 module.exports = wrapFunction;
 
 });
-__d("DOMEventListener",["wrapFunction"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var wrapFunction = require('wrapFunction');
+__d("DOMEventListener",["wrapFunction"],function(global,require,requireDynamic,requireLazy,module,exports,wrapFunction) {
+   
 
 var add, remove;
 
@@ -2326,12 +2411,12 @@ var DOMEventListener = {
 module.exports = DOMEventListener;
 
 });
-__d("sdk.createIframe",["copyProperties","guid","hasNamePropertyBug","DOMEventListener"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var copyProperties = require('copyProperties');
-var guid = require('guid');
-var hasNamePropertyBug = require('hasNamePropertyBug');
-var DOMEventListener = require('DOMEventListener');
+__d("sdk.createIframe",["copyProperties","guid","hasNamePropertyBug","DOMEventListener"],function(global,require,requireDynamic,requireLazy,module,exports,copyProperties,guid,hasNamePropertyBug,DOMEventListener) {
+   
+   
+   
+   
 
 function createIframe(/*object*/ opts) /*DOMElement*/ {__t([opts, 'object', 'opts']);return __t([function() {
   opts = copyProperties({}, opts);
@@ -2429,9 +2514,9 @@ var DOMWrapper = {
 module.exports = DOMWrapper;
 
 });
-__d("sdk.feature",["SDKConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var SDKConfig = requireDynamic('SDKConfig');
+__d("sdk.feature",["SDKConfig"],function(global,require,requireDynamic,requireLazy,module,exports,SDKConfig) {
+   
 
 function feature(/*string*/ name, defaultValue) {__t([name, 'string', 'name']);
   if (SDKConfig.features && name in SDKConfig.features) {
@@ -2455,8 +2540,8 @@ function feature(/*string*/ name, defaultValue) {__t([name, 'string', 'name']);
 module.exports = feature;
 
 });
-__d("UserAgent",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("UserAgent",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 
 var _populated = false;
@@ -2642,10 +2727,10 @@ var UserAgent = {
 module.exports = UserAgent;
 
 });
-__d("sdk.getContextType",["UserAgent","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var UserAgent = require('UserAgent');
-var Runtime = require('sdk.Runtime');
+__d("sdk.getContextType",["UserAgent","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports,UserAgent,Runtime) {
+   
+   
 
 function getContextType() /*number*/ {return __t([function() {
   
@@ -2669,9 +2754,9 @@ function getContextType() /*number*/ {return __t([function() {
 module.exports = getContextType;
 
 });
-__d("UrlMap",["UrlMapConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var UrlMapConfig = require('UrlMapConfig');
+__d("UrlMap",["UrlMapConfig"],function(global,require,requireDynamic,requireLazy,module,exports,UrlMapConfig) {
+   
 
 var UrlMap = {
   
@@ -2705,12 +2790,12 @@ var UrlMap = {
 module.exports = UrlMap;
 
 });
-__d("sdk.Impressions",["guid","QueryString","sdk.Runtime","UrlMap"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var guid = require('guid');
-var QueryString = require('QueryString');
-var Runtime = require('sdk.Runtime');
-var UrlMap = require('UrlMap');
+__d("sdk.Impressions",["guid","QueryString","sdk.Runtime","UrlMap"],function(global,require,requireDynamic,requireLazy,module,exports,guid,QueryString,Runtime,UrlMap) {
+   
+   
+   
+   
 
 function request(/*object*/ params) {__t([params, 'object', 'params']);
   var clientID = Runtime.getClientID();
@@ -2748,9 +2833,9 @@ var Impressions = {
 module.exports = Impressions;
 
 });
-__d("Log",["sprintf"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var sprintf = require('sprintf');
+__d("Log",["sprintf"],function(global,require,requireDynamic,requireLazy,module,exports,sprintf) {
+   
 
 var Level = {
   DEBUG    : 3,
@@ -2785,8 +2870,8 @@ module.exports = Log;
 
 
 });
-__d("Base64",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("Base64",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 
 
@@ -2849,9 +2934,9 @@ var Base64 = {
 module.exports = Base64;
 
 });
-__d("sdk.SignedRequest",["Base64"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Base64 = require('Base64');
+__d("sdk.SignedRequest",["Base64"],function(global,require,requireDynamic,requireLazy,module,exports,Base64) {
+   
 
 function parse(/*string?*/ signed_request) /*object?*/ {__t([signed_request, '?string', 'signed_request']);return __t([function() {
   if (!signed_request) {
@@ -2872,178 +2957,530 @@ var SignedRequest = {
 module.exports = SignedRequest;
 
 });
-__d("URL",["Assert","copyProperties","QueryString","Log"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Assert = require('Assert');
-var copyProperties = require('copyProperties');
-var QueryString = require('QueryString');
-var Log = require('Log');
-
-
-
-var urlRe = new RegExp(
-  '(' + 
-    '(((\\w+):)?//)' + 
-    '(.*?@)?' + 
-    '([^~/?#:]+)' + 
-    '(:(\\d+))?' + 
-  ')?' +
-  '([^\\?$#]+)?' + 
-  '(\\?([^$#]+))?' + 
-  '(#([^$]+))?' 
+__d("URIRFC3986",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+var PARSE_PATTERN = new RegExp(
+  '^'+
+  '([^:/?#]+:)?'+                
+  '(//'+                         
+    '([^\\\\/?#@]*@)?'+          
+    '('+                         
+      '\\[[A-Fa-f0-9:.]+\\]|'+   
+      '[^\\/?#:]*'+              
+    ')'+                         
+    '(:[0-9]*)?'+                
+  ')?'+                          
+  '([^?#]*)'+                    
+  '(\\?[^#]*)?'+                 
+  '(#.*)?'                       
 );
 
 
-var bannedRe = /[\0\\]/;
+var URIRFC3986 = {
 
-var unsafeRe = /[^\w\-\.,;\/?:@=&%#$~+!*'\[\]()]+/g;
+  
+  parse: __w(function(uriString) {__t([uriString, 'string', 'uriString']);return __t([function() {
+    if (ES5(uriString,'trim', true) === '') {
+      return null;
+    }
+    var captures = uriString.match(PARSE_PATTERN);
+    var uri = {};
+    
+    // other browsers return undefined. This means there's no way to
+    
+    
+    uri.uri = captures[0] ? captures[0] : null;
+    uri.scheme = captures[1] ?
+      captures[1].substr(0, captures[1].length - 1) :
+      null;
+    uri.authority = captures[2] ? captures[2].substr(2) : null;
+    uri.userinfo = captures[3] ?
+      captures[3].substr(0, captures[3].length - 1) :
+      null;
+    uri.host = captures[2] ? captures[4] : null;
+    uri.port = captures[5] ?
+      (captures[5].substr(1) ? parseInt(captures[5].substr(1), 10) : null) :
+      null;
+    uri.path = captures[6] ? captures[6] : null;
+    uri.query = captures[7] ? captures[7].substr(1) : null;
+    uri.fragment = captures[8] ? captures[8].substr(1) : null;
+    uri.isGenericURI = uri.authority === null && !!uri.scheme;
+    return uri;
+  }.apply(this, arguments), '?object']);}, {"signature":"function(string):?object"})
+};
 
-var domainRe = /^[a-z0-9.][a-z0-9\-\.]+[a-z0-9.]$/;
+module.exports = URIRFC3986;
+
+});
+
+__d("createObjectFrom",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+
+function createObjectFrom(keys, values ) {
+  if (__DEV__) {
+    if (!ES5('Array', 'isArray', false,keys)) {
+      throw new TypeError('Must pass an array of keys.');
+    }
+  }
+
+  var object = {};
+  var isArray = ES5('Array', 'isArray', false,values);
+  if (typeof values == 'undefined') {
+    values = true;
+  }
+
+  for (var ii = keys.length; ii--;) {
+    object[keys[ii]] = isArray ? values[ii] : values;
+  }
+  return object;
+}
+
+module.exports = createObjectFrom;
+
+});
+
+__d("URISchemes",["createObjectFrom"],function(global,require,requireDynamic,requireLazy,module,exports,createObjectFrom) {
+   
+
+var defaultSchemes = createObjectFrom([
+  'fb',        
+  'fbcf',
+  'fbconnect', 
+  'fb-messenger', 
+  'fbrpc',
+  'file',
+  'ftp',
+  'http',
+  'https',
+  'mailto',
+  'ms-app',    
+  'itms',      
+  'itms-apps', 
+  'itms-services', 
+  'market',    
+  'svn+ssh',   
+  'fbstaging', 
+  'tel',       
+  'sms'        
+]);
+
+var URISchemes = {
+
+  
+  isAllowed: __w(function(schema) {__t([schema, '?string', 'schema']);return __t([function() {
+    if (!schema) {
+      return true;
+    }
+    return defaultSchemes.hasOwnProperty(schema.toLowerCase());
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function(?string):boolean"})
+};
+
+module.exports = URISchemes;
+
+});
+
+__d("ex",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+
+
+var ex = function() {var args=Array.prototype.slice.call(arguments,0);
+  args = ES5(args, 'map', true,function(arg)  {return String(arg);});
+  if (args[0].split('%s').length !== args.length) {
+    
+    return ex('ex args number mismatch: %s', ES5('JSON', 'stringify', false,args));
+  }
+
+  return ex._prefix + ES5('JSON', 'stringify', false,args) + ex._suffix;
+};
+
+
+ex._prefix = '<![EX[';
+ex._suffix = ']]>';
+
+module.exports = ex;
+
+});
+
+__d("invariant",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+"use strict";
+
+
+
+var invariant = function(condition) {
+  if (!condition) {
+    var error = new Error(
+      'Minified exception occured; use the non-minified dev environment for ' +
+      'the full error message and additional helpful warnings.'
+    );
+    error.framesToPop = 1;
+    throw error;
+  }
+};
+
+if (__DEV__) {
+  invariant = function(condition, format, a, b, c, d, e, f) {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+
+    if (!condition) {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      var error = new Error(
+        'Invariant Violation: ' +
+        format.replace(/%s/g, function() { return args[argIndex++]; })
+      );
+      error.framesToPop = 1; // we don't care about invariant's own frame
+      throw error;
+    }
+  };
+}
+
+module.exports = invariant;
+
+});
+
+__d("URIBase",["URIRFC3986","URISchemes","copyProperties","ex","invariant"],function(global,require,requireDynamic,requireLazy,module,exports,URIRFC3986,URISchemes,copyProperties,ex,invariant) {
+   
+   
+   
+   
+   
+
+
+var UNSAFE_DOMAIN_PATTERN = new RegExp(
+  
+  
+  '[\\x00-\\x2c\\x2f\\x3b-\\x40\\x5c\\x5e\\x60\\x7b-\\x7f' +
+    
+    '\\uFDD0-\\uFDEF\\uFFF0-\\uFFFF' +
+    
+    '\\u2047\\u2048\\uFE56\\uFE5F\\uFF03\\uFF0F\\uFF1F]');
+
+
+var SECURITY_PATTERN = new RegExp(
+  // URI has a ":" before the first "/"
+  '^(?:[^/]*:|' +
+  
+  '[\\x00-\\x1f]*/[\\x00-\\x1f]*/)');
+
+
+function parse(uri, uriToParse, shouldThrow, serializer) {
+  if (!uriToParse) {
+    return true;
+  }
+
+  
+  if (uriToParse instanceof URIBase) {
+    uri.setProtocol(uriToParse.getProtocol());
+    uri.setDomain(uriToParse.getDomain());
+    uri.setPort(uriToParse.getPort());
+    uri.setPath(uriToParse.getPath());
+    uri.setQueryData(
+      serializer.deserialize(
+        serializer.serialize(uriToParse.getQueryData())
+      )
+    );
+    uri.setFragment(uriToParse.getFragment());
+    return true;
+  }
+
+  uriToParse = uriToParse.toString();
+  var components = URIRFC3986.parse(uriToParse) || {};
+  if (!shouldThrow && !URISchemes.isAllowed(components.scheme)) {
+    return false;
+  }
+  uri.setProtocol(components.scheme || '');
+  if (!shouldThrow && UNSAFE_DOMAIN_PATTERN.test(components.host)) {
+    return false;
+  }
+  uri.setDomain(components.host || '');
+  uri.setPort(components.port || '');
+  uri.setPath(components.path || '');
+  if (shouldThrow) {
+    uri.setQueryData(serializer.deserialize(components.query) || {});
+  } else {
+    try {
+      uri.setQueryData(serializer.deserialize(components.query) || {});
+    } catch (err) {
+      return false;
+    }
+  }
+  uri.setFragment(components.fragment || '');
+
+  if (components.userinfo !== null) {
+    if (shouldThrow) {
+        throw new Error(ex(
+          'URI.parse: invalid URI (userinfo is not allowed in a URI): %s',
+          uri.toString()
+        ));
+    } else {
+      return false;
+    }
+  }
+
+  
+  
+  if (!uri.getDomain() && ES5(uri.getPath(), 'indexOf', true,'\\') !== -1) {
+    if (shouldThrow) {
+      throw new Error(ex(
+        'URI.parse: invalid URI (no domain but multiple back-slashes): %s',
+        uri.toString()
+      ));
+    } else {
+      return false;
+    }
+  }
+
+  
+  
+  if (!uri.getProtocol() && SECURITY_PATTERN.test(uriToParse)) {
+    if (shouldThrow) {
+      throw new Error(ex(
+        'URI.parse: invalid URI (unsafe protocol-relative URLs): %s',
+        uri.toString()
+      ));
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+
+
+  
+  function URIBase(uri, serializer) {"use strict";
+    invariant(serializer, 'no serializer set');
+    this.$URIBase_serializer = serializer;
+
+    this.$URIBase_protocol = '';
+    this.$URIBase_domain = '';
+    this.$URIBase_port = '';
+    this.$URIBase_path = '';
+    this.$URIBase_fragment = '';
+    this.$URIBase_queryData = {};
+    parse(this, uri, true, serializer);
+  }
+
+  
+  URIBase.prototype.setProtocol=function(protocol) {"use strict";
+    invariant(
+      URISchemes.isAllowed(protocol),
+      '"%s" is not a valid protocol for a URI.', protocol
+    );
+    this.$URIBase_protocol = protocol;
+    return this;
+  };
+
+  
+  URIBase.prototype.getProtocol=function(protocol) {"use strict";
+    return this.$URIBase_protocol;
+  };
+
+  
+  URIBase.prototype.setSecure=function(secure) {"use strict";
+    return this.setProtocol(secure ? 'https' : 'http');
+  };
+
+  
+  URIBase.prototype.isSecure=function() {"use strict";
+    return this.getProtocol() === 'https';
+  };
+
+  
+  URIBase.prototype.setDomain=function(domain) {"use strict";
+    
+    if (UNSAFE_DOMAIN_PATTERN.test(domain)) {
+      throw new Error(ex(
+        'URI.setDomain: unsafe domain specified: %s for url %s',
+        domain,
+        this.toString()
+      ));
+    }
+
+    this.$URIBase_domain = domain;
+    return this;
+  };
+
+  
+  URIBase.prototype.getDomain=function() {"use strict";
+    return this.$URIBase_domain;
+  };
+
+  
+  URIBase.prototype.setPort=function(port) {"use strict";
+    this.$URIBase_port = port;
+    return this;
+  };
+
+  
+  URIBase.prototype.getPort=function() {"use strict";
+    return this.$URIBase_port;
+  };
+
+  
+  URIBase.prototype.setPath=function(path) {"use strict";
+    if (__DEV__) {
+      if (path && path.charAt(0) !== '/') {
+        console.warn('Path does not begin with a "/" which means this URI ' +
+          'will likely be malformed. Ensure any string passed to .setPath() ' +
+          'leads with "/"');
+      }
+    }
+    this.$URIBase_path = path;
+    return this;
+  };
+
+  
+  URIBase.prototype.getPath=function() {"use strict";
+    return this.$URIBase_path;
+  };
+
+  
+  URIBase.prototype.addQueryData=function(mapOrKey, value) {"use strict";
+    if (mapOrKey instanceof Object) {
+      copyProperties(this.$URIBase_queryData, mapOrKey);
+    } else {
+      this.$URIBase_queryData[mapOrKey] = value;
+    }
+    return this;
+  };
+
+  
+  URIBase.prototype.setQueryData=function(map) {"use strict";
+    this.$URIBase_queryData = map;
+    return this;
+  };
+
+  
+  URIBase.prototype.getQueryData=function() {"use strict";
+    return this.$URIBase_queryData;
+  };
+
+  
+  URIBase.prototype.removeQueryData=function(keys) {"use strict";
+    if (!ES5('Array', 'isArray', false,keys)) {
+      keys = [keys];
+    }
+    for (var i = 0, length = keys.length; i < length; ++i) {
+      delete this.$URIBase_queryData[keys[i]];
+    }
+    return this;
+  };
+
+  
+  URIBase.prototype.setFragment=function(fragment) {"use strict";
+    this.$URIBase_fragment = fragment;
+    return this;
+  };
+
+  
+  URIBase.prototype.getFragment=function() {"use strict";
+    return this.$URIBase_fragment;
+  };
+
+  
+  URIBase.prototype.isEmpty=function() {"use strict";
+    return !(
+      this.getPath() ||
+      this.getProtocol() ||
+      this.getDomain() ||
+      this.getPort() ||
+      ES5('Object', 'keys', false,this.getQueryData()).length > 0 ||
+      this.getFragment()
+    );
+  };
+
+  
+  URIBase.prototype.toString=function() {"use strict";
+    var str = '';
+    if (this.$URIBase_protocol) {
+      str += this.$URIBase_protocol + '://';
+    }
+    if (this.$URIBase_domain) {
+      str += this.$URIBase_domain;
+    }
+    if (this.$URIBase_port) {
+      str += ':' + this.$URIBase_port;
+    }
+    // If there is a protocol, domain or port, we need to provide '/' for the
+    // path. If we don't have either and also don't have a path, we can omit
+    
+    // with "?", "#", or is empty.
+    if (this.$URIBase_path) {
+      str += this.$URIBase_path;
+    } else if (str) {
+      str += '/';
+    }
+    var queryStr = this.$URIBase_serializer.serialize(this.$URIBase_queryData);
+    if (queryStr) {
+      str += '?' + queryStr;
+    }
+    if (this.$URIBase_fragment) {
+      str += '#' + this.$URIBase_fragment;
+    }
+    return str;
+  };
+
+  
+  URIBase.prototype.getOrigin=function() {"use strict";
+    return this.$URIBase_protocol
+      + '://'
+      + this.$URIBase_domain
+      + (this.$URIBase_port ? ':' + this.$URIBase_port : '');
+  };
+
+
+
+URIBase.isValidURI = function(uri, serializer) {
+  return parse(new URIBase(null, serializer), uri, false, serializer);
+};
+
+module.exports = URIBase;
+
+});
+
+__d("sdk.URI",["Assert","QueryString","URIBase"],function(global,require,requireDynamic,requireLazy,module,exports,Assert,QueryString,URIBase) {
+   
+   
+   
 
 var facebookRe = /\.facebook\.com$/;
 
-
-function URL(/*string*/ url) {__t([url, 'string', 'url']);
-  Assert.isString(url, 'The passed argument was of invalid type.');
-
-  if (bannedRe.test(url)) {
-    throw new URIError('The passed argument could not be parsed as a url.');
+var serializer = {
+  serialize: function(map) {
+    return map
+      ? QueryString.encode(map)
+      : '';
+  },
+  deserialize: function(text) {
+    return text
+      ? QueryString.decode(text)
+      : {};
   }
+};
 
-  
-  if (this instanceof URL === false) {
-    return new URL(url);
-  }
+for(var URIBase____Key in URIBase){if(URIBase.hasOwnProperty(URIBase____Key)){URI[URIBase____Key]=URIBase[URIBase____Key];}}var ____SuperProtoOfURIBase=URIBase===null?null:URIBase.prototype;URI.prototype=ES5('Object', 'create', false,____SuperProtoOfURIBase);URI.prototype.constructor=URI;URI.__superConstructor__=URIBase;
+  function URI(uri) {"use strict";
+    Assert.isString(uri, 'The passed argument was of invalid type.');
 
-  
-  var match = url
-    .replace(unsafeRe, function(m) {
-      Log.warn('Escaping unescaped character \\x%s from "%s"',
-        m.charCodeAt(0).toString(16), url);
-      return encodeURIComponent(m);
-    })
-    .match(urlRe);
+    if (!(this instanceof URI)) {
+      return new URI(uri);
+    }
 
-  if (!url || !match) {
-    throw new URIError('The passed argument could not be parsed as a url.');
-  }
+    URIBase.call(this,uri, serializer);
+  }__w(URI, {"type":"URI"}); 
 
-  
-  
-  
-  var useDefaults = !!location.hostname;
+  URI.prototype.isFacebookURI=function()  {"use strict";
+    return facebookRe.test(this.getDomain());
+  };
 
-  this.setProtocol(match[4] ||
-    (useDefaults ? location.protocol.replace(/:/, '') : ''));
-  this.setDomain(match[6] || location.hostname);
-  this.setPort(match[8] || (useDefaults && !match[6] ? location.port : ''));
-  this.setPath(match[9] || '');
-  this.setSearch(match[11] || '');
-  this.setFragment(match[13] || '');
-
-  if (this._path.substring(0,1) != '/') {
-    this._path = '/' + this._path;
-  }
-
-  
-  if (this._domain &&
-      !domainRe.test(decodeURIComponent(this._domain.toLowerCase()))) {
-    Log.error('Invalid characters found in domain name: %s', this._domain);
-    throw new URIError('Domain contained invalid characters.');
-  }
-}__w(URL, {"type":"URL","signature":"function(string)"}); 
-
-copyProperties(URL.prototype, {
-  constructor : URL,
-
-  getProtocol: __w(function() /*string*/ {return __t([function() {
-    return this._protocol;
-  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
-  setProtocol: __w(function(/*string*/ protocol) /*URL*/ {__t([protocol, 'string', 'protocol']);return __t([function() {
-    this._protocol = protocol;
-    return this;
-  }.apply(this, arguments), 'URL']);}, {"signature":"function(string):URL"}),
-
-  getDomain: __w(function() /*string*/ {return __t([function() {
-    return this._domain;
-  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
-  setDomain: __w(function(/*string*/ domain) /*URL*/ {__t([domain, 'string', 'domain']);return __t([function() {
-    this._domain = domain;
-    return this;
-  }.apply(this, arguments), 'URL']);}, {"signature":"function(string):URL"}),
-
-  getPort: __w(function() /*string*/ {return __t([function() {
-    return this._port;
-  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
-  setPort: __w(function(port) /*URL*/ {return __t([function() {
-    this._port = port;
-    return this;
-  }.apply(this, arguments), 'URL']);}, {"signature":"function():URL"}),
-
-  getPath: __w(function() /*string*/ {return __t([function() {
-    return this._path;
-  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
-  setPath: __w(function(path) /*URL*/ {return __t([function() {
-    this._path = path;
-    return this;
-  }.apply(this, arguments), 'URL']);}, {"signature":"function():URL"}),
-
-  getSearch: __w(function() /*string*/ {return __t([function() {
-    return this._search;
-  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
-  setSearch: __w(function(search) /*URL*/ {return __t([function() {
-    this._search = search;
-    return this;
-  }.apply(this, arguments), 'URL']);}, {"signature":"function():URL"}),
-
-  getFragment: __w(function() /*string*/ {return __t([function() {
-    return this._fragment;
-  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
-  setFragment: __w(function(fragment) /*URL*/ {return __t([function() {
-    this._fragment = fragment;
-    return this;
-  }.apply(this, arguments), 'URL']);}, {"signature":"function():URL"}),
-
-  getParsedSearch: __w(function() /*object*/ {return __t([function() {
-    return QueryString.decode(this._search);
-  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
-
-  getParsedFragment: __w(function() /*object*/ {return __t([function() {
-    return QueryString.decode(this._fragment);
-  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
-
-  isFacebookURL: __w(function() /*boolean*/ {return __t([function() {
-    return facebookRe.test(this._domain);
-  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
-
-  toString: __w(function() /*string*/ {return __t([function() {
-    return (this._protocol ? this._protocol + ':' : '') +
-      (this._domain ? '//' + this._domain : '') +
-      (this._port ? ':' + this._port : '') +
-      this._path +
-      (this._search ? '?' + this._search : '') +
-      (this._fragment ? '#' + this._fragment : '');
-  }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
-  valueOf: __w(function() /*string*/ {return __t([function() {
+  URI.prototype.valueOf=function()  {"use strict";
     return this.toString();
-  }.apply(this, arguments), 'string']);}, {"signature":"function():string"})
-});
+  };
 
-copyProperties(URL, {
 
-  getCurrent: __w(function() /*URL*/ {return __t([function() {
-    return new URL(location.href);
-  }.apply(this, arguments), 'URL']);}, {"signature":"function():URL"}),
-
-  getReferrer: __w(function() /*URL?*/ {return __t([function() {
-    return document.referrer
-      ? new URL(document.referrer)
-      : null;
-  }.apply(this, arguments), '?URL']);}, {"signature":"function():URL?"})
-
-});
-
-module.exports = URL;
+module.exports = URI;
 
 });
 __d("sdk.domReady",[],function(global,require,requireDynamic,requireLazy,module,exports) {
@@ -3109,11 +3546,11 @@ if(!domIsReady) {
 module.exports = domReady;
 
 },3);
-__d("sdk.Content",["sdk.domReady","Log","UserAgent"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var domReady = require('sdk.domReady');
-var Log = require('Log');
-var UserAgent = require('UserAgent');
+__d("sdk.Content",["sdk.domReady","Log","UserAgent"],function(global,require,requireDynamic,requireLazy,module,exports,domReady,Log,UserAgent) {
+   
+   
+   
 
 var visibleRoot;
 var hiddenRoot;
@@ -3205,8 +3642,8 @@ var Content = {
 module.exports = Content;
 
 });
-__d("sdk.Event",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("sdk.Event",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var Event = {
   
   subscribers: __w(function() /*object*/ {return __t([function() {
@@ -3284,9 +3721,9 @@ var Event = {
 module.exports = Event;
 
 });
-__d("Queue",["copyProperties"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var copyProperties = require('copyProperties');
+__d("Queue",["copyProperties"],function(global,require,requireDynamic,requireLazy,module,exports,copyProperties) {
+   
 
 
 var registry = {};
@@ -3348,6 +3785,10 @@ var registry = {};
     return this;
   };
 
+  Queue.prototype.isStarted=function()  {"use strict";
+    return !this._stopped;
+  };
+
   
   Queue.prototype.dispatch=function() {"use strict";
     this._dispatch(true);
@@ -3402,10 +3843,10 @@ var registry = {};
 module.exports = Queue;
 
 });
-__d("JSONRPC",["copyProperties","Log"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var copyProperties = require('copyProperties');
-var Log = require('Log');
+__d("JSONRPC",["copyProperties","Log"],function(global,require,requireDynamic,requireLazy,module,exports,copyProperties,Log) {
+   
+   
 
 function JSONRPC(/*function*/ write) {__t([write, 'function', 'write']);
   this._counter = 0;
@@ -3524,11 +3965,11 @@ copyProperties(JSONRPC.prototype, {
 module.exports = JSONRPC;
 
 });
-__d("sdk.RPC",["Assert","JSONRPC","Queue"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Assert = require('Assert');
-var JSONRPC = require('JSONRPC');
-var Queue = require('Queue');
+__d("sdk.RPC",["Assert","JSONRPC","Queue"],function(global,require,requireDynamic,requireLazy,module,exports,Assert,JSONRPC,Queue) {
+   
+   
+   
 
 var outQueue = new Queue();
 var jsonrpc = new JSONRPC(__w(function(/*string*/ message) {__t([message, 'string', 'message']);
@@ -3554,9 +3995,34 @@ var RPC = {
 module.exports = RPC;
 
 });
-__d("emptyFunction",["copyProperties"],function(global,require,requireDynamic,requireLazy,module,exports) {
+__d("sdk.Scribe",["QueryString","sdk.Runtime","UrlMap"],function(global,require,requireDynamic,requireLazy,module,exports,QueryString,Runtime,UrlMap) {
+   
+   
+   
 
-var copyProperties = require('copyProperties');
+function log(/*string*/ category, /*object*/ data) {__t([category, 'string', 'category'], [data, 'object', 'data']);
+  if (typeof data.extra == 'object') {
+    data.extra.revision = Runtime.getRevision();
+  }
+  (new Image()).src = QueryString.appendToUrl(
+    UrlMap.resolve('www', /*force ssl*/true) + '/common/scribe_endpoint.php',
+    {
+      c: category,
+      m: ES5('JSON', 'stringify', false,data)
+    }
+  );
+}__w(log, {"signature":"function(string,object)"}); 
+
+var Scribe = {
+  log: log
+};
+
+module.exports = Scribe;
+
+});
+
+__d("emptyFunction",["copyProperties"],function(global,require,requireDynamic,requireLazy,module,exports,copyProperties) {
+   
 
 function makeEmptyFunction(arg) {
   return function() {
@@ -3611,18 +4077,18 @@ function htmlSpecialChars(text) {
 module.exports = htmlSpecialChars;
 
 });
-__d("Flash",["DOMEventListener","DOMWrapper","QueryString","UserAgent","copyProperties","guid","htmlSpecialChars"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("Flash",["DOMEventListener","DOMWrapper","QueryString","UserAgent","copyProperties","guid","htmlSpecialChars"],function(global,require,requireDynamic,requireLazy,module,exports,DOMEventListener,DOMWrapper,QueryString,UserAgent,copyProperties,guid,htmlSpecialChars) {
 /*globals ActiveXObject */
 
-var DOMEventListener = require('DOMEventListener');
-var DOMWrapper = require('DOMWrapper');
-var QueryString = require('QueryString');
-var UserAgent = require('UserAgent');
+   
+   
+   
+   
 
-var copyProperties = require('copyProperties');
-var guid = require('guid');
-var htmlSpecialChars = require('htmlSpecialChars');
+   
+   
+   
 
 var registry = {};
 var unloadHandlerAttached;
@@ -3765,8 +4231,8 @@ var Flash = {
 module.exports = Flash;
 
 });
-__d("dotAccess",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("dotAccess",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 function dotAccess(head, path, create) {
   var stack = path.split('.');
   do {
@@ -3779,12 +4245,12 @@ function dotAccess(head, path, create) {
 module.exports = dotAccess;
 
 });
-__d("GlobalCallback",["DOMWrapper","dotAccess","guid","wrapFunction"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var DOMWrapper = require('DOMWrapper');
-var dotAccess = require('dotAccess');
-var guid = require('guid');
-var wrapFunction = require('wrapFunction');
+__d("GlobalCallback",["DOMWrapper","dotAccess","guid","wrapFunction"],function(global,require,requireDynamic,requireLazy,module,exports,DOMWrapper,dotAccess,guid,wrapFunction) {
+   
+   
+   
+   
 
 // window is the same as the 'global' object in the browser, but the variable
 // 'global' might be shadowed.
@@ -3820,17 +4286,17 @@ var GlobalCallback = {
 module.exports = GlobalCallback;
 
 });
-__d("XDM",["DOMEventListener","DOMWrapper","emptyFunction","Flash","GlobalCallback","guid","Log","UserAgent","wrapFunction"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var DOMEventListener = require('DOMEventListener');
-var DOMWrapper = require('DOMWrapper');
-var emptyFunction = require('emptyFunction');
-var Flash = require('Flash');
-var GlobalCallback = require('GlobalCallback');
-var guid = require('guid');
-var Log = require('Log');
-var UserAgent = require('UserAgent');
-var wrapFunction = require('wrapFunction');
+__d("XDM",["DOMEventListener","DOMWrapper","emptyFunction","Flash","GlobalCallback","guid","Log","UserAgent","wrapFunction"],function(global,require,requireDynamic,requireLazy,module,exports,DOMEventListener,DOMWrapper,emptyFunction,Flash,GlobalCallback,guid,Log,UserAgent,wrapFunction) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 var transports = {};
 var configuration = {
@@ -4027,21 +4493,24 @@ XDM.register('postmessage', (function() {
 module.exports = XDM;
 
 });
-__d("sdk.XD",["sdk.Content","sdk.createIframe","sdk.Event","guid","Log","QueryString","Queue","sdk.RPC","sdk.Runtime","UrlMap","URL","XDM","XDConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Content = require('sdk.Content');
-var createIframe = require('sdk.createIframe');
-var Event = require('sdk.Event');
-var guid = require('guid');
-var Log = require('Log');
-var QueryString = require('QueryString');
-var Queue = require('Queue');
-var RPC = require('sdk.RPC');
-var Runtime = require('sdk.Runtime');
-var UrlMap = require('UrlMap');
-var URL = require('URL');
-var XDConfig = requireDynamic('XDConfig');
-var XDM = require('XDM');
+__d("sdk.XD",["sdk.Content","sdk.Event","Log","QueryString","Queue","sdk.RPC","sdk.Runtime","sdk.Scribe","sdk.URI","UrlMap","XDConfig","XDM","sdk.createIframe","sdk.feature","guid"],function(global,require,requireDynamic,requireLazy,module,exports,Content,Event,Log,QueryString,Queue,RPC,Runtime,Scribe,URI,UrlMap,XDConfig,XDM,createIframe,feature,guid) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+   
+   
+   
 
 var facebookQueue = new Queue();
 var httpProxyQueue = new Queue();
@@ -4050,6 +4519,14 @@ var httpProxyFrame;
 var httpsProxyFrame;
 var proxySecret = guid();
 
+var xdArbiterTier = XDConfig.useCdn ? 'cdn' : 'www';
+var xdArbiterPathAndQuery = feature('use_bundle')
+  ? XDConfig.XdBundleUrl
+  : XDConfig.XdUrl;
+var xdArbiterHttpUrl
+  = UrlMap.resolve(xdArbiterTier, false) + xdArbiterPathAndQuery;
+var xdArbiterHttpsUrl
+  = UrlMap.resolve(xdArbiterTier, true) + xdArbiterPathAndQuery;
 
 var channel = guid();
 var origin = location.protocol + '//' + location.host;
@@ -4132,7 +4609,7 @@ function handleAction(/*object*/ message, /*string*/ senderOrigin) {__t([message
 
 function onMessage(/*string|object*/ message, /*?string*/ senderOrigin) {__t([message, 'string|object', 'message'], [senderOrigin, '?string', 'senderOrigin']);
   if (senderOrigin && senderOrigin !== 'native' &&
-      !URL(senderOrigin).isFacebookURL()) {
+      !URI(senderOrigin).isFacebookURI()) {
     return;
   }
   if (typeof message == 'string') {
@@ -4233,18 +4710,7 @@ function init(/*?string*/ xdProxyName) {__t([xdProxyName, '?string', 'xdProxyNam
         xd_name: xdProxyName 
       };
 
-      var proxyUrl = '/' + XDConfig.XdUrl +
-        '#' + QueryString.encode(proxyData);
-
-      
-      
-      var httpDomain = XDConfig.useCdn
-       ? UrlMap.resolve('cdn', false)
-       : 'http://www.facebook.com';
-
-      var httpsDomain = XDConfig.useCdn
-       ? UrlMap.resolve('cdn', true)
-       : 'https://www.facebook.com';
+      var xdArbiterFragment = '#' + QueryString.encode(proxyData);
 
       
       
@@ -4255,7 +4721,7 @@ function init(/*?string*/ xdProxyName) {__t([xdProxyName, '?string', 'xdProxyNam
         
         
         httpProxyFrame = createIframe({
-          url: httpDomain + proxyUrl,
+          url: xdArbiterHttpUrl + xdArbiterFragment,
           name: 'fb_xdm_frame_http',
           id: 'fb_xdm_frame_http',
           root: container,
@@ -4268,7 +4734,7 @@ function init(/*?string*/ xdProxyName) {__t([xdProxyName, '?string', 'xdProxyNam
       
       
       httpsProxyFrame = createIframe({
-        url: httpsDomain + proxyUrl,
+        url: xdArbiterHttpsUrl + xdArbiterFragment,
         name: 'fb_xdm_frame_https',
         id: 'fb_xdm_frame_https',
         root: container,
@@ -4317,19 +4783,16 @@ var XD = {
   
   handler: __w(function(/*function*/ cb, /*?string*/ relation, /*?boolean*/ forever,
       /*?string*/ id) /*string*/ {__t([cb, 'function', 'cb'], [relation, '?string', 'relation'], [forever, '?boolean', 'forever'], [id, '?string', 'id']);return __t([function() {
-    var handlerDomain = XDConfig.useCdn
-      ? UrlMap.resolve('cdn', location.protocol == 'https:')
-      : location.protocol + '//www.facebook.com';
-
-    // This url isn't actually used, the channel_url is merely used to pass
-    
-    
-    return handlerDomain + '/' + XDConfig.XdUrl + '#' + QueryString.encode({
+    var xdArbiterFragment = '#' + QueryString.encode({
       cb        : this.registerCallback(cb, forever, id),
       origin    : origin + '/' + channel,
       domain    : location.hostname,
       relation  : relation || 'opener'
     });
+    return (location.protocol == 'https:'
+      ? xdArbiterHttpsUrl
+      : xdArbiterHttpUrl
+    ) + xdArbiterFragment;
   }.apply(this, arguments), 'string']);}, {"signature":"function(function,?string,?boolean,?string):string"}),
 
   registerCallback: __w(function(/*function*/ cb, /*?boolean*/ persistent,
@@ -4349,30 +4812,48 @@ var XD = {
 
 Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options, 'object', 'options']);
   init(options.xdProxyName);
+  var timeout = feature('xd_timeout');
+  if (timeout) {
+    setTimeout(function() {
+      var initialized =
+        httpsProxyFrame
+        && (!!httpProxyFrame == httpProxyQueue.isStarted()
+            && !!httpsProxyFrame == httpsProxyQueue.isStarted());
+
+      if (!initialized) {
+        Scribe.log('jssdk_error', {
+          appId: Runtime.getClientID(),
+          error: 'XD_INITIALIZATION',
+          extra: {
+            message: 'Failed to initialize in ' + timeout + 'ms'
+          }
+        });
+      }
+    }, timeout);
+  }
 }, {"signature":"function(object)"}));
 
 
 module.exports = XD;
 
 });
-__d("sdk.Auth",["sdk.Cookie","copyProperties","sdk.createIframe","DOMWrapper","sdk.feature","sdk.getContextType","guid","sdk.Impressions","Log","ObservableMixin","QueryString","sdk.Runtime","sdk.SignedRequest","UrlMap","URL","sdk.XD"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Cookie = require('sdk.Cookie');
-var copyProperties = require('copyProperties');
-var createIframe = require('sdk.createIframe');
-var DOMWrapper = require('DOMWrapper');
-var feature = require('sdk.feature');
-var getContextType = require('sdk.getContextType');
-var guid = require('guid');
-var Impressions = require('sdk.Impressions');
-var Log = require('Log');
-var ObservableMixin = require('ObservableMixin');
-var QueryString = require('QueryString');
-var Runtime = require('sdk.Runtime');
-var SignedRequest = require('sdk.SignedRequest');
-var UrlMap = require('UrlMap');
-var URL = require('URL');
-var XD = require('sdk.XD');
+__d("sdk.Auth",["sdk.Cookie","copyProperties","sdk.createIframe","DOMWrapper","sdk.feature","sdk.getContextType","guid","sdk.Impressions","Log","ObservableMixin","sdk.Runtime","sdk.SignedRequest","UrlMap","sdk.URI","sdk.XD"],function(global,require,requireDynamic,requireLazy,module,exports,Cookie,copyProperties,createIframe,DOMWrapper,feature,getContextType,guid,Impressions,Log,ObservableMixin,Runtime,SignedRequest,UrlMap,URI,XD) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 var currentAuthResponse;
 
@@ -4518,8 +4999,8 @@ function fetchLoginStatus(/*function*/ fn) {__t([fn, 'function', 'fn']);
   var handleResponse = xdResponseWrapper(fn, currentAuthResponse,
     'login_status');
 
-  var url = URL(UrlMap.resolve('www', true) + '/connect/ping')
-    .setSearch(QueryString.encode({
+  var url = URI(UrlMap.resolve('www', true) + '/connect/ping')
+    .setQueryData({
       client_id: Runtime.getClientID(),
       response_type: 'token,signed_request,code',
       domain: location.hostname,
@@ -4547,7 +5028,7 @@ function fetchLoginStatus(/*function*/ fn) {__t([fn, 'function', 'fn']);
       }, {"signature":"function(object)"}), 'parent'),
       sdk: 'joey',
       kid_directed_site: Runtime.getKidDirectedSite()
-    }));
+    });
 
   frame = createIframe({
     root: DOMWrapper.getRoot(),
@@ -4610,48 +5091,9 @@ copyProperties(Auth, {
 module.exports = Auth;
 
 });
-__d("invariant",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-
-
-function invariant(condition) {
-  if (!condition) {
-    var error = new Error(
-      'Minified exception occured, use the non-minified dev environment for ' +
-      'the full error message and additional helpful warnings.'
-    );
-    error.framesToPop = 1;
-    throw error;
-  }
-}
-
-module.exports = invariant;
-
-if (__DEV__) {
-  var invariantDev = function(condition, format, a, b, c, d, e, f) {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-
-    if (!condition) {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      var error = new Error(
-        'Invariant Violation: ' +
-        format.replace(/%s/g, function() { return args[argIndex++]; })
-      );
-      error.framesToPop = 1; // we don't care about invariant's own frame
-      throw error;
-    }
-  };
-
-  module.exports = invariantDev;
-}
-
-});
-__d("toArray",["invariant"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-var invariant = require('invariant');
+__d("toArray",["invariant"],function(global,require,requireDynamic,requireLazy,module,exports,invariant) {
+   
 
 
 function toArray(obj) {__t([obj, 'object|function', 'obj']);return __t([function() {
@@ -4699,9 +5141,9 @@ function toArray(obj) {__t([obj, 'object|function', 'obj']);return __t([function
 module.exports = toArray;
 
 });
-__d("createArrayFrom",["toArray"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var toArray = require('toArray');
+__d("createArrayFrom",["toArray"],function(global,require,requireDynamic,requireLazy,module,exports,toArray) {
+   
 
 
 function hasArrayNature(obj) {return __t([function() {
@@ -4742,12 +5184,12 @@ function createArrayFrom(obj) {return __t([function() {
 module.exports = createArrayFrom;
 
 });
-__d("sdk.DOM",["Assert","createArrayFrom","sdk.domReady","UserAgent"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Assert = require('Assert');
-var createArrayFrom = require('createArrayFrom');
-var domReady = require('sdk.domReady');
-var UserAgent = require('UserAgent');
+__d("sdk.DOM",["Assert","createArrayFrom","sdk.domReady","UserAgent"],function(global,require,requireDynamic,requireLazy,module,exports,Assert,createArrayFrom,domReady,UserAgent) {
+   
+   
+   
+   
 
 var cssRules = {};
 
@@ -4976,35 +5418,14 @@ var DOM = {
 module.exports = DOM;
 
 });
-__d("sdk.Scribe",["UrlMap","QueryString"],function(global,require,requireDynamic,requireLazy,module,exports) {
-var UrlMap = require('UrlMap');
-var QueryString = require('QueryString');
 
-function log(/*string*/ category, /*object*/ data) {__t([category, 'string', 'category'], [data, 'object', 'data']);
-  (new Image()).src = QueryString.appendToUrl(
-    UrlMap.resolve('www', /*force ssl*/true) + '/common/scribe_endpoint.php',
-    {
-      c: category,
-      m: ES5('JSON', 'stringify', false,data)
-    }
-  );
-}__w(log, {"signature":"function(string,object)"}); 
-
-var Scribe = {
-  log: log
-};
-
-module.exports = Scribe;
-
-});
-__d("sdk.ErrorHandling",["sdk.feature","ManagedError","sdk.Runtime","sdk.Scribe","UserAgent","wrapFunction"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-var feature = require('sdk.feature');
-var ManagedError = require('ManagedError');
-var Runtime = require('sdk.Runtime');
-var Scribe = require('sdk.Scribe');
-var UserAgent = require('UserAgent');
-var wrapFunction = require('wrapFunction');
+__d("sdk.ErrorHandling",["sdk.feature","ManagedError","sdk.Runtime","sdk.Scribe","UserAgent","wrapFunction"],function(global,require,requireDynamic,requireLazy,module,exports,feature,ManagedError,Runtime,Scribe,UserAgent,wrapFunction) {
+   
+   
+   
+   
+   
+   
 
 var handleError = feature('error_handling', false);
 var currentEntry = '';
@@ -5133,9 +5554,9 @@ var ErrorHandler = {
 module.exports = ErrorHandler;
 
 });
-__d("sdk.Insights",["sdk.Impressions"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Impressions = require('sdk.Impressions');
+__d("sdk.Insights",["sdk.Impressions"],function(global,require,requireDynamic,requireLazy,module,exports,Impressions) {
+   
 
 var Insights = {
   TYPE: {
@@ -5169,23 +5590,23 @@ var Insights = {
 module.exports = Insights;
 
 });
-__d("FB",["sdk.Auth","copyProperties","dotAccess","sdk.domReady","sdk.DOM","sdk.ErrorHandling","sdk.Content","DOMWrapper","GlobalCallback","sdk.Insights","Log","sdk.Runtime","sdk.Scribe","CssConfig","SDKConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Auth = require('sdk.Auth');
-var copyProperties = require('copyProperties');
-var CssConfig = requireDynamic('CssConfig');
-var dotAccess = require('dotAccess');
-var domReady = require('sdk.domReady');
-var DOM = require('sdk.DOM');
-var ErrorHandling = require('sdk.ErrorHandling');
-var Content = require('sdk.Content');
-var DOMWrapper = require('DOMWrapper');
-var GlobalCallback = require('GlobalCallback');
-var Insights = require('sdk.Insights');
-var Log = require('Log');
-var Runtime = require('sdk.Runtime');
-var Scribe = require('sdk.Scribe');
-var SDKConfig = requireDynamic('SDKConfig');
+__d("FB",["sdk.Auth","copyProperties","CssConfig","dotAccess","sdk.domReady","sdk.DOM","sdk.ErrorHandling","sdk.Content","DOMWrapper","GlobalCallback","sdk.Insights","Log","sdk.Runtime","sdk.Scribe","SDKConfig"],function(global,require,requireDynamic,requireLazy,module,exports,Auth,copyProperties,CssConfig,dotAccess,domReady,DOM,ErrorHandling,Content,DOMWrapper,GlobalCallback,Insights,Log,Runtime,Scribe,SDKConfig) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 var externalInterface;
 var apiWhitelist, apiWhitelistMode = dotAccess(SDKConfig, 'api.mode');
@@ -5385,9 +5806,9 @@ copyProperties(FB, {
 module.exports = FB;
 
 });
-__d("ArgumentError",["ManagedError"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var ManagedError = require('ManagedError');
+__d("ArgumentError",["ManagedError"],function(global,require,requireDynamic,requireLazy,module,exports,ManagedError) {
+   
 
 function ArgumentError(message, innerError) {
   ManagedError.prototype.constructor.apply(this, arguments);
@@ -5398,10 +5819,10 @@ ArgumentError.prototype.constructor = ArgumentError;
 module.exports = ArgumentError;
 
 });
-__d("CORSRequest",["wrapFunction","QueryString"],function(global,require,requireDynamic,requireLazy,module,exports) {
+__d("CORSRequest",["wrapFunction","QueryString"],function(global,require,requireDynamic,requireLazy,module,exports,wrapFunction,QueryString) {
 /*global self:true*/
-var wrapFunction = require('wrapFunction');
-var QueryString = require('QueryString');
+   
+   
 
 function createCORSRequest(/*string*/ method, /*string*/ url) /*?object*/ {__t([method, 'string', 'method'], [url, 'string', 'url']);return __t([function() {
    if (!self.XMLHttpRequest) {
@@ -5521,13 +5942,13 @@ var CORSRequest = {
 module.exports = CORSRequest;
 
 });
-__d("FlashRequest",["DOMWrapper","Flash","GlobalCallback","QueryString","Queue"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var DOMWrapper     = require('DOMWrapper');
-var Flash          = require('Flash');
-var GlobalCallback = require('GlobalCallback');
-var QueryString    = require('QueryString');
-var Queue          = require('Queue');
+__d("FlashRequest",["DOMWrapper","Flash","GlobalCallback","QueryString","Queue"],function(global,require,requireDynamic,requireLazy,module,exports,DOMWrapper,Flash,GlobalCallback,QueryString,Queue) {
+       
+            
+   
+      
+            
 
 var flashQueue; 
 var requestCallbacks = {}; 
@@ -5635,8 +6056,8 @@ var FlashRequest = {
 module.exports = FlashRequest;
 
 });
-__d("flattenObject",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("flattenObject",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
 function flattenObject(/*object*/ obj) /*object*/ {__t([obj, 'object', 'obj']);return __t([function() {
   var flat = {};
@@ -5657,11 +6078,11 @@ function flattenObject(/*object*/ obj) /*object*/ {__t([obj, 'object', 'obj']);r
 module.exports = flattenObject;
 
 });
-__d("JSONPRequest",["DOMWrapper","GlobalCallback","QueryString"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var DOMWrapper     = require('DOMWrapper');
-var GlobalCallback = require('GlobalCallback');
-var QueryString    = require('QueryString');
+__d("JSONPRequest",["DOMWrapper","GlobalCallback","QueryString"],function(global,require,requireDynamic,requireLazy,module,exports,DOMWrapper,GlobalCallback,QueryString) {
+       
+   
+      
 
 
 function execute(/*string*/ url, /*string*/ method, /*object*/ params,
@@ -5733,171 +6154,22 @@ var JSONPRequest = {
 module.exports = JSONPRequest;
 
 });
-__d("keyMirror",["invariant"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-"use strict";
+__d("ApiClient",["ArgumentError","Assert","copyProperties","CORSRequest","FlashRequest","flattenObject","JSONPRequest","Log","ObservableMixin","sprintf","sdk.URI","UrlMap","ApiClientConfig"],function(global,require,requireDynamic,requireLazy,module,exports,ArgumentError,Assert,copyProperties,CORSRequest,FlashRequest,flattenObject,JSONPRequest,Log,ObservableMixin,sprintf,URI,UrlMap,ApiClientConfig) {
+    
+           
+   
+      
+     
+    
+     
+              
+   
+          
+              
+           
 
-var invariant = require('invariant');
-
-
-var keyMirror = function(obj) {
-  var ret = {};
-  var key;
-  invariant(
-    obj instanceof Object && !ES5('Array', 'isArray', false,obj),
-    'keyMirror(...): Argument must be an object.'
-  );
-  for (key in obj) {
-    if (!obj.hasOwnProperty(key)) {
-      continue;
-    }
-    ret[key] = key;
-  }
-  return ret;
-};
-
-module.exports = keyMirror;
-
-});
-__d("mergeHelpers",["invariant","keyMirror"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-"use strict";
-
-var invariant = require('invariant');
-var keyMirror = require('keyMirror');
-
-
-var MAX_MERGE_DEPTH = 36;
-
-
-var isTerminal = function(o) {
-  return typeof o !== 'object' || o === null;
-};
-
-var mergeHelpers = {
-
-  MAX_MERGE_DEPTH: MAX_MERGE_DEPTH,
-
-  isTerminal: isTerminal,
-
-  
-  normalizeMergeArg: function(arg) {
-    return arg === undefined || arg === null ? {} : arg;
-  },
-
-  
-  checkMergeArrayArgs: function(one, two) {
-    invariant(
-      ES5('Array', 'isArray', false,one) && ES5('Array', 'isArray', false,two),
-      'Tried to merge arrays, instead got %s and %s.',
-      one,
-      two
-    );
-  },
-
-  
-  checkMergeObjectArgs: function(one, two) {
-    mergeHelpers.checkMergeObjectArg(one);
-    mergeHelpers.checkMergeObjectArg(two);
-  },
-
-  
-  checkMergeObjectArg: function(arg) {
-    invariant(
-      !isTerminal(arg) && !ES5('Array', 'isArray', false,arg),
-      'Tried to merge an object, instead got %s.',
-      arg
-    );
-  },
-
-  
-  checkMergeLevel: function(level) {
-    invariant(
-      level < MAX_MERGE_DEPTH,
-      'Maximum deep merge depth exceeded. You may be attempting to merge ' +
-      'circular structures in an unsupported way.'
-    );
-  },
-
-  
-  checkArrayStrategy: function(strategy) {
-    invariant(
-      strategy === undefined || strategy in mergeHelpers.ArrayStrategies,
-      'You must provide an array strategy to deep merge functions to ' +
-      'instruct the deep merge how to resolve merging two arrays.'
-    );
-  },
-
-  
-  ArrayStrategies: keyMirror({
-    Clobber: true,
-    IndexByIndex: true
-  })
-
-};
-
-module.exports = mergeHelpers;
-
-});
-__d("mergeInto",["mergeHelpers"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-"use strict";
-
-var mergeHelpers = require('mergeHelpers');
-
-var checkMergeObjectArg = mergeHelpers.checkMergeObjectArg;
-
-
-function mergeInto(one, two) {
-  checkMergeObjectArg(one);
-  if (two != null) {
-    checkMergeObjectArg(two);
-    for (var key in two) {
-      if (!two.hasOwnProperty(key)) {
-        continue;
-      }
-      one[key] = two[key];
-    }
-  }
-}
-
-module.exports = mergeInto;
-
-});
-__d("merge",["mergeInto"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-"use strict";
-
-var mergeInto = require('mergeInto');
-
-
-var merge = function(one, two) {
-  var result = {};
-  mergeInto(result, one);
-  mergeInto(result, two);
-  return result;
-};
-
-module.exports = merge;
-
-});
-__d("ApiClient",["ArgumentError","Assert","copyProperties","CORSRequest","FlashRequest","flattenObject","JSONPRequest","Log","merge","ObservableMixin","sprintf","URL","UrlMap","ApiClientConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
-
-var ArgumentError  = require('ArgumentError');
-var Assert         = require('Assert');
-var copyProperties = require('copyProperties');
-var CORSRequest    = require('CORSRequest');
-var FlashRequest   = require('FlashRequest');
-var flattenObject  = require('flattenObject');
-var JSONPRequest   = require('JSONPRequest');
-var Log            = require('Log');
-var merge          = require('merge');
-var ObservableMixin = require('ObservableMixin');
-var sprintf        = require('sprintf');
-var URL            = require('URL');
-var UrlMap         = require('UrlMap');
-
-var ApiClientConfig = require('ApiClientConfig');
+   
 
 var accessToken;
 var clientID;
@@ -5973,11 +6245,15 @@ function inspect(/*?function*/ callback, /*string*/ endpoint, /*string*/ method,
 
 function requestUsingGraph(/*string*/ path) {__t([path, 'string', 'path']);
   Assert.isString(path, 'Invalid path');
-  var url;
+  if (!/^https?/.test(path) && path.charAt(0) !== '/')  {
+    path = '/' + path;
+  }
+
+  var uri;
   var args = {};
 
   try {
-    url= new URL(path);
+    uri = new URI(path);
   } catch (e) {
     throw new ArgumentError(e.message, e);
   }
@@ -5988,19 +6264,29 @@ function requestUsingGraph(/*string*/ path) {__t([path, 'string', 'path']);
   });
 
   var method = (args.string || 'get').toLowerCase();
-  var params = merge(args.object || {}, url.getParsedSearch());
+
+  Assert.isTrue(
+    METHODS.hasOwnProperty(method),
+    sprintf('Invalid method passed to ApiClient: %s', method)
+  );
+
   var callback = args['function'];
   if (!callback) {
     Log.warn('No callback passed to the ApiClient');
   }
 
-  var inspector = ES5(inspect, 'bind', true,null, callback, url.getPath(), method, params);
+  if (args.object) {
+    uri.addQueryData(args.object);
+  }
+  var params = uri.getQueryData();
 
-  Assert.isTrue(method in METHODS,
-    sprintf('Invalid method passed to ApiClient: %s', method));
+  var inspector = ES5(inspect, 'bind', true,null, callback, uri.getPath(), method, params);
+
+  var url = uri.getProtocol() && uri.getDomain()
+    ? uri.setQueryData({}).toString()
+    : UrlMap.resolve('graph') + uri.getPath();
 
   params.method = method;
-  url = UrlMap.resolve('graph') + url.getPath();
   request(url, method == 'get' ? 'get' : 'post', params, inspector);
 }__w(requestUsingGraph, {"signature":"function(string)"}); 
 
@@ -6042,10 +6328,10 @@ FlashRequest.setSwfUrl(ApiClientConfig.FlashRequest.swfUrl);
 module.exports = ApiClient;
 
 });
-__d("sdk.api",["ApiClient","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var ApiClient  = require('ApiClient');
-var Runtime    = require('sdk.Runtime');
+__d("sdk.api",["ApiClient","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports,ApiClient,Runtime) {
+    
+      
 
 var currentAccessToken;
 
@@ -6112,19 +6398,19 @@ function api() {
 module.exports = api;
 
 });
-__d("legacy:fb.api",["FB","sdk.api"],function(global,require,requireDynamic,requireLazy) {
 
-var FB = require('FB');
-var api = require('sdk.api');
+__d("legacy:fb.api",["FB","sdk.api"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,FB,api) {
+   
+   
 
 FB.provide('', {
   api: api
 });
 
 },3);
-__d("sdk.Canvas.Environment",["sdk.RPC"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var RPC = require('sdk.RPC');
+__d("sdk.Canvas.Environment",["sdk.RPC"],function(global,require,requireDynamic,requireLazy,module,exports,RPC) {
+   
 
 function getPageInfo(/*function*/ appCallback) {__t([appCallback, 'function', 'appCallback']);
   RPC.remote.getPageInfo(__w(function(/*object*/ response) {__t([response, 'object', 'response']);
@@ -6148,9 +6434,9 @@ var Environment = {
 module.exports = Environment;
 
 });
-__d("sdk.Intl",["Log"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Log = require('Log');
+__d("sdk.Intl",["Log"],function(global,require,requireDynamic,requireLazy,module,exports,Log) {
+   
 
 
 var _punctCharClass = (
@@ -6259,18 +6545,18 @@ module.exports = {
   tx: tx};
 
 });
-__d("sdk.Dialog",["sdk.Canvas.Environment","sdk.Content","sdk.DOM","DOMEventListener","sdk.Intl","ObservableMixin","sdk.Runtime","Type","UserAgent","sdk.feature"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var CanvasEnvironment = require('sdk.Canvas.Environment');
-var Content = require('sdk.Content');
-var DOM = require('sdk.DOM');
-var DOMEventListener = require('DOMEventListener');
-var Intl = require('sdk.Intl');
-var ObservableMixin = require('ObservableMixin');
-var Runtime = require('sdk.Runtime');
-var Type = require('Type');
-var UserAgent = require('UserAgent');
-var feature = require('sdk.feature');
+__d("sdk.Dialog",["sdk.Canvas.Environment","sdk.Content","sdk.DOM","DOMEventListener","sdk.Intl","ObservableMixin","sdk.Runtime","Type","UserAgent","sdk.feature"],function(global,require,requireDynamic,requireLazy,module,exports,CanvasEnvironment,Content,DOM,DOMEventListener,Intl,ObservableMixin,Runtime,Type,UserAgent,feature) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 var MAX_HEIGHT_MOBILE = 590;
 var MAX_WIDTH_MOBILE = 500;
@@ -6285,7 +6571,7 @@ var isTablet = __w(function() /*boolean*/ {return __t([function() {
       result = size
         && (size.height >= MAX_HEIGHT_MOBILE || size.width >= MAX_WIDTH_MOBILE);
     } else {
-      result = UserAgent.ipad();
+      result = !!UserAgent.ipad();
     }
     isTablet = __w(function() /*boolean*/ {return __t([function() { return result; }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"});
     return result;
@@ -6882,12 +7168,12 @@ var Dialog = {
 module.exports = Dialog;
 
 });
-__d("sdk.Frictionless",["sdk.Auth","sdk.api","sdk.Event","sdk.Dialog"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Auth = require('sdk.Auth');
-var api = require('sdk.api');
-var Event = require('sdk.Event');
-var Dialog = require('sdk.Dialog');
+__d("sdk.Frictionless",["sdk.Auth","sdk.api","sdk.Event","sdk.Dialog"],function(global,require,requireDynamic,requireLazy,module,exports,Auth,api,Event,Dialog) {
+   
+   
+   
+   
 
 var Frictionless = {
 
@@ -6984,10 +7270,10 @@ Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options, 'ob
 module.exports = Frictionless;
 
 });
-__d("insertIframe",["guid","GlobalCallback"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var guid = require('guid');
-var GlobalCallback = require('GlobalCallback');
+__d("insertIframe",["guid","GlobalCallback"],function(global,require,requireDynamic,requireLazy,module,exports,guid,GlobalCallback) {
+   
+   
 
 function insertIframe(/*object*/ opts) {__t([opts, 'object', 'opts']);
 
@@ -7109,11 +7395,11 @@ function insertIframe(/*object*/ opts) {__t([opts, 'object', 'opts']);
 module.exports = insertIframe;
 
 });
-__d("sdk.Native",["copyProperties","Log","UserAgent"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var copyProperties = require('copyProperties');
-var Log = require('Log');
-var UserAgent = require('UserAgent');
+__d("sdk.Native",["copyProperties","Log","UserAgent"],function(global,require,requireDynamic,requireLazy,module,exports,copyProperties,Log,UserAgent) {
+   
+   
+   
 
 var NATIVE_READY_EVENT = 'fbNativeReady';
 
@@ -7155,8 +7441,8 @@ var Native = {
 module.exports = Native;
 
 });
-__d("resolveURI",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("resolveURI",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 function resolveURI(/*string?*/ uri) /*string*/ {__t([uri, '?string', 'uri']);return __t([function() {
   if (!uri) { 
     return window.location.href;
@@ -7176,29 +7462,29 @@ function resolveURI(/*string?*/ uri) /*string*/ {__t([uri, '?string', 'uri']);re
 module.exports = resolveURI;
 
 });
-__d("sdk.UIServer",["sdk.Auth","sdk.Content","copyProperties","sdk.Dialog","sdk.DOM","sdk.Event","flattenObject","sdk.Frictionless","sdk.getContextType","guid","insertIframe","Log","sdk.Native","QueryString","resolveURI","sdk.RPC","sdk.Runtime","UrlMap","UserAgent","sdk.XD","SDKConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Auth = require('sdk.Auth');
-var Content = require('sdk.Content');
-var copyProperties = require('copyProperties');
-var Dialog = require('sdk.Dialog');
-var DOM = require('sdk.DOM');
-var Event = require('sdk.Event');
-var flattenObject = require('flattenObject');
-var Frictionless = require('sdk.Frictionless');
-var getContextType = require('sdk.getContextType');
-var guid = require('guid');
-var insertIframe = require('insertIframe');
-var Log = require('Log');
-var Native = require('sdk.Native');
-var QueryString = require('QueryString');
-var resolveURI = require('resolveURI');
-var RPC = require('sdk.RPC');
-var Runtime = require('sdk.Runtime');
-var SDKConfig = requireDynamic('SDKConfig');
-var UrlMap = require('UrlMap');
-var UserAgent = require('UserAgent');
-var XD = require('sdk.XD');
+__d("sdk.UIServer",["sdk.Auth","sdk.Content","copyProperties","sdk.Dialog","sdk.DOM","sdk.Event","flattenObject","sdk.Frictionless","sdk.getContextType","guid","insertIframe","Log","sdk.Native","QueryString","resolveURI","sdk.RPC","sdk.Runtime","SDKConfig","UrlMap","UserAgent","sdk.XD"],function(global,require,requireDynamic,requireLazy,module,exports,Auth,Content,copyProperties,Dialog,DOM,Event,flattenObject,Frictionless,getContextType,guid,insertIframe,Log,Native,QueryString,resolveURI,RPC,Runtime,SDKConfig,UrlMap,UserAgent,XD) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 var MobileIframeable = {
   transform: __w(function(/*object*/ call) /*object*/ {__t([call, 'object', 'call']);return __t([function() {
@@ -7983,14 +8269,14 @@ RPC.stub('showDialog');
 module.exports = UIServer;
 
 });
-__d("sdk.ui",["Assert","copyProperties","sdk.feature","sdk.Impressions","Log","sdk.UIServer"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Assert = require('Assert');
-var copyProperties = require('copyProperties');
-var feature = require('sdk.feature');
-var Impressions = require('sdk.Impressions');
-var Log = require('Log');
-var UIServer = require('sdk.UIServer');
+__d("sdk.ui",["Assert","copyProperties","sdk.feature","sdk.Impressions","Log","sdk.UIServer"],function(global,require,requireDynamic,requireLazy,module,exports,Assert,copyProperties,feature,Impressions,Log,UIServer) {
+   
+   
+   
+   
+   
+   
 
 
 function ui(/*object*/ params, /*?function*/ cb) /*?object*/ {__t([params, 'object', 'params'], [cb, '?function', 'cb']);return __t([function() {
@@ -8059,17 +8345,17 @@ function ui(/*object*/ params, /*?function*/ cb) /*?object*/ {__t([params, 'obje
 module.exports = ui;
 
 });
-__d("legacy:fb.auth",["sdk.Auth","sdk.Cookie","copyProperties","sdk.Event","FB","Log","sdk.Runtime","sdk.SignedRequest","sdk.ui"],function(global,require,requireDynamic,requireLazy) {
 
-var Auth = require('sdk.Auth');
-var Cookie = require('sdk.Cookie');
-var copyProperties = require('copyProperties');
-var Event = require('sdk.Event');
-var FB = require('FB');
-var Log = require('Log');
-var Runtime = require('sdk.Runtime');
-var SignedRequest = require('sdk.SignedRequest');
-var ui = require('sdk.ui');
+__d("legacy:fb.auth",["sdk.Auth","sdk.Cookie","copyProperties","sdk.Event","FB","Log","sdk.Runtime","sdk.SignedRequest","sdk.ui"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,Auth,Cookie,copyProperties,Event,FB,Log,Runtime,SignedRequest,ui) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 FB.provide('', {
 
@@ -8148,14 +8434,14 @@ Event.subscribe('init:post', __w(function(/*object*/ options) {__t([options, 'ob
 }, {"signature":"function(object)"}));
 
 },3);
-__d("sdk.Canvas.Plugin",["sdk.api","sdk.RPC","Log","UserAgent","sdk.Runtime","createArrayFrom"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var api = require('sdk.api');
-var RPC = require('sdk.RPC');
-var Log = require('Log');
-var UserAgent = require('UserAgent');
-var Runtime = require('sdk.Runtime');
-var createArrayFrom = require('createArrayFrom');
+__d("sdk.Canvas.Plugin",["sdk.api","sdk.RPC","Log","UserAgent","sdk.Runtime","createArrayFrom"],function(global,require,requireDynamic,requireLazy,module,exports,api,RPC,Log,UserAgent,Runtime,createArrayFrom) {
+   
+   
+   
+   
+   
+   
 
 var flashClassID = 'CLSID:D27CDB6E-AE6D-11CF-96B8-444553540000';
 var unityClassID = 'CLSID:444785F1-DE89-4295-863A-D46C3A781394';
@@ -8328,10 +8614,10 @@ var Plugin = {
 module.exports = Plugin;
 
 });
-__d("sdk.Canvas.IframeHandling",["DOMWrapper","sdk.RPC"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var DOMWrapper = require('DOMWrapper');
-var RPC = require('sdk.RPC');
+__d("sdk.Canvas.IframeHandling",["DOMWrapper","sdk.RPC"],function(global,require,requireDynamic,requireLazy,module,exports,DOMWrapper,RPC) {
+   
+   
 
 var autoGrowTimer = null;
 var autoGrowLastSize;
@@ -8417,9 +8703,9 @@ var IframeHandling = {
 module.exports = IframeHandling;
 
 });
-__d("sdk.Canvas.Navigation",["sdk.RPC"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var RPC = require('sdk.RPC');
+__d("sdk.Canvas.Navigation",["sdk.RPC"],function(global,require,requireDynamic,requireLazy,module,exports,RPC) {
+   
 
 
 function setUrlHandler(/*function*/ callback) {__t([callback, 'function', 'callback']);
@@ -8439,10 +8725,10 @@ var Navigation = {
 module.exports = Navigation;
 
 });
-__d("sdk.Canvas.Tti",["sdk.RPC","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var RPC = require('sdk.RPC');
-var Runtime = require('sdk.Runtime');
+__d("sdk.Canvas.Tti",["sdk.RPC","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports,RPC,Runtime) {
+   
+   
 
 function passAppTtiMessage(/*function?*/ callback, /*string*/ messageName) {__t([callback, '?function', 'callback'], [messageName, 'string', 'messageName']);
   var params = {
@@ -8486,18 +8772,18 @@ var Tti = {
 module.exports = Tti;
 
 });
-__d("legacy:fb.canvas",["Assert","sdk.Canvas.Environment","sdk.Event","FB","sdk.Canvas.Plugin","sdk.Canvas.IframeHandling","Log","sdk.Canvas.Navigation","sdk.Runtime","sdk.Canvas.Tti"],function(global,require,requireDynamic,requireLazy) {
 
-var Assert = require('Assert');
-var Environment = require('sdk.Canvas.Environment');
-var Event = require('sdk.Event');
-var FB = require('FB');
-var Plugin = require('sdk.Canvas.Plugin');
-var IframeHandling = require('sdk.Canvas.IframeHandling');
-var Log = require('Log');
-var Navigation = require('sdk.Canvas.Navigation');
-var Runtime = require('sdk.Runtime');
-var Tti = require('sdk.Canvas.Tti');
+__d("legacy:fb.canvas",["Assert","sdk.Canvas.Environment","sdk.Event","FB","sdk.Canvas.Plugin","sdk.Canvas.IframeHandling","Log","sdk.Canvas.Navigation","sdk.Runtime","sdk.Canvas.Tti"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,Assert,Environment,Event,FB,Plugin,IframeHandling,Log,Navigation,Runtime,Tti) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 FB.provide('Canvas', {
   
@@ -8570,12 +8856,12 @@ Event.subscribe('init:post', function(options) {
 });
 
 },3);
-__d("sdk.Canvas.Prefetcher",["sdk.api","createArrayFrom","sdk.Runtime","CanvasPrefetcherConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var api = require('sdk.api');
-var createArrayFrom = require('createArrayFrom');
-var CanvasPrefetcherConfig = requireDynamic('CanvasPrefetcherConfig');
-var Runtime = require('sdk.Runtime');
+__d("sdk.Canvas.Prefetcher",["sdk.api","createArrayFrom","CanvasPrefetcherConfig","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports,api,createArrayFrom,CanvasPrefetcherConfig,Runtime) {
+   
+   
+   
+   
 
 var COLLECT = {
   AUTOMATIC : 0,
@@ -8659,12 +8945,12 @@ var CanvasPrefetcher = {
 module.exports = CanvasPrefetcher;
 
 });
-__d("legacy:fb.canvas.prefetcher",["FB","sdk.Canvas.Prefetcher","sdk.Event","sdk.Runtime"],function(global,require,requireDynamic,requireLazy) {
 
-var FB = require('FB');
-var CanvasPrefetcher = require('sdk.Canvas.Prefetcher');
-var Event = require('sdk.Event');
-var Runtime = require('sdk.Runtime');
+__d("legacy:fb.canvas.prefetcher",["FB","sdk.Canvas.Prefetcher","sdk.Event","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,FB,CanvasPrefetcher,Event,Runtime) {
+   
+   
+   
+   
 
 FB.provide('Canvas.Prefetcher', CanvasPrefetcher);
 
@@ -8675,13 +8961,13 @@ Event.subscribe('init:post', function(options) {
 });
 
 },3);
-__d("legacy:fb.compat.ui",["copyProperties","FB","Log","sdk.ui","sdk.UIServer"],function(global,require,requireDynamic,requireLazy) {
 
-var copyProperties = require('copyProperties');
-var FB = require('FB');
-var Log = require('Log');
-var ui = require('sdk.ui');
-var UIServer = require('sdk.UIServer');
+__d("legacy:fb.compat.ui",["copyProperties","FB","Log","sdk.ui","sdk.UIServer"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,copyProperties,FB,Log,ui,UIServer) {
+   
+   
+   
+   
+   
 
 FB.provide('', {
   share: function(u) {
@@ -8717,8 +9003,8 @@ FB.provide('', {
 UIServer.Methods['auth.login'] = UIServer.Methods['permissions.request'];
 
 },3);
-__d("mergeArrays",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("mergeArrays",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 function mergeArrays(/*array*/ target, /*array*/ source) /*array*/ {__t([target, 'array', 'target'], [source, 'array', 'source']);return __t([function() {
   for (var i=0; i < source.length; i++) {
     if (ES5(target, 'indexOf', true,source[i]) < 0) {
@@ -8730,8 +9016,8 @@ function mergeArrays(/*array*/ target, /*array*/ source) /*array*/ {__t([target,
 module.exports = mergeArrays;
 
 });
-__d("format",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("format",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 function format(/*string*/ str, argsdotdot) /*string*/ {__t([str, 'string', 'str']);return __t([function() {
   argsdotdot = Array.prototype.slice.call(arguments, 1);
   return str.replace(/\{(\d+)\}/g, function(_, index) {
@@ -8744,8 +9030,8 @@ function format(/*string*/ str, argsdotdot) /*string*/ {__t([str, 'string', 'str
 module.exports = format;
 
 });
-__d("safeEval",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("safeEval",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 function safeEval(source, /*?array*/ args) {__t([args, '?array', 'args']);
   if (source === null || typeof source === 'undefined') {
     return;
@@ -8767,9 +9053,9 @@ function safeEval(source, /*?array*/ args) {__t([args, '?array', 'args']);
 module.exports = safeEval;
 
 });
-__d("sdk.Waitable",["sdk.Model"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Model = require('sdk.Model');
+__d("sdk.Waitable",["sdk.Model"],function(global,require,requireDynamic,requireLazy,module,exports,Model) {
+   
 
 
 var Waitable = Model.extend({
@@ -8805,12 +9091,12 @@ var Waitable = Model.extend({
 module.exports = Waitable;
 
 });
-__d("sdk.Query",["format","safeEval","Type","sdk.Waitable"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var format = require('format');
-var safeEval = require('safeEval');
-var Type = require('Type');
-var Waitable = require('sdk.Waitable');
+__d("sdk.Query",["format","safeEval","Type","sdk.Waitable"],function(global,require,requireDynamic,requireLazy,module,exports,format,safeEval,Type,Waitable) {
+   
+   
+   
+   
 
 
 
@@ -8928,14 +9214,14 @@ var Query = Waitable.extend({
 module.exports = Query;
 
 });
-__d("sdk.Data",["sdk.api","sdk.ErrorHandling","mergeArrays","sdk.Query","safeEval","sdk.Waitable"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var api = require('sdk.api');
-var ErrorHandling = require('sdk.ErrorHandling');
-var mergeArrays = require('mergeArrays');
-var Query = require('sdk.Query');
-var safeEval = require('safeEval');
-var Waitable = require('sdk.Waitable');
+__d("sdk.Data",["sdk.api","sdk.ErrorHandling","mergeArrays","sdk.Query","safeEval","sdk.Waitable"],function(global,require,requireDynamic,requireLazy,module,exports,api,ErrorHandling,mergeArrays,Query,safeEval,Waitable) {
+   
+   
+   
+   
+   
+   
 
 
 
@@ -9094,39 +9380,39 @@ var Data = {
 module.exports = Data;
 
 });
-__d("legacy:fb.data",["FB","sdk.Data"],function(global,require,requireDynamic,requireLazy) {
 
-var FB = require('FB');
-var Data = require('sdk.Data');
+__d("legacy:fb.data",["FB","sdk.Data"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,FB,Data) {
+   
+   
 FB.provide('Data', Data);
 
 },3);
-__d("legacy:fb.event",["FB","sdk.Event"],function(global,require,requireDynamic,requireLazy) {
 
-var FB = require('FB');
-var Event = require('sdk.Event');
+__d("legacy:fb.event",["FB","sdk.Event"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,FB,Event) {
+   
+   
 
 FB.provide('Event', Event);
 FB.provide('EventProvider', Event);
 
 },3);
-__d("legacy:fb.frictionless",["FB","sdk.Frictionless"],function(global,require,requireDynamic,requireLazy) {
 
-var FB = require('FB');
-var Frictionless = require('sdk.Frictionless');
+__d("legacy:fb.frictionless",["FB","sdk.Frictionless"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,FB,Frictionless) {
+   
+   
 FB.provide('Frictionless', Frictionless);
 
 },3);
-__d("sdk.init",["sdk.Cookie","copyProperties","createArrayFrom","sdk.ErrorHandling","sdk.Event","Log","QueryString","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Cookie = require('sdk.Cookie');
-var copyProperties = require('copyProperties');
-var createArrayFrom = require('createArrayFrom');
-var ErrorHandling = require('sdk.ErrorHandling');
-var Event = require('sdk.Event');
-var Log = require('Log');
-var QueryString = require('QueryString');
-var Runtime = require('sdk.Runtime');
+__d("sdk.init",["sdk.Cookie","copyProperties","createArrayFrom","sdk.ErrorHandling","sdk.Event","Log","QueryString","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports,Cookie,copyProperties,createArrayFrom,ErrorHandling,Event,Log,QueryString,Runtime) {
+   
+   
+   
+   
+   
+   
+   
+   
 
 
 
@@ -9223,20 +9509,20 @@ setTimeout(function() {
 module.exports = init;
 
 });
-__d("legacy:fb.init",["FB","sdk.init"],function(global,require,requireDynamic,requireLazy) {
 
-var FB = require('FB');
-var init = require('sdk.init');
+__d("legacy:fb.init",["FB","sdk.init"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,FB,init) {
+   
+   
 
 FB.provide('', {
   init: init
 });
 
 },3);
-__d("legacy:fb.json",["FB","ManagedError"],function(global,require,requireDynamic,requireLazy) {
 
-var FB = require('FB');
-var ManagedError = require('ManagedError');
+__d("legacy:fb.json",["FB","ManagedError"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,FB,ManagedError) {
+   
+   
 
 
 
@@ -9259,14 +9545,14 @@ FB.provide('JSON', {
 });
 
 },3);
-__d("legacy:fb.pay",["FB","copyProperties","sdk.Runtime","sdk.UIServer","sdk.XD"],function(global,require,requireDynamic,requireLazy) {
 
+__d("legacy:fb.pay",["copyProperties","sdk.Runtime","sdk.UIServer","sdk.XD","FB"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,copyProperties,Runtime,UIServer,XD) {
 require('FB');
 
-var copyProperties = require('copyProperties');
-var Runtime = require('sdk.Runtime');
-var UIServer = require('sdk.UIServer');
-var XD = require('sdk.XD');
+   
+   
+   
+   
 
 var DEF_ERROR_MSG = {
   'error_code': 1383001,
@@ -9319,19 +9605,19 @@ copyProperties(UIServer.Methods, {
 
 
 },3);
-__d("legacy:fb.ua",["FB","UserAgent"],function(global,require,requireDynamic,requireLazy) {
 
-var FB = require('FB');
-var UserAgent = require('UserAgent');
+__d("legacy:fb.ua",["FB","UserAgent"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,FB,UserAgent) {
+   
+   
 FB.provide('UA', {
   nativeApp: UserAgent.nativeApp
 });
 
 },3);
-__d("legacy:fb.ui",["FB","sdk.ui"],function(global,require,requireDynamic,requireLazy) {
 
-var FB = require('FB');
-var ui = require('sdk.ui');
+__d("legacy:fb.ui",["FB","sdk.ui"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,FB,ui) {
+   
+   
 
 FB.provide('', {
   ui: ui
@@ -9339,8 +9625,8 @@ FB.provide('', {
 
 
 },3);
-__d("Miny",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("Miny",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var MAGIC = 'Miny1';
 
 
@@ -9433,8 +9719,8 @@ var Miny = {
 module.exports = Miny;
 
 });
-__d("runOnce",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("runOnce",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 function runOnce(func) {
   var run, ret;
   return function() {
@@ -9449,18 +9735,18 @@ function runOnce(func) {
 module.exports = runOnce;
 
 });
-__d("XFBML",["Assert","copyProperties","createArrayFrom","sdk.DOM","sdk.feature","sdk.Impressions","Log","ObservableMixin","runOnce","UserAgent"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Assert = require('Assert');
-var copyProperties = require('copyProperties');
-var createArrayFrom = require('createArrayFrom');
-var DOM = require('sdk.DOM');
-var feature = require('sdk.feature');
-var Impressions = require('sdk.Impressions');
-var Log = require('Log');
-var ObservableMixin = require('ObservableMixin');
-var runOnce = require('runOnce');
-var UserAgent = require('UserAgent');
+__d("XFBML",["Assert","copyProperties","createArrayFrom","sdk.DOM","sdk.feature","sdk.Impressions","Log","ObservableMixin","runOnce","UserAgent"],function(global,require,requireDynamic,requireLazy,module,exports,Assert,copyProperties,createArrayFrom,DOM,feature,Impressions,Log,ObservableMixin,runOnce,UserAgent) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 
 var xfbml = {}; 
@@ -9676,19 +9962,19 @@ if (feature('log_tag_count')) {
 module.exports = XFBML;
 
 });
-__d("PluginPipe",["sdk.Content","copyProperties","sdk.feature","guid","insertIframe","Miny","ObservableMixin","sdk.Runtime","UrlMap","UserAgent","XFBML","PluginPipeConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
-var Content = require('sdk.Content');
-var copyProperties = require('copyProperties');
-var feature = require('sdk.feature');
-var guid = require('guid');
-var insertIframe = require('insertIframe');
-var Miny = require('Miny');
-var ObservableMixin = require('ObservableMixin');
-var PluginPipeConfig = requireDynamic('PluginPipeConfig');
-var Runtime = require('sdk.Runtime');
-var UrlMap = require('UrlMap');
-var UserAgent = require('UserAgent');
-var XFBML = require('XFBML');
+__d("PluginPipe",["sdk.Content","copyProperties","sdk.feature","guid","insertIframe","Miny","ObservableMixin","PluginPipeConfig","sdk.Runtime","UrlMap","UserAgent","XFBML"],function(global,require,requireDynamic,requireLazy,module,exports,Content,copyProperties,feature,guid,insertIframe,Miny,ObservableMixin,PluginPipeConfig,Runtime,UrlMap,UserAgent,XFBML) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 var PluginPipe = new ObservableMixin();
 
@@ -9791,24 +10077,24 @@ copyProperties(PluginPipe, {
 module.exports = PluginPipe;
 
 });
-__d("IframePlugin",["sdk.Auth","sdk.createIframe","copyProperties","sdk.DOM","sdk.Event","guid","Log","ObservableMixin","PluginPipe","QueryString","resolveURI","sdk.Runtime","Type","UrlMap","UserAgent","sdk.XD"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Auth = require('sdk.Auth');
-var createIframe = require('sdk.createIframe');
-var copyProperties = require('copyProperties');
-var DOM = require('sdk.DOM');
-var Event = require('sdk.Event');
-var guid = require('guid');
-var Log = require('Log');
-var ObservableMixin = require('ObservableMixin');
-var PluginPipe = require('PluginPipe');
-var QueryString = require('QueryString');
-var resolveURI = require('resolveURI');
-var Runtime = require('sdk.Runtime');
-var Type = require('Type');
-var UrlMap = require('UrlMap');
-var UserAgent = require('UserAgent');
-var XD = require('sdk.XD');
+__d("IframePlugin",["sdk.Auth","sdk.createIframe","copyProperties","sdk.DOM","sdk.Event","guid","Log","ObservableMixin","PluginPipe","QueryString","resolveURI","sdk.Runtime","Type","UrlMap","UserAgent","sdk.XD"],function(global,require,requireDynamic,requireLazy,module,exports,Auth,createIframe,copyProperties,DOM,Event,guid,Log,ObservableMixin,PluginPipe,QueryString,resolveURI,Runtime,Type,UrlMap,UserAgent,XD) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 var baseParams = {
   skin: 'string',
@@ -10052,8 +10338,8 @@ IframePlugin.withParams = __w(function(/*object*/ params) /*function*/ {__t([par
 module.exports = IframePlugin;
 
 });
-__d("PluginTags",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("PluginTags",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var PluginTags = {
   activity: {
     filter: 'string',
@@ -10208,8 +10494,8 @@ ES5(ES5('Object', 'keys', false,aliases), 'forEach', true,function(key) {
 module.exports = PluginTags;
 
 });
-__d("sdk.Arbiter",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("sdk.Arbiter",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var Arbiter = {
   BEHAVIOR_EVENT: 'e',
   BEHAVIOR_PERSISTENT: 'p',
@@ -10218,11 +10504,11 @@ var Arbiter = {
 module.exports = Arbiter;
 
 });
-__d("sdk.XFBML.Element",["sdk.DOM","Type","ObservableMixin"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var DOM = require('sdk.DOM');
-var Type = require('Type');
-var ObservableMixin = require('ObservableMixin');
+__d("sdk.XFBML.Element",["sdk.DOM","Type","ObservableMixin"],function(global,require,requireDynamic,requireLazy,module,exports,DOM,Type,ObservableMixin) {
+   
+   
+   
 
 
 var Element = Type.extend({
@@ -10301,22 +10587,22 @@ var Element = Type.extend({
 module.exports = Element;
 
 });
-__d("sdk.XFBML.IframeWidget",["sdk.Arbiter","sdk.Auth","sdk.Content","copyProperties","sdk.DOM","sdk.Event","sdk.XFBML.Element","guid","insertIframe","QueryString","sdk.Runtime","sdk.ui","UrlMap","sdk.XD"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Arbiter = require('sdk.Arbiter');
-var Auth = require('sdk.Auth');
-var Content = require('sdk.Content');
-var copyProperties = require('copyProperties');
-var DOM = require('sdk.DOM');
-var Event = require('sdk.Event');
-var Element = require('sdk.XFBML.Element');
-var guid = require('guid');
-var insertIframe = require('insertIframe');
-var QueryString = require('QueryString');
-var Runtime = require('sdk.Runtime');
-var ui = require('sdk.ui');
-var UrlMap = require('UrlMap');
-var XD = require('sdk.XD');
+__d("sdk.XFBML.IframeWidget",["sdk.Arbiter","sdk.Auth","sdk.Content","copyProperties","sdk.DOM","sdk.Event","sdk.XFBML.Element","guid","insertIframe","QueryString","sdk.Runtime","sdk.ui","UrlMap","sdk.XD"],function(global,require,requireDynamic,requireLazy,module,exports,Arbiter,Auth,Content,copyProperties,DOM,Event,Element,guid,insertIframe,QueryString,Runtime,ui,UrlMap,XD) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 
 var IframeWidget = Element.extend({
@@ -10730,15 +11016,15 @@ function groupWidgetPipeDescriptions() /*object*/ {return __t([function() {
 module.exports = IframeWidget;
 
 });
-__d("sdk.XFBML.Comments",["sdk.Event","sdk.XFBML.IframeWidget","QueryString","sdk.Runtime","UrlMap","UserAgent","SDKConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Event = require('sdk.Event');
-var IframeWidget = require('sdk.XFBML.IframeWidget');
-var QueryString = require('QueryString');
-var Runtime = require('sdk.Runtime');
-var SDKConfig = requireDynamic('SDKConfig');
-var UrlMap = require('UrlMap');
-var UserAgent = require('UserAgent');
+__d("sdk.XFBML.Comments",["sdk.Event","sdk.XFBML.IframeWidget","QueryString","sdk.Runtime","SDKConfig","UrlMap","UserAgent"],function(global,require,requireDynamic,requireLazy,module,exports,Event,IframeWidget,QueryString,Runtime,SDKConfig,UrlMap,UserAgent) {
+   
+   
+   
+   
+   
+   
+   
 
 var Comments = IframeWidget.extend({
   _visibleAfter: 'immediate',
@@ -10754,13 +11040,17 @@ var Comments = IframeWidget.extend({
       colorscheme : this.getAttribute('colorscheme'),
       skin        : this.getAttribute('skin'),
       numposts    : this.getAttribute('num-posts', 10),
-      width       : this._getPxAttribute('width', 550),
+      width       : this._getPxAttribute('width'),
       href        : this.getAttribute('href'),
       permalink   : this.getAttribute('permalink'),
       publish_feed : this.getAttribute('publish_feed'),
       order_by    : this.getAttribute('order_by'),
       mobile      : this._getBoolAttribute('mobile')
     };
+
+    if (!attr.width && !attr.permalink) {
+      attr.width = 550;
+    }
 
     if (SDKConfig.initSitevars.enableMobileComments &&
         UserAgent.mobile() &&
@@ -10854,7 +11144,9 @@ var Comments = IframeWidget.extend({
     if (this._attr.mobile) {
       return { width: '100%', height: 160 };
     }
-    return { width: this._attr.width, height: 160 };
+    if (!this._attr.permalink) {
+      return { width: this._attr.width, height: 160 };
+    }
   }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
 
   
@@ -10916,12 +11208,12 @@ var Comments = IframeWidget.extend({
 module.exports = Comments;
 
 });
-__d("sdk.XFBML.CommentsCount",["sdk.Data","sdk.DOM","sdk.XFBML.Element","sprintf"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Data = require('sdk.Data');
-var DOM = require('sdk.DOM');
-var Element = require('sdk.XFBML.Element');
-var sprintf = require('sprintf');
+__d("sdk.XFBML.CommentsCount",["sdk.Data","sdk.DOM","sdk.XFBML.Element","sprintf"],function(global,require,requireDynamic,requireLazy,module,exports,Data,DOM,Element,sprintf) {
+   
+   
+   
+   
 
 var CommentsCount = Element.extend({
 
@@ -10952,9 +11244,9 @@ var CommentsCount = Element.extend({
 module.exports = CommentsCount;
 
 });
-__d("sdk.Anim",["sdk.DOM"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var DOM = require('sdk.DOM');
+__d("sdk.Anim",["sdk.DOM"],function(global,require,requireDynamic,requireLazy,module,exports,DOM) {
+   
 var Anim = {
   
   ate: __w(function(/*DOMElement*/ dom, /*object*/ props, /*number?*/ duration,
@@ -11025,8 +11317,8 @@ var Anim = {
 module.exports = Anim;
 
 });
-__d("escapeHTML",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
+__d("escapeHTML",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 var re = /[&<>"'\/]/g;
 var map = {
   '&': '&amp;',
@@ -11045,14 +11337,14 @@ function escapeHTML(/*string*/ value) /*string*/ {__t([value, 'string', 'value']
 module.exports = escapeHTML;
 
 });
-__d("sdk.Helper",["sdk.ErrorHandling","sdk.Event","UrlMap","safeEval","sprintf"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var ErrorHandling = require('sdk.ErrorHandling');
-var Event = require('sdk.Event');
-var UrlMap = require('UrlMap');
+__d("sdk.Helper",["sdk.ErrorHandling","sdk.Event","UrlMap","safeEval","sprintf"],function(global,require,requireDynamic,requireLazy,module,exports,ErrorHandling,Event,UrlMap,safeEval,sprintf) {
+   
+   
+   
 
-var safeEval = require('safeEval');
-var sprintf = require('sprintf');
+   
+   
 
 var Helper = {
   
@@ -11128,25 +11420,25 @@ var Helper = {
 module.exports = Helper;
 
 });
-__d("sdk.XFBML.ConnectBar",["sdk.Anim","sdk.api","sdk.Auth","createArrayFrom","sdk.Data","sdk.DOM","sdk.XFBML.Element","escapeHTML","sdk.Event","format","sdk.Helper","sdk.Insights","sdk.Intl","sdk.Runtime","UrlMap","UserAgent","ConnectBarConfig"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Anim = require('sdk.Anim');
-var api = require('sdk.api');
-var Auth = require('sdk.Auth');
-var createArrayFrom = require('createArrayFrom');
-var ConnectBarConfig = requireDynamic('ConnectBarConfig');
-var Data = require('sdk.Data');
-var DOM = require('sdk.DOM');
-var Element = require('sdk.XFBML.Element');
-var escapeHTML = require('escapeHTML');
-var Event = require('sdk.Event');
-var format = require('format');
-var Helper = require('sdk.Helper');
-var Insights = require('sdk.Insights');
-var Intl = require('sdk.Intl');
-var Runtime = require('sdk.Runtime');
-var UrlMap = require('UrlMap');
-var UserAgent = require('UserAgent');
+__d("sdk.XFBML.ConnectBar",["sdk.Anim","sdk.api","sdk.Auth","createArrayFrom","ConnectBarConfig","sdk.Data","sdk.DOM","sdk.XFBML.Element","escapeHTML","sdk.Event","format","sdk.Helper","sdk.Insights","sdk.Intl","sdk.Runtime","UrlMap","UserAgent"],function(global,require,requireDynamic,requireLazy,module,exports,Anim,api,Auth,createArrayFrom,ConnectBarConfig,Data,DOM,Element,escapeHTML,Event,format,Helper,Insights,Intl,Runtime,UrlMap,UserAgent) {
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 var ConnectBar = Element.extend({
   _initialHeight: null,
@@ -11360,10 +11652,10 @@ var ConnectBar = Element.extend({
 module.exports = ConnectBar;
 
 });
-__d("sdk.XFBML.LoginButton",["sdk.Helper","IframePlugin"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Helper = require('sdk.Helper');
-var IframePlugin = require('IframePlugin');
+__d("sdk.XFBML.LoginButton",["sdk.Helper","IframePlugin"],function(global,require,requireDynamic,requireLazy,module,exports,Helper,IframePlugin) {
+   
+   
 
 var LoginButton = IframePlugin.extend({
   constructor: __w(function(/*DOMElement*/ elem, /*string*/ ns, /*string*/ tag,
@@ -11389,7 +11681,8 @@ var LoginButton = IframePlugin.extend({
       registration_url: 'url_maybe',
       auto_logout_link: 'bool',
       one_click: 'bool',
-      show_banner: 'bool'
+      show_banner: 'bool',
+      auth_type: 'string'
     };
   }.apply(this, arguments), 'object']);}, {"signature":"function():object"})
 });
@@ -11397,16 +11690,16 @@ var LoginButton = IframePlugin.extend({
 module.exports = LoginButton;
 
 });
-__d("sdk.XFBML.Name",["copyProperties","sdk.Data","escapeHTML","sdk.Event","sdk.XFBML.Element","sdk.Helper","Log","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var copyProperties = require('copyProperties');
-var Data = require('sdk.Data');
-var escapeHTML = require('escapeHTML');
-var Event = require('sdk.Event');
-var Element = require('sdk.XFBML.Element');
-var Helper = require('sdk.Helper');
-var Log = require('Log');
-var Runtime = require('sdk.Runtime');
+__d("sdk.XFBML.Name",["copyProperties","sdk.Data","escapeHTML","sdk.Event","sdk.XFBML.Element","sdk.Helper","Log","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports,copyProperties,Data,escapeHTML,Event,Element,Helper,Log,Runtime) {
+   
+   
+   
+   
+   
+   
+   
+   
 
 var Name = Element.extend({
   
@@ -11648,14 +11941,14 @@ var Name = Element.extend({
 module.exports = Name;
 
 });
-__d("sdk.XFBML.RecommendationsBar",["sdk.Arbiter","DOMEventListener","sdk.Event","sdk.XFBML.IframeWidget","resolveURI","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Arbiter = require('sdk.Arbiter');
-var DOMEventListener = require('DOMEventListener');
-var Event = require('sdk.Event');
-var IframeWidget = require('sdk.XFBML.IframeWidget');
-var resolveURI = require('resolveURI');
-var Runtime = require('sdk.Runtime');
+__d("sdk.XFBML.RecommendationsBar",["sdk.Arbiter","DOMEventListener","sdk.Event","sdk.XFBML.IframeWidget","resolveURI","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports,Arbiter,DOMEventListener,Event,IframeWidget,resolveURI,Runtime) {
+   
+   
+   
+   
+   
+   
 
 var Bar = IframeWidget.extend({
 
@@ -11850,13 +12143,13 @@ var Bar = IframeWidget.extend({
 module.exports = Bar;
 
 });
-__d("sdk.XFBML.Registration",["sdk.Auth","sdk.Helper","sdk.XFBML.IframeWidget","sdk.Runtime","UrlMap"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Auth = require('sdk.Auth');
-var Helper = require('sdk.Helper');
-var IframeWidget = require('sdk.XFBML.IframeWidget');
-var Runtime = require('sdk.Runtime');
-var UrlMap = require('UrlMap');
+__d("sdk.XFBML.Registration",["sdk.Auth","sdk.Helper","sdk.XFBML.IframeWidget","sdk.Runtime","UrlMap"],function(global,require,requireDynamic,requireLazy,module,exports,Auth,Helper,IframeWidget,Runtime,UrlMap) {
+   
+   
+   
+   
+   
 
 var Registration = IframeWidget.extend({
   _visibleAfter: 'immediate',
@@ -11983,10 +12276,10 @@ var Registration = IframeWidget.extend({
 module.exports = Registration;
 
 });
-__d("sdk.XFBML.SocialContext",["sdk.Event","sdk.XFBML.IframeWidget"],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-var Event = require('sdk.Event');
-var IframeWidget = require('sdk.XFBML.IframeWidget');
+__d("sdk.XFBML.SocialContext",["sdk.Event","sdk.XFBML.IframeWidget"],function(global,require,requireDynamic,requireLazy,module,exports,Event,IframeWidget) {
+   
+   
 
 var SocialContext = IframeWidget.extend({
   
@@ -12032,16 +12325,16 @@ var SocialContext = IframeWidget.extend({
 module.exports = SocialContext;
 
 });
-__d("legacy:fb.xfbml",["Assert","sdk.domReady","sdk.Event","FB","IframePlugin","PluginTags","wrapFunction","XFBML","sdk.XFBML.Comments","sdk.XFBML.CommentsCount","sdk.XFBML.ConnectBar","sdk.XFBML.LoginButton","sdk.XFBML.Name","sdk.XFBML.RecommendationsBar","sdk.XFBML.Registration","sdk.XFBML.SocialContext"],function(global,require,requireDynamic,requireLazy) {
 
-var Assert = require('Assert');
-var domReady = require('sdk.domReady');
-var Event = require('sdk.Event');
-var FB = require('FB');
-var IframePlugin = require('IframePlugin');
-var PluginTags = require('PluginTags');
-var wrapFunction = require('wrapFunction');
-var XFBML = require('XFBML');
+__d("legacy:fb.xfbml",["Assert","sdk.domReady","sdk.Event","FB","IframePlugin","PluginTags","wrapFunction","XFBML","sdk.XFBML.Comments","sdk.XFBML.CommentsCount","sdk.XFBML.ConnectBar","sdk.XFBML.LoginButton","sdk.XFBML.Name","sdk.XFBML.RecommendationsBar","sdk.XFBML.Registration","sdk.XFBML.SocialContext"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,Assert,domReady,Event,FB,IframePlugin,PluginTags,wrapFunction,XFBML) {
+   
+   
+   
+   
+   
+   
+   
+   
 
 var customTags = {
   comments: require('sdk.XFBML.Comments'),
@@ -12129,4 +12422,4 @@ try {
 
 
 }).call({}, window.inDapIF ? parent.window : window);
-} catch (e) {new Image().src="http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m='+encodeURIComponent('{"error":"LOAD", "extra": {"name":"'+e.name+'","line":"'+(e.lineNumber||e.line)+'","script":"'+(e.fileName||e.sourceURL||e.script)+'","stack":"'+(e.stackTrace||e.stack)+'","message":"'+e.message+'"}}');}
+} catch (e) {new Image().src="http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m='+encodeURIComponent('{"error":"LOAD", "extra": {"name":"'+e.name+'","line":"'+(e.lineNumber||e.line)+'","script":"'+(e.fileName||e.sourceURL||e.script)+'","stack":"'+(e.stackTrace||e.stack)+'","revision":"1149284","message":"'+e.message+'"}}');}

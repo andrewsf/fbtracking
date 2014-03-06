@@ -1,4 +1,4 @@
-/*1392156772,180826203,JIT Construction: v1116978,en_US*/
+/*1394066140,180681529,JIT Construction: v1149284,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -144,6 +144,48 @@ try {
                 g.trim = function() {
                     if (this == null) throw new TypeError('String.prototype.trim called on null or undefined');
                     return String.prototype.replace.call(this, /^\s+|\s+$/g, '');
+                };
+                g.startsWith = function(h) {
+                    var i = String(this);
+                    if (this == null) throw new TypeError('String.prototype.startsWith called on null or undefined');
+                    var j = arguments.length > 1 ? Number(arguments[1]) : 0;
+                    if (isNaN(j)) j = 0;
+                    var k = Math.min(Math.max(j, 0), i.length);
+                    return i.indexOf(String(h), j) == k;
+                };
+                g.endsWith = function(h) {
+                    var i = String(this);
+                    if (this == null) throw new TypeError('String.prototype.endsWith called on null or undefined');
+                    var j = i.length,
+                        k = String(h),
+                        l = arguments.length > 1 ? Number(arguments[1]) : j;
+                    if (isNaN(l)) l = 0;
+                    var m = Math.min(Math.max(l, 0), j),
+                        n = m - k.length;
+                    if (n < 0) return false;
+                    return i.lastIndexOf(k, n) == n;
+                };
+                g.contains = function(h) {
+                    if (this == null) throw new TypeError('String.prototype.contains called on null or undefined');
+                    var i = String(this),
+                        j = arguments.length > 1 ? Number(arguments[1]) : 0;
+                    if (isNaN(j)) j = 0;
+                    return i.indexOf(String(h), j) != -1;
+                };
+                g.repeat = function(h) {
+                    if (this == null) throw new TypeError('String.prototype.repeat called on null or undefined');
+                    var i = String(this),
+                        j = h ? Number(h) : 0;
+                    if (isNaN(j)) j = 0;
+                    if (j < 0 || j === Infinity) throw RangeError();
+                    if (j === 1) return i;
+                    if (j === 0) return '';
+                    var k = '';
+                    while (j) {
+                        if (j & 1) k += i;
+                        if ((j >>= 1)) i += i;
+                    }
+                    return k;
                 };
                 e.exports = g;
             });
@@ -560,15 +602,8 @@ try {
                 })
                     .call(this);
             });
-            __d("ES5", ["ES5ArrayPrototype", "ES5FunctionPrototype", "ES5StringPrototype", "ES5Array", "ES5Object", "ES5Date", "JSON3"], function(a, b, c, d, e, f) {
-                var g = b('ES5ArrayPrototype'),
-                    h = b('ES5FunctionPrototype'),
-                    i = b('ES5StringPrototype'),
-                    j = b('ES5Array'),
-                    k = b('ES5Object'),
-                    l = b('ES5Date'),
-                    m = b('JSON3'),
-                    n = Array.prototype.slice,
+            __d("ES5", ["ES5ArrayPrototype", "ES5FunctionPrototype", "ES5StringPrototype", "ES5Array", "ES5Object", "ES5Date", "JSON3"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
+                var n = Array.prototype.slice,
                     o = Object.prototype.toString,
                     p = {
                         'JSON.stringify': m.stringify,
@@ -608,7 +643,8 @@ try {
 
         __d("sdk.RuntimeConfig", [], {
             "locale": "en_US",
-            "rtl": false
+            "rtl": false,
+            "revision": "1149284"
         });
         __d("SDKConfig", [], {
             "bustCache": true,
@@ -625,7 +661,12 @@ try {
                 },
                 "e2e_ping_tracking": {
                     "rate": 1.0e-6
-                }
+                },
+                "xd_timeout": {
+                    "rate": 4,
+                    "value": 20000
+                },
+                "use_bundle": true
             },
             "api": {
                 "mode": "warn",
@@ -680,9 +721,10 @@ try {
             "cdn_https": "s-static.ak.facebook.com"
         });
         __d("XDConfig", [], {
-            "XdUrl": "connect\/xd_arbiter.php?version=40",
+            "XdUrl": "\/connect\/xd_arbiter.php?version=40",
+            "XdBundleUrl": "\/connect\/xd_arbiter\/63KoCqPoniC.js?version=40",
             "Flash": {
-                "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yS\/r\/NoZWYE2GRkt.swf"
+                "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"
             },
             "useCdn": true
         });
@@ -709,7 +751,7 @@ try {
         });
         __d("ApiClientConfig", [], {
             "FlashRequest": {
-                "swfUrl": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yB\/r\/YV5wijq5fkW.swf"
+                "swfUrl": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yW\/r\/PvklbuW2Ycn.swf"
             }
         });
         __d("QueryString", [], function(a, b, c, d, e, f) {
@@ -774,9 +816,7 @@ try {
             g.prototype.constructor = g;
             e.exports = g;
         });
-        __d("AssertionError", ["ManagedError"], function(a, b, c, d, e, f) {
-            var g = b('ManagedError');
-
+        __d("AssertionError", ["ManagedError"], function(a, b, c, d, e, f, g) {
             function h(i) {
                 g.prototype.constructor.apply(this, arguments);
             }
@@ -794,10 +834,7 @@ try {
             }
             e.exports = g;
         });
-        __d("Assert", ["AssertionError", "sprintf"], function(a, b, c, d, e, f) {
-            var g = b('AssertionError'),
-                h = b('sprintf');
-
+        __d("Assert", ["AssertionError", "sprintf"], function(a, b, c, d, e, f, g, h) {
             function i(n, o) {
                 if (typeof n !== 'boolean' || !n) throw new g(o);
                 return n;
@@ -846,10 +883,7 @@ try {
             });
             e.exports = m;
         });
-        __d("Type", ["copyProperties", "Assert"], function(a, b, c, d, e, f) {
-            var g = b('copyProperties'),
-                h = b('Assert');
-
+        __d("Type", ["copyProperties", "Assert"], function(a, b, c, d, e, f, g, h) {
             function i() {
                 var m = this.__mixins;
                 if (m) for (var n = 0; n < m.length; n++) m[n].apply(this, arguments);
@@ -969,53 +1003,49 @@ try {
             };
             e.exports = g;
         });
-        __d("sdk.Model", ["Type", "ObservableMixin"], function(a, b, c, d, e, f) {
-            var g = b('Type'),
-                h = b('ObservableMixin'),
-                i = g.extend({
-                    constructor: function(j) {
-                        this.parent();
-                        var k = {}, l = this;
-                        ES5(ES5('Object', 'keys', false, j), 'forEach', true, function(m) {
-                            k[m] = j[m];
-                            l['set' + m] = function(n) {
-                                if (n === k[m]) return this;
-                                k[m] = n;
-                                l.inform(m + '.change', n);
-                                return l;
-                            };
-                            l['get' + m] = function() {
-                                return k[m];
-                            };
-                        });
-                    }
-                }, h);
+        __d("sdk.Model", ["Type", "ObservableMixin"], function(a, b, c, d, e, f, g, h) {
+            var i = g.extend({
+                constructor: function(j) {
+                    this.parent();
+                    var k = {}, l = this;
+                    ES5(ES5('Object', 'keys', false, j), 'forEach', true, function(m) {
+                        k[m] = j[m];
+                        l['set' + m] = function(n) {
+                            if (n === k[m]) return this;
+                            k[m] = n;
+                            l.inform(m + '.change', n);
+                            return l;
+                        };
+                        l['get' + m] = function() {
+                            return k[m];
+                        };
+                    });
+                }
+            }, h);
             e.exports = i;
         });
-        __d("sdk.Runtime", ["sdk.Model", "copyProperties", "sdk.RuntimeConfig"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Model'),
-                h = c('sdk.RuntimeConfig'),
-                i = b('copyProperties'),
-                j = {
-                    UNKNOWN: 0,
-                    PAGETAB: 1,
-                    CANVAS: 2,
-                    PLATFORM: 4
-                }, k = new g({
-                    AccessToken: '',
-                    ClientID: '',
-                    Environment: j.UNKNOWN,
-                    Initialized: false,
-                    KidDirectedSite: undefined,
-                    Locale: h.locale,
-                    LoginStatus: undefined,
-                    Rtl: h.rtl,
-                    Scope: undefined,
-                    Secure: undefined,
-                    UseCookie: false,
-                    UserID: '',
-                    CookieUserID: ''
-                });
+        __d("sdk.Runtime", ["sdk.Model", "sdk.RuntimeConfig", "copyProperties"], function(a, b, c, d, e, f, g, h, i) {
+            var j = {
+                UNKNOWN: 0,
+                PAGETAB: 1,
+                CANVAS: 2,
+                PLATFORM: 4
+            }, k = new g({
+                AccessToken: '',
+                ClientID: '',
+                CookieUserID: '',
+                Environment: j.UNKNOWN,
+                Initialized: false,
+                KidDirectedSite: undefined,
+                Locale: h.locale,
+                LoginStatus: undefined,
+                Revision: h.revision,
+                Rtl: h.rtl,
+                Scope: undefined,
+                Secure: undefined,
+                UseCookie: false,
+                UserID: ''
+            });
             i(k, {
                 ENVIRONMENTS: j,
                 isEnvironment: function(l) {
@@ -1030,10 +1060,8 @@ try {
             })();
             e.exports = k;
         });
-        __d("sdk.Cookie", ["QueryString", "sdk.Runtime"], function(a, b, c, d, e, f) {
-            var g = b('QueryString'),
-                h = b('sdk.Runtime'),
-                i = null;
+        __d("sdk.Cookie", ["QueryString", "sdk.Runtime"], function(a, b, c, d, e, f, g, h) {
+            var i = null;
 
             function j(m, n, o) {
                 m = m + h.getClientID();
@@ -1094,9 +1122,8 @@ try {
             }
             e.exports = g;
         });
-        __d("hasNamePropertyBug", ["guid"], function(a, b, c, d, e, f) {
-            var g = b('guid'),
-                h;
+        __d("hasNamePropertyBug", ["guid"], function(a, b, c, d, e, f, g) {
+            var h;
 
             function i() {
                 var k = document.createElement("form"),
@@ -1127,9 +1154,8 @@ try {
             };
             e.exports = h;
         });
-        __d("DOMEventListener", ["wrapFunction"], function(a, b, c, d, e, f) {
-            var g = b('wrapFunction'),
-                h, i;
+        __d("DOMEventListener", ["wrapFunction"], function(a, b, c, d, e, f, g) {
+            var h, i;
             if (window.addEventListener) {
                 h = function(k, l, m) {
                     m.wrapper = g(m, 'entry', 'DOMEventListener.add ' + l);
@@ -1161,12 +1187,7 @@ try {
             };
             e.exports = j;
         });
-        __d("sdk.createIframe", ["copyProperties", "guid", "hasNamePropertyBug", "DOMEventListener"], function(a, b, c, d, e, f) {
-            var g = b('copyProperties'),
-                h = b('guid'),
-                i = b('hasNamePropertyBug'),
-                j = b('DOMEventListener');
-
+        __d("sdk.createIframe", ["copyProperties", "guid", "hasNamePropertyBug", "DOMEventListener"], function(a, b, c, d, e, f, g, h, i, j) {
             function k(l) {
                 l = g({}, l);
                 var m, n = l.name || h(),
@@ -1225,9 +1246,7 @@ try {
             };
             e.exports = i;
         });
-        __d("sdk.feature", ["SDKConfig"], function(a, b, c, d, e, f) {
-            var g = c('SDKConfig');
-
+        __d("sdk.feature", ["SDKConfig"], function(a, b, c, d, e, f, g) {
             function h(i, j) {
                 if (g.features && i in g.features) {
                     var k = g.features[i];
@@ -1331,10 +1350,7 @@ try {
             };
             e.exports = x;
         });
-        __d("sdk.getContextType", ["UserAgent", "sdk.Runtime"], function(a, b, c, d, e, f) {
-            var g = b('UserAgent'),
-                h = b('sdk.Runtime');
-
+        __d("sdk.getContextType", ["UserAgent", "sdk.Runtime"], function(a, b, c, d, e, f, g, h) {
             function i() {
                 if (g.nativeApp()) return 3;
                 if (g.mobile()) return 2;
@@ -1343,25 +1359,19 @@ try {
             }
             e.exports = i;
         });
-        __d("UrlMap", ["UrlMapConfig"], function(a, b, c, d, e, f) {
-            var g = b('UrlMapConfig'),
-                h = {
-                    resolve: function(i, j) {
-                        var k = typeof j == 'undefined' ? location.protocol.replace(':', '') : j ? 'https' : 'http';
-                        if (i in g) return k + '://' + g[i];
-                        if (typeof j == 'undefined' && i + '_' + k in g) return k + '://' + g[i + '_' + k];
-                        if (j !== true && i + '_http' in g) return 'http://' + g[i + '_http'];
-                        if (j !== false && i + '_https' in g) return 'https://' + g[i + '_https'];
-                    }
-                };
+        __d("UrlMap", ["UrlMapConfig"], function(a, b, c, d, e, f, g) {
+            var h = {
+                resolve: function(i, j) {
+                    var k = typeof j == 'undefined' ? location.protocol.replace(':', '') : j ? 'https' : 'http';
+                    if (i in g) return k + '://' + g[i];
+                    if (typeof j == 'undefined' && i + '_' + k in g) return k + '://' + g[i + '_' + k];
+                    if (j !== true && i + '_http' in g) return 'http://' + g[i + '_http'];
+                    if (j !== false && i + '_https' in g) return 'https://' + g[i + '_https'];
+                }
+            };
             e.exports = h;
         });
-        __d("sdk.Impressions", ["guid", "QueryString", "sdk.Runtime", "UrlMap"], function(a, b, c, d, e, f) {
-            var g = b('guid'),
-                h = b('QueryString'),
-                i = b('sdk.Runtime'),
-                j = b('UrlMap');
-
+        __d("sdk.Impressions", ["guid", "QueryString", "sdk.Runtime", "UrlMap"], function(a, b, c, d, e, f, g, h, i, j) {
             function k(m) {
                 var n = i.getClientID();
                 if (!m.api_key && n) m.api_key = n;
@@ -1381,14 +1391,13 @@ try {
             };
             e.exports = l;
         });
-        __d("Log", ["sprintf"], function(a, b, c, d, e, f) {
-            var g = b('sprintf'),
-                h = {
-                    DEBUG: 3,
-                    INFO: 2,
-                    WARNING: 1,
-                    ERROR: 0
-                };
+        __d("Log", ["sprintf"], function(a, b, c, d, e, f, g) {
+            var h = {
+                DEBUG: 3,
+                INFO: 2,
+                WARNING: 1,
+                ERROR: 0
+            };
 
             function i(k, l) {
                 var m = Array.prototype.slice.call(arguments, 2),
@@ -1453,9 +1462,7 @@ try {
             };
             e.exports = k;
         });
-        __d("sdk.SignedRequest", ["Base64"], function(a, b, c, d, e, f) {
-            var g = b('Base64');
-
+        __d("sdk.SignedRequest", ["Base64"], function(a, b, c, d, e, f, g) {
             function h(j) {
                 if (!j) return null;
                 var k = j.split('.', 2)[1].replace(/\-/g, '+')
@@ -1467,110 +1474,262 @@ try {
             };
             e.exports = i;
         });
-        __d("URL", ["Assert", "copyProperties", "QueryString", "Log"], function(a, b, c, d, e, f) {
-            var g = b('Assert'),
-                h = b('copyProperties'),
-                i = b('QueryString'),
-                j = b('Log'),
-                k = new RegExp('(' + '(((\\w+):)?//)' + '(.*?@)?' + '([^~/?#:]+)' + '(:(\\d+))?' + ')?' + '([^\\?$#]+)?' + '(\\?([^$#]+))?' + '(#([^$]+))?'),
-                l = /[\0\\]/,
-                m = /[^\w\-\.,;\/?:@=&%#$~+!*'\[\]()]+/g,
-                n = /^[a-z0-9.][a-z0-9\-\.]+[a-z0-9.]$/,
-                o = /\.facebook\.com$/;
-
-            function p(q) {
-                g.isString(q, 'The passed argument was of invalid type.');
-                if (l.test(q)) throw new URIError('The passed argument could not be parsed as a url.');
-                if (this instanceof p === false) return new p(q);
-                var r = q.replace(m, function(t) {
-                    j.warn('Escaping unescaped character \\x%s from "%s"', t.charCodeAt(0)
-                        .toString(16), q);
-                    return encodeURIComponent(t);
-                })
-                    .match(k);
-                if (!q || !r) throw new URIError('The passed argument could not be parsed as a url.');
-                var s = !! location.hostname;
-                this.setProtocol(r[4] || (s ? location.protocol.replace(/:/, '') : ''));
-                this.setDomain(r[6] || location.hostname);
-                this.setPort(r[8] || (s && !r[6] ? location.port : ''));
-                this.setPath(r[9] || '');
-                this.setSearch(r[11] || '');
-                this.setFragment(r[13] || '');
-                if (this._path.substring(0, 1) != '/') this._path = '/' + this._path;
-                if (this._domain && !n.test(decodeURIComponent(this._domain.toLowerCase()))) {
-                    j.error('Invalid characters found in domain name: %s', this._domain);
-                    throw new URIError('Domain contained invalid characters.');
-                }
+        __d("URIRFC3986", [], function(a, b, c, d, e, f) {
+            var g = new RegExp('^' + '([^:/?#]+:)?' + '(//' + '([^\\\\/?#@]*@)?' + '(' + '\\[[A-Fa-f0-9:.]+\\]|' + '[^\\/?#:]*' + ')' + '(:[0-9]*)?' + ')?' + '([^?#]*)' + '(\\?[^#]*)?' + '(#.*)?'),
+                h = {
+                    parse: function(i) {
+                        if (ES5(i, 'trim', true) === '') return null;
+                        var j = i.match(g),
+                            k = {};
+                        k.uri = j[0] ? j[0] : null;
+                        k.scheme = j[1] ? j[1].substr(0, j[1].length - 1) : null;
+                        k.authority = j[2] ? j[2].substr(2) : null;
+                        k.userinfo = j[3] ? j[3].substr(0, j[3].length - 1) : null;
+                        k.host = j[2] ? j[4] : null;
+                        k.port = j[5] ? (j[5].substr(1) ? parseInt(j[5].substr(1), 10) : null) : null;
+                        k.path = j[6] ? j[6] : null;
+                        k.query = j[7] ? j[7].substr(1) : null;
+                        k.fragment = j[8] ? j[8].substr(1) : null;
+                        k.isGenericURI = k.authority === null && !! k.scheme;
+                        return k;
+                    }
+                };
+            e.exports = h;
+        });
+        __d("createObjectFrom", [], function(a, b, c, d, e, f) {
+            function g(h, i) {
+                var j = {}, k = ES5('Array', 'isArray', false, i);
+                if (typeof i == 'undefined') i = true;
+                for (var l = h.length; l--;) j[h[l]] = k ? i[l] : i;
+                return j;
             }
-            h(p.prototype, {
-                constructor: p,
-                getProtocol: function() {
-                    return this._protocol;
-                },
-                setProtocol: function(q) {
-                    this._protocol = q;
-                    return this;
-                },
-                getDomain: function() {
-                    return this._domain;
-                },
-                setDomain: function(q) {
-                    this._domain = q;
-                    return this;
-                },
-                getPort: function() {
-                    return this._port;
-                },
-                setPort: function(q) {
-                    this._port = q;
-                    return this;
-                },
-                getPath: function() {
-                    return this._path;
-                },
-                setPath: function(q) {
-                    this._path = q;
-                    return this;
-                },
-                getSearch: function() {
-                    return this._search;
-                },
-                setSearch: function(q) {
-                    this._search = q;
-                    return this;
-                },
-                getFragment: function() {
-                    return this._fragment;
-                },
-                setFragment: function(q) {
-                    this._fragment = q;
-                    return this;
-                },
-                getParsedSearch: function() {
-                    return i.decode(this._search);
-                },
-                getParsedFragment: function() {
-                    return i.decode(this._fragment);
-                },
-                isFacebookURL: function() {
-                    return o.test(this._domain);
-                },
-                toString: function() {
-                    return (this._protocol ? this._protocol + ':' : '') + (this._domain ? '//' + this._domain : '') + (this._port ? ':' + this._port : '') + this._path + (this._search ? '?' + this._search : '') + (this._fragment ? '#' + this._fragment : '');
-                },
-                valueOf: function() {
-                    return this.toString();
+            e.exports = g;
+        });
+        __d("URISchemes", ["createObjectFrom"], function(a, b, c, d, e, f, g) {
+            var h = g(['fb', 'fbcf', 'fbconnect', 'fb-messenger', 'fbrpc', 'file', 'ftp', 'http', 'https', 'mailto', 'ms-app', 'itms', 'itms-apps', 'itms-services', 'market', 'svn+ssh', 'fbstaging', 'tel', 'sms']),
+                i = {
+                    isAllowed: function(j) {
+                        if (!j) return true;
+                        return h.hasOwnProperty(j.toLowerCase());
+                    }
+                };
+            e.exports = i;
+        });
+        __d("ex", [], function(a, b, c, d, e, f) {
+            var g = function() {
+                var h = Array.prototype.slice.call(arguments, 0);
+                h = ES5(h, 'map', true, function(i) {
+                    return String(i);
+                });
+                if (h[0].split('%s')
+                    .length !== h.length) return g('ex args number mismatch: %s', ES5('JSON', 'stringify', false, h));
+                return g._prefix + ES5('JSON', 'stringify', false, h) + g._suffix;
+            };
+            g._prefix = '<![EX[';
+            g._suffix = ']]>';
+            e.exports = g;
+        });
+        __d("invariant", [], function(a, b, c, d, e, f) {
+            "use strict";
+            var g = function(h) {
+                if (!h) {
+                    var i = new Error('Minified exception occured; use the non-minified dev environment for ' + 'the full error message and additional helpful warnings.');
+                    i.framesToPop = 1;
+                    throw i;
                 }
-            });
-            h(p, {
-                getCurrent: function() {
-                    return new p(location.href);
-                },
-                getReferrer: function() {
-                    return document.referrer ? new p(document.referrer) : null;
+            };
+            e.exports = g;
+        });
+        __d("URIBase", ["URIRFC3986", "URISchemes", "copyProperties", "ex", "invariant"], function(a, b, c, d, e, f, g, h, i, j, k) {
+            var l = new RegExp('[\\x00-\\x2c\\x2f\\x3b-\\x40\\x5c\\x5e\\x60\\x7b-\\x7f' + '\\uFDD0-\\uFDEF\\uFFF0-\\uFFFF' + '\\u2047\\u2048\\uFE56\\uFE5F\\uFF03\\uFF0F\\uFF1F]'),
+                m = new RegExp('^(?:[^/]*:|' + '[\\x00-\\x1f]*/[\\x00-\\x1f]*/)');
+
+            function n(p, q, r, s) {
+                if (!q) return true;
+                if (q instanceof o) {
+                    p.setProtocol(q.getProtocol());
+                    p.setDomain(q.getDomain());
+                    p.setPort(q.getPort());
+                    p.setPath(q.getPath());
+                    p.setQueryData(s.deserialize(s.serialize(q.getQueryData())));
+                    p.setFragment(q.getFragment());
+                    return true;
                 }
-            });
-            e.exports = p;
+                q = q.toString();
+                var t = g.parse(q) || {};
+                if (!r && !h.isAllowed(t.scheme)) return false;
+                p.setProtocol(t.scheme || '');
+                if (!r && l.test(t.host)) return false;
+                p.setDomain(t.host || '');
+                p.setPort(t.port || '');
+                p.setPath(t.path || '');
+                if (r) {
+                    p.setQueryData(s.deserialize(t.query) || {});
+                } else try {
+                    p.setQueryData(s.deserialize(t.query) || {});
+                } catch (u) {
+                    return false;
+                }
+                p.setFragment(t.fragment || '');
+                if (t.userinfo !== null) if (r) {
+                    throw new Error(j('URI.parse: invalid URI (userinfo is not allowed in a URI): %s', p.toString()));
+                } else return false;
+                if (!p.getDomain() && ES5(p.getPath(), 'indexOf', true, '\\') !== -1) if (r) {
+                    throw new Error(j('URI.parse: invalid URI (no domain but multiple back-slashes): %s', p.toString()));
+                } else return false;
+                if (!p.getProtocol() && m.test(q)) if (r) {
+                    throw new Error(j('URI.parse: invalid URI (unsafe protocol-relative URLs): %s', p.toString()));
+                } else return false;
+                return true;
+            }
+            function o(p, q) {
+                "use strict";
+                k(q);
+                this.$URIBase0 = q;
+                this.$URIBase1 = '';
+                this.$URIBase2 = '';
+                this.$URIBase3 = '';
+                this.$URIBase4 = '';
+                this.$URIBase5 = '';
+                this.$URIBase6 = {};
+                n(this, p, true, q);
+            }
+            o.prototype.setProtocol = function(p) {
+                "use strict";
+                k(h.isAllowed(p));
+                this.$URIBase1 = p;
+                return this;
+            };
+            o.prototype.getProtocol = function(p) {
+                "use strict";
+                return this.$URIBase1;
+            };
+            o.prototype.setSecure = function(p) {
+                "use strict";
+                return this.setProtocol(p ? 'https' : 'http');
+            };
+            o.prototype.isSecure = function() {
+                "use strict";
+                return this.getProtocol() === 'https';
+            };
+            o.prototype.setDomain = function(p) {
+                "use strict";
+                if (l.test(p)) throw new Error(j('URI.setDomain: unsafe domain specified: %s for url %s', p, this.toString()));
+                this.$URIBase2 = p;
+                return this;
+            };
+            o.prototype.getDomain = function() {
+                "use strict";
+                return this.$URIBase2;
+            };
+            o.prototype.setPort = function(p) {
+                "use strict";
+                this.$URIBase3 = p;
+                return this;
+            };
+            o.prototype.getPort = function() {
+                "use strict";
+                return this.$URIBase3;
+            };
+            o.prototype.setPath = function(p) {
+                "use strict";
+                this.$URIBase4 = p;
+                return this;
+            };
+            o.prototype.getPath = function() {
+                "use strict";
+                return this.$URIBase4;
+            };
+            o.prototype.addQueryData = function(p, q) {
+                "use strict";
+                if (p instanceof Object) {
+                    i(this.$URIBase6, p);
+                } else this.$URIBase6[p] = q;
+                return this;
+            };
+            o.prototype.setQueryData = function(p) {
+                "use strict";
+                this.$URIBase6 = p;
+                return this;
+            };
+            o.prototype.getQueryData = function() {
+                "use strict";
+                return this.$URIBase6;
+            };
+            o.prototype.removeQueryData = function(p) {
+                "use strict";
+                if (!ES5('Array', 'isArray', false, p)) p = [p];
+                for (var q = 0, r = p.length; q < r; ++q) delete this.$URIBase6[p[q]];
+                return this;
+            };
+            o.prototype.setFragment = function(p) {
+                "use strict";
+                this.$URIBase5 = p;
+                return this;
+            };
+            o.prototype.getFragment = function() {
+                "use strict";
+                return this.$URIBase5;
+            };
+            o.prototype.isEmpty = function() {
+                "use strict";
+                return !(this.getPath() || this.getProtocol() || this.getDomain() || this.getPort() || ES5('Object', 'keys', false, this.getQueryData())
+                    .length > 0 || this.getFragment());
+            };
+            o.prototype.toString = function() {
+                "use strict";
+                var p = '';
+                if (this.$URIBase1) p += this.$URIBase1 + '://';
+                if (this.$URIBase2) p += this.$URIBase2;
+                if (this.$URIBase3) p += ':' + this.$URIBase3;
+                if (this.$URIBase4) {
+                    p += this.$URIBase4;
+                } else if (p) p += '/';
+                var q = this.$URIBase0.serialize(this.$URIBase6);
+                if (q) p += '?' + q;
+                if (this.$URIBase5) p += '#' + this.$URIBase5;
+                return p;
+            };
+            o.prototype.getOrigin = function() {
+                "use strict";
+                return this.$URIBase1 + '://' + this.$URIBase2 + (this.$URIBase3 ? ':' + this.$URIBase3 : '');
+            };
+            o.isValidURI = function(p, q) {
+                return n(new o(null, q), p, false, q);
+            };
+            e.exports = o;
+        });
+        __d("sdk.URI", ["Assert", "QueryString", "URIBase"], function(a, b, c, d, e, f, g, h, i) {
+            var j = /\.facebook\.com$/,
+                k = {
+                    serialize: function(o) {
+                        return o ? h.encode(o) : '';
+                    },
+                    deserialize: function(o) {
+                        return o ? h.decode(o) : {};
+                    }
+                };
+            for (var l in i) if (i.hasOwnProperty(l)) n[l] = i[l];
+            var m = i === null ? null : i.prototype;
+            n.prototype = ES5('Object', 'create', false, m);
+            n.prototype.constructor = n;
+            n.__superConstructor__ = i;
+
+            function n(o) {
+                "use strict";
+                g.isString(o, 'The passed argument was of invalid type.');
+                if (!(this instanceof n)) return new n(o);
+                i.call(this, o, k);
+            }
+            n.prototype.isFacebookURI = function() {
+                "use strict";
+                return j.test(this.getDomain());
+            };
+            n.prototype.valueOf = function() {
+                "use strict";
+                return this.toString();
+            };
+            e.exports = n;
         });
         __d("sdk.domReady", [], function(a, b, c, d, e, f) {
             var g, h = "readyState" in document ? /loaded|complete/.test(document.readyState) : !! document.body;
@@ -1611,63 +1770,60 @@ try {
             }
             e.exports = j;
         }, 3);
-        __d("sdk.Content", ["sdk.domReady", "Log", "UserAgent"], function(a, b, c, d, e, f) {
-            var g = b('sdk.domReady'),
-                h = b('Log'),
-                i = b('UserAgent'),
-                j, k, l = {
-                    append: function(m, n) {
-                        if (!n) if (!j) {
-                            j = n = document.getElementById('fb-root');
-                            if (!n) {
-                                h.warn('The "fb-root" div has not been created, auto-creating');
-                                j = n = document.createElement('div');
-                                n.id = 'fb-root';
-                                if (i.ie() || !document.body) {
-                                    g(function() {
-                                        document.body.appendChild(n);
-                                    });
-                                } else document.body.appendChild(n);
-                            }
-                            n.className += ' fb_reset';
-                        } else n = j;
-                        if (typeof m == 'string') {
-                            var o = document.createElement('div');
-                            n.appendChild(o)
-                                .innerHTML = m;
-                            return o;
-                        } else return n.appendChild(m);
-                    },
-                    appendHidden: function(m) {
+        __d("sdk.Content", ["sdk.domReady", "Log", "UserAgent"], function(a, b, c, d, e, f, g, h, i) {
+            var j, k, l = {
+                append: function(m, n) {
+                    if (!n) if (!j) {
+                        j = n = document.getElementById('fb-root');
                         if (!n) {
-                            var n = document.createElement('div'),
-                                o = n.style;
-                            o.position = 'absolute';
-                            o.top = '-10000px';
-                            o.width = o.height = 0;
-                            n = l.append(n);
+                            h.warn('The "fb-root" div has not been created, auto-creating');
+                            j = n = document.createElement('div');
+                            n.id = 'fb-root';
+                            if (i.ie() || !document.body) {
+                                g(function() {
+                                    document.body.appendChild(n);
+                                });
+                            } else document.body.appendChild(n);
                         }
-                        return l.append(m, n);
-                    },
-                    submitToTarget: function(m, n) {
-                        var o = document.createElement('form');
-                        o.action = m.url;
-                        o.target = m.target;
-                        o.method = (n) ? 'GET' : 'POST';
-                        l.appendHidden(o);
-                        for (var p in m.params) if (m.params.hasOwnProperty(p)) {
-                            var q = m.params[p];
-                            if (q !== null && q !== undefined) {
-                                var r = document.createElement('input');
-                                r.name = p;
-                                r.value = q;
-                                o.appendChild(r);
-                            }
-                        }
-                        o.submit();
-                        o.parentNode.removeChild(o);
+                        n.className += ' fb_reset';
+                    } else n = j;
+                    if (typeof m == 'string') {
+                        var o = document.createElement('div');
+                        n.appendChild(o)
+                            .innerHTML = m;
+                        return o;
+                    } else return n.appendChild(m);
+                },
+                appendHidden: function(m) {
+                    if (!n) {
+                        var n = document.createElement('div'),
+                            o = n.style;
+                        o.position = 'absolute';
+                        o.top = '-10000px';
+                        o.width = o.height = 0;
+                        n = l.append(n);
                     }
-                };
+                    return l.append(m, n);
+                },
+                submitToTarget: function(m, n) {
+                    var o = document.createElement('form');
+                    o.action = m.url;
+                    o.target = m.target;
+                    o.method = (n) ? 'GET' : 'POST';
+                    l.appendHidden(o);
+                    for (var p in m.params) if (m.params.hasOwnProperty(p)) {
+                        var q = m.params[p];
+                        if (q !== null && q !== undefined) {
+                            var r = document.createElement('input');
+                            r.name = p;
+                            r.value = q;
+                            o.appendChild(r);
+                        }
+                    }
+                    o.submit();
+                    o.parentNode.removeChild(o);
+                }
+            };
             e.exports = l;
         });
         __d("sdk.Event", [], function(a, b, c, d, e, f) {
@@ -1710,9 +1866,8 @@ try {
             };
             e.exports = g;
         });
-        __d("Queue", ["copyProperties"], function(a, b, c, d, e, f) {
-            var g = b('copyProperties'),
-                h = {};
+        __d("Queue", ["copyProperties"], function(a, b, c, d, e, f, g) {
+            var h = {};
 
             function i(j) {
                 "use strict";
@@ -1748,6 +1903,10 @@ try {
                 this._stopped = false;
                 this._dispatch();
                 return this;
+            };
+            i.prototype.isStarted = function() {
+                "use strict";
+                return !this._stopped;
             };
             i.prototype.dispatch = function() {
                 "use strict";
@@ -1788,10 +1947,7 @@ try {
             };
             e.exports = i;
         });
-        __d("JSONRPC", ["copyProperties", "Log"], function(a, b, c, d, e, f) {
-            var g = b('copyProperties'),
-                h = b('Log');
-
+        __d("JSONRPC", ["copyProperties", "Log"], function(a, b, c, d, e, f, g, h) {
             function i(j) {
                 this._counter = 0;
                 this._callbacks = {};
@@ -1876,11 +2032,8 @@ try {
             });
             e.exports = i;
         });
-        __d("sdk.RPC", ["Assert", "JSONRPC", "Queue"], function(a, b, c, d, e, f) {
-            var g = b('Assert'),
-                h = b('JSONRPC'),
-                i = b('Queue'),
-                j = new i(),
+        __d("sdk.RPC", ["Assert", "JSONRPC", "Queue"], function(a, b, c, d, e, f, g, h, i) {
+            var j = new i(),
                 k = new h(function(m) {
                     j.enqueue(m);
                 }),
@@ -1900,9 +2053,21 @@ try {
                 };
             e.exports = l;
         });
-        __d("emptyFunction", ["copyProperties"], function(a, b, c, d, e, f) {
-            var g = b('copyProperties');
-
+        __d("sdk.Scribe", ["QueryString", "sdk.Runtime", "UrlMap"], function(a, b, c, d, e, f, g, h, i) {
+            function j(l, m) {
+                if (typeof m.extra == 'object') m.extra.revision = h.getRevision();
+                (new Image())
+                    .src = g.appendToUrl(i.resolve('www', true) + '/common/scribe_endpoint.php', {
+                    c: l,
+                    m: ES5('JSON', 'stringify', false, m)
+                });
+            }
+            var k = {
+                log: j
+            };
+            e.exports = k;
+        });
+        __d("emptyFunction", ["copyProperties"], function(a, b, c, d, e, f, g) {
             function h(j) {
                 return function() {
                     return j;
@@ -1944,16 +2109,9 @@ try {
             }
             e.exports = l;
         });
-        __d("Flash", ["DOMEventListener", "DOMWrapper", "QueryString", "UserAgent", "copyProperties", "guid", "htmlSpecialChars"], function(a, b, c, d, e, f) {
-            var g = b('DOMEventListener'),
-                h = b('DOMWrapper'),
-                i = b('QueryString'),
-                j = b('UserAgent'),
-                k = b('copyProperties'),
-                l = b('guid'),
-                m = b('htmlSpecialChars'),
-                n = {}, o, p = h.getWindow()
-                    .document;
+        __d("Flash", ["DOMEventListener", "DOMWrapper", "QueryString", "UserAgent", "copyProperties", "guid", "htmlSpecialChars"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
+            var n = {}, o, p = h.getWindow()
+                .document;
 
             function q(v) {
                 var w = p.getElementById(v);
@@ -2035,42 +2193,29 @@ try {
             }
             e.exports = g;
         });
-        __d("GlobalCallback", ["DOMWrapper", "dotAccess", "guid", "wrapFunction"], function(a, b, c, d, e, f) {
-            var g = b('DOMWrapper'),
-                h = b('dotAccess'),
-                i = b('guid'),
-                j = b('wrapFunction'),
-                k, l, m = {
-                    setPrefix: function(n) {
-                        k = h(g.getWindow(), n, true);
-                        l = n;
-                    },
-                    create: function(n, o) {
-                        if (!k) this.setPrefix('__globalCallbacks');
-                        var p = i();
-                        k[p] = j(n, 'entry', o || 'GlobalCallback');
-                        return l + '.' + p;
-                    },
-                    remove: function(n) {
-                        var o = n.substring(l.length + 1);
-                        delete k[o];
-                    }
-                };
+        __d("GlobalCallback", ["DOMWrapper", "dotAccess", "guid", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j) {
+            var k, l, m = {
+                setPrefix: function(n) {
+                    k = h(g.getWindow(), n, true);
+                    l = n;
+                },
+                create: function(n, o) {
+                    if (!k) this.setPrefix('__globalCallbacks');
+                    var p = i();
+                    k[p] = j(n, 'entry', o || 'GlobalCallback');
+                    return l + '.' + p;
+                },
+                remove: function(n) {
+                    var o = n.substring(l.length + 1);
+                    delete k[o];
+                }
+            };
             e.exports = m;
         });
-        __d("XDM", ["DOMEventListener", "DOMWrapper", "emptyFunction", "Flash", "GlobalCallback", "guid", "Log", "UserAgent", "wrapFunction"], function(a, b, c, d, e, f) {
-            var g = b('DOMEventListener'),
-                h = b('DOMWrapper'),
-                i = b('emptyFunction'),
-                j = b('Flash'),
-                k = b('GlobalCallback'),
-                l = b('guid'),
-                m = b('Log'),
-                n = b('UserAgent'),
-                o = b('wrapFunction'),
-                p = {}, q = {
-                    transports: []
-                }, r = h.getWindow();
+        __d("XDM", ["DOMEventListener", "DOMWrapper", "emptyFunction", "Flash", "GlobalCallback", "guid", "Log", "UserAgent", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
+            var p = {}, q = {
+                transports: []
+            }, r = h.getWindow();
 
             function s(u) {
                 var v = {}, w = u.length,
@@ -2203,381 +2348,353 @@ try {
             })());
             e.exports = t;
         });
-        __d("sdk.XD", ["sdk.Content", "sdk.createIframe", "sdk.Event", "guid", "Log", "QueryString", "Queue", "sdk.RPC", "sdk.Runtime", "UrlMap", "URL", "XDM", "XDConfig"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Content'),
-                h = b('sdk.createIframe'),
-                i = b('sdk.Event'),
-                j = b('guid'),
-                k = b('Log'),
-                l = b('QueryString'),
-                m = b('Queue'),
-                n = b('sdk.RPC'),
-                o = b('sdk.Runtime'),
-                p = b('UrlMap'),
-                q = b('URL'),
-                r = c('XDConfig'),
-                s = b('XDM'),
-                t = new m(),
-                u = new m(),
-                v = new m(),
-                w, x, y = j(),
-                z = j(),
-                aa = location.protocol + '//' + location.host,
-                ba, ca = false,
-                da = 'Facebook Cross Domain Communication Frame',
-                ea = {}, fa = new m();
-            n.setInQueue(fa);
+        __d("sdk.XD", ["sdk.Content", "sdk.Event", "Log", "QueryString", "Queue", "sdk.RPC", "sdk.Runtime", "sdk.Scribe", "sdk.URI", "UrlMap", "XDConfig", "XDM", "sdk.createIframe", "sdk.feature", "guid"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u) {
+            var v = new k(),
+                w = new k(),
+                x = new k(),
+                y, z, aa = u(),
+                ba = q.useCdn ? 'cdn' : 'www',
+                ca = t('use_bundle') ? q.XdBundleUrl : q.XdUrl,
+                da = p.resolve(ba, false) + ca,
+                ea = p.resolve(ba, true) + ca,
+                fa = u(),
+                ga = location.protocol + '//' + location.host,
+                ha, ia = false,
+                ja = 'Facebook Cross Domain Communication Frame',
+                ka = {}, la = new k();
+            l.setInQueue(la);
 
-            function ga(ma) {
-                k.info('Remote XD can talk to facebook.com (%s)', ma);
-                o.setEnvironment(ma === 'canvas' ? o.ENVIRONMENTS.CANVAS : o.ENVIRONMENTS.PAGETAB);
+            function ma(sa) {
+                i.info('Remote XD can talk to facebook.com (%s)', sa);
+                m.setEnvironment(sa === 'canvas' ? m.ENVIRONMENTS.CANVAS : m.ENVIRONMENTS.PAGETAB);
             }
-            function ha(ma, na) {
-                if (!na) {
-                    k.error('No senderOrigin');
+            function na(sa, ta) {
+                if (!ta) {
+                    i.error('No senderOrigin');
                     throw new Error();
                 }
-                var oa = /^https?/.exec(na)[0];
-                switch (ma.xd_action) {
+                var ua = /^https?/.exec(ta)[0];
+                switch (sa.xd_action) {
                 case 'proxy_ready':
-                    var pa, qa;
-                    if (oa == 'https') {
-                        pa = v;
-                        qa = x;
+                    var va, wa;
+                    if (ua == 'https') {
+                        va = x;
+                        wa = z;
                     } else {
-                        pa = u;
-                        qa = w;
+                        va = w;
+                        wa = y;
                     }
-                    if (ma.registered) {
-                        ga(ma.registered);
-                        t = pa.merge(t);
+                    if (sa.registered) {
+                        ma(sa.registered);
+                        v = va.merge(v);
                     }
-                    k.info('Proxy ready, starting queue %s containing %s messages', oa + 'ProxyQueue', pa.getLength());
-                    pa.start(function(sa) {
-                        ba.send(typeof sa === 'string' ? sa : l.encode(sa), na, qa.contentWindow, z + '_' + oa);
+                    i.info('Proxy ready, starting queue %s containing %s messages', ua + 'ProxyQueue', va.getLength());
+                    va.start(function(ya) {
+                        ha.send(typeof ya === 'string' ? ya : j.encode(ya), ta, wa.contentWindow, fa + '_' + ua);
                     });
                     break;
                 case 'plugin_ready':
-                    k.info('Plugin %s ready, protocol: %s', ma.name, oa);
-                    ea[ma.name] = {
-                        protocol: oa
+                    i.info('Plugin %s ready, protocol: %s', sa.name, ua);
+                    ka[sa.name] = {
+                        protocol: ua
                     };
-                    if (m.exists(ma.name)) {
-                        var ra = m.get(ma.name);
-                        k.debug('Enqueuing %s messages for %s in %s', ra.getLength(), ma.name, oa + 'ProxyQueue');
-                        (oa == 'https' ? v : u)
-                            .merge(ra);
+                    if (k.exists(sa.name)) {
+                        var xa = k.get(sa.name);
+                        i.debug('Enqueuing %s messages for %s in %s', xa.getLength(), sa.name, ua + 'ProxyQueue');
+                        (ua == 'https' ? x : w)
+                            .merge(xa);
                     }
                     break;
                 }
-                if (ma.data) ia(ma.data, na);
+                if (sa.data) oa(sa.data, ta);
             }
-            function ia(ma, na) {
-                if (na && na !== 'native' && !q(na)
-                    .isFacebookURL()) return;
-                if (typeof ma == 'string') {
-                    if (/^FB_RPC:/.test(ma)) {
-                        fa.enqueue(ma.substring(7));
+            function oa(sa, ta) {
+                if (ta && ta !== 'native' && !o(ta)
+                    .isFacebookURI()) return;
+                if (typeof sa == 'string') {
+                    if (/^FB_RPC:/.test(sa)) {
+                        la.enqueue(sa.substring(7));
                         return;
                     }
-                    if (ma.substring(0, 1) == '{') {
+                    if (sa.substring(0, 1) == '{') {
                         try {
-                            ma = ES5('JSON', 'parse', false, ma);
-                        } catch (oa) {
-                            k.warn('Failed to decode %s as JSON', ma);
+                            sa = ES5('JSON', 'parse', false, sa);
+                        } catch (ua) {
+                            i.warn('Failed to decode %s as JSON', sa);
                             return;
                         }
-                    } else ma = l.decode(ma);
+                    } else sa = j.decode(sa);
                 }
-                if (!na) if (ma.xd_sig == y) na = ma.xd_origin;
-                if (ma.xd_action) {
-                    ha(ma, na);
+                if (!ta) if (sa.xd_sig == aa) ta = sa.xd_origin;
+                if (sa.xd_action) {
+                    na(sa, ta);
                     return;
                 }
-                if (ma.access_token) o.setSecure(/^https/.test(aa));
-                if (ma.cb) {
-                    var pa = la._callbacks[ma.cb];
-                    if (!la._forever[ma.cb]) delete la._callbacks[ma.cb];
-                    if (pa) pa(ma);
+                if (sa.access_token) m.setSecure(/^https/.test(ga));
+                if (sa.cb) {
+                    var va = ra._callbacks[sa.cb];
+                    if (!ra._forever[sa.cb]) delete ra._callbacks[sa.cb];
+                    if (va) va(sa);
                 }
             }
-            function ja(ma, na) {
-                if (ma == 'facebook') {
-                    na.relation = 'parent.parent';
-                    t.enqueue(na);
+            function pa(sa, ta) {
+                if (sa == 'facebook') {
+                    ta.relation = 'parent.parent';
+                    v.enqueue(ta);
                 } else {
-                    na.relation = 'parent.frames["' + ma + '"]';
-                    var oa = ea[ma];
-                    if (oa) {
-                        k.debug('Enqueuing message for plugin %s in %s', ma, oa.protocol + 'ProxyQueue');
-                        (oa.protocol == 'https' ? v : u)
-                            .enqueue(na);
+                    ta.relation = 'parent.frames["' + sa + '"]';
+                    var ua = ka[sa];
+                    if (ua) {
+                        i.debug('Enqueuing message for plugin %s in %s', sa, ua.protocol + 'ProxyQueue');
+                        (ua.protocol == 'https' ? x : w)
+                            .enqueue(ta);
                     } else {
-                        k.debug('Buffering message for plugin %s', ma);
-                        m.get(ma)
-                            .enqueue(na);
+                        i.debug('Buffering message for plugin %s', sa);
+                        k.get(sa)
+                            .enqueue(ta);
                     }
                 }
             }
-            n.getOutQueue()
-                .start(function(ma) {
-                ja('facebook', 'FB_RPC:' + ma);
+            l.getOutQueue()
+                .start(function(sa) {
+                pa('facebook', 'FB_RPC:' + sa);
             });
 
-            function ka(ma) {
-                if (ca) return;
-                var na = g.appendHidden(document.createElement('div')),
-                    oa = s.create({
+            function qa(sa) {
+                if (ia) return;
+                var ta = g.appendHidden(document.createElement('div')),
+                    ua = r.create({
                         blacklist: null,
-                        root: na,
-                        channel: z,
-                        flashUrl: r.Flash.path,
-                        whenReady: function(pa) {
-                            ba = pa;
-                            var qa = {
-                                channel: z,
+                        root: ta,
+                        channel: fa,
+                        flashUrl: q.Flash.path,
+                        whenReady: function(va) {
+                            ha = va;
+                            var wa = {
+                                channel: fa,
                                 origin: location.protocol + '//' + location.host,
-                                transport: oa,
-                                xd_name: ma
-                            }, ra = '/' + r.XdUrl + '#' + l.encode(qa),
-                                sa = r.useCdn ? p.resolve('cdn', false) : 'http://www.facebook.com',
-                                ta = r.useCdn ? p.resolve('cdn', true) : 'https://www.facebook.com';
-                            if (o.getSecure() !== true) w = h({
-                                url: sa + ra,
+                                transport: ua,
+                                xd_name: sa
+                            }, xa = '#' + j.encode(wa);
+                            if (m.getSecure() !== true) y = s({
+                                url: da + xa,
                                 name: 'fb_xdm_frame_http',
                                 id: 'fb_xdm_frame_http',
-                                root: na,
+                                root: ta,
                                 'aria-hidden': true,
-                                title: da,
+                                title: ja,
                                 'tab-index': -1
                             });
-                            x = h({
-                                url: ta + ra,
+                            z = s({
+                                url: ea + xa,
                                 name: 'fb_xdm_frame_https',
                                 id: 'fb_xdm_frame_https',
-                                root: na,
+                                root: ta,
                                 'aria-hidden': true,
-                                title: da,
+                                title: ja,
                                 'tab-index': -1
                             });
                         },
-                        onMessage: ia
+                        onMessage: oa
                     });
-                ca = true;
+                ia = true;
             }
-            var la = {
-                rpc: n,
+            var ra = {
+                rpc: l,
                 _callbacks: {},
                 _forever: {},
-                _channel: z,
-                _origin: aa,
-                onMessage: ia,
-                recv: ia,
-                init: ka,
-                sendToFacebook: ja,
-                inform: function(ma, na, oa, pa) {
-                    ja('facebook', {
-                        method: ma,
-                        params: ES5('JSON', 'stringify', false, na || {}),
-                        behavior: pa || 'p',
-                        relation: oa
+                _channel: fa,
+                _origin: ga,
+                onMessage: oa,
+                recv: oa,
+                init: qa,
+                sendToFacebook: pa,
+                inform: function(sa, ta, ua, va) {
+                    pa('facebook', {
+                        method: sa,
+                        params: ES5('JSON', 'stringify', false, ta || {}),
+                        behavior: va || 'p',
+                        relation: ua
                     });
                 },
-                handler: function(ma, na, oa, pa) {
-                    var qa = r.useCdn ? p.resolve('cdn', location.protocol == 'https:') : location.protocol + '//www.facebook.com';
-                    return qa + '/' + r.XdUrl + '#' + l.encode({
-                        cb: this.registerCallback(ma, oa, pa),
-                        origin: aa + '/' + z,
+                handler: function(sa, ta, ua, va) {
+                    var wa = '#' + j.encode({
+                        cb: this.registerCallback(sa, ua, va),
+                        origin: ga + '/' + fa,
                         domain: location.hostname,
-                        relation: na || 'opener'
+                        relation: ta || 'opener'
                     });
+                    return (location.protocol == 'https:' ? ea : da) + wa;
                 },
-                registerCallback: function(ma, na, oa) {
-                    oa = oa || j();
-                    if (na) la._forever[oa] = true;
-                    la._callbacks[oa] = ma;
-                    return oa;
+                registerCallback: function(sa, ta, ua) {
+                    ua = ua || u();
+                    if (ta) ra._forever[ua] = true;
+                    ra._callbacks[ua] = sa;
+                    return ua;
                 }
             };
-            i.subscribe('init:post', function(ma) {
-                ka(ma.xdProxyName);
-            });
-            e.exports = la;
-        });
-        __d("sdk.Auth", ["sdk.Cookie", "copyProperties", "sdk.createIframe", "DOMWrapper", "sdk.feature", "sdk.getContextType", "guid", "sdk.Impressions", "Log", "ObservableMixin", "QueryString", "sdk.Runtime", "sdk.SignedRequest", "UrlMap", "URL", "sdk.XD"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Cookie'),
-                h = b('copyProperties'),
-                i = b('sdk.createIframe'),
-                j = b('DOMWrapper'),
-                k = b('sdk.feature'),
-                l = b('sdk.getContextType'),
-                m = b('guid'),
-                n = b('sdk.Impressions'),
-                o = b('Log'),
-                p = b('ObservableMixin'),
-                q = b('QueryString'),
-                r = b('sdk.Runtime'),
-                s = b('sdk.SignedRequest'),
-                t = b('UrlMap'),
-                u = b('URL'),
-                v = b('sdk.XD'),
-                w, x, y = new p();
-
-            function z(fa, ga) {
-                var ha = r.getUserID(),
-                    ia = '';
-                if (fa) if (fa.userID) {
-                    ia = fa.userID;
-                } else if (fa.signedRequest) {
-                    var ja = s.parse(fa.signedRequest);
-                    if (ja && ja.user_id) ia = ja.user_id;
-                }
-                var ka = r.getLoginStatus(),
-                    la = (ka === 'unknown' && fa) || (r.getUseCookie() && r.getCookieUserID() !== ia),
-                    ma = ha && !fa,
-                    na = fa && ha && ha != ia,
-                    oa = fa != w,
-                    pa = ga != (ka || 'unknown');
-                r.setLoginStatus(ga);
-                r.setAccessToken(fa && fa.accessToken || null);
-                r.setUserID(ia);
-                w = fa;
-                var qa = {
-                    authResponse: fa,
-                    status: ga
-                };
-                if (ma || na) y.inform('logout', qa);
-                if (la || na) y.inform('login', qa);
-                if (oa) y.inform('authresponse.change', qa);
-                if (pa) y.inform('status.change', qa);
-                return qa;
-            }
-            function aa() {
-                return w;
-            }
-            function ba(fa, ga, ha) {
-                return function(ia) {
-                    var ja;
-                    if (ia && ia.access_token) {
-                        var ka = s.parse(ia.signed_request);
-                        ga = {
-                            accessToken: ia.access_token,
-                            userID: ka.user_id,
-                            expiresIn: parseInt(ia.expires_in, 10),
-                            signedRequest: ia.signed_request
-                        };
-                        if (ia.granted_scopes) ga.grantedScopes = ia.granted_scopes;
-                        if (r.getUseCookie()) {
-                            var la = ga.expiresIn === 0 ? 0 : ES5('Date', 'now', false) + ga.expiresIn * 1000,
-                                ma = g.getDomain();
-                            if (!ma && ia.base_domain) g.setDomain('.' + ia.base_domain);
-                            g.setSignedRequestCookie(ia.signed_request, la);
+            h.subscribe('init:post', function(sa) {
+                qa(sa.xdProxyName);
+                var ta = t('xd_timeout');
+                if (ta) setTimeout(function() {
+                    var ua = z && ( !! y == w.isStarted() && !! z == x.isStarted());
+                    if (!ua) n.log('jssdk_error', {
+                        appId: m.getClientID(),
+                        error: 'XD_INITIALIZATION',
+                        extra: {
+                            message: 'Failed to initialize in ' + ta + 'ms'
                         }
-                        ja = 'connected';
-                        z(ga, ja);
-                    } else if (ha === 'logout' || ha === 'login_status') {
-                        if (ia.error && ia.error === 'not_authorized') {
-                            ja = 'not_authorized';
-                        } else ja = 'unknown';
-                        z(null, ja);
-                        if (r.getUseCookie()) g.clearSignedRequestCookie();
-                    }
-                    if (ia && ia.https == 1) r.setSecure(true);
-                    if (fa) fa({
-                        authResponse: ga,
-                        status: r.getLoginStatus()
                     });
-                    return ga;
+                }, ta);
+            });
+            e.exports = ra;
+        });
+        __d("sdk.Auth", ["sdk.Cookie", "copyProperties", "sdk.createIframe", "DOMWrapper", "sdk.feature", "sdk.getContextType", "guid", "sdk.Impressions", "Log", "ObservableMixin", "sdk.Runtime", "sdk.SignedRequest", "UrlMap", "sdk.URI", "sdk.XD"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u) {
+            var v, w, x = new p();
+
+            function y(ea, fa) {
+                var ga = q.getUserID(),
+                    ha = '';
+                if (ea) if (ea.userID) {
+                    ha = ea.userID;
+                } else if (ea.signedRequest) {
+                    var ia = r.parse(ea.signedRequest);
+                    if (ia && ia.user_id) ha = ia.user_id;
+                }
+                var ja = q.getLoginStatus(),
+                    ka = (ja === 'unknown' && ea) || (q.getUseCookie() && q.getCookieUserID() !== ha),
+                    la = ga && !ea,
+                    ma = ea && ga && ga != ha,
+                    na = ea != v,
+                    oa = fa != (ja || 'unknown');
+                q.setLoginStatus(fa);
+                q.setAccessToken(ea && ea.accessToken || null);
+                q.setUserID(ha);
+                v = ea;
+                var pa = {
+                    authResponse: ea,
+                    status: fa
+                };
+                if (la || ma) x.inform('logout', pa);
+                if (ka || ma) x.inform('login', pa);
+                if (na) x.inform('authresponse.change', pa);
+                if (oa) x.inform('status.change', pa);
+                return pa;
+            }
+            function z() {
+                return v;
+            }
+            function aa(ea, fa, ga) {
+                return function(ha) {
+                    var ia;
+                    if (ha && ha.access_token) {
+                        var ja = r.parse(ha.signed_request);
+                        fa = {
+                            accessToken: ha.access_token,
+                            userID: ja.user_id,
+                            expiresIn: parseInt(ha.expires_in, 10),
+                            signedRequest: ha.signed_request
+                        };
+                        if (ha.granted_scopes) fa.grantedScopes = ha.granted_scopes;
+                        if (q.getUseCookie()) {
+                            var ka = fa.expiresIn === 0 ? 0 : ES5('Date', 'now', false) + fa.expiresIn * 1000,
+                                la = g.getDomain();
+                            if (!la && ha.base_domain) g.setDomain('.' + ha.base_domain);
+                            g.setSignedRequestCookie(ha.signed_request, ka);
+                        }
+                        ia = 'connected';
+                        y(fa, ia);
+                    } else if (ga === 'logout' || ga === 'login_status') {
+                        if (ha.error && ha.error === 'not_authorized') {
+                            ia = 'not_authorized';
+                        } else ia = 'unknown';
+                        y(null, ia);
+                        if (q.getUseCookie()) g.clearSignedRequestCookie();
+                    }
+                    if (ha && ha.https == 1) q.setSecure(true);
+                    if (ea) ea({
+                        authResponse: fa,
+                        status: q.getLoginStatus()
+                    });
+                    return fa;
                 };
             }
-            function ca(fa) {
-                var ga, ha = ES5('Date', 'now', false);
-                if (x) {
-                    clearTimeout(x);
-                    x = null;
+            function ba(ea) {
+                var fa, ga = ES5('Date', 'now', false);
+                if (w) {
+                    clearTimeout(w);
+                    w = null;
                 }
-                var ia = ba(fa, w, 'login_status'),
-                    ja = u(t.resolve('www', true) + '/connect/ping')
-                        .setSearch(q.encode({
-                        client_id: r.getClientID(),
+                var ha = aa(ea, v, 'login_status'),
+                    ia = t(s.resolve('www', true) + '/connect/ping')
+                        .setQueryData({
+                        client_id: q.getClientID(),
                         response_type: 'token,signed_request,code',
                         domain: location.hostname,
                         origin: l(),
-                        redirect_uri: v.handler(function(ka) {
+                        redirect_uri: u.handler(function(ja) {
                             if (k('e2e_ping_tracking', true)) {
-                                var la = {
-                                    init: ha,
+                                var ka = {
+                                    init: ga,
                                     close: ES5('Date', 'now', false),
                                     method: 'ping'
                                 };
-                                o.debug('e2e: %s', ES5('JSON', 'stringify', false, la));
+                                o.debug('e2e: %s', ES5('JSON', 'stringify', false, ka));
                                 n.log(114, {
-                                    payload: la
+                                    payload: ka
                                 });
                             }
-                            ga.parentNode.removeChild(ga);
-                            if (ia(ka)) x = setTimeout(function() {
-                                ca(function() {});
+                            fa.parentNode.removeChild(fa);
+                            if (ha(ja)) w = setTimeout(function() {
+                                ba(function() {});
                             }, 1200000);
                         }, 'parent'),
                         sdk: 'joey',
-                        kid_directed_site: r.getKidDirectedSite()
-                    }));
-                ga = i({
+                        kid_directed_site: q.getKidDirectedSite()
+                    });
+                fa = i({
                     root: j.getRoot(),
                     name: m(),
-                    url: ja.toString(),
+                    url: ia.toString(),
                     style: {
                         display: 'none'
                     }
                 });
             }
-            var da;
+            var ca;
 
-            function ea(fa, ga) {
-                if (!r.getClientID()) {
+            function da(ea, fa) {
+                if (!q.getClientID()) {
                     o.warn('FB.getLoginStatus() called before calling FB.init().');
                     return;
                 }
-                if (fa) if (!ga && da == 'loaded') {
-                    fa({
-                        status: r.getLoginStatus(),
-                        authResponse: aa()
+                if (ea) if (!fa && ca == 'loaded') {
+                    ea({
+                        status: q.getLoginStatus(),
+                        authResponse: z()
                     });
                     return;
-                } else y.subscribe('FB.loginStatus', fa);
-                if (!ga && da == 'loading') return;
-                da = 'loading';
-                var ha = function(ia) {
-                    da = 'loaded';
-                    y.inform('FB.loginStatus', ia);
-                    y.clearSubscribers('FB.loginStatus');
+                } else x.subscribe('FB.loginStatus', ea);
+                if (!fa && ca == 'loading') return;
+                ca = 'loading';
+                var ga = function(ha) {
+                    ca = 'loaded';
+                    x.inform('FB.loginStatus', ha);
+                    x.clearSubscribers('FB.loginStatus');
                 };
-                ca(ha);
+                ba(ga);
             }
-            h(y, {
-                getLoginStatus: ea,
-                fetchLoginStatus: ca,
-                setAuthResponse: z,
-                getAuthResponse: aa,
-                parseSignedRequest: s.parse,
-                xdResponseWrapper: ba
+            h(x, {
+                getLoginStatus: da,
+                fetchLoginStatus: ba,
+                setAuthResponse: y,
+                getAuthResponse: z,
+                parseSignedRequest: r.parse,
+                xdResponseWrapper: aa
             });
-            e.exports = y;
+            e.exports = x;
         });
-        __d("invariant", [], function(a, b, c, d, e, f) {
-            function g(h) {
-                if (!h) {
-                    var i = new Error('Minified exception occured, use the non-minified dev environment for ' + 'the full error message and additional helpful warnings.');
-                    i.framesToPop = 1;
-                    throw i;
-                }
-            }
-            e.exports = g;
-        });
-        __d("toArray", ["invariant"], function(a, b, c, d, e, f) {
-            var g = b('invariant');
-
+        __d("toArray", ["invariant"], function(a, b, c, d, e, f, g) {
             function h(i) {
                 var j = i.length;
                 g(!ES5('Array', 'isArray', false, i) && (typeof i === 'object' || typeof i === 'function'));
@@ -2592,9 +2709,7 @@ try {
             }
             e.exports = h;
         });
-        __d("createArrayFrom", ["toArray"], function(a, b, c, d, e, f) {
-            var g = b('toArray');
-
+        __d("createArrayFrom", ["toArray"], function(a, b, c, d, e, f, g) {
             function h(j) {
                 return ( !! j && (typeof j == 'object' || typeof j == 'function') && ('length' in j) && !('setInterval' in j) && (typeof j.nodeType != 'number') && (ES5('Array', 'isArray', false, j) || ('callee' in j) || ('item' in j)));
             }
@@ -2607,12 +2722,8 @@ try {
             }
             e.exports = i;
         });
-        __d("sdk.DOM", ["Assert", "createArrayFrom", "sdk.domReady", "UserAgent"], function(a, b, c, d, e, f) {
-            var g = b('Assert'),
-                h = b('createArrayFrom'),
-                i = b('sdk.domReady'),
-                j = b('UserAgent'),
-                k = {};
+        __d("sdk.DOM", ["Assert", "createArrayFrom", "sdk.domReady", "UserAgent"], function(a, b, c, d, e, f, g, h, i, j) {
+            var k = {};
 
             function l(z, aa) {
                 var ba = (z.getAttribute(aa) || z.getAttribute(aa.replace(/_/g, '-')) || z.getAttribute(aa.replace(/-/g, '_')) || z.getAttribute(aa.replace(/-/g, '')) || z.getAttribute(aa.replace(/_/g, '')) || z.getAttribute('data-' + aa) || z.getAttribute('data-' + aa.replace(/_/g, '-')) || z.getAttribute('data-' + aa.replace(/-/g, '_')) || z.getAttribute('data-' + aa.replace(/-/g, '')) || z.getAttribute('data-' + aa.replace(/_/g, '')));
@@ -2746,30 +2857,8 @@ try {
             };
             e.exports = y;
         });
-        __d("sdk.Scribe", ["UrlMap", "QueryString"], function(a, b, c, d, e, f) {
-            var g = b('UrlMap'),
-                h = b('QueryString');
-
-            function i(k, l) {
-                (new Image())
-                    .src = h.appendToUrl(g.resolve('www', true) + '/common/scribe_endpoint.php', {
-                    c: k,
-                    m: ES5('JSON', 'stringify', false, l)
-                });
-            }
-            var j = {
-                log: i
-            };
-            e.exports = j;
-        });
-        __d("sdk.ErrorHandling", ["sdk.feature", "ManagedError", "sdk.Runtime", "sdk.Scribe", "UserAgent", "wrapFunction"], function(a, b, c, d, e, f) {
-            var g = b('sdk.feature'),
-                h = b('ManagedError'),
-                i = b('sdk.Runtime'),
-                j = b('sdk.Scribe'),
-                k = b('UserAgent'),
-                l = b('wrapFunction'),
-                m = g('error_handling', false),
+        __d("sdk.ErrorHandling", ["sdk.feature", "ManagedError", "sdk.Runtime", "sdk.Scribe", "UserAgent", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
+            var m = g('error_handling', false),
                 n = '';
 
             function o(u) {
@@ -2851,48 +2940,32 @@ try {
             };
             e.exports = t;
         });
-        __d("sdk.Insights", ["sdk.Impressions"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Impressions'),
-                h = {
-                    TYPE: {
-                        NOTICE: 'notice',
-                        WARNING: 'warn',
-                        ERROR: 'error'
-                    },
-                    CATEGORY: {
-                        DEPRECATED: 'deprecated',
-                        APIERROR: 'apierror'
-                    },
-                    log: function(i, j, k) {
-                        var l = {
-                            source: 'jssdk',
-                            type: i,
-                            category: j,
-                            payload: k
-                        };
-                        g.log(113, l);
-                    },
-                    impression: g.impression
-                };
+        __d("sdk.Insights", ["sdk.Impressions"], function(a, b, c, d, e, f, g) {
+            var h = {
+                TYPE: {
+                    NOTICE: 'notice',
+                    WARNING: 'warn',
+                    ERROR: 'error'
+                },
+                CATEGORY: {
+                    DEPRECATED: 'deprecated',
+                    APIERROR: 'apierror'
+                },
+                log: function(i, j, k) {
+                    var l = {
+                        source: 'jssdk',
+                        type: i,
+                        category: j,
+                        payload: k
+                    };
+                    g.log(113, l);
+                },
+                impression: g.impression
+            };
             e.exports = h;
         });
-        __d("FB", ["sdk.Auth", "copyProperties", "dotAccess", "sdk.domReady", "sdk.DOM", "sdk.ErrorHandling", "sdk.Content", "DOMWrapper", "GlobalCallback", "sdk.Insights", "Log", "sdk.Runtime", "sdk.Scribe", "CssConfig", "SDKConfig"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Auth'),
-                h = b('copyProperties'),
-                i = c('CssConfig'),
-                j = b('dotAccess'),
-                k = b('sdk.domReady'),
-                l = b('sdk.DOM'),
-                m = b('sdk.ErrorHandling'),
-                n = b('sdk.Content'),
-                o = b('DOMWrapper'),
-                p = b('GlobalCallback'),
-                q = b('sdk.Insights'),
-                r = b('Log'),
-                s = b('sdk.Runtime'),
-                t = b('sdk.Scribe'),
-                u = c('SDKConfig'),
-                v, w, x = j(u, 'api.mode'),
+        __d("FB", ["sdk.Auth", "copyProperties", "CssConfig", "dotAccess", "sdk.domReady", "sdk.DOM", "sdk.ErrorHandling", "sdk.Content", "DOMWrapper", "GlobalCallback", "sdk.Insights", "Log", "sdk.Runtime", "sdk.Scribe", "SDKConfig"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u) {
+            var v, w, x = j(u, 'api.mode'),
                 y = {};
             v = window.FB = {};
             var z = {};
@@ -2990,9 +3063,7 @@ try {
             });
             e.exports = z;
         });
-        __d("ArgumentError", ["ManagedError"], function(a, b, c, d, e, f) {
-            var g = b('ManagedError');
-
+        __d("ArgumentError", ["ManagedError"], function(a, b, c, d, e, f, g) {
             function h(i, j) {
                 g.prototype.constructor.apply(this, arguments);
             }
@@ -3000,10 +3071,7 @@ try {
             h.prototype.constructor = h;
             e.exports = h;
         });
-        __d("CORSRequest", ["wrapFunction", "QueryString"], function(a, b, c, d, e, f) {
-            var g = b('wrapFunction'),
-                h = b('QueryString');
-
+        __d("CORSRequest", ["wrapFunction", "QueryString"], function(a, b, c, d, e, f, g, h) {
             function i(l, m) {
                 if (!self.XMLHttpRequest) return null;
                 var n = new XMLHttpRequest(),
@@ -3076,13 +3144,8 @@ try {
             };
             e.exports = k;
         });
-        __d("FlashRequest", ["DOMWrapper", "Flash", "GlobalCallback", "QueryString", "Queue"], function(a, b, c, d, e, f) {
-            var g = b('DOMWrapper'),
-                h = b('Flash'),
-                i = b('GlobalCallback'),
-                j = b('QueryString'),
-                k = b('Queue'),
-                l, m = {}, n, o;
+        __d("FlashRequest", ["DOMWrapper", "Flash", "GlobalCallback", "QueryString", "Queue"], function(a, b, c, d, e, f, g, h, i, j, k) {
+            var l, m = {}, n, o;
 
             function p() {
                 if (!n) throw new Error('swfUrl has not been set');
@@ -3160,11 +3223,7 @@ try {
             }
             e.exports = g;
         });
-        __d("JSONPRequest", ["DOMWrapper", "GlobalCallback", "QueryString"], function(a, b, c, d, e, f) {
-            var g = b('DOMWrapper'),
-                h = b('GlobalCallback'),
-                i = b('QueryString');
-
+        __d("JSONPRequest", ["DOMWrapper", "GlobalCallback", "QueryString"], function(a, b, c, d, e, f, g, h, i) {
             function j(l, m, n, o) {
                 var p = document.createElement('script'),
                     q = function(s) {
@@ -3213,198 +3272,107 @@ try {
             };
             e.exports = k;
         });
-        __d("keyMirror", ["invariant"], function(a, b, c, d, e, f) {
-            "use strict";
-            var g = b('invariant'),
-                h = function(i) {
-                    var j = {}, k;
-                    g(i instanceof Object && !ES5('Array', 'isArray', false, i));
-                    for (k in i) {
-                        if (!i.hasOwnProperty(k)) continue;
-                        j[k] = k;
-                    }
-                    return j;
-                };
-            e.exports = h;
-        });
-        __d("mergeHelpers", ["invariant", "keyMirror"], function(a, b, c, d, e, f) {
-            "use strict";
-            var g = b('invariant'),
-                h = b('keyMirror'),
-                i = 36,
-                j = function(l) {
-                    return typeof l !== 'object' || l === null;
-                }, k = {
-                    MAX_MERGE_DEPTH: i,
-                    isTerminal: j,
-                    normalizeMergeArg: function(l) {
-                        return l === undefined || l === null ? {} : l;
-                    },
-                    checkMergeArrayArgs: function(l, m) {
-                        g(ES5('Array', 'isArray', false, l) && ES5('Array', 'isArray', false, m));
-                    },
-                    checkMergeObjectArgs: function(l, m) {
-                        k.checkMergeObjectArg(l);
-                        k.checkMergeObjectArg(m);
-                    },
-                    checkMergeObjectArg: function(l) {
-                        g(!j(l) && !ES5('Array', 'isArray', false, l));
-                    },
-                    checkMergeLevel: function(l) {
-                        g(l < i);
-                    },
-                    checkArrayStrategy: function(l) {
-                        g(l === undefined || l in k.ArrayStrategies);
-                    },
-                    ArrayStrategies: h({
-                        Clobber: true,
-                        IndexByIndex: true
-                    })
-                };
-            e.exports = k;
-        });
-        __d("mergeInto", ["mergeHelpers"], function(a, b, c, d, e, f) {
-            "use strict";
-            var g = b('mergeHelpers'),
-                h = g.checkMergeObjectArg;
+        __d("ApiClient", ["ArgumentError", "Assert", "copyProperties", "CORSRequest", "FlashRequest", "flattenObject", "JSONPRequest", "Log", "ObservableMixin", "sprintf", "sdk.URI", "UrlMap", "ApiClientConfig"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s) {
+            var t, u, v, w = {
+                get: true,
+                post: true,
+                'delete': true,
+                put: true
+            }, x = {
+                fql_query: true,
+                fql_multiquery: true,
+                friends_get: true,
+                notifications_get: true,
+                stream_get: true,
+                users_getinfo: true
+            };
 
-            function i(j, k) {
-                h(j);
-                if (k != null) {
-                    h(k);
-                    for (var l in k) {
-                        if (!k.hasOwnProperty(l)) continue;
-                        j[l] = k[l];
-                    }
-                }
-            }
-            e.exports = i;
-        });
-        __d("merge", ["mergeInto"], function(a, b, c, d, e, f) {
-            "use strict";
-            var g = b('mergeInto'),
-                h = function(i, j) {
-                    var k = {};
-                    g(k, i);
-                    g(k, j);
-                    return k;
-                };
-            e.exports = h;
-        });
-        __d("ApiClient", ["ArgumentError", "Assert", "copyProperties", "CORSRequest", "FlashRequest", "flattenObject", "JSONPRequest", "Log", "merge", "ObservableMixin", "sprintf", "URL", "UrlMap", "ApiClientConfig"], function(a, b, c, d, e, f) {
-            var g = b('ArgumentError'),
-                h = b('Assert'),
-                i = b('copyProperties'),
-                j = b('CORSRequest'),
-                k = b('FlashRequest'),
-                l = b('flattenObject'),
-                m = b('JSONPRequest'),
-                n = b('Log'),
-                o = b('merge'),
-                p = b('ObservableMixin'),
-                q = b('sprintf'),
-                r = b('URL'),
-                s = b('UrlMap'),
-                t = b('ApiClientConfig'),
-                u, v, w, x = {
-                    get: true,
-                    post: true,
-                    'delete': true,
-                    put: true
-                }, y = {
-                    fql_query: true,
-                    fql_multiquery: true,
-                    friends_get: true,
-                    notifications_get: true,
-                    stream_get: true,
-                    users_getinfo: true
-                };
-
-            function z(ea, fa, ga, ha) {
-                if (w) ga = i({}, w, ga);
-                ga.access_token = ga.access_token || u;
-                ga.pretty = ga.pretty || 0;
-                ga = l(ga);
-                var ia = {
+            function y(da, ea, fa, ga) {
+                if (v) fa = i({}, v, fa);
+                fa.access_token = fa.access_token || t;
+                fa.pretty = fa.pretty || 0;
+                fa = l(fa);
+                var ha = {
                     jsonp: m,
                     cors: j,
                     flash: k
-                }, ja;
-                if (ga.transport) {
-                    ja = [ga.transport];
-                    delete ga.transport;
-                } else ja = ['jsonp', 'cors', 'flash'];
-                for (var ka = 0; ka < ja.length; ka++) {
-                    var la = ia[ja[ka]],
-                        ma = i({}, ga);
-                    if (la.execute(ea, fa, ma, ha)) return;
+                }, ia;
+                if (fa.transport) {
+                    ia = [fa.transport];
+                    delete fa.transport;
+                } else ia = ['jsonp', 'cors', 'flash'];
+                for (var ja = 0; ja < ia.length; ja++) {
+                    var ka = ha[ia[ja]],
+                        la = i({}, fa);
+                    if (ka.execute(da, ea, la, ga)) return;
                 }
-                ha({
+                ga({
                     error: {
                         type: 'no-transport',
                         message: 'Could not find a usable transport for request'
                     }
                 });
             }
-            function aa(ea, fa, ga, ha, ia) {
-                da.inform('request.complete', fa, ga, ha, ia);
-                if (ea) ea(ia);
+            function z(da, ea, fa, ga, ha) {
+                ca.inform('request.complete', ea, fa, ga, ha);
+                if (da) da(ha);
             }
-            function ba(ea) {
-                h.isString(ea, 'Invalid path');
-                var fa, ga = {};
+            function aa(da) {
+                h.isString(da, 'Invalid path');
+                if (!/^https?/.test(da) && da.charAt(0) !== '/') da = '/' + da;
+                var ea, fa = {};
                 try {
-                    fa = new r(ea);
-                } catch (ha) {
-                    throw new g(ha.message, ha);
+                    ea = new q(da);
+                } catch (ga) {
+                    throw new g(ga.message, ga);
                 }
                 ES5(Array.prototype.slice.call(arguments, 1), 'forEach', true, function(ma) {
-                    ga[typeof ma] = ma;
+                    fa[typeof ma] = ma;
                 });
-                var ia = (ga.string || 'get')
-                    .toLowerCase(),
-                    ja = o(ga.object || {}, fa.getParsedSearch()),
-                    ka = ga['function'];
-                if (!ka) n.warn('No callback passed to the ApiClient');
-                var la = ES5(aa, 'bind', true, null, ka, fa.getPath(), ia, ja);
-                h.isTrue(ia in x, q('Invalid method passed to ApiClient: %s', ia));
-                ja.method = ia;
-                fa = s.resolve('graph') + fa.getPath();
-                z(fa, ia == 'get' ? 'get' : 'post', ja, la);
+                var ha = (fa.string || 'get')
+                    .toLowerCase();
+                h.isTrue(w.hasOwnProperty(ha), p('Invalid method passed to ApiClient: %s', ha));
+                var ia = fa['function'];
+                if (!ia) n.warn('No callback passed to the ApiClient');
+                if (fa.object) ea.addQueryData(fa.object);
+                var ja = ea.getQueryData(),
+                    ka = ES5(z, 'bind', true, null, ia, ea.getPath(), ha, ja),
+                    la = ea.getProtocol() && ea.getDomain() ? ea.setQueryData({})
+                        .toString() : r.resolve('graph') + ea.getPath();
+                ja.method = ha;
+                y(la, ha == 'get' ? 'get' : 'post', ja, ka);
             }
-            function ca(ea, fa) {
-                h.isObject(ea);
-                h.isString(ea.method, 'method missing');
-                if (!fa) n.warn('No callback passed to the ApiClient');
-                var ga = ea.method.toLowerCase()
+            function ba(da, ea) {
+                h.isObject(da);
+                h.isString(da.method, 'method missing');
+                if (!ea) n.warn('No callback passed to the ApiClient');
+                var fa = da.method.toLowerCase()
                     .replace('.', '_');
-                ea.format = 'json-strings';
-                ea.api_key = v;
-                var ha = ga in y ? 'api_read' : 'api',
-                    ia = s.resolve(ha) + '/restserver.php',
-                    ja = ES5(aa, 'bind', true, null, fa, '/restserver.php', 'get', ea);
-                z(ia, 'get', ea, ja);
+                da.format = 'json-strings';
+                da.api_key = u;
+                var ga = fa in x ? 'api_read' : 'api',
+                    ha = r.resolve(ga) + '/restserver.php',
+                    ia = ES5(z, 'bind', true, null, ea, '/restserver.php', 'get', da);
+                y(ha, 'get', da, ia);
             }
-            var da = i(new p(), {
-                setAccessToken: function(ea) {
-                    u = ea;
+            var ca = i(new o(), {
+                setAccessToken: function(da) {
+                    t = da;
                 },
-                setClientID: function(ea) {
-                    v = ea;
+                setClientID: function(da) {
+                    u = da;
                 },
-                setDefaultParams: function(ea) {
-                    w = ea;
+                setDefaultParams: function(da) {
+                    v = da;
                 },
-                rest: ca,
-                graph: ba
+                rest: ba,
+                graph: aa
             });
-            k.setSwfUrl(t.FlashRequest.swfUrl);
-            e.exports = da;
+            k.setSwfUrl(s.FlashRequest.swfUrl);
+            e.exports = ca;
         });
-        __d("sdk.api", ["ApiClient", "sdk.Runtime"], function(a, b, c, d, e, f) {
-            var g = b('ApiClient'),
-                h = b('sdk.Runtime'),
-                i;
+        __d("sdk.api", ["ApiClient", "sdk.Runtime"], function(a, b, c, d, e, f, g, h) {
+            var i;
             h.subscribe('ClientID.change', function(k) {
                 g.setClientID(k);
             });
@@ -3433,16 +3401,12 @@ try {
             }
             e.exports = j;
         });
-        __d("legacy:fb.api", ["FB", "sdk.api"], function(a, b, c, d) {
-            var e = b('FB'),
-                f = b('sdk.api');
-            e.provide('', {
-                api: f
+        __d("legacy:fb.api", ["FB", "sdk.api"], function(a, b, c, d, e, f, g, h) {
+            g.provide('', {
+                api: h
             });
         }, 3);
-        __d("sdk.Canvas.Environment", ["sdk.RPC"], function(a, b, c, d, e, f) {
-            var g = b('sdk.RPC');
-
+        __d("sdk.Canvas.Environment", ["sdk.RPC"], function(a, b, c, d, e, f, g) {
             function h(k) {
                 g.remote.getPageInfo(function(l) {
                     k(l.result);
@@ -3462,9 +3426,8 @@ try {
             };
             e.exports = j;
         });
-        __d("sdk.Intl", ["Log"], function(a, b, c, d, e, f) {
-            var g = b('Log'),
-                h = ('[' + '.!?' + '\u3002' + '\uFF01' + '\uFF1F' + '\u0964' + '\u2026' + '\u0EAF' + '\u1801' + '\u0E2F' + '\uFF0E' + ']');
+        __d("sdk.Intl", ["Log"], function(a, b, c, d, e, f, g) {
+            var h = ('[' + '.!?' + '\u3002' + '\uFF01' + '\uFF1F' + '\u0964' + '\u2026' + '\u0EAF' + '\u1801' + '\u0E2F' + '\uFF0E' + ']');
 
             function i(l) {
                 if (typeof l != 'string') return false;
@@ -3492,18 +3455,8 @@ try {
                 tx: k
             };
         });
-        __d("sdk.Dialog", ["sdk.Canvas.Environment", "sdk.Content", "sdk.DOM", "DOMEventListener", "sdk.Intl", "ObservableMixin", "sdk.Runtime", "Type", "UserAgent", "sdk.feature"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Canvas.Environment'),
-                h = b('sdk.Content'),
-                i = b('sdk.DOM'),
-                j = b('DOMEventListener'),
-                k = b('sdk.Intl'),
-                l = b('ObservableMixin'),
-                m = b('sdk.Runtime'),
-                n = b('Type'),
-                o = b('UserAgent'),
-                p = b('sdk.feature'),
-                q = 590,
+        __d("sdk.Dialog", ["sdk.Canvas.Environment", "sdk.Content", "sdk.DOM", "DOMEventListener", "sdk.Intl", "ObservableMixin", "sdk.Runtime", "Type", "UserAgent", "sdk.feature"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+            var q = 590,
                 r = 500,
                 s = 240,
                 t = 575,
@@ -3512,7 +3465,7 @@ try {
                     if (p('dialog_resize_refactor')) {
                         var z = v();
                         y = z && (z.height >= q || z.width >= r);
-                    } else y = o.ipad();
+                    } else y = !! o.ipad();
                     u = function() {
                         return y;
                     };
@@ -3827,73 +3780,66 @@ try {
                 };
             e.exports = x;
         });
-        __d("sdk.Frictionless", ["sdk.Auth", "sdk.api", "sdk.Event", "sdk.Dialog"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Auth'),
-                h = b('sdk.api'),
-                i = b('sdk.Event'),
-                j = b('sdk.Dialog'),
-                k = {
-                    _allowedRecipients: {},
-                    _useFrictionless: false,
-                    _updateRecipients: function() {
-                        k._allowedRecipients = {};
-                        h('/me/apprequestformerrecipients', function(l) {
-                            if (!l || l.error) return;
-                            ES5(l.data, 'forEach', true, function(m) {
-                                k._allowedRecipients[m.recipient_id] = true;
-                            });
+        __d("sdk.Frictionless", ["sdk.Auth", "sdk.api", "sdk.Event", "sdk.Dialog"], function(a, b, c, d, e, f, g, h, i, j) {
+            var k = {
+                _allowedRecipients: {},
+                _useFrictionless: false,
+                _updateRecipients: function() {
+                    k._allowedRecipients = {};
+                    h('/me/apprequestformerrecipients', function(l) {
+                        if (!l || l.error) return;
+                        ES5(l.data, 'forEach', true, function(m) {
+                            k._allowedRecipients[m.recipient_id] = true;
                         });
-                    },
-                    init: function() {
-                        k._useFrictionless = true;
-                        g.getLoginStatus(function(l) {
-                            if (l.status == 'connected') k._updateRecipients();
-                        });
-                        i.subscribe('auth.login', function(l) {
-                            if (l.authResponse) k._updateRecipients();
-                        });
-                    },
-                    _processRequestResponse: function(l, m) {
-                        return function(n) {
-                            var o = n && n.updated_frictionless;
-                            if (k._useFrictionless && o) k._updateRecipients();
-                            if (n) {
-                                if (!m && n.frictionless) {
-                                    j._hideLoader();
-                                    j._restoreBodyPosition();
-                                    j._hideIPadOverlay();
-                                }
-                                delete n.frictionless;
-                                delete n.updated_frictionless;
+                    });
+                },
+                init: function() {
+                    k._useFrictionless = true;
+                    g.getLoginStatus(function(l) {
+                        if (l.status == 'connected') k._updateRecipients();
+                    });
+                    i.subscribe('auth.login', function(l) {
+                        if (l.authResponse) k._updateRecipients();
+                    });
+                },
+                _processRequestResponse: function(l, m) {
+                    return function(n) {
+                        var o = n && n.updated_frictionless;
+                        if (k._useFrictionless && o) k._updateRecipients();
+                        if (n) {
+                            if (!m && n.frictionless) {
+                                j._hideLoader();
+                                j._restoreBodyPosition();
+                                j._hideIPadOverlay();
                             }
-                            l && l(n);
-                        };
-                    },
-                    isAllowed: function(l) {
-                        if (!l) return false;
-                        if (typeof l === 'number') return l in k._allowedRecipients;
-                        if (typeof l === 'string') l = l.split(',');
-                        l = ES5(l, 'map', true, function(o) {
-                            return ES5(String(o), 'trim', true);
-                        });
-                        var m = true,
-                            n = false;
-                        ES5(l, 'forEach', true, function(o) {
-                            m = m && o in k._allowedRecipients;
-                            n = true;
-                        });
-                        return m && n;
-                    }
-                };
+                            delete n.frictionless;
+                            delete n.updated_frictionless;
+                        }
+                        l && l(n);
+                    };
+                },
+                isAllowed: function(l) {
+                    if (!l) return false;
+                    if (typeof l === 'number') return l in k._allowedRecipients;
+                    if (typeof l === 'string') l = l.split(',');
+                    l = ES5(l, 'map', true, function(o) {
+                        return ES5(String(o), 'trim', true);
+                    });
+                    var m = true,
+                        n = false;
+                    ES5(l, 'forEach', true, function(o) {
+                        m = m && o in k._allowedRecipients;
+                        n = true;
+                    });
+                    return m && n;
+                }
+            };
             i.subscribe('init:post', function(l) {
                 if (l.frictionlessRequests) k.init();
             });
             e.exports = k;
         });
-        __d("insertIframe", ["guid", "GlobalCallback"], function(a, b, c, d, e, f) {
-            var g = b('guid'),
-                h = b('GlobalCallback');
-
+        __d("insertIframe", ["guid", "GlobalCallback"], function(a, b, c, d, e, f, g, h) {
             function i(j) {
                 j.id = j.id || g();
                 j.name = j.name || g();
@@ -3936,11 +3882,8 @@ try {
             }
             e.exports = i;
         });
-        __d("sdk.Native", ["copyProperties", "Log", "UserAgent"], function(a, b, c, d, e, f) {
-            var g = b('copyProperties'),
-                h = b('Log'),
-                i = b('UserAgent'),
-                j = 'fbNativeReady',
+        __d("sdk.Native", ["copyProperties", "Log", "UserAgent"], function(a, b, c, d, e, f, g, h, i) {
+            var j = 'fbNativeReady',
                 k = {
                     onready: function(l) {
                         if (!i.nativeApp()) {
@@ -3972,456 +3915,428 @@ try {
             }
             e.exports = g;
         });
-        __d("sdk.UIServer", ["sdk.Auth", "sdk.Content", "copyProperties", "sdk.Dialog", "sdk.DOM", "sdk.Event", "flattenObject", "sdk.Frictionless", "sdk.getContextType", "guid", "insertIframe", "Log", "sdk.Native", "QueryString", "resolveURI", "sdk.RPC", "sdk.Runtime", "UrlMap", "UserAgent", "sdk.XD", "SDKConfig"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Auth'),
-                h = b('sdk.Content'),
-                i = b('copyProperties'),
-                j = b('sdk.Dialog'),
-                k = b('sdk.DOM'),
-                l = b('sdk.Event'),
-                m = b('flattenObject'),
-                n = b('sdk.Frictionless'),
-                o = b('sdk.getContextType'),
-                p = b('guid'),
-                q = b('insertIframe'),
-                r = b('Log'),
-                s = b('sdk.Native'),
-                t = b('QueryString'),
-                u = b('resolveURI'),
-                v = b('sdk.RPC'),
-                w = b('sdk.Runtime'),
-                x = c('SDKConfig'),
-                y = b('UrlMap'),
-                z = b('UserAgent'),
-                aa = b('sdk.XD'),
-                ba = {
+        __d("sdk.UIServer", ["sdk.Auth", "sdk.Content", "copyProperties", "sdk.Dialog", "sdk.DOM", "sdk.Event", "flattenObject", "sdk.Frictionless", "sdk.getContextType", "guid", "insertIframe", "Log", "sdk.Native", "QueryString", "resolveURI", "sdk.RPC", "sdk.Runtime", "SDKConfig", "UrlMap", "UserAgent", "sdk.XD"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, aa) {
+            var ba = {
+                transform: function(ea) {
+                    if (ea.params.display === 'touch' && ea.params.access_token && window.postMessage) {
+                        ea.params.channel = da._xdChannelHandler(ea.id, 'parent');
+                        if (!z.nativeApp()) ea.params.in_iframe = 1;
+                        return ea;
+                    } else return da.genericTransform(ea);
+                },
+                getXdRelation: function(ea) {
+                    var fa = ea.display;
+                    if (fa === 'touch' && window.postMessage && ea.in_iframe) return 'parent';
+                    return da.getXdRelation(ea);
+                }
+            }, ca = {
+                'stream.share': {
+                    size: {
+                        width: 670,
+                        height: 340
+                    },
+                    url: 'sharer.php',
                     transform: function(ea) {
-                        if (ea.params.display === 'touch' && ea.params.access_token && window.postMessage) {
-                            ea.params.channel = da._xdChannelHandler(ea.id, 'parent');
-                            if (!z.nativeApp()) ea.params.in_iframe = 1;
-                            return ea;
-                        } else return da.genericTransform(ea);
-                    },
-                    getXdRelation: function(ea) {
-                        var fa = ea.display;
-                        if (fa === 'touch' && window.postMessage && ea.in_iframe) return 'parent';
-                        return da.getXdRelation(ea);
+                        if (!ea.params.u) ea.params.u = window.location.toString();
+                        ea.params.display = 'popup';
+                        return ea;
                     }
-                }, ca = {
-                    'stream.share': {
-                        size: {
-                            width: 670,
-                            height: 340
-                        },
-                        url: 'sharer.php',
-                        transform: function(ea) {
-                            if (!ea.params.u) ea.params.u = window.location.toString();
-                            ea.params.display = 'popup';
-                            return ea;
+                },
+                apprequests: {
+                    transform: function(ea) {
+                        ea = ba.transform(ea);
+                        ea.params.frictionless = n && n._useFrictionless;
+                        if (ea.params.frictionless) {
+                            if (n.isAllowed(ea.params.to)) {
+                                ea.params.display = 'iframe';
+                                ea.params.in_iframe = true;
+                                ea.hideLoader = true;
+                            }
+                            ea.cb = n._processRequestResponse(ea.cb, ea.hideLoader);
                         }
+                        ea.closeIcon = false;
+                        return ea;
                     },
-                    apprequests: {
-                        transform: function(ea) {
-                            ea = ba.transform(ea);
-                            ea.params.frictionless = n && n._useFrictionless;
-                            if (ea.params.frictionless) {
-                                if (n.isAllowed(ea.params.to)) {
-                                    ea.params.display = 'iframe';
-                                    ea.params.in_iframe = true;
-                                    ea.hideLoader = true;
-                                }
-                                ea.cb = n._processRequestResponse(ea.cb, ea.hideLoader);
-                            }
-                            ea.closeIcon = false;
-                            return ea;
-                        },
-                        getXdRelation: ba.getXdRelation
+                    getXdRelation: ba.getXdRelation
+                },
+                feed: ba,
+                'permissions.oauth': {
+                    url: 'dialog/oauth',
+                    size: {
+                        width: (z.mobile() ? null : 475),
+                        height: (z.mobile() ? null : 183)
                     },
-                    feed: ba,
-                    'permissions.oauth': {
-                        url: 'dialog/oauth',
-                        size: {
-                            width: (z.mobile() ? null : 475),
-                            height: (z.mobile() ? null : 183)
-                        },
-                        transform: function(ea) {
-                            if (!w.getClientID()) {
-                                r.error('FB.login() called before FB.init().');
-                                return;
-                            }
-                            if (g.getAuthResponse() && !ea.params.scope && !ea.params.auth_type) {
-                                r.error('FB.login() called when user is already connected.');
-                                ea.cb && ea.cb({
-                                    status: w.getLoginStatus(),
-                                    authResponse: g.getAuthResponse()
-                                });
-                                return;
-                            }
-                            var fa = ea.cb,
-                                ga = ea.id;
-                            delete ea.cb;
-                            if (ea.params.display === 'async') {
-                                i(ea.params, {
-                                    client_id: w.getClientID(),
-                                    origin: o(),
-                                    response_type: 'token,signed_request',
-                                    domain: location.hostname
-                                });
-                                ea.cb = g.xdResponseWrapper(fa, g.getAuthResponse(), 'permissions.oauth');
-                            } else i(ea.params, {
+                    transform: function(ea) {
+                        if (!w.getClientID()) {
+                            r.error('FB.login() called before FB.init().');
+                            return;
+                        }
+                        if (g.getAuthResponse() && !ea.params.scope && !ea.params.auth_type) {
+                            r.error('FB.login() called when user is already connected.');
+                            ea.cb && ea.cb({
+                                status: w.getLoginStatus(),
+                                authResponse: g.getAuthResponse()
+                            });
+                            return;
+                        }
+                        var fa = ea.cb,
+                            ga = ea.id;
+                        delete ea.cb;
+                        if (ea.params.display === 'async') {
+                            i(ea.params, {
                                 client_id: w.getClientID(),
-                                redirect_uri: u(da.xdHandler(fa, ga, 'opener', g.getAuthResponse(), 'permissions.oauth')),
                                 origin: o(),
                                 response_type: 'token,signed_request',
                                 domain: location.hostname
                             });
-                            return ea;
-                        }
-                    },
-                    'auth.logout': {
-                        url: 'logout.php',
-                        transform: function(ea) {
-                            if (!w.getClientID()) {
-                                r.error('FB.logout() called before calling FB.init().');
-                            } else if (!g.getAuthResponse()) {
-                                r.error('FB.logout() called without an access token.');
-                            } else {
-                                ea.params.next = da.xdHandler(ea.cb, ea.id, 'parent', g.getAuthResponse(), 'logout');
-                                return ea;
-                            }
-                        }
-                    },
-                    'login.status': {
-                        url: 'dialog/oauth',
-                        transform: function(ea) {
-                            var fa = ea.cb,
-                                ga = ea.id;
-                            delete ea.cb;
-                            i(ea.params, {
-                                client_id: w.getClientID(),
-                                redirect_uri: da.xdHandler(fa, ga, 'parent', g.getAuthResponse(), 'login_status'),
-                                origin: o(),
-                                response_type: 'token,signed_request,code',
-                                domain: location.hostname
-                            });
+                            ea.cb = g.xdResponseWrapper(fa, g.getAuthResponse(), 'permissions.oauth');
+                        } else i(ea.params, {
+                            client_id: w.getClientID(),
+                            redirect_uri: u(da.xdHandler(fa, ga, 'opener', g.getAuthResponse(), 'permissions.oauth')),
+                            origin: o(),
+                            response_type: 'token,signed_request',
+                            domain: location.hostname
+                        });
+                        return ea;
+                    }
+                },
+                'auth.logout': {
+                    url: 'logout.php',
+                    transform: function(ea) {
+                        if (!w.getClientID()) {
+                            r.error('FB.logout() called before calling FB.init().');
+                        } else if (!g.getAuthResponse()) {
+                            r.error('FB.logout() called without an access token.');
+                        } else {
+                            ea.params.next = da.xdHandler(ea.cb, ea.id, 'parent', g.getAuthResponse(), 'logout');
                             return ea;
                         }
                     }
-                }, da = {
-                    Methods: ca,
-                    _loadedNodes: {},
-                    _defaultCb: {},
-                    _resultToken: '"xxRESULTTOKENxx"',
-                    genericTransform: function(ea) {
-                        if (ea.params.display == 'dialog' || ea.params.display == 'iframe') i(ea.params, {
-                            display: 'iframe',
-                            channel: da._xdChannelHandler(ea.id, 'parent.parent')
-                        }, true);
+                },
+                'login.status': {
+                    url: 'dialog/oauth',
+                    transform: function(ea) {
+                        var fa = ea.cb,
+                            ga = ea.id;
+                        delete ea.cb;
+                        i(ea.params, {
+                            client_id: w.getClientID(),
+                            redirect_uri: da.xdHandler(fa, ga, 'parent', g.getAuthResponse(), 'login_status'),
+                            origin: o(),
+                            response_type: 'token,signed_request,code',
+                            domain: location.hostname
+                        });
                         return ea;
-                    },
-                    checkOauthDisplay: function(ea) {
-                        var fa = ea.scope || ea.perms || w.getScope();
-                        if (!fa) return ea.display;
-                        var ga = fa.split(/\s|,/g);
-                        for (var ha = 0; ha < ga.length; ha++) if (!x.initSitevars.iframePermissions[ES5(ga[ha], 'trim', true)]) return 'popup';
-                        return ea.display;
-                    },
-                    prepareCall: function(ea, fa) {
-                        var ga = ea.method.toLowerCase(),
-                            ha = i({}, da.Methods[ga]),
-                            ia = p(),
-                            ja = w.getSecure() || (ga !== 'auth.status' && ga != 'login.status');
-                        i(ea, {
-                            app_id: w.getClientID(),
-                            locale: w.getLocale(),
-                            sdk: 'joey',
-                            access_token: ja && w.getAccessToken() || undefined
-                        });
-                        ea.display = da.getDisplayMode(ha, ea);
-                        if (!ha.url) ha.url = 'dialog/' + ga;
-                        if ((ha.url == 'dialog/oauth' || ha.url == 'dialog/permissions.request') && (ea.display == 'iframe' || (ea.display == 'touch' && ea.in_iframe))) ea.display = da.checkOauthDisplay(ea);
-                        var ka = {
-                            cb: fa,
-                            id: ia,
-                            size: ha.size || da.getDefaultSize(),
-                            url: y.resolve(ea.display == 'touch' ? 'm' : 'www', ja) + '/' + ha.url,
-                            params: ea,
-                            name: ga,
-                            dialog: j.newInstance(ia, ea.display)
-                        }, la = ha.transform ? ha.transform : da.genericTransform;
-                        if (la) {
-                            ka = la(ka);
-                            if (!ka) return;
-                        }
-                        var ma = ha.getXdRelation || da.getXdRelation,
-                            na = ma(ka.params);
-                        if (!(ka.id in da._defaultCb) && !('next' in ka.params) && !('redirect_uri' in ka.params)) ka.params.next = da._xdResult(ka.cb, ka.id, na, true);
-                        if (na === 'parent') i(ka.params, {
-                            channel_url: da._xdChannelHandler(ia, 'parent.parent')
-                        }, true);
-                        ka = da.prepareParams(ka);
-                        return ka;
-                    },
-                    prepareParams: function(ea) {
-                        var fa = ea.params.method;
-                        if (ea.params.display !== 'async') delete ea.params.method;
-                        ea.params = m(ea.params);
-                        var ga = t.encode(ea.params);
-                        if (!z.nativeApp() && da.urlTooLongForIE(ea.url + '?' + ga)) {
-                            ea.post = true;
-                        } else if (ga) ea.url += '?' + ga;
-                        return ea;
-                    },
-                    urlTooLongForIE: function(ea) {
-                        return ea.length > 2000;
-                    },
-                    getDisplayMode: function(ea, fa) {
-                        if (fa.display === 'hidden' || fa.display === 'none') return fa.display;
-                        var ga = w.isEnvironment(w.ENVIRONMENTS.CANVAS) || w.isEnvironment(w.ENVIRONMENTS.PAGETAB);
-                        if (ga && !fa.display) return 'async';
-                        if (z.mobile() || fa.display === 'touch') return 'touch';
-                        if (!w.getAccessToken() && fa.display == 'dialog' && !ea.loggedOutIframe) {
-                            r.error('"dialog" mode can only be used when the user is connected.');
-                            return 'popup';
-                        }
-                        if (ea.connectDisplay && !ga) return ea.connectDisplay;
-                        return fa.display || (w.getAccessToken() ? 'dialog' : 'popup');
-                    },
-                    getXdRelation: function(ea) {
-                        var fa = ea.display;
-                        if (fa === 'popup' || fa === 'touch') return 'opener';
-                        if (fa === 'dialog' || fa === 'iframe' || fa === 'hidden' || fa === 'none') return 'parent';
-                        if (fa === 'async') return 'parent.frames[' + window.name + ']';
-                    },
-                    popup: function(ea) {
-                        var fa = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
-                            ga = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
-                            ha = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.documentElement.clientWidth,
-                            ia = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.documentElement.clientHeight - 22),
-                            ja = z.mobile() ? null : ea.size.width,
-                            ka = z.mobile() ? null : ea.size.height,
-                            la = (fa < 0) ? window.screen.width + fa : fa,
-                            ma = parseInt(la + ((ha - ja) / 2), 10),
-                            na = parseInt(ga + ((ia - ka) / 2.5), 10),
-                            oa = [];
-                        if (ja !== null) oa.push('width=' + ja);
-                        if (ka !== null) oa.push('height=' + ka);
-                        oa.push('left=' + ma);
-                        oa.push('top=' + na);
-                        oa.push('scrollbars=1');
-                        if (ea.name == 'permissions.request' || ea.name == 'permissions.oauth') oa.push('location=1,toolbar=0');
-                        oa = oa.join(',');
-                        var pa;
-                        if (ea.post) {
-                            pa = window.open('about:blank', ea.id, oa);
-                            if (pa) {
-                                da.setLoadedNode(ea, pa, 'popup');
-                                h.submitToTarget({
-                                    url: ea.url,
-                                    target: ea.id,
-                                    params: ea.params
-                                });
-                            }
-                        } else {
-                            pa = window.open(ea.url, ea.id, oa);
-                            if (pa) da.setLoadedNode(ea, pa, 'popup');
-                        }
-                        if (!pa) return;
-                        if (ea.id in da._defaultCb) da._popupMonitor();
-                    },
-                    setLoadedNode: function(ea, fa, ga) {
-                        if (ea.params && ea.params.display != 'popup') fa.fbCallID = ea.id;
-                        fa = {
-                            node: fa,
-                            type: ga,
-                            fbCallID: ea.id
-                        };
-                        da._loadedNodes[ea.id] = fa;
-                    },
-                    getLoadedNode: function(ea) {
-                        var fa = typeof ea == 'object' ? ea.id : ea,
-                            ga = da._loadedNodes[fa];
-                        return ga ? ga.node : null;
-                    },
-                    hidden: function(ea) {
-                        ea.className = 'FB_UI_Hidden';
-                        ea.root = h.appendHidden('');
-                        da._insertIframe(ea);
-                    },
-                    iframe: function(ea) {
-                        ea.className = 'FB_UI_Dialog';
-                        var fa = function() {
-                            da._triggerDefault(ea.id);
-                        };
-                        ea.root = j.create({
-                            onClose: fa,
-                            closeIcon: ea.closeIcon === undefined ? true : ea.closeIcon,
-                            classes: (z.ipad() ? 'centered' : '')
-                        });
-                        if (!ea.hideLoader) j.showLoader(fa, ea.size.width);
-                        k.addCss(ea.root, 'fb_dialog_iframe');
-                        da._insertIframe(ea);
-                    },
-                    touch: function(ea) {
-                        if (ea.params && ea.params.in_iframe) {
-                            if (ea.ui_created) {
-                                j.showLoader(function() {
-                                    da._triggerDefault(ea.id);
-                                }, 0);
-                            } else da.iframe(ea);
-                        } else if (z.nativeApp() && !ea.ui_created) {
-                            ea.frame = ea.id;
-                            s.onready(function() {
-                                da.setLoadedNode(ea, s.open(ea.url + '#cb=' + ea.frameName), 'native');
+                    }
+                }
+            }, da = {
+                Methods: ca,
+                _loadedNodes: {},
+                _defaultCb: {},
+                _resultToken: '"xxRESULTTOKENxx"',
+                genericTransform: function(ea) {
+                    if (ea.params.display == 'dialog' || ea.params.display == 'iframe') i(ea.params, {
+                        display: 'iframe',
+                        channel: da._xdChannelHandler(ea.id, 'parent.parent')
+                    }, true);
+                    return ea;
+                },
+                checkOauthDisplay: function(ea) {
+                    var fa = ea.scope || ea.perms || w.getScope();
+                    if (!fa) return ea.display;
+                    var ga = fa.split(/\s|,/g);
+                    for (var ha = 0; ha < ga.length; ha++) if (!x.initSitevars.iframePermissions[ES5(ga[ha], 'trim', true)]) return 'popup';
+                    return ea.display;
+                },
+                prepareCall: function(ea, fa) {
+                    var ga = ea.method.toLowerCase(),
+                        ha = i({}, da.Methods[ga]),
+                        ia = p(),
+                        ja = w.getSecure() || (ga !== 'auth.status' && ga != 'login.status');
+                    i(ea, {
+                        app_id: w.getClientID(),
+                        locale: w.getLocale(),
+                        sdk: 'joey',
+                        access_token: ja && w.getAccessToken() || undefined
+                    });
+                    ea.display = da.getDisplayMode(ha, ea);
+                    if (!ha.url) ha.url = 'dialog/' + ga;
+                    if ((ha.url == 'dialog/oauth' || ha.url == 'dialog/permissions.request') && (ea.display == 'iframe' || (ea.display == 'touch' && ea.in_iframe))) ea.display = da.checkOauthDisplay(ea);
+                    var ka = {
+                        cb: fa,
+                        id: ia,
+                        size: ha.size || da.getDefaultSize(),
+                        url: y.resolve(ea.display == 'touch' ? 'm' : 'www', ja) + '/' + ha.url,
+                        params: ea,
+                        name: ga,
+                        dialog: j.newInstance(ia, ea.display)
+                    }, la = ha.transform ? ha.transform : da.genericTransform;
+                    if (la) {
+                        ka = la(ka);
+                        if (!ka) return;
+                    }
+                    var ma = ha.getXdRelation || da.getXdRelation,
+                        na = ma(ka.params);
+                    if (!(ka.id in da._defaultCb) && !('next' in ka.params) && !('redirect_uri' in ka.params)) ka.params.next = da._xdResult(ka.cb, ka.id, na, true);
+                    if (na === 'parent') i(ka.params, {
+                        channel_url: da._xdChannelHandler(ia, 'parent.parent')
+                    }, true);
+                    ka = da.prepareParams(ka);
+                    return ka;
+                },
+                prepareParams: function(ea) {
+                    var fa = ea.params.method;
+                    if (ea.params.display !== 'async') delete ea.params.method;
+                    ea.params = m(ea.params);
+                    var ga = t.encode(ea.params);
+                    if (!z.nativeApp() && da.urlTooLongForIE(ea.url + '?' + ga)) {
+                        ea.post = true;
+                    } else if (ga) ea.url += '?' + ga;
+                    return ea;
+                },
+                urlTooLongForIE: function(ea) {
+                    return ea.length > 2000;
+                },
+                getDisplayMode: function(ea, fa) {
+                    if (fa.display === 'hidden' || fa.display === 'none') return fa.display;
+                    var ga = w.isEnvironment(w.ENVIRONMENTS.CANVAS) || w.isEnvironment(w.ENVIRONMENTS.PAGETAB);
+                    if (ga && !fa.display) return 'async';
+                    if (z.mobile() || fa.display === 'touch') return 'touch';
+                    if (!w.getAccessToken() && fa.display == 'dialog' && !ea.loggedOutIframe) {
+                        r.error('"dialog" mode can only be used when the user is connected.');
+                        return 'popup';
+                    }
+                    if (ea.connectDisplay && !ga) return ea.connectDisplay;
+                    return fa.display || (w.getAccessToken() ? 'dialog' : 'popup');
+                },
+                getXdRelation: function(ea) {
+                    var fa = ea.display;
+                    if (fa === 'popup' || fa === 'touch') return 'opener';
+                    if (fa === 'dialog' || fa === 'iframe' || fa === 'hidden' || fa === 'none') return 'parent';
+                    if (fa === 'async') return 'parent.frames[' + window.name + ']';
+                },
+                popup: function(ea) {
+                    var fa = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
+                        ga = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
+                        ha = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.documentElement.clientWidth,
+                        ia = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.documentElement.clientHeight - 22),
+                        ja = z.mobile() ? null : ea.size.width,
+                        ka = z.mobile() ? null : ea.size.height,
+                        la = (fa < 0) ? window.screen.width + fa : fa,
+                        ma = parseInt(la + ((ha - ja) / 2), 10),
+                        na = parseInt(ga + ((ia - ka) / 2.5), 10),
+                        oa = [];
+                    if (ja !== null) oa.push('width=' + ja);
+                    if (ka !== null) oa.push('height=' + ka);
+                    oa.push('left=' + ma);
+                    oa.push('top=' + na);
+                    oa.push('scrollbars=1');
+                    if (ea.name == 'permissions.request' || ea.name == 'permissions.oauth') oa.push('location=1,toolbar=0');
+                    oa = oa.join(',');
+                    var pa;
+                    if (ea.post) {
+                        pa = window.open('about:blank', ea.id, oa);
+                        if (pa) {
+                            da.setLoadedNode(ea, pa, 'popup');
+                            h.submitToTarget({
+                                url: ea.url,
+                                target: ea.id,
+                                params: ea.params
                             });
-                            da._popupMonitor();
-                        } else if (!ea.ui_created) da.popup(ea);
-                    },
-                    async: function(ea) {
-                        ea.params.redirect_uri = location.protocol + '//' + location.host + location.pathname;
-                        delete ea.params.access_token;
-                        v.remote.showDialog(ea.params, function(fa) {
-                            var ga = fa.result;
-                            if (ga && ga.e2e) {
-                                var ha = j.get(ea.id);
-                                ha.trackEvents(ga.e2e);
-                                ha.trackEvent('close');
-                                delete ga.e2e;
-                            }
-                            ea.cb(ga);
+                        }
+                    } else {
+                        pa = window.open(ea.url, ea.id, oa);
+                        if (pa) da.setLoadedNode(ea, pa, 'popup');
+                    }
+                    if (!pa) return;
+                    if (ea.id in da._defaultCb) da._popupMonitor();
+                },
+                setLoadedNode: function(ea, fa, ga) {
+                    if (ea.params && ea.params.display != 'popup') fa.fbCallID = ea.id;
+                    fa = {
+                        node: fa,
+                        type: ga,
+                        fbCallID: ea.id
+                    };
+                    da._loadedNodes[ea.id] = fa;
+                },
+                getLoadedNode: function(ea) {
+                    var fa = typeof ea == 'object' ? ea.id : ea,
+                        ga = da._loadedNodes[fa];
+                    return ga ? ga.node : null;
+                },
+                hidden: function(ea) {
+                    ea.className = 'FB_UI_Hidden';
+                    ea.root = h.appendHidden('');
+                    da._insertIframe(ea);
+                },
+                iframe: function(ea) {
+                    ea.className = 'FB_UI_Dialog';
+                    var fa = function() {
+                        da._triggerDefault(ea.id);
+                    };
+                    ea.root = j.create({
+                        onClose: fa,
+                        closeIcon: ea.closeIcon === undefined ? true : ea.closeIcon,
+                        classes: (z.ipad() ? 'centered' : '')
+                    });
+                    if (!ea.hideLoader) j.showLoader(fa, ea.size.width);
+                    k.addCss(ea.root, 'fb_dialog_iframe');
+                    da._insertIframe(ea);
+                },
+                touch: function(ea) {
+                    if (ea.params && ea.params.in_iframe) {
+                        if (ea.ui_created) {
+                            j.showLoader(function() {
+                                da._triggerDefault(ea.id);
+                            }, 0);
+                        } else da.iframe(ea);
+                    } else if (z.nativeApp() && !ea.ui_created) {
+                        ea.frame = ea.id;
+                        s.onready(function() {
+                            da.setLoadedNode(ea, s.open(ea.url + '#cb=' + ea.frameName), 'native');
                         });
-                    },
-                    getDefaultSize: function() {
-                        return j.getDefaultSize();
-                    },
-                    _insertIframe: function(ea) {
-                        da._loadedNodes[ea.id] = false;
-                        var fa = function(ga) {
-                            if (ea.id in da._loadedNodes) da.setLoadedNode(ea, ga, 'iframe');
-                        };
-                        if (ea.post) {
-                            q({
-                                url: 'about:blank',
-                                root: ea.root,
-                                className: ea.className,
-                                width: ea.size.width,
-                                height: ea.size.height,
-                                id: ea.id,
-                                onInsert: fa,
-                                onload: function(ga) {
-                                    h.submitToTarget({
-                                        url: ea.url,
-                                        target: ga.name,
-                                        params: ea.params
-                                    });
-                                }
-                            });
-                        } else q({
-                            url: ea.url,
+                        da._popupMonitor();
+                    } else if (!ea.ui_created) da.popup(ea);
+                },
+                async: function(ea) {
+                    ea.params.redirect_uri = location.protocol + '//' + location.host + location.pathname;
+                    delete ea.params.access_token;
+                    v.remote.showDialog(ea.params, function(fa) {
+                        var ga = fa.result;
+                        if (ga && ga.e2e) {
+                            var ha = j.get(ea.id);
+                            ha.trackEvents(ga.e2e);
+                            ha.trackEvent('close');
+                            delete ga.e2e;
+                        }
+                        ea.cb(ga);
+                    });
+                },
+                getDefaultSize: function() {
+                    return j.getDefaultSize();
+                },
+                _insertIframe: function(ea) {
+                    da._loadedNodes[ea.id] = false;
+                    var fa = function(ga) {
+                        if (ea.id in da._loadedNodes) da.setLoadedNode(ea, ga, 'iframe');
+                    };
+                    if (ea.post) {
+                        q({
+                            url: 'about:blank',
                             root: ea.root,
                             className: ea.className,
                             width: ea.size.width,
                             height: ea.size.height,
                             id: ea.id,
-                            name: ea.frameName,
-                            onInsert: fa
+                            onInsert: fa,
+                            onload: function(ga) {
+                                h.submitToTarget({
+                                    url: ea.url,
+                                    target: ga.name,
+                                    params: ea.params
+                                });
+                            }
                         });
-                    },
-                    _handleResizeMessage: function(ea, fa) {
-                        var ga = da.getLoadedNode(ea);
-                        if (!ga) return;
-                        if (fa.height) ga.style.height = fa.height + 'px';
-                        if (fa.width) ga.style.width = fa.width + 'px';
-                        aa.inform('resize.ack', fa || {}, 'parent.frames[' + ga.name + ']');
-                        if (!j.isActive(ga)) j.show(ga);
-                    },
-                    _triggerDefault: function(ea) {
-                        da._xdRecv({
-                            frame: ea
-                        }, da._defaultCb[ea] || function() {});
-                    },
-                    _popupMonitor: function() {
-                        var ea;
-                        for (var fa in da._loadedNodes) if (da._loadedNodes.hasOwnProperty(fa) && fa in da._defaultCb) {
-                            var ga = da._loadedNodes[fa];
-                            if (ga.type != 'popup' && ga.type != 'native') continue;
-                            var ha = ga.node;
-                            try {
-                                if (ha.closed) {
-                                    da._triggerDefault(fa);
-                                } else ea = true;
-                            } catch (ia) {}
-                        }
-                        if (ea && !da._popupInterval) {
-                            da._popupInterval = setInterval(da._popupMonitor, 100);
-                        } else if (!ea && da._popupInterval) {
-                            clearInterval(da._popupInterval);
-                            da._popupInterval = null;
-                        }
-                    },
-                    _xdChannelHandler: function(ea, fa) {
-                        return aa.handler(function(ga) {
-                            var ha = da.getLoadedNode(ea);
-                            if (!ha) return;
-                            if (ga.type == 'resize') {
-                                da._handleResizeMessage(ea, ga);
-                            } else if (ga.type == 'hide') {
-                                j.hide(ha);
-                            } else if (ga.type == 'rendered') {
-                                var ia = j._findRoot(ha);
-                                j.show(ia);
-                            } else if (ga.type == 'fireevent') l.fire(ga.event);
-                        }, fa, true, null);
-                    },
-                    _xdNextHandler: function(ea, fa, ga, ha) {
-                        if (ha) da._defaultCb[fa] = ea;
-                        return aa.handler(function(ia) {
-                            da._xdRecv(ia, ea);
-                        }, ga) + '&frame=' + fa;
-                    },
-                    _xdRecv: function(ea, fa) {
-                        var ga = da.getLoadedNode(ea.frame);
-                        if (ga) if (ga.close) {
-                            try {
-                                ga.close();
-                                if (/iPhone.*Version\/(5|6)/.test(navigator.userAgent) && RegExp.$1 !== '5') window.focus();
-                                da._popupCount--;
-                            } catch (ha) {}
-                        } else if (k.containsCss(ga, 'FB_UI_Hidden')) {
-                            setTimeout(function() {
-                                ga.parentNode.parentNode.removeChild(ga.parentNode);
-                            }, 3000);
-                        } else if (k.containsCss(ga, 'FB_UI_Dialog')) j.remove(ga);
-                        delete da._loadedNodes[ea.frame];
-                        delete da._defaultCb[ea.frame];
-                        if (ea.e2e) {
-                            var ia = j.get(ea.frame);
-                            ia.trackEvents(ea.e2e);
-                            ia.trackEvent('close');
-                            delete ea.e2e;
-                        }
-                        fa(ea);
-                    },
-                    _xdResult: function(ea, fa, ga, ha) {
-                        return (da._xdNextHandler(function(ia) {
-                            ea && ea(ia.result && ia.result != da._resultToken && ES5('JSON', 'parse', false, ia.result));
-                        }, fa, ga, ha) + '&result=' + encodeURIComponent(da._resultToken));
-                    },
-                    xdHandler: function(ea, fa, ga, ha, ia) {
-                        return da._xdNextHandler(g.xdResponseWrapper(ea, ha, ia), fa, ga, true);
+                    } else q({
+                        url: ea.url,
+                        root: ea.root,
+                        className: ea.className,
+                        width: ea.size.width,
+                        height: ea.size.height,
+                        id: ea.id,
+                        name: ea.frameName,
+                        onInsert: fa
+                    });
+                },
+                _handleResizeMessage: function(ea, fa) {
+                    var ga = da.getLoadedNode(ea);
+                    if (!ga) return;
+                    if (fa.height) ga.style.height = fa.height + 'px';
+                    if (fa.width) ga.style.width = fa.width + 'px';
+                    aa.inform('resize.ack', fa || {}, 'parent.frames[' + ga.name + ']');
+                    if (!j.isActive(ga)) j.show(ga);
+                },
+                _triggerDefault: function(ea) {
+                    da._xdRecv({
+                        frame: ea
+                    }, da._defaultCb[ea] || function() {});
+                },
+                _popupMonitor: function() {
+                    var ea;
+                    for (var fa in da._loadedNodes) if (da._loadedNodes.hasOwnProperty(fa) && fa in da._defaultCb) {
+                        var ga = da._loadedNodes[fa];
+                        if (ga.type != 'popup' && ga.type != 'native') continue;
+                        var ha = ga.node;
+                        try {
+                            if (ha.closed) {
+                                da._triggerDefault(fa);
+                            } else ea = true;
+                        } catch (ia) {}
                     }
-                };
+                    if (ea && !da._popupInterval) {
+                        da._popupInterval = setInterval(da._popupMonitor, 100);
+                    } else if (!ea && da._popupInterval) {
+                        clearInterval(da._popupInterval);
+                        da._popupInterval = null;
+                    }
+                },
+                _xdChannelHandler: function(ea, fa) {
+                    return aa.handler(function(ga) {
+                        var ha = da.getLoadedNode(ea);
+                        if (!ha) return;
+                        if (ga.type == 'resize') {
+                            da._handleResizeMessage(ea, ga);
+                        } else if (ga.type == 'hide') {
+                            j.hide(ha);
+                        } else if (ga.type == 'rendered') {
+                            var ia = j._findRoot(ha);
+                            j.show(ia);
+                        } else if (ga.type == 'fireevent') l.fire(ga.event);
+                    }, fa, true, null);
+                },
+                _xdNextHandler: function(ea, fa, ga, ha) {
+                    if (ha) da._defaultCb[fa] = ea;
+                    return aa.handler(function(ia) {
+                        da._xdRecv(ia, ea);
+                    }, ga) + '&frame=' + fa;
+                },
+                _xdRecv: function(ea, fa) {
+                    var ga = da.getLoadedNode(ea.frame);
+                    if (ga) if (ga.close) {
+                        try {
+                            ga.close();
+                            if (/iPhone.*Version\/(5|6)/.test(navigator.userAgent) && RegExp.$1 !== '5') window.focus();
+                            da._popupCount--;
+                        } catch (ha) {}
+                    } else if (k.containsCss(ga, 'FB_UI_Hidden')) {
+                        setTimeout(function() {
+                            ga.parentNode.parentNode.removeChild(ga.parentNode);
+                        }, 3000);
+                    } else if (k.containsCss(ga, 'FB_UI_Dialog')) j.remove(ga);
+                    delete da._loadedNodes[ea.frame];
+                    delete da._defaultCb[ea.frame];
+                    if (ea.e2e) {
+                        var ia = j.get(ea.frame);
+                        ia.trackEvents(ea.e2e);
+                        ia.trackEvent('close');
+                        delete ea.e2e;
+                    }
+                    fa(ea);
+                },
+                _xdResult: function(ea, fa, ga, ha) {
+                    return (da._xdNextHandler(function(ia) {
+                        ea && ea(ia.result && ia.result != da._resultToken && ES5('JSON', 'parse', false, ia.result));
+                    }, fa, ga, ha) + '&result=' + encodeURIComponent(da._resultToken));
+                },
+                xdHandler: function(ea, fa, ga, ha, ia) {
+                    return da._xdNextHandler(g.xdResponseWrapper(ea, ha, ia), fa, ga, true);
+                }
+            };
             v.stub('showDialog');
             e.exports = da;
         });
-        __d("sdk.ui", ["Assert", "copyProperties", "sdk.feature", "sdk.Impressions", "Log", "sdk.UIServer"], function(a, b, c, d, e, f) {
-            var g = b('Assert'),
-                h = b('copyProperties'),
-                i = b('sdk.feature'),
-                j = b('sdk.Impressions'),
-                k = b('Log'),
-                l = b('sdk.UIServer');
-
+        __d("sdk.ui", ["Assert", "copyProperties", "sdk.feature", "sdk.Impressions", "Log", "sdk.UIServer"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
             function m(n, o) {
                 g.isObject(n);
                 g.maybeFunction(o);
@@ -4462,80 +4377,65 @@ try {
             }
             e.exports = m;
         });
-        __d("legacy:fb.auth", ["sdk.Auth", "sdk.Cookie", "copyProperties", "sdk.Event", "FB", "Log", "sdk.Runtime", "sdk.SignedRequest", "sdk.ui"], function(a, b, c, d) {
-            var e = b('sdk.Auth'),
-                f = b('sdk.Cookie'),
-                g = b('copyProperties'),
-                h = b('sdk.Event'),
-                i = b('FB'),
-                j = b('Log'),
-                k = b('sdk.Runtime'),
-                l = b('sdk.SignedRequest'),
-                m = b('sdk.ui');
-            i.provide('', {
+        __d("legacy:fb.auth", ["sdk.Auth", "sdk.Cookie", "copyProperties", "sdk.Event", "FB", "Log", "sdk.Runtime", "sdk.SignedRequest", "sdk.ui"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
+            k.provide('', {
                 getLoginStatus: function() {
-                    return e.getLoginStatus.apply(e, arguments);
+                    return g.getLoginStatus.apply(g, arguments);
                 },
                 getAuthResponse: function() {
-                    return e.getAuthResponse();
+                    return g.getAuthResponse();
                 },
                 getAccessToken: function() {
-                    return k.getAccessToken() || null;
+                    return m.getAccessToken() || null;
                 },
                 getUserID: function() {
-                    return k.getUserID() || k.getCookieUserID();
+                    return m.getUserID() || m.getCookieUserID();
                 },
-                login: function(n, o) {
-                    if (o && o.perms && !o.scope) {
-                        o.scope = o.perms;
-                        delete o.perms;
-                        j.warn('OAuth2 specification states that \'perms\' ' + 'should now be called \'scope\'.  Please update.');
+                login: function(p, q) {
+                    if (q && q.perms && !q.scope) {
+                        q.scope = q.perms;
+                        delete q.perms;
+                        l.warn('OAuth2 specification states that \'perms\' ' + 'should now be called \'scope\'.  Please update.');
                     }
-                    var p = k.isEnvironment(k.ENVIRONMENTS.CANVAS) || k.isEnvironment(k.ENVIRONMENTS.PAGETAB);
-                    m(g({
+                    var r = m.isEnvironment(m.ENVIRONMENTS.CANVAS) || m.isEnvironment(m.ENVIRONMENTS.PAGETAB);
+                    o(i({
                         method: 'permissions.oauth',
-                        display: p ? 'async' : 'popup',
+                        display: r ? 'async' : 'popup',
                         domain: location.hostname
-                    }, o || {}), n);
+                    }, q || {}), p);
                 },
-                logout: function(n) {
-                    m({
+                logout: function(p) {
+                    o({
                         method: 'auth.logout',
                         display: 'hidden'
-                    }, n);
+                    }, p);
                 }
             });
-            e.subscribe('logout', ES5(h.fire, 'bind', true, h, 'auth.logout'));
-            e.subscribe('login', ES5(h.fire, 'bind', true, h, 'auth.login'));
-            e.subscribe('authresponse.change', ES5(h.fire, 'bind', true, h, 'auth.authResponseChange'));
-            e.subscribe('status.change', ES5(h.fire, 'bind', true, h, 'auth.statusChange'));
-            h.subscribe('init:post', function(n) {
-                if (n.status) e.getLoginStatus();
-                if (k.getClientID()) if (n.authResponse) {
-                    e.setAuthResponse(n.authResponse, 'connected');
-                } else if (k.getUseCookie()) {
-                    var o = f.loadSignedRequest(),
-                        p;
-                    if (o) {
+            g.subscribe('logout', ES5(j.fire, 'bind', true, j, 'auth.logout'));
+            g.subscribe('login', ES5(j.fire, 'bind', true, j, 'auth.login'));
+            g.subscribe('authresponse.change', ES5(j.fire, 'bind', true, j, 'auth.authResponseChange'));
+            g.subscribe('status.change', ES5(j.fire, 'bind', true, j, 'auth.statusChange'));
+            j.subscribe('init:post', function(p) {
+                if (p.status) g.getLoginStatus();
+                if (m.getClientID()) if (p.authResponse) {
+                    g.setAuthResponse(p.authResponse, 'connected');
+                } else if (m.getUseCookie()) {
+                    var q = h.loadSignedRequest(),
+                        r;
+                    if (q) {
                         try {
-                            p = l.parse(o);
-                        } catch (q) {
-                            f.clearSignedRequestCookie();
+                            r = n.parse(q);
+                        } catch (s) {
+                            h.clearSignedRequestCookie();
                         }
-                        if (p && p.user_id) k.setCookieUserID(p.user_id);
+                        if (r && r.user_id) m.setCookieUserID(r.user_id);
                     }
-                    f.loadMeta();
+                    h.loadMeta();
                 }
             });
         }, 3);
-        __d("sdk.Canvas.Plugin", ["sdk.api", "sdk.RPC", "Log", "UserAgent", "sdk.Runtime", "createArrayFrom"], function(a, b, c, d, e, f) {
-            var g = b('sdk.api'),
-                h = b('sdk.RPC'),
-                i = b('Log'),
-                j = b('UserAgent'),
-                k = b('sdk.Runtime'),
-                l = b('createArrayFrom'),
-                m = 'CLSID:D27CDB6E-AE6D-11CF-96B8-444553540000',
+        __d("sdk.Canvas.Plugin", ["sdk.api", "sdk.RPC", "Log", "UserAgent", "sdk.Runtime", "createArrayFrom"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
+            var m = 'CLSID:D27CDB6E-AE6D-11CF-96B8-444553540000',
                 n = 'CLSID:444785F1-DE89-4295-863A-D46C3A781394',
                 o = null,
                 p = !(j.osx() >= 10.9 && (j.chrome() >= 31 || j.webkit() >= 537.71 || j.firefox() >= 25));
@@ -4653,10 +4553,8 @@ try {
             };
             e.exports = z;
         });
-        __d("sdk.Canvas.IframeHandling", ["DOMWrapper", "sdk.RPC"], function(a, b, c, d, e, f) {
-            var g = b('DOMWrapper'),
-                h = b('sdk.RPC'),
-                i = null,
+        __d("sdk.Canvas.IframeHandling", ["DOMWrapper", "sdk.RPC"], function(a, b, c, d, e, f, g, h) {
+            var i = null,
                 j;
 
             function k() {
@@ -4713,9 +4611,7 @@ try {
             };
             e.exports = n;
         });
-        __d("sdk.Canvas.Navigation", ["sdk.RPC"], function(a, b, c, d, e, f) {
-            var g = b('sdk.RPC');
-
+        __d("sdk.Canvas.Navigation", ["sdk.RPC"], function(a, b, c, d, e, f, g) {
             function h(j) {
                 g.local.navigate = function(k) {
                     j({
@@ -4730,10 +4626,7 @@ try {
             };
             e.exports = i;
         });
-        __d("sdk.Canvas.Tti", ["sdk.RPC", "sdk.Runtime"], function(a, b, c, d, e, f) {
-            var g = b('sdk.RPC'),
-                h = b('sdk.Runtime');
-
+        __d("sdk.Canvas.Tti", ["sdk.RPC", "sdk.Runtime"], function(a, b, c, d, e, f, g, h) {
             function i(n, o) {
                 var p = {
                     appId: h.getClientID(),
@@ -4762,81 +4655,67 @@ try {
             };
             e.exports = m;
         });
-        __d("legacy:fb.canvas", ["Assert", "sdk.Canvas.Environment", "sdk.Event", "FB", "sdk.Canvas.Plugin", "sdk.Canvas.IframeHandling", "Log", "sdk.Canvas.Navigation", "sdk.Runtime", "sdk.Canvas.Tti"], function(a, b, c, d) {
-            var e = b('Assert'),
-                f = b('sdk.Canvas.Environment'),
-                g = b('sdk.Event'),
-                h = b('FB'),
-                i = b('sdk.Canvas.Plugin'),
-                j = b('sdk.Canvas.IframeHandling'),
-                k = b('Log'),
-                l = b('sdk.Canvas.Navigation'),
-                m = b('sdk.Runtime'),
-                n = b('sdk.Canvas.Tti');
-            h.provide('Canvas', {
-                setSize: function(o) {
-                    e.maybeObject(o, 'Invalid argument');
-                    return j.setSize.apply(null, arguments);
+        __d("legacy:fb.canvas", ["Assert", "sdk.Canvas.Environment", "sdk.Event", "FB", "sdk.Canvas.Plugin", "sdk.Canvas.IframeHandling", "Log", "sdk.Canvas.Navigation", "sdk.Runtime", "sdk.Canvas.Tti"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+            j.provide('Canvas', {
+                setSize: function(q) {
+                    g.maybeObject(q, 'Invalid argument');
+                    return l.setSize.apply(null, arguments);
                 },
                 setAutoGrow: function() {
-                    return j.setAutoGrow.apply(null, arguments);
+                    return l.setAutoGrow.apply(null, arguments);
                 },
-                getPageInfo: function(o) {
-                    e.isFunction(o, 'Invalid argument');
-                    return f.getPageInfo.apply(null, arguments);
+                getPageInfo: function(q) {
+                    g.isFunction(q, 'Invalid argument');
+                    return h.getPageInfo.apply(null, arguments);
                 },
-                scrollTo: function(o, p) {
-                    e.maybeNumber(o, 'Invalid argument');
-                    e.maybeNumber(p, 'Invalid argument');
-                    return f.scrollTo.apply(null, arguments);
+                scrollTo: function(q, r) {
+                    g.maybeNumber(q, 'Invalid argument');
+                    g.maybeNumber(r, 'Invalid argument');
+                    return h.scrollTo.apply(null, arguments);
                 },
-                setDoneLoading: function(o) {
-                    e.maybeFunction(o, 'Invalid argument');
-                    return n.setDoneLoading.apply(null, arguments);
+                setDoneLoading: function(q) {
+                    g.maybeFunction(q, 'Invalid argument');
+                    return p.setDoneLoading.apply(null, arguments);
                 },
                 startTimer: function() {
-                    return n.startTimer.apply(null, arguments);
+                    return p.startTimer.apply(null, arguments);
                 },
-                stopTimer: function(o) {
-                    e.maybeFunction(o, 'Invalid argument');
-                    return n.stopTimer.apply(null, arguments);
+                stopTimer: function(q) {
+                    g.maybeFunction(q, 'Invalid argument');
+                    return p.stopTimer.apply(null, arguments);
                 },
-                getHash: function(o) {
-                    e.isFunction(o, 'Invalid argument');
-                    return l.getHash.apply(null, arguments);
+                getHash: function(q) {
+                    g.isFunction(q, 'Invalid argument');
+                    return n.getHash.apply(null, arguments);
                 },
-                setHash: function(o) {
-                    e.isString(o, 'Invalid argument');
-                    return l.setHash.apply(null, arguments);
+                setHash: function(q) {
+                    g.isString(q, 'Invalid argument');
+                    return n.setHash.apply(null, arguments);
                 },
-                setUrlHandler: function(o) {
-                    e.isFunction(o, 'Invalid argument');
-                    return l.setUrlHandler.apply(null, arguments);
+                setUrlHandler: function(q) {
+                    g.isFunction(q, 'Invalid argument');
+                    return n.setUrlHandler.apply(null, arguments);
                 }
             });
-            h.provide('CanvasInsights', {
-                setDoneLoading: function(o) {
-                    k.warn('Deprecated: use FB.Canvas.setDoneLoading');
-                    e.maybeFunction(o, 'Invalid argument');
-                    return n.setDoneLoading.apply(null, arguments);
+            j.provide('CanvasInsights', {
+                setDoneLoading: function(q) {
+                    m.warn('Deprecated: use FB.Canvas.setDoneLoading');
+                    g.maybeFunction(q, 'Invalid argument');
+                    return p.setDoneLoading.apply(null, arguments);
                 }
             });
-            g.subscribe('init:post', function(o) {
-                if (m.isEnvironment(m.ENVIRONMENTS.CANVAS)) {
-                    e.isTrue(!o.hideFlashCallback || !o.hidePluginCallback, 'cannot specify deprecated hideFlashCallback and new hidePluginCallback');
-                    i._setHidePluginCallback(o.hidePluginCallback || o.hideFlashCallback);
+            i.subscribe('init:post', function(q) {
+                if (o.isEnvironment(o.ENVIRONMENTS.CANVAS)) {
+                    g.isTrue(!q.hideFlashCallback || !q.hidePluginCallback, 'cannot specify deprecated hideFlashCallback and new hidePluginCallback');
+                    k._setHidePluginCallback(q.hidePluginCallback || q.hideFlashCallback);
                 }
             });
         }, 3);
-        __d("sdk.Canvas.Prefetcher", ["sdk.api", "createArrayFrom", "sdk.Runtime", "CanvasPrefetcherConfig"], function(a, b, c, d, e, f) {
-            var g = b('sdk.api'),
-                h = b('createArrayFrom'),
-                i = c('CanvasPrefetcherConfig'),
-                j = b('sdk.Runtime'),
-                k = {
-                    AUTOMATIC: 0,
-                    MANUAL: 1
-                }, l = i.sampleRate,
+        __d("sdk.Canvas.Prefetcher", ["sdk.api", "createArrayFrom", "CanvasPrefetcherConfig", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j) {
+            var k = {
+                AUTOMATIC: 0,
+                MANUAL: 1
+            }, l = i.sampleRate,
                 m = i.blacklist,
                 n = k.AUTOMATIC,
                 o = [];
@@ -4880,50 +4759,41 @@ try {
             };
             e.exports = t;
         });
-        __d("legacy:fb.canvas.prefetcher", ["FB", "sdk.Canvas.Prefetcher", "sdk.Event", "sdk.Runtime"], function(a, b, c, d) {
-            var e = b('FB'),
-                f = b('sdk.Canvas.Prefetcher'),
-                g = b('sdk.Event'),
-                h = b('sdk.Runtime');
-            e.provide('Canvas.Prefetcher', f);
-            g.subscribe('init:post', function(i) {
-                if (h.isEnvironment(h.ENVIRONMENTS.CANVAS)) f._maybeSample();
+        __d("legacy:fb.canvas.prefetcher", ["FB", "sdk.Canvas.Prefetcher", "sdk.Event", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j) {
+            g.provide('Canvas.Prefetcher', h);
+            i.subscribe('init:post', function(k) {
+                if (j.isEnvironment(j.ENVIRONMENTS.CANVAS)) h._maybeSample();
             });
         }, 3);
-        __d("legacy:fb.compat.ui", ["copyProperties", "FB", "Log", "sdk.ui", "sdk.UIServer"], function(a, b, c, d) {
-            var e = b('copyProperties'),
-                f = b('FB'),
-                g = b('Log'),
-                h = b('sdk.ui'),
-                i = b('sdk.UIServer');
-            f.provide('', {
-                share: function(j) {
-                    g.error('share() has been deprecated. Please use FB.ui() instead.');
-                    h({
+        __d("legacy:fb.compat.ui", ["copyProperties", "FB", "Log", "sdk.ui", "sdk.UIServer"], function(a, b, c, d, e, f, g, h, i, j, k) {
+            h.provide('', {
+                share: function(l) {
+                    i.error('share() has been deprecated. Please use FB.ui() instead.');
+                    j({
                         display: 'popup',
                         method: 'stream.share',
-                        u: j
+                        u: l
                     });
                 },
-                publish: function(j, k) {
-                    g.error('publish() has been deprecated. Please use FB.ui() instead.');
-                    j = j || {};
-                    h(e({
+                publish: function(l, m) {
+                    i.error('publish() has been deprecated. Please use FB.ui() instead.');
+                    l = l || {};
+                    j(g({
                         display: 'popup',
                         method: 'stream.publish',
                         preview: 1
-                    }, j || {}), k);
+                    }, l || {}), m);
                 },
-                addFriend: function(j, k) {
-                    g.error('addFriend() has been deprecated. Please use FB.ui() instead.');
-                    h({
+                addFriend: function(l, m) {
+                    i.error('addFriend() has been deprecated. Please use FB.ui() instead.');
+                    j({
                         display: 'popup',
-                        id: j,
+                        id: l,
                         method: 'friend.add'
-                    }, k);
+                    }, m);
                 }
             });
-            i.Methods['auth.login'] = i.Methods['permissions.request'];
+            k.Methods['auth.login'] = k.Methods['permissions.request'];
         }, 3);
         __d("mergeArrays", [], function(a, b, c, d, e, f) {
             function g(h, i) {
@@ -4952,37 +4822,31 @@ try {
             }
             e.exports = g;
         });
-        __d("sdk.Waitable", ["sdk.Model"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Model'),
-                h = g.extend({
-                    constructor: function() {
-                        this.parent({
-                            Value: undefined
-                        });
-                    },
-                    error: function(i) {
-                        this.inform("error", i);
-                    },
-                    wait: function(i, j) {
-                        if (j) this.subscribe('error', j);
-                        this.monitor('Value.change', ES5(function() {
-                            var k = this.getValue();
-                            if (k !== undefined) {
-                                this.value = k;
-                                i(k);
-                                return true;
-                            }
-                        }, 'bind', true, this));
-                    }
-                });
+        __d("sdk.Waitable", ["sdk.Model"], function(a, b, c, d, e, f, g) {
+            var h = g.extend({
+                constructor: function() {
+                    this.parent({
+                        Value: undefined
+                    });
+                },
+                error: function(i) {
+                    this.inform("error", i);
+                },
+                wait: function(i, j) {
+                    if (j) this.subscribe('error', j);
+                    this.monitor('Value.change', ES5(function() {
+                        var k = this.getValue();
+                        if (k !== undefined) {
+                            this.value = k;
+                            i(k);
+                            return true;
+                        }
+                    }, 'bind', true, this));
+                }
+            });
             e.exports = h;
         });
-        __d("sdk.Query", ["format", "safeEval", "Type", "sdk.Waitable"], function(a, b, c, d, e, f) {
-            var g = b('format'),
-                h = b('safeEval'),
-                i = b('Type'),
-                j = b('sdk.Waitable');
-
+        __d("sdk.Query", ["format", "safeEval", "Type", "sdk.Waitable"], function(a, b, c, d, e, f, g, h, i, j) {
             function k(p) {
                 return ES5(p.split(','), 'map', true, function(q) {
                     return ES5(q, 'trim', true);
@@ -5058,151 +4922,130 @@ try {
                 });
             e.exports = o;
         });
-        __d("sdk.Data", ["sdk.api", "sdk.ErrorHandling", "mergeArrays", "sdk.Query", "safeEval", "sdk.Waitable"], function(a, b, c, d, e, f) {
-            var g = b('sdk.api'),
-                h = b('sdk.ErrorHandling'),
-                i = b('mergeArrays'),
-                j = b('sdk.Query'),
-                k = b('safeEval'),
-                l = b('sdk.Waitable'),
-                m = {
-                    query: function(n, o) {
-                        var p = new j()
-                            .parse(Array.prototype.slice.call(arguments));
-                        m.queue.push(p);
-                        m._waitToProcess();
-                        return p;
-                    },
-                    waitOn: function(n, o) {
-                        var p = new l(),
-                            q = n.length;
-                        if (typeof(o) == 'string') {
-                            var r = o;
-                            o = h.unguard(function() {
-                                return k(r);
-                            });
-                        }
-                        ES5(n, 'forEach', true, function(s) {
-                            s.monitor('Value.change', function() {
-                                var t = false;
-                                if (m._getValue(s) !== undefined) {
-                                    s.value = s.getValue();
-                                    q--;
-                                    t = true;
-                                }
-                                if (q === 0) {
-                                    var u = o(ES5(n, 'map', true, m._getValue));
-                                    p.setValue(u !== undefined ? u : true);
-                                }
-                                return t;
-                            });
+        __d("sdk.Data", ["sdk.api", "sdk.ErrorHandling", "mergeArrays", "sdk.Query", "safeEval", "sdk.Waitable"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
+            var m = {
+                query: function(n, o) {
+                    var p = new j()
+                        .parse(Array.prototype.slice.call(arguments));
+                    m.queue.push(p);
+                    m._waitToProcess();
+                    return p;
+                },
+                waitOn: function(n, o) {
+                    var p = new l(),
+                        q = n.length;
+                    if (typeof(o) == 'string') {
+                        var r = o;
+                        o = h.unguard(function() {
+                            return k(r);
                         });
-                        return p;
-                    },
-                    process: function(n) {
-                        m._process(n);
-                    },
-                    _getValue: function(n) {
-                        return n instanceof l ? n.getValue() : n;
-                    },
-                    _selectByIndex: function(n, o, p, q) {
-                        var r = new j();
-                        r.fields = n;
-                        r.table = o;
-                        r.where = {
-                            type: 'index',
+                    }
+                    ES5(n, 'forEach', true, function(s) {
+                        s.monitor('Value.change', function() {
+                            var t = false;
+                            if (m._getValue(s) !== undefined) {
+                                s.value = s.getValue();
+                                q--;
+                                t = true;
+                            }
+                            if (q === 0) {
+                                var u = o(ES5(n, 'map', true, m._getValue));
+                                p.setValue(u !== undefined ? u : true);
+                            }
+                            return t;
+                        });
+                    });
+                    return p;
+                },
+                process: function(n) {
+                    m._process(n);
+                },
+                _getValue: function(n) {
+                    return n instanceof l ? n.getValue() : n;
+                },
+                _selectByIndex: function(n, o, p, q) {
+                    var r = new j();
+                    r.fields = n;
+                    r.table = o;
+                    r.where = {
+                        type: 'index',
+                        key: p,
+                        value: q
+                    };
+                    m.queue.push(r);
+                    m._waitToProcess();
+                    return r;
+                },
+                _waitToProcess: function() {
+                    if (m.timer < 0) m.timer = setTimeout(function() {
+                        m._process();
+                    }, 10);
+                },
+                _process: function(n) {
+                    m.timer = -1;
+                    var o = {}, p = m.queue;
+                    if (!p.length) return;
+                    m.queue = [];
+                    for (var q = 0; q < p.length; q++) {
+                        var r = p[q];
+                        if (r.where.type == 'index' && !r.hasDependency()) {
+                            m._mergeIndexQuery(r, o);
+                        } else o[r.name] = r;
+                    }
+                    var s = {
+                        q: {}
+                    };
+                    for (var t in o) if (o.hasOwnProperty(t)) s.q[t] = o[t].toFql();
+                    if (n) s.access_token = n;
+                    g('/fql', 'GET', s, function(u) {
+                        if (u.error) {
+                            ES5(ES5('Object', 'keys', false, o), 'forEach', true, function(v) {
+                                o[v].error(new Error(u.error.message));
+                            });
+                        } else ES5(u.data, 'forEach', true, function(v) {
+                            o[v.name].setValue(v.fql_result_set);
+                        });
+                    });
+                },
+                _mergeIndexQuery: function(n, o) {
+                    var p = n.where.key,
+                        q = n.where.value,
+                        r = 'index_' + n.table + '_' + p,
+                        s = o[r];
+                    if (!s) {
+                        s = o[r] = new j();
+                        s.fields = [p];
+                        s.table = n.table;
+                        s.where = {
+                            type: 'in',
                             key: p,
-                            value: q
+                            value: []
                         };
-                        m.queue.push(r);
-                        m._waitToProcess();
-                        return r;
-                    },
-                    _waitToProcess: function() {
-                        if (m.timer < 0) m.timer = setTimeout(function() {
-                            m._process();
-                        }, 10);
-                    },
-                    _process: function(n) {
-                        m.timer = -1;
-                        var o = {}, p = m.queue;
-                        if (!p.length) return;
-                        m.queue = [];
-                        for (var q = 0; q < p.length; q++) {
-                            var r = p[q];
-                            if (r.where.type == 'index' && !r.hasDependency()) {
-                                m._mergeIndexQuery(r, o);
-                            } else o[r.name] = r;
-                        }
-                        var s = {
-                            q: {}
-                        };
-                        for (var t in o) if (o.hasOwnProperty(t)) s.q[t] = o[t].toFql();
-                        if (n) s.access_token = n;
-                        g('/fql', 'GET', s, function(u) {
-                            if (u.error) {
-                                ES5(ES5('Object', 'keys', false, o), 'forEach', true, function(v) {
-                                    o[v].error(new Error(u.error.message));
-                                });
-                            } else ES5(u.data, 'forEach', true, function(v) {
-                                o[v.name].setValue(v.fql_result_set);
-                            });
-                        });
-                    },
-                    _mergeIndexQuery: function(n, o) {
-                        var p = n.where.key,
-                            q = n.where.value,
-                            r = 'index_' + n.table + '_' + p,
-                            s = o[r];
-                        if (!s) {
-                            s = o[r] = new j();
-                            s.fields = [p];
-                            s.table = n.table;
-                            s.where = {
-                                type: 'in',
-                                key: p,
-                                value: []
-                            };
-                        }
-                        i(s.fields, n.fields);
-                        i(s.where.value, [q]);
-                        s.wait(function(t) {
-                            n.setValue(ES5(t, 'filter', true, function(u) {
-                                return u[p] == q;
-                            }));
-                        });
-                    },
-                    timer: -1,
-                    queue: []
-                };
+                    }
+                    i(s.fields, n.fields);
+                    i(s.where.value, [q]);
+                    s.wait(function(t) {
+                        n.setValue(ES5(t, 'filter', true, function(u) {
+                            return u[p] == q;
+                        }));
+                    });
+                },
+                timer: -1,
+                queue: []
+            };
             e.exports = m;
         });
-        __d("legacy:fb.data", ["FB", "sdk.Data"], function(a, b, c, d) {
-            var e = b('FB'),
-                f = b('sdk.Data');
-            e.provide('Data', f);
+        __d("legacy:fb.data", ["FB", "sdk.Data"], function(a, b, c, d, e, f, g, h) {
+            g.provide('Data', h);
         }, 3);
-        __d("legacy:fb.event", ["FB", "sdk.Event"], function(a, b, c, d) {
-            var e = b('FB'),
-                f = b('sdk.Event');
-            e.provide('Event', f);
-            e.provide('EventProvider', f);
+        __d("legacy:fb.event", ["FB", "sdk.Event"], function(a, b, c, d, e, f, g, h) {
+            g.provide('Event', h);
+            g.provide('EventProvider', h);
         }, 3);
-        __d("legacy:fb.frictionless", ["FB", "sdk.Frictionless"], function(a, b, c, d) {
-            var e = b('FB'),
-                f = b('sdk.Frictionless');
-            e.provide('Frictionless', f);
+        __d("legacy:fb.frictionless", ["FB", "sdk.Frictionless"], function(a, b, c, d, e, f, g, h) {
+            g.provide('Frictionless', h);
         }, 3);
-        __d("sdk.init", ["sdk.Cookie", "copyProperties", "createArrayFrom", "sdk.ErrorHandling", "sdk.Event", "Log", "QueryString", "sdk.Runtime"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Cookie'),
-                h = b('copyProperties'),
-                i = b('createArrayFrom'),
-                j = b('sdk.ErrorHandling'),
-                k = b('sdk.Event'),
-                l = b('Log'),
-                m = b('QueryString'),
-                n = b('sdk.Runtime');
-
+        __d("sdk.init", ["sdk.Cookie", "copyProperties", "createArrayFrom", "sdk.ErrorHandling", "sdk.Event", "Log", "QueryString", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
             function o(q) {
                 var r = (typeof q == 'number' && q > 0) || (typeof q == 'string' && /^[0-9a-f]{21,}$|^[0-9]{1,21}$/.test(q));
                 if (r) return q.toString();
@@ -5254,53 +5097,45 @@ try {
             }, 0);
             e.exports = p;
         });
-        __d("legacy:fb.init", ["FB", "sdk.init"], function(a, b, c, d) {
-            var e = b('FB'),
-                f = b('sdk.init');
-            e.provide('', {
-                init: f
+        __d("legacy:fb.init", ["FB", "sdk.init"], function(a, b, c, d, e, f, g, h) {
+            g.provide('', {
+                init: h
             });
         }, 3);
-        __d("legacy:fb.json", ["FB", "ManagedError"], function(a, b, c, d) {
-            var e = b('FB'),
-                f = b('ManagedError');
-            e.provide('JSON', {
-                stringify: function(g) {
+        __d("legacy:fb.json", ["FB", "ManagedError"], function(a, b, c, d, e, f, g, h) {
+            g.provide('JSON', {
+                stringify: function(i) {
                     try {
-                        return ES5('JSON', 'stringify', false, g);
-                    } catch (h) {
-                        throw new f(h.message, h);
+                        return ES5('JSON', 'stringify', false, i);
+                    } catch (j) {
+                        throw new h(j.message, j);
                     }
                 },
-                parse: function(g) {
+                parse: function(i) {
                     try {
-                        return ES5('JSON', 'parse', false, g);
-                    } catch (h) {
-                        throw new f(h.message, h);
+                        return ES5('JSON', 'parse', false, i);
+                    } catch (j) {
+                        throw new h(j.message, j);
                     }
                 }
             });
         }, 3);
-        __d("legacy:fb.pay", ["FB", "copyProperties", "sdk.Runtime", "sdk.UIServer", "sdk.XD"], function(a, b, c, d) {
+        __d("legacy:fb.pay", ["copyProperties", "sdk.Runtime", "sdk.UIServer", "sdk.XD", "FB"], function(a, b, c, d, e, f, g, h, i, j) {
             b('FB');
-            var e = b('copyProperties'),
-                f = b('sdk.Runtime'),
-                g = b('sdk.UIServer'),
-                h = b('sdk.XD'),
-                i = {
-                    error_code: 1383001,
-                    error_message: 'An unknown error caused the dialog to be closed'
-                }, j = function(k) {
-                    return function(l) {
-                        k(l && l.response ? ES5('JSON', 'parse', false, l.response) : i);
-                    };
+            var k = {
+                error_code: 1383001,
+                error_message: 'An unknown error caused the dialog to be closed'
+            }, l = function(m) {
+                return function(n) {
+                    m(n && n.response ? ES5('JSON', 'parse', false, n.response) : k);
                 };
-            e(g.Methods, {
+            };
+            g(i.Methods, {
                 'pay.prompt': {
-                    transform: function(k) {
-                        var l = h.handler(j(k.cb), 'parent.frames[' + (window.name || 'iframe_canvas') + ']');
-                        k.params.channel = l;
-                        h.inform('Pay.Prompt', k.params);
+                    transform: function(m) {
+                        var n = j.handler(l(m.cb), 'parent.frames[' + (window.name || 'iframe_canvas') + ']');
+                        m.params.channel = n;
+                        j.inform('Pay.Prompt', m.params);
                     }
                 },
                 pay: {
@@ -5309,32 +5144,28 @@ try {
                         height: 120
                     },
                     connectDisplay: 'popup',
-                    transform: function(k) {
-                        k.cb = j(k.cb);
-                        if (!f.isEnvironment(f.ENVIRONMENTS.CANVAS)) {
-                            k.params.order_info = ES5('JSON', 'stringify', false, k.params.order_info);
-                            return k;
+                    transform: function(m) {
+                        m.cb = l(m.cb);
+                        if (!h.isEnvironment(h.ENVIRONMENTS.CANVAS)) {
+                            m.params.order_info = ES5('JSON', 'stringify', false, m.params.order_info);
+                            return m;
                         }
-                        var l = h.handler(k.cb, 'parent.frames[' + (window.name || 'iframe_canvas') + ']');
-                        k.params.channel = l;
-                        k.params.uiserver = true;
-                        h.inform('Pay.Prompt', k.params);
+                        var n = j.handler(m.cb, 'parent.frames[' + (window.name || 'iframe_canvas') + ']');
+                        m.params.channel = n;
+                        m.params.uiserver = true;
+                        j.inform('Pay.Prompt', m.params);
                     }
                 }
             });
         }, 3);
-        __d("legacy:fb.ua", ["FB", "UserAgent"], function(a, b, c, d) {
-            var e = b('FB'),
-                f = b('UserAgent');
-            e.provide('UA', {
-                nativeApp: f.nativeApp
+        __d("legacy:fb.ua", ["FB", "UserAgent"], function(a, b, c, d, e, f, g, h) {
+            g.provide('UA', {
+                nativeApp: h.nativeApp
             });
         }, 3);
-        __d("legacy:fb.ui", ["FB", "sdk.ui"], function(a, b, c, d) {
-            var e = b('FB'),
-                f = b('sdk.ui');
-            e.provide('', {
-                ui: f
+        __d("legacy:fb.ui", ["FB", "sdk.ui"], function(a, b, c, d, e, f, g, h) {
+            g.provide('', {
+                ui: h
             });
         }, 3);
         __d("Miny", [], function(a, b, c, d, e, f) {
@@ -5405,18 +5236,8 @@ try {
             }
             e.exports = g;
         });
-        __d("XFBML", ["Assert", "copyProperties", "createArrayFrom", "sdk.DOM", "sdk.feature", "sdk.Impressions", "Log", "ObservableMixin", "runOnce", "UserAgent"], function(a, b, c, d, e, f) {
-            var g = b('Assert'),
-                h = b('copyProperties'),
-                i = b('createArrayFrom'),
-                j = b('sdk.DOM'),
-                k = b('sdk.feature'),
-                l = b('sdk.Impressions'),
-                m = b('Log'),
-                n = b('ObservableMixin'),
-                o = b('runOnce'),
-                p = b('UserAgent'),
-                q = {}, r = {}, s = 0,
+        __d("XFBML", ["Assert", "copyProperties", "createArrayFrom", "sdk.DOM", "sdk.feature", "sdk.Impressions", "Log", "ObservableMixin", "runOnce", "UserAgent"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+            var q = {}, r = {}, s = 0,
                 t = new n();
 
             function u(ca, da) {
@@ -5535,20 +5356,8 @@ try {
             }
             e.exports = t;
         });
-        __d("PluginPipe", ["sdk.Content", "copyProperties", "sdk.feature", "guid", "insertIframe", "Miny", "ObservableMixin", "sdk.Runtime", "UrlMap", "UserAgent", "XFBML", "PluginPipeConfig"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Content'),
-                h = b('copyProperties'),
-                i = b('sdk.feature'),
-                j = b('guid'),
-                k = b('insertIframe'),
-                l = b('Miny'),
-                m = b('ObservableMixin'),
-                n = c('PluginPipeConfig'),
-                o = b('sdk.Runtime'),
-                p = b('UrlMap'),
-                q = b('UserAgent'),
-                r = b('XFBML'),
-                s = new m(),
+        __d("PluginPipe", ["sdk.Content", "copyProperties", "sdk.feature", "guid", "insertIframe", "Miny", "ObservableMixin", "PluginPipeConfig", "sdk.Runtime", "UrlMap", "UserAgent", "XFBML"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r) {
+            var s = new m(),
                 t = n.threshold,
                 u = [];
 
@@ -5628,31 +5437,15 @@ try {
             });
             e.exports = s;
         });
-        __d("IframePlugin", ["sdk.Auth", "sdk.createIframe", "copyProperties", "sdk.DOM", "sdk.Event", "guid", "Log", "ObservableMixin", "PluginPipe", "QueryString", "resolveURI", "sdk.Runtime", "Type", "UrlMap", "UserAgent", "sdk.XD"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Auth'),
-                h = b('sdk.createIframe'),
-                i = b('copyProperties'),
-                j = b('sdk.DOM'),
-                k = b('sdk.Event'),
-                l = b('guid'),
-                m = b('Log'),
-                n = b('ObservableMixin'),
-                o = b('PluginPipe'),
-                p = b('QueryString'),
-                q = b('resolveURI'),
-                r = b('sdk.Runtime'),
-                s = b('Type'),
-                t = b('UrlMap'),
-                u = b('UserAgent'),
-                v = b('sdk.XD'),
-                w = {
-                    skin: 'string',
-                    font: 'string',
-                    width: 'px',
-                    height: 'px',
-                    ref: 'string',
-                    color_scheme: 'string'
-                };
+        __d("IframePlugin", ["sdk.Auth", "sdk.createIframe", "copyProperties", "sdk.DOM", "sdk.Event", "guid", "Log", "ObservableMixin", "PluginPipe", "QueryString", "resolveURI", "sdk.Runtime", "Type", "UrlMap", "UserAgent", "sdk.XD"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v) {
+            var w = {
+                skin: 'string',
+                font: 'string',
+                width: 'px',
+                height: 'px',
+                ref: 'string',
+                color_scheme: 'string'
+            };
 
             function x(ea, fa, ga) {
                 if (fa || fa === 0) ea.style.width = fa + 'px';
@@ -5966,308 +5759,291 @@ try {
             };
             e.exports = g;
         });
-        __d("sdk.XFBML.Element", ["sdk.DOM", "Type", "ObservableMixin"], function(a, b, c, d, e, f) {
-            var g = b('sdk.DOM'),
-                h = b('Type'),
-                i = b('ObservableMixin'),
-                j = h.extend({
-                    constructor: function(k) {
-                        this.parent();
-                        this.dom = k;
-                    },
-                    fire: function() {
-                        this.inform.apply(this, arguments);
-                    },
-                    getAttribute: function(k, l, m) {
-                        var n = g.getAttr(this.dom, k);
-                        return n ? m ? m(n) : n : l;
-                    },
-                    _getBoolAttribute: function(k, l) {
-                        var m = g.getBoolAttr(this.dom, k);
-                        return m === null ? l : m;
-                    },
-                    _getPxAttribute: function(k, l) {
-                        return this.getAttribute(k, l, function(m) {
-                            var n = parseInt(m.replace('px', ''), 10);
-                            if (isNaN(n)) {
-                                return l;
-                            } else return n;
-                        });
-                    },
-                    _getAttributeFromList: function(k, l, m) {
-                        return this.getAttribute(k, l, function(n) {
-                            n = n.toLowerCase();
-                            return (ES5(m, 'indexOf', true, n) > -1) ? n : l;
-                        });
-                    },
-                    isValid: function() {
-                        for (var k = this.dom; k; k = k.parentNode) if (k == document.body) return true;
-                    },
-                    clear: function() {
-                        g.html(this.dom, '');
-                    }
-                }, i);
+        __d("sdk.XFBML.Element", ["sdk.DOM", "Type", "ObservableMixin"], function(a, b, c, d, e, f, g, h, i) {
+            var j = h.extend({
+                constructor: function(k) {
+                    this.parent();
+                    this.dom = k;
+                },
+                fire: function() {
+                    this.inform.apply(this, arguments);
+                },
+                getAttribute: function(k, l, m) {
+                    var n = g.getAttr(this.dom, k);
+                    return n ? m ? m(n) : n : l;
+                },
+                _getBoolAttribute: function(k, l) {
+                    var m = g.getBoolAttr(this.dom, k);
+                    return m === null ? l : m;
+                },
+                _getPxAttribute: function(k, l) {
+                    return this.getAttribute(k, l, function(m) {
+                        var n = parseInt(m.replace('px', ''), 10);
+                        if (isNaN(n)) {
+                            return l;
+                        } else return n;
+                    });
+                },
+                _getAttributeFromList: function(k, l, m) {
+                    return this.getAttribute(k, l, function(n) {
+                        n = n.toLowerCase();
+                        return (ES5(m, 'indexOf', true, n) > -1) ? n : l;
+                    });
+                },
+                isValid: function() {
+                    for (var k = this.dom; k; k = k.parentNode) if (k == document.body) return true;
+                },
+                clear: function() {
+                    g.html(this.dom, '');
+                }
+            }, i);
             e.exports = j;
         });
-        __d("sdk.XFBML.IframeWidget", ["sdk.Arbiter", "sdk.Auth", "sdk.Content", "copyProperties", "sdk.DOM", "sdk.Event", "sdk.XFBML.Element", "guid", "insertIframe", "QueryString", "sdk.Runtime", "sdk.ui", "UrlMap", "sdk.XD"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Arbiter'),
-                h = b('sdk.Auth'),
-                i = b('sdk.Content'),
-                j = b('copyProperties'),
-                k = b('sdk.DOM'),
-                l = b('sdk.Event'),
-                m = b('sdk.XFBML.Element'),
-                n = b('guid'),
-                o = b('insertIframe'),
-                p = b('QueryString'),
-                q = b('sdk.Runtime'),
-                r = b('sdk.ui'),
-                s = b('UrlMap'),
-                t = b('sdk.XD'),
-                u = m.extend({
-                    _iframeName: null,
-                    _showLoader: true,
-                    _refreshOnAuthChange: false,
-                    _allowReProcess: false,
-                    _fetchPreCachedLoader: false,
-                    _visibleAfter: 'load',
-                    _widgetPipeEnabled: false,
-                    _borderReset: false,
-                    _repositioned: false,
-                    getUrlBits: function() {
-                        throw new Error('Inheriting class needs to implement getUrlBits().');
-                    },
-                    setupAndValidate: function() {
-                        return true;
-                    },
-                    oneTimeSetup: function() {},
-                    getSize: function() {},
-                    getIframeName: function() {
-                        return this._iframeName;
-                    },
-                    getIframeTitle: function() {
-                        return 'Facebook Social Plugin';
-                    },
-                    getChannelUrl: function() {
-                        if (!this._channelUrl) {
-                            var y = this;
-                            this._channelUrl = t.handler(function(z) {
-                                y.fire('xd.' + z.type, z);
-                            }, 'parent.parent', true);
-                        }
-                        return this._channelUrl;
-                    },
-                    getIframeNode: function() {
-                        return this.dom.getElementsByTagName('iframe')[0];
-                    },
-                    arbiterInform: function(event, y, z) {
-                        t.sendToFacebook(this.getIframeName(), {
-                            method: event,
-                            params: ES5('JSON', 'stringify', false, y || {}),
-                            behavior: z || g.BEHAVIOR_PERSISTENT
-                        });
-                    },
-                    _arbiterInform: function(event, y, z) {
-                        var aa = 'parent.frames["' + this.getIframeNode()
-                            .name + '"]';
-                        t.inform(event, y, aa, z);
-                    },
-                    getDefaultWebDomain: function() {
-                        return s.resolve('www');
-                    },
-                    process: function(y) {
-                        if (this._done) {
-                            if (!this._allowReProcess && !y) return;
-                            this.clear();
-                        } else this._oneTimeSetup();
-                        this._done = true;
-                        this._iframeName = this.getIframeName() || this._iframeName || n();
-                        if (!this.setupAndValidate()) {
-                            this.fire('render');
-                            return;
-                        }
-                        if (this._showLoader) this._addLoader();
-                        k.addCss(this.dom, 'fb_iframe_widget');
-                        if (this._visibleAfter != 'immediate') {
-                            k.addCss(this.dom, 'fb_hide_iframes');
-                        } else this.subscribe('iframe.onload', ES5(this.fire, 'bind', true, this, 'render'));
-                        var z = this.getSize() || {}, aa = this.getFullyQualifiedURL();
-                        if (z.width == '100%') k.addCss(this.dom, 'fb_iframe_widget_fluid');
-                        this.clear();
-                        o({
-                            url: aa,
-                            root: this.dom.appendChild(document.createElement('span')),
-                            name: this._iframeName,
-                            title: this.getIframeTitle(),
-                            className: q.getRtl() ? 'fb_rtl' : 'fb_ltr',
-                            height: z.height,
-                            width: z.width,
-                            onload: ES5(this.fire, 'bind', true, this, 'iframe.onload')
-                        });
-                        this._resizeFlow(z);
-                        this.loaded = false;
-                        this.subscribe('iframe.onload', ES5(function() {
-                            this.loaded = true;
-                        }, 'bind', true, this));
-                    },
-                    generateWidgetPipeIframeName: function() {
-                        v++;
-                        return 'fb_iframe_' + v;
-                    },
-                    getFullyQualifiedURL: function() {
-                        var y = this._getURL();
-                        y += '?' + p.encode(this._getQS());
-                        if (y.length > 2000) {
-                            y = 'about:blank';
-                            var z = ES5(function() {
-                                this._postRequest();
-                                this.unsubscribe('iframe.onload', z);
-                            }, 'bind', true, this);
-                            this.subscribe('iframe.onload', z);
-                        }
-                        return y;
-                    },
-                    _getWidgetPipeShell: function() {
-                        return s.resolve('www') + '/common/widget_pipe_shell.php';
-                    },
-                    _oneTimeSetup: function() {
-                        this.subscribe('xd.resize', ES5(this._handleResizeMsg, 'bind', true, this));
-                        this.subscribe('xd.resize', ES5(this._bubbleResizeEvent, 'bind', true, this));
-                        this.subscribe('xd.resize.iframe', ES5(this._resizeIframe, 'bind', true, this));
-                        this.subscribe('xd.resize.flow', ES5(this._resizeFlow, 'bind', true, this));
-                        this.subscribe('xd.resize.flow', ES5(this._bubbleResizeEvent, 'bind', true, this));
-                        this.subscribe('xd.refreshLoginStatus', function() {
-                            h.getLoginStatus(function() {}, true);
-                        });
-                        this.subscribe('xd.logout', function() {
-                            r({
-                                method: 'auth.logout',
-                                display: 'hidden'
-                            }, function() {});
-                        });
-                        if (this._refreshOnAuthChange) this._setupAuthRefresh();
-                        if (this._visibleAfter == 'load') this.subscribe('iframe.onload', ES5(this._makeVisible, 'bind', true, this));
-                        this.subscribe('xd.verify', ES5(function(y) {
-                            this.arbiterInform('xd/verify', y.token);
-                        }, 'bind', true, this));
-                        this.oneTimeSetup();
-                    },
-                    _makeVisible: function() {
-                        this._removeLoader();
-                        k.removeCss(this.dom, 'fb_hide_iframes');
-                        this.fire('render');
-                    },
-                    _setupAuthRefresh: function() {
-                        h.getLoginStatus(ES5(function(y) {
-                            var z = y.status;
-                            l.subscribe('auth.statusChange', ES5(function(aa) {
-                                if (!this.isValid()) return;
-                                if (z == 'unknown' || aa.status == 'unknown') this.process(true);
-                                z = aa.status;
-                            }, 'bind', true, this));
-                        }, 'bind', true, this));
-                    },
-                    _handleResizeMsg: function(y) {
-                        if (!this.isValid()) return;
-                        this._resizeIframe(y);
-                        this._resizeFlow(y);
-                        if (!this._borderReset) {
-                            this.getIframeNode()
-                                .style.border = 'none';
-                            this._borderReset = true;
-                        }
-                        this._makeVisible();
-                    },
-                    _bubbleResizeEvent: function(y) {
-                        var z = {
-                            height: y.height,
-                            width: y.width,
-                            pluginID: this.getAttribute('plugin-id')
-                        };
-                        l.fire('xfbml.resize', z);
-                    },
-                    _resizeIframe: function(y) {
-                        var z = this.getIframeNode();
-                        if (y.reposition === "true") this._repositionIframe(y);
-                        y.height && (z.style.height = y.height + 'px');
-                        y.width && (z.style.width = y.width + 'px');
-                        this._updateIframeZIndex();
-                    },
-                    _resizeFlow: function(y) {
-                        var z = this.dom.getElementsByTagName('span')[0];
-                        y.height && (z.style.height = y.height + 'px');
-                        y.width && (z.style.width = y.width + 'px');
-                        this._updateIframeZIndex();
-                    },
-                    _updateIframeZIndex: function() {
-                        var y = this.dom.getElementsByTagName('span')[0],
-                            z = this.getIframeNode(),
-                            aa = z.style.height === y.style.height && z.style.width === y.style.width,
-                            ba = aa ? 'removeCss' : 'addCss';
-                        k[ba](z, 'fb_iframe_widget_lift');
-                    },
-                    _repositionIframe: function(y) {
-                        var z = this.getIframeNode(),
-                            aa = parseInt(k.getStyle(z, 'width'), 10),
-                            ba = k.getPosition(z)
-                                .x,
-                            ca = k.getViewportInfo()
-                                .width,
-                            da = parseInt(y.width, 10);
-                        if (ba + da > ca && ba > da) {
-                            z.style.left = aa - da + 'px';
-                            this.arbiterInform('xd/reposition', {
-                                type: 'horizontal'
-                            });
-                            this._repositioned = true;
-                        } else if (this._repositioned) {
-                            z.style.left = '0px';
-                            this.arbiterInform('xd/reposition', {
-                                type: 'restore'
-                            });
-                            this._repositioned = false;
-                        }
-                    },
-                    _addLoader: function() {
-                        if (!this._loaderDiv) {
-                            k.addCss(this.dom, 'fb_iframe_widget_loader');
-                            this._loaderDiv = document.createElement('div');
-                            this._loaderDiv.className = 'FB_Loader';
-                            this.dom.appendChild(this._loaderDiv);
-                        }
-                    },
-                    _removeLoader: function() {
-                        if (this._loaderDiv) {
-                            k.removeCss(this.dom, 'fb_iframe_widget_loader');
-                            if (this._loaderDiv.parentNode) this._loaderDiv.parentNode.removeChild(this._loaderDiv);
-                            this._loaderDiv = null;
-                        }
-                    },
-                    _getQS: function() {
-                        return j({
-                            api_key: q.getClientID(),
-                            locale: q.getLocale(),
-                            sdk: 'joey',
-                            kid_directed_site: q.getKidDirectedSite(),
-                            ref: this.getAttribute('ref')
-                        }, this.getUrlBits()
-                            .params);
-                    },
-                    _getURL: function() {
-                        var y = this.getDefaultWebDomain(),
-                            z = '';
-                        return y + '/plugins/' + z + this.getUrlBits()
-                            .name + '.php';
-                    },
-                    _postRequest: function() {
-                        i.submitToTarget({
-                            url: this._getURL(),
-                            target: this.getIframeNode()
-                                .name,
-                            params: this._getQS()
-                        });
+        __d("sdk.XFBML.IframeWidget", ["sdk.Arbiter", "sdk.Auth", "sdk.Content", "copyProperties", "sdk.DOM", "sdk.Event", "sdk.XFBML.Element", "guid", "insertIframe", "QueryString", "sdk.Runtime", "sdk.ui", "UrlMap", "sdk.XD"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t) {
+            var u = m.extend({
+                _iframeName: null,
+                _showLoader: true,
+                _refreshOnAuthChange: false,
+                _allowReProcess: false,
+                _fetchPreCachedLoader: false,
+                _visibleAfter: 'load',
+                _widgetPipeEnabled: false,
+                _borderReset: false,
+                _repositioned: false,
+                getUrlBits: function() {
+                    throw new Error('Inheriting class needs to implement getUrlBits().');
+                },
+                setupAndValidate: function() {
+                    return true;
+                },
+                oneTimeSetup: function() {},
+                getSize: function() {},
+                getIframeName: function() {
+                    return this._iframeName;
+                },
+                getIframeTitle: function() {
+                    return 'Facebook Social Plugin';
+                },
+                getChannelUrl: function() {
+                    if (!this._channelUrl) {
+                        var y = this;
+                        this._channelUrl = t.handler(function(z) {
+                            y.fire('xd.' + z.type, z);
+                        }, 'parent.parent', true);
                     }
-                }),
+                    return this._channelUrl;
+                },
+                getIframeNode: function() {
+                    return this.dom.getElementsByTagName('iframe')[0];
+                },
+                arbiterInform: function(event, y, z) {
+                    t.sendToFacebook(this.getIframeName(), {
+                        method: event,
+                        params: ES5('JSON', 'stringify', false, y || {}),
+                        behavior: z || g.BEHAVIOR_PERSISTENT
+                    });
+                },
+                _arbiterInform: function(event, y, z) {
+                    var aa = 'parent.frames["' + this.getIframeNode()
+                        .name + '"]';
+                    t.inform(event, y, aa, z);
+                },
+                getDefaultWebDomain: function() {
+                    return s.resolve('www');
+                },
+                process: function(y) {
+                    if (this._done) {
+                        if (!this._allowReProcess && !y) return;
+                        this.clear();
+                    } else this._oneTimeSetup();
+                    this._done = true;
+                    this._iframeName = this.getIframeName() || this._iframeName || n();
+                    if (!this.setupAndValidate()) {
+                        this.fire('render');
+                        return;
+                    }
+                    if (this._showLoader) this._addLoader();
+                    k.addCss(this.dom, 'fb_iframe_widget');
+                    if (this._visibleAfter != 'immediate') {
+                        k.addCss(this.dom, 'fb_hide_iframes');
+                    } else this.subscribe('iframe.onload', ES5(this.fire, 'bind', true, this, 'render'));
+                    var z = this.getSize() || {}, aa = this.getFullyQualifiedURL();
+                    if (z.width == '100%') k.addCss(this.dom, 'fb_iframe_widget_fluid');
+                    this.clear();
+                    o({
+                        url: aa,
+                        root: this.dom.appendChild(document.createElement('span')),
+                        name: this._iframeName,
+                        title: this.getIframeTitle(),
+                        className: q.getRtl() ? 'fb_rtl' : 'fb_ltr',
+                        height: z.height,
+                        width: z.width,
+                        onload: ES5(this.fire, 'bind', true, this, 'iframe.onload')
+                    });
+                    this._resizeFlow(z);
+                    this.loaded = false;
+                    this.subscribe('iframe.onload', ES5(function() {
+                        this.loaded = true;
+                    }, 'bind', true, this));
+                },
+                generateWidgetPipeIframeName: function() {
+                    v++;
+                    return 'fb_iframe_' + v;
+                },
+                getFullyQualifiedURL: function() {
+                    var y = this._getURL();
+                    y += '?' + p.encode(this._getQS());
+                    if (y.length > 2000) {
+                        y = 'about:blank';
+                        var z = ES5(function() {
+                            this._postRequest();
+                            this.unsubscribe('iframe.onload', z);
+                        }, 'bind', true, this);
+                        this.subscribe('iframe.onload', z);
+                    }
+                    return y;
+                },
+                _getWidgetPipeShell: function() {
+                    return s.resolve('www') + '/common/widget_pipe_shell.php';
+                },
+                _oneTimeSetup: function() {
+                    this.subscribe('xd.resize', ES5(this._handleResizeMsg, 'bind', true, this));
+                    this.subscribe('xd.resize', ES5(this._bubbleResizeEvent, 'bind', true, this));
+                    this.subscribe('xd.resize.iframe', ES5(this._resizeIframe, 'bind', true, this));
+                    this.subscribe('xd.resize.flow', ES5(this._resizeFlow, 'bind', true, this));
+                    this.subscribe('xd.resize.flow', ES5(this._bubbleResizeEvent, 'bind', true, this));
+                    this.subscribe('xd.refreshLoginStatus', function() {
+                        h.getLoginStatus(function() {}, true);
+                    });
+                    this.subscribe('xd.logout', function() {
+                        r({
+                            method: 'auth.logout',
+                            display: 'hidden'
+                        }, function() {});
+                    });
+                    if (this._refreshOnAuthChange) this._setupAuthRefresh();
+                    if (this._visibleAfter == 'load') this.subscribe('iframe.onload', ES5(this._makeVisible, 'bind', true, this));
+                    this.subscribe('xd.verify', ES5(function(y) {
+                        this.arbiterInform('xd/verify', y.token);
+                    }, 'bind', true, this));
+                    this.oneTimeSetup();
+                },
+                _makeVisible: function() {
+                    this._removeLoader();
+                    k.removeCss(this.dom, 'fb_hide_iframes');
+                    this.fire('render');
+                },
+                _setupAuthRefresh: function() {
+                    h.getLoginStatus(ES5(function(y) {
+                        var z = y.status;
+                        l.subscribe('auth.statusChange', ES5(function(aa) {
+                            if (!this.isValid()) return;
+                            if (z == 'unknown' || aa.status == 'unknown') this.process(true);
+                            z = aa.status;
+                        }, 'bind', true, this));
+                    }, 'bind', true, this));
+                },
+                _handleResizeMsg: function(y) {
+                    if (!this.isValid()) return;
+                    this._resizeIframe(y);
+                    this._resizeFlow(y);
+                    if (!this._borderReset) {
+                        this.getIframeNode()
+                            .style.border = 'none';
+                        this._borderReset = true;
+                    }
+                    this._makeVisible();
+                },
+                _bubbleResizeEvent: function(y) {
+                    var z = {
+                        height: y.height,
+                        width: y.width,
+                        pluginID: this.getAttribute('plugin-id')
+                    };
+                    l.fire('xfbml.resize', z);
+                },
+                _resizeIframe: function(y) {
+                    var z = this.getIframeNode();
+                    if (y.reposition === "true") this._repositionIframe(y);
+                    y.height && (z.style.height = y.height + 'px');
+                    y.width && (z.style.width = y.width + 'px');
+                    this._updateIframeZIndex();
+                },
+                _resizeFlow: function(y) {
+                    var z = this.dom.getElementsByTagName('span')[0];
+                    y.height && (z.style.height = y.height + 'px');
+                    y.width && (z.style.width = y.width + 'px');
+                    this._updateIframeZIndex();
+                },
+                _updateIframeZIndex: function() {
+                    var y = this.dom.getElementsByTagName('span')[0],
+                        z = this.getIframeNode(),
+                        aa = z.style.height === y.style.height && z.style.width === y.style.width,
+                        ba = aa ? 'removeCss' : 'addCss';
+                    k[ba](z, 'fb_iframe_widget_lift');
+                },
+                _repositionIframe: function(y) {
+                    var z = this.getIframeNode(),
+                        aa = parseInt(k.getStyle(z, 'width'), 10),
+                        ba = k.getPosition(z)
+                            .x,
+                        ca = k.getViewportInfo()
+                            .width,
+                        da = parseInt(y.width, 10);
+                    if (ba + da > ca && ba > da) {
+                        z.style.left = aa - da + 'px';
+                        this.arbiterInform('xd/reposition', {
+                            type: 'horizontal'
+                        });
+                        this._repositioned = true;
+                    } else if (this._repositioned) {
+                        z.style.left = '0px';
+                        this.arbiterInform('xd/reposition', {
+                            type: 'restore'
+                        });
+                        this._repositioned = false;
+                    }
+                },
+                _addLoader: function() {
+                    if (!this._loaderDiv) {
+                        k.addCss(this.dom, 'fb_iframe_widget_loader');
+                        this._loaderDiv = document.createElement('div');
+                        this._loaderDiv.className = 'FB_Loader';
+                        this.dom.appendChild(this._loaderDiv);
+                    }
+                },
+                _removeLoader: function() {
+                    if (this._loaderDiv) {
+                        k.removeCss(this.dom, 'fb_iframe_widget_loader');
+                        if (this._loaderDiv.parentNode) this._loaderDiv.parentNode.removeChild(this._loaderDiv);
+                        this._loaderDiv = null;
+                    }
+                },
+                _getQS: function() {
+                    return j({
+                        api_key: q.getClientID(),
+                        locale: q.getLocale(),
+                        sdk: 'joey',
+                        kid_directed_site: q.getKidDirectedSite(),
+                        ref: this.getAttribute('ref')
+                    }, this.getUrlBits()
+                        .params);
+                },
+                _getURL: function() {
+                    var y = this.getDefaultWebDomain(),
+                        z = '';
+                    return y + '/plugins/' + z + this.getUrlBits()
+                        .name + '.php';
+                },
+                _postRequest: function() {
+                    i.submitToTarget({
+                        url: this._getURL(),
+                        target: this.getIframeNode()
+                            .name,
+                        params: this._getQS()
+                    });
+                }
+            }),
                 v = 0,
                 w = {};
 
@@ -6285,189 +6061,178 @@ try {
             }
             e.exports = u;
         });
-        __d("sdk.XFBML.Comments", ["sdk.Event", "sdk.XFBML.IframeWidget", "QueryString", "sdk.Runtime", "UrlMap", "UserAgent", "SDKConfig"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Event'),
-                h = b('sdk.XFBML.IframeWidget'),
-                i = b('QueryString'),
-                j = b('sdk.Runtime'),
-                k = c('SDKConfig'),
-                l = b('UrlMap'),
-                m = b('UserAgent'),
-                n = h.extend({
-                    _visibleAfter: 'immediate',
-                    _refreshOnAuthChange: true,
-                    setupAndValidate: function() {
-                        var o = {
-                            channel_url: this.getChannelUrl(),
-                            colorscheme: this.getAttribute('colorscheme'),
-                            skin: this.getAttribute('skin'),
-                            numposts: this.getAttribute('num-posts', 10),
-                            width: this._getPxAttribute('width', 550),
-                            href: this.getAttribute('href'),
-                            permalink: this.getAttribute('permalink'),
-                            publish_feed: this.getAttribute('publish_feed'),
-                            order_by: this.getAttribute('order_by'),
-                            mobile: this._getBoolAttribute('mobile')
-                        };
-                        if (k.initSitevars.enableMobileComments && m.mobile() && o.mobile !== false) {
-                            o.mobile = true;
-                            delete o.width;
-                        }
-                        if (!o.skin) o.skin = o.colorscheme;
-                        if (!o.href) {
-                            o.migrated = this.getAttribute('migrated');
-                            o.xid = this.getAttribute('xid');
-                            o.title = this.getAttribute('title', document.title);
-                            o.url = this.getAttribute('url', document.URL);
-                            o.quiet = this.getAttribute('quiet');
-                            o.reverse = this.getAttribute('reverse');
-                            o.simple = this.getAttribute('simple');
-                            o.css = this.getAttribute('css');
-                            o.notify = this.getAttribute('notify');
-                            if (!o.xid) {
-                                var p = ES5(document.URL, 'indexOf', true, '#');
-                                if (p > 0) {
-                                    o.xid = encodeURIComponent(document.URL.substring(0, p));
-                                } else o.xid = encodeURIComponent(document.URL);
-                            }
-                            if (o.migrated) o.href = l.resolve('www') + '/plugins/comments_v1.php?' + 'app_id=' + j.getClientID() + '&xid=' + encodeURIComponent(o.xid) + '&url=' + encodeURIComponent(o.url);
-                        } else {
-                            var q = this.getAttribute('fb_comment_id');
-                            if (!q) {
-                                q = i.decode(document.URL.substring(ES5(document.URL, 'indexOf', true, '?') + 1))
-                                    .fb_comment_id;
-                                if (q && ES5(q, 'indexOf', true, '#') > 0) q = q.substring(0, ES5(q, 'indexOf', true, '#'));
-                            }
-                            if (q) {
-                                o.fb_comment_id = q;
-                                this.subscribe('render', ES5(function() {
-                                    if (!window.location.hash) window.location.hash = this.getIframeNode()
-                                        .id;
-                                }, 'bind', true, this));
-                            }
-                        }
-                        this._attr = o;
-                        return true;
-                    },
-                    oneTimeSetup: function() {
-                        this.subscribe('xd.addComment', ES5(this._handleCommentMsg, 'bind', true, this));
-                        this.subscribe('xd.commentCreated', ES5(this._handleCommentCreatedMsg, 'bind', true, this));
-                        this.subscribe('xd.commentRemoved', ES5(this._handleCommentRemovedMsg, 'bind', true, this));
-                    },
-                    getSize: function() {
-                        if (this._attr.mobile) return {
-                            width: '100%',
-                            height: 160
-                        };
-                        return {
-                            width: this._attr.width,
-                            height: 160
-                        };
-                    },
-                    getUrlBits: function() {
-                        return {
-                            name: 'comments',
-                            params: this._attr
-                        };
-                    },
-                    getDefaultWebDomain: function() {
-                        return l.resolve(this._attr.mobile ? 'm' : 'www', true);
-                    },
-                    _handleCommentMsg: function(o) {
-                        if (!this.isValid()) return;
-                        g.fire('comments.add', {
-                            post: o.post,
-                            user: o.user,
-                            widget: this
-                        });
-                    },
-                    _handleCommentCreatedMsg: function(o) {
-                        if (!this.isValid()) return;
-                        var p = {
-                            href: o.href,
-                            commentID: o.commentID,
-                            parentCommentID: o.parentCommentID
-                        };
-                        g.fire('comment.create', p);
-                    },
-                    _handleCommentRemovedMsg: function(o) {
-                        if (!this.isValid()) return;
-                        var p = {
-                            href: o.href,
-                            commentID: o.commentID
-                        };
-                        g.fire('comment.remove', p);
+        __d("sdk.XFBML.Comments", ["sdk.Event", "sdk.XFBML.IframeWidget", "QueryString", "sdk.Runtime", "SDKConfig", "UrlMap", "UserAgent"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
+            var n = h.extend({
+                _visibleAfter: 'immediate',
+                _refreshOnAuthChange: true,
+                setupAndValidate: function() {
+                    var o = {
+                        channel_url: this.getChannelUrl(),
+                        colorscheme: this.getAttribute('colorscheme'),
+                        skin: this.getAttribute('skin'),
+                        numposts: this.getAttribute('num-posts', 10),
+                        width: this._getPxAttribute('width'),
+                        href: this.getAttribute('href'),
+                        permalink: this.getAttribute('permalink'),
+                        publish_feed: this.getAttribute('publish_feed'),
+                        order_by: this.getAttribute('order_by'),
+                        mobile: this._getBoolAttribute('mobile')
+                    };
+                    if (!o.width && !o.permalink) o.width = 550;
+                    if (k.initSitevars.enableMobileComments && m.mobile() && o.mobile !== false) {
+                        o.mobile = true;
+                        delete o.width;
                     }
-                });
+                    if (!o.skin) o.skin = o.colorscheme;
+                    if (!o.href) {
+                        o.migrated = this.getAttribute('migrated');
+                        o.xid = this.getAttribute('xid');
+                        o.title = this.getAttribute('title', document.title);
+                        o.url = this.getAttribute('url', document.URL);
+                        o.quiet = this.getAttribute('quiet');
+                        o.reverse = this.getAttribute('reverse');
+                        o.simple = this.getAttribute('simple');
+                        o.css = this.getAttribute('css');
+                        o.notify = this.getAttribute('notify');
+                        if (!o.xid) {
+                            var p = ES5(document.URL, 'indexOf', true, '#');
+                            if (p > 0) {
+                                o.xid = encodeURIComponent(document.URL.substring(0, p));
+                            } else o.xid = encodeURIComponent(document.URL);
+                        }
+                        if (o.migrated) o.href = l.resolve('www') + '/plugins/comments_v1.php?' + 'app_id=' + j.getClientID() + '&xid=' + encodeURIComponent(o.xid) + '&url=' + encodeURIComponent(o.url);
+                    } else {
+                        var q = this.getAttribute('fb_comment_id');
+                        if (!q) {
+                            q = i.decode(document.URL.substring(ES5(document.URL, 'indexOf', true, '?') + 1))
+                                .fb_comment_id;
+                            if (q && ES5(q, 'indexOf', true, '#') > 0) q = q.substring(0, ES5(q, 'indexOf', true, '#'));
+                        }
+                        if (q) {
+                            o.fb_comment_id = q;
+                            this.subscribe('render', ES5(function() {
+                                if (!window.location.hash) window.location.hash = this.getIframeNode()
+                                    .id;
+                            }, 'bind', true, this));
+                        }
+                    }
+                    this._attr = o;
+                    return true;
+                },
+                oneTimeSetup: function() {
+                    this.subscribe('xd.addComment', ES5(this._handleCommentMsg, 'bind', true, this));
+                    this.subscribe('xd.commentCreated', ES5(this._handleCommentCreatedMsg, 'bind', true, this));
+                    this.subscribe('xd.commentRemoved', ES5(this._handleCommentRemovedMsg, 'bind', true, this));
+                },
+                getSize: function() {
+                    if (this._attr.mobile) return {
+                        width: '100%',
+                        height: 160
+                    };
+                    if (!this._attr.permalink) return {
+                        width: this._attr.width,
+                        height: 160
+                    };
+                },
+                getUrlBits: function() {
+                    return {
+                        name: 'comments',
+                        params: this._attr
+                    };
+                },
+                getDefaultWebDomain: function() {
+                    return l.resolve(this._attr.mobile ? 'm' : 'www', true);
+                },
+                _handleCommentMsg: function(o) {
+                    if (!this.isValid()) return;
+                    g.fire('comments.add', {
+                        post: o.post,
+                        user: o.user,
+                        widget: this
+                    });
+                },
+                _handleCommentCreatedMsg: function(o) {
+                    if (!this.isValid()) return;
+                    var p = {
+                        href: o.href,
+                        commentID: o.commentID,
+                        parentCommentID: o.parentCommentID
+                    };
+                    g.fire('comment.create', p);
+                },
+                _handleCommentRemovedMsg: function(o) {
+                    if (!this.isValid()) return;
+                    var p = {
+                        href: o.href,
+                        commentID: o.commentID
+                    };
+                    g.fire('comment.remove', p);
+                }
+            });
             e.exports = n;
         });
-        __d("sdk.XFBML.CommentsCount", ["sdk.Data", "sdk.DOM", "sdk.XFBML.Element", "sprintf"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Data'),
-                h = b('sdk.DOM'),
-                i = b('sdk.XFBML.Element'),
-                j = b('sprintf'),
-                k = i.extend({
-                    process: function() {
-                        h.addCss(this.dom, 'fb_comments_count_zero');
-                        var l = this.getAttribute('href', window.location.href);
-                        g._selectByIndex(['commentsbox_count'], 'link_stat', 'url', l)
-                            .wait(ES5(function(m) {
-                            var n = m[0].commentsbox_count;
-                            h.html(this.dom, j('<span class="fb_comments_count">%s</span>', n));
-                            if (n > 0) h.removeCss(this.dom, 'fb_comments_count_zero');
-                            this.fire('render');
-                        }, 'bind', true, this));
-                    }
-                });
+        __d("sdk.XFBML.CommentsCount", ["sdk.Data", "sdk.DOM", "sdk.XFBML.Element", "sprintf"], function(a, b, c, d, e, f, g, h, i, j) {
+            var k = i.extend({
+                process: function() {
+                    h.addCss(this.dom, 'fb_comments_count_zero');
+                    var l = this.getAttribute('href', window.location.href);
+                    g._selectByIndex(['commentsbox_count'], 'link_stat', 'url', l)
+                        .wait(ES5(function(m) {
+                        var n = m[0].commentsbox_count;
+                        h.html(this.dom, j('<span class="fb_comments_count">%s</span>', n));
+                        if (n > 0) h.removeCss(this.dom, 'fb_comments_count_zero');
+                        this.fire('render');
+                    }, 'bind', true, this));
+                }
+            });
             e.exports = k;
         });
-        __d("sdk.Anim", ["sdk.DOM"], function(a, b, c, d, e, f) {
-            var g = b('sdk.DOM'),
-                h = {
-                    ate: function(i, j, k, l) {
-                        k = !isNaN(parseFloat(k)) && k >= 0 ? k : 750;
-                        var m = 40,
-                            n = {}, o = {}, p = null,
-                            q = setInterval(ES5(function() {
-                                if (!p) p = ES5('Date', 'now', false);
-                                var r = 1;
-                                if (k != 0) r = Math.min((ES5('Date', 'now', false) - p) / k, 1);
-                                for (var s in j) if (j.hasOwnProperty(s)) {
-                                    var t = j[s];
-                                    if (!n[s]) {
-                                        var u = g.getStyle(i, s);
-                                        if (u === false) return;
-                                        n[s] = this._parseCSS(u + '');
-                                    }
-                                    if (!o[s]) o[s] = this._parseCSS(t.toString());
-                                    var v = '';
-                                    ES5(n[s], 'forEach', true, function(w, x) {
-                                        if (isNaN(o[s][x].numPart) && o[s][x].textPart == '?') {
-                                            v = w.numPart + w.textPart;
-                                        } else if (isNaN(w.numPart)) {
-                                            v = w.textPart;
-                                        } else v += (w.numPart + Math.ceil((o[s][x].numPart - w.numPart) * Math.sin(Math.PI / 2 * r))) + o[s][x].textPart + ' ';
-                                    });
-                                    g.setStyle(i, s, v);
+        __d("sdk.Anim", ["sdk.DOM"], function(a, b, c, d, e, f, g) {
+            var h = {
+                ate: function(i, j, k, l) {
+                    k = !isNaN(parseFloat(k)) && k >= 0 ? k : 750;
+                    var m = 40,
+                        n = {}, o = {}, p = null,
+                        q = setInterval(ES5(function() {
+                            if (!p) p = ES5('Date', 'now', false);
+                            var r = 1;
+                            if (k != 0) r = Math.min((ES5('Date', 'now', false) - p) / k, 1);
+                            for (var s in j) if (j.hasOwnProperty(s)) {
+                                var t = j[s];
+                                if (!n[s]) {
+                                    var u = g.getStyle(i, s);
+                                    if (u === false) return;
+                                    n[s] = this._parseCSS(u + '');
                                 }
-                                if (r == 1) {
-                                    clearInterval(q);
-                                    if (l) l(i);
-                                }
-                            }, 'bind', true, this), m);
-                    },
-                    _parseCSS: function(i) {
-                        var j = [];
-                        ES5(i.split(' '), 'forEach', true, function(k) {
-                            var l = parseInt(k, 10);
-                            j.push({
-                                numPart: l,
-                                textPart: k.replace(l, '')
-                            });
+                                if (!o[s]) o[s] = this._parseCSS(t.toString());
+                                var v = '';
+                                ES5(n[s], 'forEach', true, function(w, x) {
+                                    if (isNaN(o[s][x].numPart) && o[s][x].textPart == '?') {
+                                        v = w.numPart + w.textPart;
+                                    } else if (isNaN(w.numPart)) {
+                                        v = w.textPart;
+                                    } else v += (w.numPart + Math.ceil((o[s][x].numPart - w.numPart) * Math.sin(Math.PI / 2 * r))) + o[s][x].textPart + ' ';
+                                });
+                                g.setStyle(i, s, v);
+                            }
+                            if (r == 1) {
+                                clearInterval(q);
+                                if (l) l(i);
+                            }
+                        }, 'bind', true, this), m);
+                },
+                _parseCSS: function(i) {
+                    var j = [];
+                    ES5(i.split(' '), 'forEach', true, function(k) {
+                        var l = parseInt(k, 10);
+                        j.push({
+                            numPart: l,
+                            textPart: k.replace(l, '')
                         });
-                        return j;
-                    }
-                };
+                    });
+                    return j;
+                }
+            };
             e.exports = h;
         });
         __d("escapeHTML", [], function(a, b, c, d, e, f) {
@@ -6488,744 +6253,692 @@ try {
             }
             e.exports = i;
         });
-        __d("sdk.Helper", ["sdk.ErrorHandling", "sdk.Event", "UrlMap", "safeEval", "sprintf"], function(a, b, c, d, e, f) {
-            var g = b('sdk.ErrorHandling'),
-                h = b('sdk.Event'),
-                i = b('UrlMap'),
-                j = b('safeEval'),
-                k = b('sprintf'),
-                l = {
-                    isUser: function(m) {
-                        return m < 2.2e+09 || (m >= 1e+14 && m <= 100099999989999) || (m >= 8.9e+13 && m <= 89999999999999);
-                    },
-                    upperCaseFirstChar: function(m) {
-                        if (m.length > 0) {
-                            return m.substr(0, 1)
-                                .toUpperCase() + m.substr(1);
-                        } else return m;
-                    },
-                    getProfileLink: function(m, n, o) {
-                        if (!o && m) o = k('%s/profile.php?id=%s', i.resolve('www'), m.uid || m.id);
-                        if (o) n = k('<a class="fb_link" href="%s">%s</a>', o, n);
-                        return n;
-                    },
-                    invokeHandler: function(m, n, o) {
-                        if (m) if (typeof m === 'string') {
-                            g.unguard(j)(m, o);
-                        } else if (m.apply) g.unguard(m)
-                            .apply(n, o || []);
-                    },
-                    fireEvent: function(m, n) {
-                        var o = n._attr.href;
-                        n.fire(m, o);
-                        h.fire(m, o, n);
-                    },
-                    executeFunctionByName: function(m) {
-                        var n = Array.prototype.slice.call(arguments, 1),
-                            o = m.split("."),
-                            p = o.pop(),
-                            q = window;
-                        for (var r = 0; r < o.length; r++) q = q[o[r]];
-                        return q[p].apply(this, n);
-                    }
-                };
+        __d("sdk.Helper", ["sdk.ErrorHandling", "sdk.Event", "UrlMap", "safeEval", "sprintf"], function(a, b, c, d, e, f, g, h, i, j, k) {
+            var l = {
+                isUser: function(m) {
+                    return m < 2.2e+09 || (m >= 1e+14 && m <= 100099999989999) || (m >= 8.9e+13 && m <= 89999999999999);
+                },
+                upperCaseFirstChar: function(m) {
+                    if (m.length > 0) {
+                        return m.substr(0, 1)
+                            .toUpperCase() + m.substr(1);
+                    } else return m;
+                },
+                getProfileLink: function(m, n, o) {
+                    if (!o && m) o = k('%s/profile.php?id=%s', i.resolve('www'), m.uid || m.id);
+                    if (o) n = k('<a class="fb_link" href="%s">%s</a>', o, n);
+                    return n;
+                },
+                invokeHandler: function(m, n, o) {
+                    if (m) if (typeof m === 'string') {
+                        g.unguard(j)(m, o);
+                    } else if (m.apply) g.unguard(m)
+                        .apply(n, o || []);
+                },
+                fireEvent: function(m, n) {
+                    var o = n._attr.href;
+                    n.fire(m, o);
+                    h.fire(m, o, n);
+                },
+                executeFunctionByName: function(m) {
+                    var n = Array.prototype.slice.call(arguments, 1),
+                        o = m.split("."),
+                        p = o.pop(),
+                        q = window;
+                    for (var r = 0; r < o.length; r++) q = q[o[r]];
+                    return q[p].apply(this, n);
+                }
+            };
             e.exports = l;
         });
-        __d("sdk.XFBML.ConnectBar", ["sdk.Anim", "sdk.api", "sdk.Auth", "createArrayFrom", "sdk.Data", "sdk.DOM", "sdk.XFBML.Element", "escapeHTML", "sdk.Event", "format", "sdk.Helper", "sdk.Insights", "sdk.Intl", "sdk.Runtime", "UrlMap", "UserAgent", "ConnectBarConfig"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Anim'),
-                h = b('sdk.api'),
-                i = b('sdk.Auth'),
-                j = b('createArrayFrom'),
-                k = c('ConnectBarConfig'),
-                l = b('sdk.Data'),
-                m = b('sdk.DOM'),
-                n = b('sdk.XFBML.Element'),
-                o = b('escapeHTML'),
-                p = b('sdk.Event'),
-                q = b('format'),
-                r = b('sdk.Helper'),
-                s = b('sdk.Insights'),
-                t = b('sdk.Intl'),
-                u = b('sdk.Runtime'),
-                v = b('UrlMap'),
-                w = b('UserAgent'),
-                x = n.extend({
-                    _initialHeight: null,
-                    _initTopMargin: 0,
-                    _picFieldName: 'pic_square',
-                    _page: null,
-                    _displayed: false,
-                    _notDisplayed: false,
-                    _container: null,
-                    _animationSpeed: 0,
-                    process: function() {
-                        i.getLoginStatus(ES5(function(y) {
-                            p.monitor('auth.statusChange', ES5(function() {
-                                if (this.isValid() && u.getLoginStatus() == 'connected') {
-                                    this._uid = u.getUserID();
-                                    h({
-                                        method: 'Connect.shouldShowConnectBar'
-                                    }, ES5(function(z) {
-                                        if (z != 2) {
-                                            this._animationSpeed = (z == 0) ? 750 : 0;
-                                            this._showBar();
-                                        } else this._noRender();
-                                    }, 'bind', true, this));
-                                } else this._noRender();
-                                return false;
-                            }, 'bind', true, this));
+        __d("sdk.XFBML.ConnectBar", ["sdk.Anim", "sdk.api", "sdk.Auth", "createArrayFrom", "ConnectBarConfig", "sdk.Data", "sdk.DOM", "sdk.XFBML.Element", "escapeHTML", "sdk.Event", "format", "sdk.Helper", "sdk.Insights", "sdk.Intl", "sdk.Runtime", "UrlMap", "UserAgent"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w) {
+            var x = n.extend({
+                _initialHeight: null,
+                _initTopMargin: 0,
+                _picFieldName: 'pic_square',
+                _page: null,
+                _displayed: false,
+                _notDisplayed: false,
+                _container: null,
+                _animationSpeed: 0,
+                process: function() {
+                    i.getLoginStatus(ES5(function(y) {
+                        p.monitor('auth.statusChange', ES5(function() {
+                            if (this.isValid() && u.getLoginStatus() == 'connected') {
+                                this._uid = u.getUserID();
+                                h({
+                                    method: 'Connect.shouldShowConnectBar'
+                                }, ES5(function(z) {
+                                    if (z != 2) {
+                                        this._animationSpeed = (z == 0) ? 750 : 0;
+                                        this._showBar();
+                                    } else this._noRender();
+                                }, 'bind', true, this));
+                            } else this._noRender();
+                            return false;
                         }, 'bind', true, this));
-                    },
-                    _showBar: function() {
-                        var y = l._selectByIndex(['first_name', 'profile_url', this._picFieldName], 'user', 'uid', this._uid),
-                            z = l._selectByIndex(['display_name'], 'application', 'api_key', u.getClientID());
-                        l.waitOn([y, z], ES5(function(aa) {
-                            aa[0][0].site_name = aa[1][0].display_name;
-                            if (!this._displayed) {
-                                this._displayed = true;
-                                this._notDisplayed = false;
-                                this._renderConnectBar(aa[0][0]);
-                                this.fire('render');
-                                s.impression({
-                                    lid: 104,
-                                    name: 'widget_load'
-                                });
-                                this.fire('connectbar.ondisplay');
-                                p.fire('connectbar.ondisplay', this);
-                                r.invokeHandler(this.getAttribute('on-display'), this);
-                            }
-                        }, 'bind', true, this));
-                    },
-                    _noRender: function() {
-                        if (this._displayed) {
-                            this._displayed = false;
-                            this._closeConnectBar();
-                        }
-                        if (!this._notDisplayed) {
-                            this._notDisplayed = true;
+                    }, 'bind', true, this));
+                },
+                _showBar: function() {
+                    var y = l._selectByIndex(['first_name', 'profile_url', this._picFieldName], 'user', 'uid', this._uid),
+                        z = l._selectByIndex(['display_name'], 'application', 'api_key', u.getClientID());
+                    l.waitOn([y, z], ES5(function(aa) {
+                        aa[0][0].site_name = aa[1][0].display_name;
+                        if (!this._displayed) {
+                            this._displayed = true;
+                            this._notDisplayed = false;
+                            this._renderConnectBar(aa[0][0]);
                             this.fire('render');
-                            this.fire('connectbar.onnotdisplay');
-                            p.fire('connectbar.onnotdisplay', this);
-                            r.invokeHandler(this.getAttribute('on-not-display'), this);
-                        }
-                    },
-                    _renderConnectBar: function(y) {
-                        var z = document.createElement('div'),
-                            aa = document.createElement('div');
-                        z.className = 'fb_connect_bar';
-                        aa.className = 'fb_reset fb_connect_bar_container';
-                        aa.appendChild(z);
-                        document.body.appendChild(aa);
-                        this._container = aa;
-                        this._initialHeight = Math.round(parseFloat(m.getStyle(aa, 'height')) + parseFloat(m.getStyle(aa, 'borderBottomWidth')));
-                        m.html(z, q('<div class="fb_buttons">' + '<a href="#" class="fb_bar_close">' + '<img src="{1}" alt="{2}" title="{2}"/>' + '</a>' + '</div>' + '<a href="{7}" class="fb_profile" target="_blank">' + '<img src="{3}" alt="{4}" title="{4}"/>' + '</a>' + '{5}' + ' <span>' + '<a href="{8}" class="fb_learn_more" target="_blank">{6}</a> &ndash; ' + '<a href="#" class="fb_no_thanks">{0}</a>' + '</span>', t.tx._("No Thanks"), v.resolve('fbcdn') + '/' + k.imgs.buttonUrl, t.tx._("Close"), y[this._picFieldName] || v.resolve('fbcdn') + '/' + k.imgs.missingProfileUrl, o(y.first_name), t.tx._("Hi {firstName}. \u003Cstrong>{siteName}\u003C\/strong> is using Facebook to personalize your experience.", {
-                            firstName: o(y.first_name),
-                            siteName: o(y.site_name)
-                        }), t.tx._("Learn More"), y.profile_url, v.resolve('www') + '/sitetour/connect.php'));
-                        ES5(j(z.getElementsByTagName('a')), 'forEach', true, function(da) {
-                            da.onclick = ES5(this._clickHandler, 'bind', true, this);
-                        }, this);
-                        this._page = document.body;
-                        var ba = 0;
-                        if (this._page.parentNode) {
-                            ba = Math.round((parseFloat(m.getStyle(this._page.parentNode, 'height')) - parseFloat(m.getStyle(this._page, 'height'))) / 2);
-                        } else ba = parseInt(m.getStyle(this._page, 'marginTop'), 10);
-                        ba = isNaN(ba) ? 0 : ba;
-                        this._initTopMargin = ba;
-                        if (!window.XMLHttpRequest) {
-                            aa.className += " fb_connect_bar_container_ie6";
-                        } else {
-                            aa.style.top = (-1 * this._initialHeight) + 'px';
-                            g.ate(aa, {
-                                top: '0px'
-                            }, this._animationSpeed);
-                        }
-                        var ca = {
-                            marginTop: this._initTopMargin + this._initialHeight + 'px'
-                        };
-                        if (w.ie()) {
-                            ca.backgroundPositionY = this._initialHeight + 'px';
-                        } else ca.backgroundPosition = '? ' + this._initialHeight + 'px';
-                        g.ate(this._page, ca, this._animationSpeed);
-                    },
-                    _clickHandler: function(y) {
-                        y = y || window.event;
-                        var z = y.target || y.srcElement;
-                        while (z.nodeName != 'A') z = z.parentNode;
-                        switch (z.className) {
-                        case 'fb_bar_close':
-                            h({
-                                method: 'Connect.connectBarMarkAcknowledged'
-                            });
                             s.impression({
                                 lid: 104,
-                                name: 'widget_user_closed'
+                                name: 'widget_load'
                             });
-                            this._closeConnectBar();
-                            break;
-                        case 'fb_learn_more':
-                        case 'fb_profile':
-                            window.open(z.href);
-                            break;
-                        case 'fb_no_thanks':
-                            this._closeConnectBar();
-                            h({
-                                method: 'Connect.connectBarMarkAcknowledged'
-                            });
-                            s.impression({
-                                lid: 104,
-                                name: 'widget_user_no_thanks'
-                            });
-                            h({
-                                method: 'auth.revokeAuthorization',
-                                block: true
-                            }, ES5(function() {
-                                this.fire('connectbar.ondeauth');
-                                p.fire('connectbar.ondeauth', this);
-                                r.invokeHandler(this.getAttribute('on-deauth'), this);
-                                if (this._getBoolAttribute('auto-refresh', true)) window.location.reload();
-                            }, 'bind', true, this));
-                            break;
+                            this.fire('connectbar.ondisplay');
+                            p.fire('connectbar.ondisplay', this);
+                            r.invokeHandler(this.getAttribute('on-display'), this);
                         }
-                        return false;
-                    },
-                    _closeConnectBar: function() {
-                        this._notDisplayed = true;
-                        var y = {
-                            marginTop: this._initTopMargin + 'px'
-                        };
-                        if (w.ie()) {
-                            y.backgroundPositionY = '0px';
-                        } else y.backgroundPosition = '? 0px';
-                        var z = (this._animationSpeed == 0) ? 0 : 300;
-                        g.ate(this._page, y, z);
-                        g.ate(this._container, {
-                            top: (-1 * this._initialHeight) + 'px'
-                        }, z, function(aa) {
-                            aa.parentNode.removeChild(aa);
-                        });
-                        this.fire('connectbar.onclose');
-                        p.fire('connectbar.onclose', this);
-                        r.invokeHandler(this.getAttribute('on-close'), this);
+                    }, 'bind', true, this));
+                },
+                _noRender: function() {
+                    if (this._displayed) {
+                        this._displayed = false;
+                        this._closeConnectBar();
                     }
-                });
+                    if (!this._notDisplayed) {
+                        this._notDisplayed = true;
+                        this.fire('render');
+                        this.fire('connectbar.onnotdisplay');
+                        p.fire('connectbar.onnotdisplay', this);
+                        r.invokeHandler(this.getAttribute('on-not-display'), this);
+                    }
+                },
+                _renderConnectBar: function(y) {
+                    var z = document.createElement('div'),
+                        aa = document.createElement('div');
+                    z.className = 'fb_connect_bar';
+                    aa.className = 'fb_reset fb_connect_bar_container';
+                    aa.appendChild(z);
+                    document.body.appendChild(aa);
+                    this._container = aa;
+                    this._initialHeight = Math.round(parseFloat(m.getStyle(aa, 'height')) + parseFloat(m.getStyle(aa, 'borderBottomWidth')));
+                    m.html(z, q('<div class="fb_buttons">' + '<a href="#" class="fb_bar_close">' + '<img src="{1}" alt="{2}" title="{2}"/>' + '</a>' + '</div>' + '<a href="{7}" class="fb_profile" target="_blank">' + '<img src="{3}" alt="{4}" title="{4}"/>' + '</a>' + '{5}' + ' <span>' + '<a href="{8}" class="fb_learn_more" target="_blank">{6}</a> &ndash; ' + '<a href="#" class="fb_no_thanks">{0}</a>' + '</span>', t.tx._("No Thanks"), v.resolve('fbcdn') + '/' + k.imgs.buttonUrl, t.tx._("Close"), y[this._picFieldName] || v.resolve('fbcdn') + '/' + k.imgs.missingProfileUrl, o(y.first_name), t.tx._("Hi {firstName}. \u003Cstrong>{siteName}\u003C\/strong> is using Facebook to personalize your experience.", {
+                        firstName: o(y.first_name),
+                        siteName: o(y.site_name)
+                    }), t.tx._("Learn More"), y.profile_url, v.resolve('www') + '/sitetour/connect.php'));
+                    ES5(j(z.getElementsByTagName('a')), 'forEach', true, function(da) {
+                        da.onclick = ES5(this._clickHandler, 'bind', true, this);
+                    }, this);
+                    this._page = document.body;
+                    var ba = 0;
+                    if (this._page.parentNode) {
+                        ba = Math.round((parseFloat(m.getStyle(this._page.parentNode, 'height')) - parseFloat(m.getStyle(this._page, 'height'))) / 2);
+                    } else ba = parseInt(m.getStyle(this._page, 'marginTop'), 10);
+                    ba = isNaN(ba) ? 0 : ba;
+                    this._initTopMargin = ba;
+                    if (!window.XMLHttpRequest) {
+                        aa.className += " fb_connect_bar_container_ie6";
+                    } else {
+                        aa.style.top = (-1 * this._initialHeight) + 'px';
+                        g.ate(aa, {
+                            top: '0px'
+                        }, this._animationSpeed);
+                    }
+                    var ca = {
+                        marginTop: this._initTopMargin + this._initialHeight + 'px'
+                    };
+                    if (w.ie()) {
+                        ca.backgroundPositionY = this._initialHeight + 'px';
+                    } else ca.backgroundPosition = '? ' + this._initialHeight + 'px';
+                    g.ate(this._page, ca, this._animationSpeed);
+                },
+                _clickHandler: function(y) {
+                    y = y || window.event;
+                    var z = y.target || y.srcElement;
+                    while (z.nodeName != 'A') z = z.parentNode;
+                    switch (z.className) {
+                    case 'fb_bar_close':
+                        h({
+                            method: 'Connect.connectBarMarkAcknowledged'
+                        });
+                        s.impression({
+                            lid: 104,
+                            name: 'widget_user_closed'
+                        });
+                        this._closeConnectBar();
+                        break;
+                    case 'fb_learn_more':
+                    case 'fb_profile':
+                        window.open(z.href);
+                        break;
+                    case 'fb_no_thanks':
+                        this._closeConnectBar();
+                        h({
+                            method: 'Connect.connectBarMarkAcknowledged'
+                        });
+                        s.impression({
+                            lid: 104,
+                            name: 'widget_user_no_thanks'
+                        });
+                        h({
+                            method: 'auth.revokeAuthorization',
+                            block: true
+                        }, ES5(function() {
+                            this.fire('connectbar.ondeauth');
+                            p.fire('connectbar.ondeauth', this);
+                            r.invokeHandler(this.getAttribute('on-deauth'), this);
+                            if (this._getBoolAttribute('auto-refresh', true)) window.location.reload();
+                        }, 'bind', true, this));
+                        break;
+                    }
+                    return false;
+                },
+                _closeConnectBar: function() {
+                    this._notDisplayed = true;
+                    var y = {
+                        marginTop: this._initTopMargin + 'px'
+                    };
+                    if (w.ie()) {
+                        y.backgroundPositionY = '0px';
+                    } else y.backgroundPosition = '? 0px';
+                    var z = (this._animationSpeed == 0) ? 0 : 300;
+                    g.ate(this._page, y, z);
+                    g.ate(this._container, {
+                        top: (-1 * this._initialHeight) + 'px'
+                    }, z, function(aa) {
+                        aa.parentNode.removeChild(aa);
+                    });
+                    this.fire('connectbar.onclose');
+                    p.fire('connectbar.onclose', this);
+                    r.invokeHandler(this.getAttribute('on-close'), this);
+                }
+            });
             e.exports = x;
         });
-        __d("sdk.XFBML.LoginButton", ["sdk.Helper", "IframePlugin"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Helper'),
-                h = b('IframePlugin'),
-                i = h.extend({
-                    constructor: function(j, k, l, m) {
-                        this.parent(j, k, l, m);
-                        var n = h.getVal(m, 'on_login');
-                        if (n) this.subscribe('login.status', function(o) {
-                            g.invokeHandler(n, null, [o]);
-                        });
-                    },
-                    getParams: function() {
-                        return {
-                            scope: 'string',
-                            perms: 'string',
-                            size: 'string',
-                            login_text: 'text',
-                            show_faces: 'bool',
-                            max_rows: 'string',
-                            show_login_face: 'bool',
-                            registration_url: 'url_maybe',
-                            auto_logout_link: 'bool',
-                            one_click: 'bool',
-                            show_banner: 'bool'
-                        };
-                    }
-                });
+        __d("sdk.XFBML.LoginButton", ["sdk.Helper", "IframePlugin"], function(a, b, c, d, e, f, g, h) {
+            var i = h.extend({
+                constructor: function(j, k, l, m) {
+                    this.parent(j, k, l, m);
+                    var n = h.getVal(m, 'on_login');
+                    if (n) this.subscribe('login.status', function(o) {
+                        g.invokeHandler(n, null, [o]);
+                    });
+                },
+                getParams: function() {
+                    return {
+                        scope: 'string',
+                        perms: 'string',
+                        size: 'string',
+                        login_text: 'text',
+                        show_faces: 'bool',
+                        max_rows: 'string',
+                        show_login_face: 'bool',
+                        registration_url: 'url_maybe',
+                        auto_logout_link: 'bool',
+                        one_click: 'bool',
+                        show_banner: 'bool',
+                        auth_type: 'string'
+                    };
+                }
+            });
             e.exports = i;
         });
-        __d("sdk.XFBML.Name", ["copyProperties", "sdk.Data", "escapeHTML", "sdk.Event", "sdk.XFBML.Element", "sdk.Helper", "Log", "sdk.Runtime"], function(a, b, c, d, e, f) {
-            var g = b('copyProperties'),
-                h = b('sdk.Data'),
-                i = b('escapeHTML'),
-                j = b('sdk.Event'),
-                k = b('sdk.XFBML.Element'),
-                l = b('sdk.Helper'),
-                m = b('Log'),
-                n = b('sdk.Runtime'),
-                o = k.extend({
-                    process: function() {
-                        g(this, {
-                            _uid: this.getAttribute('uid'),
-                            _firstnameonly: this._getBoolAttribute('first-name-only'),
-                            _lastnameonly: this._getBoolAttribute('last-name-only'),
-                            _possessive: this._getBoolAttribute('possessive'),
-                            _reflexive: this._getBoolAttribute('reflexive'),
-                            _objective: this._getBoolAttribute('objective'),
-                            _linked: this._getBoolAttribute('linked', true),
-                            _subjectId: this.getAttribute('subject-id')
-                        });
-                        if (!this._uid) {
-                            m.error('"uid" is a required attribute for <fb:name>');
-                            this.fire('render');
-                            return;
-                        }
-                        var p = [];
-                        if (this._firstnameonly) {
-                            p.push('first_name');
-                        } else if (this._lastnameonly) {
-                            p.push('last_name');
-                        } else p.push('name');
-                        if (this._subjectId) {
-                            p.push('sex');
-                            if (this._subjectId == n.getUserID()) this._reflexive = true;
-                        }
-                        var q;
-                        j.monitor('auth.statusChange', ES5(function() {
-                            if (!this.isValid()) {
-                                this.fire('render');
-                                return true;
-                            }
-                            if (!this._uid || this._uid == 'loggedinuser') this._uid = n.getUserID();
-                            if (!this._uid) return;
-                            if (l.isUser(this._uid)) {
-                                q = h._selectByIndex(p, 'user', 'uid', this._uid);
-                            } else q = h._selectByIndex(['name', 'id'], 'profile', 'id', this._uid);
-                            q.wait(ES5(function(r) {
-                                if (this._subjectId == this._uid) {
-                                    this._renderPronoun(r[0]);
-                                } else this._renderOther(r[0]);
-                                this.fire('render');
-                            }, 'bind', true, this));
-                        }, 'bind', true, this));
-                    },
-                    _renderPronoun: function(p) {
-                        var q = '',
-                            r = this._objective;
-                        if (this._subjectId) {
-                            r = true;
-                            if (this._subjectId === this._uid) this._reflexive = true;
-                        }
-                        if (this._uid == n.getUserID() && this._getBoolAttribute('use-you', true)) {
-                            if (this._possessive) {
-                                if (this._reflexive) {
-                                    q = 'your own';
-                                } else q = 'your';
-                            } else if (this._reflexive) {
-                                q = 'yourself';
-                            } else q = 'you';
-                        } else switch (p.sex) {
-                        case 'male':
-                            if (this._possessive) {
-                                q = this._reflexive ? 'his own' : 'his';
-                            } else if (this._reflexive) {
-                                q = 'himself';
-                            } else if (r) {
-                                q = 'him';
-                            } else q = 'he';
-                            break;
-                        case 'female':
-                            if (this._possessive) {
-                                q = this._reflexive ? 'her own' : 'her';
-                            } else if (this._reflexive) {
-                                q = 'herself';
-                            } else if (r) {
-                                q = 'her';
-                            } else q = 'she';
-                            break;
-                        default:
-                            if (this._getBoolAttribute('use-they', true)) {
-                                if (this._possessive) {
-                                    if (this._reflexive) {
-                                        q = 'their own';
-                                    } else q = 'their';
-                                } else if (this._reflexive) {
-                                    q = 'themselves';
-                                } else if (r) {
-                                    q = 'them';
-                                } else q = 'they';
-                            } else if (this._possessive) {
-                                if (this._reflexive) {
-                                    q = 'his/her own';
-                                } else q = 'his/her';
-                            } else if (this._reflexive) {
-                                q = 'himself/herself';
-                            } else if (r) {
-                                q = 'him/her';
-                            } else q = 'he/she';
-                            break;
-                        }
-                        if (this._getBoolAttribute('capitalize', false)) q = l.upperCaseFirstChar(q);
-                        this.dom.innerHTML = q;
-                    },
-                    _renderOther: function(p) {
-                        var q = '',
-                            r = '';
-                        if (this._uid == n.getUserID() && this._getBoolAttribute('use-you', true)) {
-                            if (this._reflexive) {
-                                if (this._possessive) {
-                                    q = 'your own';
-                                } else q = 'yourself';
-                            } else if (this._possessive) {
-                                q = 'your';
-                            } else q = 'you';
-                        } else if (p) {
-                            if (null === p.first_name) p.first_name = '';
-                            if (null === p.last_name) p.last_name = '';
-                            if (this._firstnameonly && p.first_name !== undefined) {
-                                q = i(p.first_name);
-                            } else if (this._lastnameonly && p.last_name !== undefined) q = i(p.last_name);
-                            if (!q) q = i(p.name);
-                            if (q !== '' && this._possessive) q += '\'s';
-                        }
-                        if (!q) q = i(this.getAttribute('if-cant-see', 'Facebook User'));
-                        if (q) {
-                            if (this._getBoolAttribute('capitalize', false)) q = l.upperCaseFirstChar(q);
-                            if (p && this._linked) {
-                                r = l.getProfileLink(p, q, this.getAttribute('href', null));
-                            } else r = q;
-                        }
-                        this.dom.innerHTML = r;
+        __d("sdk.XFBML.Name", ["copyProperties", "sdk.Data", "escapeHTML", "sdk.Event", "sdk.XFBML.Element", "sdk.Helper", "Log", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
+            var o = k.extend({
+                process: function() {
+                    g(this, {
+                        _uid: this.getAttribute('uid'),
+                        _firstnameonly: this._getBoolAttribute('first-name-only'),
+                        _lastnameonly: this._getBoolAttribute('last-name-only'),
+                        _possessive: this._getBoolAttribute('possessive'),
+                        _reflexive: this._getBoolAttribute('reflexive'),
+                        _objective: this._getBoolAttribute('objective'),
+                        _linked: this._getBoolAttribute('linked', true),
+                        _subjectId: this.getAttribute('subject-id')
+                    });
+                    if (!this._uid) {
+                        m.error('"uid" is a required attribute for <fb:name>');
+                        this.fire('render');
+                        return;
                     }
-                });
+                    var p = [];
+                    if (this._firstnameonly) {
+                        p.push('first_name');
+                    } else if (this._lastnameonly) {
+                        p.push('last_name');
+                    } else p.push('name');
+                    if (this._subjectId) {
+                        p.push('sex');
+                        if (this._subjectId == n.getUserID()) this._reflexive = true;
+                    }
+                    var q;
+                    j.monitor('auth.statusChange', ES5(function() {
+                        if (!this.isValid()) {
+                            this.fire('render');
+                            return true;
+                        }
+                        if (!this._uid || this._uid == 'loggedinuser') this._uid = n.getUserID();
+                        if (!this._uid) return;
+                        if (l.isUser(this._uid)) {
+                            q = h._selectByIndex(p, 'user', 'uid', this._uid);
+                        } else q = h._selectByIndex(['name', 'id'], 'profile', 'id', this._uid);
+                        q.wait(ES5(function(r) {
+                            if (this._subjectId == this._uid) {
+                                this._renderPronoun(r[0]);
+                            } else this._renderOther(r[0]);
+                            this.fire('render');
+                        }, 'bind', true, this));
+                    }, 'bind', true, this));
+                },
+                _renderPronoun: function(p) {
+                    var q = '',
+                        r = this._objective;
+                    if (this._subjectId) {
+                        r = true;
+                        if (this._subjectId === this._uid) this._reflexive = true;
+                    }
+                    if (this._uid == n.getUserID() && this._getBoolAttribute('use-you', true)) {
+                        if (this._possessive) {
+                            if (this._reflexive) {
+                                q = 'your own';
+                            } else q = 'your';
+                        } else if (this._reflexive) {
+                            q = 'yourself';
+                        } else q = 'you';
+                    } else switch (p.sex) {
+                    case 'male':
+                        if (this._possessive) {
+                            q = this._reflexive ? 'his own' : 'his';
+                        } else if (this._reflexive) {
+                            q = 'himself';
+                        } else if (r) {
+                            q = 'him';
+                        } else q = 'he';
+                        break;
+                    case 'female':
+                        if (this._possessive) {
+                            q = this._reflexive ? 'her own' : 'her';
+                        } else if (this._reflexive) {
+                            q = 'herself';
+                        } else if (r) {
+                            q = 'her';
+                        } else q = 'she';
+                        break;
+                    default:
+                        if (this._getBoolAttribute('use-they', true)) {
+                            if (this._possessive) {
+                                if (this._reflexive) {
+                                    q = 'their own';
+                                } else q = 'their';
+                            } else if (this._reflexive) {
+                                q = 'themselves';
+                            } else if (r) {
+                                q = 'them';
+                            } else q = 'they';
+                        } else if (this._possessive) {
+                            if (this._reflexive) {
+                                q = 'his/her own';
+                            } else q = 'his/her';
+                        } else if (this._reflexive) {
+                            q = 'himself/herself';
+                        } else if (r) {
+                            q = 'him/her';
+                        } else q = 'he/she';
+                        break;
+                    }
+                    if (this._getBoolAttribute('capitalize', false)) q = l.upperCaseFirstChar(q);
+                    this.dom.innerHTML = q;
+                },
+                _renderOther: function(p) {
+                    var q = '',
+                        r = '';
+                    if (this._uid == n.getUserID() && this._getBoolAttribute('use-you', true)) {
+                        if (this._reflexive) {
+                            if (this._possessive) {
+                                q = 'your own';
+                            } else q = 'yourself';
+                        } else if (this._possessive) {
+                            q = 'your';
+                        } else q = 'you';
+                    } else if (p) {
+                        if (null === p.first_name) p.first_name = '';
+                        if (null === p.last_name) p.last_name = '';
+                        if (this._firstnameonly && p.first_name !== undefined) {
+                            q = i(p.first_name);
+                        } else if (this._lastnameonly && p.last_name !== undefined) q = i(p.last_name);
+                        if (!q) q = i(p.name);
+                        if (q !== '' && this._possessive) q += '\'s';
+                    }
+                    if (!q) q = i(this.getAttribute('if-cant-see', 'Facebook User'));
+                    if (q) {
+                        if (this._getBoolAttribute('capitalize', false)) q = l.upperCaseFirstChar(q);
+                        if (p && this._linked) {
+                            r = l.getProfileLink(p, q, this.getAttribute('href', null));
+                        } else r = q;
+                    }
+                    this.dom.innerHTML = r;
+                }
+            });
             e.exports = o;
         });
-        __d("sdk.XFBML.RecommendationsBar", ["sdk.Arbiter", "DOMEventListener", "sdk.Event", "sdk.XFBML.IframeWidget", "resolveURI", "sdk.Runtime"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Arbiter'),
-                h = b('DOMEventListener'),
-                i = b('sdk.Event'),
-                j = b('sdk.XFBML.IframeWidget'),
-                k = b('resolveURI'),
-                l = b('sdk.Runtime'),
-                m = j.extend({
-                    getUrlBits: function() {
-                        return {
-                            name: 'recommendations_bar',
-                            params: this._attr
-                        };
-                    },
-                    setupAndValidate: function() {
-                        function n(w, x) {
-                            var y = 0,
-                                z = null;
+        __d("sdk.XFBML.RecommendationsBar", ["sdk.Arbiter", "DOMEventListener", "sdk.Event", "sdk.XFBML.IframeWidget", "resolveURI", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
+            var m = j.extend({
+                getUrlBits: function() {
+                    return {
+                        name: 'recommendations_bar',
+                        params: this._attr
+                    };
+                },
+                setupAndValidate: function() {
+                    function n(w, x) {
+                        var y = 0,
+                            z = null;
 
-                            function aa() {
-                                x();
-                                z = null;
-                                y = ES5('Date', 'now', false);
-                            }
-                            return function() {
-                                if (!z) {
-                                    var ba = ES5('Date', 'now', false);
-                                    if (ba - y < w) {
-                                        z = setTimeout(aa, w - (ba - y));
-                                    } else aa();
-                                }
-                                return true;
-                            };
+                        function aa() {
+                            x();
+                            z = null;
+                            y = ES5('Date', 'now', false);
                         }
-                        function o(w) {
-                            if (w.match(/^\d+(?:\.\d+)?%$/)) {
-                                var x = Math.min(Math.max(parseInt(w, 10), 0), 100);
-                                w = x / 100;
-                            } else if (w != 'manual' && w != 'onvisible') w = 'onvisible';
-                            return w;
-                        }
-                        function p(w) {
-                            return Math.max(parseInt(w, 10) || 30, 10);
-                        }
-                        function q(w) {
-                            if (w == 'left' || w == 'right') return w;
-                            return l.getRtl() ? 'left' : 'right';
-                        }
-                        this._attr = {
-                            channel: this.getChannelUrl(),
-                            api_key: l.getClientID(),
-                            font: this.getAttribute('font'),
-                            colorscheme: this.getAttribute('colorscheme'),
-                            href: k(this.getAttribute('href')),
-                            side: q(this.getAttribute('side')),
-                            site: this.getAttribute('site'),
-                            action: this.getAttribute('action'),
-                            ref: this.getAttribute('ref'),
-                            max_age: this.getAttribute('max_age'),
-                            trigger: o(this.getAttribute('trigger', '')),
-                            read_time: p(this.getAttribute('read_time')),
-                            num_recommendations: parseInt(this.getAttribute('num_recommendations'), 10) || 2
-                        };
-                        this._showLoader = false;
-                        this.subscribe('iframe.onload', ES5(function() {
-                            var w = this.dom.children[0];
-                            w.className = 'fbpluginrecommendationsbar' + this._attr.side;
-                        }, 'bind', true, this));
-                        var r = ES5(function() {
-                            h.remove(window, 'scroll', r);
-                            h.remove(document.documentElement, 'click', r);
-                            h.remove(document.documentElement, 'mousemove', r);
-                            setTimeout(ES5(this.arbiterInform, 'bind', true, this, 'platform/plugins/recommendations_bar/action', null, g.BEHAVIOR_STATE), this._attr.read_time * 1000);
-                            return true;
-                        }, 'bind', true, this);
-                        h.add(window, 'scroll', r);
-                        h.add(document.documentElement, 'click', r);
-                        h.add(document.documentElement, 'mousemove', r);
-                        if (this._attr.trigger == "manual") {
-                            var s = ES5(function(w) {
-                                if (w == this._attr.href) {
-                                    i.unsubscribe('xfbml.recommendationsbar.read', s);
-                                    this.arbiterInform('platform/plugins/recommendations_bar/trigger', null, g.BEHAVIOR_STATE);
-                                }
-                                return true;
-                            }, 'bind', true, this);
-                            i.subscribe('xfbml.recommendationsbar.read', s);
-                        } else {
-                            var t = n(500, ES5(function() {
-                                if (this.calculateVisibility()) {
-                                    h.remove(window, 'scroll', t);
-                                    h.remove(window, 'resize', t);
-                                    this.arbiterInform('platform/plugins/recommendations_bar/trigger', null, g.BEHAVIOR_STATE);
-                                }
-                                return true;
-                            }, 'bind', true, this));
-                            h.add(window, 'scroll', t);
-                            h.add(window, 'resize', t);
-                            t();
-                        }
-                        this.visible = false;
-                        var u = n(500, ES5(function() {
-                            if (!this.visible && this.calculateVisibility()) {
-                                this.visible = true;
-                                this.arbiterInform('platform/plugins/recommendations_bar/visible');
-                            } else if (this.visible && !this.calculateVisibility()) {
-                                this.visible = false;
-                                this.arbiterInform('platform/plugins/recommendations_bar/invisible');
+                        return function() {
+                            if (!z) {
+                                var ba = ES5('Date', 'now', false);
+                                if (ba - y < w) {
+                                    z = setTimeout(aa, w - (ba - y));
+                                } else aa();
                             }
                             return true;
-                        }, 'bind', true, this));
-                        h.add(window, 'scroll', u);
-                        h.add(window, 'resize', u);
-                        u();
-                        this.focused = true;
-                        var v = ES5(function() {
-                            this.focused = !this.focused;
-                            return true;
-                        }, 'bind', true, this);
-                        h.add(window, 'blur', v);
-                        h.add(window, 'focus', v);
-                        this.resize_running = false;
-                        this.animate = false;
-                        this.subscribe('xd.signal_animation', ES5(function() {
-                            this.animate = true;
-                        }, 'bind', true, this));
-                        return true;
-                    },
-                    getSize: function() {
-                        return {
-                            height: 25,
-                            width: (this._attr.action == 'recommend' ? 140 : 96)
                         };
-                    },
-                    calculateVisibility: function() {
-                        var n = document.documentElement.clientHeight;
-                        if (!this.focused && window.console && window.console.firebug) return this.visible;
-                        switch (this._attr.trigger) {
-                        case "manual":
-                            return false;
-                        case "onvisible":
-                            var o = this.dom.getBoundingClientRect()
-                                .top;
-                            return o <= n;
-                        default:
-                            var p = window.pageYOffset || document.body.scrollTop,
-                                q = document.documentElement.scrollHeight;
-                            return (p + n) / q >= this._attr.trigger;
-                        }
                     }
-                });
+                    function o(w) {
+                        if (w.match(/^\d+(?:\.\d+)?%$/)) {
+                            var x = Math.min(Math.max(parseInt(w, 10), 0), 100);
+                            w = x / 100;
+                        } else if (w != 'manual' && w != 'onvisible') w = 'onvisible';
+                        return w;
+                    }
+                    function p(w) {
+                        return Math.max(parseInt(w, 10) || 30, 10);
+                    }
+                    function q(w) {
+                        if (w == 'left' || w == 'right') return w;
+                        return l.getRtl() ? 'left' : 'right';
+                    }
+                    this._attr = {
+                        channel: this.getChannelUrl(),
+                        api_key: l.getClientID(),
+                        font: this.getAttribute('font'),
+                        colorscheme: this.getAttribute('colorscheme'),
+                        href: k(this.getAttribute('href')),
+                        side: q(this.getAttribute('side')),
+                        site: this.getAttribute('site'),
+                        action: this.getAttribute('action'),
+                        ref: this.getAttribute('ref'),
+                        max_age: this.getAttribute('max_age'),
+                        trigger: o(this.getAttribute('trigger', '')),
+                        read_time: p(this.getAttribute('read_time')),
+                        num_recommendations: parseInt(this.getAttribute('num_recommendations'), 10) || 2
+                    };
+                    this._showLoader = false;
+                    this.subscribe('iframe.onload', ES5(function() {
+                        var w = this.dom.children[0];
+                        w.className = 'fbpluginrecommendationsbar' + this._attr.side;
+                    }, 'bind', true, this));
+                    var r = ES5(function() {
+                        h.remove(window, 'scroll', r);
+                        h.remove(document.documentElement, 'click', r);
+                        h.remove(document.documentElement, 'mousemove', r);
+                        setTimeout(ES5(this.arbiterInform, 'bind', true, this, 'platform/plugins/recommendations_bar/action', null, g.BEHAVIOR_STATE), this._attr.read_time * 1000);
+                        return true;
+                    }, 'bind', true, this);
+                    h.add(window, 'scroll', r);
+                    h.add(document.documentElement, 'click', r);
+                    h.add(document.documentElement, 'mousemove', r);
+                    if (this._attr.trigger == "manual") {
+                        var s = ES5(function(w) {
+                            if (w == this._attr.href) {
+                                i.unsubscribe('xfbml.recommendationsbar.read', s);
+                                this.arbiterInform('platform/plugins/recommendations_bar/trigger', null, g.BEHAVIOR_STATE);
+                            }
+                            return true;
+                        }, 'bind', true, this);
+                        i.subscribe('xfbml.recommendationsbar.read', s);
+                    } else {
+                        var t = n(500, ES5(function() {
+                            if (this.calculateVisibility()) {
+                                h.remove(window, 'scroll', t);
+                                h.remove(window, 'resize', t);
+                                this.arbiterInform('platform/plugins/recommendations_bar/trigger', null, g.BEHAVIOR_STATE);
+                            }
+                            return true;
+                        }, 'bind', true, this));
+                        h.add(window, 'scroll', t);
+                        h.add(window, 'resize', t);
+                        t();
+                    }
+                    this.visible = false;
+                    var u = n(500, ES5(function() {
+                        if (!this.visible && this.calculateVisibility()) {
+                            this.visible = true;
+                            this.arbiterInform('platform/plugins/recommendations_bar/visible');
+                        } else if (this.visible && !this.calculateVisibility()) {
+                            this.visible = false;
+                            this.arbiterInform('platform/plugins/recommendations_bar/invisible');
+                        }
+                        return true;
+                    }, 'bind', true, this));
+                    h.add(window, 'scroll', u);
+                    h.add(window, 'resize', u);
+                    u();
+                    this.focused = true;
+                    var v = ES5(function() {
+                        this.focused = !this.focused;
+                        return true;
+                    }, 'bind', true, this);
+                    h.add(window, 'blur', v);
+                    h.add(window, 'focus', v);
+                    this.resize_running = false;
+                    this.animate = false;
+                    this.subscribe('xd.signal_animation', ES5(function() {
+                        this.animate = true;
+                    }, 'bind', true, this));
+                    return true;
+                },
+                getSize: function() {
+                    return {
+                        height: 25,
+                        width: (this._attr.action == 'recommend' ? 140 : 96)
+                    };
+                },
+                calculateVisibility: function() {
+                    var n = document.documentElement.clientHeight;
+                    if (!this.focused && window.console && window.console.firebug) return this.visible;
+                    switch (this._attr.trigger) {
+                    case "manual":
+                        return false;
+                    case "onvisible":
+                        var o = this.dom.getBoundingClientRect()
+                            .top;
+                        return o <= n;
+                    default:
+                        var p = window.pageYOffset || document.body.scrollTop,
+                            q = document.documentElement.scrollHeight;
+                        return (p + n) / q >= this._attr.trigger;
+                    }
+                }
+            });
             e.exports = m;
         });
-        __d("sdk.XFBML.Registration", ["sdk.Auth", "sdk.Helper", "sdk.XFBML.IframeWidget", "sdk.Runtime", "UrlMap"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Auth'),
-                h = b('sdk.Helper'),
-                i = b('sdk.XFBML.IframeWidget'),
-                j = b('sdk.Runtime'),
-                k = b('UrlMap'),
-                l = i.extend({
-                    _visibleAfter: 'immediate',
-                    _baseHeight: 167,
-                    _fieldHeight: 28,
-                    _skinnyWidth: 520,
-                    _skinnyBaseHeight: 173,
-                    _skinnyFieldHeight: 52,
-                    setupAndValidate: function() {
-                        this._attr = {
-                            action: this.getAttribute('action'),
-                            border_color: this.getAttribute('border-color'),
-                            channel_url: this.getChannelUrl(),
-                            client_id: j.getClientID(),
-                            fb_only: this._getBoolAttribute('fb-only', false),
-                            fb_register: this._getBoolAttribute('fb-register', false),
-                            fields: this.getAttribute('fields'),
-                            height: this._getPxAttribute('height'),
-                            redirect_uri: this.getAttribute('redirect-uri', window.location.href),
-                            no_footer: this._getBoolAttribute('no-footer'),
-                            no_header: this._getBoolAttribute('no-header'),
-                            onvalidate: this.getAttribute('onvalidate'),
-                            width: this._getPxAttribute('width', 600),
-                            target: this.getAttribute('target')
-                        };
-                        if (this._attr.onvalidate) this.subscribe('xd.validate', ES5(function(m) {
-                            var n = ES5('JSON', 'parse', false, m.value),
-                                o = ES5(function(q) {
-                                    this.arbiterInform('Registration.Validation', {
-                                        errors: q,
-                                        id: m.id
-                                    });
-                                }, 'bind', true, this),
-                                p = h.executeFunctionByName(this._attr.onvalidate, n, o);
-                            if (p) o(p);
-                        }, 'bind', true, this));
-                        this.subscribe('xd.authLogin', ES5(this._onAuthLogin, 'bind', true, this));
-                        this.subscribe('xd.authLogout', ES5(this._onAuthLogout, 'bind', true, this));
-                        return true;
-                    },
-                    getSize: function() {
-                        return {
-                            width: this._attr.width,
-                            height: this._getHeight()
-                        };
-                    },
-                    _getHeight: function() {
-                        if (this._attr.height) return this._attr.height;
-                        var m;
-                        if (!this._attr.fields) {
-                            m = ['name'];
-                        } else try {
-                            m = ES5('JSON', 'parse', false, this._attr.fields);
-                        } catch (n) {
-                            m = this._attr.fields.split(/,/);
-                        }
-                        if (this._attr.width < this._skinnyWidth) {
-                            return this._skinnyBaseHeight + m.length * this._skinnyFieldHeight;
-                        } else return this._baseHeight + m.length * this._fieldHeight;
-                    },
-                    getUrlBits: function() {
-                        return {
-                            name: 'registration',
-                            params: this._attr
-                        };
-                    },
-                    getDefaultWebDomain: function() {
-                        return k.resolve('www', true);
-                    },
-                    _onAuthLogin: function() {
-                        if (!g.getAuthResponse()) g.getLoginStatus();
-                        h.fireEvent('auth.login', this);
-                    },
-                    _onAuthLogout: function() {
-                        if (!g.getAuthResponse()) g.getLoginStatus();
-                        h.fireEvent('auth.logout', this);
+        __d("sdk.XFBML.Registration", ["sdk.Auth", "sdk.Helper", "sdk.XFBML.IframeWidget", "sdk.Runtime", "UrlMap"], function(a, b, c, d, e, f, g, h, i, j, k) {
+            var l = i.extend({
+                _visibleAfter: 'immediate',
+                _baseHeight: 167,
+                _fieldHeight: 28,
+                _skinnyWidth: 520,
+                _skinnyBaseHeight: 173,
+                _skinnyFieldHeight: 52,
+                setupAndValidate: function() {
+                    this._attr = {
+                        action: this.getAttribute('action'),
+                        border_color: this.getAttribute('border-color'),
+                        channel_url: this.getChannelUrl(),
+                        client_id: j.getClientID(),
+                        fb_only: this._getBoolAttribute('fb-only', false),
+                        fb_register: this._getBoolAttribute('fb-register', false),
+                        fields: this.getAttribute('fields'),
+                        height: this._getPxAttribute('height'),
+                        redirect_uri: this.getAttribute('redirect-uri', window.location.href),
+                        no_footer: this._getBoolAttribute('no-footer'),
+                        no_header: this._getBoolAttribute('no-header'),
+                        onvalidate: this.getAttribute('onvalidate'),
+                        width: this._getPxAttribute('width', 600),
+                        target: this.getAttribute('target')
+                    };
+                    if (this._attr.onvalidate) this.subscribe('xd.validate', ES5(function(m) {
+                        var n = ES5('JSON', 'parse', false, m.value),
+                            o = ES5(function(q) {
+                                this.arbiterInform('Registration.Validation', {
+                                    errors: q,
+                                    id: m.id
+                                });
+                            }, 'bind', true, this),
+                            p = h.executeFunctionByName(this._attr.onvalidate, n, o);
+                        if (p) o(p);
+                    }, 'bind', true, this));
+                    this.subscribe('xd.authLogin', ES5(this._onAuthLogin, 'bind', true, this));
+                    this.subscribe('xd.authLogout', ES5(this._onAuthLogout, 'bind', true, this));
+                    return true;
+                },
+                getSize: function() {
+                    return {
+                        width: this._attr.width,
+                        height: this._getHeight()
+                    };
+                },
+                _getHeight: function() {
+                    if (this._attr.height) return this._attr.height;
+                    var m;
+                    if (!this._attr.fields) {
+                        m = ['name'];
+                    } else try {
+                        m = ES5('JSON', 'parse', false, this._attr.fields);
+                    } catch (n) {
+                        m = this._attr.fields.split(/,/);
                     }
-                });
+                    if (this._attr.width < this._skinnyWidth) {
+                        return this._skinnyBaseHeight + m.length * this._skinnyFieldHeight;
+                    } else return this._baseHeight + m.length * this._fieldHeight;
+                },
+                getUrlBits: function() {
+                    return {
+                        name: 'registration',
+                        params: this._attr
+                    };
+                },
+                getDefaultWebDomain: function() {
+                    return k.resolve('www', true);
+                },
+                _onAuthLogin: function() {
+                    if (!g.getAuthResponse()) g.getLoginStatus();
+                    h.fireEvent('auth.login', this);
+                },
+                _onAuthLogout: function() {
+                    if (!g.getAuthResponse()) g.getLoginStatus();
+                    h.fireEvent('auth.logout', this);
+                }
+            });
             e.exports = l;
         });
-        __d("sdk.XFBML.SocialContext", ["sdk.Event", "sdk.XFBML.IframeWidget"], function(a, b, c, d, e, f) {
-            var g = b('sdk.Event'),
-                h = b('sdk.XFBML.IframeWidget'),
-                i = h.extend({
-                    setupAndValidate: function() {
-                        var j = this.getAttribute('size', 'small');
-                        this._attr = {
-                            channel: this.getChannelUrl(),
-                            width: this._getPxAttribute('width', 400),
-                            height: this._getPxAttribute('height', 100),
-                            ref: this.getAttribute('ref'),
-                            size: this.getAttribute('size'),
-                            keywords: this.getAttribute('keywords'),
-                            urls: this.getAttribute('urls'),
-                            object_id: this.getAttribute('object_id')
-                        };
-                        this.subscribe('xd.social_context_stats', ES5(this._bubbleSocialContextStats, 'bind', true, this));
-                        return true;
-                    },
-                    _bubbleSocialContextStats: function(j) {
-                        var k = {
-                            pluginID: this.getAttribute('plugin-id'),
-                            socialContextPageIDs: ES5('JSON', 'parse', false, j.social_context_page_ids)
-                        };
-                        g.fire('xfbml.social_context_stats', k);
-                    },
-                    getSize: function() {
-                        return {
-                            width: this._attr.width,
-                            height: this._attr.height
-                        };
-                    },
-                    getUrlBits: function() {
-                        return {
-                            name: 'social_context',
-                            params: this._attr
-                        };
-                    }
-                });
+        __d("sdk.XFBML.SocialContext", ["sdk.Event", "sdk.XFBML.IframeWidget"], function(a, b, c, d, e, f, g, h) {
+            var i = h.extend({
+                setupAndValidate: function() {
+                    var j = this.getAttribute('size', 'small');
+                    this._attr = {
+                        channel: this.getChannelUrl(),
+                        width: this._getPxAttribute('width', 400),
+                        height: this._getPxAttribute('height', 100),
+                        ref: this.getAttribute('ref'),
+                        size: this.getAttribute('size'),
+                        keywords: this.getAttribute('keywords'),
+                        urls: this.getAttribute('urls'),
+                        object_id: this.getAttribute('object_id')
+                    };
+                    this.subscribe('xd.social_context_stats', ES5(this._bubbleSocialContextStats, 'bind', true, this));
+                    return true;
+                },
+                _bubbleSocialContextStats: function(j) {
+                    var k = {
+                        pluginID: this.getAttribute('plugin-id'),
+                        socialContextPageIDs: ES5('JSON', 'parse', false, j.social_context_page_ids)
+                    };
+                    g.fire('xfbml.social_context_stats', k);
+                },
+                getSize: function() {
+                    return {
+                        width: this._attr.width,
+                        height: this._attr.height
+                    };
+                },
+                getUrlBits: function() {
+                    return {
+                        name: 'social_context',
+                        params: this._attr
+                    };
+                }
+            });
             e.exports = i;
         });
-        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration", "sdk.XFBML.SocialContext"], function(a, b, c, d) {
-            var e = b('Assert'),
-                f = b('sdk.domReady'),
-                g = b('sdk.Event'),
-                h = b('FB'),
-                i = b('IframePlugin'),
-                j = b('PluginTags'),
-                k = b('wrapFunction'),
-                l = b('XFBML'),
-                m = {
-                    comments: b('sdk.XFBML.Comments'),
-                    comments_count: b('sdk.XFBML.CommentsCount'),
-                    connect_bar: b('sdk.XFBML.ConnectBar'),
-                    login_button: b('sdk.XFBML.LoginButton'),
-                    name: b('sdk.XFBML.Name'),
-                    recommendations_bar: b('sdk.XFBML.RecommendationsBar'),
-                    registration: b('sdk.XFBML.Registration'),
-                    social_context: b('sdk.XFBML.SocialContext')
-                };
-            ES5(ES5('Object', 'keys', false, j), 'forEach', true, function(o) {
-                l.registerTag({
+        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration", "sdk.XFBML.SocialContext"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
+            var o = {
+                comments: b('sdk.XFBML.Comments'),
+                comments_count: b('sdk.XFBML.CommentsCount'),
+                connect_bar: b('sdk.XFBML.ConnectBar'),
+                login_button: b('sdk.XFBML.LoginButton'),
+                name: b('sdk.XFBML.Name'),
+                recommendations_bar: b('sdk.XFBML.RecommendationsBar'),
+                registration: b('sdk.XFBML.Registration'),
+                social_context: b('sdk.XFBML.SocialContext')
+            };
+            ES5(ES5('Object', 'keys', false, l), 'forEach', true, function(q) {
+                n.registerTag({
                     xmlns: 'fb',
-                    localName: o.replace(/_/g, '-'),
-                    ctor: i.withParams(j[o])
+                    localName: q.replace(/_/g, '-'),
+                    ctor: k.withParams(l[q])
                 });
             });
-            ES5(ES5('Object', 'keys', false, m), 'forEach', true, function(o) {
-                l.registerTag({
+            ES5(ES5('Object', 'keys', false, o), 'forEach', true, function(q) {
+                n.registerTag({
                     xmlns: 'fb',
-                    localName: o.replace(/_/g, '-'),
-                    ctor: m[o]
+                    localName: q.replace(/_/g, '-'),
+                    ctor: o[q]
                 });
             });
-            h.provide('XFBML', {
-                parse: function(o) {
-                    e.maybeXfbml(o, 'Invalid argument');
-                    if (o && o.nodeType === 9) o = o.body;
-                    return l.parse.apply(null, arguments);
+            j.provide('XFBML', {
+                parse: function(q) {
+                    g.maybeXfbml(q, 'Invalid argument');
+                    if (q && q.nodeType === 9) q = q.body;
+                    return n.parse.apply(null, arguments);
                 }
             });
-            h.provide('XFBML.RecommendationsBar', {
-                markRead: function(o) {
-                    g.fire('xfbml.recommendationsbar.read', o || window.location.href);
+            j.provide('XFBML.RecommendationsBar', {
+                markRead: function(q) {
+                    i.fire('xfbml.recommendationsbar.read', q || window.location.href);
                 }
             });
-            l.subscribe('parse', ES5(g.fire, 'bind', true, g, 'xfbml.parse'));
-            l.subscribe('render', ES5(g.fire, 'bind', true, g, 'xfbml.render'));
-            g.subscribe('init:post', function(o) {
-                if (o.xfbml) setTimeout(k(ES5(f, 'bind', true, null, l.parse), 'entry', 'init:post:xfbml.parse'), 0);
+            n.subscribe('parse', ES5(i.fire, 'bind', true, i, 'xfbml.parse'));
+            n.subscribe('render', ES5(i.fire, 'bind', true, i, 'xfbml.render'));
+            i.subscribe('init:post', function(q) {
+                if (q.xfbml) setTimeout(m(ES5(h, 'bind', true, null, n.parse), 'entry', 'init:post:xfbml.parse'), 0);
             });
-            e.define('Xfbml', function(o) {
-                return (o.nodeType === 1 || o.nodeType === 9) && typeof o.nodeName === 'string';
+            g.define('Xfbml', function(q) {
+                return (q.nodeType === 1 || q.nodeType === 9) && typeof q.nodeName === 'string';
             });
             try {
                 if (document.namespaces && !document.namespaces.item.fb) document.namespaces.add('fb');
-            } catch (n) {}
+            } catch (p) {}
         }, 3);
 
     })
         .call({}, window.inDapIF ? parent.window : window);
 } catch (e) {
     new Image()
-        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","message":"' + e.message + '"}}');
+        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1149284","message":"' + e.message + '"}}');
 }
