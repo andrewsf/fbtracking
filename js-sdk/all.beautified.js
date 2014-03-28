@@ -1,4 +1,4 @@
-/*1395725588,170412089,JIT Construction: v1175958,en_US*/
+/*1396039801,178528851,JIT Construction: v1182448,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -644,7 +644,7 @@ try {
         __d("sdk.RuntimeConfig", [], {
             "locale": "en_US",
             "rtl": false,
-            "revision": "1175958"
+            "revision": "1182448"
         });
         __d("SDKConfig", [], {
             "bustCache": true,
@@ -722,7 +722,7 @@ try {
         });
         __d("XDConfig", [], {
             "XdUrl": "\/connect\/xd_arbiter.php?version=40",
-            "XdBundleUrl": "\/connect\/xd_arbiter\/LEdxGgtB9cN.js?version=40",
+            "XdBundleUrl": "\/connect\/xd_arbiter\/wTH8U0osOYl.js?version=40",
             "Flash": {
                 "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"
             },
@@ -6959,5 +6959,5 @@ try {
         .call({}, window.inDapIF ? parent.window : window);
 } catch (e) {
     new Image()
-        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1175958","message":"' + e.message + '"}}');
+        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1182448","message":"' + e.message + '"}}');
 }
