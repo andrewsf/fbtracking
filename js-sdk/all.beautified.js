@@ -1,4 +1,4 @@
-/*1396913989,180751695,JIT Construction: v1196466,en_US*/
+/*1400973354,182070301,JIT Construction: v1262776,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -11,7 +11,9 @@ try {
         var self = window,
             document = window.document;
         var setTimeout = window.setTimeout,
-            setInterval = window.setInterval;
+            setInterval = window.setInterval,
+            clearTimeout = window.clearTimeout,
+            clearInterval = window.clearInterval;
         var __DEV__ = 0;
 
         function emptyFunction() {};
@@ -75,576 +77,572 @@ try {
                 } else c[e] = g;
             };
         })(this);
-        var ES5 = function() {
-            __d("ES5ArrayPrototype", [], function(a, b, c, d, e, f) {
-                var g = {};
-                g.map = function(h, i) {
-                    if (typeof h != 'function') throw new TypeError();
-                    var j, k = this.length,
-                        l = new Array(k);
-                    for (j = 0; j < k; ++j) if (j in this) l[j] = h.call(i, this[j], j, this);
-                    return l;
-                };
-                g.forEach = function(h, i) {
-                    g.map.call(this, h, i);
-                };
-                g.filter = function(h, i) {
-                    if (typeof h != 'function') throw new TypeError();
-                    var j, k, l = this.length,
-                        m = [];
-                    for (j = 0; j < l; ++j) if (j in this) {
-                        k = this[j];
-                        if (h.call(i, k, j, this)) m.push(k);
-                    }
-                    return m;
-                };
-                g.every = function(h, i) {
-                    if (typeof h != 'function') throw new TypeError();
-                    var j = new Object(this),
-                        k = j.length;
-                    for (var l = 0; l < k; l++) if (l in j) if (!h.call(i, j[l], l, j)) return false;
-                    return true;
-                };
-                g.some = function(h, i) {
-                    if (typeof h != 'function') throw new TypeError();
-                    var j = new Object(this),
-                        k = j.length;
-                    for (var l = 0; l < k; l++) if (l in j) if (h.call(i, j[l], l, j)) return true;
-                    return false;
-                };
-                g.indexOf = function(h, i) {
-                    var j = this.length;
-                    i |= 0;
-                    if (i < 0) i += j;
-                    for (; i < j; i++) if (i in this && this[i] === h) return i;
-                    return -1;
-                };
-                e.exports = g;
-            });
-            __d("ES5FunctionPrototype", [], function(a, b, c, d, e, f) {
-                var g = {};
-                g.bind = function(h) {
-                    if (typeof this != 'function') throw new TypeError('Bind must be called on a function');
-                    var i = this,
-                        j = Array.prototype.slice.call(arguments, 1);
+        __d("ES5ArrayPrototype", [], function(a, b, c, d, e, f) {
+            var g = {};
+            g.map = function(h, i) {
+                if (typeof h != 'function') throw new TypeError();
+                var j, k = this.length,
+                    l = new Array(k);
+                for (j = 0; j < k; ++j) if (j in this) l[j] = h.call(i, this[j], j, this);
+                return l;
+            };
+            g.forEach = function(h, i) {
+                g.map.call(this, h, i);
+            };
+            g.filter = function(h, i) {
+                if (typeof h != 'function') throw new TypeError();
+                var j, k, l = this.length,
+                    m = [];
+                for (j = 0; j < l; ++j) if (j in this) {
+                    k = this[j];
+                    if (h.call(i, k, j, this)) m.push(k);
+                }
+                return m;
+            };
+            g.every = function(h, i) {
+                if (typeof h != 'function') throw new TypeError();
+                var j = new Object(this),
+                    k = j.length;
+                for (var l = 0; l < k; l++) if (l in j) if (!h.call(i, j[l], l, j)) return false;
+                return true;
+            };
+            g.some = function(h, i) {
+                if (typeof h != 'function') throw new TypeError();
+                var j = new Object(this),
+                    k = j.length;
+                for (var l = 0; l < k; l++) if (l in j) if (h.call(i, j[l], l, j)) return true;
+                return false;
+            };
+            g.indexOf = function(h, i) {
+                var j = this.length;
+                i |= 0;
+                if (i < 0) i += j;
+                for (; i < j; i++) if (i in this && this[i] === h) return i;
+                return -1;
+            };
+            e.exports = g;
+        });
+        __d("ES5FunctionPrototype", [], function(a, b, c, d, e, f) {
+            var g = {};
+            g.bind = function(h) {
+                if (typeof this != 'function') throw new TypeError('Bind must be called on a function');
+                var i = this,
+                    j = Array.prototype.slice.call(arguments, 1);
 
-                    function k() {
-                        return i.apply(h, j.concat(Array.prototype.slice.call(arguments)));
-                    }
-                    k.displayName = 'bound:' + (i.displayName || i.name || '(?)');
-                    k.toString = function l() {
-                        return 'bound: ' + i;
+                function k() {
+                    return i.apply(h, j.concat(Array.prototype.slice.call(arguments)));
+                }
+                k.displayName = 'bound:' + (i.displayName || i.name || '(?)');
+                k.toString = function l() {
+                    return 'bound: ' + i;
+                };
+                return k;
+            };
+            e.exports = g;
+        });
+        __d("ES5StringPrototype", [], function(a, b, c, d, e, f) {
+            var g = {};
+            g.trim = function() {
+                if (this == null) throw new TypeError('String.prototype.trim called on null or undefined');
+                return String.prototype.replace.call(this, /^\s+|\s+$/g, '');
+            };
+            g.startsWith = function(h) {
+                var i = String(this);
+                if (this == null) throw new TypeError('String.prototype.startsWith called on null or undefined');
+                var j = arguments.length > 1 ? Number(arguments[1]) : 0;
+                if (isNaN(j)) j = 0;
+                var k = Math.min(Math.max(j, 0), i.length);
+                return i.indexOf(String(h), j) == k;
+            };
+            g.endsWith = function(h) {
+                var i = String(this);
+                if (this == null) throw new TypeError('String.prototype.endsWith called on null or undefined');
+                var j = i.length,
+                    k = String(h),
+                    l = arguments.length > 1 ? Number(arguments[1]) : j;
+                if (isNaN(l)) l = 0;
+                var m = Math.min(Math.max(l, 0), j),
+                    n = m - k.length;
+                if (n < 0) return false;
+                return i.lastIndexOf(k, n) == n;
+            };
+            g.contains = function(h) {
+                if (this == null) throw new TypeError('String.prototype.contains called on null or undefined');
+                var i = String(this),
+                    j = arguments.length > 1 ? Number(arguments[1]) : 0;
+                if (isNaN(j)) j = 0;
+                return i.indexOf(String(h), j) != -1;
+            };
+            g.repeat = function(h) {
+                if (this == null) throw new TypeError('String.prototype.repeat called on null or undefined');
+                var i = String(this),
+                    j = h ? Number(h) : 0;
+                if (isNaN(j)) j = 0;
+                if (j < 0 || j === Infinity) throw RangeError();
+                if (j === 1) return i;
+                if (j === 0) return '';
+                var k = '';
+                while (j) {
+                    if (j & 1) k += i;
+                    if ((j >>= 1)) i += i;
+                }
+                return k;
+            };
+            e.exports = g;
+        });
+        __d("ES5Array", [], function(a, b, c, d, e, f) {
+            var g = {};
+            g.isArray = function(h) {
+                return Object.prototype.toString.call(h) == '[object Array]';
+            };
+            e.exports = g;
+        });
+        __d("ES5Object", [], function(a, b, c, d, e, f) {
+            var g = {};
+            g.create = function(h) {
+                var i = typeof h;
+                if (i != 'object' && i != 'function') throw new TypeError('Object prototype may only be a Object or null');
+                var j = new Function();
+                j.prototype = h;
+                return new j();
+            };
+            g.keys = function(h) {
+                var i = typeof h;
+                if (i != 'object' && i != 'function' || h === null) throw new TypeError('Object.keys called on non-object');
+                var j = [];
+                for (var k in h) if (Object.prototype.hasOwnProperty.call(h, k)) j.push(k);
+                var l = !({
+                    toString: true
+                })
+                    .propertyIsEnumerable('toString'),
+                    m = ['toString', 'toLocaleString', 'valueOf', 'hasOwnProperty', 'isPrototypeOf', 'prototypeIsEnumerable', 'constructor'];
+                if (l) for (var n = 0; n < m.length; n++) {
+                    var o = m[n];
+                    if (Object.prototype.hasOwnProperty.call(h, o)) j.push(o);
+                }
+                return j;
+            };
+            e.exports = g;
+        });
+        __d("ES5Date", [], function(a, b, c, d, e, f) {
+            var g = {};
+            g.now = function() {
+                return new Date()
+                    .getTime();
+            };
+            e.exports = g;
+        });
+        /**
+         * @providesModule JSON3
+         * @preserve-header
+         *
+         *! JSON v3.2.3 | http://bestiejs.github.com/json3 | Copyright 2012, Kit Cambridge | http://kit.mit-license.org
+         */
+        __d("JSON3", [], function(a, b, c, d, e, f) {
+            (function() {
+                var g = {}.toString,
+                    h, i, j, k = e.exports = {}, l = '{"A":[1,true,false,null,"\\u0000\\b\\n\\f\\r\\t"]}',
+                    m, n, o, p, q, r, s, t, u, v, w, x, y, z, aa, ba = new Date(-3509827334573292),
+                    ca, da, ea;
+                try {
+                    ba = ba.getUTCFullYear() == -109252 && ba.getUTCMonth() === 0 && ba.getUTCDate() == 1 && ba.getUTCHours() == 10 && ba.getUTCMinutes() == 37 && ba.getUTCSeconds() == 6 && ba.getUTCMilliseconds() == 708;
+                } catch (fa) {}
+                if (!ba) {
+                    ca = Math.floor;
+                    da = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+                    ea = function(ga, ha) {
+                        return da[ha] + 365 * (ga - 1970) + ca((ga - 1969 + (ha = +(ha > 1))) / 4) - ca((ga - 1901 + ha) / 100) + ca((ga - 1601 + ha) / 400);
                     };
-                    return k;
-                };
-                e.exports = g;
-            });
-            __d("ES5StringPrototype", [], function(a, b, c, d, e, f) {
-                var g = {};
-                g.trim = function() {
-                    if (this == null) throw new TypeError('String.prototype.trim called on null or undefined');
-                    return String.prototype.replace.call(this, /^\s+|\s+$/g, '');
-                };
-                g.startsWith = function(h) {
-                    var i = String(this);
-                    if (this == null) throw new TypeError('String.prototype.startsWith called on null or undefined');
-                    var j = arguments.length > 1 ? Number(arguments[1]) : 0;
-                    if (isNaN(j)) j = 0;
-                    var k = Math.min(Math.max(j, 0), i.length);
-                    return i.indexOf(String(h), j) == k;
-                };
-                g.endsWith = function(h) {
-                    var i = String(this);
-                    if (this == null) throw new TypeError('String.prototype.endsWith called on null or undefined');
-                    var j = i.length,
-                        k = String(h),
-                        l = arguments.length > 1 ? Number(arguments[1]) : j;
-                    if (isNaN(l)) l = 0;
-                    var m = Math.min(Math.max(l, 0), j),
-                        n = m - k.length;
-                    if (n < 0) return false;
-                    return i.lastIndexOf(k, n) == n;
-                };
-                g.contains = function(h) {
-                    if (this == null) throw new TypeError('String.prototype.contains called on null or undefined');
-                    var i = String(this),
-                        j = arguments.length > 1 ? Number(arguments[1]) : 0;
-                    if (isNaN(j)) j = 0;
-                    return i.indexOf(String(h), j) != -1;
-                };
-                g.repeat = function(h) {
-                    if (this == null) throw new TypeError('String.prototype.repeat called on null or undefined');
-                    var i = String(this),
-                        j = h ? Number(h) : 0;
-                    if (isNaN(j)) j = 0;
-                    if (j < 0 || j === Infinity) throw RangeError();
-                    if (j === 1) return i;
-                    if (j === 0) return '';
-                    var k = '';
-                    while (j) {
-                        if (j & 1) k += i;
-                        if ((j >>= 1)) i += i;
-                    }
-                    return k;
-                };
-                e.exports = g;
-            });
-            __d("ES5Array", [], function(a, b, c, d, e, f) {
-                var g = {};
-                g.isArray = function(h) {
-                    return Object.prototype.toString.call(h) == '[object Array]';
-                };
-                e.exports = g;
-            });
-            __d("ES5Object", [], function(a, b, c, d, e, f) {
-                var g = {};
-                g.create = function(h) {
-                    var i = typeof h;
-                    if (i != 'object' && i != 'function') throw new TypeError('Object prototype may only be a Object or null');
-                    var j = new Function();
-                    j.prototype = h;
-                    return new j();
-                };
-                g.keys = function(h) {
-                    var i = typeof h;
-                    if (i != 'object' && i != 'function' || h === null) throw new TypeError('Object.keys called on non-object');
-                    var j = [];
-                    for (var k in h) if (Object.prototype.hasOwnProperty.call(h, k)) j.push(k);
-                    var l = !({
-                        toString: true
+                }
+                if (typeof JSON == "object" && JSON) {
+                    k.stringify = JSON.stringify;
+                    k.parse = JSON.parse;
+                }
+                if ((m = typeof k.stringify == "function" && !ea)) {
+                    (ba = function() {
+                        return 1;
                     })
-                        .propertyIsEnumerable('toString'),
-                        m = ['toString', 'toLocaleString', 'valueOf', 'hasOwnProperty', 'isPrototypeOf', 'prototypeIsEnumerable', 'constructor'];
-                    if (l) for (var n = 0; n < m.length; n++) {
-                        var o = m[n];
-                        if (Object.prototype.hasOwnProperty.call(h, o)) j.push(o);
-                    }
-                    return j;
-                };
-                e.exports = g;
-            });
-            __d("ES5Date", [], function(a, b, c, d, e, f) {
-                var g = {};
-                g.now = function() {
-                    return new Date()
-                        .getTime();
-                };
-                e.exports = g;
-            });
-            /**
-             * @providesModule JSON3
-             * @preserve-header
-             *
-             *! JSON v3.2.3 | http://bestiejs.github.com/json3 | Copyright 2012, Kit Cambridge | http://kit.mit-license.org
-             */
-            __d("JSON3", [], function(a, b, c, d, e, f) {
-                (function() {
-                    var g = {}.toString,
-                        h, i, j, k = e.exports = {}, l = '{"A":[1,true,false,null,"\\u0000\\b\\n\\f\\r\\t"]}',
-                        m, n, o, p, q, r, s, t, u, v, w, x, y, z, aa, ba = new Date(-3509827334573292),
-                        ca, da, ea;
+                        .toJSON = ba;
                     try {
-                        ba = ba.getUTCFullYear() == -109252 && ba.getUTCMonth() === 0 && ba.getUTCDate() == 1 && ba.getUTCHours() == 10 && ba.getUTCMinutes() == 37 && ba.getUTCSeconds() == 6 && ba.getUTCMilliseconds() == 708;
-                    } catch (fa) {}
-                    if (!ba) {
-                        ca = Math.floor;
-                        da = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
-                        ea = function(ga, ha) {
-                            return da[ha] + 365 * (ga - 1970) + ca((ga - 1969 + (ha = +(ha > 1))) / 4) - ca((ga - 1901 + ha) / 100) + ca((ga - 1601 + ha) / 400);
-                        };
-                    }
-                    if (typeof JSON == "object" && JSON) {
-                        k.stringify = JSON.stringify;
-                        k.parse = JSON.parse;
-                    }
-                    if ((m = typeof k.stringify == "function" && !ea)) {
-                        (ba = function() {
-                            return 1;
-                        })
-                            .toJSON = ba;
-                        try {
-                            m = k.stringify(0) === "0" && k.stringify(new Number()) === "0" && k.stringify(new String()) == '""' && k.stringify(g) === j && k.stringify(j) === j && k.stringify() === j && k.stringify(ba) === "1" && k.stringify([ba]) == "[1]" && k.stringify([j]) == "[null]" && k.stringify(null) == "null" && k.stringify([j, g, null]) == "[null,null,null]" && k.stringify({
-                                result: [ba, true, false, null, "\0\b\n\f\r\t"]
-                            }) == l && k.stringify(null, ba) === "1" && k.stringify([1, 2], null, 1) == "[\n 1,\n 2\n]" && k.stringify(new Date(-8.64e+15)) == '"-271821-04-20T00:00:00.000Z"' && k.stringify(new Date(8.64e+15)) == '"+275760-09-13T00:00:00.000Z"' && k.stringify(new Date(-62198755200000)) == '"-000001-01-01T00:00:00.000Z"' && k.stringify(new Date(-1)) == '"1969-12-31T23:59:59.999Z"';
-                        } catch (fa) {
-                            m = false;
-                        }
-                    }
-                    if (typeof k.parse == "function") try {
-                        if (k.parse("0") === 0 && !k.parse(false)) {
-                            ba = k.parse(l);
-                            if ((r = ba.A.length == 5 && ba.A[0] == 1)) {
-                                try {
-                                    r = !k.parse('"\t"');
-                                } catch (fa) {}
-                                if (r) try {
-                                    r = k.parse("01") != 1;
-                                } catch (fa) {}
-                            }
-                        }
+                        m = k.stringify(0) === "0" && k.stringify(new Number()) === "0" && k.stringify(new String()) == '""' && k.stringify(g) === j && k.stringify(j) === j && k.stringify() === j && k.stringify(ba) === "1" && k.stringify([ba]) == "[1]" && k.stringify([j]) == "[null]" && k.stringify(null) == "null" && k.stringify([j, g, null]) == "[null,null,null]" && k.stringify({
+                            result: [ba, true, false, null, "\0\b\n\f\r\t"]
+                        }) == l && k.stringify(null, ba) === "1" && k.stringify([1, 2], null, 1) == "[\n 1,\n 2\n]" && k.stringify(new Date(-8.64e+15)) == '"-271821-04-20T00:00:00.000Z"' && k.stringify(new Date(8.64e+15)) == '"+275760-09-13T00:00:00.000Z"' && k.stringify(new Date(-62198755200000)) == '"-000001-01-01T00:00:00.000Z"' && k.stringify(new Date(-1)) == '"1969-12-31T23:59:59.999Z"';
                     } catch (fa) {
-                        r = false;
+                        m = false;
                     }
-                    ba = l = null;
-                    if (!m || !r) {
-                        if (!(h = {}.hasOwnProperty)) h = function(ga) {
-                            var ha = {}, ia;
-                            if ((ha.__proto__ = null, ha.__proto__ = {
-                                toString: 1
-                            }, ha)
-                                .toString != g) {
-                                h = function(ja) {
-                                    var ka = this.__proto__,
-                                        la = ja in (this.__proto__ = null, this);
-                                    this.__proto__ = ka;
-                                    return la;
-                                };
-                            } else {
-                                ia = ha.constructor;
-                                h = function(ja) {
-                                    var ka = (this.constructor || ia)
-                                        .prototype;
-                                    return ja in this && !(ja in ka && this[ja] === ka[ja]);
-                                };
-                            }
-                            ha = null;
-                            return h.call(this, ga);
-                        };
-                        i = function(ga, ha) {
-                            var ia = 0,
-                                ja, ka, la, ma;
-                            (ja = function() {
-                                this.valueOf = 0;
-                            })
-                                .prototype.valueOf = 0;
-                            ka = new ja();
-                            for (la in ka) if (h.call(ka, la)) ia++;
-                            ja = ka = null;
-                            if (!ia) {
-                                ka = ["valueOf", "toString", "toLocaleString", "propertyIsEnumerable", "isPrototypeOf", "hasOwnProperty", "constructor"];
-                                ma = function(na, oa) {
-                                    var pa = g.call(na) == "[object Function]",
-                                        qa, ra;
-                                    for (qa in na) if (!(pa && qa == "prototype") && h.call(na, qa)) oa(qa);
-                                    for (ra = ka.length; qa = ka[--ra]; h.call(na, qa) && oa(qa));
-                                };
-                            } else if (ia == 2) {
-                                ma = function(na, oa) {
-                                    var pa = {}, qa = g.call(na) == "[object Function]",
-                                        ra;
-                                    for (ra in na) if (!(qa && ra == "prototype") && !h.call(pa, ra) && (pa[ra] = 1) && h.call(na, ra)) oa(ra);
-                                };
-                            } else ma = function(na, oa) {
+                }
+                if (typeof k.parse == "function") try {
+                    if (k.parse("0") === 0 && !k.parse(false)) {
+                        ba = k.parse(l);
+                        if ((r = ba.A.length == 5 && ba.A[0] == 1)) {
+                            try {
+                                r = !k.parse('"\t"');
+                            } catch (fa) {}
+                            if (r) try {
+                                r = k.parse("01") != 1;
+                            } catch (fa) {}
+                        }
+                    }
+                } catch (fa) {
+                    r = false;
+                }
+                ba = l = null;
+                if (!m || !r) {
+                    if (!(h = {}.hasOwnProperty)) h = function(ga) {
+                        var ha = {}, ia;
+                        if ((ha.__proto__ = null, ha.__proto__ = {
+                            toString: 1
+                        }, ha)
+                            .toString != g) {
+                            h = function(ja) {
+                                var ka = this.__proto__,
+                                    la = ja in (this.__proto__ = null, this);
+                                this.__proto__ = ka;
+                                return la;
+                            };
+                        } else {
+                            ia = ha.constructor;
+                            h = function(ja) {
+                                var ka = (this.constructor || ia)
+                                    .prototype;
+                                return ja in this && !(ja in ka && this[ja] === ka[ja]);
+                            };
+                        }
+                        ha = null;
+                        return h.call(this, ga);
+                    };
+                    i = function(ga, ha) {
+                        var ia = 0,
+                            ja, ka, la, ma;
+                        (ja = function() {
+                            this.valueOf = 0;
+                        })
+                            .prototype.valueOf = 0;
+                        ka = new ja();
+                        for (la in ka) if (h.call(ka, la)) ia++;
+                        ja = ka = null;
+                        if (!ia) {
+                            ka = ["valueOf", "toString", "toLocaleString", "propertyIsEnumerable", "isPrototypeOf", "hasOwnProperty", "constructor"];
+                            ma = function(na, oa) {
                                 var pa = g.call(na) == "[object Function]",
                                     qa, ra;
-                                for (qa in na) if (!(pa && qa == "prototype") && h.call(na, qa) && !(ra = qa === "constructor")) oa(qa);
-                                if (ra || h.call(na, (qa = "constructor"))) oa(qa);
+                                for (qa in na) if (!(pa && qa == "prototype") && h.call(na, qa)) oa(qa);
+                                for (ra = ka.length; qa = ka[--ra]; h.call(na, qa) && oa(qa));
                             };
-                            return ma(ga, ha);
+                        } else if (ia == 2) {
+                            ma = function(na, oa) {
+                                var pa = {}, qa = g.call(na) == "[object Function]",
+                                    ra;
+                                for (ra in na) if (!(qa && ra == "prototype") && !h.call(pa, ra) && (pa[ra] = 1) && h.call(na, ra)) oa(ra);
+                            };
+                        } else ma = function(na, oa) {
+                            var pa = g.call(na) == "[object Function]",
+                                qa, ra;
+                            for (qa in na) if (!(pa && qa == "prototype") && h.call(na, qa) && !(ra = qa === "constructor")) oa(qa);
+                            if (ra || h.call(na, (qa = "constructor"))) oa(qa);
                         };
-                        if (!m) {
-                            n = {
-                                "\\": "\\\\",
-                                '"': '\\"',
-                                "\b": "\\b",
-                                "\f": "\\f",
-                                "\n": "\\n",
-                                "\r": "\\r",
-                                "\t": "\\t"
-                            };
-                            o = function(ga, ha) {
-                                return ("000000" + (ha || 0))
-                                    .slice(-ga);
-                            };
-                            p = function(ga) {
-                                var ha = '"',
-                                    ia = 0,
-                                    ja;
-                                for (; ja = ga.charAt(ia); ia++) ha += '\\"\b\f\n\r\t'.indexOf(ja) > -1 ? n[ja] : ja < " " ? "\\u00" + o(2, ja.charCodeAt(0)
-                                    .toString(16)) : ja;
-                                return ha + '"';
-                            };
-                            q = function(ga, ha, ia, ja, ka, la, ma) {
-                                var na = ha[ga],
-                                    oa, pa, qa, ra, sa, ta, ua, va, wa, xa, ya, za, ab, bb, cb;
-                                if (typeof na == "object" && na) {
-                                    oa = g.call(na);
-                                    if (oa == "[object Date]" && !h.call(na, "toJSON")) {
-                                        if (na > -1 / 0 && na < 1 / 0) {
-                                            if (ea) {
-                                                ra = ca(na / 86400000);
-                                                for (pa = ca(ra / 365.2425) + 1970 - 1; ea(pa + 1, 0) <= ra; pa++);
-                                                for (qa = ca((ra - ea(pa, 0)) / 30.42); ea(pa, qa + 1) <= ra; qa++);
-                                                ra = 1 + ra - ea(pa, qa);
-                                                sa = (na % 86400000 + 86400000) % 86400000;
-                                                ta = ca(sa / 3600000) % 24;
-                                                ua = ca(sa / 60000) % 60;
-                                                va = ca(sa / 1000) % 60;
-                                                wa = sa % 1000;
-                                            } else {
-                                                pa = na.getUTCFullYear();
-                                                qa = na.getUTCMonth();
-                                                ra = na.getUTCDate();
-                                                ta = na.getUTCHours();
-                                                ua = na.getUTCMinutes();
-                                                va = na.getUTCSeconds();
-                                                wa = na.getUTCMilliseconds();
-                                            }
-                                            na = (pa <= 0 || pa >= 10000 ? (pa < 0 ? "-" : "+") + o(6, pa < 0 ? -pa : pa) : o(4, pa)) + "-" + o(2, qa + 1) + "-" + o(2, ra) + "T" + o(2, ta) + ":" + o(2, ua) + ":" + o(2, va) + "." + o(3, wa) + "Z";
-                                        } else na = null;
-                                    } else if (typeof na.toJSON == "function" && ((oa != "[object Number]" && oa != "[object String]" && oa != "[object Array]") || h.call(na, "toJSON"))) na = na.toJSON(ga);
-                                }
-                                if (ia) na = ia.call(ha, ga, na);
-                                if (na === null) return "null";
+                        return ma(ga, ha);
+                    };
+                    if (!m) {
+                        n = {
+                            "\\": "\\\\",
+                            '"': '\\"',
+                            "\b": "\\b",
+                            "\f": "\\f",
+                            "\n": "\\n",
+                            "\r": "\\r",
+                            "\t": "\\t"
+                        };
+                        o = function(ga, ha) {
+                            return ("000000" + (ha || 0))
+                                .slice(-ga);
+                        };
+                        p = function(ga) {
+                            var ha = '"',
+                                ia = 0,
+                                ja;
+                            for (; ja = ga.charAt(ia); ia++) ha += '\\"\b\f\n\r\t'.indexOf(ja) > -1 ? n[ja] : ja < " " ? "\\u00" + o(2, ja.charCodeAt(0)
+                                .toString(16)) : ja;
+                            return ha + '"';
+                        };
+                        q = function(ga, ha, ia, ja, ka, la, ma) {
+                            var na = ha[ga],
+                                oa, pa, qa, ra, sa, ta, ua, va, wa, xa, ya, za, ab, bb, cb;
+                            if (typeof na == "object" && na) {
                                 oa = g.call(na);
-                                if (oa == "[object Boolean]") {
-                                    return "" + na;
-                                } else if (oa == "[object Number]") {
-                                    return na > -1 / 0 && na < 1 / 0 ? "" + na : "null";
-                                } else if (oa == "[object String]") return p(na);
-                                if (typeof na == "object") {
-                                    for (ab = ma.length; ab--;) if (ma[ab] === na) throw TypeError();
-                                    ma.push(na);
-                                    xa = [];
-                                    bb = la;
-                                    la += ka;
-                                    if (oa == "[object Array]") {
-                                        for (za = 0, ab = na.length; za < ab; cb || (cb = true), za++) {
-                                            ya = q(za, na, ia, ja, ka, la, ma);
-                                            xa.push(ya === j ? "null" : ya);
+                                if (oa == "[object Date]" && !h.call(na, "toJSON")) {
+                                    if (na > -1 / 0 && na < 1 / 0) {
+                                        if (ea) {
+                                            ra = ca(na / 86400000);
+                                            for (pa = ca(ra / 365.2425) + 1970 - 1; ea(pa + 1, 0) <= ra; pa++);
+                                            for (qa = ca((ra - ea(pa, 0)) / 30.42); ea(pa, qa + 1) <= ra; qa++);
+                                            ra = 1 + ra - ea(pa, qa);
+                                            sa = (na % 86400000 + 86400000) % 86400000;
+                                            ta = ca(sa / 3600000) % 24;
+                                            ua = ca(sa / 60000) % 60;
+                                            va = ca(sa / 1000) % 60;
+                                            wa = sa % 1000;
+                                        } else {
+                                            pa = na.getUTCFullYear();
+                                            qa = na.getUTCMonth();
+                                            ra = na.getUTCDate();
+                                            ta = na.getUTCHours();
+                                            ua = na.getUTCMinutes();
+                                            va = na.getUTCSeconds();
+                                            wa = na.getUTCMilliseconds();
                                         }
-                                        return cb ? (ka ? "[\n" + la + xa.join(",\n" + la) + "\n" + bb + "]" : ("[" + xa.join(",") + "]")) : "[]";
-                                    } else {
-                                        i(ja || na, function(db) {
-                                            var eb = q(db, na, ia, ja, ka, la, ma);
-                                            if (eb !== j) xa.push(p(db) + ":" + (ka ? " " : "") + eb);
-                                            cb || (cb = true);
-                                        });
-                                        return cb ? (ka ? "{\n" + la + xa.join(",\n" + la) + "\n" + bb + "}" : ("{" + xa.join(",") + "}")) : "{}";
+                                        na = (pa <= 0 || pa >= 10000 ? (pa < 0 ? "-" : "+") + o(6, pa < 0 ? -pa : pa) : o(4, pa)) + "-" + o(2, qa + 1) + "-" + o(2, ra) + "T" + o(2, ta) + ":" + o(2, ua) + ":" + o(2, va) + "." + o(3, wa) + "Z";
+                                    } else na = null;
+                                } else if (typeof na.toJSON == "function" && ((oa != "[object Number]" && oa != "[object String]" && oa != "[object Array]") || h.call(na, "toJSON"))) na = na.toJSON(ga);
+                            }
+                            if (ia) na = ia.call(ha, ga, na);
+                            if (na === null) return "null";
+                            oa = g.call(na);
+                            if (oa == "[object Boolean]") {
+                                return "" + na;
+                            } else if (oa == "[object Number]") {
+                                return na > -1 / 0 && na < 1 / 0 ? "" + na : "null";
+                            } else if (oa == "[object String]") return p(na);
+                            if (typeof na == "object") {
+                                for (ab = ma.length; ab--;) if (ma[ab] === na) throw TypeError();
+                                ma.push(na);
+                                xa = [];
+                                bb = la;
+                                la += ka;
+                                if (oa == "[object Array]") {
+                                    for (za = 0, ab = na.length; za < ab; cb || (cb = true), za++) {
+                                        ya = q(za, na, ia, ja, ka, la, ma);
+                                        xa.push(ya === j ? "null" : ya);
                                     }
-                                    ma.pop();
+                                    return cb ? (ka ? "[\n" + la + xa.join(",\n" + la) + "\n" + bb + "]" : ("[" + xa.join(",") + "]")) : "[]";
+                                } else {
+                                    i(ja || na, function(db) {
+                                        var eb = q(db, na, ia, ja, ka, la, ma);
+                                        if (eb !== j) xa.push(p(db) + ":" + (ka ? " " : "") + eb);
+                                        cb || (cb = true);
+                                    });
+                                    return cb ? (ka ? "{\n" + la + xa.join(",\n" + la) + "\n" + bb + "}" : ("{" + xa.join(",") + "}")) : "{}";
                                 }
-                            };
-                            k.stringify = function(ga, ha, ia) {
-                                var ja, ka, la, ma, na, oa;
-                                if (typeof ha == "function" || typeof ha == "object" && ha) if (g.call(ha) == "[object Function]") {
-                                    ka = ha;
-                                } else if (g.call(ha) == "[object Array]") {
-                                    la = {};
-                                    for (ma = 0, na = ha.length; ma < na; oa = ha[ma++], ((g.call(oa) == "[object String]" || g.call(oa) == "[object Number]") && (la[oa] = 1)));
-                                }
-                                if (ia) if (g.call(ia) == "[object Number]") {
-                                    if ((ia -= ia % 1) > 0) for (ja = "", ia > 10 && (ia = 10); ja.length < ia; ja += " ");
-                                } else if (g.call(ia) == "[object String]") ja = ia.length <= 10 ? ia : ia.slice(0, 10);
-                                return q("", (oa = {}, oa[""] = ga, oa), ka, la, ja, "", []);
-                            };
-                        }
-                        if (!r) {
-                            s = String.fromCharCode;
-                            t = {
-                                "\\": "\\",
-                                '"': '"',
-                                "/": "/",
-                                b: "\b",
-                                t: "\t",
-                                n: "\n",
-                                f: "\f",
-                                r: "\r"
-                            };
-                            u = function() {
-                                z = aa = null;
-                                throw SyntaxError();
-                            };
-                            v = function() {
-                                var ga = aa,
-                                    ha = ga.length,
-                                    ia, ja, ka, la, ma;
-                                while (z < ha) {
-                                    ia = ga.charAt(z);
-                                    if ("\t\r\n ".indexOf(ia) > -1) {
-                                        z++;
-                                    } else if ("{}[]:,".indexOf(ia) > -1) {
-                                        z++;
-                                        return ia;
-                                    } else if (ia == '"') {
-                                        for (ja = "@", z++; z < ha;) {
-                                            ia = ga.charAt(z);
-                                            if (ia < " ") {
-                                                u();
-                                            } else if (ia == "\\") {
-                                                ia = ga.charAt(++z);
-                                                if ('\\"/btnfr'.indexOf(ia) > -1) {
-                                                    ja += t[ia];
-                                                    z++;
-                                                } else if (ia == "u") {
-                                                    ka = ++z;
-                                                    for (la = z + 4; z < la; z++) {
-                                                        ia = ga.charAt(z);
-                                                        if (!(ia >= "0" && ia <= "9" || ia >= "a" && ia <= "f" || ia >= "A" && ia <= "F")) u();
-                                                    }
-                                                    ja += s("0x" + ga.slice(ka, z));
-                                                } else u();
-                                            } else {
-                                                if (ia == '"') break;
-                                                ja += ia;
-                                                z++;
-                                            }
-                                        }
-                                        if (ga.charAt(z) == '"') {
-                                            z++;
-                                            return ja;
-                                        }
-                                        u();
-                                    } else {
-                                        ka = z;
-                                        if (ia == "-") {
-                                            ma = true;
+                                ma.pop();
+                            }
+                        };
+                        k.stringify = function(ga, ha, ia) {
+                            var ja, ka, la, ma, na, oa;
+                            if (typeof ha == "function" || typeof ha == "object" && ha) if (g.call(ha) == "[object Function]") {
+                                ka = ha;
+                            } else if (g.call(ha) == "[object Array]") {
+                                la = {};
+                                for (ma = 0, na = ha.length; ma < na; oa = ha[ma++], ((g.call(oa) == "[object String]" || g.call(oa) == "[object Number]") && (la[oa] = 1)));
+                            }
+                            if (ia) if (g.call(ia) == "[object Number]") {
+                                if ((ia -= ia % 1) > 0) for (ja = "", ia > 10 && (ia = 10); ja.length < ia; ja += " ");
+                            } else if (g.call(ia) == "[object String]") ja = ia.length <= 10 ? ia : ia.slice(0, 10);
+                            return q("", (oa = {}, oa[""] = ga, oa), ka, la, ja, "", []);
+                        };
+                    }
+                    if (!r) {
+                        s = String.fromCharCode;
+                        t = {
+                            "\\": "\\",
+                            '"': '"',
+                            "/": "/",
+                            b: "\b",
+                            t: "\t",
+                            n: "\n",
+                            f: "\f",
+                            r: "\r"
+                        };
+                        u = function() {
+                            z = aa = null;
+                            throw SyntaxError();
+                        };
+                        v = function() {
+                            var ga = aa,
+                                ha = ga.length,
+                                ia, ja, ka, la, ma;
+                            while (z < ha) {
+                                ia = ga.charAt(z);
+                                if ("\t\r\n ".indexOf(ia) > -1) {
+                                    z++;
+                                } else if ("{}[]:,".indexOf(ia) > -1) {
+                                    z++;
+                                    return ia;
+                                } else if (ia == '"') {
+                                    for (ja = "@", z++; z < ha;) {
+                                        ia = ga.charAt(z);
+                                        if (ia < " ") {
+                                            u();
+                                        } else if (ia == "\\") {
                                             ia = ga.charAt(++z);
+                                            if ('\\"/btnfr'.indexOf(ia) > -1) {
+                                                ja += t[ia];
+                                                z++;
+                                            } else if (ia == "u") {
+                                                ka = ++z;
+                                                for (la = z + 4; z < la; z++) {
+                                                    ia = ga.charAt(z);
+                                                    if (!(ia >= "0" && ia <= "9" || ia >= "a" && ia <= "f" || ia >= "A" && ia <= "F")) u();
+                                                }
+                                                ja += s("0x" + ga.slice(ka, z));
+                                            } else u();
+                                        } else {
+                                            if (ia == '"') break;
+                                            ja += ia;
+                                            z++;
                                         }
-                                        if (ia >= "0" && ia <= "9") {
-                                            if (ia == "0" && (ia = ga.charAt(z + 1), ia >= "0" && ia <= "9")) u();
-                                            ma = false;
-                                            for (; z < ha && (ia = ga.charAt(z), ia >= "0" && ia <= "9"); z++);
-                                            if (ga.charAt(z) == ".") {
-                                                la = ++z;
-                                                for (; la < ha && (ia = ga.charAt(la), ia >= "0" && ia <= "9"); la++);
-                                                if (la == z) u();
-                                                z = la;
-                                            }
-                                            ia = ga.charAt(z);
-                                            if (ia == "e" || ia == "E") {
-                                                ia = ga.charAt(++z);
-                                                if (ia == "+" || ia == "-") z++;
-                                                for (la = z; la < ha && (ia = ga.charAt(la), ia >= "0" && ia <= "9"); la++);
-                                                if (la == z) u();
-                                                z = la;
-                                            }
-                                            return +ga.slice(ka, z);
-                                        }
-                                        if (ma) u();
-                                        if (ga.slice(z, z + 4) == "true") {
-                                            z += 4;
-                                            return true;
-                                        } else if (ga.slice(z, z + 5) == "false") {
-                                            z += 5;
-                                            return false;
-                                        } else if (ga.slice(z, z + 4) == "null") {
-                                            z += 4;
-                                            return null;
-                                        }
-                                        u();
                                     }
-                                }
-                                return "$";
-                            };
-                            w = function(ga) {
-                                var ha, ia, ja;
-                                if (ga == "$") u();
-                                if (typeof ga == "string") {
-                                    if (ga.charAt(0) == "@") return ga.slice(1);
-                                    if (ga == "[") {
-                                        ha = [];
-                                        for (;; ia || (ia = true)) {
-                                            ga = v();
-                                            if (ga == "]") break;
-                                            if (ia) if (ga == ",") {
-                                                ga = v();
-                                                if (ga == "]") u();
-                                            } else u();
-                                            if (ga == ",") u();
-                                            ha.push(w(ga));
+                                    if (ga.charAt(z) == '"') {
+                                        z++;
+                                        return ja;
+                                    }
+                                    u();
+                                } else {
+                                    ka = z;
+                                    if (ia == "-") {
+                                        ma = true;
+                                        ia = ga.charAt(++z);
+                                    }
+                                    if (ia >= "0" && ia <= "9") {
+                                        if (ia == "0" && (ia = ga.charAt(z + 1), ia >= "0" && ia <= "9")) u();
+                                        ma = false;
+                                        for (; z < ha && (ia = ga.charAt(z), ia >= "0" && ia <= "9"); z++);
+                                        if (ga.charAt(z) == ".") {
+                                            la = ++z;
+                                            for (; la < ha && (ia = ga.charAt(la), ia >= "0" && ia <= "9"); la++);
+                                            if (la == z) u();
+                                            z = la;
                                         }
-                                        return ha;
-                                    } else if (ga == "{") {
-                                        ha = {};
-                                        for (;; ia || (ia = true)) {
-                                            ga = v();
-                                            if (ga == "}") break;
-                                            if (ia) if (ga == ",") {
-                                                ga = v();
-                                                if (ga == "}") u();
-                                            } else u();
-                                            if (ga == "," || typeof ga != "string" || ga.charAt(0) != "@" || v() != ":") u();
-                                            ha[ga.slice(1)] = w(v());
+                                        ia = ga.charAt(z);
+                                        if (ia == "e" || ia == "E") {
+                                            ia = ga.charAt(++z);
+                                            if (ia == "+" || ia == "-") z++;
+                                            for (la = z; la < ha && (ia = ga.charAt(la), ia >= "0" && ia <= "9"); la++);
+                                            if (la == z) u();
+                                            z = la;
                                         }
-                                        return ha;
+                                        return +ga.slice(ka, z);
+                                    }
+                                    if (ma) u();
+                                    if (ga.slice(z, z + 4) == "true") {
+                                        z += 4;
+                                        return true;
+                                    } else if (ga.slice(z, z + 5) == "false") {
+                                        z += 5;
+                                        return false;
+                                    } else if (ga.slice(z, z + 4) == "null") {
+                                        z += 4;
+                                        return null;
                                     }
                                     u();
                                 }
-                                return ga;
-                            };
-                            y = function(ga, ha, ia) {
-                                var ja = x(ga, ha, ia);
-                                if (ja === j) {
-                                    delete ga[ha];
-                                } else ga[ha] = ja;
-                            };
-                            x = function(ga, ha, ia) {
-                                var ja = ga[ha],
-                                    ka;
-                                if (typeof ja == "object" && ja) if (g.call(ja) == "[object Array]") {
-                                    for (ka = ja.length; ka--;) y(ja, ka, ia);
-                                } else i(ja, function(la) {
-                                    y(ja, la, ia);
-                                });
-                                return ia.call(ga, ha, ja);
-                            };
-                            k.parse = function(ga, ha) {
-                                z = 0;
-                                aa = ga;
-                                var ia = w(v());
-                                if (v() != "$") u();
-                                z = aa = null;
-                                return ha && g.call(ha) == "[object Function]" ? x((ba = {}, ba[""] = ia, ba), "", ha) : ia;
-                            };
-                        }
-                    }
-                })
-                    .call(this);
-            });
-            __d("ES5", ["ES5ArrayPrototype", "ES5FunctionPrototype", "ES5StringPrototype", "ES5Array", "ES5Object", "ES5Date", "JSON3"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
-                var n = Array.prototype.slice,
-                    o = Object.prototype.toString,
-                    p = {
-                        'JSON.stringify': m.stringify,
-                        'JSON.parse': m.parse
-                    }, q = {
-                        array: g,
-                        'function': h,
-                        string: i,
-                        Object: k,
-                        Array: j,
-                        Date: l
-                    };
-                for (var r in q) {
-                    if (!q.hasOwnProperty(r)) continue;
-                    var s = q[r],
-                        t = r === r.toLowerCase() ? window[r.replace(/^\w/, function(x) {
-                            return x.toUpperCase();
-                        })].prototype : window[r];
-                    for (var u in s) {
-                        if (!s.hasOwnProperty(u)) continue;
-                        var v = t[u];
-                        p[r + '.' + u] = v && /\{\s+\[native code\]\s\}/.test(v) ? v : s[u];
+                            }
+                            return "$";
+                        };
+                        w = function(ga) {
+                            var ha, ia, ja;
+                            if (ga == "$") u();
+                            if (typeof ga == "string") {
+                                if (ga.charAt(0) == "@") return ga.slice(1);
+                                if (ga == "[") {
+                                    ha = [];
+                                    for (;; ia || (ia = true)) {
+                                        ga = v();
+                                        if (ga == "]") break;
+                                        if (ia) if (ga == ",") {
+                                            ga = v();
+                                            if (ga == "]") u();
+                                        } else u();
+                                        if (ga == ",") u();
+                                        ha.push(w(ga));
+                                    }
+                                    return ha;
+                                } else if (ga == "{") {
+                                    ha = {};
+                                    for (;; ia || (ia = true)) {
+                                        ga = v();
+                                        if (ga == "}") break;
+                                        if (ia) if (ga == ",") {
+                                            ga = v();
+                                            if (ga == "}") u();
+                                        } else u();
+                                        if (ga == "," || typeof ga != "string" || ga.charAt(0) != "@" || v() != ":") u();
+                                        ha[ga.slice(1)] = w(v());
+                                    }
+                                    return ha;
+                                }
+                                u();
+                            }
+                            return ga;
+                        };
+                        y = function(ga, ha, ia) {
+                            var ja = x(ga, ha, ia);
+                            if (ja === j) {
+                                delete ga[ha];
+                            } else ga[ha] = ja;
+                        };
+                        x = function(ga, ha, ia) {
+                            var ja = ga[ha],
+                                ka;
+                            if (typeof ja == "object" && ja) if (g.call(ja) == "[object Array]") {
+                                for (ka = ja.length; ka--;) y(ja, ka, ia);
+                            } else i(ja, function(la) {
+                                y(ja, la, ia);
+                            });
+                            return ia.call(ga, ha, ja);
+                        };
+                        k.parse = function(ga, ha) {
+                            z = 0;
+                            aa = ga;
+                            var ia = w(v());
+                            if (v() != "$") u();
+                            z = aa = null;
+                            return ha && g.call(ha) == "[object Function]" ? x((ba = {}, ba[""] = ia, ba), "", ha) : ia;
+                        };
                     }
                 }
-                function w(x, y, z) {
-                    var aa = n.call(arguments, 3),
-                        ba = z ? /\s(.*)\]/.exec(o.call(x)
-                            .toLowerCase())[1] : x,
-                        ca = p[ba + '.' + y] || x[y];
-                    if (typeof ca === 'function') return ca.apply(x, aa);
+            })
+                .call(this);
+        });
+        __d("ES5", ["ES5ArrayPrototype", "ES5FunctionPrototype", "ES5StringPrototype", "ES5Array", "ES5Object", "ES5Date", "JSON3"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
+            var n = Array.prototype.slice,
+                o = Object.prototype.toString,
+                p = {
+                    'JSON.stringify': m.stringify,
+                    'JSON.parse': m.parse
+                }, q = {
+                    array: g,
+                    'function': h,
+                    string: i,
+                    Object: k,
+                    Array: j,
+                    Date: l
+                };
+            for (var r in q) {
+                if (!q.hasOwnProperty(r)) continue;
+                var s = q[r],
+                    t = r === r.toLowerCase() ? window[r.replace(/^\w/, function(x) {
+                        return x.toUpperCase();
+                    })].prototype : window[r];
+                for (var u in s) {
+                    if (!s.hasOwnProperty(u)) continue;
+                    var v = t[u];
+                    p[r + '.' + u] = v && /\{\s+\[native code\]\s\}/.test(v) ? v : s[u];
                 }
-                e.exports = w;
-            });
-            ES5 = require('ES5');
-            return ES5.apply(null, arguments);
-        };
-
+            }
+            function w(x, y, z) {
+                var aa = n.call(arguments, 3),
+                    ba = z ? /\s(.*)\]/.exec(o.call(x)
+                        .toLowerCase())[1] : x,
+                    ca = p[ba + '.' + y] || x[y];
+                if (typeof ca === 'function') return ca.apply(x, aa);
+            }
+            e.exports = w;
+        });
+        var ES5 = require('ES5');
         __d("JSSDKRuntimeConfig", [], {
             "locale": "en_US",
             "rtl": false,
-            "revision": "1196466"
+            "revision": "1262776"
         });
         __d("JSSDKConfig", [], {
             "bustCache": true,
@@ -721,8 +719,8 @@ try {
             "cdn_https": "s-static.ak.facebook.com"
         });
         __d("JSSDKXDConfig", [], {
-            "XdUrl": "\/connect\/xd_arbiter.php?version=40",
-            "XdBundleUrl": "\/connect\/xd_arbiter\/wTH8U0osOYl.js?version=40",
+            "XdUrl": "\/connect\/xd_arbiter.php?version=41",
+            "XdBundleUrl": "\/connect\/xd_arbiter\/dgdTycPTSRj.js?version=41",
             "Flash": {
                 "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"
             },
@@ -1036,6 +1034,7 @@ try {
                 CookieUserID: '',
                 Environment: j.UNKNOWN,
                 Initialized: false,
+                IsVersioned: false,
                 KidDirectedSite: undefined,
                 Locale: h.locale,
                 LoginStatus: undefined,
@@ -1044,7 +1043,8 @@ try {
                 Scope: undefined,
                 Secure: undefined,
                 UseCookie: false,
-                UserID: ''
+                UserID: '',
+                Version: undefined
             });
             i(k, {
                 ENVIRONMENTS: j,
@@ -1570,7 +1570,7 @@ try {
                     p.setFragment(q.getFragment());
                     return true;
                 }
-                q = q.toString();
+                q = ES5(q.toString(), 'trim', true);
                 var t = g.parse(q) || {};
                 if (!r && !h.isAllowed(t.scheme)) return false;
                 p.setProtocol(t.scheme || '');
@@ -1657,7 +1657,7 @@ try {
             };
             o.prototype.addQueryData = function(p, q) {
                 "use strict";
-                if (p instanceof Object) {
+                if (Object.prototype.toString.call(p) === '[object Object]') {
                     i(this.$URIBase6, p);
                 } else this.$URIBase6[p] = q;
                 return this;
@@ -2349,7 +2349,7 @@ try {
                             var y = event.data,
                                 z = event.origin || 'native';
                             if (!/^(https?:\/\/|native$)/.test(z)) {
-                                m.warn('Received message from invalid origin type: %s', z);
+                                m.debug('Received message from invalid origin type: %s', z);
                                 return;
                             }
                             if (typeof y != 'string') {
@@ -2502,7 +2502,7 @@ try {
                                 root: ta,
                                 'aria-hidden': true,
                                 title: ja,
-                                'tab-index': -1
+                                tabindex: -1
                             });
                             z = s({
                                 url: ea + xa,
@@ -2511,11 +2511,18 @@ try {
                                 root: ta,
                                 'aria-hidden': true,
                                 title: ja,
-                                'tab-index': -1
+                                tabindex: -1
                             });
                         },
                         onMessage: oa
                     });
+                if (!ua) n.log('jssdk_error', {
+                    appId: m.getClientID(),
+                    error: 'XD_TRANSPORT',
+                    extra: {
+                        message: 'Failed to create a valid transport'
+                    }
+                });
                 ia = true;
             }
             var ra = {
@@ -3390,35 +3397,58 @@ try {
             k.setSwfUrl(s.FlashRequest.swfUrl);
             e.exports = ca;
         });
-        __d("sdk.api", ["ApiClient", "sdk.Runtime"], function(a, b, c, d, e, f, g, h) {
-            var i;
-            h.subscribe('ClientID.change', function(k) {
-                g.setClientID(k);
+        __d("sdk.PlatformVersioning", ["sdk.Runtime", "ManagedError"], function(a, b, c, d, e, f, g, h) {
+            var i = /^v\d+\.\d\d?$/,
+                j = {
+                    REGEX: i,
+                    assertVersionIsSet: function() {
+                        if (!g.getVersion()) throw new h('init not called with valid version');
+                    },
+                    assertValidVersion: function(k) {
+                        if (!i.test(k)) throw new h('invalid version specified');
+                    }
+                };
+            e.exports = j;
+        });
+        __d("sdk.api", ["ApiClient", "sdk.PlatformVersioning", "sdk.Runtime", "sdk.URI"], function(a, b, c, d, e, f, g, h, i, j) {
+            var k;
+            i.subscribe('ClientID.change', function(m) {
+                g.setClientID(m);
             });
-            h.subscribe('AccessToken.change', function(k) {
-                i = k;
-                g.setAccessToken(k);
+            i.subscribe('AccessToken.change', function(m) {
+                k = m;
+                g.setAccessToken(m);
             });
             g.setDefaultParams({
                 sdk: 'joey'
             });
-            g.subscribe('request.complete', function(k, l, m, n) {
-                var o = false;
-                if (n && typeof n == 'object') if (n.error) {
-                    if (n.error == 'invalid_token' || (n.error.type == 'OAuthException' && n.error.code == 190)) o = true;
-                } else if (n.error_code) if (n.error_code == '190') o = true;
-                if (o && i === h.getAccessToken()) h.setAccessToken(null);
+            g.subscribe('request.complete', function(m, n, o, p) {
+                var q = false;
+                if (p && typeof p == 'object') if (p.error) {
+                    if (p.error == 'invalid_token' || (p.error.type == 'OAuthException' && p.error.code == 190)) q = true;
+                } else if (p.error_code) if (p.error_code == '190') q = true;
+                if (q && k === i.getAccessToken()) i.setAccessToken(null);
             });
-            g.subscribe('request.complete', function(k, l, m, n) {
-                if (((k == '/me/permissions' && l === 'delete') || (k == '/restserver.php' && m.method == 'Auth.revokeAuthorization')) && n === true) h.setAccessToken(null);
+            g.subscribe('request.complete', function(m, n, o, p) {
+                if (((m == '/me/permissions' && n === 'delete') || (m == '/restserver.php' && o.method == 'Auth.revokeAuthorization')) && p === true) i.setAccessToken(null);
             });
 
-            function j() {
-                if (typeof arguments[0] === 'string') {
-                    g.graph.apply(g, arguments);
+            function l(m) {
+                if (typeof m === 'string') {
+                    if (i.getIsVersioned()) {
+                        h.assertVersionIsSet();
+                        if (!/https?/.test(m) && m.charAt(0) !== '/') m = '/' + m;
+                        m = j(m)
+                            .setDomain(null)
+                            .setProtocol(null)
+                            .toString();
+                        if (!h.REGEX.test(m.substring(1, ES5(m, 'indexOf', true, '/', 1)))) m = '/' + i.getVersion() + m;
+                        var n = [m].concat(Array.prototype.slice.call(arguments, 1));
+                        g.graph.apply(g, n);
+                    } else g.graph.apply(g, arguments);
                 } else g.rest.apply(g, arguments);
             }
-            e.exports = j;
+            e.exports = l;
         });
         __d("legacy:fb.api", ["FB", "sdk.api"], function(a, b, c, d, e, f, g, h) {
             g.provide('', {
@@ -3934,467 +3964,479 @@ try {
             }
             e.exports = g;
         });
-        __d("sdk.UIServer", ["sdk.Auth", "sdk.Content", "copyProperties", "sdk.Dialog", "sdk.DOM", "sdk.Event", "flattenObject", "sdk.Frictionless", "sdk.getContextType", "guid", "insertIframe", "Log", "sdk.Native", "QueryString", "resolveURI", "sdk.RPC", "sdk.Runtime", "JSSDKConfig", "UrlMap", "UserAgent", "sdk.XD"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, aa) {
-            var ba = {
-                transform: function(ea) {
-                    if (ea.params.display === 'touch' && ea.params.access_token && window.postMessage) {
-                        ea.params.channel = da._xdChannelHandler(ea.id, 'parent');
-                        if (!z.nativeApp()) ea.params.in_iframe = 1;
-                        return ea;
-                    } else return da.genericTransform(ea);
+        __d("sdk.UIServer", ["sdk.Auth", "sdk.Content", "createObjectFrom", "copyProperties", "sdk.Dialog", "sdk.DOM", "sdk.Event", "flattenObject", "sdk.Frictionless", "sdk.getContextType", "guid", "insertIframe", "Log", "sdk.Native", "QueryString", "resolveURI", "sdk.RPC", "sdk.Runtime", "JSSDKConfig", "UrlMap", "UserAgent", "sdk.XD"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, aa, ba) {
+            var ca = {
+                transform: function(fa) {
+                    if (fa.params.display === 'touch' && fa.params.access_token && window.postMessage) {
+                        fa.params.channel = ea._xdChannelHandler(fa.id, 'parent');
+                        if (!aa.nativeApp()) fa.params.in_iframe = 1;
+                        return fa;
+                    } else return ea.genericTransform(fa);
                 },
-                getXdRelation: function(ea) {
-                    var fa = ea.display;
-                    if (fa === 'touch' && window.postMessage && ea.in_iframe) return 'parent';
-                    return da.getXdRelation(ea);
+                getXdRelation: function(fa) {
+                    var ga = fa.display;
+                    if (ga === 'touch' && window.postMessage && fa.in_iframe) return 'parent';
+                    return ea.getXdRelation(fa);
                 }
-            }, ca = {
+            }, da = {
                 'stream.share': {
                     size: {
                         width: 670,
                         height: 340
                     },
                     url: 'sharer.php',
-                    transform: function(ea) {
-                        if (!ea.params.u) ea.params.u = window.location.toString();
-                        ea.params.display = 'popup';
-                        return ea;
+                    transform: function(fa) {
+                        if (!fa.params.u) fa.params.u = window.location.toString();
+                        fa.params.display = 'popup';
+                        return fa;
                     }
                 },
                 apprequests: {
-                    transform: function(ea) {
-                        ea = ba.transform(ea);
-                        ea.params.frictionless = n && n._useFrictionless;
-                        if (ea.params.frictionless) {
-                            if (n.isAllowed(ea.params.to)) {
-                                ea.params.display = 'iframe';
-                                ea.params.in_iframe = true;
-                                ea.hideLoader = true;
+                    transform: function(fa) {
+                        fa = ca.transform(fa);
+                        fa.params.frictionless = o && o._useFrictionless;
+                        if (fa.params.frictionless) {
+                            if (o.isAllowed(fa.params.to)) {
+                                fa.params.display = 'iframe';
+                                fa.params.in_iframe = true;
+                                fa.hideLoader = true;
                             }
-                            ea.cb = n._processRequestResponse(ea.cb, ea.hideLoader);
+                            fa.cb = o._processRequestResponse(fa.cb, fa.hideLoader);
                         }
-                        ea.closeIcon = false;
-                        return ea;
+                        fa.closeIcon = false;
+                        return fa;
                     },
-                    getXdRelation: ba.getXdRelation
+                    getXdRelation: ca.getXdRelation
                 },
-                feed: ba,
+                feed: ca,
                 'permissions.oauth': {
                     url: 'dialog/oauth',
                     size: {
-                        width: (z.mobile() ? null : 475),
-                        height: (z.mobile() ? null : 183)
+                        width: (aa.mobile() ? null : 475),
+                        height: (aa.mobile() ? null : 183)
                     },
-                    transform: function(ea) {
-                        if (!w.getClientID()) {
-                            r.error('FB.login() called before FB.init().');
+                    transform: function(fa) {
+                        if (!x.getClientID()) {
+                            s.error('FB.login() called before FB.init().');
                             return;
                         }
-                        if (g.getAuthResponse() && !ea.params.scope && !ea.params.auth_type) {
-                            r.error('FB.login() called when user is already connected.');
-                            ea.cb && ea.cb({
-                                status: w.getLoginStatus(),
+                        if (g.getAuthResponse() && !fa.params.scope && !fa.params.auth_type) {
+                            s.error('FB.login() called when user is already connected.');
+                            fa.cb && fa.cb({
+                                status: x.getLoginStatus(),
                                 authResponse: g.getAuthResponse()
                             });
                             return;
                         }
-                        var fa = ea.cb,
-                            ga = ea.id;
-                        delete ea.cb;
-                        if (ea.params.display === 'async') {
-                            i(ea.params, {
-                                client_id: w.getClientID(),
-                                origin: o(),
-                                response_type: 'token,signed_request',
+                        var ga = fa.cb,
+                            ha = fa.id;
+                        delete fa.cb;
+                        var ia = ES5('Object', 'keys', false, j(fa.params.response_type ? i(fa.params.response_type.split(',')) : {}, {
+                            token: true,
+                            signed_request: true
+                        }))
+                            .join(',');
+                        if (fa.params.display === 'async') {
+                            j(fa.params, {
+                                client_id: x.getClientID(),
+                                origin: p(),
+                                response_type: ia,
                                 domain: location.hostname
                             });
-                            ea.cb = g.xdResponseWrapper(fa, g.getAuthResponse(), 'permissions.oauth');
-                        } else i(ea.params, {
-                            client_id: w.getClientID(),
-                            redirect_uri: u(da.xdHandler(fa, ga, 'opener', g.getAuthResponse(), 'permissions.oauth')),
-                            origin: o(),
-                            response_type: 'token,signed_request',
+                            fa.cb = g.xdResponseWrapper(ga, g.getAuthResponse(), 'permissions.oauth');
+                        } else j(fa.params, {
+                            client_id: x.getClientID(),
+                            redirect_uri: v(ea.xdHandler(ga, ha, 'opener', g.getAuthResponse(), 'permissions.oauth')),
+                            origin: p(),
+                            response_type: ia,
                             domain: location.hostname
                         });
-                        return ea;
+                        return fa;
                     }
                 },
                 'auth.logout': {
                     url: 'logout.php',
-                    transform: function(ea) {
-                        if (!w.getClientID()) {
-                            r.error('FB.logout() called before calling FB.init().');
+                    transform: function(fa) {
+                        if (!x.getClientID()) {
+                            s.error('FB.logout() called before calling FB.init().');
                         } else if (!g.getAuthResponse()) {
-                            r.error('FB.logout() called without an access token.');
+                            s.error('FB.logout() called without an access token.');
                         } else {
-                            ea.params.next = da.xdHandler(ea.cb, ea.id, 'parent', g.getAuthResponse(), 'logout');
-                            return ea;
+                            fa.params.next = ea.xdHandler(fa.cb, fa.id, 'parent', g.getAuthResponse(), 'logout');
+                            return fa;
                         }
                     }
                 },
                 'login.status': {
                     url: 'dialog/oauth',
-                    transform: function(ea) {
-                        var fa = ea.cb,
-                            ga = ea.id;
-                        delete ea.cb;
-                        i(ea.params, {
-                            client_id: w.getClientID(),
-                            redirect_uri: da.xdHandler(fa, ga, 'parent', g.getAuthResponse(), 'login_status'),
-                            origin: o(),
+                    transform: function(fa) {
+                        var ga = fa.cb,
+                            ha = fa.id;
+                        delete fa.cb;
+                        j(fa.params, {
+                            client_id: x.getClientID(),
+                            redirect_uri: ea.xdHandler(ga, ha, 'parent', g.getAuthResponse(), 'login_status'),
+                            origin: p(),
                             response_type: 'token,signed_request,code',
                             domain: location.hostname
                         });
-                        return ea;
+                        return fa;
                     }
                 }
-            }, da = {
-                Methods: ca,
+            }, ea = {
+                Methods: da,
                 _loadedNodes: {},
                 _defaultCb: {},
                 _resultToken: '"xxRESULTTOKENxx"',
-                genericTransform: function(ea) {
-                    if (ea.params.display == 'dialog' || ea.params.display == 'iframe') i(ea.params, {
+                genericTransform: function(fa) {
+                    if (fa.params.display == 'dialog' || fa.params.display == 'iframe') j(fa.params, {
                         display: 'iframe',
-                        channel: da._xdChannelHandler(ea.id, 'parent.parent')
+                        channel: ea._xdChannelHandler(fa.id, 'parent.parent')
                     }, true);
-                    return ea;
+                    return fa;
                 },
-                checkOauthDisplay: function(ea) {
-                    var fa = ea.scope || ea.perms || w.getScope();
-                    if (!fa) return ea.display;
-                    var ga = fa.split(/\s|,/g);
-                    for (var ha = 0; ha < ga.length; ha++) if (!x.initSitevars.iframePermissions[ES5(ga[ha], 'trim', true)]) return 'popup';
-                    return ea.display;
+                checkOauthDisplay: function(fa) {
+                    var ga = fa.scope || fa.perms || x.getScope();
+                    if (!ga) return fa.display;
+                    var ha = ga.split(/\s|,/g);
+                    for (var ia = 0; ia < ha.length; ia++) if (!y.initSitevars.iframePermissions[ES5(ha[ia], 'trim', true)]) return 'popup';
+                    return fa.display;
                 },
-                prepareCall: function(ea, fa) {
-                    var ga = ea.method.toLowerCase(),
-                        ha = i({}, da.Methods[ga]),
-                        ia = p(),
-                        ja = w.getSecure() || (ga !== 'auth.status' && ga != 'login.status');
-                    i(ea, {
-                        app_id: w.getClientID(),
-                        locale: w.getLocale(),
+                prepareCall: function(fa, ga) {
+                    var ha = fa.method.toLowerCase(),
+                        ia = j({}, ea.Methods[ha]),
+                        ja = q(),
+                        ka = x.getSecure() || (ha !== 'auth.status' && ha != 'login.status');
+                    j(fa, {
+                        app_id: x.getClientID(),
+                        locale: x.getLocale(),
                         sdk: 'joey',
-                        access_token: ja && w.getAccessToken() || undefined
+                        access_token: ka && x.getAccessToken() || undefined
                     });
-                    ea.display = da.getDisplayMode(ha, ea);
-                    if (!ha.url) ha.url = 'dialog/' + ga;
-                    if ((ha.url == 'dialog/oauth' || ha.url == 'dialog/permissions.request') && (ea.display == 'iframe' || (ea.display == 'touch' && ea.in_iframe))) ea.display = da.checkOauthDisplay(ea);
-                    var ka = {
-                        cb: fa,
-                        id: ia,
-                        size: ha.size || da.getDefaultSize(),
-                        url: y.resolve(ea.display == 'touch' ? 'm' : 'www', ja) + '/' + ha.url,
-                        params: ea,
-                        name: ga,
-                        dialog: j.newInstance(ia, ea.display)
-                    }, la = ha.transform ? ha.transform : da.genericTransform;
-                    if (la) {
-                        ka = la(ka);
-                        if (!ka) return;
+                    fa.display = ea.getDisplayMode(ia, fa);
+                    if (!ia.url) ia.url = 'dialog/' + ha;
+                    if ((ia.url == 'dialog/oauth' || ia.url == 'dialog/permissions.request') && (fa.display == 'iframe' || (fa.display == 'touch' && fa.in_iframe))) fa.display = ea.checkOauthDisplay(fa);
+                    if (x.getIsVersioned() && ia.url.substring(0, 7) === 'dialog/') ia.url = fa.version + '/' + ia.url;
+                    var la = {
+                        cb: ga,
+                        id: ja,
+                        size: ia.size || ea.getDefaultSize(),
+                        url: z.resolve(fa.display == 'touch' ? 'm' : 'www', ka) + '/' + ia.url,
+                        params: fa,
+                        name: ha,
+                        dialog: k.newInstance(ja, fa.display)
+                    }, ma = ia.transform ? ia.transform : ea.genericTransform;
+                    if (ma) {
+                        la = ma(la);
+                        if (!la) return;
                     }
-                    var ma = ha.getXdRelation || da.getXdRelation,
-                        na = ma(ka.params);
-                    if (!(ka.id in da._defaultCb) && !('next' in ka.params) && !('redirect_uri' in ka.params)) ka.params.next = da._xdResult(ka.cb, ka.id, na, true);
-                    if (na === 'parent') i(ka.params, {
-                        channel_url: da._xdChannelHandler(ia, 'parent.parent')
+                    var na = ia.getXdRelation || ea.getXdRelation,
+                        oa = na(la.params);
+                    if (!(la.id in ea._defaultCb) && !('next' in la.params) && !('redirect_uri' in la.params)) la.params.next = ea._xdResult(la.cb, la.id, oa, true);
+                    if (oa === 'parent') j(la.params, {
+                        channel_url: ea._xdChannelHandler(ja, 'parent.parent')
                     }, true);
-                    ka = da.prepareParams(ka);
-                    return ka;
+                    la = ea.prepareParams(la);
+                    return la;
                 },
-                prepareParams: function(ea) {
-                    var fa = ea.params.method;
-                    if (ea.params.display !== 'async') delete ea.params.method;
-                    ea.params = m(ea.params);
-                    var ga = t.encode(ea.params);
-                    if (!z.nativeApp() && da.urlTooLongForIE(ea.url + '?' + ga)) {
-                        ea.post = true;
-                    } else if (ga) ea.url += '?' + ga;
-                    return ea;
+                prepareParams: function(fa) {
+                    var ga = fa.params.method;
+                    if (fa.params.display !== 'async') delete fa.params.method;
+                    fa.params = n(fa.params);
+                    var ha = u.encode(fa.params);
+                    if (!aa.nativeApp() && ea.urlTooLongForIE(fa.url + '?' + ha)) {
+                        fa.post = true;
+                    } else if (ha) fa.url += '?' + ha;
+                    return fa;
                 },
-                urlTooLongForIE: function(ea) {
-                    return ea.length > 2000;
+                urlTooLongForIE: function(fa) {
+                    return fa.length > 2000;
                 },
-                getDisplayMode: function(ea, fa) {
-                    if (fa.display === 'hidden' || fa.display === 'none') return fa.display;
-                    var ga = w.isEnvironment(w.ENVIRONMENTS.CANVAS) || w.isEnvironment(w.ENVIRONMENTS.PAGETAB);
-                    if (ga && !fa.display) return 'async';
-                    if (z.mobile() || fa.display === 'touch') return 'touch';
-                    if (!w.getAccessToken() && (fa.display == 'iframe' || fa.display == 'dialog') && !ea.loggedOutIframe) {
-                        r.error('"dialog" mode can only be used when the user is connected.');
+                getDisplayMode: function(fa, ga) {
+                    if (ga.display === 'hidden' || ga.display === 'none') return ga.display;
+                    var ha = x.isEnvironment(x.ENVIRONMENTS.CANVAS) || x.isEnvironment(x.ENVIRONMENTS.PAGETAB);
+                    if (ha && !ga.display) return 'async';
+                    if (aa.mobile() || ga.display === 'touch') return 'touch';
+                    if (!x.getAccessToken() && (ga.display == 'iframe' || ga.display == 'dialog') && !fa.loggedOutIframe) {
+                        s.error('"dialog" mode can only be used when the user is connected.');
                         return 'popup';
                     }
-                    if (ea.connectDisplay && !ga) return ea.connectDisplay;
-                    return fa.display || (w.getAccessToken() ? 'dialog' : 'popup');
+                    if (fa.connectDisplay && !ha) return fa.connectDisplay;
+                    return ga.display || (x.getAccessToken() ? 'dialog' : 'popup');
                 },
-                getXdRelation: function(ea) {
-                    var fa = ea.display;
-                    if (fa === 'popup' || fa === 'touch') return 'opener';
-                    if (fa === 'dialog' || fa === 'iframe' || fa === 'hidden' || fa === 'none') return 'parent';
-                    if (fa === 'async') return 'parent.frames[' + window.name + ']';
+                getXdRelation: function(fa) {
+                    var ga = fa.display;
+                    if (ga === 'popup' || ga === 'touch') return 'opener';
+                    if (ga === 'dialog' || ga === 'iframe' || ga === 'hidden' || ga === 'none') return 'parent';
+                    if (ga === 'async') return 'parent.frames[' + window.name + ']';
                 },
-                popup: function(ea) {
-                    var fa = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
-                        ga = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
-                        ha = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.documentElement.clientWidth,
-                        ia = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.documentElement.clientHeight - 22),
-                        ja = z.mobile() ? null : ea.size.width,
-                        ka = z.mobile() ? null : ea.size.height,
-                        la = (fa < 0) ? window.screen.width + fa : fa,
-                        ma = parseInt(la + ((ha - ja) / 2), 10),
-                        na = parseInt(ga + ((ia - ka) / 2.5), 10),
-                        oa = [];
-                    if (ja !== null) oa.push('width=' + ja);
-                    if (ka !== null) oa.push('height=' + ka);
-                    oa.push('left=' + ma);
-                    oa.push('top=' + na);
-                    oa.push('scrollbars=1');
-                    if (ea.name == 'permissions.request' || ea.name == 'permissions.oauth') oa.push('location=1,toolbar=0');
-                    oa = oa.join(',');
-                    var pa;
-                    if (ea.post) {
-                        pa = window.open('about:blank', ea.id, oa);
-                        if (pa) {
-                            da.setLoadedNode(ea, pa, 'popup');
+                popup: function(fa) {
+                    var ga = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
+                        ha = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
+                        ia = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.documentElement.clientWidth,
+                        ja = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.documentElement.clientHeight - 22),
+                        ka = aa.mobile() ? null : fa.size.width,
+                        la = aa.mobile() ? null : fa.size.height,
+                        ma = (ga < 0) ? window.screen.width + ga : ga,
+                        na = parseInt(ma + ((ia - ka) / 2), 10),
+                        oa = parseInt(ha + ((ja - la) / 2.5), 10),
+                        pa = [];
+                    if (ka !== null) pa.push('width=' + ka);
+                    if (la !== null) pa.push('height=' + la);
+                    pa.push('left=' + na);
+                    pa.push('top=' + oa);
+                    pa.push('scrollbars=1');
+                    if (fa.name == 'permissions.request' || fa.name == 'permissions.oauth') pa.push('location=1,toolbar=0');
+                    pa = pa.join(',');
+                    var qa;
+                    if (fa.post) {
+                        qa = window.open('about:blank', fa.id, pa);
+                        if (qa) {
+                            ea.setLoadedNode(fa, qa, 'popup');
                             h.submitToTarget({
-                                url: ea.url,
-                                target: ea.id,
-                                params: ea.params
+                                url: fa.url,
+                                target: fa.id,
+                                params: fa.params
                             });
                         }
                     } else {
-                        pa = window.open(ea.url, ea.id, oa);
-                        if (pa) da.setLoadedNode(ea, pa, 'popup');
+                        qa = window.open(fa.url, fa.id, pa);
+                        if (qa) ea.setLoadedNode(fa, qa, 'popup');
                     }
-                    if (!pa) return;
-                    if (ea.id in da._defaultCb) da._popupMonitor();
+                    if (!qa) return;
+                    if (fa.id in ea._defaultCb) ea._popupMonitor();
                 },
-                setLoadedNode: function(ea, fa, ga) {
-                    if (ea.params && ea.params.display != 'popup') fa.fbCallID = ea.id;
-                    fa = {
-                        node: fa,
-                        type: ga,
-                        fbCallID: ea.id
+                setLoadedNode: function(fa, ga, ha) {
+                    if (fa.params && fa.params.display != 'popup') ga.fbCallID = fa.id;
+                    ga = {
+                        node: ga,
+                        type: ha,
+                        fbCallID: fa.id
                     };
-                    da._loadedNodes[ea.id] = fa;
+                    ea._loadedNodes[fa.id] = ga;
                 },
-                getLoadedNode: function(ea) {
-                    var fa = typeof ea == 'object' ? ea.id : ea,
-                        ga = da._loadedNodes[fa];
-                    return ga ? ga.node : null;
+                getLoadedNode: function(fa) {
+                    var ga = typeof fa == 'object' ? fa.id : fa,
+                        ha = ea._loadedNodes[ga];
+                    return ha ? ha.node : null;
                 },
-                hidden: function(ea) {
-                    ea.className = 'FB_UI_Hidden';
-                    ea.root = h.appendHidden('');
-                    da._insertIframe(ea);
+                hidden: function(fa) {
+                    fa.className = 'FB_UI_Hidden';
+                    fa.root = h.appendHidden('');
+                    ea._insertIframe(fa);
                 },
-                iframe: function(ea) {
-                    ea.className = 'FB_UI_Dialog';
-                    var fa = function() {
-                        da._triggerDefault(ea.id);
+                iframe: function(fa) {
+                    fa.className = 'FB_UI_Dialog';
+                    var ga = function() {
+                        ea._triggerDefault(fa.id);
                     };
-                    ea.root = j.create({
-                        onClose: fa,
-                        closeIcon: ea.closeIcon === undefined ? true : ea.closeIcon,
-                        classes: (z.ipad() ? 'centered' : '')
+                    fa.root = k.create({
+                        onClose: ga,
+                        closeIcon: fa.closeIcon === undefined ? true : fa.closeIcon,
+                        classes: (aa.ipad() ? 'centered' : '')
                     });
-                    if (!ea.hideLoader) j.showLoader(fa, ea.size.width);
-                    k.addCss(ea.root, 'fb_dialog_iframe');
-                    da._insertIframe(ea);
+                    if (!fa.hideLoader) k.showLoader(ga, fa.size.width);
+                    l.addCss(fa.root, 'fb_dialog_iframe');
+                    ea._insertIframe(fa);
                 },
-                touch: function(ea) {
-                    if (ea.params && ea.params.in_iframe) {
-                        if (ea.ui_created) {
-                            j.showLoader(function() {
-                                da._triggerDefault(ea.id);
+                touch: function(fa) {
+                    if (fa.params && fa.params.in_iframe) {
+                        if (fa.ui_created) {
+                            k.showLoader(function() {
+                                ea._triggerDefault(fa.id);
                             }, 0);
-                        } else da.iframe(ea);
-                    } else if (z.nativeApp() && !ea.ui_created) {
-                        ea.frame = ea.id;
-                        s.onready(function() {
-                            da.setLoadedNode(ea, s.open(ea.url + '#cb=' + ea.frameName), 'native');
+                        } else ea.iframe(fa);
+                    } else if (aa.nativeApp() && !fa.ui_created) {
+                        fa.frame = fa.id;
+                        t.onready(function() {
+                            ea.setLoadedNode(fa, t.open(fa.url + '#cb=' + fa.frameName), 'native');
                         });
-                        da._popupMonitor();
-                    } else if (!ea.ui_created) da.popup(ea);
+                        ea._popupMonitor();
+                    } else if (!fa.ui_created) ea.popup(fa);
                 },
-                async: function(ea) {
-                    ea.params.redirect_uri = location.protocol + '//' + location.host + location.pathname;
-                    delete ea.params.access_token;
-                    v.remote.showDialog(ea.params, function(fa) {
-                        var ga = fa.result;
-                        if (ga && ga.e2e) {
-                            var ha = j.get(ea.id);
-                            ha.trackEvents(ga.e2e);
-                            ha.trackEvent('close');
-                            delete ga.e2e;
+                async: function(fa) {
+                    fa.params.redirect_uri = location.protocol + '//' + location.host + location.pathname;
+                    delete fa.params.access_token;
+                    w.remote.showDialog(fa.params, function(ga) {
+                        var ha = ga.result;
+                        if (ha && ha.e2e) {
+                            var ia = k.get(fa.id);
+                            ia.trackEvents(ha.e2e);
+                            ia.trackEvent('close');
+                            delete ha.e2e;
                         }
-                        ea.cb(ga);
+                        fa.cb(ha);
                     });
                 },
                 getDefaultSize: function() {
-                    return j.getDefaultSize();
+                    return k.getDefaultSize();
                 },
-                _insertIframe: function(ea) {
-                    da._loadedNodes[ea.id] = false;
-                    var fa = function(ga) {
-                        if (ea.id in da._loadedNodes) da.setLoadedNode(ea, ga, 'iframe');
+                _insertIframe: function(fa) {
+                    ea._loadedNodes[fa.id] = false;
+                    var ga = function(ha) {
+                        if (fa.id in ea._loadedNodes) ea.setLoadedNode(fa, ha, 'iframe');
                     };
-                    if (ea.post) {
-                        q({
+                    if (fa.post) {
+                        r({
                             url: 'about:blank',
-                            root: ea.root,
-                            className: ea.className,
-                            width: ea.size.width,
-                            height: ea.size.height,
-                            id: ea.id,
-                            onInsert: fa,
-                            onload: function(ga) {
+                            root: fa.root,
+                            className: fa.className,
+                            width: fa.size.width,
+                            height: fa.size.height,
+                            id: fa.id,
+                            onInsert: ga,
+                            onload: function(ha) {
                                 h.submitToTarget({
-                                    url: ea.url,
-                                    target: ga.name,
-                                    params: ea.params
+                                    url: fa.url,
+                                    target: ha.name,
+                                    params: fa.params
                                 });
                             }
                         });
-                    } else q({
-                        url: ea.url,
-                        root: ea.root,
-                        className: ea.className,
-                        width: ea.size.width,
-                        height: ea.size.height,
-                        id: ea.id,
-                        name: ea.frameName,
-                        onInsert: fa
+                    } else r({
+                        url: fa.url,
+                        root: fa.root,
+                        className: fa.className,
+                        width: fa.size.width,
+                        height: fa.size.height,
+                        id: fa.id,
+                        name: fa.frameName,
+                        onInsert: ga
                     });
                 },
-                _handleResizeMessage: function(ea, fa) {
-                    var ga = da.getLoadedNode(ea);
-                    if (!ga) return;
-                    if (fa.height) ga.style.height = fa.height + 'px';
-                    if (fa.width) ga.style.width = fa.width + 'px';
-                    aa.inform('resize.ack', fa || {}, 'parent.frames[' + ga.name + ']');
-                    if (!j.isActive(ga)) j.show(ga);
+                _handleResizeMessage: function(fa, ga) {
+                    var ha = ea.getLoadedNode(fa);
+                    if (!ha) return;
+                    if (ga.height) ha.style.height = ga.height + 'px';
+                    if (ga.width) ha.style.width = ga.width + 'px';
+                    ba.inform('resize.ack', ga || {}, 'parent.frames[' + ha.name + ']');
+                    if (!k.isActive(ha)) k.show(ha);
                 },
-                _triggerDefault: function(ea) {
-                    da._xdRecv({
-                        frame: ea
-                    }, da._defaultCb[ea] || function() {});
+                _triggerDefault: function(fa) {
+                    ea._xdRecv({
+                        frame: fa
+                    }, ea._defaultCb[fa] || function() {});
                 },
                 _popupMonitor: function() {
-                    var ea;
-                    for (var fa in da._loadedNodes) if (da._loadedNodes.hasOwnProperty(fa) && fa in da._defaultCb) {
-                        var ga = da._loadedNodes[fa];
-                        if (ga.type != 'popup' && ga.type != 'native') continue;
-                        var ha = ga.node;
+                    var fa;
+                    for (var ga in ea._loadedNodes) if (ea._loadedNodes.hasOwnProperty(ga) && ga in ea._defaultCb) {
+                        var ha = ea._loadedNodes[ga];
+                        if (ha.type != 'popup' && ha.type != 'native') continue;
+                        var ia = ha.node;
                         try {
-                            if (ha.closed) {
-                                da._triggerDefault(fa);
-                            } else ea = true;
-                        } catch (ia) {}
+                            if (ia.closed) {
+                                ea._triggerDefault(ga);
+                            } else fa = true;
+                        } catch (ja) {}
                     }
-                    if (ea && !da._popupInterval) {
-                        da._popupInterval = setInterval(da._popupMonitor, 100);
-                    } else if (!ea && da._popupInterval) {
-                        clearInterval(da._popupInterval);
-                        da._popupInterval = null;
+                    if (fa && !ea._popupInterval) {
+                        ea._popupInterval = setInterval(ea._popupMonitor, 100);
+                    } else if (!fa && ea._popupInterval) {
+                        clearInterval(ea._popupInterval);
+                        ea._popupInterval = null;
                     }
                 },
-                _xdChannelHandler: function(ea, fa) {
-                    return aa.handler(function(ga) {
-                        var ha = da.getLoadedNode(ea);
-                        if (!ha) return;
-                        if (ga.type == 'resize') {
-                            da._handleResizeMessage(ea, ga);
-                        } else if (ga.type == 'hide') {
-                            j.hide(ha);
-                        } else if (ga.type == 'rendered') {
-                            var ia = j._findRoot(ha);
-                            j.show(ia);
-                        } else if (ga.type == 'fireevent') l.fire(ga.event);
-                    }, fa, true, null);
+                _xdChannelHandler: function(fa, ga) {
+                    return ba.handler(function(ha) {
+                        var ia = ea.getLoadedNode(fa);
+                        if (!ia) return;
+                        if (ha.type == 'resize') {
+                            ea._handleResizeMessage(fa, ha);
+                        } else if (ha.type == 'hide') {
+                            k.hide(ia);
+                        } else if (ha.type == 'rendered') {
+                            var ja = k._findRoot(ia);
+                            k.show(ja);
+                        } else if (ha.type == 'fireevent') m.fire(ha.event);
+                    }, ga, true, null);
                 },
-                _xdNextHandler: function(ea, fa, ga, ha) {
-                    if (ha) da._defaultCb[fa] = ea;
-                    return aa.handler(function(ia) {
-                        da._xdRecv(ia, ea);
-                    }, ga) + '&frame=' + fa;
+                _xdNextHandler: function(fa, ga, ha, ia) {
+                    if (ia) ea._defaultCb[ga] = fa;
+                    return ba.handler(function(ja) {
+                        ea._xdRecv(ja, fa);
+                    }, ha) + '&frame=' + ga;
                 },
-                _xdRecv: function(ea, fa) {
-                    var ga = da.getLoadedNode(ea.frame);
-                    if (ga) if (ga.close) {
+                _xdRecv: function(fa, ga) {
+                    var ha = ea.getLoadedNode(fa.frame);
+                    if (ha) if (ha.close) {
                         try {
-                            ga.close();
+                            ha.close();
                             if (/iPhone.*Version\/(5|6)/.test(navigator.userAgent) && RegExp.$1 !== '5') window.focus();
-                            da._popupCount--;
-                        } catch (ha) {}
-                    } else if (k.containsCss(ga, 'FB_UI_Hidden')) {
+                            ea._popupCount--;
+                        } catch (ia) {}
+                    } else if (l.containsCss(ha, 'FB_UI_Hidden')) {
                         setTimeout(function() {
-                            ga.parentNode.parentNode.removeChild(ga.parentNode);
+                            ha.parentNode.parentNode.removeChild(ha.parentNode);
                         }, 3000);
-                    } else if (k.containsCss(ga, 'FB_UI_Dialog')) j.remove(ga);
-                    delete da._loadedNodes[ea.frame];
-                    delete da._defaultCb[ea.frame];
-                    if (ea.e2e) {
-                        var ia = j.get(ea.frame);
-                        ia.trackEvents(ea.e2e);
-                        ia.trackEvent('close');
-                        delete ea.e2e;
+                    } else if (l.containsCss(ha, 'FB_UI_Dialog')) k.remove(ha);
+                    delete ea._loadedNodes[fa.frame];
+                    delete ea._defaultCb[fa.frame];
+                    if (fa.e2e) {
+                        var ja = k.get(fa.frame);
+                        ja.trackEvents(fa.e2e);
+                        ja.trackEvent('close');
+                        delete fa.e2e;
                     }
-                    fa(ea);
+                    ga(fa);
                 },
-                _xdResult: function(ea, fa, ga, ha) {
-                    return (da._xdNextHandler(function(ia) {
-                        ea && ea(ia.result && ia.result != da._resultToken && ES5('JSON', 'parse', false, ia.result));
-                    }, fa, ga, ha) + '&result=' + encodeURIComponent(da._resultToken));
+                _xdResult: function(fa, ga, ha, ia) {
+                    return (ea._xdNextHandler(function(ja) {
+                        fa && fa(ja.result && ja.result != ea._resultToken && ES5('JSON', 'parse', false, ja.result));
+                    }, ga, ha, ia) + '&result=' + encodeURIComponent(ea._resultToken));
                 },
-                xdHandler: function(ea, fa, ga, ha, ia) {
-                    return da._xdNextHandler(g.xdResponseWrapper(ea, ha, ia), fa, ga, true);
+                xdHandler: function(fa, ga, ha, ia, ja) {
+                    return ea._xdNextHandler(g.xdResponseWrapper(fa, ia, ja), ga, ha, true);
                 }
             };
-            v.stub('showDialog');
-            e.exports = da;
+            w.stub('showDialog');
+            e.exports = ea;
         });
-        __d("sdk.ui", ["Assert", "copyProperties", "sdk.feature", "sdk.Impressions", "Log", "sdk.UIServer"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
-            function m(n, o) {
-                g.isObject(n);
-                g.maybeFunction(o);
-                n = h({}, n);
-                if (!n.method) {
-                    k.error('"method" is a required parameter for FB.ui().');
+        __d("sdk.ui", ["Assert", "sdk.Impressions", "Log", "sdk.PlatformVersioning", "sdk.Runtime", "sdk.UIServer", "copyProperties", "sdk.feature"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
+            function o(p, q) {
+                g.isObject(p);
+                g.maybeFunction(q);
+                if (k.getIsVersioned()) {
+                    j.assertVersionIsSet();
+                    if (p.version) {
+                        j.assertValidVersion(p.version);
+                    } else p.version = k.getVersion();
+                }
+                p = m({}, p);
+                if (!p.method) {
+                    i.error('"method" is a required parameter for FB.ui().');
                     return null;
                 }
-                var p = n.method;
-                if (n.redirect_uri) {
-                    k.warn('When using FB.ui, you should not specify a redirect_uri.');
-                    delete n.redirect_uri;
+                var r = p.method;
+                if (p.redirect_uri) {
+                    i.warn('When using FB.ui, you should not specify a redirect_uri.');
+                    delete p.redirect_uri;
                 }
-                if ((p == 'permissions.request' || p == 'permissions.oauth') && (n.display == 'iframe' || n.display == 'dialog')) n.display = l.checkOauthDisplay(n);
-                var q = i('e2e_tracking', true);
-                if (q) n.e2e = {};
-                var r = l.prepareCall(n, o || function() {});
-                if (!r) return null;
-                var s = r.params.display;
-                if (s === 'dialog') {
-                    s = 'iframe';
-                } else if (s === 'none') s = 'hidden';
-                var t = l[s];
-                if (!t) {
-                    k.error('"display" must be one of "popup", ' + '"dialog", "iframe", "touch", "async", "hidden", or "none"');
+                if ((r == 'permissions.request' || r == 'permissions.oauth') && (p.display == 'iframe' || p.display == 'dialog')) p.display = l.checkOauthDisplay(p);
+                var s = n('e2e_tracking', true);
+                if (s) p.e2e = {};
+                var t = l.prepareCall(p, q || function() {});
+                if (!t) return null;
+                var u = t.params.display;
+                if (u === 'dialog') {
+                    u = 'iframe';
+                } else if (u === 'none') u = 'hidden';
+                var v = l[u];
+                if (!v) {
+                    i.error('"display" must be one of "popup", ' + '"dialog", "iframe", "touch", "async", "hidden", or "none"');
                     return null;
                 }
-                if (q) r.dialog.subscribe('e2e:end', function(u) {
-                    u.method = p;
-                    u.display = s;
-                    k.debug('e2e: %s', ES5('JSON', 'stringify', false, u));
-                    j.log(114, {
-                        payload: u
+                if (s) t.dialog.subscribe('e2e:end', function(w) {
+                    w.method = r;
+                    w.display = u;
+                    i.debug('e2e: %s', ES5('JSON', 'stringify', false, w));
+                    h.log(114, {
+                        payload: w
                     });
                 });
-                t(r);
-                return r.dialog;
+                v(t);
+                return t.dialog;
             }
-            e.exports = m;
+            e.exports = o;
         });
         __d("legacy:fb.auth", ["sdk.Auth", "sdk.Cookie", "copyProperties", "sdk.Event", "FB", "Log", "sdk.Runtime", "sdk.SignedRequest", "sdk.ui"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
             k.provide('', {
@@ -4716,17 +4758,19 @@ try {
                     return n.setUrlHandler.apply(null, arguments);
                 }
             });
-            j.provide('CanvasInsights', {
-                setDoneLoading: function(q) {
-                    m.warn('Deprecated: use FB.Canvas.setDoneLoading');
-                    g.maybeFunction(q, 'Invalid argument');
-                    return p.setDoneLoading.apply(null, arguments);
-                }
-            });
             i.subscribe('init:post', function(q) {
                 if (o.isEnvironment(o.ENVIRONMENTS.CANVAS)) {
                     g.isTrue(!q.hideFlashCallback || !q.hidePluginCallback, 'cannot specify deprecated hideFlashCallback and new hidePluginCallback');
                     k._setHidePluginCallback(q.hidePluginCallback || q.hideFlashCallback);
+                }
+            });
+        }, 3);
+        __d("legacy:fb.canvas-legacy", ["Assert", "FB", "Log", "sdk.Canvas.Tti"], function(a, b, c, d, e, f, g, h, i, j) {
+            h.provide('CanvasInsights', {
+                setDoneLoading: function(k) {
+                    i.warn('Deprecated: use FB.Canvas.setDoneLoading');
+                    g.maybeFunction(k, 'Invalid argument');
+                    return j.setDoneLoading.apply(null, arguments);
                 }
             });
         }, 3);
@@ -5058,63 +5102,82 @@ try {
             g.provide('Data', h);
         }, 3);
         __d("legacy:fb.event", ["FB", "sdk.Event"], function(a, b, c, d, e, f, g, h) {
-            g.provide('Event', h);
+            g.provide('Event', {
+                subscribe: ES5(h.subscribe, 'bind', true, h),
+                unsubscribe: ES5(h.unsubscribe, 'bind', true, h)
+            });
+        }, 3);
+        __d("legacy:fb.event-legacy", ["FB", "sdk.Event"], function(a, b, c, d, e, f, g, h) {
+            g.provide('Event', {
+                clear: ES5(h.clear, 'bind', true, h),
+                fire: ES5(h.fire, 'bind', true, h),
+                monitor: ES5(h.monitor, 'bind', true, h)
+            });
             g.provide('EventProvider', h);
         }, 3);
         __d("legacy:fb.frictionless", ["FB", "sdk.Frictionless"], function(a, b, c, d, e, f, g, h) {
             g.provide('Frictionless', h);
         }, 3);
-        __d("sdk.init", ["sdk.Cookie", "copyProperties", "createArrayFrom", "sdk.ErrorHandling", "sdk.Event", "Log", "QueryString", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
-            function o(q) {
-                var r = (typeof q == 'number' && q > 0) || (typeof q == 'string' && /^[0-9a-f]{21,}$|^[0-9]{1,21}$/.test(q));
-                if (r) return q.toString();
-                l.warn('Invalid App Id: Must be a number or numeric string representing ' + 'the application id.');
+        __d("sdk.init", ["sdk.Cookie", "sdk.ErrorHandling", "sdk.Event", "Log", "ManagedError", "sdk.PlatformVersioning", "QueryString", "sdk.Runtime", "sdk.URI", "copyProperties", "createArrayFrom"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) {
+            function r(t) {
+                var u = (typeof t == 'number' && t > 0) || (typeof t == 'string' && /^[0-9a-f]{21,}$|^[0-9]{1,21}$/.test(t));
+                if (u) return t.toString();
+                j.warn('Invalid App Id: Must be a number or numeric string representing ' + 'the application id.');
                 return null;
             }
-            function p(q) {
-                if (n.getInitialized()) l.warn('FB.init has already been called - this could indicate a problem');
-                if (/number|string/.test(typeof q)) {
-                    l.warn('FB.init called with invalid parameters');
-                    q = {
-                        apiKey: q
-                    };
+            function s(t) {
+                if (n.getInitialized()) j.warn('FB.init has already been called - this could indicate a problem');
+                if (n.getIsVersioned()) {
+                    if (Object.prototype.toString.call(t) !== '[object Object]') throw new k('Invalid argument');
+                    if (t.authResponse) throw new k('Setting authResponse is not supported');
+                    if (!t.version) t.version = o(location.href)
+                        .getQueryData()
+                        .sdk_version;
+                    l.assertValidVersion(t.version);
+                    n.setVersion(t.version);
+                } else {
+                    if (/number|string/.test(typeof t)) {
+                        j.warn('FB.init called with invalid parameters');
+                        t = {
+                            apiKey: t
+                        };
+                    }
+                    t = p({
+                        status: true
+                    }, t || {});
                 }
-                q = h({
-                    logging: true,
-                    status: true
-                }, q || {});
-                var r = o(q.appId || q.apiKey);
-                if (r !== null) n.setClientID(r);
-                if ('scope' in q) n.setScope(q.scope);
-                if (q.cookie) {
+                var u = r(t.appId || t.apiKey);
+                if (u !== null) n.setClientID(u);
+                if ('scope' in t) n.setScope(t.scope);
+                if (t.cookie) {
                     n.setUseCookie(true);
-                    if (typeof q.cookie === 'string') g.setDomain(q.cookie);
+                    if (typeof t.cookie === 'string') g.setDomain(t.cookie);
                 }
-                if (q.kidDirectedSite) n.setKidDirectedSite(true);
+                if (t.kidDirectedSite) n.setKidDirectedSite(true);
                 n.setInitialized(true);
-                k.fire('init:post', q);
+                i.fire('init:post', t);
             }
             setTimeout(function() {
-                var q = /(connect\.facebook\.net|\.facebook\.com\/assets.php).*?#(.*)/;
-                ES5(i(document.getElementsByTagName('script')), 'forEach', true, function(r) {
-                    if (r.src) {
-                        var s = q.exec(r.src);
-                        if (s) {
-                            var t = m.decode(s[2]);
-                            for (var u in t) if (t.hasOwnProperty(u)) {
-                                var v = t[u];
-                                if (v == '0') t[u] = 0;
+                var t = /(connect\.facebook\.net|\.facebook\.com\/assets.php).*?#(.*)/;
+                ES5(q(document.getElementsByTagName('script')), 'forEach', true, function(u) {
+                    if (u.src) {
+                        var v = t.exec(u.src);
+                        if (v) {
+                            var w = m.decode(v[2]);
+                            for (var x in w) if (w.hasOwnProperty(x)) {
+                                var y = w[x];
+                                if (y == '0') w[x] = 0;
                             }
-                            p(t);
+                            s(w);
                         }
                     }
                 });
                 if (window.fbAsyncInit && !window.fbAsyncInit.hasRun) {
                     window.fbAsyncInit.hasRun = true;
-                    j.unguard(window.fbAsyncInit)();
+                    h.unguard(window.fbAsyncInit)();
                 }
             }, 0);
-            e.exports = p;
+            e.exports = s;
         });
         __d("legacy:fb.init", ["FB", "sdk.init"], function(a, b, c, d, e, f, g, h) {
             g.provide('', {
@@ -5206,6 +5269,7 @@ try {
                 return h;
             }
             function k(n) {
+                if (/^$|[~\\]|__proto__/.test(n)) return n;
                 var o = n.match(/\w+|\W+/g),
                     p = {};
                 for (var q = 0; q < o.length; q++) p[o[q]] = (p[o[q]] || 0) + 1;
@@ -5218,14 +5282,13 @@ try {
                 for (q = 0; q < r.length; q++) p[r[q]] = s[q];
                 var t = [];
                 for (q = 0; q < o.length; q++) t[q] = p[o[q]];
-                for (q = 0; q < r.length; q++) r[q] = r[q].replace(/'~'/g, '\\~');
                 return [g, r.length].concat(r)
                     .concat(t.join(''))
                     .join('~');
             }
             function l(n) {
                 var o = n.split('~');
-                if (o.shift() != g) throw new Error('Not a Miny stream');
+                if (o.shift() != g) return n;
                 var p = parseInt(o.shift(), 10),
                     q = o.pop();
                 q = q.match(/[0-9a-v]*[\-w-zA-Z_]/g);
@@ -5456,8 +5519,8 @@ try {
             });
             e.exports = s;
         });
-        __d("IframePlugin", ["sdk.Auth", "sdk.createIframe", "copyProperties", "sdk.DOM", "sdk.Event", "guid", "Log", "ObservableMixin", "PluginPipe", "QueryString", "resolveURI", "sdk.Runtime", "Type", "UrlMap", "UserAgent", "sdk.XD"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v) {
-            var w = {
+        __d("IframePlugin", ["sdk.Auth", "sdk.DOM", "sdk.Event", "Log", "ObservableMixin", "sdk.PlatformVersioning", "PluginPipe", "QueryString", "sdk.Runtime", "Type", "sdk.URI", "UrlMap", "UserAgent", "sdk.XD", "copyProperties", "sdk.createIframe", "guid", "resolveURI"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x) {
+            var y = {
                 skin: 'string',
                 font: 'string',
                 width: 'px',
@@ -5466,128 +5529,128 @@ try {
                 color_scheme: 'string'
             };
 
-            function x(ea, fa, ga) {
-                if (fa || fa === 0) ea.style.width = fa + 'px';
-                if (ga || ga === 0) ea.style.height = ga + 'px';
+            function z(ga, ha, ia) {
+                if (ha || ha === 0) ga.style.width = ha + 'px';
+                if (ia || ia === 0) ga.style.height = ia + 'px';
             }
-            function y(ea) {
-                return function(fa) {
-                    var ga = {
-                        width: fa.width,
-                        height: fa.height,
-                        pluginID: ea
+            function aa(ga) {
+                return function(ha) {
+                    var ia = {
+                        width: ha.width,
+                        height: ha.height,
+                        pluginID: ga
                     };
-                    k.fire('xfbml.resize', ga);
+                    i.fire('xfbml.resize', ia);
                 };
             }
-            var z = {
-                string: function(ea) {
-                    return ea;
+            var ba = {
+                string: function(ga) {
+                    return ga;
                 },
-                bool: function(ea) {
-                    return ea ? (/^(?:true|1|yes|on)$/i)
-                        .test(ea) : undefined;
+                bool: function(ga) {
+                    return ga ? (/^(?:true|1|yes|on)$/i)
+                        .test(ga) : undefined;
                 },
-                url: function(ea) {
-                    return q(ea);
+                url: function(ga) {
+                    return x(ga);
                 },
-                url_maybe: function(ea) {
-                    return ea ? q(ea) : ea;
+                url_maybe: function(ga) {
+                    return ga ? x(ga) : ga;
                 },
-                hostname: function(ea) {
-                    return ea || window.location.hostname;
+                hostname: function(ga) {
+                    return ga || window.location.hostname;
                 },
-                px: function(ea) {
+                px: function(ga) {
                     return (/^(\d+)(?:px)?$/)
-                        .test(ea) ? parseInt(RegExp.$1, 10) : undefined;
+                        .test(ga) ? parseInt(RegExp.$1, 10) : undefined;
                 },
-                text: function(ea) {
-                    return ea;
+                text: function(ga) {
+                    return ga;
                 }
             };
 
-            function aa(ea, fa) {
-                var ga = ea[fa] || ea[fa.replace(/_/g, '-')] || ea[fa.replace(/_/g, '')] || ea['data-' + fa] || ea['data-' + fa.replace(/_/g, '-')] || ea['data-' + fa.replace(/_/g, '')] || undefined;
-                return ga;
+            function ca(ga, ha) {
+                var ia = ga[ha] || ga[ha.replace(/_/g, '-')] || ga[ha.replace(/_/g, '')] || ga['data-' + ha] || ga['data-' + ha.replace(/_/g, '-')] || ga['data-' + ha.replace(/_/g, '')] || undefined;
+                return ia;
             }
-            function ba(ea, fa, ga, ha) {
-                ES5(ES5('Object', 'keys', false, ea), 'forEach', true, function(ia) {
-                    if (ea[ia] == 'text' && !ga[ia]) {
-                        ga[ia] = fa.textContent || fa.innerText || '';
-                        fa.setAttribute(ia, ga[ia]);
+            function da(ga, ha, ia, ja) {
+                ES5(ES5('Object', 'keys', false, ga), 'forEach', true, function(ka) {
+                    if (ga[ka] == 'text' && !ia[ka]) {
+                        ia[ka] = ha.textContent || ha.innerText || '';
+                        ha.setAttribute(ka, ia[ka]);
                     }
-                    ha[ia] = z[ea[ia]](aa(ga, ia));
+                    ja[ka] = ba[ga[ka]](ca(ia, ka));
                 });
             }
-            function ca(ea) {
-                return ea || ea === '0' || ea === 0 ? parseInt(ea, 10) : undefined;
+            function ea(ga) {
+                return ga || ga === '0' || ga === 0 ? parseInt(ga, 10) : undefined;
             }
-            var da = s.extend({
-                constructor: function(ea, fa, ga, ha) {
+            var fa = p.extend({
+                constructor: function(ga, ha, ia, ja) {
                     this.parent();
-                    ga = ga.replace(/-/g, '_');
-                    var ia = aa(ha, 'plugin_id');
-                    this.subscribe('xd.resize', y(ia));
-                    this.subscribe('xd.resize.flow', y(ia));
-                    this.subscribe('xd.resize.flow', ES5(function(pa) {
+                    ia = ia.replace(/-/g, '_');
+                    var ka = ca(ja, 'plugin_id');
+                    this.subscribe('xd.resize', aa(ka));
+                    this.subscribe('xd.resize.flow', aa(ka));
+                    this.subscribe('xd.resize.flow', ES5(function(ra) {
                         this._config.root.style.verticalAlign = 'bottom';
-                        x(this._config.root, ca(pa.width), ca(pa.height));
+                        z(this._config.root, ea(ra.width), ea(ra.height));
                         this.updateLift();
                         clearTimeout(this._timeoutID);
                     }, 'bind', true, this));
-                    this.subscribe('xd.resize', ES5(function(pa) {
+                    this.subscribe('xd.resize', ES5(function(ra) {
                         this._config.root.style.verticalAlign = 'bottom';
-                        x(this._config.root, ca(pa.width), ca(pa.height));
-                        x(this._iframe, ca(pa.width), ca(pa.height));
+                        z(this._config.root, ea(ra.width), ea(ra.height));
+                        z(this._iframe, ea(ra.width), ea(ra.height));
                         this.updateLift();
                         clearTimeout(this._timeoutID);
                     }, 'bind', true, this));
-                    this.subscribe('xd.resize.iframe', ES5(function(pa) {
-                        x(this._iframe, ca(pa.width), ca(pa.height));
+                    this.subscribe('xd.resize.iframe', ES5(function(ra) {
+                        z(this._iframe, ea(ra.width), ea(ra.height));
                         this.updateLift();
                         clearTimeout(this._timeoutID);
                     }, 'bind', true, this));
-                    this.subscribe('xd.sdk_event', function(pa) {
-                        var qa = ES5('JSON', 'parse', false, pa.data);
-                        qa.pluginID = ia;
-                        k.fire(pa.event, qa, ea);
+                    this.subscribe('xd.sdk_event', function(ra) {
+                        var sa = ES5('JSON', 'parse', false, ra.data);
+                        sa.pluginID = ka;
+                        i.fire(ra.event, sa, ga);
                     });
-                    var ja = r.getSecure() || window.location.protocol == 'https:',
-                        ka = t.resolve('www', ja) + '/plugins/' + ga + '.php?',
-                        la = {};
-                    ba(this.getParams(), ea, ha, la);
-                    ba(w, ea, ha, la);
-                    la.app_id = r.getClientID();
-                    la.locale = r.getLocale();
-                    la.sdk = 'joey';
-                    la.kid_directed_site = r.getKidDirectedSite();
-                    var ma = ES5(function(pa) {
-                        this.inform('xd.' + pa.type, pa);
+                    var la = o.getSecure() || window.location.protocol == 'https:',
+                        ma = r.resolve('www', la) + '/plugins/' + ia + '.php?',
+                        na = {};
+                    da(this.getParams(), ga, ja, na);
+                    da(y, ga, ja, na);
+                    na.app_id = o.getClientID();
+                    na.locale = o.getLocale();
+                    na.sdk = 'joey';
+                    na.kid_directed_site = o.getKidDirectedSite();
+                    var oa = ES5(function(ra) {
+                        this.inform('xd.' + ra.type, ra);
                     }, 'bind', true, this);
-                    la.channel = v.handler(ma, 'parent.parent', true);
-                    j.addCss(ea, 'fb_iframe_widget');
-                    var na = l();
-                    this.subscribe('xd.verify', function(pa) {
-                        v.sendToFacebook(na, {
+                    na.channel = t.handler(oa, 'parent.parent', true);
+                    h.addCss(ga, 'fb_iframe_widget');
+                    var pa = w();
+                    this.subscribe('xd.verify', function(ra) {
+                        t.sendToFacebook(pa, {
                             method: 'xd/verify',
-                            params: ES5('JSON', 'stringify', false, pa.token)
+                            params: ES5('JSON', 'stringify', false, ra.token)
                         });
                     });
                     this.subscribe('xd.refreshLoginStatus', ES5(g.getLoginStatus, 'bind', true, g, ES5(this.inform, 'bind', true, this, 'login.status'), true));
-                    var oa = document.createElement('span');
-                    oa.style.verticalAlign = 'top';
-                    oa.style.width = '0px';
-                    oa.style.height = '0px';
-                    this._element = ea;
-                    this._ns = fa;
-                    this._tag = ga;
-                    this._params = la;
+                    var qa = document.createElement('span');
+                    qa.style.verticalAlign = 'top';
+                    qa.style.width = '0px';
+                    qa.style.height = '0px';
+                    this._element = ga;
+                    this._ns = ha;
+                    this._tag = ia;
+                    this._params = na;
                     this._config = {
-                        root: oa,
-                        url: ka + p.encode(la),
-                        name: na,
-                        width: (u.mobile() ? undefined : (la.width || 1000)),
-                        height: la.height || 1000,
+                        root: qa,
+                        url: ma + n.encode(na),
+                        name: pa,
+                        width: (s.mobile() ? undefined : (na.width || 1000)),
+                        height: na.height || 1000,
                         style: {
                             border: 'none',
                             visibility: 'hidden'
@@ -5599,28 +5662,34 @@ try {
                     };
                 },
                 process: function() {
-                    var ea = i({}, this._params);
-                    delete ea.channel;
-                    var fa = p.encode(ea);
-                    if (this._element.getAttribute('fb-iframe-plugin-query') == fa) {
-                        m.info('Skipping render: %s:%s %s', this._ns, this._tag, fa);
+                    if (o.getIsVersioned()) {
+                        l.assertVersionIsSet();
+                        var ga = q(this._config.url);
+                        this._config.url = ga.setPath('/' + o.getVersion() + ga.getPath())
+                            .toString();
+                    }
+                    var ha = u({}, this._params);
+                    delete ha.channel;
+                    var ia = n.encode(ha);
+                    if (this._element.getAttribute('fb-iframe-plugin-query') == ia) {
+                        j.info('Skipping render: %s:%s %s', this._ns, this._tag, ia);
                         this.inform('render');
                         return;
                     }
-                    this._element.setAttribute('fb-iframe-plugin-query', fa);
+                    this._element.setAttribute('fb-iframe-plugin-query', ia);
                     this.subscribe('render', function() {
                         this._iframe.style.visibility = 'visible';
                     });
                     while (this._element.firstChild) this._element.removeChild(this._element.firstChild);
                     this._element.appendChild(this._config.root);
-                    var ga = u.mobile() ? 120 : 45;
+                    var ja = s.mobile() ? 120 : 45;
                     this._timeoutID = setTimeout(ES5(function() {
-                        this._iframe && x(this._iframe, 0, 0);
-                        m.warn('%s:%s failed to resize in %ss', this._ns, this._tag, ga);
-                    }, 'bind', true, this), ga * 1000);
-                    if (!o.add(this)) this._iframe = h(this._config);
-                    if (u.mobile()) {
-                        j.addCss(this._element, 'fb_iframe_widget_fluid');
+                        this._iframe && z(this._iframe, 0, 0);
+                        j.warn('%s:%s failed to resize in %ss', this._ns, this._tag, ja);
+                    }, 'bind', true, this), ja * 1000);
+                    if (!m.add(this)) this._iframe = v(this._config);
+                    if (s.mobile()) {
+                        h.addCss(this._element, 'fb_iframe_widget_fluid');
                         this._element.style.display = 'block';
                         this._element.style.width = '100%';
                         this._element.style.height = 'auto';
@@ -5632,19 +5701,19 @@ try {
                     }
                 },
                 updateLift: function() {
-                    var ea = this._iframe.style.width === this._config.root.style.width && this._iframe.style.height === this._config.root.style.height;
-                    j[ea ? 'removeCss' : 'addCss'](this._iframe, 'fb_iframe_widget_lift');
+                    var ga = this._iframe.style.width === this._config.root.style.width && this._iframe.style.height === this._config.root.style.height;
+                    h[ga ? 'removeCss' : 'addCss'](this._iframe, 'fb_iframe_widget_lift');
                 }
-            }, n);
-            da.getVal = aa;
-            da.withParams = function(ea) {
-                return da.extend({
+            }, k);
+            fa.getVal = ca;
+            fa.withParams = function(ga) {
+                return fa.extend({
                     getParams: function() {
-                        return ea;
+                        return ga;
                     }
                 });
             };
-            e.exports = da;
+            e.exports = fa;
         });
         __d("PluginTags", [], function(a, b, c, d, e, f) {
             var g = {
@@ -5797,10 +5866,15 @@ try {
                 },
                 _getPxAttribute: function(k, l) {
                     return this.getAttribute(k, l, function(m) {
-                        var n = parseInt(m.replace('px', ''), 10);
-                        if (isNaN(n)) {
-                            return l;
-                        } else return n;
+                        var n = parseInt(m, 10);
+                        return isNaN(n) ? l : n;
+                    });
+                },
+                _getLengthAttribute: function(k, l) {
+                    return this.getAttribute(k, l, function(m) {
+                        if (m === '100%') return m;
+                        var n = parseInt(m, 10);
+                        return isNaN(n) ? l : n;
                     });
                 },
                 _getAttributeFromList: function(k, l, m) {
@@ -6090,7 +6164,7 @@ try {
                         colorscheme: this.getAttribute('colorscheme'),
                         skin: this.getAttribute('skin'),
                         numposts: this.getAttribute('num-posts', 10),
-                        width: this._getPxAttribute('width'),
+                        width: this._getLengthAttribute('width'),
                         href: this.getAttribute('href'),
                         permalink: this.getAttribute('permalink'),
                         publish_feed: this.getAttribute('publish_feed'),
@@ -6144,12 +6218,8 @@ try {
                     this.subscribe('xd.commentRemoved', ES5(this._handleCommentRemovedMsg, 'bind', true, this));
                 },
                 getSize: function() {
-                    if (this._attr.mobile) return {
-                        width: '100%',
-                        height: 160
-                    };
                     if (!this._attr.permalink) return {
-                        width: this._attr.width,
+                        width: this._attr.mobile ? '100%' : this._attr.width,
                         height: 160
                     };
                 },
@@ -6937,11 +7007,6 @@ try {
                     return n.parse.apply(null, arguments);
                 }
             });
-            j.provide('XFBML.RecommendationsBar', {
-                markRead: function(q) {
-                    i.fire('xfbml.recommendationsbar.read', q || window.location.href);
-                }
-            });
             n.subscribe('parse', ES5(i.fire, 'bind', true, i, 'xfbml.parse'));
             n.subscribe('render', ES5(i.fire, 'bind', true, i, 'xfbml.render'));
             i.subscribe('init:post', function(q) {
@@ -6954,10 +7019,17 @@ try {
                 if (document.namespaces && !document.namespaces.item.fb) document.namespaces.add('fb');
             } catch (p) {}
         }, 3);
+        __d("legacy:fb.xfbml-legacy", ["FB", "sdk.Event"], function(a, b, c, d, e, f, g, h) {
+            g.provide('XFBML.RecommendationsBar', {
+                markRead: function(i) {
+                    h.fire('xfbml.recommendationsbar.read', i || window.location.href);
+                }
+            });
+        }, 3);
 
     })
         .call({}, window.inDapIF ? parent.window : window);
 } catch (e) {
     new Image()
-        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1196466","message":"' + e.message + '"}}');
+        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1262776","message":"' + e.message + '"}}');
 }
