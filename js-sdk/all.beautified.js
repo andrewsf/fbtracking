@@ -1,4 +1,4 @@
-/*1402111475,,JIT Construction: v1279725,en_US*/
+/*1402518652,,JIT Construction: v1285533,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -642,7 +642,7 @@ try {
         __d("JSSDKRuntimeConfig", [], {
             "locale": "en_US",
             "rtl": false,
-            "revision": "1279725"
+            "revision": "1285533"
         });
         __d("JSSDKConfig", [], {
             "bustCache": true,
@@ -1852,6 +1852,8 @@ try {
         }, null);
         __d("sdk.Event", [], function(a, b, c, d, e, f) {
             var g = {
+                SUBSCRIBE: 'event.subscribe',
+                UNSUBSCRIBE: 'event.unsubscribe',
                 subscribers: function() {
                     if (!this._subscribersMap) this._subscribersMap = {};
                     return this._subscribersMap;
@@ -1860,13 +1862,15 @@ try {
                     var j = this.subscribers();
                     if (!j[h]) {
                         j[h] = [i];
-                    } else j[h].push(i);
+                    } else if (ES5(j[h], 'indexOf', true, i) == -1) j[h].push(i);
+                    if (h != this.SUBSCRIBE && h != this.UNSUBSCRIBE) this.fire(this.SUBSCRIBE, h, j[h]);
                 },
                 unsubscribe: function(h, i) {
                     var j = this.subscribers()[h];
                     if (j) ES5(j, 'forEach', true, function(k, l) {
-                        if (k == i) j[l] = null;
+                        if (k == i) j.splice(l, 1);
                     });
+                    if (h != this.SUBSCRIBE && h != this.UNSUBSCRIBE) this.fire(this.UNSUBSCRIBE, h, j);
                 },
                 monitor: function(h, i) {
                     if (!i()) {
@@ -4504,6 +4508,79 @@ try {
                 }
             });
         }, 3);
+        __d("sdk.Canvas.IframeHandling", ["DOMWrapper", "sdk.RPC"], function(a, b, c, d, e, f, g, h) {
+            var i = null,
+                j;
+
+            function k() {
+                var o = g.getWindow()
+                    .document,
+                    p = o.body,
+                    q = o.documentElement,
+                    r = Math.max(p.offsetTop, 0),
+                    s = Math.max(q.offsetTop, 0),
+                    t = p.scrollHeight + r,
+                    u = p.offsetHeight + r,
+                    v = q.scrollHeight + s,
+                    w = q.offsetHeight + s;
+                return Math.max(t, u, v, w);
+            }
+            function l(o) {
+                if (typeof o != 'object') o = {};
+                var p = 0,
+                    q = 0;
+                if (!o.height) {
+                    o.height = k();
+                    p = 16;
+                    q = 4;
+                }
+                if (!o.frame) o.frame = window.name || 'iframe_canvas';
+                if (j) {
+                    var r = j.height,
+                        s = o.height - r;
+                    if (s <= q && s >= -p) return false;
+                }
+                j = o;
+                h.remote.setSize(o);
+                return true;
+            }
+            function m(o, p) {
+                if (p === undefined && typeof o === 'number') {
+                    p = o;
+                    o = true;
+                }
+                if (o || o === undefined) {
+                    if (i === null) i = setInterval(function() {
+                        l();
+                    }, p || 100);
+                    l();
+                } else if (i !== null) {
+                    clearInterval(i);
+                    i = null;
+                }
+            }
+            h.stub('setSize');
+            var n = {
+                setSize: l,
+                setAutoGrow: m
+            };
+            e.exports = n;
+        }, null);
+        __d("sdk.Canvas.Navigation", ["sdk.RPC"], function(a, b, c, d, e, f, g) {
+            function h(j) {
+                g.local.navigate = function(k) {
+                    j({
+                        path: k
+                    });
+                };
+                g.remote.setNavigationEnabled(true);
+            }
+            g.stub('setNavigationEnabled');
+            var i = {
+                setUrlHandler: h
+            };
+            e.exports = i;
+        }, null);
         __d("sdk.Canvas.Plugin", ["sdk.api", "sdk.RPC", "Log", "UserAgent", "sdk.Runtime", "createArrayFrom"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
             var m = 'CLSID:D27CDB6E-AE6D-11CF-96B8-444553540000',
                 n = 'CLSID:444785F1-DE89-4295-863A-D46C3A781394',
@@ -4623,79 +4700,6 @@ try {
             };
             e.exports = z;
         }, null);
-        __d("sdk.Canvas.IframeHandling", ["DOMWrapper", "sdk.RPC"], function(a, b, c, d, e, f, g, h) {
-            var i = null,
-                j;
-
-            function k() {
-                var o = g.getWindow()
-                    .document,
-                    p = o.body,
-                    q = o.documentElement,
-                    r = Math.max(p.offsetTop, 0),
-                    s = Math.max(q.offsetTop, 0),
-                    t = p.scrollHeight + r,
-                    u = p.offsetHeight + r,
-                    v = q.scrollHeight + s,
-                    w = q.offsetHeight + s;
-                return Math.max(t, u, v, w);
-            }
-            function l(o) {
-                if (typeof o != 'object') o = {};
-                var p = 0,
-                    q = 0;
-                if (!o.height) {
-                    o.height = k();
-                    p = 16;
-                    q = 4;
-                }
-                if (!o.frame) o.frame = window.name || 'iframe_canvas';
-                if (j) {
-                    var r = j.height,
-                        s = o.height - r;
-                    if (s <= q && s >= -p) return false;
-                }
-                j = o;
-                h.remote.setSize(o);
-                return true;
-            }
-            function m(o, p) {
-                if (p === undefined && typeof o === 'number') {
-                    p = o;
-                    o = true;
-                }
-                if (o || o === undefined) {
-                    if (i === null) i = setInterval(function() {
-                        l();
-                    }, p || 100);
-                    l();
-                } else if (i !== null) {
-                    clearInterval(i);
-                    i = null;
-                }
-            }
-            h.stub('setSize');
-            var n = {
-                setSize: l,
-                setAutoGrow: m
-            };
-            e.exports = n;
-        }, null);
-        __d("sdk.Canvas.Navigation", ["sdk.RPC"], function(a, b, c, d, e, f, g) {
-            function h(j) {
-                g.local.navigate = function(k) {
-                    j({
-                        path: k
-                    });
-                };
-                g.remote.setNavigationEnabled(true);
-            }
-            g.stub('setNavigationEnabled');
-            var i = {
-                setUrlHandler: h
-            };
-            e.exports = i;
-        }, null);
         __d("sdk.Canvas.Tti", ["sdk.RPC", "sdk.Runtime"], function(a, b, c, d, e, f, g, h) {
             function i(n, o) {
                 var p = {
@@ -4725,14 +4729,14 @@ try {
             };
             e.exports = m;
         }, null);
-        __d("legacy:fb.canvas", ["Assert", "sdk.Canvas.Environment", "sdk.Event", "FB", "sdk.Canvas.Plugin", "sdk.Canvas.IframeHandling", "Log", "sdk.Canvas.Navigation", "sdk.Runtime", "sdk.Canvas.Tti"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+        __d("legacy:fb.canvas", ["Assert", "sdk.Canvas.Environment", "sdk.Event", "FB", "sdk.Canvas.IframeHandling", "sdk.Canvas.Navigation", "sdk.Canvas.Plugin", "sdk.RPC", "sdk.Runtime", "sdk.Canvas.Tti"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
             j.provide('Canvas', {
                 setSize: function(q) {
                     g.maybeObject(q, 'Invalid argument');
-                    return l.setSize.apply(null, arguments);
+                    return k.setSize.apply(null, arguments);
                 },
                 setAutoGrow: function() {
-                    return l.setAutoGrow.apply(null, arguments);
+                    return k.setAutoGrow.apply(null, arguments);
                 },
                 getPageInfo: function(q) {
                     g.isFunction(q, 'Invalid argument');
@@ -4756,21 +4760,22 @@ try {
                 },
                 getHash: function(q) {
                     g.isFunction(q, 'Invalid argument');
-                    return n.getHash.apply(null, arguments);
+                    return l.getHash.apply(null, arguments);
                 },
                 setHash: function(q) {
                     g.isString(q, 'Invalid argument');
-                    return n.setHash.apply(null, arguments);
+                    return l.setHash.apply(null, arguments);
                 },
                 setUrlHandler: function(q) {
                     g.isFunction(q, 'Invalid argument');
-                    return n.setUrlHandler.apply(null, arguments);
+                    return l.setUrlHandler.apply(null, arguments);
                 }
             });
+            n.local.fireEvent = ES5(i.fire, 'bind', true, i);
             i.subscribe('init:post', function(q) {
                 if (o.isEnvironment(o.ENVIRONMENTS.CANVAS)) {
                     g.isTrue(!q.hideFlashCallback || !q.hidePluginCallback, 'cannot specify deprecated hideFlashCallback and new hidePluginCallback');
-                    k._setHidePluginCallback(q.hidePluginCallback || q.hideFlashCallback);
+                    m._setHidePluginCallback(q.hidePluginCallback || q.hideFlashCallback);
                 }
             });
         }, 3);
@@ -7040,5 +7045,5 @@ try {
         .call({}, window.inDapIF ? parent.window : window);
 } catch (e) {
     new Image()
-        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1279725","message":"' + e.message + '"}}');
+        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1285533","message":"' + e.message + '"}}');
 }
