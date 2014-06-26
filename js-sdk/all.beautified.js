@@ -1,4 +1,4 @@
-/*1402518652,,JIT Construction: v1285533,en_US*/
+/*1403810649,,JIT Construction: v1306262,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -642,7 +642,7 @@ try {
         __d("JSSDKRuntimeConfig", [], {
             "locale": "en_US",
             "rtl": false,
-            "revision": "1285533"
+            "revision": "1306262"
         });
         __d("JSSDKConfig", [], {
             "bustCache": true,
@@ -720,7 +720,7 @@ try {
         });
         __d("JSSDKXDConfig", [], {
             "XdUrl": "\/connect\/xd_arbiter.php?version=41",
-            "XdBundleUrl": "\/connect\/xd_arbiter\/V80PAcvrynR.js?version=41",
+            "XdBundleUrl": "\/connect\/xd_arbiter\/DhmkJ2TR0QN.js?version=41",
             "Flash": {
                 "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"
             },
@@ -2380,213 +2380,224 @@ try {
             })());
             e.exports = t;
         }, null);
-        __d("sdk.XD", ["sdk.Content", "sdk.Event", "Log", "QueryString", "Queue", "sdk.RPC", "sdk.Runtime", "sdk.Scribe", "sdk.URI", "UrlMap", "JSSDKXDConfig", "XDM", "sdk.createIframe", "sdk.feature", "guid"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u) {
-            var v = new k(),
-                w = new k(),
-                x = new k(),
-                y, z, aa = u(),
-                ba = q.useCdn ? 'cdn' : 'www',
-                ca = t('use_bundle') ? q.XdBundleUrl : q.XdUrl,
-                da = p.resolve(ba, false) + ca,
-                ea = p.resolve(ba, true) + ca,
-                fa = u(),
-                ga = location.protocol + '//' + location.host,
-                ha, ia = false,
-                ja = 'Facebook Cross Domain Communication Frame',
-                ka = {}, la = new k();
-            l.setInQueue(la);
+        __d("isFacebookURI", [], function(a, b, c, d, e, f) {
+            var g = null,
+                h = ['http', 'https'];
 
-            function ma(sa) {
-                i.info('Remote XD can talk to facebook.com (%s)', sa);
-                m.setEnvironment(sa === 'canvas' ? m.ENVIRONMENTS.CANVAS : m.ENVIRONMENTS.PAGETAB);
+            function i(j) {
+                if (!g) g = new RegExp('(^|\\.)facebook\\.com$', 'i');
+                if (j.isEmpty()) return false;
+                if (!j.getDomain() && !j.getProtocol()) return true;
+                return (ES5(h, 'indexOf', true, j.getProtocol()) !== -1 && g.test(j.getDomain()));
             }
-            function na(sa, ta) {
-                if (!ta) {
+            e.exports = i;
+        }, null);
+        __d("sdk.XD", ["sdk.Content", "sdk.Event", "Log", "QueryString", "Queue", "sdk.RPC", "sdk.Runtime", "sdk.Scribe", "sdk.URI", "UrlMap", "JSSDKXDConfig", "XDM", "isFacebookURI", "sdk.createIframe", "sdk.feature", "guid"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v) {
+            var w = new k(),
+                x = new k(),
+                y = new k(),
+                z, aa, ba = v(),
+                ca = q.useCdn ? 'cdn' : 'www',
+                da = u('use_bundle') ? q.XdBundleUrl : q.XdUrl,
+                ea = p.resolve(ca, false) + da,
+                fa = p.resolve(ca, true) + da,
+                ga = v(),
+                ha = location.protocol + '//' + location.host,
+                ia, ja = false,
+                ka = 'Facebook Cross Domain Communication Frame',
+                la = {}, ma = new k();
+            l.setInQueue(ma);
+
+            function na(ta) {
+                i.info('Remote XD can talk to facebook.com (%s)', ta);
+                m.setEnvironment(ta === 'canvas' ? m.ENVIRONMENTS.CANVAS : m.ENVIRONMENTS.PAGETAB);
+            }
+            function oa(ta, ua) {
+                if (!ua) {
                     i.error('No senderOrigin');
                     throw new Error();
                 }
-                var ua = /^https?/.exec(ta)[0];
-                switch (sa.xd_action) {
+                var va = /^https?/.exec(ua)[0];
+                switch (ta.xd_action) {
                 case 'proxy_ready':
-                    var va, wa;
-                    if (ua == 'https') {
-                        va = x;
-                        wa = z;
-                    } else {
-                        va = w;
+                    var wa, xa;
+                    if (va == 'https') {
                         wa = y;
+                        xa = aa;
+                    } else {
+                        wa = x;
+                        xa = z;
                     }
-                    if (sa.registered) {
-                        ma(sa.registered);
-                        v = va.merge(v);
+                    if (ta.registered) {
+                        na(ta.registered);
+                        w = wa.merge(w);
                     }
-                    i.info('Proxy ready, starting queue %s containing %s messages', ua + 'ProxyQueue', va.getLength());
-                    va.start(function(ya) {
-                        ha.send(typeof ya === 'string' ? ya : j.encode(ya), ta, wa.contentWindow, fa + '_' + ua);
+                    i.info('Proxy ready, starting queue %s containing %s messages', va + 'ProxyQueue', wa.getLength());
+                    wa.start(function(za) {
+                        ia.send(typeof za === 'string' ? za : j.encode(za), ua, xa.contentWindow, ga + '_' + va);
                     });
                     break;
                 case 'plugin_ready':
-                    i.info('Plugin %s ready, protocol: %s', sa.name, ua);
-                    ka[sa.name] = {
-                        protocol: ua
+                    i.info('Plugin %s ready, protocol: %s', ta.name, va);
+                    la[ta.name] = {
+                        protocol: va
                     };
-                    if (k.exists(sa.name)) {
-                        var xa = k.get(sa.name);
-                        i.debug('Enqueuing %s messages for %s in %s', xa.getLength(), sa.name, ua + 'ProxyQueue');
-                        (ua == 'https' ? x : w)
-                            .merge(xa);
+                    if (k.exists(ta.name)) {
+                        var ya = k.get(ta.name);
+                        i.debug('Enqueuing %s messages for %s in %s', ya.getLength(), ta.name, va + 'ProxyQueue');
+                        (va == 'https' ? y : x)
+                            .merge(ya);
                     }
                     break;
                 }
-                if (sa.data) oa(sa.data, ta);
+                if (ta.data) pa(ta.data, ua);
             }
-            function oa(sa, ta) {
-                if (ta && ta !== 'native' && !o(ta)
-                    .isFacebookURI()) return;
-                if (typeof sa == 'string') {
-                    if (/^FB_RPC:/.test(sa)) {
-                        la.enqueue(sa.substring(7));
+            function pa(ta, ua) {
+                if (ua && ua !== 'native' && !s(o(ua))) return;
+                if (typeof ta == 'string') {
+                    if (/^FB_RPC:/.test(ta)) {
+                        ma.enqueue(ta.substring(7));
                         return;
                     }
-                    if (sa.substring(0, 1) == '{') {
+                    if (ta.substring(0, 1) == '{') {
                         try {
-                            sa = ES5('JSON', 'parse', false, sa);
-                        } catch (ua) {
-                            i.warn('Failed to decode %s as JSON', sa);
+                            ta = ES5('JSON', 'parse', false, ta);
+                        } catch (va) {
+                            i.warn('Failed to decode %s as JSON', ta);
                             return;
                         }
-                    } else sa = j.decode(sa);
+                    } else ta = j.decode(ta);
                 }
-                if (!ta) if (sa.xd_sig == aa) ta = sa.xd_origin;
-                if (sa.xd_action) {
-                    na(sa, ta);
+                if (!ua) if (ta.xd_sig == ba) ua = ta.xd_origin;
+                if (ta.xd_action) {
+                    oa(ta, ua);
                     return;
                 }
-                if (sa.access_token) m.setSecure(/^https/.test(ga));
-                if (sa.cb) {
-                    var va = ra._callbacks[sa.cb];
-                    if (!ra._forever[sa.cb]) delete ra._callbacks[sa.cb];
-                    if (va) va(sa);
+                if (ta.access_token) m.setSecure(/^https/.test(ha));
+                if (ta.cb) {
+                    var wa = sa._callbacks[ta.cb];
+                    if (!sa._forever[ta.cb]) delete sa._callbacks[ta.cb];
+                    if (wa) wa(ta);
                 }
             }
-            function pa(sa, ta) {
-                if (sa == 'facebook') {
-                    ta.relation = 'parent.parent';
-                    v.enqueue(ta);
+            function qa(ta, ua) {
+                if (ta == 'facebook') {
+                    ua.relation = 'parent.parent';
+                    w.enqueue(ua);
                 } else {
-                    ta.relation = 'parent.frames["' + sa + '"]';
-                    var ua = ka[sa];
-                    if (ua) {
-                        i.debug('Enqueuing message for plugin %s in %s', sa, ua.protocol + 'ProxyQueue');
-                        (ua.protocol == 'https' ? x : w)
-                            .enqueue(ta);
+                    ua.relation = 'parent.frames["' + ta + '"]';
+                    var va = la[ta];
+                    if (va) {
+                        i.debug('Enqueuing message for plugin %s in %s', ta, va.protocol + 'ProxyQueue');
+                        (va.protocol == 'https' ? y : x)
+                            .enqueue(ua);
                     } else {
-                        i.debug('Buffering message for plugin %s', sa);
-                        k.get(sa)
-                            .enqueue(ta);
+                        i.debug('Buffering message for plugin %s', ta);
+                        k.get(ta)
+                            .enqueue(ua);
                     }
                 }
             }
             l.getOutQueue()
-                .start(function(sa) {
-                pa('facebook', 'FB_RPC:' + sa);
+                .start(function(ta) {
+                qa('facebook', 'FB_RPC:' + ta);
             });
 
-            function qa(sa) {
-                if (ia) return;
-                var ta = g.appendHidden(document.createElement('div')),
-                    ua = r.create({
+            function ra(ta) {
+                if (ja) return;
+                var ua = g.appendHidden(document.createElement('div')),
+                    va = r.create({
                         blacklist: null,
-                        root: ta,
-                        channel: fa,
+                        root: ua,
+                        channel: ga,
                         flashUrl: q.Flash.path,
-                        whenReady: function(va) {
-                            ha = va;
-                            var wa = {
-                                channel: fa,
+                        whenReady: function(wa) {
+                            ia = wa;
+                            var xa = {
+                                channel: ga,
                                 origin: location.protocol + '//' + location.host,
-                                transport: ua,
-                                xd_name: sa
-                            }, xa = '#' + j.encode(wa);
-                            if (m.getSecure() !== true) y = s({
-                                url: da + xa,
+                                transport: va,
+                                xd_name: ta
+                            }, ya = '#' + j.encode(xa);
+                            if (m.getSecure() !== true) z = t({
+                                url: ea + ya,
                                 name: 'fb_xdm_frame_http',
                                 id: 'fb_xdm_frame_http',
-                                root: ta,
+                                root: ua,
                                 'aria-hidden': true,
-                                title: ja,
+                                title: ka,
                                 tabindex: -1
                             });
-                            z = s({
-                                url: ea + xa,
+                            aa = t({
+                                url: fa + ya,
                                 name: 'fb_xdm_frame_https',
                                 id: 'fb_xdm_frame_https',
-                                root: ta,
+                                root: ua,
                                 'aria-hidden': true,
-                                title: ja,
+                                title: ka,
                                 tabindex: -1
                             });
                         },
-                        onMessage: oa
+                        onMessage: pa
                     });
-                if (!ua) n.log('jssdk_error', {
+                if (!va) n.log('jssdk_error', {
                     appId: m.getClientID(),
                     error: 'XD_TRANSPORT',
                     extra: {
                         message: 'Failed to create a valid transport'
                     }
                 });
-                ia = true;
+                ja = true;
             }
-            var ra = {
+            var sa = {
                 rpc: l,
                 _callbacks: {},
                 _forever: {},
-                _channel: fa,
-                _origin: ga,
-                onMessage: oa,
-                recv: oa,
-                init: qa,
-                sendToFacebook: pa,
-                inform: function(sa, ta, ua, va) {
-                    pa('facebook', {
-                        method: sa,
-                        params: ES5('JSON', 'stringify', false, ta || {}),
-                        behavior: va || 'p',
-                        relation: ua
+                _channel: ga,
+                _origin: ha,
+                onMessage: pa,
+                recv: pa,
+                init: ra,
+                sendToFacebook: qa,
+                inform: function(ta, ua, va, wa) {
+                    qa('facebook', {
+                        method: ta,
+                        params: ES5('JSON', 'stringify', false, ua || {}),
+                        behavior: wa || 'p',
+                        relation: va
                     });
                 },
-                handler: function(sa, ta, ua, va) {
-                    var wa = '#' + j.encode({
-                        cb: this.registerCallback(sa, ua, va),
-                        origin: ga + '/' + fa,
+                handler: function(ta, ua, va, wa) {
+                    var xa = '#' + j.encode({
+                        cb: this.registerCallback(ta, va, wa),
+                        origin: ha + '/' + ga,
                         domain: location.hostname,
-                        relation: ta || 'opener'
+                        relation: ua || 'opener'
                     });
-                    return (location.protocol == 'https:' ? ea : da) + wa;
+                    return (location.protocol == 'https:' ? fa : ea) + xa;
                 },
-                registerCallback: function(sa, ta, ua) {
-                    ua = ua || u();
-                    if (ta) ra._forever[ua] = true;
-                    ra._callbacks[ua] = sa;
-                    return ua;
+                registerCallback: function(ta, ua, va) {
+                    va = va || v();
+                    if (ua) sa._forever[va] = true;
+                    sa._callbacks[va] = ta;
+                    return va;
                 }
             };
-            h.subscribe('init:post', function(sa) {
-                qa(sa.xdProxyName);
-                var ta = t('xd_timeout');
-                if (ta) setTimeout(function() {
-                    var ua = z && ( !! y == w.isStarted() && !! z == x.isStarted());
-                    if (!ua) n.log('jssdk_error', {
+            h.subscribe('init:post', function(ta) {
+                ra(ta.xdProxyName);
+                var ua = u('xd_timeout');
+                if (ua) setTimeout(function() {
+                    var va = aa && ( !! z == x.isStarted() && !! aa == y.isStarted());
+                    if (!va) n.log('jssdk_error', {
                         appId: m.getClientID(),
                         error: 'XD_INITIALIZATION',
                         extra: {
-                            message: 'Failed to initialize in ' + ta + 'ms'
+                            message: 'Failed to initialize in ' + ua + 'ms'
                         }
                     });
-                }, ta);
+                }, ua);
             });
-            e.exports = ra;
+            e.exports = sa;
         }, null);
         __d("sdk.Auth", ["sdk.Cookie", "copyProperties", "sdk.createIframe", "DOMWrapper", "sdk.feature", "sdk.getContextType", "guid", "sdk.Impressions", "Log", "ObservableMixin", "sdk.Runtime", "sdk.SignedRequest", "UrlMap", "sdk.URI", "sdk.XD"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u) {
             var v, w, x = new p();
@@ -6579,7 +6590,8 @@ try {
                         auto_logout_link: 'bool',
                         one_click: 'bool',
                         show_banner: 'bool',
-                        auth_type: 'string'
+                        auth_type: 'string',
+                        default_audience: 'string'
                     };
                 }
             });
@@ -7045,5 +7057,5 @@ try {
         .call({}, window.inDapIF ? parent.window : window);
 } catch (e) {
     new Image()
-        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1285533","message":"' + e.message + '"}}');
+        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1306262","message":"' + e.message + '"}}');
 }
