@@ -1,4 +1,4 @@
-/*1404888886,,JIT Construction: v1321716,en_US*/
+/*1407361302,,JIT Construction: v1358837,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -13,7 +13,7 @@ function emptyFunction() {};
 var __w, __t;
 /** Path: html/js/downstream/polyfill/TypeChecker.js */
 /**
- * @generated SignedSource<<543cc4c70877d623011cb40738182b20>>
+ * @generated SignedSource<<f05ceab49bd445d883e5a164a021bcff>>
  *
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  * !! This file is a check-in of a static_upstream project!      !!
@@ -55,7 +55,8 @@ var __w, __t;
     'DOMWindow': ['DOMEventTarget'],
     'DOMTextNode': ['DOMNode'],
     'Comment': ['DOMNode'],
-    'file': ['blob']
+    'file': ['blob'],
+    'worker': ['DOMEventTarget']
   };
 
   /**
@@ -168,6 +169,7 @@ var __w, __t;
           case 'Blob':
           case 'File':
           case 'FileList':
+          case 'Worker':
           // typed arrays
           case 'Uint8Array':
           case 'Int8Array':
@@ -405,10 +407,10 @@ var __w, __t;
 })();
 /*/TC*/
 
-/* ENxYLH8hkQM */
+/* SoyZ8sKHK_x */
 /** Path: html/js/downstream/require/require-lite.js */
 /**
- * @generated SignedSource<<7baa71c000d6a6e43ef1e4570fbb3fdb>>
+ * @generated SignedSource<<7618ccf975187cb96282853804aca921>>
  *
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  * !! This file is a check-in of a static_upstream project!      !!
@@ -451,7 +453,7 @@ var require, __d;
     }
     var module = map[id],
         deps = module.deps,
-        length = deps.length,
+        length = module.factory.length,
         dep,
         args = [];
 
@@ -491,7 +493,7 @@ var require, __d;
   }, {"signature":"function(string,array<string>,?number)"});
 })(this);
 
-/* T7BwI_B4Uar */
+/* u6b3MVzyeK6 */
 /** Path: html/js/sdk/ES5ArrayPrototype.js */
 /**
  * @providesModule ES5ArrayPrototype
@@ -1780,7 +1782,7 @@ module.exports = ES;
 /* HddqKc1MRYB */
 },null);
 var ES = require('ES');
-__d("JSSDKRuntimeConfig",[],{"locale":"en_US","rtl":false,"revision":"1321716"});__d("JSSDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"features":{"kill_fragment":true,"xfbml_profile_pic_server":true,"error_handling":{"rate":4},"e2e_ping_tracking":{"rate":1.0e-6},"xd_timeout":{"rate":4,"value":30000},"use_bundle":true},"api":{"mode":"warn","whitelist":["Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Data","Data.process","Data.query","Data.query:wait","Data.waitOn","Data.waitOn:wait","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.cancelFlow","Payment.continueFlow","Payment.init","Payment.lockForProcessing","Payment.unlockForProcessing","Payment.parse","Payment.setSize","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui","ui:subscribe"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","business":"business.facebook.com","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("JSSDKXDConfig",[],{"XdUrl":"\/connect\/xd_arbiter.php?version=41","XdBundleUrl":"\/connect\/xd_arbiter\/y7D3QxmA0ET.js?version=41","Flash":{"path":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"},"useCdn":true});__d("JSSDKCssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100\u0025}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100\u0025;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif) no-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif) white no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100\u0025}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,.fb_connect_bar_container span,.fb_connect_bar_container a,.fb_connect_bar_container img,.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}.fb_connect_bar a:hover{color:#fff}.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}.fb_connect_bar div a,.fb_connect_bar span,.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fbpluginrecommendationsbarleft,.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}.fbpluginrecommendationsbarleft{left:10px}.fbpluginrecommendationsbarright{right:10px}","components":["css:fb.css.base","css:fb.css.dialog","css:fb.css.iframewidget","css:fb.css.connectbarwidget","css:fb.css.plugin.recommendationsbar"]});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yW\/r\/PvklbuW2Ycn.swf"}});__d("JSSDKCanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("JSSDKPluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});__d("JSSDKConnectBarConfig",[],{"imgs":{"buttonUrl":"rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png","missingProfileUrl":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"}});
+__d("JSSDKRuntimeConfig",[],{"locale":"en_US","rtl":false,"revision":"1358837"});__d("JSSDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"features":{"kill_fragment":true,"xfbml_profile_pic_server":true,"error_handling":{"rate":4},"e2e_ping_tracking":{"rate":1.0e-6},"xd_timeout":{"rate":4,"value":30000},"use_bundle":true},"api":{"mode":"warn","whitelist":["Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Data","Data.process","Data.query","Data.query:wait","Data.waitOn","Data.waitOn:wait","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.cancelFlow","Payment.continueFlow","Payment.init","Payment.lockForProcessing","Payment.unlockForProcessing","Payment.parse","Payment.setSize","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui","ui:subscribe"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","business":"business.facebook.com","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("JSSDKXDConfig",[],{"XdUrl":"\/connect\/xd_arbiter.php?version=41","XdBundleUrl":"\/connect\/xd_arbiter\/sT9WD2idZGy.js?version=41","Flash":{"path":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"},"useCdn":true});__d("JSSDKCssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100\u0025}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100\u0025;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif) no-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif) white no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100\u0025}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,.fb_connect_bar_container span,.fb_connect_bar_container a,.fb_connect_bar_container img,.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}.fb_connect_bar a:hover{color:#fff}.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}.fb_connect_bar div a,.fb_connect_bar span,.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fbpluginrecommendationsbarleft,.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}.fbpluginrecommendationsbarleft{left:10px}.fbpluginrecommendationsbarright{right:10px}","components":["css:fb.css.base","css:fb.css.dialog","css:fb.css.iframewidget","css:fb.css.connectbarwidget","css:fb.css.plugin.recommendationsbar"]});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yW\/r\/PvklbuW2Ycn.swf"}});__d("JSSDKCanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("JSSDKPluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});__d("JSSDKConnectBarConfig",[],{"imgs":{"buttonUrl":"rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png","missingProfileUrl":"rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"}});
 
 
 __d("QueryString",[],function(global,require,requireDynamic,requireLazy,module,exports) {
@@ -2736,6 +2738,7 @@ function createIframe(/*object*/ opts) /*DOMElement*/ {__t([opts, 'object', 'opt
   var style = opts.style ||  { border: 'none' };
   var src = opts.url;
   var onLoad = opts.onload;
+  var onError = opts.onerror;
 
   if (hasNamePropertyBug()) {
     frame = document.createElement('<iframe name="' + name + '"/>');
@@ -2750,6 +2753,7 @@ function createIframe(/*object*/ opts) /*DOMElement*/ {__t([opts, 'object', 'opt
   delete opts.url;
   delete opts.root;
   delete opts.onload;
+  delete opts.onerror;
 
   var attributes =  ES('Object', 'assign', false,{
     frameBorder: 0,
@@ -2784,9 +2788,16 @@ function createIframe(/*object*/ opts) /*DOMElement*/ {__t([opts, 'object', 'opt
   frame.src = "javascript:false";
   root.appendChild(frame);
   if (onLoad) {
-    var listener = DOMEventListener.add(frame, 'load', function() {
-      listener.remove();
+    var onLoadListener = DOMEventListener.add(frame, 'load', function()  {
+      onLoadListener.remove();
       onLoad();
+    });
+  }
+
+  if (onError) {
+    var onErrorListener = DOMEventListener.add(frame, 'error', function()  {
+      onErrorListener.remove();
+      onError();
     });
   }
 
@@ -3397,6 +3408,7 @@ function parse(uri, uriToParse, shouldThrow, serializer) {
       )
     );
     uri.setFragment(uriToParse.getFragment());
+    uri.setForceFragmentSeparator(uriToParse.getForceFragmentSeparator());
     return true;
   }
 
@@ -3422,6 +3434,11 @@ function parse(uri, uriToParse, shouldThrow, serializer) {
     }
   }
   uri.setFragment(components.fragment || '');
+  
+  
+  if (components.fragment === '') {
+    uri.setForceFragmentSeparator(true);
+  }
 
   if (components.userinfo !== null) {
     if (shouldThrow) {
@@ -3476,6 +3493,7 @@ function parse(uri, uriToParse, shouldThrow, serializer) {
     this.$URIBase_path = '';
     this.$URIBase_fragment = '';
     this.$URIBase_queryData = {};
+    this.$URIBase_forceFragmentSeparator = false;
     parse(this, uri, true, serializer);
   }
 
@@ -3589,12 +3607,26 @@ function parse(uri, uriToParse, shouldThrow, serializer) {
   
   URIBase.prototype.setFragment=function(fragment) {"use strict";
     this.$URIBase_fragment = fragment;
+    // fragment was updated - we don't care about forcing separator
+    this.setForceFragmentSeparator(false);
     return this;
   };
 
   
   URIBase.prototype.getFragment=function() {"use strict";
     return this.$URIBase_fragment;
+  };
+
+
+  
+  URIBase.prototype.setForceFragmentSeparator=function(shouldForce) {"use strict";
+    this.$URIBase_forceFragmentSeparator = shouldForce;
+    return this;
+  };
+
+  
+  URIBase.prototype.getForceFragmentSeparator=function() {"use strict";
+    return this.$URIBase_forceFragmentSeparator;
   };
 
   
@@ -3636,6 +3668,8 @@ function parse(uri, uriToParse, shouldThrow, serializer) {
     }
     if (this.$URIBase_fragment) {
       str += '#' + this.$URIBase_fragment;
+    } else if (this.$URIBase_forceFragmentSeparator) {
+      str += '#';
     }
     return str;
   };
@@ -4091,7 +4125,7 @@ __d("JSONRPC",["Log"],function(global,require,requireDynamic,requireLazy,module,
 
 
 
-  function JSONRPC(/*function*/ write) {__t([write, 'function', 'write']);"use strict";
+  function JSONRPC(write) {"use strict";
     this.$JSONRPC_counter = 0;
     this.$JSONRPC_callbacks = {};
 
@@ -4103,10 +4137,10 @@ __d("JSONRPC",["Log"],function(global,require,requireDynamic,requireLazy,module,
     this.local = {};
 
     this.$JSONRPC_write = write;
-  }__w(JSONRPC, {"type":"JSONRPC","signature":"function(function)"}); 
+  }__w(JSONRPC, {"type":"JSONRPC"}); 
 
   
-  JSONRPC.prototype.stub=__w(function(/*string*/ stub) {__t([stub, 'string', 'stub']);"use strict";
+  JSONRPC.prototype.stub=function(stub) {"use strict";
     this.remote[stub] = ES(function()  {var args=Array.prototype.slice.call(arguments,0);
       var message = {
         jsonrpc: '2.0',
@@ -4122,10 +4156,10 @@ __d("JSONRPC",["Log"],function(global,require,requireDynamic,requireLazy,module,
 
       this.$JSONRPC_write(ES('JSON', 'stringify', false,message), this.$JSONRPC_context || {method: stub });
     }, 'bind', true,this);
-  }, {"signature":"function(string)"});
+  };
 
   
-  JSONRPC.prototype.read=__w(function(/*string*/ message, context) {__t([message, 'string', 'message']);"use strict";
+  JSONRPC.prototype.read=function(message, context) {"use strict";
     var rpc = ES('JSON', 'parse', false,message), id = rpc.id;
 
     if (!rpc.method) {
@@ -4198,7 +4232,7 @@ __d("JSONRPC",["Log"],function(global,require,requireDynamic,requireLazy,module,
         data: rpcEx.message
       });
     }
-  }, {"signature":"function(string)"});
+  };
 
 
 module.exports = JSONRPC;
@@ -6480,7 +6514,7 @@ module.exports = JSONPRequest;
 },null);
 
 
-__d("ApiClient",["ArgumentError","Assert","CORSRequest","FlashRequest","flattenObject","JSONPRequest","Log","ObservableMixin","sprintf","sdk.URI","UrlMap","ApiClientConfig"],function(global,require,requireDynamic,requireLazy,module,exports,ArgumentError,Assert,CORSRequest,FlashRequest,flattenObject,JSONPRequest,Log,ObservableMixin,sprintf,URI,UrlMap,ApiClientConfig) {
+__d("ApiClient",["ArgumentError","Assert","CORSRequest","FlashRequest","flattenObject","JSONPRequest","Log","ObservableMixin","sprintf","sdk.URI","UrlMap","ApiClientConfig","invariant"],function(global,require,requireDynamic,requireLazy,module,exports,ArgumentError,Assert,CORSRequest,FlashRequest,flattenObject,JSONPRequest,Log,ObservableMixin,sprintf,URI,UrlMap,ApiClientConfig,invariant) {
     
            
       
@@ -6492,6 +6526,8 @@ __d("ApiClient",["ArgumentError","Assert","CORSRequest","FlashRequest","flattenO
           
               
            
+
+   
 
    
 
@@ -6514,6 +6550,11 @@ var READONLYCALLS = {
   stream_get: true,
   users_getinfo: true
 };
+
+
+var batchCalls = [];
+var batchCallbacks = [];
+var scheduleId = null;
 
 
 function request(/*string*/ url, /*string*/ method, /*object*/ params,
@@ -6567,14 +6608,15 @@ function inspect(/*?function*/ callback, /*string*/ endpoint, /*string*/ method,
 }__w(inspect, {"signature":"function(?function,string,string,object)"}); 
 
 
-function requestUsingGraph(/*string*/ path) {__t([path, 'string', 'path']);
+function parseCallDataFromArgs(/*array*/ args) {__t([args, 'array', 'args']);
+  var path = args.shift();
   Assert.isString(path, 'Invalid path');
   if (!/^https?/.test(path) && path.charAt(0) !== '/')  {
     path = '/' + path;
   }
 
   var uri;
-  var args = {};
+  var argsMap = {};
 
   try {
     uri = new URI(path);
@@ -6583,36 +6625,104 @@ function requestUsingGraph(/*string*/ path) {__t([path, 'string', 'path']);
   }
 
   
-  ES(Array.prototype.slice.call(arguments, 1), 'forEach', true,function(argument) {
-    args[typeof argument] = argument;
-  });
+  ES(args, 'forEach', true,function(arg)  {return argsMap[typeof arg] = arg;});
 
-  var method = (args.string || 'get').toLowerCase();
+  var method = (argsMap.string || 'get').toLowerCase();
 
   Assert.isTrue(
     METHODS.hasOwnProperty(method),
     sprintf('Invalid method passed to ApiClient: %s', method)
   );
 
-  var callback = args['function'];
+  var callback = argsMap['function'];
   if (!callback) {
     Log.warn('No callback passed to the ApiClient');
   }
 
-  if (args.object) {
-    uri.addQueryData(args.object);
+  if (argsMap.object) {
+    uri.addQueryData(argsMap.object);
   }
-  var params = uri.getQueryData();
 
-  var inspector = ES(inspect, 'bind', true,null, callback, uri.getPath(), method, params);
+  var params = uri.getQueryData();
+  params.method = method;
+
+  return {uri:uri, callback:callback, params:params};
+}__w(parseCallDataFromArgs, {"signature":"function(array)"}); 
+
+
+function requestUsingGraph() {var args=Array.prototype.slice.call(arguments,0);
+  var $__0=    parseCallDataFromArgs(args),uri=$__0.uri,callback=$__0.callback,params=$__0.params;
+  var method = params.method;
 
   var url = uri.getProtocol() && uri.getDomain()
     ? uri.setQueryData({}).toString()
     : UrlMap.resolve('graph') + uri.getPath();
 
-  params.method = method;
-  request(url, method == 'get' ? 'get' : 'post', params, inspector);
-}__w(requestUsingGraph, {"signature":"function(string)"}); 
+  request(
+    url,
+    method == 'get' ? 'get' : 'post',
+    params,
+    ES(inspect, 'bind', true,null, callback, uri.getPath(), method, params)
+  );
+}
+
+
+function scheduleBatchCall() {var args=Array.prototype.slice.call(arguments,0);
+  var $__0=     parseCallDataFromArgs(args),uri=$__0.uri,callback=$__0.callback,$__1=$__0.params,method=$__1.method;
+
+  var batchCall = {
+    method: method,
+    relative_url: uri
+      .removeQueryData('method')
+      .toString()
+  };
+
+  if (method.toLowerCase() == 'post') {
+    batchCall.body = uri.getQueryData();
+    batchCall.relative_url = uri
+      .setQueryData({})
+      .toString();
+  }
+
+  batchCalls.push(batchCall);
+  batchCallbacks.push(callback);
+
+  clearTimeout(scheduleId);
+  scheduleId = setTimeout(dispatchBatchCalls, 0);
+}
+
+
+function dispatchBatchCalls() {
+  invariant(
+    batchCalls.length > 0,
+    'ApiClient: batchCalls is empty at dispatch.'
+  );
+
+  
+  
+  var copiedBatchCalls = batchCalls;
+  var copiedBatchCallbacks = batchCallbacks;
+
+  batchCalls = [];
+  batchCallbacks = [];
+
+  requestUsingGraph(
+    '/',
+    'POST',
+    {batch: ES('JSON', 'stringify', false,copiedBatchCalls), include_headers: false},
+    function(response)  {
+      if (ES('Array', 'isArray', false,response)) {
+        ES(response, 'forEach', true,function(data, idx)  {
+          copiedBatchCallbacks[idx](ES('JSON', 'parse', false,data.body));
+        });
+      } else {
+        ES(copiedBatchCallbacks, 'forEach', true,function(callback) 
+          {return callback({error: {message: 'Fatal: batch call failed.'}});}
+        );
+      }
+    }
+  );
+}
 
 
 function requestUsingRest(/*object*/ params, /*?function*/ cb) {__t([params, 'object', 'params'], [cb, '?function', 'cb']);
@@ -6633,17 +6743,18 @@ function requestUsingRest(/*object*/ params, /*?function*/ cb) {__t([params, 'ob
 }__w(requestUsingRest, {"signature":"function(object,?function)"}); 
 
 var ApiClient = ES('Object', 'assign', false,new ObservableMixin(), {
-  setAccessToken: __w(function(/*?string*/ access_token) {__t([access_token, '?string', 'access_token']);
+  setAccessToken:__w(function(/*?string*/ access_token) {__t([access_token, '?string', 'access_token']);
     accessToken = access_token;
   }, {"signature":"function(?string)"}),
-  setClientID: __w(function(/*?string*/ client_id) {__t([client_id, '?string', 'client_id']);
+  setClientID:__w(function(/*?string*/ client_id) {__t([client_id, '?string', 'client_id']);
     clientID = client_id;
   }, {"signature":"function(?string)"}),
-  setDefaultParams: __w(function(/*?object*/ default_params) {__t([default_params, '?object', 'default_params']);
+  setDefaultParams:__w(function(/*?object*/ default_params) {__t([default_params, '?object', 'default_params']);
     defaultParams = default_params;
   }, {"signature":"function(?object)"}),
   rest: requestUsingRest,
-  graph: requestUsingGraph
+  graph: requestUsingGraph,
+  scheduleBatchCall: scheduleBatchCall
 });
 
 
@@ -10706,9 +10817,20 @@ function parse(dim) {
   return dim || dim === '0' || dim === 0 ? parseInt(dim, 10) : undefined;
 }
 
+function collapseIframe(iframe) {
+  if (iframe) {
+    resize(iframe, 0, 0);
+  }
+}
+
+
 var IframePlugin = Type.extend({
-  constructor: __w(function(/*DOMElement*/ elem, /*string*/ ns, /*string*/ tag,
-      /*object*/ attr) {__t([elem, 'DOMElement', 'elem'], [ns, 'string', 'ns'], [tag, 'string', 'tag'], [attr, 'object', 'attr']);
+  constructor:__w(function(
+    /*DOMElement*/ elem,
+    /*string*/ ns,
+    /*string*/ tag,
+    /*object*/ attr
+  ) {__t([elem, 'DOMElement', 'elem'], [ns, 'string', 'ns'], [tag, 'string', 'tag'], [attr, 'object', 'attr']);
     this.parent();
     tag = tag.replace(/-/g, '_');
 
@@ -10716,32 +10838,40 @@ var IframePlugin = Type.extend({
     this.subscribe('xd.resize', resizeBubbler(pluginId));
     this.subscribe('xd.resize.flow', resizeBubbler(pluginId));
 
-    this.subscribe('xd.resize.flow', ES(__w(function(/*object*/ message) {__t([message, 'object', 'message']);
-      this._config.root.style.verticalAlign = 'bottom';
+    this.subscribe('xd.resize.flow', ES(__w(function(/*object*/ message)  {__t([message, 'object', 'message']);
+      ES('Object', 'assign', false,this._config.root.style, {
+        verticalAlign: 'bottom',
+        overflow: ''
+      });
       resize(this._config.root, parse(message.width), parse(message.height));
       this.updateLift();
       clearTimeout(this._timeoutID);
     }, {"signature":"function(object)"}), 'bind', true,this));
 
-    this.subscribe('xd.resize', ES(__w(function(/*object*/ message) {__t([message, 'object', 'message']);
-      this._config.root.style.verticalAlign = 'bottom';
+    this.subscribe('xd.resize', ES(__w(function(/*object*/ message)  {__t([message, 'object', 'message']);
+      ES('Object', 'assign', false,this._config.root.style, {
+        verticalAlign: 'bottom',
+        overflow: ''
+      });
       resize(this._config.root, parse(message.width), parse(message.height));
       resize(this._iframe, parse(message.width), parse(message.height));
-      this.updateLift();
-      clearTimeout(this._timeoutID);
-    }, {"signature":"function(object)"}), 'bind', true,this));
-    this.subscribe('xd.resize.iframe', ES(__w(function(/*object*/ message) {__t([message, 'object', 'message']);
-      resize(this._iframe, parse(message.width), parse(message.height));
+      this._isIframeResized = true;
       this.updateLift();
       clearTimeout(this._timeoutID);
     }, {"signature":"function(object)"}), 'bind', true,this));
 
-    this.subscribe('xd.sdk_event', __w(function(/*object*/ message) {__t([message, 'object', 'message']);
+    this.subscribe('xd.resize.iframe', ES(__w(function(/*object*/ message)  {__t([message, 'object', 'message']);
+      resize(this._iframe, parse(message.width), parse(message.height));
+      this._isIframeResized = true;
+      this.updateLift();
+      clearTimeout(this._timeoutID);
+    }, {"signature":"function(object)"}), 'bind', true,this));
+
+    this.subscribe('xd.sdk_event', __w(function(/*object*/ message)  {__t([message, 'object', 'message']);
       var data = ES('JSON', 'parse', false,message.data);
       data.pluginID = pluginId;
       Event.fire(message.event, data, elem);
     }, {"signature":"function(object)"}));
-
 
     var secure = Runtime.getSecure() || window.location.protocol == 'https:';
     
@@ -10749,17 +10879,23 @@ var IframePlugin = Type.extend({
     var params = {};
     validate(this.getParams(), elem, attr, params);
     validate(baseParams, elem, attr, params);
-    params.app_id = Runtime.getClientID();
-    params.locale = Runtime.getLocale();
-    params.sdk = 'joey';
-    params.kid_directed_site = Runtime.getKidDirectedSite();
-    var xd = ES(function(msg) { this.inform('xd.' + msg.type, msg); }, 'bind', true,this);
-    params.channel = XD.handler(xd, 'parent.parent', /*forever=*/ true);
+
+    ES('Object', 'assign', false,params, {
+      app_id: Runtime.getClientID(),
+      locale: Runtime.getLocale(),
+      sdk: 'joey',
+      kid_directed_site: Runtime.getKidDirectedSite(),
+      channel: XD.handler(
+        ES(function(msg)  {return this.inform('xd.' + msg.type, msg);}, 'bind', true,this),
+        'parent.parent',
+        /*forever=*/true
+      )
+    });
 
     DOM.addCss(elem, 'fb_iframe_widget');
 
     var name = guid();
-    this.subscribe('xd.verify', __w(function(/*object*/ msg) {__t([msg, 'object', 'msg']);
+    this.subscribe('xd.verify', __w(function(/*object*/ msg)  {__t([msg, 'object', 'msg']);
       XD.sendToFacebook(
         name, { method: 'xd/verify', params: ES('JSON', 'stringify', false,msg.token) });
     }, {"signature":"function(object)"}));
@@ -10772,9 +10908,12 @@ var IframePlugin = Type.extend({
     // We want to use 'vertical-align: bottom' to match the default browser
     // layout of inline blocks, but that results in a 'jumping' effect during
     // rendering, so we use 'top' initially and set 'bottom' when resizing.
-    flow.style.verticalAlign = 'top';
-    flow.style.width = '0px';
-    flow.style.height = '0px';
+    ES('Object', 'assign', false,flow.style, {
+      verticalAlign: 'top',
+      width: '0px',
+      height: '0px',
+      overflow: 'hidden'
+    });
 
     this._element = elem;
     this._ns = ns;
@@ -10789,17 +10928,19 @@ var IframePlugin = Type.extend({
       
       
       
-      width: (UserAgent.mobile() ? undefined : (params.width || 1000)),
+      width: (UserAgent.mobile() ? (void 0) : (params.width || 1000)),
       height: params.height || 1000,
-      style: { border: 'none', visibility: 'hidden' },
+      style: {
+        border: 'none',
+        visibility: 'hidden'
+      },
       title: this._ns + ':' + this._tag + ' Facebook Social Plugin',
-      onload: ES(function() {
-        this.inform('render');
-      }, 'bind', true,this)
+      onload: ES(function()  {return this.inform('render');}, 'bind', true,this),
+      onerror: ES(function()  {return collapseIframe(this._iframe);}, 'bind', true,this)
     };
   }, {"signature":"function(DOMElement,string,string,object)"}),
 
-  process: function() {
+  process:function() {
     if (Runtime.getIsVersioned()) {
       PlatformVersioning.assertVersionIsSet();
       var uri = URI(this._config.url);
@@ -10818,16 +10959,24 @@ var IframePlugin = Type.extend({
     }
     this._element.setAttribute('fb-iframe-plugin-query', query);
 
-    this.subscribe('render', function() {
+    this.subscribe('render', ES(function()  {
       this._iframe.style.visibility = 'visible';
-    });
+      
+      // of network issues), and the main resize event wasn't
+      
+      
+      if (!this._isIframeResized) {
+        collapseIframe(this._iframe);
+      }
+    }, 'bind', true,this));
+
     while (this._element.firstChild) {
       this._element.removeChild(this._element.firstChild);
     }
     this._element.appendChild(this._config.root);
     var timeout = UserAgent.mobile() ? 120 : 45;
-    this._timeoutID = setTimeout(ES(function() {
-      this._iframe && resize(this._iframe, 0, 0);
+    this._timeoutID = setTimeout(ES(function()  {
+      collapseIframe(this._iframe);
       Log.warn(
         '%s:%s failed to resize in %ss',
         this._ns,
@@ -10846,29 +10995,41 @@ var IframePlugin = Type.extend({
     }
     if (UserAgent.mobile()) {
       DOM.addCss(this._element, 'fb_iframe_widget_fluid');
-      this._element.style.display = 'block';
-      this._element.style.width = '100%';
-      this._element.style.height = 'auto';
-      this._config.root.style.width = '100%';
-      this._config.root.style.height = 'auto';
-      this._iframe.style.width = '100%';
-      this._iframe.style.height = 'auto';
-      this._iframe.style.position = 'static';
+
+      ES('Object', 'assign', false,this._element.style, {
+        display: 'block',
+        width: '100%',
+        height: 'auto'
+      });
+
+      ES('Object', 'assign', false,this._config.root.style, {
+        width: '100%',
+        height: 'auto'
+      });
+
+      ES('Object', 'assign', false,this._iframe.style, {
+        width: '100%',
+        height: 'auto',
+        position: 'static'
+      });
     }
   },
 
-  updateLift: function() { 
+  updateLift:function() { 
     var same = this._iframe.style.width === this._config.root.style.width &&
       this._iframe.style.height === this._config.root.style.height;
     DOM[same ? 'removeCss' : 'addCss'](this._iframe, 'fb_iframe_widget_lift');
   }
-
 }, ObservableMixin);
 
 IframePlugin.getVal = getVal;
 
 IframePlugin.withParams = __w(function(/*object*/ params) /*function*/ {__t([params, 'object', 'params']);return __t([function() {
-  return IframePlugin.extend({ getParams: function() { return params; } });
+  return IframePlugin.extend({
+    getParams:function() {
+      return params;
+    }
+  });
 }.apply(this, arguments), 'function']);}, {"signature":"function(object):function"});
 
 module.exports = IframePlugin;
@@ -11323,8 +11484,13 @@ var IframeWidget = Element.extend({
     this._resizeFlow(size);
 
     this.loaded = false;
-    this.subscribe('iframe.onload', ES(function() {
+    this.subscribe('iframe.onload', ES(function()  {
       this.loaded = true;
+      
+      
+      if (!this._isResizeHandled) {
+        DOM.addCss(this.dom, 'fb_hide_iframes');
+      }
     }, 'bind', true,this));
   }, {"signature":"function(?boolean)"}),
 
@@ -11435,6 +11601,7 @@ var IframeWidget = Element.extend({
       this._borderReset = true;
     }
 
+    this._isResizeHandled = true;
     this._makeVisible();
   }, {"signature":"function(object)"}),
 
@@ -11737,7 +11904,8 @@ var Comments = IframeWidget.extend({
     var eventArgs = {
       href: message.href,
       commentID: message.commentID,
-      parentCommentID: message.parentCommentID
+      parentCommentID: message.parentCommentID,
+      message: message.message
     };
 
     Event.fire('comment.create', eventArgs);
@@ -11762,7 +11930,7 @@ module.exports = Comments;
 },null);
 
 
-__d("sdk.XFBML.CommentsCount",["sdk.Data","sdk.DOM","sdk.XFBML.Element","sprintf"],function(global,require,requireDynamic,requireLazy,module,exports,Data,DOM,Element,sprintf) {
+__d("sdk.XFBML.CommentsCount",["ApiClient","sdk.DOM","sdk.XFBML.Element","sprintf"],function(global,require,requireDynamic,requireLazy,module,exports,ApiClient,DOM,Element,sprintf) {
    
    
    
@@ -11770,15 +11938,16 @@ __d("sdk.XFBML.CommentsCount",["sdk.Data","sdk.DOM","sdk.XFBML.Element","sprintf
 
 var CommentsCount = Element.extend({
 
-  process: function() {
+  process:function() {
     DOM.addCss(this.dom, 'fb_comments_count_zero');
 
     var href = this.getAttribute('href', window.location.href);
 
-    Data._selectByIndex(['commentsbox_count'], 'link_stat', 'url', href)
-      .wait(ES(__w(function(/*array<object>*/ value) {__t([value, 'array<object>', 'value']);
-        var c = value[0].commentsbox_count;
-
+    ApiClient.scheduleBatchCall(
+      '/v2.0/' + encodeURIComponent(href),
+      {fields: 'comments'},
+      ES(function(value)  {
+        var c = value.comments || 0;
         DOM.html(
           this.dom,
           sprintf('<span class="fb_comments_count">%s</span>', c)
@@ -11789,7 +11958,8 @@ var CommentsCount = Element.extend({
         }
 
         this.fire('render');
-      }, {"signature":"function(array<object>)"}), 'bind', true,this));
+      }, 'bind', true,this)
+    );
   }
 
 });
@@ -12257,7 +12427,7 @@ module.exports = LoginButton;
 },null);
 
 
-__d("sdk.XFBML.Name",["sdk.Data","escapeHTML","sdk.Event","sdk.XFBML.Element","sdk.Helper","Log","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports,Data,escapeHTML,Event,Element,Helper,Log,Runtime) {
+__d("sdk.XFBML.Name",["ApiClient","escapeHTML","sdk.Event","sdk.XFBML.Element","sdk.Helper","Log","sdk.Runtime"],function(global,require,requireDynamic,requireLazy,module,exports,ApiClient,escapeHTML,Event,Element,Helper,Log,Runtime) {
    
    
    
@@ -12296,16 +12466,15 @@ var Name = Element.extend({
     }
 
     if (this._subjectId) {
-      fields.push('sex');
+      fields.push('gender');
 
       if (this._subjectId == Runtime.getUserID()) {
         this._reflexive = true;
       }
     }
 
-    var data;
     
-    Event.monitor('auth.statusChange', ES(function() {
+    Event.monitor('auth.statusChange', ES(function()  {
       
       if (!this.isValid()) {
         this.fire('render');
@@ -12320,19 +12489,18 @@ var Name = Element.extend({
         return; // don't do anything yet
       }
 
-      if (Helper.isUser(this._uid)) {
-        data = Data._selectByIndex(fields, 'user', 'uid', this._uid);
-      } else {
-        data = Data._selectByIndex(['name', 'id'], 'profile', 'id', this._uid);
-      }
-      data.wait(ES(__w(function(/*array<object>*/ data) {__t([data, 'array<object>', 'data']);
-        if (this._subjectId == this._uid) {
-          this._renderPronoun(data[0]);
-        } else {
-          this._renderOther(data[0]);
-        }
-        this.fire('render');
-      }, {"signature":"function(array<object>)"}), 'bind', true,this));
+      ApiClient.scheduleBatchCall(
+        '/' + this._uid,
+        {fields: fields.join(',')},
+        ES(function(data)  {
+          if (this._subjectId == this._uid) {
+            this._renderPronoun(data);
+          } else {
+            this._renderOther(data);
+          }
+          this.fire('render');
+        }, 'bind', true,this)
+      );
     }, 'bind', true,this));
   },
 
@@ -12364,7 +12532,7 @@ var Name = Element.extend({
       }
     }
     else {
-      switch (userInfo.sex) {
+      switch (userInfo.gender) {
         case 'male':
           if (this._possessive) {
             word = this._reflexive ? 'his own' : 'his';
@@ -12848,58 +13016,7 @@ module.exports = Registration;
 },null);
 
 
-__d("sdk.XFBML.SocialContext",["sdk.Event","sdk.XFBML.IframeWidget"],function(global,require,requireDynamic,requireLazy,module,exports,Event,IframeWidget) {
-   
-   
-
-var SocialContext = IframeWidget.extend({
-  
-  setupAndValidate: __w(function() /*boolean*/ {return __t([function() {
-    var size = this.getAttribute('size', 'small');
-    this._attr = {
-      channel: this.getChannelUrl(),
-      width: this._getPxAttribute('width', 400),
-      height: this._getPxAttribute('height', 100),
-      ref: this.getAttribute('ref'),
-      size: this.getAttribute('size'),
-      keywords: this.getAttribute('keywords'),
-      urls: this.getAttribute('urls'),
-      object_id: this.getAttribute('object_id')
-    };
-
-    this.subscribe(
-      'xd.social_context_stats', ES(this._bubbleSocialContextStats, 'bind', true,this));
-
-    return true;
-  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"}),
-
-  
-  _bubbleSocialContextStats: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
-    var filtered_message = {
-      pluginID: this.getAttribute('plugin-id'),
-      socialContextPageIDs: ES('JSON', 'parse', false,message.social_context_page_ids)
-    };
-    Event.fire('xfbml.social_context_stats', filtered_message);
-  }, {"signature":"function(object)"}),
-
-  
-  getSize: __w(function() /*object*/ {return __t([function() {
-    return { width: this._attr.width, height: this._attr.height };
-  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
-
-  
-  getUrlBits: __w(function() /*object*/ {return __t([function() {
-    return { name: 'social_context', params: this._attr };
-  }.apply(this, arguments), 'object']);}, {"signature":"function():object"})
-});
-
-module.exports = SocialContext;
-
-
-},null);
-
-
-__d("legacy:fb.xfbml",["Assert","sdk.domReady","sdk.Event","FB","IframePlugin","PluginTags","wrapFunction","XFBML","sdk.XFBML.Comments","sdk.XFBML.CommentsCount","sdk.XFBML.ConnectBar","sdk.XFBML.LoginButton","sdk.XFBML.Name","sdk.XFBML.RecommendationsBar","sdk.XFBML.Registration","sdk.XFBML.SocialContext"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,Assert,domReady,Event,FB,IframePlugin,PluginTags,wrapFunction,XFBML) {
+__d("legacy:fb.xfbml",["Assert","sdk.domReady","sdk.Event","FB","IframePlugin","PluginTags","wrapFunction","XFBML","sdk.XFBML.Comments","sdk.XFBML.CommentsCount","sdk.XFBML.ConnectBar","sdk.XFBML.LoginButton","sdk.XFBML.Name","sdk.XFBML.RecommendationsBar","sdk.XFBML.Registration"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,Assert,domReady,Event,FB,IframePlugin,PluginTags,wrapFunction,XFBML) {
    
    
    
@@ -12916,8 +13033,7 @@ var customTags = {
   login_button: require('sdk.XFBML.LoginButton'),
   name: require('sdk.XFBML.Name'),
   recommendations_bar: require('sdk.XFBML.RecommendationsBar'),
-  registration: require('sdk.XFBML.Registration'),
-  social_context: require('sdk.XFBML.SocialContext')
+  registration: require('sdk.XFBML.Registration')
 };
 
 
@@ -13005,4 +13121,4 @@ FB.provide('XFBML.RecommendationsBar', {
 
 
 }).call({}, window.inDapIF ? parent.window : window);
-} catch (e) {new Image().src="http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m='+encodeURIComponent('{"error":"LOAD", "extra": {"name":"'+e.name+'","line":"'+(e.lineNumber||e.line)+'","script":"'+(e.fileName||e.sourceURL||e.script)+'","stack":"'+(e.stackTrace||e.stack)+'","revision":"1321716","message":"'+e.message+'"}}');}
+} catch (e) {new Image().src="http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m='+encodeURIComponent('{"error":"LOAD", "extra": {"name":"'+e.name+'","line":"'+(e.lineNumber||e.line)+'","script":"'+(e.fileName||e.sourceURL||e.script)+'","stack":"'+(e.stackTrace||e.stack)+'","revision":"1358837","message":"'+e.message+'"}}');}

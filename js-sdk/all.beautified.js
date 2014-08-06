@@ -1,4 +1,4 @@
-/*1404889989,,JIT Construction: v1321716,en_US*/
+/*1407362091,,JIT Construction: v1358837,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -35,7 +35,7 @@ try {
                 }
                 var g = b[e],
                     h = g.deps,
-                    i = h.length,
+                    i = g.factory.length,
                     j, k = [];
                 for (var l = 0; l < i; l++) {
                     switch (h[l]) {
@@ -684,7 +684,7 @@ try {
         __d("JSSDKRuntimeConfig", [], {
             "locale": "en_US",
             "rtl": false,
-            "revision": "1321716"
+            "revision": "1358837"
         });
         __d("JSSDKConfig", [], {
             "bustCache": true,
@@ -762,7 +762,7 @@ try {
         });
         __d("JSSDKXDConfig", [], {
             "XdUrl": "\/connect\/xd_arbiter.php?version=41",
-            "XdBundleUrl": "\/connect\/xd_arbiter\/bLBBWlYJp_w.js?version=41",
+            "XdBundleUrl": "\/connect\/xd_arbiter\/oDB-fAAStWy.js?version=41",
             "Flash": {
                 "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"
             },
@@ -1312,7 +1312,8 @@ try {
                     o = k.style || {
                         border: 'none'
                     }, p = k.url,
-                    q = k.onload;
+                    q = k.onload,
+                    r = k.onerror;
                 if (h()) {
                     l = document.createElement('<iframe name="' + m + '"/>');
                 } else {
@@ -1324,22 +1325,27 @@ try {
                 delete k.url;
                 delete k.root;
                 delete k.onload;
-                var r = ES('Object', 'assign', false, {
+                delete k.onerror;
+                var s = ES('Object', 'assign', false, {
                     frameBorder: 0,
                     allowTransparency: true,
                     scrolling: 'no'
                 }, k);
-                if (r.width) l.width = r.width + 'px';
-                if (r.height) l.height = r.height + 'px';
-                delete r.height;
-                delete r.width;
-                for (var s in r) if (r.hasOwnProperty(s)) l.setAttribute(s, r[s]);
+                if (s.width) l.width = s.width + 'px';
+                if (s.height) l.height = s.height + 'px';
+                delete s.height;
+                delete s.width;
+                for (var t in s) if (s.hasOwnProperty(t)) l.setAttribute(t, s[t]);
                 ES('Object', 'assign', false, l.style, o);
                 l.src = "javascript:false";
                 n.appendChild(l);
-                if (q) var t = i.add(l, 'load', function() {
-                    t.remove();
+                if (q) var u = i.add(l, 'load', function() {
+                    u.remove();
                     q();
+                });
+                if (r) var v = i.add(l, 'error', function() {
+                    v.remove();
+                    r();
                 });
                 l.src = p;
                 return l;
@@ -1619,6 +1625,7 @@ try {
                     p.setPath(q.getPath());
                     p.setQueryData(s.deserialize(s.serialize(q.getQueryData())));
                     p.setFragment(q.getFragment());
+                    p.setForceFragmentSeparator(q.getForceFragmentSeparator());
                     return true;
                 }
                 q = ES(q.toString(), 'trim', true);
@@ -1637,6 +1644,7 @@ try {
                     return false;
                 }
                 p.setFragment(t.fragment || '');
+                if (t.fragment === '') p.setForceFragmentSeparator(true);
                 if (t.userinfo !== null) if (r) {
                     throw new Error(j('URI.parse: invalid URI (userinfo is not allowed in a URI): %s', p.toString()));
                 } else return false;
@@ -1658,6 +1666,7 @@ try {
                 this.$URIBase4 = '';
                 this.$URIBase5 = '';
                 this.$URIBase6 = {};
+                this.$URIBase7 = false;
                 n(this, p, true, q);
             }
             o.prototype.setProtocol = function(p) {
@@ -1731,11 +1740,21 @@ try {
             o.prototype.setFragment = function(p) {
                 "use strict";
                 this.$URIBase5 = p;
+                this.setForceFragmentSeparator(false);
                 return this;
             };
             o.prototype.getFragment = function() {
                 "use strict";
                 return this.$URIBase5;
+            };
+            o.prototype.setForceFragmentSeparator = function(p) {
+                "use strict";
+                this.$URIBase7 = p;
+                return this;
+            };
+            o.prototype.getForceFragmentSeparator = function() {
+                "use strict";
+                return this.$URIBase7;
             };
             o.prototype.isEmpty = function() {
                 "use strict";
@@ -1753,7 +1772,9 @@ try {
                 } else if (p) p += '/';
                 var q = this.$URIBase0.serialize(this.$URIBase6);
                 if (q) p += '?' + q;
-                if (this.$URIBase5) p += '#' + this.$URIBase5;
+                if (this.$URIBase5) {
+                    p += '#' + this.$URIBase5;
+                } else if (this.$URIBase7) p += '#';
                 return p;
             };
             o.prototype.getOrigin = function() {
@@ -3365,104 +3386,165 @@ try {
             };
             e.exports = k;
         }, null);
-        __d("ApiClient", ["ArgumentError", "Assert", "CORSRequest", "FlashRequest", "flattenObject", "JSONPRequest", "Log", "ObservableMixin", "sprintf", "sdk.URI", "UrlMap", "ApiClientConfig"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r) {
-            var s, t, u, v = {
+        __d("ApiClient", ["ArgumentError", "Assert", "CORSRequest", "FlashRequest", "flattenObject", "JSONPRequest", "Log", "ObservableMixin", "sprintf", "sdk.URI", "UrlMap", "ApiClientConfig", "invariant"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s) {
+            var t, u, v, w = {
                 get: true,
                 post: true,
                 'delete': true,
                 put: true
-            }, w = {
+            }, x = {
                 fql_query: true,
                 fql_multiquery: true,
                 friends_get: true,
                 notifications_get: true,
                 stream_get: true,
                 users_getinfo: true
-            };
+            }, y = [],
+                z = [],
+                aa = null;
 
-            function x(ca, da, ea, fa) {
-                if (u) ea = ES('Object', 'assign', false, {}, u, ea);
-                ea.access_token = ea.access_token || s;
-                ea.pretty = ea.pretty || 0;
-                ea = k(ea);
-                var ga = {
+            function ba(ja, ka, la, ma) {
+                if (v) la = ES('Object', 'assign', false, {}, v, la);
+                la.access_token = la.access_token || t;
+                la.pretty = la.pretty || 0;
+                la = k(la);
+                var na = {
                     jsonp: l,
                     cors: i,
                     flash: j
-                }, ha;
-                if (ea.transport) {
-                    ha = [ea.transport];
-                    delete ea.transport;
-                } else ha = ['jsonp', 'cors', 'flash'];
-                for (var ia = 0; ia < ha.length; ia++) {
-                    var ja = ga[ha[ia]],
-                        ka = ES('Object', 'assign', false, {}, ea);
-                    if (ja.execute(ca, da, ka, fa)) return;
+                }, oa;
+                if (la.transport) {
+                    oa = [la.transport];
+                    delete la.transport;
+                } else oa = ['jsonp', 'cors', 'flash'];
+                for (var pa = 0; pa < oa.length; pa++) {
+                    var qa = na[oa[pa]],
+                        ra = ES('Object', 'assign', false, {}, la);
+                    if (qa.execute(ja, ka, ra, ma)) return;
                 }
-                fa({
+                ma({
                     error: {
                         type: 'no-transport',
                         message: 'Could not find a usable transport for request'
                     }
                 });
             }
-            function y(ca, da, ea, fa, ga) {
-                ba.inform('request.complete', da, ea, fa, ga);
-                if (ca) ca(ga);
+            function ca(ja, ka, la, ma, na) {
+                ia.inform('request.complete', ka, la, ma, na);
+                if (ja) ja(na);
             }
-            function z(ca) {
-                h.isString(ca, 'Invalid path');
-                if (!/^https?/.test(ca) && ca.charAt(0) !== '/') ca = '/' + ca;
-                var da, ea = {};
+            function da(ja) {
+                var ka = ja.shift();
+                h.isString(ka, 'Invalid path');
+                if (!/^https?/.test(ka) && ka.charAt(0) !== '/') ka = '/' + ka;
+                var la, ma = {};
                 try {
-                    da = new p(ca);
-                } catch (fa) {
-                    throw new g(fa.message, fa);
+                    la = new p(ka);
+                } catch (na) {
+                    throw new g(na.message, na);
                 }
-                ES(Array.prototype.slice.call(arguments, 1), 'forEach', true, function(la) {
-                    ea[typeof la] = la;
+                ES(ja, 'forEach', true, function(ra) {
+                    return ma[typeof ra] = ra;
                 });
-                var ga = (ea.string || 'get')
+                var oa = (ma.string || 'get')
                     .toLowerCase();
-                h.isTrue(v.hasOwnProperty(ga), o('Invalid method passed to ApiClient: %s', ga));
-                var ha = ea['function'];
-                if (!ha) m.warn('No callback passed to the ApiClient');
-                if (ea.object) da.addQueryData(ea.object);
-                var ia = da.getQueryData(),
-                    ja = ES(y, 'bind', true, null, ha, da.getPath(), ga, ia),
-                    ka = da.getProtocol() && da.getDomain() ? da.setQueryData({})
-                        .toString() : q.resolve('graph') + da.getPath();
-                ia.method = ga;
-                x(ka, ga == 'get' ? 'get' : 'post', ia, ja);
+                h.isTrue(w.hasOwnProperty(oa), o('Invalid method passed to ApiClient: %s', oa));
+                var pa = ma['function'];
+                if (!pa) m.warn('No callback passed to the ApiClient');
+                if (ma.object) la.addQueryData(ma.object);
+                var qa = la.getQueryData();
+                qa.method = oa;
+                return {
+                    uri: la,
+                    callback: pa,
+                    params: qa
+                };
             }
-            function aa(ca, da) {
-                h.isObject(ca);
-                h.isString(ca.method, 'method missing');
-                if (!da) m.warn('No callback passed to the ApiClient');
-                var ea = ca.method.toLowerCase()
+            function ea() {
+                var ja = Array.prototype.slice.call(arguments, 0),
+                    ka = da(ja),
+                    la = ka.uri,
+                    ma = ka.callback,
+                    na = ka.params,
+                    oa = na.method,
+                    pa = la.getProtocol() && la.getDomain() ? la.setQueryData({})
+                        .toString() : q.resolve('graph') + la.getPath();
+                ba(pa, oa == 'get' ? 'get' : 'post', na, ES(ca, 'bind', true, null, ma, la.getPath(), oa, na));
+            }
+            function fa() {
+                var ja = Array.prototype.slice.call(arguments, 0),
+                    ka = da(ja),
+                    la = ka.uri,
+                    ma = ka.callback,
+                    na = ka.params,
+                    oa = na.method,
+                    pa = {
+                        method: oa,
+                        relative_url: la.removeQueryData('method')
+                            .toString()
+                    };
+                if (oa.toLowerCase() == 'post') {
+                    pa.body = la.getQueryData();
+                    pa.relative_url = la.setQueryData({})
+                        .toString();
+                }
+                y.push(pa);
+                z.push(ma);
+                clearTimeout(aa);
+                aa = setTimeout(ga, 0);
+            }
+            function ga() {
+                s(y.length > 0);
+                var ja = y,
+                    ka = z;
+                y = [];
+                z = [];
+                ea('/', 'POST', {
+                    batch: ES('JSON', 'stringify', false, ja),
+                    include_headers: false
+                }, function(la) {
+                    if (ES('Array', 'isArray', false, la)) {
+                        ES(la, 'forEach', true, function(ma, na) {
+                            ka[na](ES('JSON', 'parse', false, ma.body));
+                        });
+                    } else ES(ka, 'forEach', true, function(ma) {
+                        return ma({
+                            error: {
+                                message: 'Fatal: batch call failed.'
+                            }
+                        });
+                    });
+                });
+            }
+            function ha(ja, ka) {
+                h.isObject(ja);
+                h.isString(ja.method, 'method missing');
+                if (!ka) m.warn('No callback passed to the ApiClient');
+                var la = ja.method.toLowerCase()
                     .replace('.', '_');
-                ca.format = 'json-strings';
-                ca.api_key = t;
-                var fa = ea in w ? 'api_read' : 'api',
-                    ga = q.resolve(fa) + '/restserver.php',
-                    ha = ES(y, 'bind', true, null, da, '/restserver.php', 'get', ca);
-                x(ga, 'get', ca, ha);
+                ja.format = 'json-strings';
+                ja.api_key = u;
+                var ma = la in x ? 'api_read' : 'api',
+                    na = q.resolve(ma) + '/restserver.php',
+                    oa = ES(ca, 'bind', true, null, ka, '/restserver.php', 'get', ja);
+                ba(na, 'get', ja, oa);
             }
-            var ba = ES('Object', 'assign', false, new n(), {
-                setAccessToken: function(ca) {
-                    s = ca;
+            var ia = ES('Object', 'assign', false, new n(), {
+                setAccessToken: function(ja) {
+                    t = ja;
                 },
-                setClientID: function(ca) {
-                    t = ca;
+                setClientID: function(ja) {
+                    u = ja;
                 },
-                setDefaultParams: function(ca) {
-                    u = ca;
+                setDefaultParams: function(ja) {
+                    v = ja;
                 },
-                rest: aa,
-                graph: z
+                rest: ha,
+                graph: ea,
+                scheduleBatchCall: fa
             });
             j.setSwfUrl(r.FlashRequest.swfUrl);
-            e.exports = ba;
+            e.exports = ia;
         }, null);
         __d("sdk.PlatformVersioning", ["sdk.Runtime", "ManagedError"], function(a, b, c, d, e, f, g, h) {
             var i = /^v\d+\.\d\d?$/,
@@ -5596,106 +5678,118 @@ try {
                 color_scheme: 'string'
             };
 
-            function y(fa, ga, ha) {
-                if (ga || ga === 0) fa.style.width = ga + 'px';
-                if (ha || ha === 0) fa.style.height = ha + 'px';
+            function y(ga, ha, ia) {
+                if (ha || ha === 0) ga.style.width = ha + 'px';
+                if (ia || ia === 0) ga.style.height = ia + 'px';
             }
-            function z(fa) {
-                return function(ga) {
-                    var ha = {
-                        width: ga.width,
-                        height: ga.height,
-                        pluginID: fa
+            function z(ga) {
+                return function(ha) {
+                    var ia = {
+                        width: ha.width,
+                        height: ha.height,
+                        pluginID: ga
                     };
-                    i.fire('xfbml.resize', ha);
+                    i.fire('xfbml.resize', ia);
                 };
             }
             var aa = {
-                string: function(fa) {
-                    return fa;
+                string: function(ga) {
+                    return ga;
                 },
-                bool: function(fa) {
-                    return fa ? (/^(?:true|1|yes|on)$/i)
-                        .test(fa) : undefined;
+                bool: function(ga) {
+                    return ga ? (/^(?:true|1|yes|on)$/i)
+                        .test(ga) : undefined;
                 },
-                url: function(fa) {
-                    return w(fa);
+                url: function(ga) {
+                    return w(ga);
                 },
-                url_maybe: function(fa) {
-                    return fa ? w(fa) : fa;
+                url_maybe: function(ga) {
+                    return ga ? w(ga) : ga;
                 },
-                hostname: function(fa) {
-                    return fa || window.location.hostname;
+                hostname: function(ga) {
+                    return ga || window.location.hostname;
                 },
-                px: function(fa) {
+                px: function(ga) {
                     return (/^(\d+)(?:px)?$/)
-                        .test(fa) ? parseInt(RegExp.$1, 10) : undefined;
+                        .test(ga) ? parseInt(RegExp.$1, 10) : undefined;
                 },
-                text: function(fa) {
-                    return fa;
+                text: function(ga) {
+                    return ga;
                 }
             };
 
-            function ba(fa, ga) {
-                var ha = fa[ga] || fa[ga.replace(/_/g, '-')] || fa[ga.replace(/_/g, '')] || fa['data-' + ga] || fa['data-' + ga.replace(/_/g, '-')] || fa['data-' + ga.replace(/_/g, '')] || undefined;
-                return ha;
+            function ba(ga, ha) {
+                var ia = ga[ha] || ga[ha.replace(/_/g, '-')] || ga[ha.replace(/_/g, '')] || ga['data-' + ha] || ga['data-' + ha.replace(/_/g, '-')] || ga['data-' + ha.replace(/_/g, '')] || undefined;
+                return ia;
             }
-            function ca(fa, ga, ha, ia) {
-                ES(ES('Object', 'keys', false, fa), 'forEach', true, function(ja) {
-                    if (fa[ja] == 'text' && !ha[ja]) {
-                        ha[ja] = ga.textContent || ga.innerText || '';
-                        ga.setAttribute(ja, ha[ja]);
+            function ca(ga, ha, ia, ja) {
+                ES(ES('Object', 'keys', false, ga), 'forEach', true, function(ka) {
+                    if (ga[ka] == 'text' && !ia[ka]) {
+                        ia[ka] = ha.textContent || ha.innerText || '';
+                        ha.setAttribute(ka, ia[ka]);
                     }
-                    ia[ja] = aa[fa[ja]](ba(ha, ja));
+                    ja[ka] = aa[ga[ka]](ba(ia, ka));
                 });
             }
-            function da(fa) {
-                return fa || fa === '0' || fa === 0 ? parseInt(fa, 10) : undefined;
+            function da(ga) {
+                return ga || ga === '0' || ga === 0 ? parseInt(ga, 10) : undefined;
             }
-            var ea = p.extend({
-                constructor: function(fa, ga, ha, ia) {
+            function ea(ga) {
+                if (ga) y(ga, 0, 0);
+            }
+            var fa = p.extend({
+                constructor: function(ga, ha, ia, ja) {
                     this.parent();
-                    ha = ha.replace(/-/g, '_');
-                    var ja = ba(ia, 'plugin_id');
-                    this.subscribe('xd.resize', z(ja));
-                    this.subscribe('xd.resize.flow', z(ja));
+                    ia = ia.replace(/-/g, '_');
+                    var ka = ba(ja, 'plugin_id');
+                    this.subscribe('xd.resize', z(ka));
+                    this.subscribe('xd.resize.flow', z(ka));
                     this.subscribe('xd.resize.flow', ES(function(qa) {
-                        this._config.root.style.verticalAlign = 'bottom';
+                        ES('Object', 'assign', false, this._config.root.style, {
+                            verticalAlign: 'bottom',
+                            overflow: ''
+                        });
                         y(this._config.root, da(qa.width), da(qa.height));
                         this.updateLift();
                         clearTimeout(this._timeoutID);
                     }, 'bind', true, this));
                     this.subscribe('xd.resize', ES(function(qa) {
-                        this._config.root.style.verticalAlign = 'bottom';
+                        ES('Object', 'assign', false, this._config.root.style, {
+                            verticalAlign: 'bottom',
+                            overflow: ''
+                        });
                         y(this._config.root, da(qa.width), da(qa.height));
                         y(this._iframe, da(qa.width), da(qa.height));
+                        this._isIframeResized = true;
                         this.updateLift();
                         clearTimeout(this._timeoutID);
                     }, 'bind', true, this));
                     this.subscribe('xd.resize.iframe', ES(function(qa) {
                         y(this._iframe, da(qa.width), da(qa.height));
+                        this._isIframeResized = true;
                         this.updateLift();
                         clearTimeout(this._timeoutID);
                     }, 'bind', true, this));
                     this.subscribe('xd.sdk_event', function(qa) {
                         var ra = ES('JSON', 'parse', false, qa.data);
-                        ra.pluginID = ja;
-                        i.fire(qa.event, ra, fa);
+                        ra.pluginID = ka;
+                        i.fire(qa.event, ra, ga);
                     });
-                    var ka = o.getSecure() || window.location.protocol == 'https:',
-                        la = r.resolve('www', ka) + '/plugins/' + ha + '.php?',
-                        ma = {};
-                    ca(this.getParams(), fa, ia, ma);
-                    ca(x, fa, ia, ma);
-                    ma.app_id = o.getClientID();
-                    ma.locale = o.getLocale();
-                    ma.sdk = 'joey';
-                    ma.kid_directed_site = o.getKidDirectedSite();
-                    var na = ES(function(qa) {
-                        this.inform('xd.' + qa.type, qa);
-                    }, 'bind', true, this);
-                    ma.channel = t.handler(na, 'parent.parent', true);
-                    h.addCss(fa, 'fb_iframe_widget');
+                    var la = o.getSecure() || window.location.protocol == 'https:',
+                        ma = r.resolve('www', la) + '/plugins/' + ia + '.php?',
+                        na = {};
+                    ca(this.getParams(), ga, ja, na);
+                    ca(x, ga, ja, na);
+                    ES('Object', 'assign', false, na, {
+                        app_id: o.getClientID(),
+                        locale: o.getLocale(),
+                        sdk: 'joey',
+                        kid_directed_site: o.getKidDirectedSite(),
+                        channel: t.handler(ES(function(qa) {
+                            return this.inform('xd.' + qa.type, qa);
+                        }, 'bind', true, this), 'parent.parent', true)
+                    });
+                    h.addCss(ga, 'fb_iframe_widget');
                     var oa = v();
                     this.subscribe('xd.verify', function(qa) {
                         t.sendToFacebook(oa, {
@@ -5705,82 +5799,95 @@ try {
                     });
                     this.subscribe('xd.refreshLoginStatus', ES(g.getLoginStatus, 'bind', true, g, ES(this.inform, 'bind', true, this, 'login.status'), true));
                     var pa = document.createElement('span');
-                    pa.style.verticalAlign = 'top';
-                    pa.style.width = '0px';
-                    pa.style.height = '0px';
-                    this._element = fa;
-                    this._ns = ga;
-                    this._tag = ha;
-                    this._params = ma;
+                    ES('Object', 'assign', false, pa.style, {
+                        verticalAlign: 'top',
+                        width: '0px',
+                        height: '0px',
+                        overflow: 'hidden'
+                    });
+                    this._element = ga;
+                    this._ns = ha;
+                    this._tag = ia;
+                    this._params = na;
                     this._config = {
                         root: pa,
-                        url: la + n.encode(ma),
+                        url: ma + n.encode(na),
                         name: oa,
-                        width: (s.mobile() ? undefined : (ma.width || 1000)),
-                        height: ma.height || 1000,
+                        width: (s.mobile() ? (void 0) : (na.width || 1000)),
+                        height: na.height || 1000,
                         style: {
                             border: 'none',
                             visibility: 'hidden'
                         },
                         title: this._ns + ':' + this._tag + ' Facebook Social Plugin',
                         onload: ES(function() {
-                            this.inform('render');
+                            return this.inform('render');
+                        }, 'bind', true, this),
+                        onerror: ES(function() {
+                            return ea(this._iframe);
                         }, 'bind', true, this)
                     };
                 },
                 process: function() {
                     if (o.getIsVersioned()) {
                         l.assertVersionIsSet();
-                        var fa = q(this._config.url);
-                        this._config.url = fa.setPath('/' + o.getVersion() + fa.getPath())
+                        var ga = q(this._config.url);
+                        this._config.url = ga.setPath('/' + o.getVersion() + ga.getPath())
                             .toString();
                     }
-                    var ga = ES('Object', 'assign', false, {}, this._params);
-                    delete ga.channel;
-                    var ha = n.encode(ga);
-                    if (this._element.getAttribute('fb-iframe-plugin-query') == ha) {
-                        j.info('Skipping render: %s:%s %s', this._ns, this._tag, ha);
+                    var ha = ES('Object', 'assign', false, {}, this._params);
+                    delete ha.channel;
+                    var ia = n.encode(ha);
+                    if (this._element.getAttribute('fb-iframe-plugin-query') == ia) {
+                        j.info('Skipping render: %s:%s %s', this._ns, this._tag, ia);
                         this.inform('render');
                         return;
                     }
-                    this._element.setAttribute('fb-iframe-plugin-query', ha);
-                    this.subscribe('render', function() {
+                    this._element.setAttribute('fb-iframe-plugin-query', ia);
+                    this.subscribe('render', ES(function() {
                         this._iframe.style.visibility = 'visible';
-                    });
+                        if (!this._isIframeResized) ea(this._iframe);
+                    }, 'bind', true, this));
                     while (this._element.firstChild) this._element.removeChild(this._element.firstChild);
                     this._element.appendChild(this._config.root);
-                    var ia = s.mobile() ? 120 : 45;
+                    var ja = s.mobile() ? 120 : 45;
                     this._timeoutID = setTimeout(ES(function() {
-                        this._iframe && y(this._iframe, 0, 0);
-                        j.warn('%s:%s failed to resize in %ss', this._ns, this._tag, ia);
-                    }, 'bind', true, this), ia * 1000);
+                        ea(this._iframe);
+                        j.warn('%s:%s failed to resize in %ss', this._ns, this._tag, ja);
+                    }, 'bind', true, this), ja * 1000);
                     if (!m.add(this)) this._iframe = u(this._config);
                     if (s.mobile()) {
                         h.addCss(this._element, 'fb_iframe_widget_fluid');
-                        this._element.style.display = 'block';
-                        this._element.style.width = '100%';
-                        this._element.style.height = 'auto';
-                        this._config.root.style.width = '100%';
-                        this._config.root.style.height = 'auto';
-                        this._iframe.style.width = '100%';
-                        this._iframe.style.height = 'auto';
-                        this._iframe.style.position = 'static';
+                        ES('Object', 'assign', false, this._element.style, {
+                            display: 'block',
+                            width: '100%',
+                            height: 'auto'
+                        });
+                        ES('Object', 'assign', false, this._config.root.style, {
+                            width: '100%',
+                            height: 'auto'
+                        });
+                        ES('Object', 'assign', false, this._iframe.style, {
+                            width: '100%',
+                            height: 'auto',
+                            position: 'static'
+                        });
                     }
                 },
                 updateLift: function() {
-                    var fa = this._iframe.style.width === this._config.root.style.width && this._iframe.style.height === this._config.root.style.height;
-                    h[fa ? 'removeCss' : 'addCss'](this._iframe, 'fb_iframe_widget_lift');
+                    var ga = this._iframe.style.width === this._config.root.style.width && this._iframe.style.height === this._config.root.style.height;
+                    h[ga ? 'removeCss' : 'addCss'](this._iframe, 'fb_iframe_widget_lift');
                 }
             }, k);
-            ea.getVal = ba;
-            ea.withParams = function(fa) {
-                return ea.extend({
+            fa.getVal = ba;
+            fa.withParams = function(ga) {
+                return fa.extend({
                     getParams: function() {
-                        return fa;
+                        return ga;
                     }
                 });
             };
-            e.exports = ea;
+            e.exports = fa;
         }, null);
         __d("PluginTags", [], function(a, b, c, d, e, f) {
             var g = {
@@ -6044,6 +6151,7 @@ try {
                     this.loaded = false;
                     this.subscribe('iframe.onload', ES(function() {
                         this.loaded = true;
+                        if (!this._isResizeHandled) j.addCss(this.dom, 'fb_hide_iframes');
                     }, 'bind', true, this));
                 },
                 generateWidgetPipeIframeName: function() {
@@ -6112,6 +6220,7 @@ try {
                             .style.border = 'none';
                         this._borderReset = true;
                     }
+                    this._isResizeHandled = true;
                     this._makeVisible();
                 },
                 _bubbleResizeEvent: function(x) {
@@ -6312,7 +6421,8 @@ try {
                     var p = {
                         href: o.href,
                         commentID: o.commentID,
-                        parentCommentID: o.parentCommentID
+                        parentCommentID: o.parentCommentID,
+                        message: o.message
                     };
                     g.fire('comment.create', p);
                 },
@@ -6327,14 +6437,15 @@ try {
             });
             e.exports = n;
         }, null);
-        __d("sdk.XFBML.CommentsCount", ["sdk.Data", "sdk.DOM", "sdk.XFBML.Element", "sprintf"], function(a, b, c, d, e, f, g, h, i, j) {
+        __d("sdk.XFBML.CommentsCount", ["ApiClient", "sdk.DOM", "sdk.XFBML.Element", "sprintf"], function(a, b, c, d, e, f, g, h, i, j) {
             var k = i.extend({
                 process: function() {
                     h.addCss(this.dom, 'fb_comments_count_zero');
                     var l = this.getAttribute('href', window.location.href);
-                    g._selectByIndex(['commentsbox_count'], 'link_stat', 'url', l)
-                        .wait(ES(function(m) {
-                        var n = m[0].commentsbox_count;
+                    g.scheduleBatchCall('/v2.0/' + encodeURIComponent(l), {
+                        fields: 'comments'
+                    }, ES(function(m) {
+                        var n = m.comments || 0;
                         h.html(this.dom, j('<span class="fb_comments_count">%s</span>', n));
                         if (n > 0) h.removeCss(this.dom, 'fb_comments_count_zero');
                         this.fire('render');
@@ -6639,7 +6750,7 @@ try {
             });
             e.exports = i;
         }, null);
-        __d("sdk.XFBML.Name", ["sdk.Data", "escapeHTML", "sdk.Event", "sdk.XFBML.Element", "sdk.Helper", "Log", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
+        __d("sdk.XFBML.Name", ["ApiClient", "escapeHTML", "sdk.Event", "sdk.XFBML.Element", "sdk.Helper", "Log", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
             var n = j.extend({
                 process: function() {
                     ES('Object', 'assign', false, this, {
@@ -6664,10 +6775,9 @@ try {
                         o.push('last_name');
                     } else o.push('name');
                     if (this._subjectId) {
-                        o.push('sex');
+                        o.push('gender');
                         if (this._subjectId == m.getUserID()) this._reflexive = true;
                     }
-                    var p;
                     i.monitor('auth.statusChange', ES(function() {
                         if (!this.isValid()) {
                             this.fire('render');
@@ -6675,13 +6785,12 @@ try {
                         }
                         if (!this._uid || this._uid == 'loggedinuser') this._uid = m.getUserID();
                         if (!this._uid) return;
-                        if (k.isUser(this._uid)) {
-                            p = g._selectByIndex(o, 'user', 'uid', this._uid);
-                        } else p = g._selectByIndex(['name', 'id'], 'profile', 'id', this._uid);
-                        p.wait(ES(function(q) {
+                        g.scheduleBatchCall('/' + this._uid, {
+                            fields: o.join(',')
+                        }, ES(function(p) {
                             if (this._subjectId == this._uid) {
-                                this._renderPronoun(q[0]);
-                            } else this._renderOther(q[0]);
+                                this._renderPronoun(p);
+                            } else this._renderOther(p);
                             this.fire('render');
                         }, 'bind', true, this));
                     }, 'bind', true, this));
@@ -6701,7 +6810,7 @@ try {
                         } else if (this._reflexive) {
                             p = 'yourself';
                         } else p = 'you';
-                    } else switch (o.sex) {
+                    } else switch (o.gender) {
                     case 'male':
                         if (this._possessive) {
                             p = this._reflexive ? 'his own' : 'his';
@@ -7004,46 +7113,7 @@ try {
             });
             e.exports = l;
         }, null);
-        __d("sdk.XFBML.SocialContext", ["sdk.Event", "sdk.XFBML.IframeWidget"], function(a, b, c, d, e, f, g, h) {
-            var i = h.extend({
-                setupAndValidate: function() {
-                    var j = this.getAttribute('size', 'small');
-                    this._attr = {
-                        channel: this.getChannelUrl(),
-                        width: this._getPxAttribute('width', 400),
-                        height: this._getPxAttribute('height', 100),
-                        ref: this.getAttribute('ref'),
-                        size: this.getAttribute('size'),
-                        keywords: this.getAttribute('keywords'),
-                        urls: this.getAttribute('urls'),
-                        object_id: this.getAttribute('object_id')
-                    };
-                    this.subscribe('xd.social_context_stats', ES(this._bubbleSocialContextStats, 'bind', true, this));
-                    return true;
-                },
-                _bubbleSocialContextStats: function(j) {
-                    var k = {
-                        pluginID: this.getAttribute('plugin-id'),
-                        socialContextPageIDs: ES('JSON', 'parse', false, j.social_context_page_ids)
-                    };
-                    g.fire('xfbml.social_context_stats', k);
-                },
-                getSize: function() {
-                    return {
-                        width: this._attr.width,
-                        height: this._attr.height
-                    };
-                },
-                getUrlBits: function() {
-                    return {
-                        name: 'social_context',
-                        params: this._attr
-                    };
-                }
-            });
-            e.exports = i;
-        }, null);
-        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration", "sdk.XFBML.SocialContext"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
+        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
             var o = {
                 comments: b('sdk.XFBML.Comments'),
                 comments_count: b('sdk.XFBML.CommentsCount'),
@@ -7051,8 +7121,7 @@ try {
                 login_button: b('sdk.XFBML.LoginButton'),
                 name: b('sdk.XFBML.Name'),
                 recommendations_bar: b('sdk.XFBML.RecommendationsBar'),
-                registration: b('sdk.XFBML.Registration'),
-                social_context: b('sdk.XFBML.SocialContext')
+                registration: b('sdk.XFBML.Registration')
             };
             ES(ES('Object', 'keys', false, l), 'forEach', true, function(q) {
                 n.registerTag({
@@ -7099,5 +7168,5 @@ try {
         .call({}, window.inDapIF ? parent.window : window);
 } catch (e) {
     new Image()
-        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1321716","message":"' + e.message + '"}}');
+        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1358837","message":"' + e.message + '"}}');
 }
