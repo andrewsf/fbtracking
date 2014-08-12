@@ -1,4 +1,4 @@
-/*1407362091,,JIT Construction: v1358837,en_US*/
+/*1407868537,,JIT Construction: v1366099,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -684,7 +684,7 @@ try {
         __d("JSSDKRuntimeConfig", [], {
             "locale": "en_US",
             "rtl": false,
-            "revision": "1358837"
+            "revision": "1366099"
         });
         __d("JSSDKConfig", [], {
             "bustCache": true,
@@ -694,6 +694,10 @@ try {
             },
             "usePluginPipe": true,
             "features": {
+                "event_subscriptions_log": {
+                    "rate": 0.01,
+                    "value": 10000
+                },
                 "kill_fragment": true,
                 "xfbml_profile_pic_server": true,
                 "error_handling": {
@@ -3401,114 +3405,119 @@ try {
                 users_getinfo: true
             }, y = [],
                 z = [],
-                aa = null;
+                aa = null,
+                ba = 50,
+                ca = 105440539523;
 
-            function ba(ja, ka, la, ma) {
-                if (v) la = ES('Object', 'assign', false, {}, v, la);
-                la.access_token = la.access_token || t;
-                la.pretty = la.pretty || 0;
-                la = k(la);
-                var na = {
+            function da(la, ma, na, oa) {
+                if (v) na = ES('Object', 'assign', false, {}, v, na);
+                na.access_token = na.access_token || t;
+                na.pretty = na.pretty || 0;
+                na = k(na);
+                var pa = {
                     jsonp: l,
                     cors: i,
                     flash: j
-                }, oa;
-                if (la.transport) {
-                    oa = [la.transport];
-                    delete la.transport;
-                } else oa = ['jsonp', 'cors', 'flash'];
-                for (var pa = 0; pa < oa.length; pa++) {
-                    var qa = na[oa[pa]],
-                        ra = ES('Object', 'assign', false, {}, la);
-                    if (qa.execute(ja, ka, ra, ma)) return;
+                }, qa;
+                if (na.transport) {
+                    qa = [na.transport];
+                    delete na.transport;
+                } else qa = ['jsonp', 'cors', 'flash'];
+                for (var ra = 0; ra < qa.length; ra++) {
+                    var sa = pa[qa[ra]],
+                        ta = ES('Object', 'assign', false, {}, na);
+                    if (sa.execute(la, ma, ta, oa)) return;
                 }
-                ma({
+                oa({
                     error: {
                         type: 'no-transport',
                         message: 'Could not find a usable transport for request'
                     }
                 });
             }
-            function ca(ja, ka, la, ma, na) {
-                ia.inform('request.complete', ka, la, ma, na);
-                if (ja) ja(na);
+            function ea(la, ma, na, oa, pa) {
+                ka.inform('request.complete', ma, na, oa, pa);
+                if (la) la(pa);
             }
-            function da(ja) {
-                var ka = ja.shift();
-                h.isString(ka, 'Invalid path');
-                if (!/^https?/.test(ka) && ka.charAt(0) !== '/') ka = '/' + ka;
-                var la, ma = {};
+            function fa(la) {
+                var ma = la.shift();
+                h.isString(ma, 'Invalid path');
+                if (!/^https?/.test(ma) && ma.charAt(0) !== '/') ma = '/' + ma;
+                var na, oa = {};
                 try {
-                    la = new p(ka);
-                } catch (na) {
-                    throw new g(na.message, na);
+                    na = new p(ma);
+                } catch (pa) {
+                    throw new g(pa.message, pa);
                 }
-                ES(ja, 'forEach', true, function(ra) {
-                    return ma[typeof ra] = ra;
+                ES(la, 'forEach', true, function(ta) {
+                    return oa[typeof ta] = ta;
                 });
-                var oa = (ma.string || 'get')
+                var qa = (oa.string || 'get')
                     .toLowerCase();
-                h.isTrue(w.hasOwnProperty(oa), o('Invalid method passed to ApiClient: %s', oa));
-                var pa = ma['function'];
-                if (!pa) m.warn('No callback passed to the ApiClient');
-                if (ma.object) la.addQueryData(ma.object);
-                var qa = la.getQueryData();
-                qa.method = oa;
+                h.isTrue(w.hasOwnProperty(qa), o('Invalid method passed to ApiClient: %s', qa));
+                var ra = oa['function'];
+                if (!ra) m.warn('No callback passed to the ApiClient');
+                if (oa.object) na.addQueryData(oa.object);
+                var sa = na.getQueryData();
+                sa.method = qa;
                 return {
-                    uri: la,
-                    callback: pa,
-                    params: qa
+                    uri: na,
+                    callback: ra,
+                    params: sa
                 };
             }
-            function ea() {
-                var ja = Array.prototype.slice.call(arguments, 0),
-                    ka = da(ja),
-                    la = ka.uri,
-                    ma = ka.callback,
-                    na = ka.params,
-                    oa = na.method,
-                    pa = la.getProtocol() && la.getDomain() ? la.setQueryData({})
-                        .toString() : q.resolve('graph') + la.getPath();
-                ba(pa, oa == 'get' ? 'get' : 'post', na, ES(ca, 'bind', true, null, ma, la.getPath(), oa, na));
+            function ga() {
+                var la = Array.prototype.slice.call(arguments, 0),
+                    ma = fa(la),
+                    na = ma.uri,
+                    oa = ma.callback,
+                    pa = ma.params,
+                    qa = pa.method,
+                    ra = na.getProtocol() && na.getDomain() ? na.setQueryData({})
+                        .toString() : q.resolve('graph') + na.getPath();
+                da(ra, qa == 'get' ? 'get' : 'post', pa, ES(ea, 'bind', true, null, oa, na.getPath(), qa, pa));
             }
-            function fa() {
-                var ja = Array.prototype.slice.call(arguments, 0),
-                    ka = da(ja),
-                    la = ka.uri,
-                    ma = ka.callback,
-                    na = ka.params,
-                    oa = na.method,
-                    pa = {
-                        method: oa,
-                        relative_url: la.removeQueryData('method')
+            function ha() {
+                var la = Array.prototype.slice.call(arguments, 0),
+                    ma = fa(la),
+                    na = ma.uri,
+                    oa = ma.callback,
+                    pa = ma.params,
+                    qa = pa.method,
+                    ra = {
+                        method: qa,
+                        relative_url: na.removeQueryData('method')
                             .toString()
                     };
-                if (oa.toLowerCase() == 'post') {
-                    pa.body = la.getQueryData();
-                    pa.relative_url = la.setQueryData({})
+                if (qa.toLowerCase() == 'post') {
+                    ra.body = na.getQueryData();
+                    ra.relative_url = na.setQueryData({})
                         .toString();
                 }
-                y.push(pa);
-                z.push(ma);
-                clearTimeout(aa);
-                aa = setTimeout(ga, 0);
+                y.push(ra);
+                z.push(oa);
+                if (y.length == ba) {
+                    ia();
+                } else if (!aa) aa = setTimeout(ia, 0);
             }
-            function ga() {
+            function ia() {
                 s(y.length > 0);
-                var ja = y,
-                    ka = z;
+                var la = y,
+                    ma = z;
                 y = [];
                 z = [];
-                ea('/', 'POST', {
-                    batch: ES('JSON', 'stringify', false, ja),
-                    include_headers: false
-                }, function(la) {
-                    if (ES('Array', 'isArray', false, la)) {
-                        ES(la, 'forEach', true, function(ma, na) {
-                            ka[na](ES('JSON', 'parse', false, ma.body));
+                aa = null;
+                ga('/', 'POST', {
+                    batch: ES('JSON', 'stringify', false, la),
+                    include_headers: false,
+                    batch_app_id: u || ca
+                }, function(na) {
+                    if (ES('Array', 'isArray', false, na)) {
+                        ES(na, 'forEach', true, function(oa, pa) {
+                            ma[pa](ES('JSON', 'parse', false, oa.body));
                         });
-                    } else ES(ka, 'forEach', true, function(ma) {
-                        return ma({
+                    } else ES(ma, 'forEach', true, function(oa) {
+                        return oa({
                             error: {
                                 message: 'Fatal: batch call failed.'
                             }
@@ -3516,35 +3525,35 @@ try {
                     });
                 });
             }
-            function ha(ja, ka) {
-                h.isObject(ja);
-                h.isString(ja.method, 'method missing');
-                if (!ka) m.warn('No callback passed to the ApiClient');
-                var la = ja.method.toLowerCase()
+            function ja(la, ma) {
+                h.isObject(la);
+                h.isString(la.method, 'method missing');
+                if (!ma) m.warn('No callback passed to the ApiClient');
+                var na = la.method.toLowerCase()
                     .replace('.', '_');
-                ja.format = 'json-strings';
-                ja.api_key = u;
-                var ma = la in x ? 'api_read' : 'api',
-                    na = q.resolve(ma) + '/restserver.php',
-                    oa = ES(ca, 'bind', true, null, ka, '/restserver.php', 'get', ja);
-                ba(na, 'get', ja, oa);
+                la.format = 'json-strings';
+                la.api_key = u;
+                var oa = na in x ? 'api_read' : 'api',
+                    pa = q.resolve(oa) + '/restserver.php',
+                    qa = ES(ea, 'bind', true, null, ma, '/restserver.php', 'get', la);
+                da(pa, 'get', la, qa);
             }
-            var ia = ES('Object', 'assign', false, new n(), {
-                setAccessToken: function(ja) {
-                    t = ja;
+            var ka = ES('Object', 'assign', false, new n(), {
+                setAccessToken: function(la) {
+                    t = la;
                 },
-                setClientID: function(ja) {
-                    u = ja;
+                setClientID: function(la) {
+                    u = la;
                 },
-                setDefaultParams: function(ja) {
-                    v = ja;
+                setDefaultParams: function(la) {
+                    v = la;
                 },
-                rest: ha,
-                graph: ea,
-                scheduleBatchCall: fa
+                rest: ja,
+                graph: ga,
+                scheduleBatchCall: ha
             });
             j.setSwfUrl(r.FlashRequest.swfUrl);
-            e.exports = ia;
+            e.exports = ka;
         }, null);
         __d("sdk.PlatformVersioning", ["sdk.Runtime", "ManagedError"], function(a, b, c, d, e, f, g, h) {
             var i = /^v\d+\.\d\d?$/,
@@ -6442,10 +6451,10 @@ try {
                 process: function() {
                     h.addCss(this.dom, 'fb_comments_count_zero');
                     var l = this.getAttribute('href', window.location.href);
-                    g.scheduleBatchCall('/v2.0/' + encodeURIComponent(l), {
-                        fields: 'comments'
+                    g.scheduleBatchCall('/v2.1/' + encodeURIComponent(l), {
+                        fields: 'share'
                     }, ES(function(m) {
-                        var n = m.comments || 0;
+                        var n = (m.share && m.share.comment_count) || 0;
                         h.html(this.dom, j('<span class="fb_comments_count">%s</span>', n));
                         if (n > 0) h.removeCss(this.dom, 'fb_comments_count_zero');
                         this.fire('render');
@@ -6785,7 +6794,7 @@ try {
                         }
                         if (!this._uid || this._uid == 'loggedinuser') this._uid = m.getUserID();
                         if (!this._uid) return;
-                        g.scheduleBatchCall('/' + this._uid, {
+                        g.scheduleBatchCall('/v1.0/' + this._uid, {
                             fields: o.join(',')
                         }, ES(function(p) {
                             if (this._subjectId == this._uid) {
@@ -7168,5 +7177,5 @@ try {
         .call({}, window.inDapIF ? parent.window : window);
 } catch (e) {
     new Image()
-        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1358837","message":"' + e.message + '"}}');
+        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1366099","message":"' + e.message + '"}}');
 }
