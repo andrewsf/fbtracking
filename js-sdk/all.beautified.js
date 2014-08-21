@@ -1,4 +1,4 @@
-/*1407868537,,JIT Construction: v1366099,en_US*/
+/*1408653255,,JIT Construction: v1380378,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -626,7 +626,7 @@ try {
                         j = Object(j);
                         for (var l = 0; l < k.length; l++) {
                             var m = k[l];
-                            if (m == null) throw new TypeError('Object.assign source cannot be null or undefined');
+                            if (m == null) continue;
                             m = Object(m);
                             for (var n in m) if (h.call(m, n)) j[n] = m[n];
                             g(m, function(o) {
@@ -638,53 +638,101 @@ try {
                 };
             e.exports = i;
         }, null);
-        __d("ES", ["ES5ArrayPrototype", "ES5FunctionPrototype", "ES5StringPrototype", "ES5Array", "ES5Object", "ES5Date", "JSON3", "ES6Object"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
-            var o = ({})
+        __d("ES6ArrayPrototype", [], function(a, b, c, d, e, f) {
+            var g = {
+                find: function(h, i) {
+                    if (this == null) throw new TypeError('Array.prototype.find called on null or undefined');
+                    if (typeof h !== 'function') throw new TypeError('predicate must be a function');
+                    var j = Object(this),
+                        k = j.length >>> 0,
+                        l;
+                    for (var m = 0; m < k; m++) if (m in j) {
+                        l = j[m];
+                        if (h.call(i, l, m, j)) return l;
+                    }
+                    return void(0);
+                }
+            };
+            e.exports = g;
+        }, null);
+        __d("ES6DatePrototype", [], function(a, b, c, d, e, f) {
+            function g(i) {
+                return (i < 10 ? '0' : '') + i;
+            }
+            var h = {
+                toISOString: function() {
+                    if (!isFinite(this)) throw new Error('Invalid time value');
+                    var i = this.getUTCFullYear();
+                    i = (i < 0 ? '-' : (i > 9999 ? '+' : '')) + ('00000' + Math.abs(i))
+                        .slice(0 <= i && i <= 9999 ? -4 : -6);
+                    return i + '-' + g(this.getUTCMonth() + 1) + '-' + g(this.getUTCDate()) + 'T' + g(this.getUTCHours()) + ':' + g(this.getUTCMinutes()) + ':' + g(this.getUTCSeconds()) + '.' + (this.getUTCMilliseconds() / 1000)
+                        .toFixed(3)
+                        .slice(2, 5) + 'Z';
+                }
+            };
+            e.exports = h;
+        }, null);
+        __d("ES6Number", [], function(a, b, c, d, e, f) {
+            var g = {
+                isFinite: function(h) {
+                    return (typeof h == 'number') && isFinite(h);
+                },
+                isNaN: function(h) {
+                    return (typeof h == 'number') && isNaN(h);
+                }
+            };
+            e.exports = g;
+        }, null);
+        __d("ES", ["ES5ArrayPrototype", "ES5FunctionPrototype", "ES5StringPrototype", "ES5Array", "ES5Object", "ES5Date", "JSON3", "ES6Object", "ES6ArrayPrototype", "ES6DatePrototype", "ES6Number"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) {
+            var r = ({})
                 .toString,
-                p = {
+                s = {
                     'JSON.stringify': m.stringify,
                     'JSON.parse': m.parse
-                }, q = {
+                }, t = {
                     'Array.prototype': g,
                     'Function.prototype': h,
                     'String.prototype': i,
                     Object: k,
                     Array: j,
                     Date: l
-                }, r = {
-                    Object: n
+                }, u = {
+                    Object: n,
+                    'Array.prototype': o,
+                    'Date.prototype': p,
+                    Number: q
                 };
 
-            function s(u) {
-                for (var v in u) {
-                    if (!u.hasOwnProperty(v)) continue;
-                    var w = u[v],
-                        x = v.split('.'),
-                        y = x.length == 2 ? window[x[0]][x[1]] : window[v];
-                    for (var z in w) {
-                        if (!w.hasOwnProperty(z)) continue;
-                        var aa = y[z];
-                        p[v + '.' + z] = aa && /\{\s+\[native code\]\s\}/.test(aa) ? aa : w[z];
+            function v(x) {
+                for (var y in x) {
+                    if (!x.hasOwnProperty(y)) continue;
+                    var z = x[y],
+                        aa = y.split('.'),
+                        ba = aa.length == 2 ? window[aa[0]][aa[1]] : window[y];
+                    for (var ca in z) {
+                        if (!z.hasOwnProperty(ca)) continue;
+                        var da = ba[ca];
+                        s[y + '.' + ca] = da && /\{\s+\[native code\]\s\}/.test(da) ? da : z[ca];
                     }
                 }
             }
-            s(q);
-            s(r);
+            v(t);
+            v(u);
 
-            function t(u, v, w) {
-                var x = Array.prototype.slice.call(arguments, 3),
-                    y = w ? o.call(u)
-                        .slice(8, - 1) + '.prototype' : u,
-                    z = p[y + '.' + v] || u[v];
-                if (typeof z === 'function') return z.apply(u, x);
+            function w(x, y, z) {
+                var aa = Array.prototype.slice.call(arguments, 3),
+                    ba = z ? r.call(x)
+                        .slice(8, - 1) + '.prototype' : x,
+                    ca = s[ba + '.' + y] || x[y];
+                if (typeof ca === 'function') return ca.apply(x, aa);
             }
-            e.exports = t;
+            e.exports = w;
         }, null);
         var ES = require('ES');
         __d("JSSDKRuntimeConfig", [], {
             "locale": "en_US",
             "rtl": false,
-            "revision": "1366099"
+            "revision": "1380378"
         });
         __d("JSSDKConfig", [], {
             "bustCache": true,
@@ -710,7 +758,10 @@ try {
                     "rate": 4,
                     "value": 30000
                 },
-                "use_bundle": true
+                "use_bundle": true,
+                "launch_payment_dialog_via_pac": {
+                    "rate": 10
+                }
             },
             "api": {
                 "mode": "warn",
@@ -766,15 +817,15 @@ try {
         });
         __d("JSSDKXDConfig", [], {
             "XdUrl": "\/connect\/xd_arbiter.php?version=41",
-            "XdBundleUrl": "\/connect\/xd_arbiter\/oDB-fAAStWy.js?version=41",
+            "XdBundleUrl": "\/connect\/xd_arbiter\/ZIZ-G4f9LgK.js?version=41",
             "Flash": {
                 "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"
             },
             "useCdn": true
         });
         __d("JSSDKCssConfig", [], {
-            "rules": ".fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100\u0025}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100\u0025;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif) no-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif) white no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100\u0025}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fb_connect_bar_container div,.fb_connect_bar_container span,.fb_connect_bar_container a,.fb_connect_bar_container img,.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode==\"CSS1Compat\"? document.documentElement.scrollTop+\"px\":body.scrollTop+\"px\")}.fb_connect_bar{position:relative;margin:auto;height:100\u0025;width:100\u0025;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}.fb_connect_bar a:hover{color:#fff}.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}.fb_connect_bar div a,.fb_connect_bar span,.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}.fb_connect_bar .fb_buttons{float:right;margin-top:7px}\n.fbpluginrecommendationsbarleft,.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}.fbpluginrecommendationsbarleft{left:10px}.fbpluginrecommendationsbarright{right:10px}",
-            "components": ["css:fb.css.base", "css:fb.css.dialog", "css:fb.css.iframewidget", "css:fb.css.connectbarwidget", "css:fb.css.plugin.recommendationsbar"]
+            "rules": ".fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100\u0025}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100\u0025;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif) no-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif) white no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100\u0025}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fbpluginrecommendationsbarleft,.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}.fbpluginrecommendationsbarleft{left:10px}.fbpluginrecommendationsbarright{right:10px}",
+            "components": ["css:fb.css.base", "css:fb.css.dialog", "css:fb.css.iframewidget", "css:fb.css.plugin.recommendationsbar"]
         });
         __d("ApiClientConfig", [], {
             "FlashRequest": {
@@ -790,12 +841,6 @@ try {
             "enabledApps": {
                 "209753825810663": 1,
                 "187288694643718": 1
-            }
-        });
-        __d("JSSDKConnectBarConfig", [], {
-            "imgs": {
-                "buttonUrl": "rsrc.php\/v2\/yY\/r\/h_Y6u1wrZPW.png",
-                "missingProfileUrl": "rsrc.php\/v2\/yo\/r\/UlIqmHJn-SK.gif"
             }
         });
         __d("QueryString", [], function(a, b, c, d, e, f) {
@@ -1153,7 +1198,7 @@ try {
             }
             e.exports = g;
         }, null);
-        __d("UserAgent", [], function(a, b, c, d, e, f) {
+        __d("UserAgent_DEPRECATED", [], function(a, b, c, d, e, f) {
             var g = false,
                 h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
 
@@ -1243,7 +1288,7 @@ try {
             };
             e.exports = x;
         }, null);
-        __d("hasNamePropertyBug", ["guid", "UserAgent"], function(a, b, c, d, e, f, g, h) {
+        __d("hasNamePropertyBug", ["guid", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h) {
             var i = h.ie() ? undefined : false;
 
             function j() {
@@ -1387,7 +1432,7 @@ try {
             }
             e.exports = h;
         }, null);
-        __d("sdk.getContextType", ["UserAgent", "sdk.Runtime"], function(a, b, c, d, e, f, g, h) {
+        __d("sdk.getContextType", ["UserAgent_DEPRECATED", "sdk.Runtime"], function(a, b, c, d, e, f, g, h) {
             function i() {
                 if (g.nativeApp()) return 3;
                 if (g.mobile()) return 2;
@@ -1861,7 +1906,7 @@ try {
             }
             e.exports = j;
         }, 3);
-        __d("sdk.Content", ["sdk.domReady", "Log", "UserAgent"], function(a, b, c, d, e, f, g, h, i) {
+        __d("sdk.Content", ["sdk.domReady", "Log", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h, i) {
             var j, k, l = {
                 append: function(m, n) {
                     if (!n) if (!j) {
@@ -2205,7 +2250,7 @@ try {
             }
             e.exports = l;
         }, null);
-        __d("Flash", ["DOMEventListener", "DOMWrapper", "QueryString", "UserAgent", "copyProperties", "guid", "htmlSpecialChars"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
+        __d("Flash", ["DOMEventListener", "DOMWrapper", "QueryString", "UserAgent_DEPRECATED", "copyProperties", "guid", "htmlSpecialChars"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
             var n = {}, o, p = h.getWindow()
                 .document;
 
@@ -2308,7 +2353,7 @@ try {
             };
             e.exports = m;
         }, null);
-        __d("XDM", ["DOMEventListener", "DOMWrapper", "emptyFunction", "Flash", "GlobalCallback", "guid", "Log", "UserAgent", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
+        __d("XDM", ["DOMEventListener", "DOMWrapper", "emptyFunction", "Flash", "GlobalCallback", "guid", "Log", "UserAgent_DEPRECATED", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
             var p = {}, q = {
                 transports: []
             }, r = h.getWindow();
@@ -2840,7 +2885,7 @@ try {
             }
             e.exports = i;
         }, null);
-        __d("sdk.DOM", ["Assert", "createArrayFrom", "sdk.domReady", "UserAgent"], function(a, b, c, d, e, f, g, h, i, j) {
+        __d("sdk.DOM", ["Assert", "createArrayFrom", "sdk.domReady", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h, i, j) {
             var k = {};
 
             function l(z, aa) {
@@ -2923,16 +2968,18 @@ try {
                     k[da] = true;
                 }
                 if (ba) return;
-                if (!j.ie()) {
-                    var ea = document.createElement('style');
-                    ea.type = 'text/css';
-                    ea.textContent = z;
-                    document.getElementsByTagName('head')[0].appendChild(ea);
-                } else try {
-                    document.createStyleSheet()
-                        .cssText = z;
-                } catch (fa) {
-                    if (document.styleSheets[0]) document.styleSheets[0].cssText += z;
+                if (j.ie() < 11) {
+                    try {
+                        document.createStyleSheet()
+                            .cssText = z;
+                    } catch (ea) {
+                        if (document.styleSheets[0]) document.styleSheets[0].cssText += z;
+                    }
+                } else {
+                    var fa = document.createElement('style');
+                    fa.type = 'text/css';
+                    fa.textContent = z;
+                    document.getElementsByTagName('head')[0].appendChild(fa);
                 }
             }
             function w() {
@@ -2975,7 +3022,7 @@ try {
             };
             e.exports = y;
         }, null);
-        __d("sdk.ErrorHandling", ["sdk.feature", "ManagedError", "sdk.Runtime", "sdk.Scribe", "UserAgent", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
+        __d("sdk.ErrorHandling", ["sdk.feature", "ManagedError", "sdk.Runtime", "sdk.Scribe", "UserAgent_DEPRECATED", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
             var m = g('error_handling', false),
                 n = '';
 
@@ -3662,7 +3709,7 @@ try {
                 tx: k
             };
         }, null);
-        __d("sdk.Dialog", ["sdk.Canvas.Environment", "sdk.Content", "sdk.DOM", "DOMEventListener", "sdk.Intl", "ObservableMixin", "sdk.Runtime", "Type", "UserAgent", "sdk.feature"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+        __d("sdk.Dialog", ["sdk.Canvas.Environment", "sdk.Content", "sdk.DOM", "DOMEventListener", "sdk.Intl", "ObservableMixin", "sdk.Runtime", "Type", "UserAgent_DEPRECATED", "sdk.feature"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
             var q = 590,
                 r = 500,
                 s = 240,
@@ -4089,7 +4136,7 @@ try {
             }
             e.exports = i;
         }, null);
-        __d("sdk.Native", ["Log", "UserAgent"], function(a, b, c, d, e, f, g, h) {
+        __d("sdk.Native", ["Log", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h) {
             var i = 'fbNativeReady',
                 j = {
                     onready: function(k) {
@@ -4122,7 +4169,7 @@ try {
             }
             e.exports = g;
         }, null);
-        __d("sdk.UIServer", ["sdk.Auth", "sdk.Content", "createObjectFrom", "sdk.Dialog", "sdk.DOM", "sdk.Event", "flattenObject", "sdk.Frictionless", "sdk.getContextType", "guid", "insertIframe", "Log", "sdk.Native", "QueryString", "resolveURI", "sdk.RPC", "sdk.Runtime", "JSSDKConfig", "UrlMap", "UserAgent", "sdk.XD"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, aa) {
+        __d("sdk.UIServer", ["sdk.Auth", "sdk.Content", "createObjectFrom", "sdk.Dialog", "sdk.DOM", "sdk.Event", "flattenObject", "sdk.Frictionless", "sdk.getContextType", "guid", "insertIframe", "Log", "sdk.Native", "QueryString", "resolveURI", "sdk.RPC", "sdk.Runtime", "JSSDKConfig", "UrlMap", "UserAgent_DEPRECATED", "sdk.XD"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, aa) {
             var ba = {
                 transform: function(ea) {
                     if (ea.params.display === 'touch' && ea.params.access_token && window.postMessage) {
@@ -4563,6 +4610,7 @@ try {
                     i.error('"method" is a required parameter for FB.ui().');
                     return null;
                 }
+                if (o.method == 'pay.prompt') o.method = 'pay';
                 var q = o.method;
                 if (o.redirect_uri) {
                     i.warn('When using FB.ui, you should not specify a redirect_uri.');
@@ -4725,7 +4773,7 @@ try {
             };
             e.exports = i;
         }, null);
-        __d("sdk.Canvas.Plugin", ["sdk.api", "sdk.RPC", "Log", "UserAgent", "sdk.Runtime", "createArrayFrom"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
+        __d("sdk.Canvas.Plugin", ["sdk.api", "sdk.RPC", "Log", "UserAgent_DEPRECATED", "sdk.Runtime", "createArrayFrom"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
             var m = 'CLSID:D27CDB6E-AE6D-11CF-96B8-444553540000',
                 n = 'CLSID:444785F1-DE89-4295-863A-D46C3A781394',
                 o = null,
@@ -5259,9 +5307,33 @@ try {
         __d("legacy:fb.data", ["FB", "sdk.Data"], function(a, b, c, d, e, f, g, h) {
             g.provide('Data', h);
         }, 3);
-        __d("legacy:fb.event", ["FB", "sdk.Event"], function(a, b, c, d, e, f, g, h) {
+        __d("legacy:fb.event", ["FB", "sdk.Event", "sdk.Runtime", "sdk.Scribe", "sdk.feature"], function(a, b, c, d, e, f, g, h, i, j, k) {
+            var l = [],
+                m = null,
+                n = k('event_subscriptions_log', false);
             g.provide('Event', {
-                subscribe: ES(h.subscribe, 'bind', true, h),
+                subscribe: function(o, p) {
+                    if (n) {
+                        l.push(o);
+                        if (!m) m = setTimeout(function() {
+                            j.log('jssdk_error', {
+                                appId: i.getClientID(),
+                                error: 'EVENT_SUBSCRIPTIONS_LOG',
+                                extra: {
+                                    line: 0,
+                                    name: 'EVENT_SUBSCRIPTIONS_LOG',
+                                    script: 'N/A',
+                                    stack: 'N/A',
+                                    message: l.sort()
+                                        .join(',')
+                                }
+                            });
+                            l.length = 0;
+                            m = null;
+                        }, n);
+                    }
+                    return h.subscribe(o, p);
+                },
                 unsubscribe: ES(h.unsubscribe, 'bind', true, h)
             });
         }, 3);
@@ -5360,45 +5432,47 @@ try {
                 }
             });
         }, 3);
-        __d("legacy:fb.pay", ["copyProperties", "sdk.Runtime", "sdk.UIServer", "sdk.XD", "FB"], function(a, b, c, d, e, f, g, h, i, j) {
+        __d("legacy:fb.pay", ["copyProperties", "sdk.Runtime", "sdk.UIServer", "sdk.XD", "sdk.feature", "FB"], function(a, b, c, d, e, f, g, h, i, j, k) {
             b('FB');
-            var k = {
+            var l = {
                 error_code: 1383001,
                 error_message: 'An unknown error caused the dialog to be closed'
-            }, l = function(m) {
-                return function(n) {
-                    m(n && n.response ? ES('JSON', 'parse', false, n.response) : k);
+            }, m = function(n) {
+                return function(o) {
+                    if (o && typeof o.response === 'string') {
+                        n(ES('JSON', 'parse', false, o.response));
+                    } else if (typeof o === 'object') {
+                        n(o);
+                    } else n(l);
                 };
             };
             g(i.Methods, {
-                'pay.prompt': {
-                    transform: function(m) {
-                        var n = j.handler(l(m.cb), 'parent.frames[' + (window.name || 'iframe_canvas') + ']');
-                        m.params.channel = n;
-                        j.inform('Pay.Prompt', m.params);
-                    }
-                },
                 pay: {
                     size: {
                         width: 555,
                         height: 120
                     },
                     connectDisplay: 'popup',
-                    transform: function(m) {
-                        m.cb = l(m.cb);
-                        if (!h.isEnvironment(h.ENVIRONMENTS.CANVAS)) {
-                            m.params.order_info = ES('JSON', 'stringify', false, m.params.order_info);
-                            return m;
+                    transform: function(n) {
+                        if (k('launch_payment_dialog_via_pac')) {
+                            n.cb = m(n.cb);
+                            return n;
+                        } else {
+                            n.cb = m(n.cb);
+                            if (!h.isEnvironment(h.ENVIRONMENTS.CANVAS)) {
+                                n.params.order_info = ES('JSON', 'stringify', false, n.params.order_info);
+                                return n;
+                            }
+                            var o = j.handler(n.cb, 'parent.frames[' + (window.name || 'iframe_canvas') + ']');
+                            n.params.channel = o;
+                            n.params.uiserver = true;
+                            j.inform('Pay.Prompt', n.params);
                         }
-                        var n = j.handler(m.cb, 'parent.frames[' + (window.name || 'iframe_canvas') + ']');
-                        m.params.channel = n;
-                        m.params.uiserver = true;
-                        j.inform('Pay.Prompt', m.params);
                     }
                 }
             });
         }, 3);
-        __d("legacy:fb.ua", ["FB", "UserAgent"], function(a, b, c, d, e, f, g, h) {
+        __d("legacy:fb.ua", ["FB", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h) {
             g.provide('UA', {
                 nativeApp: h.nativeApp
             });
@@ -5476,7 +5550,7 @@ try {
             }
             e.exports = g;
         }, null);
-        __d("XFBML", ["Assert", "createArrayFrom", "sdk.DOM", "sdk.feature", "sdk.Impressions", "Log", "ObservableMixin", "runOnce", "UserAgent"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
+        __d("XFBML", ["Assert", "createArrayFrom", "sdk.DOM", "sdk.feature", "sdk.Impressions", "Log", "ObservableMixin", "runOnce", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
             var p = {}, q = {}, r = 0,
                 s = new m();
 
@@ -5596,7 +5670,7 @@ try {
             }
             e.exports = s;
         }, null);
-        __d("PluginPipe", ["sdk.Content", "sdk.feature", "guid", "insertIframe", "Miny", "ObservableMixin", "JSSDKPluginPipeConfig", "sdk.Runtime", "UrlMap", "UserAgent", "XFBML"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) {
+        __d("PluginPipe", ["sdk.Content", "sdk.feature", "guid", "insertIframe", "Miny", "ObservableMixin", "JSSDKPluginPipeConfig", "sdk.Runtime", "UrlMap", "UserAgent_DEPRECATED", "XFBML"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) {
             var r = new l(),
                 s = m.threshold,
                 t = [];
@@ -5677,7 +5751,7 @@ try {
             });
             e.exports = r;
         }, null);
-        __d("IframePlugin", ["sdk.Auth", "sdk.DOM", "sdk.Event", "Log", "ObservableMixin", "sdk.PlatformVersioning", "PluginPipe", "QueryString", "sdk.Runtime", "Type", "sdk.URI", "UrlMap", "UserAgent", "sdk.XD", "sdk.createIframe", "guid", "resolveURI"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w) {
+        __d("IframePlugin", ["sdk.Auth", "sdk.DOM", "sdk.Event", "Log", "ObservableMixin", "sdk.PlatformVersioning", "PluginPipe", "QueryString", "sdk.Runtime", "Type", "sdk.URI", "UrlMap", "UserAgent_DEPRECATED", "sdk.XD", "sdk.createIframe", "guid", "resolveURI"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w) {
             var x = {
                 skin: 'string',
                 font: 'string',
@@ -6339,7 +6413,7 @@ try {
             }
             e.exports = t;
         }, null);
-        __d("sdk.XFBML.Comments", ["sdk.Event", "sdk.XFBML.IframeWidget", "QueryString", "sdk.Runtime", "JSSDKConfig", "UrlMap", "UserAgent"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
+        __d("sdk.XFBML.Comments", ["sdk.Event", "sdk.XFBML.IframeWidget", "QueryString", "sdk.Runtime", "JSSDKConfig", "UrlMap", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
             var n = h.extend({
                 _visibleAfter: 'immediate',
                 _refreshOnAuthChange: true,
@@ -6463,72 +6537,6 @@ try {
             });
             e.exports = k;
         }, null);
-        __d("sdk.Anim", ["sdk.DOM"], function(a, b, c, d, e, f, g) {
-            var h = {
-                ate: function(i, j, k, l) {
-                    k = !isNaN(parseFloat(k)) && k >= 0 ? k : 750;
-                    var m = 40,
-                        n = {}, o = {}, p = null,
-                        q = setInterval(ES(function() {
-                            if (!p) p = ES('Date', 'now', false);
-                            var r = 1;
-                            if (k != 0) r = Math.min((ES('Date', 'now', false) - p) / k, 1);
-                            for (var s in j) if (j.hasOwnProperty(s)) {
-                                var t = j[s];
-                                if (!n[s]) {
-                                    var u = g.getStyle(i, s);
-                                    if (u === false) return;
-                                    n[s] = this._parseCSS(u + '');
-                                }
-                                if (!o[s]) o[s] = this._parseCSS(t.toString());
-                                var v = '';
-                                ES(n[s], 'forEach', true, function(w, x) {
-                                    if (isNaN(o[s][x].numPart) && o[s][x].textPart == '?') {
-                                        v = w.numPart + w.textPart;
-                                    } else if (isNaN(w.numPart)) {
-                                        v = w.textPart;
-                                    } else v += (w.numPart + Math.ceil((o[s][x].numPart - w.numPart) * Math.sin(Math.PI / 2 * r))) + o[s][x].textPart + ' ';
-                                });
-                                g.setStyle(i, s, v);
-                            }
-                            if (r == 1) {
-                                clearInterval(q);
-                                if (l) l(i);
-                            }
-                        }, 'bind', true, this), m);
-                },
-                _parseCSS: function(i) {
-                    var j = [];
-                    ES(i.split(' '), 'forEach', true, function(k) {
-                        var l = parseInt(k, 10);
-                        j.push({
-                            numPart: l,
-                            textPart: k.replace(l, '')
-                        });
-                    });
-                    return j;
-                }
-            };
-            e.exports = h;
-        }, null);
-        __d("escapeHTML", [], function(a, b, c, d, e, f) {
-            var g = /[&<>"'\/]/g,
-                h = {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#039;',
-                    '/': '&#x2F;'
-                };
-
-            function i(j) {
-                return j.replace(g, function(k) {
-                    return h[k];
-                });
-            }
-            e.exports = i;
-        }, null);
         __d("sdk.Helper", ["sdk.ErrorHandling", "sdk.Event", "UrlMap", "safeEval", "sprintf"], function(a, b, c, d, e, f, g, h, i, j, k) {
             var l = {
                 isUser: function(m) {
@@ -6567,169 +6575,6 @@ try {
             };
             e.exports = l;
         }, null);
-        __d("sdk.XFBML.ConnectBar", ["sdk.Anim", "sdk.api", "sdk.Auth", "createArrayFrom", "JSSDKConnectBarConfig", "sdk.Data", "sdk.DOM", "sdk.XFBML.Element", "escapeHTML", "sdk.Event", "format", "sdk.Helper", "sdk.Insights", "sdk.Intl", "sdk.Runtime", "UrlMap", "UserAgent"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w) {
-            var x = n.extend({
-                _initialHeight: null,
-                _initTopMargin: 0,
-                _picFieldName: 'pic_square',
-                _page: null,
-                _displayed: false,
-                _notDisplayed: false,
-                _container: null,
-                _animationSpeed: 0,
-                process: function() {
-                    i.getLoginStatus(ES(function(y) {
-                        p.monitor('auth.statusChange', ES(function() {
-                            if (this.isValid() && u.getLoginStatus() == 'connected') {
-                                this._uid = u.getUserID();
-                                h({
-                                    method: 'Connect.shouldShowConnectBar'
-                                }, ES(function(z) {
-                                    if (z != 2) {
-                                        this._animationSpeed = (z == 0) ? 750 : 0;
-                                        this._showBar();
-                                    } else this._noRender();
-                                }, 'bind', true, this));
-                            } else this._noRender();
-                            return false;
-                        }, 'bind', true, this));
-                    }, 'bind', true, this));
-                },
-                _showBar: function() {
-                    var y = l._selectByIndex(['first_name', 'profile_url', this._picFieldName], 'user', 'uid', this._uid),
-                        z = l._selectByIndex(['display_name'], 'application', 'api_key', u.getClientID());
-                    l.waitOn([y, z], ES(function(aa) {
-                        aa[0][0].site_name = aa[1][0].display_name;
-                        if (!this._displayed) {
-                            this._displayed = true;
-                            this._notDisplayed = false;
-                            this._renderConnectBar(aa[0][0]);
-                            this.fire('render');
-                            s.impression({
-                                lid: 104,
-                                name: 'widget_load'
-                            });
-                            this.fire('connectbar.ondisplay');
-                            p.fire('connectbar.ondisplay', this);
-                            r.invokeHandler(this.getAttribute('on-display'), this);
-                        }
-                    }, 'bind', true, this));
-                },
-                _noRender: function() {
-                    if (this._displayed) {
-                        this._displayed = false;
-                        this._closeConnectBar();
-                    }
-                    if (!this._notDisplayed) {
-                        this._notDisplayed = true;
-                        this.fire('render');
-                        this.fire('connectbar.onnotdisplay');
-                        p.fire('connectbar.onnotdisplay', this);
-                        r.invokeHandler(this.getAttribute('on-not-display'), this);
-                    }
-                },
-                _renderConnectBar: function(y) {
-                    var z = document.createElement('div'),
-                        aa = document.createElement('div');
-                    z.className = 'fb_connect_bar';
-                    aa.className = 'fb_reset fb_connect_bar_container';
-                    aa.appendChild(z);
-                    document.body.appendChild(aa);
-                    this._container = aa;
-                    this._initialHeight = Math.round(parseFloat(m.getStyle(aa, 'height')) + parseFloat(m.getStyle(aa, 'borderBottomWidth')));
-                    m.html(z, q('<div class="fb_buttons">' + '<a href="#" class="fb_bar_close">' + '<img src="{1}" alt="{2}" title="{2}"/>' + '</a>' + '</div>' + '<a href="{7}" class="fb_profile" target="_blank">' + '<img src="{3}" alt="{4}" title="{4}"/>' + '</a>' + '{5}' + ' <span>' + '<a href="{8}" class="fb_learn_more" target="_blank">{6}</a> &ndash; ' + '<a href="#" class="fb_no_thanks">{0}</a>' + '</span>', t.tx._("No Thanks"), v.resolve('fbcdn') + '/' + k.imgs.buttonUrl, t.tx._("Close"), y[this._picFieldName] || v.resolve('fbcdn') + '/' + k.imgs.missingProfileUrl, o(y.first_name), t.tx._("Hi {firstName}. \u003Cstrong>{siteName}\u003C\/strong> is using Facebook to personalize your experience.", {
-                        firstName: o(y.first_name),
-                        siteName: o(y.site_name)
-                    }), t.tx._("Learn More"), y.profile_url, v.resolve('www') + '/sitetour/connect.php'));
-                    ES(j(z.getElementsByTagName('a')), 'forEach', true, function(da) {
-                        da.onclick = ES(this._clickHandler, 'bind', true, this);
-                    }, this);
-                    this._page = document.body;
-                    var ba = 0;
-                    if (this._page.parentNode) {
-                        ba = Math.round((parseFloat(m.getStyle(this._page.parentNode, 'height')) - parseFloat(m.getStyle(this._page, 'height'))) / 2);
-                    } else ba = parseInt(m.getStyle(this._page, 'marginTop'), 10);
-                    ba = isNaN(ba) ? 0 : ba;
-                    this._initTopMargin = ba;
-                    if (!window.XMLHttpRequest) {
-                        aa.className += " fb_connect_bar_container_ie6";
-                    } else {
-                        aa.style.top = (-1 * this._initialHeight) + 'px';
-                        g.ate(aa, {
-                            top: '0px'
-                        }, this._animationSpeed);
-                    }
-                    var ca = {
-                        marginTop: this._initTopMargin + this._initialHeight + 'px'
-                    };
-                    if (w.ie()) {
-                        ca.backgroundPositionY = this._initialHeight + 'px';
-                    } else ca.backgroundPosition = '? ' + this._initialHeight + 'px';
-                    g.ate(this._page, ca, this._animationSpeed);
-                },
-                _clickHandler: function(y) {
-                    y = y || window.event;
-                    var z = y.target || y.srcElement;
-                    while (z.nodeName != 'A') z = z.parentNode;
-                    switch (z.className) {
-                    case 'fb_bar_close':
-                        h({
-                            method: 'Connect.connectBarMarkAcknowledged'
-                        });
-                        s.impression({
-                            lid: 104,
-                            name: 'widget_user_closed'
-                        });
-                        this._closeConnectBar();
-                        break;
-                    case 'fb_learn_more':
-                    case 'fb_profile':
-                        window.open(z.href);
-                        break;
-                    case 'fb_no_thanks':
-                        this._closeConnectBar();
-                        h({
-                            method: 'Connect.connectBarMarkAcknowledged'
-                        });
-                        s.impression({
-                            lid: 104,
-                            name: 'widget_user_no_thanks'
-                        });
-                        h({
-                            method: 'auth.revokeAuthorization',
-                            block: true
-                        }, ES(function() {
-                            this.fire('connectbar.ondeauth');
-                            p.fire('connectbar.ondeauth', this);
-                            r.invokeHandler(this.getAttribute('on-deauth'), this);
-                            if (this._getBoolAttribute('auto-refresh', true)) window.location.reload();
-                        }, 'bind', true, this));
-                        break;
-                    }
-                    return false;
-                },
-                _closeConnectBar: function() {
-                    this._notDisplayed = true;
-                    var y = {
-                        marginTop: this._initTopMargin + 'px'
-                    };
-                    if (w.ie()) {
-                        y.backgroundPositionY = '0px';
-                    } else y.backgroundPosition = '? 0px';
-                    var z = (this._animationSpeed == 0) ? 0 : 300;
-                    g.ate(this._page, y, z);
-                    g.ate(this._container, {
-                        top: (-1 * this._initialHeight) + 'px'
-                    }, z, function(aa) {
-                        aa.parentNode.removeChild(aa);
-                    });
-                    this.fire('connectbar.onclose');
-                    p.fire('connectbar.onclose', this);
-                    r.invokeHandler(this.getAttribute('on-close'), this);
-                }
-            });
-            e.exports = x;
-        }, null);
         __d("sdk.XFBML.LoginButton", ["sdk.Helper", "IframePlugin"], function(a, b, c, d, e, f, g, h) {
             var i = h.extend({
                 constructor: function(j, k, l, m) {
@@ -6759,141 +6604,165 @@ try {
             });
             e.exports = i;
         }, null);
+        __d("escapeHTML", [], function(a, b, c, d, e, f) {
+            var g = /[&<>"'\/]/g,
+                h = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;',
+                    '/': '&#x2F;'
+                };
+
+            function i(j) {
+                return j.replace(g, function(k) {
+                    return h[k];
+                });
+            }
+            e.exports = i;
+        }, null);
         __d("sdk.XFBML.Name", ["ApiClient", "escapeHTML", "sdk.Event", "sdk.XFBML.Element", "sdk.Helper", "Log", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
-            var n = j.extend({
-                process: function() {
-                    ES('Object', 'assign', false, this, {
-                        _uid: this.getAttribute('uid'),
-                        _firstnameonly: this._getBoolAttribute('first-name-only'),
-                        _lastnameonly: this._getBoolAttribute('last-name-only'),
-                        _possessive: this._getBoolAttribute('possessive'),
-                        _reflexive: this._getBoolAttribute('reflexive'),
-                        _objective: this._getBoolAttribute('objective'),
-                        _linked: this._getBoolAttribute('linked', true),
-                        _subjectId: this.getAttribute('subject-id')
-                    });
-                    if (!this._uid) {
-                        l.error('"uid" is a required attribute for <fb:name>');
-                        this.fire('render');
-                        return;
-                    }
-                    var o = [];
-                    if (this._firstnameonly) {
-                        o.push('first_name');
-                    } else if (this._lastnameonly) {
-                        o.push('last_name');
-                    } else o.push('name');
-                    if (this._subjectId) {
-                        o.push('gender');
-                        if (this._subjectId == m.getUserID()) this._reflexive = true;
-                    }
-                    i.monitor('auth.statusChange', ES(function() {
-                        if (!this.isValid()) {
+            var n = ({})
+                .hasOwnProperty,
+                o = j.extend({
+                    process: function() {
+                        ES('Object', 'assign', false, this, {
+                            _uid: this.getAttribute('uid'),
+                            _firstnameonly: this._getBoolAttribute('first-name-only'),
+                            _lastnameonly: this._getBoolAttribute('last-name-only'),
+                            _possessive: this._getBoolAttribute('possessive'),
+                            _reflexive: this._getBoolAttribute('reflexive'),
+                            _objective: this._getBoolAttribute('objective'),
+                            _linked: this._getBoolAttribute('linked', true),
+                            _subjectId: this.getAttribute('subject-id')
+                        });
+                        if (!this._uid) {
+                            l.error('"uid" is a required attribute for <fb:name>');
                             this.fire('render');
-                            return true;
+                            return;
                         }
-                        if (!this._uid || this._uid == 'loggedinuser') this._uid = m.getUserID();
-                        if (!this._uid) return;
-                        g.scheduleBatchCall('/v1.0/' + this._uid, {
-                            fields: o.join(',')
-                        }, ES(function(p) {
-                            if (this._subjectId == this._uid) {
-                                this._renderPronoun(p);
-                            } else this._renderOther(p);
-                            this.fire('render');
+                        var p = [];
+                        if (this._firstnameonly) {
+                            p.push('first_name');
+                        } else if (this._lastnameonly) {
+                            p.push('last_name');
+                        } else p.push('name');
+                        if (this._subjectId) {
+                            p.push('gender');
+                            if (this._subjectId == m.getUserID()) this._reflexive = true;
+                        }
+                        i.monitor('auth.statusChange', ES(function() {
+                            if (!this.isValid()) {
+                                this.fire('render');
+                                return true;
+                            }
+                            if (!this._uid || this._uid == 'loggedinuser') this._uid = m.getUserID();
+                            if (!this._uid) return;
+                            g.scheduleBatchCall('/v1.0/' + this._uid, {
+                                fields: p.join(',')
+                            }, ES(function(q) {
+                                if (n.call(q, 'error')) {
+                                    l.warn('The name is not found for ID: ' + this._uid);
+                                    return;
+                                }
+                                if (this._subjectId == this._uid) {
+                                    this._renderPronoun(q);
+                                } else this._renderOther(q);
+                                this.fire('render');
+                            }, 'bind', true, this));
                         }, 'bind', true, this));
-                    }, 'bind', true, this));
-                },
-                _renderPronoun: function(o) {
-                    var p = '',
-                        q = this._objective;
-                    if (this._subjectId) {
-                        q = true;
-                        if (this._subjectId === this._uid) this._reflexive = true;
-                    }
-                    if (this._uid == m.getUserID() && this._getBoolAttribute('use-you', true)) {
-                        if (this._possessive) {
-                            if (this._reflexive) {
-                                p = 'your own';
-                            } else p = 'your';
-                        } else if (this._reflexive) {
-                            p = 'yourself';
-                        } else p = 'you';
-                    } else switch (o.gender) {
-                    case 'male':
-                        if (this._possessive) {
-                            p = this._reflexive ? 'his own' : 'his';
-                        } else if (this._reflexive) {
-                            p = 'himself';
-                        } else if (q) {
-                            p = 'him';
-                        } else p = 'he';
-                        break;
-                    case 'female':
-                        if (this._possessive) {
-                            p = this._reflexive ? 'her own' : 'her';
-                        } else if (this._reflexive) {
-                            p = 'herself';
-                        } else if (q) {
-                            p = 'her';
-                        } else p = 'she';
-                        break;
-                    default:
-                        if (this._getBoolAttribute('use-they', true)) {
+                    },
+                    _renderPronoun: function(p) {
+                        var q = '',
+                            r = this._objective;
+                        if (this._subjectId) {
+                            r = true;
+                            if (this._subjectId === this._uid) this._reflexive = true;
+                        }
+                        if (this._uid == m.getUserID() && this._getBoolAttribute('use-you', true)) {
                             if (this._possessive) {
                                 if (this._reflexive) {
-                                    p = 'their own';
-                                } else p = 'their';
+                                    q = 'your own';
+                                } else q = 'your';
                             } else if (this._reflexive) {
-                                p = 'themselves';
-                            } else if (q) {
-                                p = 'them';
-                            } else p = 'they';
-                        } else if (this._possessive) {
-                            if (this._reflexive) {
-                                p = 'his/her own';
-                            } else p = 'his/her';
-                        } else if (this._reflexive) {
-                            p = 'himself/herself';
-                        } else if (q) {
-                            p = 'him/her';
-                        } else p = 'he/she';
-                        break;
-                    }
-                    if (this._getBoolAttribute('capitalize', false)) p = k.upperCaseFirstChar(p);
-                    this.dom.innerHTML = p;
-                },
-                _renderOther: function(o) {
-                    var p = '',
-                        q = '';
-                    if (this._uid == m.getUserID() && this._getBoolAttribute('use-you', true)) {
-                        if (this._reflexive) {
+                                q = 'yourself';
+                            } else q = 'you';
+                        } else switch (p.gender) {
+                        case 'male':
                             if (this._possessive) {
-                                p = 'your own';
-                            } else p = 'yourself';
-                        } else if (this._possessive) {
-                            p = 'your';
-                        } else p = 'you';
-                    } else if (o) {
-                        if (null === o.first_name) o.first_name = '';
-                        if (null === o.last_name) o.last_name = '';
-                        if (this._firstnameonly && o.first_name !== undefined) {
-                            p = h(o.first_name);
-                        } else if (this._lastnameonly && o.last_name !== undefined) p = h(o.last_name);
-                        if (!p) p = h(o.name);
-                        if (p !== '' && this._possessive) p += '\'s';
+                                q = this._reflexive ? 'his own' : 'his';
+                            } else if (this._reflexive) {
+                                q = 'himself';
+                            } else if (r) {
+                                q = 'him';
+                            } else q = 'he';
+                            break;
+                        case 'female':
+                            if (this._possessive) {
+                                q = this._reflexive ? 'her own' : 'her';
+                            } else if (this._reflexive) {
+                                q = 'herself';
+                            } else if (r) {
+                                q = 'her';
+                            } else q = 'she';
+                            break;
+                        default:
+                            if (this._getBoolAttribute('use-they', true)) {
+                                if (this._possessive) {
+                                    if (this._reflexive) {
+                                        q = 'their own';
+                                    } else q = 'their';
+                                } else if (this._reflexive) {
+                                    q = 'themselves';
+                                } else if (r) {
+                                    q = 'them';
+                                } else q = 'they';
+                            } else if (this._possessive) {
+                                if (this._reflexive) {
+                                    q = 'his/her own';
+                                } else q = 'his/her';
+                            } else if (this._reflexive) {
+                                q = 'himself/herself';
+                            } else if (r) {
+                                q = 'him/her';
+                            } else q = 'he/she';
+                            break;
+                        }
+                        if (this._getBoolAttribute('capitalize', false)) q = k.upperCaseFirstChar(q);
+                        this.dom.innerHTML = q;
+                    },
+                    _renderOther: function(p) {
+                        var q = '',
+                            r = '';
+                        if (this._uid == m.getUserID() && this._getBoolAttribute('use-you', true)) {
+                            if (this._reflexive) {
+                                if (this._possessive) {
+                                    q = 'your own';
+                                } else q = 'yourself';
+                            } else if (this._possessive) {
+                                q = 'your';
+                            } else q = 'you';
+                        } else if (p) {
+                            if (null === p.first_name) p.first_name = '';
+                            if (null === p.last_name) p.last_name = '';
+                            if (this._firstnameonly && p.first_name !== undefined) {
+                                q = h(p.first_name);
+                            } else if (this._lastnameonly && p.last_name !== undefined) q = h(p.last_name);
+                            if (!q) q = h(p.name);
+                            if (q !== '' && this._possessive) q += '\'s';
+                        }
+                        if (!q) q = h(this.getAttribute('if-cant-see', 'Facebook User'));
+                        if (q) {
+                            if (this._getBoolAttribute('capitalize', false)) q = k.upperCaseFirstChar(q);
+                            if (p && this._linked) {
+                                r = k.getProfileLink(p, q, this.getAttribute('href', null));
+                            } else r = q;
+                        }
+                        this.dom.innerHTML = r;
                     }
-                    if (!p) p = h(this.getAttribute('if-cant-see', 'Facebook User'));
-                    if (p) {
-                        if (this._getBoolAttribute('capitalize', false)) p = k.upperCaseFirstChar(p);
-                        if (o && this._linked) {
-                            q = k.getProfileLink(o, p, this.getAttribute('href', null));
-                        } else q = p;
-                    }
-                    this.dom.innerHTML = q;
-                }
-            });
-            e.exports = n;
+                });
+            e.exports = o;
         }, null);
         __d("sdk.XFBML.RecommendationsBar", ["sdk.Arbiter", "DOMEventListener", "sdk.Event", "sdk.XFBML.IframeWidget", "resolveURI", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
             var m = j.extend({
@@ -7122,11 +6991,10 @@ try {
             });
             e.exports = l;
         }, null);
-        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.ConnectBar", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
+        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
             var o = {
                 comments: b('sdk.XFBML.Comments'),
                 comments_count: b('sdk.XFBML.CommentsCount'),
-                connect_bar: b('sdk.XFBML.ConnectBar'),
                 login_button: b('sdk.XFBML.LoginButton'),
                 name: b('sdk.XFBML.Name'),
                 recommendations_bar: b('sdk.XFBML.RecommendationsBar'),
@@ -7177,5 +7045,5 @@ try {
         .call({}, window.inDapIF ? parent.window : window);
 } catch (e) {
     new Image()
-        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1366099","message":"' + e.message + '"}}');
+        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1380378","message":"' + e.message + '"}}');
 }
