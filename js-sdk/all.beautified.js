@@ -1,4 +1,4 @@
-/*1408653255,,JIT Construction: v1380378,en_US*/
+/*1409870266,,JIT Construction: v1399202,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -643,14 +643,16 @@ try {
                 find: function(h, i) {
                     if (this == null) throw new TypeError('Array.prototype.find called on null or undefined');
                     if (typeof h !== 'function') throw new TypeError('predicate must be a function');
+                    var j = g.findIndex.call(this, h, i);
+                    return j === -1 ? void 0 : this[j];
+                },
+                findIndex: function(h, i) {
+                    if (this == null) throw new TypeError('Array.prototype.findIndex called on null or undefined');
+                    if (typeof h !== 'function') throw new TypeError('predicate must be a function');
                     var j = Object(this),
-                        k = j.length >>> 0,
-                        l;
-                    for (var m = 0; m < k; m++) if (m in j) {
-                        l = j[m];
-                        if (h.call(i, l, m, j)) return l;
-                    }
-                    return void(0);
+                        k = j.length >>> 0;
+                    for (var l = 0; l < k; l++) if (l in j) if (h.call(i, j[l], l, j)) return l;
+                    return -1;
                 }
             };
             e.exports = g;
@@ -732,7 +734,7 @@ try {
         __d("JSSDKRuntimeConfig", [], {
             "locale": "en_US",
             "rtl": false,
-            "revision": "1380378"
+            "revision": "1399202"
         });
         __d("JSSDKConfig", [], {
             "bustCache": true,
@@ -760,12 +762,12 @@ try {
                 },
                 "use_bundle": true,
                 "launch_payment_dialog_via_pac": {
-                    "rate": 10
+                    "rate": 100
                 }
             },
             "api": {
                 "mode": "warn",
-                "whitelist": ["Canvas", "Canvas.Prefetcher", "Canvas.Prefetcher.addStaticResource", "Canvas.Prefetcher.setCollectionMode", "Canvas.getPageInfo", "Canvas.hideFlashElement", "Canvas.scrollTo", "Canvas.setAutoGrow", "Canvas.setDoneLoading", "Canvas.setSize", "Canvas.setUrlHandler", "Canvas.showFlashElement", "Canvas.startTimer", "Canvas.stopTimer", "Data", "Data.process", "Data.query", "Data.query:wait", "Data.waitOn", "Data.waitOn:wait", "Event", "Event.subscribe", "Event.unsubscribe", "Music.flashCallback", "Music.init", "Music.send", "Payment", "Payment.cancelFlow", "Payment.continueFlow", "Payment.init", "Payment.lockForProcessing", "Payment.unlockForProcessing", "Payment.parse", "Payment.setSize", "ThirdPartyProvider", "ThirdPartyProvider.init", "ThirdPartyProvider.sendData", "UA", "UA.nativeApp", "XFBML", "XFBML.RecommendationsBar", "XFBML.RecommendationsBar.markRead", "XFBML.parse", "addFriend", "api", "getAccessToken", "getAuthResponse", "getLoginStatus", "getUserID", "init", "login", "logout", "publish", "share", "ui", "ui:subscribe"]
+                "whitelist": ["Canvas", "Canvas.Prefetcher", "Canvas.Prefetcher.addStaticResource", "Canvas.Prefetcher.setCollectionMode", "Canvas.getPageInfo", "Canvas.hideFlashElement", "Canvas.scrollTo", "Canvas.setAutoGrow", "Canvas.setDoneLoading", "Canvas.setSize", "Canvas.setUrlHandler", "Canvas.showFlashElement", "Canvas.startTimer", "Canvas.stopTimer", "Data", "Data.process", "Data.query", "Data.query:wait", "Data.waitOn", "Data.waitOn:wait", "Event", "Event.subscribe", "Event.unsubscribe", "Music.flashCallback", "Music.init", "Music.send", "Payment", "Payment.cancelFlow", "Payment.continueFlow", "Payment.init", "Payment.lockForProcessing", "Payment.unlockForProcessing", "Payment.parse", "Payment.setSize", "ThirdPartyProvider", "ThirdPartyProvider.init", "ThirdPartyProvider.sendData", "UA", "UA.nativeApp", "XFBML", "XFBML.RecommendationsBar", "XFBML.RecommendationsBar.markRead", "XFBML.parse", "addFriend", "api", "getAccessToken", "getAuthResponse", "getLoginStatus", "getUserID", "init", "login", "logout", "publish", "share", "ui", "ui:subscribe", "AppEvents", "AppEvents.activateApp", "AppEvents.logEvent", "AppEvents.logPurchase", "AppEvents.EventNames", "AppEvents.ParameterNames"]
             },
             "initSitevars": {
                 "enableMobileComments": 1,
@@ -817,7 +819,7 @@ try {
         });
         __d("JSSDKXDConfig", [], {
             "XdUrl": "\/connect\/xd_arbiter.php?version=41",
-            "XdBundleUrl": "\/connect\/xd_arbiter\/ZIZ-G4f9LgK.js?version=41",
+            "XdBundleUrl": "\/connect\/xd_arbiter\/ZEbdHPQfV3x.js?version=41",
             "Flash": {
                 "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"
             },
@@ -3214,6 +3216,9 @@ try {
                         var ha = (ca ? ca + '.' : '') + fa,
                             ia = aa(ga, ha, fa, da);
                         if (ia) ea[fa] = ia;
+                    } else if (typeof ga === 'object') {
+                        ha = (ca ? ca + '.' : '') + fa;
+                        if (v && v[ha]) ea[fa] = ga;
                     }
                 });
             }
@@ -6059,6 +6064,7 @@ try {
                 },
                 share_button: {
                     href: 'url',
+                    layout: 'string',
                     type: 'string'
                 },
                 shared_activity: {
@@ -7045,5 +7051,5 @@ try {
         .call({}, window.inDapIF ? parent.window : window);
 } catch (e) {
     new Image()
-        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1380378","message":"' + e.message + '"}}');
+        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1399202","message":"' + e.message + '"}}');
 }
