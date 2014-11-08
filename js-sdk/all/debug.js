@@ -1,4 +1,4 @@
-/*1409868063,,JIT Construction: v1399202,en_US*/
+/*1415404455,,JIT Construction: v1486784,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -13,7 +13,7 @@ function emptyFunction() {};
 var __w, __t;
 /** Path: html/js/downstream/polyfill/TypeChecker.js */
 /**
- * @generated SignedSource<<f05ceab49bd445d883e5a164a021bcff>>
+ * @generated SignedSource<<844f320a76c971aa562d386826b156eb>>
  *
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  * !! This file is a check-in of a static_upstream project!      !!
@@ -56,7 +56,10 @@ var __w, __t;
     'DOMTextNode': ['DOMNode'],
     'Comment': ['DOMNode'],
     'file': ['blob'],
-    'worker': ['DOMEventTarget']
+    'worker': ['DOMEventTarget'],
+    // We need to support typing on both the native and polyfilled type.
+    'Set': ['set'],
+    'Map': ['map']
   };
 
   /**
@@ -170,6 +173,8 @@ var __w, __t;
           case 'File':
           case 'FileList':
           case 'Worker':
+          case 'Map':
+          case 'Set':
           // typed arrays
           case 'Uint8Array':
           case 'Int8Array':
@@ -184,7 +189,6 @@ var __w, __t;
         }
       }
     }
-
     return type;
   }
 
@@ -238,6 +242,9 @@ var __w, __t;
         break;
       case 'array':
         simpleMatch = type === 'object' && stringType(value) === 'Array';
+        break;
+      case 'promise':
+        simpleMatch = type === 'object' && typeof value.then === 'function';
         break;
       case 'DOMElement':
         simpleMatch = isDOMNode(type, value, 1);
@@ -407,7 +414,7 @@ var __w, __t;
 })();
 /*/TC*/
 
-/* SoyZ8sKHK_x */
+/* R0DxW8zXTGl */
 /** Path: html/js/downstream/require/require-lite.js */
 /**
  * @generated SignedSource<<7618ccf975187cb96282853804aca921>>
@@ -1669,7 +1676,7 @@ var ES6Object = {
    *
    * http://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign
    */
-  assign:function(target ) {var sources=Array.prototype.slice.call(arguments,1);
+  assign:function(target ) {for (var sources=[],$__0=1,$__1=arguments.length;$__0<$__1;$__0++) sources.push(arguments[$__0]);
     if (target == null) {
       throw new TypeError('Object.assign target cannot be null or undefined');
     }
@@ -1743,10 +1750,8 @@ var ES6ArrayPrototype = {
     var list = Object(this);
     var length = list.length >>> 0;
     for (var i = 0; i < length; i++) {
-      if (i in list) {
-        if (predicate.call(thisArg, list[i], i, list)) {
-          return i;
-        }
+      if (predicate.call(thisArg, list[i], i, list)) {
+        return i;
       }
     }
     return -1;
@@ -1756,7 +1761,7 @@ var ES6ArrayPrototype = {
 
 module.exports = ES6ArrayPrototype;
 
-/* 1tA8qoTgQ7s */
+/* ftK07A9mJN8 */
 },null);
 /** Path: html/js/sdk/ES6DatePrototype.js */
 /**
@@ -1895,7 +1900,7 @@ function setupMethodsCache(polyfills) {
 setupMethodsCache(es5Polyfills);
 setupMethodsCache(es6Polyfills);
 
-function ES(lhs, rhs, proto ) {var args=Array.prototype.slice.call(arguments,3);
+function ES(lhs, rhs, proto ) {for (var args=[],$__0=3,$__1=arguments.length;$__0<$__1;$__0++) args.push(arguments[$__0]);
   // Normalize the type information
   var type = proto
     ? toString.call(lhs).slice(8, -1) + '.prototype'
@@ -1919,7 +1924,7 @@ module.exports = ES;
 /* 8t3naSxRM6- */
 },null);
 var ES = require('ES');
-__d("JSSDKRuntimeConfig",[],{"locale":"en_US","rtl":false,"revision":"1399202"});__d("JSSDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"features":{"event_subscriptions_log":{"rate":0.01,"value":10000},"kill_fragment":true,"xfbml_profile_pic_server":true,"error_handling":{"rate":4},"e2e_ping_tracking":{"rate":1.0e-6},"xd_timeout":{"rate":4,"value":30000},"use_bundle":true,"launch_payment_dialog_via_pac":{"rate":100}},"api":{"mode":"warn","whitelist":["Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Data","Data.process","Data.query","Data.query:wait","Data.waitOn","Data.waitOn:wait","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.cancelFlow","Payment.continueFlow","Payment.init","Payment.lockForProcessing","Payment.unlockForProcessing","Payment.parse","Payment.setSize","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui","ui:subscribe","AppEvents","AppEvents.activateApp","AppEvents.logEvent","AppEvents.logPurchase","AppEvents.EventNames","AppEvents.ParameterNames"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","business":"business.facebook.com","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("JSSDKXDConfig",[],{"XdUrl":"\/connect\/xd_arbiter.php?version=41","XdBundleUrl":"\/connect\/xd_arbiter\/nBGR_gz2FBo.js?version=41","Flash":{"path":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"},"useCdn":true});__d("JSSDKCssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100\u0025}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100\u0025;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif) no-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif) white no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100\u0025}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fbpluginrecommendationsbarleft,.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}.fbpluginrecommendationsbarleft{left:10px}.fbpluginrecommendationsbarright{right:10px}","components":["css:fb.css.base","css:fb.css.dialog","css:fb.css.iframewidget","css:fb.css.plugin.recommendationsbar"]});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yW\/r\/PvklbuW2Ycn.swf"}});__d("JSSDKCanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("JSSDKPluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});
+__d("JSSDKRuntimeConfig",[],{"locale":"en_US","rtl":false,"revision":"1486784"});__d("JSSDKConfig",[],{"bustCache":true,"tagCountLogRate":0.01,"errorHandling":{"rate":4},"usePluginPipe":true,"features":{"allow_non_canvas_app_events":false,"event_subscriptions_log":{"rate":0.01,"value":10000},"kill_fragment":true,"xfbml_profile_pic_server":true,"error_handling":{"rate":4},"e2e_ping_tracking":{"rate":1.0e-6},"xd_timeout":{"rate":4,"value":30000},"use_bundle":true,"launch_payment_dialog_via_pac":{"rate":100},"plugin_tags_blacklist":["recommendations_bar"]},"api":{"mode":"warn","whitelist":["AppEvents","AppEvents.EventNames","AppEvents.ParameterNames","AppEvents.activateApp","AppEvents.logEvent","AppEvents.logPurchase","Canvas","Canvas.Prefetcher","Canvas.Prefetcher.addStaticResource","Canvas.Prefetcher.setCollectionMode","Canvas.getPageInfo","Canvas.hideFlashElement","Canvas.scrollTo","Canvas.setAutoGrow","Canvas.setDoneLoading","Canvas.setSize","Canvas.setUrlHandler","Canvas.showFlashElement","Canvas.startTimer","Canvas.stopTimer","Event","Event.subscribe","Event.unsubscribe","Music.flashCallback","Music.init","Music.send","Payment","Payment.cancelFlow","Payment.continueFlow","Payment.init","Payment.lockForProcessing","Payment.parse","Payment.setSize","Payment.unlockForProcessing","ThirdPartyProvider","ThirdPartyProvider.init","ThirdPartyProvider.sendData","UA","UA.nativeApp","XFBML","XFBML.RecommendationsBar","XFBML.RecommendationsBar.markRead","XFBML.parse","addFriend","api","getAccessToken","getAuthResponse","getLoginStatus","getUserID","init","login","logout","publish","share","ui"]},"initSitevars":{"enableMobileComments":1,"iframePermissions":{"read_stream":false,"manage_mailbox":false,"manage_friendlists":false,"read_mailbox":false,"publish_checkins":true,"status_update":true,"photo_upload":true,"video_upload":true,"sms":false,"create_event":true,"rsvp_event":true,"offline_access":true,"email":true,"xmpp_login":false,"create_note":true,"share_item":true,"export_stream":false,"publish_stream":true,"publish_likes":true,"ads_management":false,"contact_email":true,"access_private_data":false,"read_insights":false,"read_requests":false,"read_friendlists":true,"manage_pages":false,"physical_login":false,"manage_groups":false,"read_deals":false}}});__d("UrlMapConfig",[],{"www":"www.facebook.com","m":"m.facebook.com","connect":"connect.facebook.net","business":"business.facebook.com","api_https":"api.facebook.com","api_read_https":"api-read.facebook.com","graph_https":"graph.facebook.com","fbcdn_http":"static.ak.fbcdn.net","fbcdn_https":"fbstatic-a.akamaihd.net","cdn_http":"static.ak.facebook.com","cdn_https":"s-static.ak.facebook.com"});__d("JSSDKXDConfig",[],{"XdUrl":"\/connect\/xd_arbiter.php?version=41","XdBundleUrl":"\/connect\/xd_arbiter\/inP_iYjVh9g.js?version=41","Flash":{"path":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"},"useCdn":true});__d("JSSDKCssConfig",[],{"rules":".fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100\u0025}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100\u0025;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif) no-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif) white no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100\u0025}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fbpluginrecommendationsbarleft,.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}.fbpluginrecommendationsbarleft{left:10px}.fbpluginrecommendationsbarright{right:10px}","components":["css:fb.css.base","css:fb.css.dialog","css:fb.css.iframewidget","css:fb.css.plugin.recommendationsbar"]});__d("ApiClientConfig",[],{"FlashRequest":{"swfUrl":"https:\/\/connect.facebook.net\/rsrc.php\/v1\/yW\/r\/PvklbuW2Ycn.swf"}});__d("JSSDKCanvasPrefetcherConfig",[],{"blacklist":[144959615576466],"sampleRate":500});__d("JSSDKPluginPipeConfig",[],{"threshold":0,"enabledApps":{"209753825810663":1,"187288694643718":1}});
 
 
 __d("QueryString",[],function(global,require,requireDynamic,requireLazy,module,exports) {
@@ -2021,10 +2026,10 @@ module.exports = AssertionError;
 
 __d("sprintf",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 
-function sprintf(format ) {__t([format, 'string', 'format']);var args=Array.prototype.slice.call(arguments,1);
+function sprintf(format ) {__t([format, 'string', 'format']);return __t([function() {for (var args=[],$__0=1,$__1=arguments.length;$__0<$__1;$__0++) args.push(arguments[$__0]);
   var index = 0;
   return format.replace(/%s/g, function(match)  {return args[index++];});
-}__w(sprintf, {"signature":"function(string)"}); 
+}.apply(this, arguments), 'string']);}__w(sprintf, {"signature":"function(string):string"}); 
 
 module.exports = sprintf;
 
@@ -2191,7 +2196,7 @@ function extend(/*?function*/ from, /*?object*/ prototype, mixins)
   from = from || Type;
 
   
-  var F = new Function();
+  function F() {}__w(F, {"type":"F"}); 
   F.prototype = from.prototype;
   constructor.prototype = new F();
 
@@ -2426,7 +2431,12 @@ ES('Object', 'assign', false,Runtime, {
   isEnvironment: __w(function(/*number*/ target) /*boolean*/ {__t([target, 'number', 'target']);return __t([function() {
     var environment = this.getEnvironment();
     return (target | environment) === environment;
-  }.apply(this, arguments), 'boolean']);}, {"signature":"function(number):boolean"})
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function(number):boolean"}),
+
+  isCanvasEnvironment: __w(function() /*boolean*/ {return __t([function() {
+    return this.isEnvironment(ENVIRONMENTS.CANVAS) ||
+      this.isEnvironment(ENVIRONMENTS.PAGETAB);
+  }.apply(this, arguments), 'boolean']);}, {"signature":"function():boolean"})
 });
 
 (function() {
@@ -2546,6 +2556,8 @@ module.exports = Cookie;
 
 
 __d("guid",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+/*jshint bitwise: false*/
+
 function guid() {
   return 'f' + (Math.random() * (1 << 30)).toString(16).replace('.', '');
 }
@@ -3034,6 +3046,487 @@ module.exports = getContextType;
 
 },null);
 
+__d("sdk.domReady",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+var queue;
+var domIsReady = "readyState" in document
+  ? /loaded|complete/.test(document.readyState)
+  
+  
+  
+  
+  
+  : !!document.body;
+
+function flush() {
+  if (!queue) {
+    return;
+  }
+
+  var fn;
+  while (fn = queue.shift()) {
+    fn();
+  }
+  queue = null;
+}
+
+function domReady(/*function*/ fn) {__t([fn, 'function', 'fn']);
+  if (queue) {
+    queue.push(fn);
+    return;
+  } else {
+    fn();
+  }
+}__w(domReady, {"signature":"function(function)"}); 
+
+if(!domIsReady) {
+  queue = [];
+  if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', flush, false);
+    window.addEventListener('load', flush, false);
+  } else if (document.attachEvent) {
+    document.attachEvent('onreadystatechange', flush);
+    window.attachEvent('onload', flush);
+  }
+
+  
+  
+  if (document.documentElement.doScroll && window == window.top) {
+    var test = function() {
+      try {
+        
+        
+        document.documentElement.doScroll('left');
+      } catch(error) {
+        setTimeout(test, 0);
+        return;
+      }
+      flush();
+    };
+    test();
+  }
+}
+
+module.exports = domReady;
+
+
+},3);
+
+
+__d("Log",["sprintf"],function(global,require,requireDynamic,requireLazy,module,exports,sprintf) {
+   
+
+var Level = {
+  DEBUG    : 3,
+  INFO     : 2,
+  WARNING  : 1,
+  ERROR    : 0
+};
+
+function log(/*string*/ name, /*number*/ level/*, args*/ ) {__t([name, 'string', 'name'], [level, 'number', 'level']);
+  var args = Array.prototype.slice.call(arguments, 2);
+  var msg = sprintf.apply(null, args);
+  var console = window.console;
+  if (console && Log.level >= level) {
+    console[name in console ? name : 'log'](msg);
+  }
+}__w(log, {"signature":"function(string,number)"}); 
+
+var Log = {
+  
+  level: __DEV__ ? 3 : -1,
+
+  
+  Level: Level,
+
+  
+  debug : ES(log, 'bind', true,null, 'debug', Level.DEBUG),
+  info  : ES(log, 'bind', true,null, 'info',  Level.INFO),
+  warn  : ES(log, 'bind', true,null, 'warn',  Level.WARNING),
+  error : ES(log, 'bind', true,null, 'error', Level.ERROR)
+};
+module.exports = Log;
+
+
+
+},null);
+
+
+__d("sdk.Content",["sdk.domReady","Log","UserAgent_DEPRECATED"],function(global,require,requireDynamic,requireLazy,module,exports,domReady,Log,UserAgent_DEPRECATED) {
+   
+   
+   
+
+var visibleRoot;
+var hiddenRoot;
+
+var Content = {
+
+  
+  append: __w(function(/*DOMElement|string*/ content, /*?DOMElement*/ root)
+      /*DOMElement*/ {__t([content, 'DOMElement|string', 'content'], [root, '?DOMElement', 'root']);return __t([function() {
+
+    
+    if (!root) {
+      if (!visibleRoot) {
+        visibleRoot = root = document.getElementById('fb-root');
+        if (!root) {
+          Log.warn('The "fb-root" div has not been created, auto-creating');
+          
+          visibleRoot = root = document.createElement('div');
+          root.id = 'fb-root';
+          
+          // that the body has loaded to avoid potential "operation aborted"
+          
+          
+          
+          
+          if (UserAgent_DEPRECATED.ie() || !document.body) {
+            domReady(function() {
+              document.body.appendChild(root);
+            });
+          } else {
+            document.body.appendChild(root);
+          }
+        }
+        root.className += ' fb_reset';
+      } else {
+        root = visibleRoot;
+      }
+    }
+
+    if (typeof content == 'string') {
+      var div = document.createElement('div');
+      root.appendChild(div).innerHTML = content;
+      return div;
+    } else {
+      return root.appendChild(content);
+    }
+  }.apply(this, arguments), 'DOMElement']);}, {"signature":"function(DOMElement|string,?DOMElement):DOMElement"}),
+
+  
+  appendHidden: __w(function(/*DOMElement|string*/ content) /*DOMElement*/ {__t([content, 'DOMElement|string', 'content']);return __t([function() {
+    if (!hiddenRoot) {
+      var
+        hiddenRoot = document.createElement('div'),
+        style      = hiddenRoot.style;
+      style.position = 'absolute';
+      style.top      = '-10000px';
+      style.width    = style.height = 0;
+      hiddenRoot = Content.append(hiddenRoot);
+    }
+
+    return Content.append(content, hiddenRoot);
+  }.apply(this, arguments), 'DOMElement']);}, {"signature":"function(DOMElement|string):DOMElement"}),
+
+  
+  submitToTarget: __w(function(/*object*/ opts, /*?boolean*/ get) {__t([opts, 'object', 'opts'], [get, '?boolean', 'get']);
+    var form = document.createElement('form');
+    form.action = opts.url;
+    form.target = opts.target;
+    form.method = (get) ? 'GET' : 'POST';
+    Content.appendHidden(form);
+
+    for (var key in opts.params) {
+      if (opts.params.hasOwnProperty(key)) {
+        var val = opts.params[key];
+        if (val !== null && val !== undefined) {
+          var input = document.createElement('input');
+          input.name = key;
+          input.value = val;
+          form.appendChild(input);
+        }
+      }
+    }
+
+    form.submit();
+    form.parentNode.removeChild(form);
+  }, {"signature":"function(object,?boolean)"})
+};
+
+module.exports = Content;
+
+
+},null);
+
+
+__d("dotAccess",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+function dotAccess(head, path, create) {
+  var stack = path.split('.');
+  do {
+    var key = stack.shift();
+    head = head[key] || create && (head[key] = {});
+  } while(stack.length && head);
+  return head;
+}
+
+module.exports = dotAccess;
+
+
+},null);
+
+
+__d("GlobalCallback",["DOMWrapper","dotAccess","guid","wrapFunction"],function(global,require,requireDynamic,requireLazy,module,exports,DOMWrapper,dotAccess,guid,wrapFunction) {
+   
+   
+   
+   
+
+// window is the same as the 'global' object in the browser, but the variable
+// 'global' might be shadowed.
+var rootObject;
+var callbackPrefix;
+
+var GlobalCallback = {
+
+  setPrefix: __w(function(/*string*/ prefix) {__t([prefix, 'string', 'prefix']);
+    rootObject = dotAccess(DOMWrapper.getWindow(), prefix, true);
+    callbackPrefix = prefix;
+  }, {"signature":"function(string)"}),
+
+  create: __w(function(/*function*/ fn, /*?string*/ description) /*string*/ {__t([fn, 'function', 'fn'], [description, '?string', 'description']);return __t([function() {
+    if (!rootObject) {
+      
+      
+      this.setPrefix('__globalCallbacks');
+    }
+    var id = guid();
+    rootObject[id] = wrapFunction(fn, 'entry', description || 'GlobalCallback');
+
+    return callbackPrefix + '.' + id;
+  }.apply(this, arguments), 'string']);}, {"signature":"function(function,?string):string"}),
+
+  remove: __w(function(/*string*/ name) {__t([name, 'string', 'name']);
+    var id = name.substring(callbackPrefix.length + 1);
+    delete rootObject[id];
+  }, {"signature":"function(string)"})
+
+};
+
+module.exports = GlobalCallback;
+
+
+},null);
+
+
+__d("insertIframe",["guid","GlobalCallback"],function(global,require,requireDynamic,requireLazy,module,exports,guid,GlobalCallback) {
+   
+   
+
+function insertIframe(/*object*/ opts) {__t([opts, 'object', 'opts']);
+
+  
+  
+  
+
+
+  opts.id = opts.id || guid();
+  opts.name = opts.name || guid();
+
+  
+  // browsers (e.g. Webkit) appear to try to do the "right thing" and will fire
+  
+  
+  
+  var srcSet = false;
+  var onloadDone = false;
+  var callback = function() {
+    if (srcSet && !onloadDone) {
+      onloadDone = true;
+      opts.onload && opts.onload(opts.root.firstChild);
+    }
+  };
+  var globalCallback = GlobalCallback.create(callback);
+
+
+  
+  
+  // Dear Webkit, you're okay. Works either way.
+
+  if (document.attachEvent) {
+    
+    
+    var html = (
+      '<iframe' +
+        ' id="' + opts.id + '"' +
+        ' name="' + opts.name + '"' +
+        (opts.title ? ' title="' + opts.title + '"' : '') +
+        (opts.className ? ' class="' + opts.className + '"' : '') +
+        ' style="border:none;' +
+        (opts.width ? 'width:' + opts.width + 'px;' : '') +
+        (opts.height ? 'height:' + opts.height + 'px;' : '') +
+        '"' +
+        ' src="javascript:false;"' +
+        ' frameborder="0"' +
+        ' scrolling="no"' +
+        ' allowtransparency="true"' +
+        ' onload="' + globalCallback + '()"' +
+        '></iframe>'
+    );
+
+    
+    
+    // actually sets the content to the HTML we created above, and because it's
+    
+    
+    
+    // the string 'false', we set the iframe height to 1px so that it gets
+    
+    opts.root.innerHTML = (
+      '<iframe src="javascript:false"' +
+        ' frameborder="0"' +
+        ' scrolling="no"' +
+        ' style="height:1px"></iframe>'
+    );
+
+    // Now we'll be setting the real src.
+    srcSet = true;
+
+    
+    
+    
+    
+    
+    setTimeout(function() {
+      opts.root.innerHTML = html;
+      opts.root.firstChild.src = opts.url;
+      opts.onInsert && opts.onInsert(opts.root.firstChild);
+    }, 0);
+
+  } else {
+    // This block works for all non-IE browsers, but it's specifically designed
+    
+    
+    var node = document.createElement('iframe');
+    node.id = opts.id;
+    node.name = opts.name;
+    node.onload = callback;
+    node.scrolling = 'no';
+    node.style.border = 'none';
+    node.style.overflow = 'hidden';
+    if (opts.title) {
+      node.title = opts.title;
+    }
+    if (opts.className) {
+      node.className = opts.className;
+    }
+    if (opts.height !== undefined) {
+      node.style.height = opts.height + 'px';
+    }
+    if (opts.width !== undefined) {
+      if (opts.width == '100%') {
+        node.style.width = opts.width;
+      } else {
+        node.style.width = opts.width + 'px';
+      }
+    }
+    opts.root.appendChild(node);
+
+    // Now we'll be setting the real src.
+    srcSet = true;
+
+    node.src = opts.url;
+    opts.onInsert && opts.onInsert(node);
+  }
+}__w(insertIframe, {"signature":"function(object)"}); 
+
+module.exports = insertIframe;
+
+
+},null);
+
+
+__d("Miny",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+var MAGIC = 'Miny1';
+
+
+var _indexMap = {encode: [], decode: {}};
+var LO = 'wxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_'.split('');
+function getIndexMap(length) {
+  for (var i = _indexMap.encode.length; i < length; i++) {
+    
+    var s = i.toString(32).split('');
+    s[s.length - 1] = LO[parseInt(s[s.length - 1], 32)];
+    s = s.join('');
+
+    _indexMap.encode[i] = s;
+    _indexMap.decode[s] = i;
+  }
+
+  return _indexMap;
+}
+
+
+function encode(s) {
+  if (/^$|[~\\]|__proto__/.test(s)) return s;
+
+  
+  var parts = s.match(/\w+|\W+/g);
+
+  // Create dictionary we'll use to encode, but initialize it to part counts
+  
+  var dict = {};
+  for (var i = 0; i < parts.length; i++) {
+    dict[parts[i]] = (dict[parts[i]] || 0) + 1;
+  }
+
+  // Create array of part strings we'll use to decode, sort by frequency so
+  
+  var byCount = ES('Object', 'keys', false,dict);
+  byCount.sort(function(a,b) {
+    return dict[a] < dict[b] ? 1 : (dict[b] < dict[a] ? -1 : 0);
+  });
+
+  
+  var encodeMap = getIndexMap(byCount.length).encode;
+  for (i = 0; i < byCount.length; i++) {
+    dict[byCount[i]] = encodeMap[i];
+  }
+
+  
+  var codes = [];
+  for (i = 0; i < parts.length; i++) {
+    codes[i] = dict[parts[i]];
+  }
+
+  return [MAGIC, byCount.length].
+         concat(byCount).
+         concat(codes.join('')).
+         join('~');
+}
+
+
+function decode(s) {
+  var fields = s.split('~');
+
+  if (fields.shift() != MAGIC) {
+    
+    return s;
+  }
+  var nKeys = parseInt(fields.shift(), 10);
+  var codes = fields.pop();
+  codes = codes.match(/[0-9a-v]*[\-w-zA-Z_]/g);
+
+  var dict = fields;
+
+  var decodeMap = getIndexMap(nKeys).decode;
+  var parts = [];
+  for (var i = 0; i < codes.length; i++) {
+    parts[i] = dict[decodeMap[codes[i]]];
+  }
+
+  return parts.join('');
+}
+
+var Miny = {
+  encode: encode,
+  decode: decode
+};
+
+module.exports = Miny;
+
+
+},null);
+
 
 __d("UrlMap",["UrlMapConfig"],function(global,require,requireDynamic,requireLazy,module,exports,UrlMapConfig) {
    
@@ -3073,7 +3566,10 @@ module.exports = UrlMap;
 },null);
 
 
-__d("sdk.Impressions",["guid","QueryString","sdk.Runtime","UrlMap"],function(global,require,requireDynamic,requireLazy,module,exports,guid,QueryString,Runtime,UrlMap) {
+__d("sdk.Impressions",["sdk.Content","guid","insertIframe","Miny","QueryString","sdk.Runtime","UrlMap"],function(global,require,requireDynamic,requireLazy,module,exports,Content,guid,insertIframe,Miny,QueryString,Runtime,UrlMap) {
+   
+   
+   
    
    
    
@@ -3088,13 +3584,44 @@ function request(/*object*/ params) {__t([params, 'object', 'params']);
 
   params.kid_directed_site = Runtime.getKidDirectedSite();
 
-  var image = new Image();
+  var url = UrlMap.resolve('www', /*force ssl*/true) +
+    '/impression.php/' + guid() + '/';
+  var fullUrlPath = QueryString.appendToUrl(url, params);
+  if (fullUrlPath.length > 2000) {
+    
+    
+    if (params.payload && typeof params.payload === 'string') {
+      var minyPayload = Miny.encode(params.payload);
+      if (minyPayload && minyPayload.length < params.payload.length) {
+        params.payload = minyPayload;
+        fullUrlPath = QueryString.appendToUrl(url, params);
+      }
+    }
+  }
 
-  image.src = QueryString.appendToUrl(
-    UrlMap.resolve('www', /*force ssl*/true) +
-      '/impression.php/' + guid() + '/',
-    params
-  );
+  if (fullUrlPath.length <= 2000) {
+    var image = new Image();
+    image.src = fullUrlPath;
+  } else {
+    
+    var name = guid();
+    var root = Content.appendHidden('');
+    insertIframe({
+      url: 'javascript:false',
+      root: root,
+      name: name,
+      className: 'fb_hidden fb_invisible',
+      onload: function() {
+        root.parentNode.removeChild(root);
+      }
+    });
+
+    Content.submitToTarget({
+      url: url,
+      target: name,
+      params: params
+    });
+  }
 }__w(request, {"signature":"function(object)"}); 
 
 var Impressions = {
@@ -3113,45 +3640,6 @@ var Impressions = {
 };
 
 module.exports = Impressions;
-
-
-},null);
-
-
-__d("Log",["sprintf"],function(global,require,requireDynamic,requireLazy,module,exports,sprintf) {
-   
-
-var Level = {
-  DEBUG    : 3,
-  INFO     : 2,
-  WARNING  : 1,
-  ERROR    : 0
-};
-
-function log(/*string*/ name, /*number*/ level/*, args*/ ) {__t([name, 'string', 'name'], [level, 'number', 'level']);
-  var args = Array.prototype.slice.call(arguments, 2);
-  var msg = sprintf.apply(null, args);
-  var console = window.console;
-  if (console && Log.level >= level) {
-    console[name in console ? name : 'log'](msg);
-  }
-}__w(log, {"signature":"function(string,number)"}); 
-
-var Log = {
-  
-  level: __DEV__ ? 3 : -1,
-
-  
-  Level: Level,
-
-  
-  debug : ES(log, 'bind', true,null, 'debug', Level.DEBUG),
-  info  : ES(log, 'bind', true,null, 'info',  Level.INFO),
-  warn  : ES(log, 'bind', true,null, 'warn',  Level.WARNING),
-  error : ES(log, 'bind', true,null, 'error', Level.ERROR)
-};
-module.exports = Log;
-
 
 
 },null);
@@ -3354,7 +3842,8 @@ var defaultSchemes = createObjectFrom([
   'svn+ssh',   
   'fbstaging', 
   'tel',       
-  'sms'        
+  'sms',       
+  'pebblejs'  
 ]);
 
 var URISchemes = {
@@ -3441,7 +3930,7 @@ __d("ex",["eprintf"],function(global,require,requireDynamic,requireLazy,module,e
 
 
 
-var ex = function() {var args=Array.prototype.slice.call(arguments,0);
+var ex = function() {for (var args=[],$__0=0,$__1=arguments.length;$__0<$__1;$__0++) args.push(arguments[$__0]);
   args = ES(args, 'map', true,function(arg)  {return String(arg);});
   if (args[0].split('%s').length !== args.length) {
     
@@ -3618,6 +4107,9 @@ function parse(uri, uriToParse, shouldThrow, serializer) {
 }
 
 
+var uriFilters = [];
+
+
 
 
   
@@ -3779,45 +4271,65 @@ function parse(uri, uriToParse, shouldThrow, serializer) {
     );
   };
 
-  
+ 
   URIBase.prototype.toString=function() {"use strict";
+    var uri = this;
+    for (var i = 0; i < uriFilters.length; i++) {
+      uri = uriFilters[i](uri);
+    }
+    return uri.$URIBase_toStringImpl();
+  };
+
+  
+  URIBase.prototype.$URIBase_toStringImpl=function() {"use strict";
     var str = '';
-    if (this.$URIBase_protocol) {
-      str += this.$URIBase_protocol + '://';
+    var protocol = this.getProtocol();
+    if (protocol) {
+      str += protocol + '://';
     }
-    if (this.$URIBase_domain) {
-      str += this.$URIBase_domain;
+    var domain = this.getDomain();
+    if (domain) {
+      str += domain;
     }
-    if (this.$URIBase_port) {
-      str += ':' + this.$URIBase_port;
+    var port = this.getPort();
+    if (port) {
+      str += ':' + port;
     }
     // If there is a protocol, domain or port, we need to provide '/' for the
     // path. If we don't have either and also don't have a path, we can omit
     
     // with "?", "#", or is empty.
-    if (this.$URIBase_path) {
-      str += this.$URIBase_path;
+    var path = this.getPath();
+    if (path) {
+      str += path;
     } else if (str) {
       str += '/';
     }
-    var queryStr = this.$URIBase_serializer.serialize(this.$URIBase_queryData);
+    var queryStr = this.$URIBase_serializer.serialize(this.getQueryData());
     if (queryStr) {
       str += '?' + queryStr;
     }
-    if (this.$URIBase_fragment) {
-      str += '#' + this.$URIBase_fragment;
-    } else if (this.$URIBase_forceFragmentSeparator) {
+    var fragment = this.getFragment();
+    if (fragment) {
+      str += '#' + fragment;
+    } else if (this.getForceFragmentSeparator()) {
       str += '#';
     }
     return str;
   };
 
   
+  URIBase.registerFilter=function(filter) {"use strict";
+    uriFilters.push(filter);
+  };
+
+  
   URIBase.prototype.getOrigin=function() {"use strict";
-    return this.$URIBase_protocol
+    var port = this.getPort();
+    return this.getProtocol()
       + '://'
-      + this.$URIBase_domain
-      + (this.$URIBase_port ? ':' + this.$URIBase_port : '');
+      + this.getDomain()
+      + (port ? ':' + port : '');
   };
 
 
@@ -3873,169 +4385,6 @@ for(var URIBase____Key in URIBase){if(URIBase.hasOwnProperty(URIBase____Key)){UR
 
 
 module.exports = URI;
-
-
-},null);
-
-__d("sdk.domReady",[],function(global,require,requireDynamic,requireLazy,module,exports) {
-var queue;
-var domIsReady = "readyState" in document
-  ? /loaded|complete/.test(document.readyState)
-  
-  
-  
-  
-  
-  : !!document.body;
-
-function flush() {
-  if (!queue) {
-    return;
-  }
-
-  var fn;
-  while (fn = queue.shift()) {
-    fn();
-  }
-  queue = null;
-}
-
-function domReady(/*function*/ fn) {__t([fn, 'function', 'fn']);
-  if (queue) {
-    queue.push(fn);
-    return;
-  } else {
-    fn();
-  }
-}__w(domReady, {"signature":"function(function)"}); 
-
-if(!domIsReady) {
-  queue = [];
-  if (document.addEventListener) {
-    document.addEventListener('DOMContentLoaded', flush, false);
-    window.addEventListener('load', flush, false);
-  } else if (document.attachEvent) {
-    document.attachEvent('onreadystatechange', flush);
-    window.attachEvent('onload', flush);
-  }
-
-  
-  
-  if (document.documentElement.doScroll && window == window.top) {
-    var test = function() {
-      try {
-        
-        
-        document.documentElement.doScroll('left');
-      } catch(error) {
-        setTimeout(test, 0);
-        return;
-      }
-      flush();
-    };
-    test();
-  }
-}
-
-module.exports = domReady;
-
-
-},3);
-
-
-__d("sdk.Content",["sdk.domReady","Log","UserAgent_DEPRECATED"],function(global,require,requireDynamic,requireLazy,module,exports,domReady,Log,UserAgent_DEPRECATED) {
-   
-   
-   
-
-var visibleRoot;
-var hiddenRoot;
-
-var Content = {
-
-  
-  append: __w(function(/*DOMElement|string*/ content, /*?DOMElement*/ root)
-      /*DOMElement*/ {__t([content, 'DOMElement|string', 'content'], [root, '?DOMElement', 'root']);return __t([function() {
-
-    
-    if (!root) {
-      if (!visibleRoot) {
-        visibleRoot = root = document.getElementById('fb-root');
-        if (!root) {
-          Log.warn('The "fb-root" div has not been created, auto-creating');
-          
-          visibleRoot = root = document.createElement('div');
-          root.id = 'fb-root';
-          
-          // that the body has loaded to avoid potential "operation aborted"
-          
-          
-          
-          
-          if (UserAgent_DEPRECATED.ie() || !document.body) {
-            domReady(function() {
-              document.body.appendChild(root);
-            });
-          } else {
-            document.body.appendChild(root);
-          }
-        }
-        root.className += ' fb_reset';
-      } else {
-        root = visibleRoot;
-      }
-    }
-
-    if (typeof content == 'string') {
-      var div = document.createElement('div');
-      root.appendChild(div).innerHTML = content;
-      return div;
-    } else {
-      return root.appendChild(content);
-    }
-  }.apply(this, arguments), 'DOMElement']);}, {"signature":"function(DOMElement|string,?DOMElement):DOMElement"}),
-
-  
-  appendHidden: __w(function(/*DOMElement|string*/ content) /*DOMElement*/ {__t([content, 'DOMElement|string', 'content']);return __t([function() {
-    if (!hiddenRoot) {
-      var
-        hiddenRoot = document.createElement('div'),
-        style      = hiddenRoot.style;
-      style.position = 'absolute';
-      style.top      = '-10000px';
-      style.width    = style.height = 0;
-      hiddenRoot = Content.append(hiddenRoot);
-    }
-
-    return Content.append(content, hiddenRoot);
-  }.apply(this, arguments), 'DOMElement']);}, {"signature":"function(DOMElement|string):DOMElement"}),
-
-  
-  submitToTarget: __w(function(/*object*/ opts, /*?boolean*/ get) {__t([opts, 'object', 'opts'], [get, '?boolean', 'get']);
-    var form = document.createElement('form');
-    form.action = opts.url;
-    form.target = opts.target;
-    form.method = (get) ? 'GET' : 'POST';
-    Content.appendHidden(form);
-
-    for (var key in opts.params) {
-      if (opts.params.hasOwnProperty(key)) {
-        var val = opts.params[key];
-        if (val !== null && val !== undefined) {
-          var input = document.createElement('input');
-          input.name = key;
-          input.value = val;
-          form.appendChild(input);
-        }
-      }
-    }
-
-    form.submit();
-    form.parentNode.removeChild(form);
-  }, {"signature":"function(object,?boolean)"})
-};
-
-module.exports = Content;
 
 
 },null);
@@ -4279,7 +4628,7 @@ __d("JSONRPC",["Log"],function(global,require,requireDynamic,requireLazy,module,
 
   
   JSONRPC.prototype.stub=function(stub) {"use strict";
-    this.remote[stub] = ES(function()  {var args=Array.prototype.slice.call(arguments,0);
+    this.remote[stub] = ES(function()  {for (var args=[],$__0=0,$__1=arguments.length;$__0<$__1;$__0++) args.push(arguments[$__0]);
       var message = {
         jsonrpc: '2.0',
         method: stub
@@ -4438,9 +4787,7 @@ module.exports = Scribe;
 },null);
 
 
-__d("emptyFunction",["copyProperties"],function(global,require,requireDynamic,requireLazy,module,exports,copyProperties) {
-   
-
+__d("emptyFunction",[],function(global,require,requireDynamic,requireLazy,module,exports) {
 function makeEmptyFunction(arg) {
   return function() {
     return arg;
@@ -4450,14 +4797,12 @@ function makeEmptyFunction(arg) {
 
 function emptyFunction() {}
 
-copyProperties(emptyFunction, {
-  thatReturns: makeEmptyFunction,
-  thatReturnsFalse: makeEmptyFunction(false),
-  thatReturnsTrue: makeEmptyFunction(true),
-  thatReturnsNull: makeEmptyFunction(null),
-  thatReturnsThis: function() { return this; },
-  thatReturnsArgument: function(arg) { return arg; }
-});
+emptyFunction.thatReturns = makeEmptyFunction;
+emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+emptyFunction.thatReturnsThis = function() { return this; };
+emptyFunction.thatReturnsArgument = function(arg) { return arg; };
 
 module.exports = emptyFunction;
 
@@ -4650,65 +4995,6 @@ var Flash = {
 };
 
 module.exports = Flash;
-
-
-},null);
-
-
-__d("dotAccess",[],function(global,require,requireDynamic,requireLazy,module,exports) {
-function dotAccess(head, path, create) {
-  var stack = path.split('.');
-  do {
-    var key = stack.shift();
-    head = head[key] || create && (head[key] = {});
-  } while(stack.length && head);
-  return head;
-}
-
-module.exports = dotAccess;
-
-
-},null);
-
-
-__d("GlobalCallback",["DOMWrapper","dotAccess","guid","wrapFunction"],function(global,require,requireDynamic,requireLazy,module,exports,DOMWrapper,dotAccess,guid,wrapFunction) {
-   
-   
-   
-   
-
-// window is the same as the 'global' object in the browser, but the variable
-// 'global' might be shadowed.
-var rootObject;
-var callbackPrefix;
-
-var GlobalCallback = {
-
-  setPrefix: __w(function(/*string*/ prefix) {__t([prefix, 'string', 'prefix']);
-    rootObject = dotAccess(DOMWrapper.getWindow(), prefix, true);
-    callbackPrefix = prefix;
-  }, {"signature":"function(string)"}),
-
-  create: __w(function(/*function*/ fn, /*?string*/ description) /*string*/ {__t([fn, 'function', 'fn'], [description, '?string', 'description']);return __t([function() {
-    if (!rootObject) {
-      
-      
-      this.setPrefix('__globalCallbacks');
-    }
-    var id = guid();
-    rootObject[id] = wrapFunction(fn, 'entry', description || 'GlobalCallback');
-
-    return callbackPrefix + '.' + id;
-  }.apply(this, arguments), 'string']);}, {"signature":"function(function,?string):string"}),
-
-  remove: __w(function(/*string*/ name) {__t([name, 'string', 'name']);
-    var id = name.substring(callbackPrefix.length + 1);
-    delete rootObject[id];
-  }, {"signature":"function(string)"})
-
-};
-
-module.exports = GlobalCallback;
 
 
 },null);
@@ -4940,7 +5226,7 @@ function isFacebookURI(uri) {__t([uri, 'URI', 'uri']);return __t([function() {
     facebookURIRegex = new RegExp('(^|\\.)facebook\\.com$', 'i');
   }
 
-  if (uri.isEmpty()) {
+  if (uri.isEmpty() && uri.toString() !== '#') {
     return false;
   }
 
@@ -4951,6 +5237,10 @@ function isFacebookURI(uri) {__t([uri, 'URI', 'uri']);return __t([function() {
   return (ES(FB_PROTOCOLS, 'indexOf', true,uri.getProtocol()) !== -1 &&
           facebookURIRegex.test(uri.getDomain()));
 }.apply(this, arguments), 'boolean']);}__w(isFacebookURI, {"signature":"function(URI):boolean"}); 
+
+isFacebookURI.setRegex = function(regex) {
+  facebookURIRegex = regex;
+};
 
 module.exports = isFacebookURI;
 
@@ -6753,12 +7043,19 @@ function request(/*string*/ url, /*string*/ method, /*object*/ params,
 }__w(request, {"signature":"function(string,string,object,function)"}); 
 
 function inspect(/*?function*/ callback, /*string*/ endpoint, /*string*/ method,
-    /*object*/ params, response) {__t([callback, '?function', 'callback'], [endpoint, 'string', 'endpoint'], [method, 'string', 'method'], [params, 'object', 'params']);
-  ApiClient.inform('request.complete', endpoint, method, params, response);
+    /*object*/ params, /*number*/ startTime, response) {__t([callback, '?function', 'callback'], [endpoint, 'string', 'endpoint'], [method, 'string', 'method'], [params, 'object', 'params'], [startTime, 'number', 'startTime']);
+  ApiClient.inform(
+    'request.complete',
+    endpoint,
+    method,
+    params,
+    response,
+    /*duration*/ ES('Date', 'now', false) - startTime
+  );
   if (callback) {
     callback(response);
   }
-}__w(inspect, {"signature":"function(?function,string,string,object)"}); 
+}__w(inspect, {"signature":"function(?function,string,string,object,number)"}); 
 
 
 function parseCallDataFromArgs(/*array*/ args) {__t([args, 'array', 'args']);
@@ -6803,25 +7100,27 @@ function parseCallDataFromArgs(/*array*/ args) {__t([args, 'array', 'args']);
 }__w(parseCallDataFromArgs, {"signature":"function(array)"}); 
 
 
-function requestUsingGraph() {var args=Array.prototype.slice.call(arguments,0);
-  var $__0=    parseCallDataFromArgs(args),uri=$__0.uri,callback=$__0.callback,params=$__0.params;
+function requestUsingGraph() {for (var args=[],$__0=0,$__1=arguments.length;$__0<$__1;$__0++) args.push(arguments[$__0]);
+  var $__2=    parseCallDataFromArgs(args),uri=$__2.uri,callback=$__2.callback,params=$__2.params;
   var method = params.method;
 
   var url = uri.getProtocol() && uri.getDomain()
     ? uri.setQueryData({}).toString()
     : UrlMap.resolve('graph') + uri.getPath();
 
+  ApiClient.inform('request.prepare', url, params);
+
   request(
     url,
     method == 'get' ? 'get' : 'post',
     params,
-    ES(inspect, 'bind', true,null, callback, uri.getPath(), method, params)
+    ES(inspect, 'bind', true,null, callback, uri.getPath(), method, params, ES('Date', 'now', false))
   );
 }
 
 
-function scheduleBatchCall() {var args=Array.prototype.slice.call(arguments,0);
-  var $__0=     parseCallDataFromArgs(args),uri=$__0.uri,callback=$__0.callback,$__1=$__0.params,method=$__1.method;
+function scheduleBatchCall() {for (var args=[],$__0=0,$__1=arguments.length;$__0<$__1;$__0++) args.push(arguments[$__0]);
+  var $__2=     parseCallDataFromArgs(args),uri=$__2.uri,callback=$__2.callback,$__3=$__2.params,method=$__3.method;
 
   var batchCall = {
     method: method,
@@ -6902,7 +7201,8 @@ function requestUsingRest(/*object*/ params, /*?function*/ cb) {__t([params, 'ob
 
   var domain = method in READONLYCALLS ? 'api_read' : 'api';
   var url = UrlMap.resolve(domain) + '/restserver.php';
-  var inspector = ES(inspect, 'bind', true,null, cb, '/restserver.php', 'get', params);
+  var inspector =
+    ES(inspect, 'bind', true,null, cb, '/restserver.php', 'get', params, ES('Date', 'now', false));
   request(url, 'get', params, inspector);
 }__w(requestUsingRest, {"signature":"function(object,?function)"}); 
 
@@ -7200,7 +7500,8 @@ tx._ = _substituteTokens;
 
 
 module.exports = {
-  tx: tx};
+  tx: tx
+};
 
 
 },null);
@@ -7935,133 +8236,6 @@ module.exports = Frictionless;
 },null);
 
 
-__d("insertIframe",["guid","GlobalCallback"],function(global,require,requireDynamic,requireLazy,module,exports,guid,GlobalCallback) {
-   
-   
-
-function insertIframe(/*object*/ opts) {__t([opts, 'object', 'opts']);
-
-  
-  
-  
-
-
-  opts.id = opts.id || guid();
-  opts.name = opts.name || guid();
-
-  
-  // browsers (e.g. Webkit) appear to try to do the "right thing" and will fire
-  
-  
-  
-  var srcSet = false;
-  var onloadDone = false;
-  var callback = function() {
-    if (srcSet && !onloadDone) {
-      onloadDone = true;
-      opts.onload && opts.onload(opts.root.firstChild);
-    }
-  };
-  var globalCallback = GlobalCallback.create(callback);
-
-
-  
-  
-  // Dear Webkit, you're okay. Works either way.
-
-  if (document.attachEvent) {
-    
-    
-    var html = (
-      '<iframe' +
-        ' id="' + opts.id + '"' +
-        ' name="' + opts.name + '"' +
-        (opts.title ? ' title="' + opts.title + '"' : '') +
-        (opts.className ? ' class="' + opts.className + '"' : '') +
-        ' style="border:none;' +
-        (opts.width ? 'width:' + opts.width + 'px;' : '') +
-        (opts.height ? 'height:' + opts.height + 'px;' : '') +
-        '"' +
-        ' src="javascript:false;"' +
-        ' frameborder="0"' +
-        ' scrolling="no"' +
-        ' allowtransparency="true"' +
-        ' onload="' + globalCallback + '()"' +
-        '></iframe>'
-    );
-
-    
-    
-    // actually sets the content to the HTML we created above, and because it's
-    
-    
-    
-    // the string 'false', we set the iframe height to 1px so that it gets
-    
-    opts.root.innerHTML = (
-      '<iframe src="javascript:false"' +
-        ' frameborder="0"' +
-        ' scrolling="no"' +
-        ' style="height:1px"></iframe>'
-    );
-
-    // Now we'll be setting the real src.
-    srcSet = true;
-
-    
-    
-    
-    
-    
-    setTimeout(function() {
-      opts.root.innerHTML = html;
-      opts.root.firstChild.src = opts.url;
-      opts.onInsert && opts.onInsert(opts.root.firstChild);
-    }, 0);
-
-  } else {
-    // This block works for all non-IE browsers, but it's specifically designed
-    
-    
-    var node = document.createElement('iframe');
-    node.id = opts.id;
-    node.name = opts.name;
-    node.onload = callback;
-    node.scrolling = 'no';
-    node.style.border = 'none';
-    node.style.overflow = 'hidden';
-    if (opts.title) {
-      node.title = opts.title;
-    }
-    if (opts.className) {
-      node.className = opts.className;
-    }
-    if (opts.height !== undefined) {
-      node.style.height = opts.height + 'px';
-    }
-    if (opts.width !== undefined) {
-      if (opts.width == '100%') {
-        node.style.width = opts.width;
-      } else {
-        node.style.width = opts.width + 'px';
-      }
-    }
-    opts.root.appendChild(node);
-
-    // Now we'll be setting the real src.
-    srcSet = true;
-
-    node.src = opts.url;
-    opts.onInsert && opts.onInsert(node);
-  }
-}__w(insertIframe, {"signature":"function(object)"}); 
-
-module.exports = insertIframe;
-
-
-},null);
-
-
 __d("sdk.Native",["Log","UserAgent_DEPRECATED"],function(global,require,requireDynamic,requireLazy,module,exports,Log,UserAgent_DEPRECATED) {
    
    
@@ -8345,6 +8519,11 @@ var Methods = {
 
       return call;
     }.apply(this, arguments), 'object']);}, {"signature":"function(object):object"})
+  },
+
+  'pay': {
+    size : { width: 555, height: 120 },
+    connectDisplay : 'popup'
   }
 };
 
@@ -8446,6 +8625,18 @@ var UIServer = {
       if (!call) {
         return;
       }
+    }
+
+    // params.in_iframe isn't set until after the transform call
+    if (params.display === 'touch' && params.in_iframe) {
+      
+      
+      
+      
+      
+      
+      
+      call.params.parent_height = window.innerHeight;
     }
 
     
@@ -10383,68 +10574,6 @@ FB.provide('JSON', {
 },3);
 
 
-__d("legacy:fb.pay",["copyProperties","sdk.Runtime","sdk.UIServer","sdk.XD","sdk.feature","FB"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,copyProperties,Runtime,UIServer,XD,feature) {
-require('FB');
-
-   
-   
-   
-   
-   
-
-var DEF_ERROR_MSG = {
-  'error_code': 1383001,
-  'error_message': 'An unknown error caused the dialog to be closed'
-};
-
-var callbackWrapper = __w(function(/*function*/ callback) /*function*/ {__t([callback, 'function', 'callback']);return __t([function() {
-  return __w(function(/*?object*/ msg) {__t([msg, '?object', 'msg']);
-    
-    
-    if (msg && typeof msg.response === 'string') {
-      callback(ES('JSON', 'parse', false,msg.response));
-    } else if (typeof msg === 'object') {
-      callback(msg);
-    } else {
-      callback(DEF_ERROR_MSG);
-    }
-  }, {"signature":"function(?object)"});
-}.apply(this, arguments), 'function']);}, {"signature":"function(function):function"});
-
-
-copyProperties(UIServer.Methods, {
-  'pay': {
-    size      : { width: 555, height: 120 },
-    connectDisplay : 'popup',
-    transform : __w(function(/*object*/ call) /*?object*/ {__t([call, 'object', 'call']);return __t([function() {
-      if (feature('launch_payment_dialog_via_pac')) {
-        call.cb = callbackWrapper(call.cb);
-        return call;
-      } else {
-        call.cb = callbackWrapper(call.cb);
-        if (!Runtime.isEnvironment(Runtime.ENVIRONMENTS.CANVAS)) {
-          
-          call.params.order_info = ES('JSON', 'stringify', false,call.params.order_info);
-          return call;
-        }
-        var handler = XD.handler(
-          call.cb,
-          'parent.frames[' + (window.name || 'iframe_canvas') + ']');
-
-        call.params.channel = handler;
-        call.params.uiserver = true;
-
-        XD.inform('Pay.Prompt', call.params);
-      }
-    }.apply(this, arguments), '?object']);}, {"signature":"function(object):?object"})
-  }
-});
-
-
-
-},3);
-
-
 __d("legacy:fb.ua",["FB","UserAgent_DEPRECATED"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,FB,UserAgent_DEPRECATED) {
    
    
@@ -10467,99 +10596,6 @@ FB.provide('', {
 
 
 },3);
-
-
-__d("Miny",[],function(global,require,requireDynamic,requireLazy,module,exports) {
-var MAGIC = 'Miny1';
-
-
-var _indexMap = {encode: [], decode: {}};
-var LO = 'wxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_'.split('');
-function getIndexMap(length) {
-  for (var i = _indexMap.encode.length; i < length; i++) {
-    
-    var s = i.toString(32).split('');
-    s[s.length - 1] = LO[parseInt(s[s.length - 1], 32)];
-    s = s.join('');
-
-    _indexMap.encode[i] = s;
-    _indexMap.decode[s] = i;
-  }
-
-  return _indexMap;
-}
-
-
-function encode(s) {
-  if (/^$|[~\\]|__proto__/.test(s)) return s;
-
-  
-  var parts = s.match(/\w+|\W+/g);
-
-  // Create dictionary we'll use to encode, but initialize it to part counts
-  
-  var dict = {};
-  for (var i = 0; i < parts.length; i++) {
-    dict[parts[i]] = (dict[parts[i]] || 0) + 1;
-  }
-
-  // Create array of part strings we'll use to decode, sort by frequency so
-  
-  var byCount = ES('Object', 'keys', false,dict);
-  byCount.sort(function(a,b) {
-    return dict[a] < dict[b] ? 1 : (dict[b] < dict[a] ? -1 : 0);
-  });
-
-  
-  var encodeMap = getIndexMap(byCount.length).encode;
-  for (i = 0; i < byCount.length; i++) {
-    dict[byCount[i]] = encodeMap[i];
-  }
-
-  
-  var codes = [];
-  for (i = 0; i < parts.length; i++) {
-    codes[i] = dict[parts[i]];
-  }
-
-  return [MAGIC, byCount.length].
-         concat(byCount).
-         concat(codes.join('')).
-         join('~');
-}
-
-
-function decode(s) {
-  var fields = s.split('~');
-
-  if (fields.shift() != MAGIC) {
-    
-    return s;
-  }
-  var nKeys = parseInt(fields.shift(), 10);
-  var codes = fields.pop();
-  codes = codes.match(/[0-9a-v]*[\-w-zA-Z_]/g);
-
-  var dict = fields;
-
-  var decodeMap = getIndexMap(nKeys).decode;
-  var parts = [];
-  for (var i = 0; i < codes.length; i++) {
-    parts[i] = dict[decodeMap[codes[i]]];
-  }
-
-  return parts.join('');
-}
-
-var Miny = {
-  encode: encode,
-  decode: decode
-};
-
-module.exports = Miny;
-
-
-},null);
 
 
 __d("runOnce",[],function(global,require,requireDynamic,requireLazy,module,exports) {
@@ -11046,21 +11082,29 @@ var IframePlugin = Type.extend({
     this.subscribe('xd.resize.flow', resizeBubbler(pluginId));
 
     this.subscribe('xd.resize.flow', ES(__w(function(/*object*/ message)  {__t([message, 'object', 'message']);
-      ES('Object', 'assign', false,this._config.root.style, {
+      ES('Object', 'assign', false,this._iframeOptions.root.style, {
         verticalAlign: 'bottom',
         overflow: ''
       });
-      resize(this._config.root, parse(message.width), parse(message.height));
+      resize(
+        this._iframeOptions.root,
+        parse(message.width),
+        parse(message.height)
+      );
       this.updateLift();
       clearTimeout(this._timeoutID);
     }, {"signature":"function(object)"}), 'bind', true,this));
 
     this.subscribe('xd.resize', ES(__w(function(/*object*/ message)  {__t([message, 'object', 'message']);
-      ES('Object', 'assign', false,this._config.root.style, {
+      ES('Object', 'assign', false,this._iframeOptions.root.style, {
         verticalAlign: 'bottom',
         overflow: ''
       });
-      resize(this._config.root, parse(message.width), parse(message.height));
+      resize(
+        this._iframeOptions.root,
+        parse(message.width),
+        parse(message.height)
+      );
       resize(this._iframe, parse(message.width), parse(message.height));
       this._isIframeResized = true;
       this.updateLift();
@@ -11126,7 +11170,8 @@ var IframePlugin = Type.extend({
     this._ns = ns;
     this._tag = tag;
     this._params = params;
-    this._config = {
+    this._config = this.getConfig();
+    this._iframeOptions = {
       root: flow,
       url: url + QueryString.encode(params),
       name: name,
@@ -11135,7 +11180,9 @@ var IframePlugin = Type.extend({
       
       
       
-      width: (UserAgent_DEPRECATED.mobile() ? (void 0) : (params.width || 1000)),
+      width: this._config.mobile_fullsize && UserAgent_DEPRECATED.mobile()
+        ? void 0
+        : params.width || 1000,
       height: params.height || 1000,
       style: {
         border: 'none',
@@ -11150,8 +11197,8 @@ var IframePlugin = Type.extend({
   process:function() {
     if (Runtime.getIsVersioned()) {
       PlatformVersioning.assertVersionIsSet();
-      var uri = URI(this._config.url);
-      this._config.url =
+      var uri = URI(this._iframeOptions.url);
+      this._iframeOptions.url =
         uri.setPath('/' + Runtime.getVersion() + uri.getPath()).toString();
     }
     // This implements an optimization to skip rendering if we've already
@@ -11180,7 +11227,7 @@ var IframePlugin = Type.extend({
     while (this._element.firstChild) {
       this._element.removeChild(this._element.firstChild);
     }
-    this._element.appendChild(this._config.root);
+    this._element.appendChild(this._iframeOptions.root);
     var timeout = UserAgent_DEPRECATED.mobile() ? 120 : 45;
     this._timeoutID = setTimeout(ES(function()  {
       collapseIframe(this._iframe);
@@ -11198,48 +11245,76 @@ var IframePlugin = Type.extend({
     
     
     if (!PluginPipe.add(this)) {
-      this._iframe = createIframe(this._config);
+      this._iframe = createIframe(this._iframeOptions);
     }
     if (UserAgent_DEPRECATED.mobile()) {
       DOM.addCss(this._element, 'fb_iframe_widget_fluid');
 
-      ES('Object', 'assign', false,this._element.style, {
-        display: 'block',
-        width: '100%',
-        height: 'auto'
-      });
+      if (!this._iframeOptions.width) {
+        ES('Object', 'assign', false,this._element.style, {
+          display: 'block',
+          width: '100%',
+          height: 'auto'
+        });
 
-      ES('Object', 'assign', false,this._config.root.style, {
-        width: '100%',
-        height: 'auto'
-      });
+        ES('Object', 'assign', false,this._iframeOptions.root.style, {
+          width: '100%',
+          height: 'auto'
+        });
 
-      ES('Object', 'assign', false,this._iframe.style, {
-        width: '100%',
-        height: 'auto',
-        position: 'static'
-      });
+        ES('Object', 'assign', false,this._iframe.style, {
+          width: '100%',
+          height: 'auto',
+          position: 'static'
+        });
+      }
     }
   },
 
+  
+  getConfig:__w(function() /*object*/ {return __t([function() {
+    return {};
+  }.apply(this, arguments), 'object']);}, {"signature":"function():object"}),
+
   updateLift:function() { 
-    var same = this._iframe.style.width === this._config.root.style.width &&
-      this._iframe.style.height === this._config.root.style.height;
+    var same =
+      this._iframe.style.width === this._iframeOptions.root.style.width &&
+      this._iframe.style.height === this._iframeOptions.root.style.height;
     DOM[same ? 'removeCss' : 'addCss'](this._iframe, 'fb_iframe_widget_lift');
   }
 }, ObservableMixin);
 
 IframePlugin.getVal = getVal;
 
-IframePlugin.withParams = __w(function(/*object*/ params) /*function*/ {__t([params, 'object', 'params']);return __t([function() {
+IframePlugin.withParams = __w(function(
+  /*object*/ params,
+  /*object*/ config
+) /*function*/ {__t([params, 'object', 'params'], [config, 'object', 'config']);return __t([function() {
   return IframePlugin.extend({
     getParams:function() {
       return params;
-    }
+    },
+
+    getConfig:__w(function() /*object*/ {return __t([function() {
+      return config ? config : {};
+    }.apply(this, arguments), 'object']);}, {"signature":"function():object"})
   });
-}.apply(this, arguments), 'function']);}, {"signature":"function(object):function"});
+}.apply(this, arguments), 'function']);}, {"signature":"function(object,object):function"});
 
 module.exports = IframePlugin;
+
+
+},null);
+
+
+__d("PluginConfig",[],function(global,require,requireDynamic,requireLazy,module,exports) {
+var PluginConfig = {
+  post: {
+    mobile_fullsize: true
+  }
+};
+
+module.exports = PluginConfig;
 
 
 },null);
@@ -12058,8 +12133,6 @@ var Comments = IframeWidget.extend({
 
   
   oneTimeSetup: function() {
-    this.subscribe('xd.addComment',
-                   ES(this._handleCommentMsg, 'bind', true,this));
     this.subscribe('xd.commentCreated',
                    ES(this._handleCommentCreatedMsg, 'bind', true,this));
     this.subscribe('xd.commentRemoved',
@@ -12071,7 +12144,9 @@ var Comments = IframeWidget.extend({
     if (!this._attr.permalink) {
       return {
         width: this._attr.mobile ? '100%' : this._attr.width,
-        height: 160
+        
+        // loaded, but initially we don't want to take more space than we need
+        height: 100
       };
     }
   }.apply(this, arguments), '?object']);}, {"signature":"function():?object"}),
@@ -12090,20 +12165,6 @@ var Comments = IframeWidget.extend({
       true
     );
   }.apply(this, arguments), 'string']);}, {"signature":"function():string"}),
-
-  
-  _handleCommentMsg: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
-    
-    
-    if (!this.isValid()) {
-      return;
-    }
-    Event.fire('comments.add', {
-      post: message.post,
-      user: message.user,
-      widget: this
-    });
-  }, {"signature":"function(object)"}),
 
   _handleCommentCreatedMsg: __w(function(/*object*/ message) {__t([message, 'object', 'message']);
     if (!this.isValid()) {
@@ -12925,12 +12986,15 @@ module.exports = Registration;
 },null);
 
 
-__d("legacy:fb.xfbml",["Assert","sdk.domReady","sdk.Event","FB","IframePlugin","PluginTags","wrapFunction","XFBML","sdk.XFBML.Comments","sdk.XFBML.CommentsCount","sdk.XFBML.LoginButton","sdk.XFBML.Name","sdk.XFBML.RecommendationsBar","sdk.XFBML.Registration"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,Assert,domReady,Event,FB,IframePlugin,PluginTags,wrapFunction,XFBML) {
+__d("legacy:fb.xfbml",["Assert","sdk.Event","FB","IframePlugin","PluginConfig","PluginTags","XFBML","sdk.domReady","sdk.feature","wrapFunction","sdk.XFBML.Comments","sdk.XFBML.CommentsCount","sdk.XFBML.LoginButton","sdk.XFBML.Name","sdk.XFBML.RecommendationsBar","sdk.XFBML.Registration"],function(global,require,requireDynamic,requireLazy,__DO_NOT_USE__module,__DO_NOT_USE__exports,Assert,Event,FB,IframePlugin,PluginConfig,PluginTags,XFBML,domReady,feature,wrapFunction) {
    
    
    
    
    
+   
+   
+
    
    
    
@@ -12944,17 +13008,25 @@ var customTags = {
   registration: require('sdk.XFBML.Registration')
 };
 
+var blacklist = feature('plugin_tags_blacklist');
+
 
 ES(ES('Object', 'keys', false,PluginTags), 'forEach', true,function(tag) {
+  if (ES(blacklist, 'indexOf', true,tag) !== -1) {
+    return;
+  }
   XFBML.registerTag({
     xmlns: 'fb',
     localName: tag.replace(/_/g, '-'),
-    ctor: IframePlugin.withParams(PluginTags[tag])
+    ctor: IframePlugin.withParams(PluginTags[tag], PluginConfig[tag])
   });
 });
 
 
 ES(ES('Object', 'keys', false,customTags), 'forEach', true,function(tag) {
+  if (ES(blacklist, 'indexOf', true,tag) !== -1) {
+    return;
+  }
   XFBML.registerTag({
     xmlns: 'fb',
     localName: tag.replace(/_/g, '-'),
@@ -13029,4 +13101,4 @@ FB.provide('XFBML.RecommendationsBar', {
 
 
 }).call({}, window.inDapIF ? parent.window : window);
-} catch (e) {new Image().src="http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m='+encodeURIComponent('{"error":"LOAD", "extra": {"name":"'+e.name+'","line":"'+(e.lineNumber||e.line)+'","script":"'+(e.fileName||e.sourceURL||e.script)+'","stack":"'+(e.stackTrace||e.stack)+'","revision":"1399202","message":"'+e.message+'"}}');}
+} catch (e) {new Image().src="http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m='+encodeURIComponent('{"error":"LOAD", "extra": {"name":"'+e.name+'","line":"'+(e.lineNumber||e.line)+'","script":"'+(e.fileName||e.sourceURL||e.script)+'","stack":"'+(e.stackTrace||e.stack)+'","revision":"1486784","message":"'+e.message+'"}}');}

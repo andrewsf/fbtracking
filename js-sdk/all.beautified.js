@@ -1,4 +1,4 @@
-/*1409870266,,JIT Construction: v1399202,en_US*/
+/*1415411347,,JIT Construction: v1486784,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -621,16 +621,16 @@ try {
                 .hasOwnProperty,
                 i = {
                     assign: function(j) {
-                        var k = Array.prototype.slice.call(arguments, 1);
+                        for (var k = [], l = 1, m = arguments.length; l < m; l++) k.push(arguments[l]);
                         if (j == null) throw new TypeError('Object.assign target cannot be null or undefined');
                         j = Object(j);
-                        for (var l = 0; l < k.length; l++) {
-                            var m = k[l];
-                            if (m == null) continue;
-                            m = Object(m);
-                            for (var n in m) if (h.call(m, n)) j[n] = m[n];
-                            g(m, function(o) {
-                                return j[o] = m[o];
+                        for (var n = 0; n < k.length; n++) {
+                            var o = k[n];
+                            if (o == null) continue;
+                            o = Object(o);
+                            for (var p in o) if (h.call(o, p)) j[p] = o[p];
+                            g(o, function(q) {
+                                return j[q] = o[q];
                             });
                         }
                         return j;
@@ -651,7 +651,7 @@ try {
                     if (typeof h !== 'function') throw new TypeError('predicate must be a function');
                     var j = Object(this),
                         k = j.length >>> 0;
-                    for (var l = 0; l < k; l++) if (l in j) if (h.call(i, j[l], l, j)) return l;
+                    for (var l = 0; l < k; l++) if (h.call(i, j[l], l, j)) return l;
                     return -1;
                 }
             };
@@ -722,11 +722,11 @@ try {
             v(u);
 
             function w(x, y, z) {
-                var aa = Array.prototype.slice.call(arguments, 3),
-                    ba = z ? r.call(x)
-                        .slice(8, - 1) + '.prototype' : x,
-                    ca = s[ba + '.' + y] || x[y];
-                if (typeof ca === 'function') return ca.apply(x, aa);
+                for (var aa = [], ba = 3, ca = arguments.length; ba < ca; ba++) aa.push(arguments[ba]);
+                var da = z ? r.call(x)
+                    .slice(8, - 1) + '.prototype' : x,
+                    ea = s[da + '.' + y] || x[y];
+                if (typeof ea === 'function') return ea.apply(x, aa);
             }
             e.exports = w;
         }, null);
@@ -734,7 +734,7 @@ try {
         __d("JSSDKRuntimeConfig", [], {
             "locale": "en_US",
             "rtl": false,
-            "revision": "1399202"
+            "revision": "1486784"
         });
         __d("JSSDKConfig", [], {
             "bustCache": true,
@@ -744,6 +744,7 @@ try {
             },
             "usePluginPipe": true,
             "features": {
+                "allow_non_canvas_app_events": false,
                 "event_subscriptions_log": {
                     "rate": 0.01,
                     "value": 10000
@@ -763,11 +764,12 @@ try {
                 "use_bundle": true,
                 "launch_payment_dialog_via_pac": {
                     "rate": 100
-                }
+                },
+                "plugin_tags_blacklist": ["recommendations_bar"]
             },
             "api": {
                 "mode": "warn",
-                "whitelist": ["Canvas", "Canvas.Prefetcher", "Canvas.Prefetcher.addStaticResource", "Canvas.Prefetcher.setCollectionMode", "Canvas.getPageInfo", "Canvas.hideFlashElement", "Canvas.scrollTo", "Canvas.setAutoGrow", "Canvas.setDoneLoading", "Canvas.setSize", "Canvas.setUrlHandler", "Canvas.showFlashElement", "Canvas.startTimer", "Canvas.stopTimer", "Data", "Data.process", "Data.query", "Data.query:wait", "Data.waitOn", "Data.waitOn:wait", "Event", "Event.subscribe", "Event.unsubscribe", "Music.flashCallback", "Music.init", "Music.send", "Payment", "Payment.cancelFlow", "Payment.continueFlow", "Payment.init", "Payment.lockForProcessing", "Payment.unlockForProcessing", "Payment.parse", "Payment.setSize", "ThirdPartyProvider", "ThirdPartyProvider.init", "ThirdPartyProvider.sendData", "UA", "UA.nativeApp", "XFBML", "XFBML.RecommendationsBar", "XFBML.RecommendationsBar.markRead", "XFBML.parse", "addFriend", "api", "getAccessToken", "getAuthResponse", "getLoginStatus", "getUserID", "init", "login", "logout", "publish", "share", "ui", "ui:subscribe", "AppEvents", "AppEvents.activateApp", "AppEvents.logEvent", "AppEvents.logPurchase", "AppEvents.EventNames", "AppEvents.ParameterNames"]
+                "whitelist": ["AppEvents", "AppEvents.EventNames", "AppEvents.ParameterNames", "AppEvents.activateApp", "AppEvents.logEvent", "AppEvents.logPurchase", "Canvas", "Canvas.Prefetcher", "Canvas.Prefetcher.addStaticResource", "Canvas.Prefetcher.setCollectionMode", "Canvas.getPageInfo", "Canvas.hideFlashElement", "Canvas.scrollTo", "Canvas.setAutoGrow", "Canvas.setDoneLoading", "Canvas.setSize", "Canvas.setUrlHandler", "Canvas.showFlashElement", "Canvas.startTimer", "Canvas.stopTimer", "Event", "Event.subscribe", "Event.unsubscribe", "Music.flashCallback", "Music.init", "Music.send", "Payment", "Payment.cancelFlow", "Payment.continueFlow", "Payment.init", "Payment.lockForProcessing", "Payment.parse", "Payment.setSize", "Payment.unlockForProcessing", "ThirdPartyProvider", "ThirdPartyProvider.init", "ThirdPartyProvider.sendData", "UA", "UA.nativeApp", "XFBML", "XFBML.RecommendationsBar", "XFBML.RecommendationsBar.markRead", "XFBML.parse", "addFriend", "api", "getAccessToken", "getAuthResponse", "getLoginStatus", "getUserID", "init", "login", "logout", "publish", "share", "ui"]
             },
             "initSitevars": {
                 "enableMobileComments": 1,
@@ -819,7 +821,7 @@ try {
         });
         __d("JSSDKXDConfig", [], {
             "XdUrl": "\/connect\/xd_arbiter.php?version=41",
-            "XdBundleUrl": "\/connect\/xd_arbiter\/ZEbdHPQfV3x.js?version=41",
+            "XdBundleUrl": "\/connect\/xd_arbiter\/QjK2hWv6uak.js?version=41",
             "Flash": {
                 "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"
             },
@@ -902,10 +904,10 @@ try {
         }, null);
         __d("sprintf", [], function(a, b, c, d, e, f) {
             function g(h) {
-                var i = Array.prototype.slice.call(arguments, 1),
-                    j = 0;
-                return h.replace(/%s/g, function(k) {
-                    return i[j++];
+                for (var i = [], j = 1, k = arguments.length; j < k; j++) i.push(arguments[j]);
+                var l = 0;
+                return h.replace(/%s/g, function(m) {
+                    return i[l++];
                 });
             }
             e.exports = g;
@@ -990,7 +992,8 @@ try {
                 g.isFunction(o);
                 if (l && l.prototype instanceof h === false) throw new Error('parent type does not inherit from Type');
                 l = l || h;
-                var p = new Function();
+
+                function p() {}
                 p.prototype = l.prototype;
                 o.prototype = new p();
                 if (m) ES('Object', 'assign', false, o.prototype, m);
@@ -1129,6 +1132,9 @@ try {
                 isEnvironment: function(k) {
                     var l = this.getEnvironment();
                     return (k | l) === l;
+                },
+                isCanvasEnvironment: function() {
+                    return this.isEnvironment(i.CANVAS) || this.isEnvironment(i.PAGETAB);
                 }
             });
             (function() {
@@ -1443,38 +1449,45 @@ try {
             }
             e.exports = i;
         }, null);
-        __d("UrlMap", ["UrlMapConfig"], function(a, b, c, d, e, f, g) {
-            var h = {
-                resolve: function(i, j) {
-                    var k = typeof j == 'undefined' ? location.protocol.replace(':', '') : j ? 'https' : 'http';
-                    if (i in g) return k + '://' + g[i];
-                    if (typeof j == 'undefined' && i + '_' + k in g) return k + '://' + g[i + '_' + k];
-                    if (j !== true && i + '_http' in g) return 'http://' + g[i + '_http'];
-                    if (j !== false && i + '_https' in g) return 'https://' + g[i + '_https'];
-                }
-            };
-            e.exports = h;
-        }, null);
-        __d("sdk.Impressions", ["guid", "QueryString", "sdk.Runtime", "UrlMap"], function(a, b, c, d, e, f, g, h, i, j) {
-            function k(m) {
-                var n = i.getClientID();
-                if (!m.api_key && n) m.api_key = n;
-                m.kid_directed_site = i.getKidDirectedSite();
-                var o = new Image();
-                o.src = h.appendToUrl(j.resolve('www', true) + '/impression.php/' + g() + '/', m);
+        __d("sdk.domReady", [], function(a, b, c, d, e, f) {
+            var g, h = "readyState" in document ? /loaded|complete/.test(document.readyState) : !! document.body;
+
+            function i() {
+                if (!g) return;
+                var l;
+                while (l = g.shift()) l();
+                g = null;
             }
-            var l = {
-                log: function(m, n) {
-                    if (!n.source) n.source = 'jssdk';
-                    k({
-                        lid: m,
-                        payload: ES('JSON', 'stringify', false, n)
-                    });
-                },
-                impression: k
-            };
-            e.exports = l;
-        }, null);
+            function j(l) {
+                if (g) {
+                    g.push(l);
+                    return;
+                } else l();
+            }
+            if (!h) {
+                g = [];
+                if (document.addEventListener) {
+                    document.addEventListener('DOMContentLoaded', i, false);
+                    window.addEventListener('load', i, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent('onreadystatechange', i);
+                    window.attachEvent('onload', i);
+                }
+                if (document.documentElement.doScroll && window == window.top) {
+                    var k = function() {
+                        try {
+                            document.documentElement.doScroll('left');
+                        } catch (l) {
+                            setTimeout(k, 0);
+                            return;
+                        }
+                        i();
+                    };
+                    k();
+                }
+            }
+            e.exports = j;
+        }, 3);
         __d("Log", ["sprintf"], function(a, b, c, d, e, f, g) {
             var h = {
                 DEBUG: 3,
@@ -1498,6 +1511,250 @@ try {
                 error: ES(i, 'bind', true, null, 'error', h.ERROR)
             };
             e.exports = j;
+        }, null);
+        __d("sdk.Content", ["sdk.domReady", "Log", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h, i) {
+            var j, k, l = {
+                append: function(m, n) {
+                    if (!n) if (!j) {
+                        j = n = document.getElementById('fb-root');
+                        if (!n) {
+                            h.warn('The "fb-root" div has not been created, auto-creating');
+                            j = n = document.createElement('div');
+                            n.id = 'fb-root';
+                            if (i.ie() || !document.body) {
+                                g(function() {
+                                    document.body.appendChild(n);
+                                });
+                            } else document.body.appendChild(n);
+                        }
+                        n.className += ' fb_reset';
+                    } else n = j;
+                    if (typeof m == 'string') {
+                        var o = document.createElement('div');
+                        n.appendChild(o)
+                            .innerHTML = m;
+                        return o;
+                    } else return n.appendChild(m);
+                },
+                appendHidden: function(m) {
+                    if (!n) {
+                        var n = document.createElement('div'),
+                            o = n.style;
+                        o.position = 'absolute';
+                        o.top = '-10000px';
+                        o.width = o.height = 0;
+                        n = l.append(n);
+                    }
+                    return l.append(m, n);
+                },
+                submitToTarget: function(m, n) {
+                    var o = document.createElement('form');
+                    o.action = m.url;
+                    o.target = m.target;
+                    o.method = (n) ? 'GET' : 'POST';
+                    l.appendHidden(o);
+                    for (var p in m.params) if (m.params.hasOwnProperty(p)) {
+                        var q = m.params[p];
+                        if (q !== null && q !== undefined) {
+                            var r = document.createElement('input');
+                            r.name = p;
+                            r.value = q;
+                            o.appendChild(r);
+                        }
+                    }
+                    o.submit();
+                    o.parentNode.removeChild(o);
+                }
+            };
+            e.exports = l;
+        }, null);
+        __d("dotAccess", [], function(a, b, c, d, e, f) {
+            function g(h, i, j) {
+                var k = i.split('.');
+                do {
+                    var l = k.shift();
+                    h = h[l] || j && (h[l] = {});
+                } while (k.length && h);
+                return h;
+            }
+            e.exports = g;
+        }, null);
+        __d("GlobalCallback", ["DOMWrapper", "dotAccess", "guid", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j) {
+            var k, l, m = {
+                setPrefix: function(n) {
+                    k = h(g.getWindow(), n, true);
+                    l = n;
+                },
+                create: function(n, o) {
+                    if (!k) this.setPrefix('__globalCallbacks');
+                    var p = i();
+                    k[p] = j(n, 'entry', o || 'GlobalCallback');
+                    return l + '.' + p;
+                },
+                remove: function(n) {
+                    var o = n.substring(l.length + 1);
+                    delete k[o];
+                }
+            };
+            e.exports = m;
+        }, null);
+        __d("insertIframe", ["guid", "GlobalCallback"], function(a, b, c, d, e, f, g, h) {
+            function i(j) {
+                j.id = j.id || g();
+                j.name = j.name || g();
+                var k = false,
+                    l = false,
+                    m = function() {
+                        if (k && !l) {
+                            l = true;
+                            j.onload && j.onload(j.root.firstChild);
+                        }
+                    }, n = h.create(m);
+                if (document.attachEvent) {
+                    var o = ('<iframe' + ' id="' + j.id + '"' + ' name="' + j.name + '"' + (j.title ? ' title="' + j.title + '"' : '') + (j.className ? ' class="' + j.className + '"' : '') + ' style="border:none;' + (j.width ? 'width:' + j.width + 'px;' : '') + (j.height ? 'height:' + j.height + 'px;' : '') + '"' + ' src="javascript:false;"' + ' frameborder="0"' + ' scrolling="no"' + ' allowtransparency="true"' + ' onload="' + n + '()"' + '></iframe>');
+                    j.root.innerHTML = ('<iframe src="javascript:false"' + ' frameborder="0"' + ' scrolling="no"' + ' style="height:1px"></iframe>');
+                    k = true;
+                    setTimeout(function() {
+                        j.root.innerHTML = o;
+                        j.root.firstChild.src = j.url;
+                        j.onInsert && j.onInsert(j.root.firstChild);
+                    }, 0);
+                } else {
+                    var p = document.createElement('iframe');
+                    p.id = j.id;
+                    p.name = j.name;
+                    p.onload = m;
+                    p.scrolling = 'no';
+                    p.style.border = 'none';
+                    p.style.overflow = 'hidden';
+                    if (j.title) p.title = j.title;
+                    if (j.className) p.className = j.className;
+                    if (j.height !== undefined) p.style.height = j.height + 'px';
+                    if (j.width !== undefined) if (j.width == '100%') {
+                        p.style.width = j.width;
+                    } else p.style.width = j.width + 'px';
+                    j.root.appendChild(p);
+                    k = true;
+                    p.src = j.url;
+                    j.onInsert && j.onInsert(p);
+                }
+            }
+            e.exports = i;
+        }, null);
+        __d("Miny", [], function(a, b, c, d, e, f) {
+            var g = 'Miny1',
+                h = {
+                    encode: [],
+                    decode: {}
+                }, i = 'wxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_'.split('');
+
+            function j(n) {
+                for (var o = h.encode.length; o < n; o++) {
+                    var p = o.toString(32)
+                        .split('');
+                    p[p.length - 1] = i[parseInt(p[p.length - 1], 32)];
+                    p = p.join('');
+                    h.encode[o] = p;
+                    h.decode[p] = o;
+                }
+                return h;
+            }
+            function k(n) {
+                if (/^$|[~\\]|__proto__/.test(n)) return n;
+                var o = n.match(/\w+|\W+/g),
+                    p = {};
+                for (var q = 0; q < o.length; q++) p[o[q]] = (p[o[q]] || 0) + 1;
+                var r = ES('Object', 'keys', false, p);
+                r.sort(function(u, v) {
+                    return p[u] < p[v] ? 1 : (p[v] < p[u] ? -1 : 0);
+                });
+                var s = j(r.length)
+                    .encode;
+                for (q = 0; q < r.length; q++) p[r[q]] = s[q];
+                var t = [];
+                for (q = 0; q < o.length; q++) t[q] = p[o[q]];
+                return [g, r.length].concat(r)
+                    .concat(t.join(''))
+                    .join('~');
+            }
+            function l(n) {
+                var o = n.split('~');
+                if (o.shift() != g) return n;
+                var p = parseInt(o.shift(), 10),
+                    q = o.pop();
+                q = q.match(/[0-9a-v]*[\-w-zA-Z_]/g);
+                var r = o,
+                    s = j(p)
+                        .decode,
+                    t = [];
+                for (var u = 0; u < q.length; u++) t[u] = r[s[q[u]]];
+                return t.join('');
+            }
+            var m = {
+                encode: k,
+                decode: l
+            };
+            e.exports = m;
+        }, null);
+        __d("UrlMap", ["UrlMapConfig"], function(a, b, c, d, e, f, g) {
+            var h = {
+                resolve: function(i, j) {
+                    var k = typeof j == 'undefined' ? location.protocol.replace(':', '') : j ? 'https' : 'http';
+                    if (i in g) return k + '://' + g[i];
+                    if (typeof j == 'undefined' && i + '_' + k in g) return k + '://' + g[i + '_' + k];
+                    if (j !== true && i + '_http' in g) return 'http://' + g[i + '_http'];
+                    if (j !== false && i + '_https' in g) return 'https://' + g[i + '_https'];
+                }
+            };
+            e.exports = h;
+        }, null);
+        __d("sdk.Impressions", ["sdk.Content", "guid", "insertIframe", "Miny", "QueryString", "sdk.Runtime", "UrlMap"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
+            function n(p) {
+                var q = l.getClientID();
+                if (!p.api_key && q) p.api_key = q;
+                p.kid_directed_site = l.getKidDirectedSite();
+                var r = m.resolve('www', true) + '/impression.php/' + h() + '/',
+                    s = k.appendToUrl(r, p);
+                if (s.length > 2000) if (p.payload && typeof p.payload === 'string') {
+                    var t = j.encode(p.payload);
+                    if (t && t.length < p.payload.length) {
+                        p.payload = t;
+                        s = k.appendToUrl(r, p);
+                    }
+                }
+                if (s.length <= 2000) {
+                    var u = new Image();
+                    u.src = s;
+                } else {
+                    var v = h(),
+                        w = g.appendHidden('');
+                    i({
+                        url: 'javascript:false',
+                        root: w,
+                        name: v,
+                        className: 'fb_hidden fb_invisible',
+                        onload: function() {
+                            w.parentNode.removeChild(w);
+                        }
+                    });
+                    g.submitToTarget({
+                        url: r,
+                        target: v,
+                        params: p
+                    });
+                }
+            }
+            var o = {
+                log: function(p, q) {
+                    if (!q.source) q.source = 'jssdk';
+                    n({
+                        lid: p,
+                        payload: ES('JSON', 'stringify', false, q)
+                    });
+                },
+                impression: n
+            };
+            e.exports = o;
         }, null);
         __d("Base64", [], function(a, b, c, d, e, f) {
             var g = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -1590,7 +1847,7 @@ try {
             e.exports = g;
         }, null);
         __d("URISchemes", ["createObjectFrom"], function(a, b, c, d, e, f, g) {
-            var h = g(['fb', 'fbcf', 'fbconnect', 'fb-messenger', 'fbrpc', 'file', 'ftp', 'http', 'https', 'mailto', 'ms-app', 'itms', 'itms-apps', 'itms-services', 'market', 'svn+ssh', 'fbstaging', 'tel', 'sms']),
+            var h = g(['fb', 'fbcf', 'fbconnect', 'fb-messenger', 'fbrpc', 'file', 'ftp', 'http', 'https', 'mailto', 'ms-app', 'itms', 'itms-apps', 'itms-services', 'market', 'svn+ssh', 'fbstaging', 'tel', 'sms', 'pebblejs']),
                 i = {
                     isAllowed: function(j) {
                         if (!j) return true;
@@ -1631,9 +1888,9 @@ try {
         }, null);
         __d("ex", ["eprintf"], function(a, b, c, d, e, f, g) {
             var h = function() {
-                var i = Array.prototype.slice.call(arguments, 0);
-                i = ES(i, 'map', true, function(j) {
-                    return String(j);
+                for (var i = [], j = 0, k = arguments.length; j < k; j++) i.push(arguments[j]);
+                i = ES(i, 'map', true, function(l) {
+                    return String(l);
                 });
                 if (i[0].split('%s')
                     .length !== i.length) return h('ex args number mismatch: %s', ES('JSON', 'stringify', false, i));
@@ -1667,50 +1924,52 @@ try {
             var l = new RegExp('[\\x00-\\x2c\\x2f\\x3b-\\x40\\x5c\\x5e\\x60\\x7b-\\x7f' + '\\uFDD0-\\uFDEF\\uFFF0-\\uFFFF' + '\\u2047\\u2048\\uFE56\\uFE5F\\uFF03\\uFF0F\\uFF1F]'),
                 m = new RegExp('^(?:[^/]*:|' + '[\\x00-\\x1f]*/[\\x00-\\x1f]*/)');
 
-            function n(p, q, r, s) {
-                if (!q) return true;
-                if (q instanceof o) {
-                    p.setProtocol(q.getProtocol());
-                    p.setDomain(q.getDomain());
-                    p.setPort(q.getPort());
-                    p.setPath(q.getPath());
-                    p.setQueryData(s.deserialize(s.serialize(q.getQueryData())));
-                    p.setFragment(q.getFragment());
-                    p.setForceFragmentSeparator(q.getForceFragmentSeparator());
+            function n(q, r, s, t) {
+                if (!r) return true;
+                if (r instanceof p) {
+                    q.setProtocol(r.getProtocol());
+                    q.setDomain(r.getDomain());
+                    q.setPort(r.getPort());
+                    q.setPath(r.getPath());
+                    q.setQueryData(t.deserialize(t.serialize(r.getQueryData())));
+                    q.setFragment(r.getFragment());
+                    q.setForceFragmentSeparator(r.getForceFragmentSeparator());
                     return true;
                 }
-                q = ES(q.toString(), 'trim', true);
-                var t = g.parse(q) || {};
-                if (!r && !h.isAllowed(t.scheme)) return false;
-                p.setProtocol(t.scheme || '');
-                if (!r && l.test(t.host)) return false;
-                p.setDomain(t.host || '');
-                p.setPort(t.port || '');
-                p.setPath(t.path || '');
-                if (r) {
-                    p.setQueryData(s.deserialize(t.query) || {});
+                r = ES(r.toString(), 'trim', true);
+                var u = g.parse(r) || {};
+                if (!s && !h.isAllowed(u.scheme)) return false;
+                q.setProtocol(u.scheme || '');
+                if (!s && l.test(u.host)) return false;
+                q.setDomain(u.host || '');
+                q.setPort(u.port || '');
+                q.setPath(u.path || '');
+                if (s) {
+                    q.setQueryData(t.deserialize(u.query) || {});
                 } else try {
-                    p.setQueryData(s.deserialize(t.query) || {});
-                } catch (u) {
+                    q.setQueryData(t.deserialize(u.query) || {});
+                } catch (v) {
                     return false;
                 }
-                p.setFragment(t.fragment || '');
-                if (t.fragment === '') p.setForceFragmentSeparator(true);
-                if (t.userinfo !== null) if (r) {
-                    throw new Error(j('URI.parse: invalid URI (userinfo is not allowed in a URI): %s', p.toString()));
+                q.setFragment(u.fragment || '');
+                if (u.fragment === '') q.setForceFragmentSeparator(true);
+                if (u.userinfo !== null) if (s) {
+                    throw new Error(j('URI.parse: invalid URI (userinfo is not allowed in a URI): %s', q.toString()));
                 } else return false;
-                if (!p.getDomain() && ES(p.getPath(), 'indexOf', true, '\\') !== -1) if (r) {
-                    throw new Error(j('URI.parse: invalid URI (no domain but multiple back-slashes): %s', p.toString()));
+                if (!q.getDomain() && ES(q.getPath(), 'indexOf', true, '\\') !== -1) if (s) {
+                    throw new Error(j('URI.parse: invalid URI (no domain but multiple back-slashes): %s', q.toString()));
                 } else return false;
-                if (!p.getProtocol() && m.test(q)) if (r) {
-                    throw new Error(j('URI.parse: invalid URI (unsafe protocol-relative URLs): %s', p.toString()));
+                if (!q.getProtocol() && m.test(r)) if (s) {
+                    throw new Error(j('URI.parse: invalid URI (unsafe protocol-relative URLs): %s', q.toString()));
                 } else return false;
                 return true;
             }
-            function o(p, q) {
+            var o = [];
+
+            function p(q, r) {
                 "use strict";
-                k(q);
-                this.$URIBase0 = q;
+                k(r);
+                this.$URIBase0 = r;
                 this.$URIBase1 = '';
                 this.$URIBase2 = '';
                 this.$URIBase3 = '';
@@ -1718,124 +1977,140 @@ try {
                 this.$URIBase5 = '';
                 this.$URIBase6 = {};
                 this.$URIBase7 = false;
-                n(this, p, true, q);
+                n(this, q, true, r);
             }
-            o.prototype.setProtocol = function(p) {
+            p.prototype.setProtocol = function(q) {
                 "use strict";
-                k(h.isAllowed(p));
-                this.$URIBase1 = p;
+                k(h.isAllowed(q));
+                this.$URIBase1 = q;
                 return this;
             };
-            o.prototype.getProtocol = function(p) {
+            p.prototype.getProtocol = function(q) {
                 "use strict";
                 return this.$URIBase1;
             };
-            o.prototype.setSecure = function(p) {
+            p.prototype.setSecure = function(q) {
                 "use strict";
-                return this.setProtocol(p ? 'https' : 'http');
+                return this.setProtocol(q ? 'https' : 'http');
             };
-            o.prototype.isSecure = function() {
+            p.prototype.isSecure = function() {
                 "use strict";
                 return this.getProtocol() === 'https';
             };
-            o.prototype.setDomain = function(p) {
+            p.prototype.setDomain = function(q) {
                 "use strict";
-                if (l.test(p)) throw new Error(j('URI.setDomain: unsafe domain specified: %s for url %s', p, this.toString()));
-                this.$URIBase2 = p;
+                if (l.test(q)) throw new Error(j('URI.setDomain: unsafe domain specified: %s for url %s', q, this.toString()));
+                this.$URIBase2 = q;
                 return this;
             };
-            o.prototype.getDomain = function() {
+            p.prototype.getDomain = function() {
                 "use strict";
                 return this.$URIBase2;
             };
-            o.prototype.setPort = function(p) {
+            p.prototype.setPort = function(q) {
                 "use strict";
-                this.$URIBase3 = p;
+                this.$URIBase3 = q;
                 return this;
             };
-            o.prototype.getPort = function() {
+            p.prototype.getPort = function() {
                 "use strict";
                 return this.$URIBase3;
             };
-            o.prototype.setPath = function(p) {
+            p.prototype.setPath = function(q) {
                 "use strict";
-                this.$URIBase4 = p;
+                this.$URIBase4 = q;
                 return this;
             };
-            o.prototype.getPath = function() {
+            p.prototype.getPath = function() {
                 "use strict";
                 return this.$URIBase4;
             };
-            o.prototype.addQueryData = function(p, q) {
+            p.prototype.addQueryData = function(q, r) {
                 "use strict";
-                if (Object.prototype.toString.call(p) === '[object Object]') {
-                    i(this.$URIBase6, p);
-                } else this.$URIBase6[p] = q;
+                if (Object.prototype.toString.call(q) === '[object Object]') {
+                    i(this.$URIBase6, q);
+                } else this.$URIBase6[q] = r;
                 return this;
             };
-            o.prototype.setQueryData = function(p) {
+            p.prototype.setQueryData = function(q) {
                 "use strict";
-                this.$URIBase6 = p;
+                this.$URIBase6 = q;
                 return this;
             };
-            o.prototype.getQueryData = function() {
+            p.prototype.getQueryData = function() {
                 "use strict";
                 return this.$URIBase6;
             };
-            o.prototype.removeQueryData = function(p) {
+            p.prototype.removeQueryData = function(q) {
                 "use strict";
-                if (!ES('Array', 'isArray', false, p)) p = [p];
-                for (var q = 0, r = p.length; q < r; ++q) delete this.$URIBase6[p[q]];
+                if (!ES('Array', 'isArray', false, q)) q = [q];
+                for (var r = 0, s = q.length; r < s; ++r) delete this.$URIBase6[q[r]];
                 return this;
             };
-            o.prototype.setFragment = function(p) {
+            p.prototype.setFragment = function(q) {
                 "use strict";
-                this.$URIBase5 = p;
+                this.$URIBase5 = q;
                 this.setForceFragmentSeparator(false);
                 return this;
             };
-            o.prototype.getFragment = function() {
+            p.prototype.getFragment = function() {
                 "use strict";
                 return this.$URIBase5;
             };
-            o.prototype.setForceFragmentSeparator = function(p) {
+            p.prototype.setForceFragmentSeparator = function(q) {
                 "use strict";
-                this.$URIBase7 = p;
+                this.$URIBase7 = q;
                 return this;
             };
-            o.prototype.getForceFragmentSeparator = function() {
+            p.prototype.getForceFragmentSeparator = function() {
                 "use strict";
                 return this.$URIBase7;
             };
-            o.prototype.isEmpty = function() {
+            p.prototype.isEmpty = function() {
                 "use strict";
                 return !(this.getPath() || this.getProtocol() || this.getDomain() || this.getPort() || ES('Object', 'keys', false, this.getQueryData())
                     .length > 0 || this.getFragment());
             };
-            o.prototype.toString = function() {
+            p.prototype.toString = function() {
                 "use strict";
-                var p = '';
-                if (this.$URIBase1) p += this.$URIBase1 + '://';
-                if (this.$URIBase2) p += this.$URIBase2;
-                if (this.$URIBase3) p += ':' + this.$URIBase3;
-                if (this.$URIBase4) {
-                    p += this.$URIBase4;
-                } else if (p) p += '/';
-                var q = this.$URIBase0.serialize(this.$URIBase6);
-                if (q) p += '?' + q;
-                if (this.$URIBase5) {
-                    p += '#' + this.$URIBase5;
-                } else if (this.$URIBase7) p += '#';
-                return p;
+                var q = this;
+                for (var r = 0; r < o.length; r++) q = o[r](q);
+                return q.$URIBase8();
             };
-            o.prototype.getOrigin = function() {
+            p.prototype.$URIBase8 = function() {
                 "use strict";
-                return this.$URIBase1 + '://' + this.$URIBase2 + (this.$URIBase3 ? ':' + this.$URIBase3 : '');
+                var q = '',
+                    r = this.getProtocol();
+                if (r) q += r + '://';
+                var s = this.getDomain();
+                if (s) q += s;
+                var t = this.getPort();
+                if (t) q += ':' + t;
+                var u = this.getPath();
+                if (u) {
+                    q += u;
+                } else if (q) q += '/';
+                var v = this.$URIBase0.serialize(this.getQueryData());
+                if (v) q += '?' + v;
+                var w = this.getFragment();
+                if (w) {
+                    q += '#' + w;
+                } else if (this.getForceFragmentSeparator()) q += '#';
+                return q;
             };
-            o.isValidURI = function(p, q) {
-                return n(new o(null, q), p, false, q);
+            p.registerFilter = function(q) {
+                "use strict";
+                o.push(q);
             };
-            e.exports = o;
+            p.prototype.getOrigin = function() {
+                "use strict";
+                var q = this.getPort();
+                return this.getProtocol() + '://' + this.getDomain() + (q ? ':' + q : '');
+            };
+            p.isValidURI = function(q, r) {
+                return n(new p(null, r), q, false, r);
+            };
+            e.exports = p;
         }, null);
         __d("sdk.URI", ["Assert", "QueryString", "URIBase"], function(a, b, c, d, e, f, g, h, i) {
             var j = /\.facebook\.com$/,
@@ -1868,101 +2143,6 @@ try {
                 return this.toString();
             };
             e.exports = n;
-        }, null);
-        __d("sdk.domReady", [], function(a, b, c, d, e, f) {
-            var g, h = "readyState" in document ? /loaded|complete/.test(document.readyState) : !! document.body;
-
-            function i() {
-                if (!g) return;
-                var l;
-                while (l = g.shift()) l();
-                g = null;
-            }
-            function j(l) {
-                if (g) {
-                    g.push(l);
-                    return;
-                } else l();
-            }
-            if (!h) {
-                g = [];
-                if (document.addEventListener) {
-                    document.addEventListener('DOMContentLoaded', i, false);
-                    window.addEventListener('load', i, false);
-                } else if (document.attachEvent) {
-                    document.attachEvent('onreadystatechange', i);
-                    window.attachEvent('onload', i);
-                }
-                if (document.documentElement.doScroll && window == window.top) {
-                    var k = function() {
-                        try {
-                            document.documentElement.doScroll('left');
-                        } catch (l) {
-                            setTimeout(k, 0);
-                            return;
-                        }
-                        i();
-                    };
-                    k();
-                }
-            }
-            e.exports = j;
-        }, 3);
-        __d("sdk.Content", ["sdk.domReady", "Log", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h, i) {
-            var j, k, l = {
-                append: function(m, n) {
-                    if (!n) if (!j) {
-                        j = n = document.getElementById('fb-root');
-                        if (!n) {
-                            h.warn('The "fb-root" div has not been created, auto-creating');
-                            j = n = document.createElement('div');
-                            n.id = 'fb-root';
-                            if (i.ie() || !document.body) {
-                                g(function() {
-                                    document.body.appendChild(n);
-                                });
-                            } else document.body.appendChild(n);
-                        }
-                        n.className += ' fb_reset';
-                    } else n = j;
-                    if (typeof m == 'string') {
-                        var o = document.createElement('div');
-                        n.appendChild(o)
-                            .innerHTML = m;
-                        return o;
-                    } else return n.appendChild(m);
-                },
-                appendHidden: function(m) {
-                    if (!n) {
-                        var n = document.createElement('div'),
-                            o = n.style;
-                        o.position = 'absolute';
-                        o.top = '-10000px';
-                        o.width = o.height = 0;
-                        n = l.append(n);
-                    }
-                    return l.append(m, n);
-                },
-                submitToTarget: function(m, n) {
-                    var o = document.createElement('form');
-                    o.action = m.url;
-                    o.target = m.target;
-                    o.method = (n) ? 'GET' : 'POST';
-                    l.appendHidden(o);
-                    for (var p in m.params) if (m.params.hasOwnProperty(p)) {
-                        var q = m.params[p];
-                        if (q !== null && q !== undefined) {
-                            var r = document.createElement('input');
-                            r.name = p;
-                            r.value = q;
-                            o.appendChild(r);
-                        }
-                    }
-                    o.submit();
-                    o.parentNode.removeChild(o);
-                }
-            };
-            e.exports = l;
         }, null);
         __d("sdk.Event", [], function(a, b, c, d, e, f) {
             var g = {
@@ -2104,17 +2284,17 @@ try {
             h.prototype.stub = function(i) {
                 "use strict";
                 this.remote[i] = ES(function() {
-                    var j = Array.prototype.slice.call(arguments, 0),
-                        k = {
-                            jsonrpc: '2.0',
-                            method: i
-                        };
+                    for (var j = [], k = 0, l = arguments.length; k < l; k++) j.push(arguments[k]);
+                    var m = {
+                        jsonrpc: '2.0',
+                        method: i
+                    };
                     if (typeof j[j.length - 1] == 'function') {
-                        k.id = ++this.$JSONRPC0;
-                        this.$JSONRPC1[k.id] = j.pop();
+                        m.id = ++this.$JSONRPC0;
+                        this.$JSONRPC1[m.id] = j.pop();
                     }
-                    k.params = j;
-                    this.$JSONRPC3(ES('JSON', 'stringify', false, k), this.$JSONRPC2 || {
+                    m.params = j;
+                    this.$JSONRPC3(ES('JSON', 'stringify', false, m), this.$JSONRPC2 || {
                         method: i
                     });
                 }, 'bind', true, this);
@@ -2210,26 +2390,24 @@ try {
             };
             e.exports = k;
         }, null);
-        __d("emptyFunction", ["copyProperties"], function(a, b, c, d, e, f, g) {
-            function h(j) {
+        __d("emptyFunction", [], function(a, b, c, d, e, f) {
+            function g(i) {
                 return function() {
-                    return j;
+                    return i;
                 };
             }
-            function i() {}
-            g(i, {
-                thatReturns: h,
-                thatReturnsFalse: h(false),
-                thatReturnsTrue: h(true),
-                thatReturnsNull: h(null),
-                thatReturnsThis: function() {
-                    return this;
-                },
-                thatReturnsArgument: function(j) {
-                    return j;
-                }
-            });
-            e.exports = i;
+            function h() {}
+            h.thatReturns = g;
+            h.thatReturnsFalse = g(false);
+            h.thatReturnsTrue = g(true);
+            h.thatReturnsNull = g(null);
+            h.thatReturnsThis = function() {
+                return this;
+            };
+            h.thatReturnsArgument = function(i) {
+                return i;
+            };
+            e.exports = h;
         }, null);
         __d("htmlSpecialChars", [], function(a, b, c, d, e, f) {
             var g = /&/g,
@@ -2324,36 +2502,6 @@ try {
                 }
             };
             e.exports = u;
-        }, null);
-        __d("dotAccess", [], function(a, b, c, d, e, f) {
-            function g(h, i, j) {
-                var k = i.split('.');
-                do {
-                    var l = k.shift();
-                    h = h[l] || j && (h[l] = {});
-                } while (k.length && h);
-                return h;
-            }
-            e.exports = g;
-        }, null);
-        __d("GlobalCallback", ["DOMWrapper", "dotAccess", "guid", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j) {
-            var k, l, m = {
-                setPrefix: function(n) {
-                    k = h(g.getWindow(), n, true);
-                    l = n;
-                },
-                create: function(n, o) {
-                    if (!k) this.setPrefix('__globalCallbacks');
-                    var p = i();
-                    k[p] = j(n, 'entry', o || 'GlobalCallback');
-                    return l + '.' + p;
-                },
-                remove: function(n) {
-                    var o = n.substring(l.length + 1);
-                    delete k[o];
-                }
-            };
-            e.exports = m;
         }, null);
         __d("XDM", ["DOMEventListener", "DOMWrapper", "emptyFunction", "Flash", "GlobalCallback", "guid", "Log", "UserAgent_DEPRECATED", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
             var p = {}, q = {
@@ -2501,10 +2649,13 @@ try {
 
             function i(j) {
                 if (!g) g = new RegExp('(^|\\.)facebook\\.com$', 'i');
-                if (j.isEmpty()) return false;
+                if (j.isEmpty() && j.toString() !== '#') return false;
                 if (!j.getDomain() && !j.getProtocol()) return true;
                 return (ES(h, 'indexOf', true, j.getProtocol()) !== -1 && g.test(j.getDomain()));
             }
+            i.setRegex = function(j) {
+                g = j;
+            };
             e.exports = i;
         }, null);
         __d("sdk.XD", ["sdk.Content", "sdk.Event", "Log", "QueryString", "Queue", "sdk.RPC", "sdk.Runtime", "sdk.Scribe", "sdk.URI", "UrlMap", "JSSDKXDConfig", "XDM", "isFacebookURI", "sdk.createIframe", "sdk.feature", "guid"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v) {
@@ -3487,9 +3638,9 @@ try {
                     }
                 });
             }
-            function ea(la, ma, na, oa, pa) {
-                ka.inform('request.complete', ma, na, oa, pa);
-                if (la) la(pa);
+            function ea(la, ma, na, oa, pa, qa) {
+                ka.inform('request.complete', ma, na, oa, qa, ES('Date', 'now', false) - pa);
+                if (la) la(qa);
             }
             function fa(la) {
                 var ma = la.shift();
@@ -3519,35 +3670,36 @@ try {
                 };
             }
             function ga() {
-                var la = Array.prototype.slice.call(arguments, 0),
-                    ma = fa(la),
-                    na = ma.uri,
-                    oa = ma.callback,
-                    pa = ma.params,
-                    qa = pa.method,
-                    ra = na.getProtocol() && na.getDomain() ? na.setQueryData({})
-                        .toString() : q.resolve('graph') + na.getPath();
-                da(ra, qa == 'get' ? 'get' : 'post', pa, ES(ea, 'bind', true, null, oa, na.getPath(), qa, pa));
+                for (var la = [], ma = 0, na = arguments.length; ma < na; ma++) la.push(arguments[ma]);
+                var oa = fa(la),
+                    pa = oa.uri,
+                    qa = oa.callback,
+                    ra = oa.params,
+                    sa = ra.method,
+                    ta = pa.getProtocol() && pa.getDomain() ? pa.setQueryData({})
+                        .toString() : q.resolve('graph') + pa.getPath();
+                ka.inform('request.prepare', ta, ra);
+                da(ta, sa == 'get' ? 'get' : 'post', ra, ES(ea, 'bind', true, null, qa, pa.getPath(), sa, ra, ES('Date', 'now', false)));
             }
             function ha() {
-                var la = Array.prototype.slice.call(arguments, 0),
-                    ma = fa(la),
-                    na = ma.uri,
-                    oa = ma.callback,
-                    pa = ma.params,
-                    qa = pa.method,
-                    ra = {
-                        method: qa,
-                        relative_url: na.removeQueryData('method')
+                for (var la = [], ma = 0, na = arguments.length; ma < na; ma++) la.push(arguments[ma]);
+                var oa = fa(la),
+                    pa = oa.uri,
+                    qa = oa.callback,
+                    ra = oa.params,
+                    sa = ra.method,
+                    ta = {
+                        method: sa,
+                        relative_url: pa.removeQueryData('method')
                             .toString()
                     };
-                if (qa.toLowerCase() == 'post') {
-                    ra.body = na.getQueryData();
-                    ra.relative_url = na.setQueryData({})
+                if (sa.toLowerCase() == 'post') {
+                    ta.body = pa.getQueryData();
+                    ta.relative_url = pa.setQueryData({})
                         .toString();
                 }
-                y.push(ra);
-                z.push(oa);
+                y.push(ta);
+                z.push(qa);
                 if (y.length == ba) {
                     ia();
                 } else if (!aa) aa = setTimeout(ia, 0);
@@ -3587,7 +3739,7 @@ try {
                 la.api_key = u;
                 var oa = na in x ? 'api_read' : 'api',
                     pa = q.resolve(oa) + '/restserver.php',
-                    qa = ES(ea, 'bind', true, null, ma, '/restserver.php', 'get', la);
+                    qa = ES(ea, 'bind', true, null, ma, '/restserver.php', 'get', la, ES('Date', 'now', false));
                 da(pa, 'get', la, qa);
             }
             var ka = ES('Object', 'assign', false, new n(), {
@@ -4098,49 +4250,6 @@ try {
             });
             e.exports = k;
         }, null);
-        __d("insertIframe", ["guid", "GlobalCallback"], function(a, b, c, d, e, f, g, h) {
-            function i(j) {
-                j.id = j.id || g();
-                j.name = j.name || g();
-                var k = false,
-                    l = false,
-                    m = function() {
-                        if (k && !l) {
-                            l = true;
-                            j.onload && j.onload(j.root.firstChild);
-                        }
-                    }, n = h.create(m);
-                if (document.attachEvent) {
-                    var o = ('<iframe' + ' id="' + j.id + '"' + ' name="' + j.name + '"' + (j.title ? ' title="' + j.title + '"' : '') + (j.className ? ' class="' + j.className + '"' : '') + ' style="border:none;' + (j.width ? 'width:' + j.width + 'px;' : '') + (j.height ? 'height:' + j.height + 'px;' : '') + '"' + ' src="javascript:false;"' + ' frameborder="0"' + ' scrolling="no"' + ' allowtransparency="true"' + ' onload="' + n + '()"' + '></iframe>');
-                    j.root.innerHTML = ('<iframe src="javascript:false"' + ' frameborder="0"' + ' scrolling="no"' + ' style="height:1px"></iframe>');
-                    k = true;
-                    setTimeout(function() {
-                        j.root.innerHTML = o;
-                        j.root.firstChild.src = j.url;
-                        j.onInsert && j.onInsert(j.root.firstChild);
-                    }, 0);
-                } else {
-                    var p = document.createElement('iframe');
-                    p.id = j.id;
-                    p.name = j.name;
-                    p.onload = m;
-                    p.scrolling = 'no';
-                    p.style.border = 'none';
-                    p.style.overflow = 'hidden';
-                    if (j.title) p.title = j.title;
-                    if (j.className) p.className = j.className;
-                    if (j.height !== undefined) p.style.height = j.height + 'px';
-                    if (j.width !== undefined) if (j.width == '100%') {
-                        p.style.width = j.width;
-                    } else p.style.width = j.width + 'px';
-                    j.root.appendChild(p);
-                    k = true;
-                    p.src = j.url;
-                    j.onInsert && j.onInsert(p);
-                }
-            }
-            e.exports = i;
-        }, null);
         __d("sdk.Native", ["Log", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h) {
             var i = 'fbNativeReady',
                 j = {
@@ -4292,6 +4401,13 @@ try {
                         });
                         return ea;
                     }
+                },
+                pay: {
+                    size: {
+                        width: 555,
+                        height: 120
+                    },
+                    connectDisplay: 'popup'
                 }
             }, da = {
                 Methods: ca,
@@ -4339,6 +4455,7 @@ try {
                         ka = la(ka);
                         if (!ka) return;
                     }
+                    if (ea.display === 'touch' && ea.in_iframe) ka.params.parent_height = window.innerHeight;
                     var ma = ha.getXdRelation || da.getXdRelation,
                         na = ma(ka.params);
                     if (!(ka.id in da._defaultCb) && !('next' in ka.params) && !('redirect_uri' in ka.params)) ka.params.next = da._xdResult(ka.cb, ka.id, na, true);
@@ -5437,46 +5554,6 @@ try {
                 }
             });
         }, 3);
-        __d("legacy:fb.pay", ["copyProperties", "sdk.Runtime", "sdk.UIServer", "sdk.XD", "sdk.feature", "FB"], function(a, b, c, d, e, f, g, h, i, j, k) {
-            b('FB');
-            var l = {
-                error_code: 1383001,
-                error_message: 'An unknown error caused the dialog to be closed'
-            }, m = function(n) {
-                return function(o) {
-                    if (o && typeof o.response === 'string') {
-                        n(ES('JSON', 'parse', false, o.response));
-                    } else if (typeof o === 'object') {
-                        n(o);
-                    } else n(l);
-                };
-            };
-            g(i.Methods, {
-                pay: {
-                    size: {
-                        width: 555,
-                        height: 120
-                    },
-                    connectDisplay: 'popup',
-                    transform: function(n) {
-                        if (k('launch_payment_dialog_via_pac')) {
-                            n.cb = m(n.cb);
-                            return n;
-                        } else {
-                            n.cb = m(n.cb);
-                            if (!h.isEnvironment(h.ENVIRONMENTS.CANVAS)) {
-                                n.params.order_info = ES('JSON', 'stringify', false, n.params.order_info);
-                                return n;
-                            }
-                            var o = j.handler(n.cb, 'parent.frames[' + (window.name || 'iframe_canvas') + ']');
-                            n.params.channel = o;
-                            n.params.uiserver = true;
-                            j.inform('Pay.Prompt', n.params);
-                        }
-                    }
-                }
-            });
-        }, 3);
         __d("legacy:fb.ua", ["FB", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h) {
             g.provide('UA', {
                 nativeApp: h.nativeApp
@@ -5487,61 +5564,6 @@ try {
                 ui: h
             });
         }, 3);
-        __d("Miny", [], function(a, b, c, d, e, f) {
-            var g = 'Miny1',
-                h = {
-                    encode: [],
-                    decode: {}
-                }, i = 'wxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_'.split('');
-
-            function j(n) {
-                for (var o = h.encode.length; o < n; o++) {
-                    var p = o.toString(32)
-                        .split('');
-                    p[p.length - 1] = i[parseInt(p[p.length - 1], 32)];
-                    p = p.join('');
-                    h.encode[o] = p;
-                    h.decode[p] = o;
-                }
-                return h;
-            }
-            function k(n) {
-                if (/^$|[~\\]|__proto__/.test(n)) return n;
-                var o = n.match(/\w+|\W+/g),
-                    p = {};
-                for (var q = 0; q < o.length; q++) p[o[q]] = (p[o[q]] || 0) + 1;
-                var r = ES('Object', 'keys', false, p);
-                r.sort(function(u, v) {
-                    return p[u] < p[v] ? 1 : (p[v] < p[u] ? -1 : 0);
-                });
-                var s = j(r.length)
-                    .encode;
-                for (q = 0; q < r.length; q++) p[r[q]] = s[q];
-                var t = [];
-                for (q = 0; q < o.length; q++) t[q] = p[o[q]];
-                return [g, r.length].concat(r)
-                    .concat(t.join(''))
-                    .join('~');
-            }
-            function l(n) {
-                var o = n.split('~');
-                if (o.shift() != g) return n;
-                var p = parseInt(o.shift(), 10),
-                    q = o.pop();
-                q = q.match(/[0-9a-v]*[\-w-zA-Z_]/g);
-                var r = o,
-                    s = j(p)
-                        .decode,
-                    t = [];
-                for (var u = 0; u < q.length; u++) t[u] = r[s[q[u]]];
-                return t.join('');
-            }
-            var m = {
-                encode: k,
-                decode: l
-            };
-            e.exports = m;
-        }, null);
         __d("runOnce", [], function(a, b, c, d, e, f) {
             function g(h) {
                 var i, j;
@@ -5833,20 +5855,20 @@ try {
                     this.subscribe('xd.resize', z(ka));
                     this.subscribe('xd.resize.flow', z(ka));
                     this.subscribe('xd.resize.flow', ES(function(qa) {
-                        ES('Object', 'assign', false, this._config.root.style, {
+                        ES('Object', 'assign', false, this._iframeOptions.root.style, {
                             verticalAlign: 'bottom',
                             overflow: ''
                         });
-                        y(this._config.root, da(qa.width), da(qa.height));
+                        y(this._iframeOptions.root, da(qa.width), da(qa.height));
                         this.updateLift();
                         clearTimeout(this._timeoutID);
                     }, 'bind', true, this));
                     this.subscribe('xd.resize', ES(function(qa) {
-                        ES('Object', 'assign', false, this._config.root.style, {
+                        ES('Object', 'assign', false, this._iframeOptions.root.style, {
                             verticalAlign: 'bottom',
                             overflow: ''
                         });
-                        y(this._config.root, da(qa.width), da(qa.height));
+                        y(this._iframeOptions.root, da(qa.width), da(qa.height));
                         y(this._iframe, da(qa.width), da(qa.height));
                         this._isIframeResized = true;
                         this.updateLift();
@@ -5897,11 +5919,12 @@ try {
                     this._ns = ha;
                     this._tag = ia;
                     this._params = na;
-                    this._config = {
+                    this._config = this.getConfig();
+                    this._iframeOptions = {
                         root: pa,
                         url: ma + n.encode(na),
                         name: oa,
-                        width: (s.mobile() ? (void 0) : (na.width || 1000)),
+                        width: this._config.mobile_fullsize && s.mobile() ? void 0 : na.width || 1000,
                         height: na.height || 1000,
                         style: {
                             border: 'none',
@@ -5919,8 +5942,8 @@ try {
                 process: function() {
                     if (o.getIsVersioned()) {
                         l.assertVersionIsSet();
-                        var ga = q(this._config.url);
-                        this._config.url = ga.setPath('/' + o.getVersion() + ga.getPath())
+                        var ga = q(this._iframeOptions.url);
+                        this._iframeOptions.url = ga.setPath('/' + o.getVersion() + ga.getPath())
                             .toString();
                     }
                     var ha = ES('Object', 'assign', false, {}, this._params);
@@ -5937,45 +5960,61 @@ try {
                         if (!this._isIframeResized) ea(this._iframe);
                     }, 'bind', true, this));
                     while (this._element.firstChild) this._element.removeChild(this._element.firstChild);
-                    this._element.appendChild(this._config.root);
+                    this._element.appendChild(this._iframeOptions.root);
                     var ja = s.mobile() ? 120 : 45;
                     this._timeoutID = setTimeout(ES(function() {
                         ea(this._iframe);
                         j.warn('%s:%s failed to resize in %ss', this._ns, this._tag, ja);
                     }, 'bind', true, this), ja * 1000);
-                    if (!m.add(this)) this._iframe = u(this._config);
+                    if (!m.add(this)) this._iframe = u(this._iframeOptions);
                     if (s.mobile()) {
                         h.addCss(this._element, 'fb_iframe_widget_fluid');
-                        ES('Object', 'assign', false, this._element.style, {
-                            display: 'block',
-                            width: '100%',
-                            height: 'auto'
-                        });
-                        ES('Object', 'assign', false, this._config.root.style, {
-                            width: '100%',
-                            height: 'auto'
-                        });
-                        ES('Object', 'assign', false, this._iframe.style, {
-                            width: '100%',
-                            height: 'auto',
-                            position: 'static'
-                        });
+                        if (!this._iframeOptions.width) {
+                            ES('Object', 'assign', false, this._element.style, {
+                                display: 'block',
+                                width: '100%',
+                                height: 'auto'
+                            });
+                            ES('Object', 'assign', false, this._iframeOptions.root.style, {
+                                width: '100%',
+                                height: 'auto'
+                            });
+                            ES('Object', 'assign', false, this._iframe.style, {
+                                width: '100%',
+                                height: 'auto',
+                                position: 'static'
+                            });
+                        }
                     }
                 },
+                getConfig: function() {
+                    return {};
+                },
                 updateLift: function() {
-                    var ga = this._iframe.style.width === this._config.root.style.width && this._iframe.style.height === this._config.root.style.height;
+                    var ga = this._iframe.style.width === this._iframeOptions.root.style.width && this._iframe.style.height === this._iframeOptions.root.style.height;
                     h[ga ? 'removeCss' : 'addCss'](this._iframe, 'fb_iframe_widget_lift');
                 }
             }, k);
             fa.getVal = ba;
-            fa.withParams = function(ga) {
+            fa.withParams = function(ga, ha) {
                 return fa.extend({
                     getParams: function() {
                         return ga;
+                    },
+                    getConfig: function() {
+                        return ha ? ha : {};
                     }
                 });
             };
             e.exports = fa;
+        }, null);
+        __d("PluginConfig", [], function(a, b, c, d, e, f) {
+            var g = {
+                post: {
+                    mobile_fullsize: true
+                }
+            };
+            e.exports = g;
         }, null);
         __d("PluginTags", [], function(a, b, c, d, e, f) {
             var g = {
@@ -6478,14 +6517,13 @@ try {
                     return true;
                 },
                 oneTimeSetup: function() {
-                    this.subscribe('xd.addComment', ES(this._handleCommentMsg, 'bind', true, this));
                     this.subscribe('xd.commentCreated', ES(this._handleCommentCreatedMsg, 'bind', true, this));
                     this.subscribe('xd.commentRemoved', ES(this._handleCommentRemovedMsg, 'bind', true, this));
                 },
                 getSize: function() {
                     if (!this._attr.permalink) return {
                         width: this._attr.mobile ? '100%' : this._attr.width,
-                        height: 160
+                        height: 100
                     };
                 },
                 getUrlBits: function() {
@@ -6496,14 +6534,6 @@ try {
                 },
                 getDefaultWebDomain: function() {
                     return l.resolve(this._attr.mobile ? 'm' : 'www', true);
-                },
-                _handleCommentMsg: function(o) {
-                    if (!this.isValid()) return;
-                    g.fire('comments.add', {
-                        post: o.post,
-                        user: o.user,
-                        widget: this
-                    });
                 },
                 _handleCommentCreatedMsg: function(o) {
                     if (!this.isValid()) return;
@@ -6997,47 +7027,49 @@ try {
             });
             e.exports = l;
         }, null);
-        __d("legacy:fb.xfbml", ["Assert", "sdk.domReady", "sdk.Event", "FB", "IframePlugin", "PluginTags", "wrapFunction", "XFBML", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
-            var o = {
+        __d("legacy:fb.xfbml", ["Assert", "sdk.Event", "FB", "IframePlugin", "PluginConfig", "PluginTags", "XFBML", "sdk.domReady", "sdk.feature", "wrapFunction", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+            var q = {
                 comments: b('sdk.XFBML.Comments'),
                 comments_count: b('sdk.XFBML.CommentsCount'),
                 login_button: b('sdk.XFBML.LoginButton'),
                 name: b('sdk.XFBML.Name'),
                 recommendations_bar: b('sdk.XFBML.RecommendationsBar'),
                 registration: b('sdk.XFBML.Registration')
-            };
-            ES(ES('Object', 'keys', false, l), 'forEach', true, function(q) {
-                n.registerTag({
+            }, r = o('plugin_tags_blacklist');
+            ES(ES('Object', 'keys', false, l), 'forEach', true, function(t) {
+                if (ES(r, 'indexOf', true, t) !== -1) return;
+                m.registerTag({
                     xmlns: 'fb',
-                    localName: q.replace(/_/g, '-'),
-                    ctor: k.withParams(l[q])
+                    localName: t.replace(/_/g, '-'),
+                    ctor: j.withParams(l[t], k[t])
                 });
             });
-            ES(ES('Object', 'keys', false, o), 'forEach', true, function(q) {
-                n.registerTag({
+            ES(ES('Object', 'keys', false, q), 'forEach', true, function(t) {
+                if (ES(r, 'indexOf', true, t) !== -1) return;
+                m.registerTag({
                     xmlns: 'fb',
-                    localName: q.replace(/_/g, '-'),
-                    ctor: o[q]
+                    localName: t.replace(/_/g, '-'),
+                    ctor: q[t]
                 });
             });
-            j.provide('XFBML', {
-                parse: function(q) {
-                    g.maybeXfbml(q, 'Invalid argument');
-                    if (q && q.nodeType === 9) q = q.body;
-                    return n.parse.apply(null, arguments);
+            i.provide('XFBML', {
+                parse: function(t) {
+                    g.maybeXfbml(t, 'Invalid argument');
+                    if (t && t.nodeType === 9) t = t.body;
+                    return m.parse.apply(null, arguments);
                 }
             });
-            n.subscribe('parse', ES(i.fire, 'bind', true, i, 'xfbml.parse'));
-            n.subscribe('render', ES(i.fire, 'bind', true, i, 'xfbml.render'));
-            i.subscribe('init:post', function(q) {
-                if (q.xfbml) setTimeout(m(ES(h, 'bind', true, null, n.parse), 'entry', 'init:post:xfbml.parse'), 0);
+            m.subscribe('parse', ES(h.fire, 'bind', true, h, 'xfbml.parse'));
+            m.subscribe('render', ES(h.fire, 'bind', true, h, 'xfbml.render'));
+            h.subscribe('init:post', function(t) {
+                if (t.xfbml) setTimeout(p(ES(n, 'bind', true, null, m.parse), 'entry', 'init:post:xfbml.parse'), 0);
             });
-            g.define('Xfbml', function(q) {
-                return (q.nodeType === 1 || q.nodeType === 9) && typeof q.nodeName === 'string';
+            g.define('Xfbml', function(t) {
+                return (t.nodeType === 1 || t.nodeType === 9) && typeof t.nodeName === 'string';
             });
             try {
                 if (document.namespaces && !document.namespaces.item.fb) document.namespaces.add('fb');
-            } catch (p) {}
+            } catch (s) {}
         }, 3);
         __d("legacy:fb.xfbml-legacy", ["FB", "sdk.Event"], function(a, b, c, d, e, f, g, h) {
             g.provide('XFBML.RecommendationsBar', {
@@ -7051,5 +7083,5 @@ try {
         .call({}, window.inDapIF ? parent.window : window);
 } catch (e) {
     new Image()
-        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1399202","message":"' + e.message + '"}}');
+        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1486784","message":"' + e.message + '"}}');
 }
