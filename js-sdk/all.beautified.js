@@ -1,4 +1,4 @@
-/*1415411347,,JIT Construction: v1486784,en_US*/
+/*1420242192,,JIT Construction: v1549264,en_US*/
 
 /**
  * Copyright Facebook Inc.
@@ -10,6 +10,7 @@ try {
     window.FB || (function(window) {
         var self = window,
             document = window.document;
+        var undefined = void 0;
         var setTimeout = window.setTimeout,
             setInterval = window.setInterval,
             clearTimeout = window.clearTimeout,
@@ -734,7 +735,7 @@ try {
         __d("JSSDKRuntimeConfig", [], {
             "locale": "en_US",
             "rtl": false,
-            "revision": "1486784"
+            "revision": "1549264"
         });
         __d("JSSDKConfig", [], {
             "bustCache": true,
@@ -821,15 +822,15 @@ try {
         });
         __d("JSSDKXDConfig", [], {
             "XdUrl": "\/connect\/xd_arbiter.php?version=41",
-            "XdBundleUrl": "\/connect\/xd_arbiter\/QjK2hWv6uak.js?version=41",
+            "XdBundleUrl": "\/connect\/xd_arbiter\/7r8gQb8MIqE.js?version=41",
             "Flash": {
                 "path": "https:\/\/connect.facebook.net\/rsrc.php\/v1\/yR\/r\/ks_9ZXiQ0GL.swf"
             },
             "useCdn": true
         });
         __d("JSSDKCssConfig", [], {
-            "rules": ".fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100\u0025}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100\u0025;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif) no-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif) white no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100\u0025}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}\n.fbpluginrecommendationsbarleft,.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}.fbpluginrecommendationsbarleft{left:10px}.fbpluginrecommendationsbarright{right:10px}",
-            "components": ["css:fb.css.base", "css:fb.css.dialog", "css:fb.css.iframewidget", "css:fb.css.plugin.recommendationsbar"]
+            "rules": ".fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:\"lucida grande\", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}\n.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yq\/r\/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yL\/r\/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ye\/r\/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100\u0025}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100\u0025;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/yd\/r\/Cou7n-nqK52.gif) no-repeat 5px 50\u0025;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100\u0025;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100\u0025}.fb_dialog.fb_dialog_mobile.loading{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/ya\/r\/3rhSv5V8j3o.gif) white no-repeat 50\u0025 50\u0025;min-height:100\u0025;min-width:100\u0025;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100\u0025;min-height:100\u0025;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100\u0025}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0\u0025 0\u0025, 0\u0025 100\u0025, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat 50\u0025 50\u0025;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}\n.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100\u0025}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http:\/\/static.ak.fbcdn.net\/rsrc.php\/v2\/y9\/r\/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50\u0025;z-index:4}",
+            "components": ["css:fb.css.base", "css:fb.css.dialog", "css:fb.css.iframewidget"]
         });
         __d("ApiClientConfig", [], {
             "FlashRequest": {
@@ -919,7 +920,7 @@ try {
             }
             function j(n, o, p) {
                 var q;
-                if (o === undefined) {
+                if (o === (void 0)) {
                     q = 'undefined';
                 } else if (o === null) {
                     q = 'null';
@@ -1116,16 +1117,16 @@ try {
                 Environment: i.UNKNOWN,
                 Initialized: false,
                 IsVersioned: false,
-                KidDirectedSite: undefined,
+                KidDirectedSite: (void 0),
                 Locale: h.locale,
-                LoginStatus: undefined,
+                LoginStatus: (void 0),
                 Revision: h.revision,
                 Rtl: h.rtl,
-                Scope: undefined,
-                Secure: undefined,
+                Scope: (void 0),
+                Secure: (void 0),
                 UseCookie: false,
                 UserID: '',
-                Version: undefined
+                Version: (void 0)
             });
             ES('Object', 'assign', false, j, {
                 ENVIRONMENTS: i,
@@ -1197,6 +1198,112 @@ try {
                 setRaw: j
             };
             e.exports = l;
+        }, null);
+        __d("wrapFunction", [], function(a, b, c, d, e, f) {
+            var g = {};
+
+            function h(i, j, k) {
+                j = j || 'default';
+                return function() {
+                    var l = j in g ? g[j](i, k) : i;
+                    return l.apply(this, arguments);
+                };
+            }
+            h.setWrapper = function(i, j) {
+                j = j || 'default';
+                g[j] = i;
+            };
+            e.exports = h;
+        }, null);
+        __d("DOMEventListener", ["wrapFunction"], function(a, b, c, d, e, f, g) {
+            var h, i;
+            if (window.addEventListener) {
+                h = function(k, l, m) {
+                    m.wrapper = g(m, 'entry', 'DOMEventListener.add ' + l);
+                    k.addEventListener(l, m.wrapper, false);
+                };
+                i = function(k, l, m) {
+                    k.removeEventListener(l, m.wrapper, false);
+                };
+            } else if (window.attachEvent) {
+                h = function(k, l, m) {
+                    m.wrapper = g(m, 'entry', 'DOMEventListener.add ' + l);
+                    k.attachEvent('on' + l, m.wrapper);
+                };
+                i = function(k, l, m) {
+                    k.detachEvent('on' + l, m.wrapper);
+                };
+            } else i = h = function() {};
+            var j = {
+                add: function(k, l, m) {
+                    h(k, l, m);
+                    return {
+                        remove: function() {
+                            i(k, l, m);
+                            k = null;
+                        }
+                    };
+                },
+                remove: i
+            };
+            e.exports = j;
+        }, null);
+        __d("sdk.UA", [], function(a, b, c, d, e, f) {
+            var g = navigator.userAgent,
+                h = {
+                    iphone: /\b(iPhone|iP[ao]d)/.test(g),
+                    ipad: /\b(iP[ao]d)/.test(g),
+                    android: /Android/i.test(g),
+                    nativeApp: /FBAN\/\w+;/i.test(g)
+                }, i = /Mobile/i.test(g),
+                j = {
+                    ie: '',
+                    firefox: '',
+                    chrome: '',
+                    webkit: '',
+                    osx: ''
+                }, k = /(?:MSIE.(\d+\.\d+))|(?:(?:Firefox|GranParadiso|Iceweasel).(\d+\.\d+))|(?:AppleWebKit.(\d+(?:\.\d+)?))|(?:Trident\/\d+\.\d+.*rv:(\d+\.\d+))/.exec(g);
+            if (k) {
+                j.ie = k[1] ? parseFloat(k[1]) : k[4] ? parseFloat(k[4]) : '';
+                j.firefox = k[2] || '';
+                j.webkit = k[3] || '';
+                if (k[3]) {
+                    var l = /(?:Chrome\/(\d+\.\d+))/.exec(g);
+                    j.chrome = l ? l[1] : '';
+                }
+            }
+            var m = /(?:Mac OS X (\d+(?:[._]\d+)?))/.exec(g);
+            if (m) j.osx = m[1];
+
+            function n(p) {
+                return ES(p.split('.'), 'map', true, function(q) {
+                    return parseFloat(q);
+                });
+            }
+            var o = {};
+            ES(ES('Object', 'keys', false, j), 'map', true, function(p) {
+                o[p] = function() {
+                    return parseFloat(j[p]);
+                };
+                o[p].getVersionParts = function() {
+                    return n(j[p]);
+                };
+            });
+            ES(ES('Object', 'keys', false, h), 'map', true, function(p) {
+                o[p] = function() {
+                    return h[p];
+                };
+            });
+            o.mobile = function() {
+                return h.iphone || h.ipad || h.android || i;
+            };
+            e.exports = o;
+        }, null);
+        __d("getBlankIframeSrc", ["sdk.UA"], function(a, b, c, d, e, f, g) {
+            function h() {
+                return g.ie() < 10 ? 'javascript:false' : 'about:blank';
+            }
+            e.exports = h;
         }, null);
         __d("guid", [], function(a, b, c, d, e, f) {
             function g() {
@@ -1297,7 +1404,7 @@ try {
             e.exports = x;
         }, null);
         __d("hasNamePropertyBug", ["guid", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h) {
-            var i = h.ie() ? undefined : false;
+            var i = h.ie() ? (void 0) : false;
 
             function j() {
                 var l = document.createElement("form"),
@@ -1312,102 +1419,53 @@ try {
             }
             e.exports = k;
         }, null);
-        __d("wrapFunction", [], function(a, b, c, d, e, f) {
-            var g = {};
-
-            function h(i, j, k) {
-                j = j || 'default';
-                return function() {
-                    var l = j in g ? g[j](i, k) : i;
-                    return l.apply(this, arguments);
-                };
-            }
-            h.setWrapper = function(i, j) {
-                j = j || 'default';
-                g[j] = i;
-            };
-            e.exports = h;
-        }, null);
-        __d("DOMEventListener", ["wrapFunction"], function(a, b, c, d, e, f, g) {
-            var h, i;
-            if (window.addEventListener) {
-                h = function(k, l, m) {
-                    m.wrapper = g(m, 'entry', 'DOMEventListener.add ' + l);
-                    k.addEventListener(l, m.wrapper, false);
-                };
-                i = function(k, l, m) {
-                    k.removeEventListener(l, m.wrapper, false);
-                };
-            } else if (window.attachEvent) {
-                h = function(k, l, m) {
-                    m.wrapper = g(m, 'entry', 'DOMEventListener.add ' + l);
-                    k.attachEvent('on' + l, m.wrapper);
-                };
-                i = function(k, l, m) {
-                    k.detachEvent('on' + l, m.wrapper);
-                };
-            } else i = h = function() {};
-            var j = {
-                add: function(k, l, m) {
-                    h(k, l, m);
-                    return {
-                        remove: function() {
-                            i(k, l, m);
-                            k = null;
-                        }
-                    };
-                },
-                remove: i
-            };
-            e.exports = j;
-        }, null);
-        __d("sdk.createIframe", ["guid", "hasNamePropertyBug", "DOMEventListener"], function(a, b, c, d, e, f, g, h, i) {
-            function j(k) {
-                k = ES('Object', 'assign', false, {}, k);
-                var l, m = k.name || g(),
-                    n = k.root,
-                    o = k.style || {
+        __d("sdk.createIframe", ["DOMEventListener", "getBlankIframeSrc", "guid", "hasNamePropertyBug"], function(a, b, c, d, e, f, g, h, i, j) {
+            function k(l) {
+                l = ES('Object', 'assign', false, {}, l);
+                var m, n = l.name || i(),
+                    o = l.root,
+                    p = l.style || {
                         border: 'none'
-                    }, p = k.url,
-                    q = k.onload,
-                    r = k.onerror;
-                if (h()) {
-                    l = document.createElement('<iframe name="' + m + '"/>');
+                    }, q = l.url,
+                    r = l.onload,
+                    s = l.onerror;
+                if (j()) {
+                    m = document.createElement('<iframe name="' + n + '"/>');
                 } else {
-                    l = document.createElement("iframe");
-                    l.name = m;
+                    m = document.createElement("iframe");
+                    m.name = n;
                 }
-                delete k.style;
-                delete k.name;
-                delete k.url;
-                delete k.root;
-                delete k.onload;
-                delete k.onerror;
-                var s = ES('Object', 'assign', false, {
+                delete l.style;
+                delete l.name;
+                delete l.url;
+                delete l.root;
+                delete l.onload;
+                delete l.onerror;
+                var t = ES('Object', 'assign', false, {
                     frameBorder: 0,
                     allowTransparency: true,
                     scrolling: 'no'
-                }, k);
-                if (s.width) l.width = s.width + 'px';
-                if (s.height) l.height = s.height + 'px';
-                delete s.height;
-                delete s.width;
-                for (var t in s) if (s.hasOwnProperty(t)) l.setAttribute(t, s[t]);
-                ES('Object', 'assign', false, l.style, o);
-                l.src = "javascript:false";
-                n.appendChild(l);
-                if (q) var u = i.add(l, 'load', function() {
-                    u.remove();
-                    q();
-                });
-                if (r) var v = i.add(l, 'error', function() {
+                }, l);
+                if (t.width) m.width = t.width + 'px';
+                if (t.height) m.height = t.height + 'px';
+                delete t.height;
+                delete t.width;
+                for (var u in t) if (t.hasOwnProperty(u)) m.setAttribute(u, t[u]);
+                ES('Object', 'assign', false, m.style, p);
+                m.src = h();
+                o.appendChild(m);
+                if (r) var v = g.add(m, 'load', function() {
                     v.remove();
                     r();
                 });
-                l.src = p;
-                return l;
+                if (s) var w = g.add(m, 'error', function() {
+                    w.remove();
+                    s();
+                });
+                m.src = q;
+                return m;
             }
-            e.exports = j;
+            e.exports = k;
         }, null);
         __d("DOMWrapper", [], function(a, b, c, d, e, f) {
             var g, h, i = {
@@ -1426,28 +1484,102 @@ try {
             };
             e.exports = i;
         }, null);
-        __d("sdk.feature", ["JSSDKConfig"], function(a, b, c, d, e, f, g) {
-            function h(i, j) {
-                if (g.features && i in g.features) {
-                    var k = g.features[i];
-                    if (typeof k === 'object' && typeof k.rate === 'number') {
-                        if (k.rate && Math.random() * 100 <= k.rate) {
-                            return k.value || true;
-                        } else return k.value ? null : false;
-                    } else return k;
-                }
-                return typeof j !== 'undefined' ? j : null;
-            }
+        __d("eprintf", [], function(a, b, c, d, e, f) {
+            var g = function(h) {
+                var i = ES(Array.prototype.slice.call(arguments), 'map', true, function(l) {
+                    return String(l);
+                }),
+                    j = h.split('%s')
+                        .length - 1;
+                if (j !== i.length - 1) return g('eprintf args number mismatch: %s', ES('JSON', 'stringify', false, i));
+                var k = 1;
+                return h.replace(/%s/g, function(l) {
+                    return String(i[k++]);
+                });
+            };
+            e.exports = g;
+        }, null);
+        __d("ex", ["eprintf"], function(a, b, c, d, e, f, g) {
+            var h = function() {
+                for (var i = [], j = 0, k = arguments.length; j < k; j++) i.push(arguments[j]);
+                i = ES(i, 'map', true, function(l) {
+                    return String(l);
+                });
+                if (i[0].split('%s')
+                    .length !== i.length) return h('ex args number mismatch: %s', ES('JSON', 'stringify', false, i));
+                return h._prefix + ES('JSON', 'stringify', false, i) + h._suffix;
+            };
+            h._prefix = '<![EX[';
+            h._suffix = ']]>';
             e.exports = h;
         }, null);
-        __d("sdk.getContextType", ["UserAgent_DEPRECATED", "sdk.Runtime"], function(a, b, c, d, e, f, g, h) {
+        __d("invariant", ["ex", "sprintf"], function(a, b, c, d, e, f, g, h) {
+            "use strict";
+            var i = g,
+                j = function(k, l) {
+                    if (!k) {
+                        var m;
+                        if (l === (void 0)) {
+                            m = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+                        } else {
+                            var n = ['Invariant Violation: ' + l];
+                            for (var o = 2, p = arguments.length; o < p; o++) n.push(arguments[o]);
+                            m = new Error(i.apply(null, n));
+                            m.messageWithParams = n;
+                        }
+                        m.framesToPop = 1;
+                        throw m;
+                    }
+                };
+            e.exports = j;
+        }, null);
+        __d("sdk.feature", ["JSSDKConfig", "invariant"], function(a, b, c, d, e, f, g, h) {
+            function i(j, k) {
+                h(arguments.length >= 2);
+                if (g.features && j in g.features) {
+                    var l = g.features[j];
+                    if (typeof l === 'object' && typeof l.rate === 'number') {
+                        if (l.rate && Math.random() * 100 <= l.rate) {
+                            return l.value || true;
+                        } else return l.value ? null : false;
+                    } else return l;
+                }
+                return k;
+            }
+            e.exports = i;
+        }, null);
+        __d("sdk.getContextType", ["sdk.Runtime", "sdk.UA"], function(a, b, c, d, e, f, g, h) {
             function i() {
-                if (g.nativeApp()) return 3;
-                if (g.mobile()) return 2;
-                if (h.isEnvironment(h.ENVIRONMENTS.CANVAS)) return 5;
+                if (h.nativeApp()) return 3;
+                if (h.mobile()) return 2;
+                if (g.isEnvironment(g.ENVIRONMENTS.CANVAS)) return 5;
                 return 1;
             }
             e.exports = i;
+        }, null);
+        __d("Log", ["sprintf"], function(a, b, c, d, e, f, g) {
+            var h = {
+                DEBUG: 3,
+                INFO: 2,
+                WARNING: 1,
+                ERROR: 0
+            };
+
+            function i(k, l) {
+                var m = Array.prototype.slice.call(arguments, 2),
+                    n = g.apply(null, m),
+                    o = window.console;
+                if (o && j.level >= l) o[k in o ? k : 'log'](n);
+            }
+            var j = {
+                level: -1,
+                Level: h,
+                debug: ES(i, 'bind', true, null, 'debug', h.DEBUG),
+                info: ES(i, 'bind', true, null, 'info', h.INFO),
+                warn: ES(i, 'bind', true, null, 'warn', h.WARNING),
+                error: ES(i, 'bind', true, null, 'error', h.ERROR)
+            };
+            e.exports = j;
         }, null);
         __d("sdk.domReady", [], function(a, b, c, d, e, f) {
             var g, h = "readyState" in document ? /loaded|complete/.test(document.readyState) : !! document.body;
@@ -1488,41 +1620,17 @@ try {
             }
             e.exports = j;
         }, 3);
-        __d("Log", ["sprintf"], function(a, b, c, d, e, f, g) {
-            var h = {
-                DEBUG: 3,
-                INFO: 2,
-                WARNING: 1,
-                ERROR: 0
-            };
-
-            function i(k, l) {
-                var m = Array.prototype.slice.call(arguments, 2),
-                    n = g.apply(null, m),
-                    o = window.console;
-                if (o && j.level >= l) o[k in o ? k : 'log'](n);
-            }
-            var j = {
-                level: -1,
-                Level: h,
-                debug: ES(i, 'bind', true, null, 'debug', h.DEBUG),
-                info: ES(i, 'bind', true, null, 'info', h.INFO),
-                warn: ES(i, 'bind', true, null, 'warn', h.WARNING),
-                error: ES(i, 'bind', true, null, 'error', h.ERROR)
-            };
-            e.exports = j;
-        }, null);
-        __d("sdk.Content", ["sdk.domReady", "Log", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h, i) {
+        __d("sdk.Content", ["Log", "sdk.UA", "sdk.domReady"], function(a, b, c, d, e, f, g, h, i) {
             var j, k, l = {
                 append: function(m, n) {
                     if (!n) if (!j) {
                         j = n = document.getElementById('fb-root');
                         if (!n) {
-                            h.warn('The "fb-root" div has not been created, auto-creating');
+                            g.warn('The "fb-root" div has not been created, auto-creating');
                             j = n = document.createElement('div');
                             n.id = 'fb-root';
-                            if (i.ie() || !document.body) {
-                                g(function() {
+                            if (h.ie() || !document.body) {
+                                i(function() {
                                     document.body.appendChild(n);
                                 });
                             } else document.body.appendChild(n);
@@ -1555,7 +1663,7 @@ try {
                     l.appendHidden(o);
                     for (var p in m.params) if (m.params.hasOwnProperty(p)) {
                         var q = m.params[p];
-                        if (q !== null && q !== undefined) {
+                        if (q !== null && q !== (void 0)) {
                             var r = document.createElement('input');
                             r.name = p;
                             r.value = q;
@@ -1567,79 +1675,6 @@ try {
                 }
             };
             e.exports = l;
-        }, null);
-        __d("dotAccess", [], function(a, b, c, d, e, f) {
-            function g(h, i, j) {
-                var k = i.split('.');
-                do {
-                    var l = k.shift();
-                    h = h[l] || j && (h[l] = {});
-                } while (k.length && h);
-                return h;
-            }
-            e.exports = g;
-        }, null);
-        __d("GlobalCallback", ["DOMWrapper", "dotAccess", "guid", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j) {
-            var k, l, m = {
-                setPrefix: function(n) {
-                    k = h(g.getWindow(), n, true);
-                    l = n;
-                },
-                create: function(n, o) {
-                    if (!k) this.setPrefix('__globalCallbacks');
-                    var p = i();
-                    k[p] = j(n, 'entry', o || 'GlobalCallback');
-                    return l + '.' + p;
-                },
-                remove: function(n) {
-                    var o = n.substring(l.length + 1);
-                    delete k[o];
-                }
-            };
-            e.exports = m;
-        }, null);
-        __d("insertIframe", ["guid", "GlobalCallback"], function(a, b, c, d, e, f, g, h) {
-            function i(j) {
-                j.id = j.id || g();
-                j.name = j.name || g();
-                var k = false,
-                    l = false,
-                    m = function() {
-                        if (k && !l) {
-                            l = true;
-                            j.onload && j.onload(j.root.firstChild);
-                        }
-                    }, n = h.create(m);
-                if (document.attachEvent) {
-                    var o = ('<iframe' + ' id="' + j.id + '"' + ' name="' + j.name + '"' + (j.title ? ' title="' + j.title + '"' : '') + (j.className ? ' class="' + j.className + '"' : '') + ' style="border:none;' + (j.width ? 'width:' + j.width + 'px;' : '') + (j.height ? 'height:' + j.height + 'px;' : '') + '"' + ' src="javascript:false;"' + ' frameborder="0"' + ' scrolling="no"' + ' allowtransparency="true"' + ' onload="' + n + '()"' + '></iframe>');
-                    j.root.innerHTML = ('<iframe src="javascript:false"' + ' frameborder="0"' + ' scrolling="no"' + ' style="height:1px"></iframe>');
-                    k = true;
-                    setTimeout(function() {
-                        j.root.innerHTML = o;
-                        j.root.firstChild.src = j.url;
-                        j.onInsert && j.onInsert(j.root.firstChild);
-                    }, 0);
-                } else {
-                    var p = document.createElement('iframe');
-                    p.id = j.id;
-                    p.name = j.name;
-                    p.onload = m;
-                    p.scrolling = 'no';
-                    p.style.border = 'none';
-                    p.style.overflow = 'hidden';
-                    if (j.title) p.title = j.title;
-                    if (j.className) p.className = j.className;
-                    if (j.height !== undefined) p.style.height = j.height + 'px';
-                    if (j.width !== undefined) if (j.width == '100%') {
-                        p.style.width = j.width;
-                    } else p.style.width = j.width + 'px';
-                    j.root.appendChild(p);
-                    k = true;
-                    p.src = j.url;
-                    j.onInsert && j.onInsert(p);
-                }
-            }
-            e.exports = i;
         }, null);
         __d("Miny", [], function(a, b, c, d, e, f) {
             var g = 'Miny1',
@@ -1708,53 +1743,126 @@ try {
             };
             e.exports = h;
         }, null);
-        __d("sdk.Impressions", ["sdk.Content", "guid", "insertIframe", "Miny", "QueryString", "sdk.Runtime", "UrlMap"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
-            function n(p) {
-                var q = l.getClientID();
-                if (!p.api_key && q) p.api_key = q;
-                p.kid_directed_site = l.getKidDirectedSite();
-                var r = m.resolve('www', true) + '/impression.php/' + h() + '/',
-                    s = k.appendToUrl(r, p);
-                if (s.length > 2000) if (p.payload && typeof p.payload === 'string') {
-                    var t = j.encode(p.payload);
-                    if (t && t.length < p.payload.length) {
-                        p.payload = t;
-                        s = k.appendToUrl(r, p);
+        __d("dotAccess", [], function(a, b, c, d, e, f) {
+            function g(h, i, j) {
+                var k = i.split('.');
+                do {
+                    var l = k.shift();
+                    h = h[l] || j && (h[l] = {});
+                } while (k.length && h);
+                return h;
+            }
+            e.exports = g;
+        }, null);
+        __d("GlobalCallback", ["DOMWrapper", "dotAccess", "guid", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j) {
+            var k, l, m = {
+                setPrefix: function(n) {
+                    k = h(g.getWindow(), n, true);
+                    l = n;
+                },
+                create: function(n, o) {
+                    if (!k) this.setPrefix('__globalCallbacks');
+                    var p = i();
+                    k[p] = j(n, 'entry', o || 'GlobalCallback');
+                    return l + '.' + p;
+                },
+                remove: function(n) {
+                    var o = n.substring(l.length + 1);
+                    delete k[o];
+                }
+            };
+            e.exports = m;
+        }, null);
+        __d("insertIframe", ["GlobalCallback", "getBlankIframeSrc", "guid"], function(a, b, c, d, e, f, g, h, i) {
+            function j(k) {
+                k.id = k.id || i();
+                k.name = k.name || i();
+                var l = false,
+                    m = false,
+                    n = function() {
+                        if (l && !m) {
+                            m = true;
+                            k.onload && k.onload(k.root.firstChild);
+                        }
+                    }, o = g.create(n);
+                if (document.attachEvent) {
+                    var p = ('<iframe' + ' id="' + k.id + '"' + ' name="' + k.name + '"' + (k.title ? ' title="' + k.title + '"' : '') + (k.className ? ' class="' + k.className + '"' : '') + ' style="border:none;' + (k.width ? 'width:' + k.width + 'px;' : '') + (k.height ? 'height:' + k.height + 'px;' : '') + '"' + ' src="' + h() + '"' + ' frameborder="0"' + ' scrolling="no"' + ' allowtransparency="true"' + ' onload="' + o + '()"' + '></iframe>');
+                    k.root.innerHTML = ('<iframe src="' + h() + '"' + ' frameborder="0"' + ' scrolling="no"' + ' style="height:1px"></iframe>');
+                    l = true;
+                    setTimeout(function() {
+                        k.root.innerHTML = p;
+                        k.root.firstChild.src = k.url;
+                        k.onInsert && k.onInsert(k.root.firstChild);
+                    }, 0);
+                } else {
+                    var q = document.createElement('iframe');
+                    q.id = k.id;
+                    q.name = k.name;
+                    q.onload = n;
+                    q.scrolling = 'no';
+                    q.style.border = 'none';
+                    q.style.overflow = 'hidden';
+                    if (k.title) q.title = k.title;
+                    if (k.className) q.className = k.className;
+                    if (k.height !== (void 0)) q.style.height = k.height + 'px';
+                    if (k.width !== (void 0)) if (k.width == '100%') {
+                        q.style.width = k.width;
+                    } else q.style.width = k.width + 'px';
+                    k.root.appendChild(q);
+                    l = true;
+                    q.src = k.url;
+                    k.onInsert && k.onInsert(q);
+                }
+            }
+            e.exports = j;
+        }, null);
+        __d("sdk.Impressions", ["sdk.Content", "Miny", "QueryString", "sdk.Runtime", "UrlMap", "getBlankIframeSrc", "guid", "insertIframe"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
+            function o(q) {
+                var r = j.getClientID();
+                if (!q.api_key && r) q.api_key = r;
+                q.kid_directed_site = j.getKidDirectedSite();
+                var s = k.resolve('www', true) + '/impression.php/' + m() + '/',
+                    t = i.appendToUrl(s, q);
+                if (t.length > 2000) if (q.payload && typeof q.payload === 'string') {
+                    var u = h.encode(q.payload);
+                    if (u && u.length < q.payload.length) {
+                        q.payload = u;
+                        t = i.appendToUrl(s, q);
                     }
                 }
-                if (s.length <= 2000) {
-                    var u = new Image();
-                    u.src = s;
+                if (t.length <= 2000) {
+                    var v = new Image();
+                    v.src = t;
                 } else {
-                    var v = h(),
-                        w = g.appendHidden('');
-                    i({
-                        url: 'javascript:false',
-                        root: w,
-                        name: v,
+                    var w = m(),
+                        x = g.appendHidden('');
+                    n({
+                        url: l(),
+                        root: x,
+                        name: w,
                         className: 'fb_hidden fb_invisible',
                         onload: function() {
-                            w.parentNode.removeChild(w);
+                            x.parentNode.removeChild(x);
                         }
                     });
                     g.submitToTarget({
-                        url: r,
-                        target: v,
-                        params: p
+                        url: s,
+                        target: w,
+                        params: q
                     });
                 }
             }
-            var o = {
-                log: function(p, q) {
-                    if (!q.source) q.source = 'jssdk';
-                    n({
-                        lid: p,
-                        payload: ES('JSON', 'stringify', false, q)
+            var p = {
+                log: function(q, r) {
+                    if (!r.source) r.source = 'jssdk';
+                    o({
+                        lid: q,
+                        payload: ES('JSON', 'stringify', false, r)
                     });
                 },
-                impression: n
+                impression: o
             };
-            e.exports = o;
+            e.exports = p;
         }, null);
         __d("Base64", [], function(a, b, c, d, e, f) {
             var g = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -1869,55 +1977,6 @@ try {
                 }
                 return h;
             }
-            e.exports = g;
-        }, null);
-        __d("eprintf", [], function(a, b, c, d, e, f) {
-            var g = function(h) {
-                var i = ES(Array.prototype.slice.call(arguments), 'map', true, function(l) {
-                    return String(l);
-                }),
-                    j = h.split('%s')
-                        .length - 1;
-                if (j !== i.length - 1) return g('eprintf args number mismatch: %s', ES('JSON', 'stringify', false, i));
-                var k = 1;
-                return h.replace(/%s/g, function(l) {
-                    return String(i[k++]);
-                });
-            };
-            e.exports = g;
-        }, null);
-        __d("ex", ["eprintf"], function(a, b, c, d, e, f, g) {
-            var h = function() {
-                for (var i = [], j = 0, k = arguments.length; j < k; j++) i.push(arguments[j]);
-                i = ES(i, 'map', true, function(l) {
-                    return String(l);
-                });
-                if (i[0].split('%s')
-                    .length !== i.length) return h('ex args number mismatch: %s', ES('JSON', 'stringify', false, i));
-                return h._prefix + ES('JSON', 'stringify', false, i) + h._suffix;
-            };
-            h._prefix = '<![EX[';
-            h._suffix = ']]>';
-            e.exports = h;
-        }, null);
-        __d("invariant", [], function(a, b, c, d, e, f) {
-            "use strict";
-            var g = function(h, i, j, k, l, m, n, o) {
-                if (!h) {
-                    var p;
-                    if (i === undefined) {
-                        p = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-                    } else {
-                        var q = [j, k, l, m, n, o],
-                            r = 0;
-                        p = new Error('Invariant Violation: ' + i.replace(/%s/g, function() {
-                            return q[r++];
-                        }));
-                    }
-                    p.framesToPop = 1;
-                    throw p;
-                }
-            };
             e.exports = g;
         }, null);
         __d("URIBase", ["URIRFC3986", "URISchemes", "copyProperties", "ex", "invariant"], function(a, b, c, d, e, f, g, h, i, j, k) {
@@ -2664,7 +2723,7 @@ try {
                 y = new k(),
                 z, aa, ba = v(),
                 ca = q.useCdn ? 'cdn' : 'www',
-                da = u('use_bundle') ? q.XdBundleUrl : q.XdUrl,
+                da = u('use_bundle', false) ? q.XdBundleUrl : q.XdUrl,
                 ea = p.resolve(ca, false) + da,
                 fa = p.resolve(ca, true) + da,
                 ga = v(),
@@ -2851,7 +2910,7 @@ try {
             };
             h.subscribe('init:post', function(ta) {
                 ra(ta.xdProxyName);
-                var ua = u('xd_timeout');
+                var ua = u('xd_timeout', false);
                 if (ua) setTimeout(function() {
                     var va = aa && ( !! z == x.isStarted() && !! aa == y.isStarted());
                     if (!va) n.log('jssdk_error', {
@@ -3025,7 +3084,7 @@ try {
             }
             e.exports = h;
         }, null);
-        __d("createArrayFrom", ["toArray"], function(a, b, c, d, e, f, g) {
+        __d("createArrayFromMixed", ["toArray"], function(a, b, c, d, e, f, g) {
             function h(j) {
                 return ( !! j && (typeof j == 'object' || typeof j == 'function') && ('length' in j) && !('setInterval' in j) && (typeof j.nodeType != 'number') && (ES('Array', 'isArray', false, j) || ('callee' in j) || ('item' in j)));
             }
@@ -3038,7 +3097,7 @@ try {
             }
             e.exports = i;
         }, null);
-        __d("sdk.DOM", ["Assert", "createArrayFrom", "sdk.domReady", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h, i, j) {
+        __d("sdk.DOM", ["Assert", "sdk.UA", "createArrayFromMixed", "sdk.domReady"], function(a, b, c, d, e, f, g, h, i, j) {
             var k = {};
 
             function l(z, aa) {
@@ -3089,7 +3148,7 @@ try {
                 g.isString(z);
                 aa = aa || document.body;
                 ba = ba || '*';
-                if (aa.querySelectorAll) return h(aa.querySelectorAll(ba + '.' + z));
+                if (aa.querySelectorAll) return i(aa.querySelectorAll(ba + '.' + z));
                 var ca = aa.getElementsByTagName(ba),
                     da = [];
                 for (var ea = 0, fa = ca.length; ea < fa; ea++) if (p(ca[ea], z)) da[da.length] = ca[ea];
@@ -3121,7 +3180,7 @@ try {
                     k[da] = true;
                 }
                 if (ba) return;
-                if (j.ie() < 11) {
+                if (h.ie() < 11) {
                     try {
                         document.createStyleSheet()
                             .cssText = z;
@@ -3171,19 +3230,19 @@ try {
                 addCssRules: v,
                 getViewportInfo: w,
                 getPosition: x,
-                ready: i
+                ready: j
             };
             e.exports = y;
         }, null);
-        __d("sdk.ErrorHandling", ["sdk.feature", "ManagedError", "sdk.Runtime", "sdk.Scribe", "UserAgent_DEPRECATED", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
-            var m = g('error_handling', false),
+        __d("sdk.ErrorHandling", ["ManagedError", "sdk.Runtime", "sdk.Scribe", "sdk.UA", "sdk.feature", "wrapFunction"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
+            var m = k('error_handling', false),
                 n = '';
 
             function o(u) {
                 var v = u._originalError;
                 delete u._originalError;
-                j.log('jssdk_error', {
-                    appId: i.getClientID(),
+                i.log('jssdk_error', {
+                    appId: h.getClientID(),
                     error: u.name || u.message,
                     extra: u
                 });
@@ -3198,7 +3257,7 @@ try {
                     stack: u.stackTrace || u.stack
                 };
                 v._originalError = u;
-                if (k.chrome() && /([\w:\.\/]+\.js):(\d+)/.test(u.stack)) {
+                if (j.chrome() && /([\w:\.\/]+\.js):(\d+)/.test(u.stack)) {
                     v.script = RegExp.$1;
                     v.line = parseInt(RegExp.$2, 10);
                 }
@@ -3212,7 +3271,7 @@ try {
                         n = v;
                         return u.apply(this, arguments);
                     } catch (w) {
-                        if (w instanceof h) throw w;
+                        if (w instanceof g) throw w;
                         var x = p(w);
                         x.entry = v;
                         var y = ES(Array.prototype.slice.call(arguments), 'map', true, function(z) {
@@ -3534,7 +3593,7 @@ try {
                 var i = {};
                 for (var j in h) if (h.hasOwnProperty(j)) {
                     var k = h[j];
-                    if (null === k || undefined === k) {
+                    if (null === k || (void 0) === k) {
                         continue;
                     } else if (typeof k == 'string') {
                         i[j] = k;
@@ -3593,135 +3652,144 @@ try {
             };
             e.exports = k;
         }, null);
-        __d("ApiClient", ["ArgumentError", "Assert", "CORSRequest", "FlashRequest", "flattenObject", "JSONPRequest", "Log", "ObservableMixin", "sprintf", "sdk.URI", "UrlMap", "ApiClientConfig", "invariant"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s) {
-            var t, u, v, w = {
+        __d("ApiClient", ["ArgumentError", "Assert", "CORSRequest", "FlashRequest", "flattenObject", "JSONPRequest", "Log", "ObservableMixin", "QueryString", "sprintf", "sdk.URI", "UrlMap", "ApiClientConfig", "invariant"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t) {
+            var u, v, w, x = {
                 get: true,
                 post: true,
                 'delete': true,
                 put: true
-            }, x = {
+            }, y = {
                 fql_query: true,
                 fql_multiquery: true,
                 friends_get: true,
                 notifications_get: true,
                 stream_get: true,
                 users_getinfo: true
-            }, y = [],
-                z = [],
-                aa = null,
-                ba = 50,
-                ca = 105440539523;
+            }, z = [],
+                aa = [],
+                ba = null,
+                ca = 50,
+                da = 105440539523;
 
-            function da(la, ma, na, oa) {
-                if (v) na = ES('Object', 'assign', false, {}, v, na);
-                na.access_token = na.access_token || t;
-                na.pretty = na.pretty || 0;
-                na = k(na);
-                var pa = {
+            function ea(ma, na, oa, pa) {
+                if (w) oa = ES('Object', 'assign', false, {}, w, oa);
+                oa.access_token = oa.access_token || u;
+                oa.pretty = oa.pretty || 0;
+                oa = k(oa);
+                var qa = {
                     jsonp: l,
                     cors: i,
                     flash: j
-                }, qa;
-                if (na.transport) {
-                    qa = [na.transport];
-                    delete na.transport;
-                } else qa = ['jsonp', 'cors', 'flash'];
-                for (var ra = 0; ra < qa.length; ra++) {
-                    var sa = pa[qa[ra]],
-                        ta = ES('Object', 'assign', false, {}, na);
-                    if (sa.execute(la, ma, ta, oa)) return;
+                }, ra;
+                if (oa.transport) {
+                    ra = [oa.transport];
+                    delete oa.transport;
+                } else ra = ['jsonp', 'cors', 'flash'];
+                for (var sa = 0; sa < ra.length; sa++) {
+                    var ta = qa[ra[sa]],
+                        ua = ES('Object', 'assign', false, {}, oa);
+                    if (ta.execute(ma, na, ua, pa)) return;
                 }
-                oa({
+                pa({
                     error: {
                         type: 'no-transport',
                         message: 'Could not find a usable transport for request'
                     }
                 });
             }
-            function ea(la, ma, na, oa, pa, qa) {
-                ka.inform('request.complete', ma, na, oa, qa, ES('Date', 'now', false) - pa);
-                if (la) la(qa);
+            function fa(ma, na, oa, pa, qa, ra) {
+                la.inform('request.complete', na, oa, pa, ra, ES('Date', 'now', false) - qa);
+                if (ma) ma(ra);
             }
-            function fa(la) {
-                var ma = la.shift();
-                h.isString(ma, 'Invalid path');
-                if (!/^https?/.test(ma) && ma.charAt(0) !== '/') ma = '/' + ma;
-                var na, oa = {};
+            function ga(ma) {
+                var na = ma.shift();
+                h.isString(na, 'Invalid path');
+                if (!/^https?/.test(na) && na.charAt(0) !== '/') na = '/' + na;
+                var oa, pa = {};
                 try {
-                    na = new p(ma);
-                } catch (pa) {
-                    throw new g(pa.message, pa);
+                    oa = new q(na);
+                } catch (qa) {
+                    throw new g(qa.message, qa);
                 }
-                ES(la, 'forEach', true, function(ta) {
-                    return oa[typeof ta] = ta;
+                ES(ma, 'forEach', true, function(ua) {
+                    return pa[typeof ua] = ua;
                 });
-                var qa = (oa.string || 'get')
+                var ra = (pa.string || 'get')
                     .toLowerCase();
-                h.isTrue(w.hasOwnProperty(qa), o('Invalid method passed to ApiClient: %s', qa));
-                var ra = oa['function'];
-                if (!ra) m.warn('No callback passed to the ApiClient');
-                if (oa.object) na.addQueryData(oa.object);
-                var sa = na.getQueryData();
-                sa.method = qa;
+                h.isTrue(x.hasOwnProperty(ra), p('Invalid method passed to ApiClient: %s', ra));
+                var sa = pa['function'];
+                if (!sa) m.warn('No callback passed to the ApiClient');
+                if (pa.object) oa.addQueryData(k(pa.object));
+                var ta = oa.getQueryData();
+                ta.method = ra;
                 return {
-                    uri: na,
-                    callback: ra,
-                    params: sa
+                    uri: oa,
+                    callback: sa,
+                    params: ta
                 };
             }
-            function ga() {
-                for (var la = [], ma = 0, na = arguments.length; ma < na; ma++) la.push(arguments[ma]);
-                var oa = fa(la),
-                    pa = oa.uri,
-                    qa = oa.callback,
-                    ra = oa.params,
-                    sa = ra.method,
-                    ta = pa.getProtocol() && pa.getDomain() ? pa.setQueryData({})
-                        .toString() : q.resolve('graph') + pa.getPath();
-                ka.inform('request.prepare', ta, ra);
-                da(ta, sa == 'get' ? 'get' : 'post', ra, ES(ea, 'bind', true, null, qa, pa.getPath(), sa, ra, ES('Date', 'now', false)));
-            }
             function ha() {
-                for (var la = [], ma = 0, na = arguments.length; ma < na; ma++) la.push(arguments[ma]);
-                var oa = fa(la),
-                    pa = oa.uri,
-                    qa = oa.callback,
-                    ra = oa.params,
-                    sa = ra.method,
-                    ta = {
-                        method: sa,
-                        relative_url: pa.removeQueryData('method')
-                            .toString()
-                    };
-                if (sa.toLowerCase() == 'post') {
-                    ta.body = pa.getQueryData();
-                    ta.relative_url = pa.setQueryData({})
-                        .toString();
-                }
-                y.push(ta);
-                z.push(qa);
-                if (y.length == ba) {
-                    ia();
-                } else if (!aa) aa = setTimeout(ia, 0);
+                for (var ma = [], na = 0, oa = arguments.length; na < oa; na++) ma.push(arguments[na]);
+                var pa = ga(ma),
+                    qa = pa.uri,
+                    ra = pa.callback,
+                    sa = pa.params,
+                    ta = sa.method,
+                    ua = qa.getProtocol() && qa.getDomain() ? qa.setQueryData({})
+                        .toString() : r.resolve('graph') + qa.getPath();
+                la.inform('request.prepare', ua, sa);
+                ea(ua, ta == 'get' ? 'get' : 'post', sa, ES(fa, 'bind', true, null, ra, qa.getPath(), ta, sa, ES('Date', 'now', false)));
             }
             function ia() {
-                s(y.length > 0);
-                var la = y,
-                    ma = z;
-                y = [];
+                for (var ma = [], na = 0, oa = arguments.length; na < oa; na++) ma.push(arguments[na]);
+                var pa = ga(ma),
+                    qa = pa.uri,
+                    ra = pa.callback,
+                    sa = pa.params,
+                    ta = sa.method,
+                    ua = {
+                        method: ta,
+                        relative_url: qa.removeQueryData('method')
+                            .toString()
+                    };
+                if (ta.toLowerCase() == 'post') {
+                    ua.body = o.encode(qa.getQueryData());
+                    ua.relative_url = qa.setQueryData({})
+                        .toString();
+                }
+                z.push(ua);
+                aa.push(ra);
+                if (z.length == ca) {
+                    if (ba) clearTimeout(ba);
+                    ja();
+                } else if (!ba) ba = setTimeout(ja, 0);
+            }
+            function ja() {
+                t(z.length > 0);
+                t(z.length === aa.length);
+                var ma = z,
+                    na = aa;
                 z = [];
-                aa = null;
-                ga('/', 'POST', {
-                    batch: ES('JSON', 'stringify', false, la),
+                aa = [];
+                ba = null;
+                if (ma.length === 1) {
+                    var oa = ma[0],
+                        pa = na[0],
+                        qa = oa.body ? o.decode(oa.body) : null;
+                    ha(oa.relative_url, oa.method, qa, pa);
+                    return;
+                }
+                ha('/', 'POST', {
+                    batch: ma,
                     include_headers: false,
-                    batch_app_id: u || ca
-                }, function(na) {
-                    if (ES('Array', 'isArray', false, na)) {
-                        ES(na, 'forEach', true, function(oa, pa) {
-                            ma[pa](ES('JSON', 'parse', false, oa.body));
+                    batch_app_id: v || da
+                }, function(ra) {
+                    if (ES('Array', 'isArray', false, ra)) {
+                        ES(ra, 'forEach', true, function(sa, ta) {
+                            na[ta](ES('JSON', 'parse', false, sa.body));
                         });
-                    } else ES(ma, 'forEach', true, function(oa) {
-                        return oa({
+                    } else ES(na, 'forEach', true, function(sa) {
+                        return sa({
                             error: {
                                 message: 'Fatal: batch call failed.'
                             }
@@ -3729,35 +3797,35 @@ try {
                     });
                 });
             }
-            function ja(la, ma) {
-                h.isObject(la);
-                h.isString(la.method, 'method missing');
-                if (!ma) m.warn('No callback passed to the ApiClient');
-                var na = la.method.toLowerCase()
+            function ka(ma, na) {
+                h.isObject(ma);
+                h.isString(ma.method, 'method missing');
+                if (!na) m.warn('No callback passed to the ApiClient');
+                var oa = ma.method.toLowerCase()
                     .replace('.', '_');
-                la.format = 'json-strings';
-                la.api_key = u;
-                var oa = na in x ? 'api_read' : 'api',
-                    pa = q.resolve(oa) + '/restserver.php',
-                    qa = ES(ea, 'bind', true, null, ma, '/restserver.php', 'get', la, ES('Date', 'now', false));
-                da(pa, 'get', la, qa);
+                ma.format = 'json-strings';
+                ma.api_key = v;
+                var pa = oa in y ? 'api_read' : 'api',
+                    qa = r.resolve(pa) + '/restserver.php',
+                    ra = ES(fa, 'bind', true, null, na, '/restserver.php', 'get', ma, ES('Date', 'now', false));
+                ea(qa, 'get', ma, ra);
             }
-            var ka = ES('Object', 'assign', false, new n(), {
-                setAccessToken: function(la) {
-                    t = la;
+            var la = ES('Object', 'assign', false, new n(), {
+                setAccessToken: function(ma) {
+                    u = ma;
                 },
-                setClientID: function(la) {
-                    u = la;
+                setClientID: function(ma) {
+                    v = ma;
                 },
-                setDefaultParams: function(la) {
-                    v = la;
+                setDefaultParams: function(ma) {
+                    w = ma;
                 },
-                rest: ja,
-                graph: ga,
-                scheduleBatchCall: ha
+                rest: ka,
+                graph: ha,
+                scheduleBatchCall: ia
             });
-            j.setSwfUrl(r.FlashRequest.swfUrl);
-            e.exports = ka;
+            j.setSwfUrl(s.FlashRequest.swfUrl);
+            e.exports = la;
         }, null);
         __d("sdk.PlatformVersioning", ["sdk.Runtime", "ManagedError"], function(a, b, c, d, e, f, g, h) {
             var i = /^v\d+\.\d\d?$/,
@@ -3837,46 +3905,25 @@ try {
             };
             e.exports = j;
         }, null);
-        __d("sdk.Intl", ["Log"], function(a, b, c, d, e, f, g) {
-            var h = ('[' + '.!?' + '\u3002' + '\uFF01' + '\uFF1F' + '\u0964' + '\u2026' + '\u0EAF' + '\u1801' + '\u0E2F' + '\uFF0E' + ']');
-
-            function i(l) {
-                if (typeof l != 'string') return false;
-                return !!l.match(new RegExp(h + '[' + ')"' + "'" + '\u00BB' + '\u0F3B' + '\u0F3D' + '\u2019' + '\u201D' + '\u203A' + '\u3009' + '\u300B' + '\u300D' + '\u300F' + '\u3011' + '\u3015' + '\u3017' + '\u3019' + '\u301B' + '\u301E' + '\u301F' + '\uFD3F' + '\uFF07' + '\uFF09' + '\uFF3D' + '\\s' + ']*$'));
-            }
-            function j(l, m) {
-                if (m !== undefined) if (typeof m != 'object') {
-                    g.error('The second arg to FB.Intl.tx() must be an Object for ' + 'FB.Intl.tx(' + l + ', ...)');
-                } else {
-                    var n;
-                    for (var o in m) if (m.hasOwnProperty(o)) {
-                        if (i(m[o])) {
-                            n = new RegExp('\\{' + o + '\\}' + h + '*', 'g');
-                        } else n = new RegExp('\\{' + o + '\\}', 'g');
-                        l = l.replace(n, m[o]);
-                    }
+        __d("sdk.fbt", [], function(a, b, c, d, e, f) {
+            var g = {
+                _: function(h) {
+                    return typeof h === 'string' ? h : h[0];
                 }
-                return l;
-            }
-            function k() {
-                throw new Error('Placeholder function');
-            }
-            k._ = j;
-            e.exports = {
-                tx: k
             };
+            e.exports = g;
         }, null);
-        __d("sdk.Dialog", ["sdk.Canvas.Environment", "sdk.Content", "sdk.DOM", "DOMEventListener", "sdk.Intl", "ObservableMixin", "sdk.Runtime", "Type", "UserAgent_DEPRECATED", "sdk.feature"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+        __d("sdk.Dialog", ["sdk.Canvas.Environment", "sdk.Content", "sdk.DOM", "DOMEventListener", "ObservableMixin", "sdk.Runtime", "Type", "sdk.UA", "sdk.fbt", "sdk.feature"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
             var q = 590,
                 r = 500,
                 s = 240,
                 t = 575,
                 u = function() {
                     var y;
-                    if (p('dialog_resize_refactor')) {
+                    if (p('dialog_resize_refactor', false)) {
                         var z = v();
                         y = z && (z.height >= q || z.width >= r);
-                    } else y = !! o.ipad();
+                    } else y = !! n.ipad();
                     u = function() {
                         return y;
                     };
@@ -3884,7 +3931,7 @@ try {
                 };
 
             function v() {
-                if (p('dialog_resize_refactor')) {
+                if (p('dialog_resize_refactor', false)) {
                     var y = i.getViewportInfo();
                     if (y.height && y.width) return {
                         width: Math.min(y.width, q),
@@ -3893,7 +3940,7 @@ try {
                 }
                 return null;
             }
-            var w = n.extend({
+            var w = m.extend({
                 constructor: function y(z, aa) {
                     this.parent();
                     this.id = z;
@@ -3917,7 +3964,7 @@ try {
                     for (var z in y) if (y.hasOwnProperty(z)) this.trackEvent(z, y[z]);
                     return this;
                 }
-            }, l),
+            }, k),
                 x = {
                     newInstance: function(y, z) {
                         return new w(y, z);
@@ -3945,7 +3992,7 @@ try {
                         });
                     },
                     _createMobileLoader: function() {
-                        var y = o.nativeApp() ? '' : ('<table>' + '  <tbody>' + '    <tr>' + '      <td class="header_left">' + '        <label class="touchable_button">' + '          <input type="submit" value="' + k.tx._("Cancel") + '"' + '            id="fb_dialog_loader_close"/>' + '        </label>' + '      </td>' + '      <td class="header_center">' + '        <div>' + k.tx._("Loading...") + '</div>' + '      </td>' + '      <td class="header_right">' + '      </td>' + '    </tr>' + '  </tbody>' + '</table>');
+                        var y = n.nativeApp() ? '' : ('<table>' + '  <tbody>' + '    <tr>' + '      <td class="header_left">' + '        <label class="touchable_button">' + '          <input type="submit" value="' + "Cancel" + '"' + '            id="fb_dialog_loader_close"/>' + '        </label>' + '      </td>' + '      <td class="header_center">' + '        <div>' + '         ' + "Loading..." + '        </div>' + '      </td>' + '      <td class="header_right">' + '      </td>' + '    </tr>' + '  </tbody>' + '</table>');
                         return x.create({
                             classes: 'loading' + (u() ? ' centered' : ''),
                             content: ('<div class="dialog_header">' + y + '</div>')
@@ -3971,7 +4018,7 @@ try {
                     },
                     showLoader: function(y, z) {
                         x._showTabletOverlay();
-                        if (!x._loaderEl) x._loaderEl = x._findRoot(o.mobile() ? x._createMobileLoader() : x._createWWWLoader(z));
+                        if (!x._loaderEl) x._loaderEl = x._findRoot(n.mobile() ? x._createMobileLoader() : x._createWWWLoader(z));
                         if (!y) y = function() {};
                         var aa = document.getElementById('fb_dialog_loader_close');
                         i.removeCss(aa, 'fb_hidden');
@@ -3992,7 +4039,7 @@ try {
                         x._setDialogSizes();
                         x._lowerActive();
                         x._active = y;
-                        if (m.isEnvironment(m.ENVIRONMENTS.CANVAS)) g.getPageInfo(function(z) {
+                        if (l.isEnvironment(l.ENVIRONMENTS.CANVAS)) g.getPageInfo(function(z) {
                             x._centerActive(z);
                         });
                         x._centerActive();
@@ -4023,14 +4070,14 @@ try {
                             ga = ea;
                         } else if (ga > fa) ga = fa;
                         ga += aa.scrollTop;
-                        if (o.mobile()) {
+                        if (n.mobile()) {
                             var ha = 100;
                             if (u()) {
                                 ha += (aa.height - ca) / 2;
                             } else {
                                 var ia = document.getElementsByTagName('body')[0];
                                 i.addCss(ia, 'fb_hidden');
-                                if (p('dialog_resize_refactor')) ia.style.width = 'auto';
+                                if (p('dialog_resize_refactor', false)) ia.style.width = 'auto';
                                 ga = 10000;
                             }
                             var ja = i.getByClass('fb_dialog_padding', z);
@@ -4040,7 +4087,7 @@ try {
                         z.style.top = (ga > 0 ? ga : 0) + 'px';
                     },
                     _setDialogSizes: function() {
-                        if (!o.mobile() || u()) return;
+                        if (!n.mobile() || u()) return;
                         for (var y in x._dialogs) if (x._dialogs.hasOwnProperty(y)) {
                             var z = document.getElementById(y);
                             if (z) {
@@ -4052,14 +4099,14 @@ try {
                         }
                     },
                     getDefaultSize: function() {
-                        if (o.mobile()) {
+                        if (n.mobile()) {
                             var y = v();
                             if (y) return y;
-                            if (o.ipad()) return {
+                            if (n.ipad()) return {
                                 width: r,
                                 height: q
                             };
-                            if (o.android()) {
+                            if (n.android()) {
                                 return {
                                     width: screen.availWidth,
                                     height: screen.availHeight
@@ -4082,7 +4129,7 @@ try {
                     _handleOrientationChange: function(y) {
                         var z = p('dialog_resize_refactor', false) ? i.getViewportInfo()
                             .width : screen.availWidth;
-                        if (o.android() && z == x._availScreenWidth) {
+                        if (n.android() && z == x._availScreenWidth) {
                             setTimeout(x._handleOrientationChange, 50);
                             return;
                         }
@@ -4099,7 +4146,7 @@ try {
                         }
                     },
                     _addOrientationHandler: function() {
-                        if (!o.mobile()) return;
+                        if (!n.mobile()) return;
                         var y = "onorientationchange" in window ? 'orientationchange' : 'resize';
                         x._availScreenWidth = p('dialog_resize_refactor', false) ? i.getViewportInfo()
                             .width : screen.availWidth;
@@ -4117,21 +4164,21 @@ try {
                             z.appendChild(ca);
                         }
                         ba += ' ' + (y.classes || '');
-                        if (o.ie()) {
+                        if (n.ie()) {
                             ba += ' fb_dialog_legacy';
                             ES(['vert_left', 'vert_right', 'horiz_top', 'horiz_bottom', 'top_left', 'top_right', 'bottom_left', 'bottom_right'], 'forEach', true, function(fa) {
                                 var ga = document.createElement('span');
                                 ga.className = 'fb_dialog_' + fa;
                                 z.appendChild(ga);
                             });
-                        } else ba += o.mobile() ? ' fb_dialog_mobile' : ' fb_dialog_advanced';
+                        } else ba += n.mobile() ? ' fb_dialog_mobile' : ' fb_dialog_advanced';
                         if (y.content) h.append(y.content, aa);
                         z.className = ba;
                         var da = parseInt(y.width, 10);
                         if (!isNaN(da)) z.style.width = da + 'px';
                         aa.className = 'fb_dialog_content';
                         z.appendChild(aa);
-                        if (o.mobile()) {
+                        if (n.mobile()) {
                             var ea = document.createElement('div');
                             ea.className = 'fb_dialog_padding';
                             z.appendChild(ea);
@@ -4250,7 +4297,7 @@ try {
             });
             e.exports = k;
         }, null);
-        __d("sdk.Native", ["Log", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h) {
+        __d("sdk.Native", ["Log", "sdk.UA"], function(a, b, c, d, e, f, g, h) {
             var i = 'fbNativeReady',
                 j = {
                     onready: function(k) {
@@ -4283,12 +4330,12 @@ try {
             }
             e.exports = g;
         }, null);
-        __d("sdk.UIServer", ["sdk.Auth", "sdk.Content", "createObjectFrom", "sdk.Dialog", "sdk.DOM", "sdk.Event", "flattenObject", "sdk.Frictionless", "sdk.getContextType", "guid", "insertIframe", "Log", "sdk.Native", "QueryString", "resolveURI", "sdk.RPC", "sdk.Runtime", "JSSDKConfig", "UrlMap", "UserAgent_DEPRECATED", "sdk.XD"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, aa) {
+        __d("sdk.UIServer", ["sdk.Auth", "sdk.Content", "sdk.DOM", "sdk.Dialog", "sdk.Event", "sdk.Frictionless", "Log", "sdk.Native", "QueryString", "sdk.RPC", "sdk.Runtime", "JSSDKConfig", "sdk.UA", "UrlMap", "sdk.XD", "createObjectFrom", "flattenObject", "sdk.getContextType", "guid", "insertIframe", "resolveURI"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, aa) {
             var ba = {
                 transform: function(ea) {
                     if (ea.params.display === 'touch' && ea.params.access_token && window.postMessage) {
                         ea.params.channel = da._xdChannelHandler(ea.id, 'parent');
-                        if (!z.nativeApp()) ea.params.in_iframe = 1;
+                        if (!s.nativeApp()) ea.params.in_iframe = 1;
                         return ea;
                     } else return da.genericTransform(ea);
                 },
@@ -4313,14 +4360,14 @@ try {
                 apprequests: {
                     transform: function(ea) {
                         ea = ba.transform(ea);
-                        ea.params.frictionless = n && n._useFrictionless;
+                        ea.params.frictionless = l && l._useFrictionless;
                         if (ea.params.frictionless) {
-                            if (n.isAllowed(ea.params.to)) {
+                            if (l.isAllowed(ea.params.to)) {
                                 ea.params.display = 'iframe';
                                 ea.params.in_iframe = true;
                                 ea.hideLoader = true;
                             }
-                            ea.cb = n._processRequestResponse(ea.cb, ea.hideLoader);
+                            ea.cb = l._processRequestResponse(ea.cb, ea.hideLoader);
                         }
                         ea.closeIcon = false;
                         return ea;
@@ -4331,18 +4378,18 @@ try {
                 'permissions.oauth': {
                     url: 'dialog/oauth',
                     size: {
-                        width: (z.mobile() ? null : 475),
-                        height: (z.mobile() ? null : 183)
+                        width: (s.mobile() ? null : 475),
+                        height: (s.mobile() ? null : 183)
                     },
                     transform: function(ea) {
-                        if (!w.getClientID()) {
-                            r.error('FB.login() called before FB.init().');
+                        if (!q.getClientID()) {
+                            m.error('FB.login() called before FB.init().');
                             return;
                         }
                         if (g.getAuthResponse() && !ea.params.scope && !ea.params.auth_type) {
-                            r.error('FB.login() called when user is already connected.');
+                            m.error('FB.login() called when user is already connected.');
                             ea.cb && ea.cb({
-                                status: w.getLoginStatus(),
+                                status: q.getLoginStatus(),
                                 authResponse: g.getAuthResponse()
                             });
                             return;
@@ -4350,23 +4397,23 @@ try {
                         var fa = ea.cb,
                             ga = ea.id;
                         delete ea.cb;
-                        var ha = ES('Object', 'keys', false, ES('Object', 'assign', false, ea.params.response_type ? i(ea.params.response_type.split(',')) : {}, {
+                        var ha = ES('Object', 'keys', false, ES('Object', 'assign', false, ea.params.response_type ? v(ea.params.response_type.split(',')) : {}, {
                             token: true,
                             signed_request: true
                         }))
                             .join(',');
                         if (ea.params.display === 'async') {
                             ES('Object', 'assign', false, ea.params, {
-                                client_id: w.getClientID(),
-                                origin: o(),
+                                client_id: q.getClientID(),
+                                origin: x(),
                                 response_type: ha,
                                 domain: location.hostname
                             });
                             ea.cb = g.xdResponseWrapper(fa, g.getAuthResponse(), 'permissions.oauth');
                         } else ES('Object', 'assign', false, ea.params, {
-                            client_id: w.getClientID(),
-                            redirect_uri: u(da.xdHandler(fa, ga, 'opener', g.getAuthResponse(), 'permissions.oauth')),
-                            origin: o(),
+                            client_id: q.getClientID(),
+                            redirect_uri: aa(da.xdHandler(fa, ga, 'opener', g.getAuthResponse(), 'permissions.oauth')),
+                            origin: x(),
                             response_type: ha,
                             domain: location.hostname
                         });
@@ -4376,10 +4423,10 @@ try {
                 'auth.logout': {
                     url: 'logout.php',
                     transform: function(ea) {
-                        if (!w.getClientID()) {
-                            r.error('FB.logout() called before calling FB.init().');
+                        if (!q.getClientID()) {
+                            m.error('FB.logout() called before calling FB.init().');
                         } else if (!g.getAuthResponse()) {
-                            r.error('FB.logout() called without an access token.');
+                            m.error('FB.logout() called without an access token.');
                         } else {
                             ea.params.next = da.xdHandler(ea.cb, ea.id, 'parent', g.getAuthResponse(), 'logout');
                             return ea;
@@ -4393,9 +4440,9 @@ try {
                             ga = ea.id;
                         delete ea.cb;
                         ES('Object', 'assign', false, ea.params, {
-                            client_id: w.getClientID(),
+                            client_id: q.getClientID(),
                             redirect_uri: da.xdHandler(fa, ga, 'parent', g.getAuthResponse(), 'login_status'),
-                            origin: o(),
+                            origin: x(),
                             response_type: 'token,signed_request,code',
                             domain: location.hostname
                         });
@@ -4422,31 +4469,32 @@ try {
                     return ea;
                 },
                 checkOauthDisplay: function(ea) {
-                    var fa = ea.scope || ea.perms || w.getScope();
+                    var fa = ea.scope || ea.perms || q.getScope();
                     if (!fa) return ea.display;
                     var ga = fa.split(/\s|,/g);
-                    for (var ha = 0; ha < ga.length; ha++) if (!x.initSitevars.iframePermissions[ES(ga[ha], 'trim', true)]) return 'popup';
+                    for (var ha = 0; ha < ga.length; ha++) if (!r.initSitevars.iframePermissions[ES(ga[ha], 'trim', true)]) return 'popup';
                     return ea.display;
                 },
                 prepareCall: function(ea, fa) {
                     var ga = ea.method.toLowerCase(),
-                        ha = da.Methods.hasOwnProperty(ga) ? ES('Object', 'assign', false, {}, da.Methods[ga]) : {}, ia = p(),
-                        ja = w.getSecure() || (ga !== 'auth.status' && ga != 'login.status');
+                        ha = da.Methods.hasOwnProperty(ga) ? ES('Object', 'assign', false, {}, da.Methods[ga]) : {}, ia = y(),
+                        ja = q.getSecure() || (ga !== 'auth.status' && ga != 'login.status');
                     ES('Object', 'assign', false, ea, {
-                        app_id: w.getClientID(),
-                        locale: w.getLocale(),
+                        app_id: q.getClientID(),
+                        locale: q.getLocale(),
                         sdk: 'joey',
-                        access_token: ja && w.getAccessToken() || undefined
+                        access_token: ja && q.getAccessToken() || (void 0)
                     });
                     ea.display = da.getDisplayMode(ha, ea);
                     if (!ha.url) ha.url = 'dialog/' + ga;
                     if ((ha.url == 'dialog/oauth' || ha.url == 'dialog/permissions.request') && (ea.display == 'iframe' || (ea.display == 'touch' && ea.in_iframe))) ea.display = da.checkOauthDisplay(ea);
-                    if (w.getIsVersioned() && ha.url.substring(0, 7) === 'dialog/') ha.url = ea.version + '/' + ha.url;
+                    if (ea.display == 'popup') delete ea.access_token;
+                    if (q.getIsVersioned() && ha.url.substring(0, 7) === 'dialog/') ha.url = ea.version + '/' + ha.url;
                     var ka = {
                         cb: fa,
                         id: ia,
                         size: ha.size || da.getDefaultSize(),
-                        url: y.resolve(ea.display == 'touch' ? 'm' : 'www', ja) + '/' + ha.url,
+                        url: t.resolve(ea.display == 'touch' ? 'm' : 'www', ja) + '/' + ha.url,
                         params: ea,
                         name: ga,
                         dialog: j.newInstance(ia, ea.display)
@@ -4466,13 +4514,12 @@ try {
                     return ka;
                 },
                 prepareParams: function(ea) {
-                    var fa = ea.params.method;
                     if (ea.params.display !== 'async') delete ea.params.method;
-                    ea.params = m(ea.params);
-                    var ga = t.encode(ea.params);
-                    if (!z.nativeApp() && da.urlTooLongForIE(ea.url + '?' + ga)) {
+                    ea.params = w(ea.params);
+                    var fa = o.encode(ea.params);
+                    if (!s.nativeApp() && da.urlTooLongForIE(ea.url + '?' + fa)) {
                         ea.post = true;
-                    } else if (ga) ea.url += '?' + ga;
+                    } else if (fa) ea.url += '?' + fa;
                     return ea;
                 },
                 urlTooLongForIE: function(ea) {
@@ -4480,15 +4527,15 @@ try {
                 },
                 getDisplayMode: function(ea, fa) {
                     if (fa.display === 'hidden' || fa.display === 'none') return fa.display;
-                    var ga = w.isEnvironment(w.ENVIRONMENTS.CANVAS) || w.isEnvironment(w.ENVIRONMENTS.PAGETAB);
+                    var ga = q.isEnvironment(q.ENVIRONMENTS.CANVAS) || q.isEnvironment(q.ENVIRONMENTS.PAGETAB);
                     if (ga && !fa.display) return 'async';
-                    if (z.mobile() || fa.display === 'touch') return 'touch';
-                    if (!w.getAccessToken() && (fa.display == 'iframe' || fa.display == 'dialog') && !ea.loggedOutIframe) {
-                        r.error('"dialog" mode can only be used when the user is connected.');
+                    if (s.mobile() || fa.display === 'touch') return 'touch';
+                    if (!q.getAccessToken() && (fa.display == 'iframe' || fa.display == 'dialog') && !ea.loggedOutIframe) {
+                        m.error('"dialog" mode can only be used when the user is connected.');
                         return 'popup';
                     }
                     if (ea.connectDisplay && !ga) return ea.connectDisplay;
-                    return fa.display || (w.getAccessToken() ? 'dialog' : 'popup');
+                    return fa.display || (q.getAccessToken() ? 'dialog' : 'popup');
                 },
                 getXdRelation: function(ea) {
                     var fa = ea.display;
@@ -4501,8 +4548,8 @@ try {
                         ga = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
                         ha = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.documentElement.clientWidth,
                         ia = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.documentElement.clientHeight - 22),
-                        ja = z.mobile() ? null : ea.size.width,
-                        ka = z.mobile() ? null : ea.size.height,
+                        ja = s.mobile() ? null : ea.size.width,
+                        ka = s.mobile() ? null : ea.size.height,
                         la = (fa < 0) ? window.screen.width + fa : fa,
                         ma = parseInt(la + ((ha - ja) / 2), 10),
                         na = parseInt(ga + ((ia - ka) / 2.5), 10),
@@ -4558,11 +4605,11 @@ try {
                     };
                     ea.root = j.create({
                         onClose: fa,
-                        closeIcon: ea.closeIcon === undefined ? true : ea.closeIcon,
-                        classes: (z.ipad() ? 'centered' : '')
+                        closeIcon: ea.closeIcon === (void 0) ? true : ea.closeIcon,
+                        classes: (s.ipad() ? 'centered' : '')
                     });
                     if (!ea.hideLoader) j.showLoader(fa, ea.size.width);
-                    k.addCss(ea.root, 'fb_dialog_iframe');
+                    i.addCss(ea.root, 'fb_dialog_iframe');
                     da._insertIframe(ea);
                 },
                 touch: function(ea) {
@@ -4572,10 +4619,10 @@ try {
                                 da._triggerDefault(ea.id);
                             }, 0);
                         } else da.iframe(ea);
-                    } else if (z.nativeApp() && !ea.ui_created) {
+                    } else if (s.nativeApp() && !ea.ui_created) {
                         ea.frame = ea.id;
-                        s.onready(function() {
-                            da.setLoadedNode(ea, s.open(ea.url + '#cb=' + ea.frameName), 'native');
+                        n.onready(function() {
+                            da.setLoadedNode(ea, n.open(ea.url + '#cb=' + ea.frameName), 'native');
                         });
                         da._popupMonitor();
                     } else if (!ea.ui_created) da.popup(ea);
@@ -4583,7 +4630,7 @@ try {
                 async: function(ea) {
                     ea.params.redirect_uri = location.protocol + '//' + location.host + location.pathname;
                     delete ea.params.access_token;
-                    v.remote.showDialog(ea.params, function(fa) {
+                    p.remote.showDialog(ea.params, function(fa) {
                         var ga = fa.result;
                         if (ga && ga.e2e) {
                             var ha = j.get(ea.id);
@@ -4603,7 +4650,7 @@ try {
                         if (ea.id in da._loadedNodes) da.setLoadedNode(ea, ga, 'iframe');
                     };
                     if (ea.post) {
-                        q({
+                        z({
                             url: 'about:blank',
                             root: ea.root,
                             className: ea.className,
@@ -4619,7 +4666,7 @@ try {
                                 });
                             }
                         });
-                    } else q({
+                    } else z({
                         url: ea.url,
                         root: ea.root,
                         className: ea.className,
@@ -4635,7 +4682,7 @@ try {
                     if (!ga) return;
                     if (fa.height) ga.style.height = fa.height + 'px';
                     if (fa.width) ga.style.width = fa.width + 'px';
-                    aa.inform('resize.ack', fa || {}, 'parent.frames[' + ga.name + ']');
+                    u.inform('resize.ack', fa || {}, 'parent.frames[' + ga.name + ']');
                     if (!j.isActive(ga)) j.show(ga);
                 },
                 _triggerDefault: function(ea) {
@@ -4663,7 +4710,7 @@ try {
                     }
                 },
                 _xdChannelHandler: function(ea, fa) {
-                    return aa.handler(function(ga) {
+                    return u.handler(function(ga) {
                         var ha = da.getLoadedNode(ea);
                         if (!ha) return;
                         if (ga.type == 'resize') {
@@ -4673,12 +4720,12 @@ try {
                         } else if (ga.type == 'rendered') {
                             var ia = j._findRoot(ha);
                             j.show(ia);
-                        } else if (ga.type == 'fireevent') l.fire(ga.event);
+                        } else if (ga.type == 'fireevent') k.fire(ga.event);
                     }, fa, true, null);
                 },
                 _xdNextHandler: function(ea, fa, ga, ha) {
                     if (ha) da._defaultCb[fa] = ea;
-                    return aa.handler(function(ia) {
+                    return u.handler(function(ia) {
                         da._xdRecv(ia, ea);
                     }, ga) + '&frame=' + fa;
                 },
@@ -4690,11 +4737,11 @@ try {
                             if (/iPhone.*Version\/(5|6)/.test(navigator.userAgent) && RegExp.$1 !== '5') window.focus();
                             da._popupCount--;
                         } catch (ha) {}
-                    } else if (k.containsCss(ga, 'FB_UI_Hidden')) {
+                    } else if (i.containsCss(ga, 'FB_UI_Hidden')) {
                         setTimeout(function() {
                             ga.parentNode.parentNode.removeChild(ga.parentNode);
                         }, 3000);
-                    } else if (k.containsCss(ga, 'FB_UI_Dialog')) j.remove(ga);
+                    } else if (i.containsCss(ga, 'FB_UI_Dialog')) j.remove(ga);
                     delete da._loadedNodes[ea.frame];
                     delete da._defaultCb[ea.frame];
                     if (ea.e2e) {
@@ -4714,7 +4761,7 @@ try {
                     return da._xdNextHandler(g.xdResponseWrapper(ea, ha, ia), fa, ga, true);
                 }
             };
-            v.stub('showDialog');
+            p.stub('showDialog');
             e.exports = da;
         }, null);
         __d("sdk.ui", ["Assert", "sdk.Impressions", "Log", "sdk.PlatformVersioning", "sdk.Runtime", "sdk.UIServer", "sdk.feature"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
@@ -4859,11 +4906,11 @@ try {
                 return true;
             }
             function m(o, p) {
-                if (p === undefined && typeof o === 'number') {
+                if (p === (void 0) && typeof o === 'number') {
                     p = o;
                     o = true;
                 }
-                if (o || o === undefined) {
+                if (o || o === (void 0)) {
                     if (i === null) i = setInterval(function() {
                         l();
                     }, p || 100);
@@ -4895,124 +4942,125 @@ try {
             };
             e.exports = i;
         }, null);
-        __d("sdk.Canvas.Plugin", ["sdk.api", "sdk.RPC", "Log", "UserAgent_DEPRECATED", "sdk.Runtime", "createArrayFrom"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
+        __d("sdk.Canvas.Plugin", ["Log", "sdk.RPC", "sdk.Runtime", "sdk.UA", "sdk.api", "createArrayFromMixed"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
             var m = 'CLSID:D27CDB6E-AE6D-11CF-96B8-444553540000',
                 n = 'CLSID:444785F1-DE89-4295-863A-D46C3A781394',
                 o = null,
-                p = !(j.osx() >= 10.9 && (j.chrome() >= 31 || j.webkit() >= 537.71 || j.firefox() >= 25));
+                p = j.osx() && j.osx.getVersionParts(),
+                q = !((p && p[0] > 10 && p[1] > 10) && (j.chrome() >= 31 || j.webkit() >= 537.71 || j.firefox() >= 25));
 
-            function q(aa) {
-                aa._hideunity_savedstyle = {};
-                aa._hideunity_savedstyle.left = aa.style.left;
-                aa._hideunity_savedstyle.position = aa.style.position;
-                aa._hideunity_savedstyle.width = aa.style.width;
-                aa._hideunity_savedstyle.height = aa.style.height;
-                aa.style.left = '-10000px';
-                aa.style.position = 'absolute';
-                aa.style.width = '1px';
-                aa.style.height = '1px';
+            function r(ba) {
+                ba._hideunity_savedstyle = {};
+                ba._hideunity_savedstyle.left = ba.style.left;
+                ba._hideunity_savedstyle.position = ba.style.position;
+                ba._hideunity_savedstyle.width = ba.style.width;
+                ba._hideunity_savedstyle.height = ba.style.height;
+                ba.style.left = '-10000px';
+                ba.style.position = 'absolute';
+                ba.style.width = '1px';
+                ba.style.height = '1px';
             }
-            function r(aa) {
-                if (aa._hideunity_savedstyle) {
-                    aa.style.left = aa._hideunity_savedstyle.left;
-                    aa.style.position = aa._hideunity_savedstyle.position;
-                    aa.style.width = aa._hideunity_savedstyle.width;
-                    aa.style.height = aa._hideunity_savedstyle.height;
+            function s(ba) {
+                if (ba._hideunity_savedstyle) {
+                    ba.style.left = ba._hideunity_savedstyle.left;
+                    ba.style.position = ba._hideunity_savedstyle.position;
+                    ba.style.width = ba._hideunity_savedstyle.width;
+                    ba.style.height = ba._hideunity_savedstyle.height;
                 }
             }
-            function s(aa) {
-                aa._old_visibility = aa.style.visibility;
-                aa.style.visibility = 'hidden';
+            function t(ba) {
+                ba._old_visibility = ba.style.visibility;
+                ba.style.visibility = 'hidden';
             }
-            function t(aa) {
-                aa.style.visibility = aa._old_visibility || '';
-                delete aa._old_visibility;
+            function u(ba) {
+                ba.style.visibility = ba._old_visibility || '';
+                delete ba._old_visibility;
             }
-            function u(aa) {
-                var ba = aa.type ? aa.type.toLowerCase() : null,
-                    ca = ba === 'application/x-shockwave-flash' || (aa.classid && aa.classid.toUpperCase() == m);
-                if (!ca) return false;
-                var da = /opaque|transparent/i;
-                if (da.test(aa.getAttribute('wmode'))) return false;
-                for (var ea = 0; ea < aa.childNodes.length; ea++) {
-                    var fa = aa.childNodes[ea];
-                    if (/param/i.test(fa.nodeName) && /wmode/i.test(fa.name) && da.test(fa.value)) return false;
+            function v(ba) {
+                var ca = ba.type ? ba.type.toLowerCase() : null,
+                    da = ca === 'application/x-shockwave-flash' || (ba.classid && ba.classid.toUpperCase() == m);
+                if (!da) return false;
+                var ea = /opaque|transparent/i;
+                if (ea.test(ba.getAttribute('wmode'))) return false;
+                for (var fa = 0; fa < ba.childNodes.length; fa++) {
+                    var ga = ba.childNodes[fa];
+                    if (/param/i.test(ga.nodeName) && /wmode/i.test(ga.name) && ea.test(ga.value)) return false;
                 }
                 return true;
             }
-            function v(aa) {
-                var ba = aa.type ? aa.type.toLowerCase() : null;
-                return ba === 'application/vnd.unity' || (aa.classid && aa.classid.toUpperCase() == n);
+            function w(ba) {
+                var ca = ba.type ? ba.type.toLowerCase() : null;
+                return ca === 'application/vnd.unity' || (ba.classid && ba.classid.toUpperCase() == n);
             }
-            function w(aa) {
-                var ba = l(window.document.getElementsByTagName('object'));
-                ba = ba.concat(l(window.document.getElementsByTagName('embed')));
-                var ca = false,
-                    da = false;
-                ES(ba, 'forEach', true, function(fa) {
-                    var ga = u(fa),
-                        ha = p && v(fa);
-                    if (!ga && !ha) return;
-                    ca = ca || ga;
+            function x(ba) {
+                var ca = l(window.document.getElementsByTagName('object'));
+                ca = ca.concat(l(window.document.getElementsByTagName('embed')));
+                var da = false,
+                    ea = false;
+                ES(ca, 'forEach', true, function(ga) {
+                    var ha = v(ga),
+                        ia = q && w(ga);
+                    if (!ha && !ia) return;
                     da = da || ha;
-                    var ia = function() {
-                        if (aa.state === 'opened') {
-                            if (ga) {
-                                s(fa);
-                            } else q(fa);
-                        } else if (ga) {
-                            t(fa);
-                        } else r(fa);
+                    ea = ea || ia;
+                    var ja = function() {
+                        if (ba.state === 'opened') {
+                            if (ha) {
+                                t(ga);
+                            } else r(ga);
+                        } else if (ha) {
+                            u(ga);
+                        } else s(ga);
                     };
                     if (o) {
-                        i.info('Calling developer specified callback');
-                        var ja = {
-                            state: aa.state,
-                            elem: fa
+                        g.info('Calling developer specified callback');
+                        var ka = {
+                            state: ba.state,
+                            elem: ga
                         };
-                        o(ja);
-                        setTimeout(ia, 200);
-                    } else ia();
+                        o(ka);
+                        setTimeout(ja, 200);
+                    } else ja();
                 });
                 if (Math.random() <= 1 / 1000) {
-                    var ea = {
-                        unity: da,
-                        flash: ca
+                    var fa = {
+                        unity: ea,
+                        flash: da
                     };
-                    g(k.getClientID() + '/occludespopups', 'post', ea);
+                    k(i.getClientID() + '/occludespopups', 'post', fa);
                 }
             }
             h.local.hidePluginObjects = function() {
-                i.info('hidePluginObjects called');
-                w({
+                g.info('hidePluginObjects called');
+                x({
                     state: 'opened'
                 });
             };
             h.local.showPluginObjects = function() {
-                i.info('showPluginObjects called');
-                w({
+                g.info('showPluginObjects called');
+                x({
                     state: 'closed'
                 });
             };
             h.local.showFlashObjects = h.local.showPluginObjects;
             h.local.hideFlashObjects = h.local.hidePluginObjects;
 
-            function x() {
-                s();
-                q();
-            }
             function y() {
                 t();
                 r();
             }
-            var z = {
-                _setHidePluginCallback: function(aa) {
-                    o = aa;
+            function z() {
+                u();
+                s();
+            }
+            var aa = {
+                _setHidePluginCallback: function(ba) {
+                    o = ba;
                 },
-                hidePluginElement: x,
-                showPluginElement: y
+                hidePluginElement: y,
+                showPluginElement: z
             };
-            e.exports = z;
+            e.exports = aa;
         }, null);
         __d("sdk.Canvas.Tti", ["sdk.RPC", "sdk.Runtime"], function(a, b, c, d, e, f, g, h) {
             function i(n, o) {
@@ -5102,7 +5150,7 @@ try {
                 }
             });
         }, 3);
-        __d("sdk.Canvas.Prefetcher", ["sdk.api", "createArrayFrom", "JSSDKCanvasPrefetcherConfig", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j) {
+        __d("sdk.Canvas.Prefetcher", ["sdk.api", "createArrayFromMixed", "JSSDKCanvasPrefetcherConfig", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j) {
             var k = {
                 AUTOMATIC: 0,
                 MANUAL: 1
@@ -5198,7 +5246,7 @@ try {
                 i = Array.prototype.slice.call(arguments, 1);
                 return h.replace(/\{(\d+)\}/g, function(j, k) {
                     var l = i[Number(k)];
-                    return (l === null || l === undefined) ? '' : l.toString();
+                    return (l === null || l === (void 0)) ? '' : l.toString();
                 });
             }
             e.exports = g;
@@ -5217,7 +5265,7 @@ try {
             var h = g.extend({
                 constructor: function() {
                     this.parent({
-                        Value: undefined
+                        Value: (void 0)
                     });
                 },
                 error: function(i) {
@@ -5227,7 +5275,7 @@ try {
                     if (j) this.subscribe('error', j);
                     this.monitor('Value.change', ES(function() {
                         var k = this.getValue();
-                        if (k !== undefined) {
+                        if (k !== (void 0)) {
                             this.value = k;
                             i(k);
                             return true;
@@ -5334,14 +5382,14 @@ try {
                     ES(n, 'forEach', true, function(s) {
                         s.monitor('Value.change', function() {
                             var t = false;
-                            if (m._getValue(s) !== undefined) {
+                            if (m._getValue(s) !== (void 0)) {
                                 s.value = s.getValue();
                                 q--;
                                 t = true;
                             }
                             if (q === 0) {
                                 var u = o(ES(n, 'map', true, m._getValue));
-                                p.setValue(u !== undefined ? u : true);
+                                p.setValue(u !== (void 0) ? u : true);
                             }
                             return t;
                         });
@@ -5470,7 +5518,7 @@ try {
         __d("legacy:fb.frictionless", ["FB", "sdk.Frictionless"], function(a, b, c, d, e, f, g, h) {
             g.provide('Frictionless', h);
         }, 3);
-        __d("sdk.init", ["sdk.Cookie", "sdk.ErrorHandling", "sdk.Event", "Log", "ManagedError", "sdk.PlatformVersioning", "QueryString", "sdk.Runtime", "sdk.URI", "createArrayFrom"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+        __d("sdk.init", ["sdk.Cookie", "sdk.ErrorHandling", "sdk.Event", "Log", "ManagedError", "sdk.PlatformVersioning", "QueryString", "sdk.Runtime", "sdk.URI", "createArrayFromMixed"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
             function q(s) {
                 var t = (typeof s == 'number' && s > 0) || (typeof s == 'string' && /^[0-9a-f]{21,}$|^[0-9]{1,21}$/.test(s));
                 if (t) return s.toString();
@@ -5554,7 +5602,7 @@ try {
                 }
             });
         }, 3);
-        __d("legacy:fb.ua", ["FB", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h) {
+        __d("legacy:fb.ua", ["FB", "sdk.UA"], function(a, b, c, d, e, f, g, h) {
             g.provide('UA', {
                 nativeApp: h.nativeApp
             });
@@ -5577,133 +5625,124 @@ try {
             }
             e.exports = g;
         }, null);
-        __d("XFBML", ["Assert", "createArrayFrom", "sdk.DOM", "sdk.feature", "sdk.Impressions", "Log", "ObservableMixin", "runOnce", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) {
-            var p = {}, q = {}, r = 0,
-                s = new m();
+        __d("XFBML", ["Assert", "sdk.DOM", "Log", "ObservableMixin", "sdk.UA", "createArrayFromMixed", "runOnce"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
+            var n = {}, o = {}, p = 0,
+                q = new j();
 
-            function t(ba, ca) {
-                return ba[ca] + '';
+            function r(y, z) {
+                return y[z] + '';
             }
-            function u(ba) {
-                return ba.scopeName ? (ba.scopeName + ':' + ba.nodeName) : '';
+            function s(y) {
+                return y.scopeName ? (y.scopeName + ':' + y.nodeName) : '';
             }
-            function v(ba) {
-                return p[t(ba, 'nodeName')
-                    .toLowerCase()] || p[u(ba)
+            function t(y) {
+                return n[r(y, 'nodeName')
+                    .toLowerCase()] || n[s(y)
                     .toLowerCase()];
             }
-            function w(ba) {
-                var ca = ES(ES(t(ba, 'className'), 'trim', true)
-                    .split(/\s+/), 'filter', true, function(da) {
-                    return q.hasOwnProperty(da);
+            function u(y) {
+                var z = ES(ES(r(y, 'className'), 'trim', true)
+                    .split(/\s+/), 'filter', true, function(aa) {
+                    return o.hasOwnProperty(aa);
                 });
-                if (ca.length === 0) return undefined;
-                if (ba.getAttribute('fb-xfbml-state') || !ba.childNodes || ba.childNodes.length === 0 || (ba.childNodes.length === 1 && ba.childNodes[0].nodeType === 3) || (ba.children.length === 1 && t(ba.children[0], 'className') === 'fb-xfbml-parse-ignore')) return q[ca[0]];
+                if (z.length === 0) return (void 0);
+                if (y.getAttribute('fb-xfbml-state') || !y.childNodes || y.childNodes.length === 0 || (y.childNodes.length === 1 && y.childNodes[0].nodeType === 3) || (y.children.length === 1 && r(y.children[0], 'className') === 'fb-xfbml-parse-ignore')) return o[z[0]];
             }
-            function x(ba) {
-                var ca = {};
-                ES(h(ba.attributes), 'forEach', true, function(da) {
-                    ca[t(da, 'name')] = t(da, 'value');
+            function v(y) {
+                var z = {};
+                ES(l(y.attributes), 'forEach', true, function(aa) {
+                    z[r(aa, 'name')] = r(aa, 'value');
                 });
-                return ca;
+                return z;
             }
-            function y(ba, ca, da) {
-                var ea = document.createElement('div');
-                i.addCss(ba, ca + '-' + da);
-                ES(h(ba.childNodes), 'forEach', true, function(fa) {
-                    ea.appendChild(fa);
+            function w(y, z, aa) {
+                var ba = document.createElement('div');
+                h.addCss(y, z + '-' + aa);
+                ES(l(y.childNodes), 'forEach', true, function(ca) {
+                    ba.appendChild(ca);
                 });
-                ES(h(ba.attributes), 'forEach', true, function(fa) {
-                    ea.setAttribute(fa.name, fa.value);
+                ES(l(y.attributes), 'forEach', true, function(ca) {
+                    ba.setAttribute(ca.name, ca.value);
                 });
-                ba.parentNode.replaceChild(ea, ba);
-                return ea;
+                y.parentNode.replaceChild(ba, y);
+                return ba;
             }
-            function z(ba, ca, da) {
-                g.isTrue(ba && ba.nodeType && ba.nodeType === 1 && !! ba.getElementsByTagName, 'Invalid DOM node passed to FB.XFBML.parse()');
-                g.isFunction(ca, 'Invalid callback passed to FB.XFBML.parse()');
-                var ea = ++r;
-                l.info('XFBML Parsing Start %s', ea);
-                var fa = 1,
-                    ga = 0,
-                    ha = function() {
-                        fa--;
-                        if (fa === 0) {
-                            l.info('XFBML Parsing Finish %s, %s tags found', ea, ga);
-                            ca();
-                            s.inform('render', ea, ga);
+            function x(y, z, aa) {
+                g.isTrue(y && y.nodeType && y.nodeType === 1 && !! y.getElementsByTagName, 'Invalid DOM node passed to FB.XFBML.parse()');
+                g.isFunction(z, 'Invalid callback passed to FB.XFBML.parse()');
+                var ba = ++p;
+                i.info('XFBML Parsing Start %s', ba);
+                var ca = 1,
+                    da = 0,
+                    ea = function() {
+                        ca--;
+                        if (ca === 0) {
+                            i.info('XFBML Parsing Finish %s, %s tags found', ba, da);
+                            z();
+                            q.inform('render', ba, da);
                         }
-                        g.isTrue(fa >= 0, 'onrender() has been called too many times');
+                        g.isTrue(ca >= 0, 'onrender() has been called too many times');
                     };
-                ES(h(ba.getElementsByTagName('*')), 'forEach', true, function(ja) {
-                    if (!da && ja.getAttribute('fb-xfbml-state')) return;
-                    if (ja.nodeType !== 1) return;
-                    var ka = v(ja) || w(ja);
-                    if (!ka) return;
-                    if (o.ie() < 9 && ja.scopeName) ja = y(ja, ka.xmlns, ka.localName);
-                    fa++;
-                    ga++;
-                    var la = new ka.ctor(ja, ka.xmlns, ka.localName, x(ja));
-                    la.subscribe('render', n(function() {
-                        ja.setAttribute('fb-xfbml-state', 'rendered');
-                        ha();
+                ES(l(y.getElementsByTagName('*')), 'forEach', true, function(ga) {
+                    if (!aa && ga.getAttribute('fb-xfbml-state')) return;
+                    if (ga.nodeType !== 1) return;
+                    var ha = t(ga) || u(ga);
+                    if (!ha) return;
+                    if (k.ie() < 9 && ga.scopeName) ga = w(ga, ha.xmlns, ha.localName);
+                    ca++;
+                    da++;
+                    var ia = new ha.ctor(ga, ha.xmlns, ha.localName, v(ga));
+                    ia.subscribe('render', m(function() {
+                        ga.setAttribute('fb-xfbml-state', 'rendered');
+                        ea();
                     }));
-                    var ma = function() {
-                        if (ja.getAttribute('fb-xfbml-state') == 'parsed') {
-                            s.subscribe('render.queue', ma);
+                    var ja = function() {
+                        if (ga.getAttribute('fb-xfbml-state') == 'parsed') {
+                            q.subscribe('render.queue', ja);
                         } else {
-                            ja.setAttribute('fb-xfbml-state', 'parsed');
-                            la.process();
+                            ga.setAttribute('fb-xfbml-state', 'parsed');
+                            ia.process();
                         }
                     };
-                    ma();
+                    ja();
                 });
-                s.inform('parse', ea, ga);
-                var ia = 30000;
+                q.inform('parse', ba, da);
+                var fa = 30000;
                 setTimeout(function() {
-                    if (fa > 0) l.warn('%s tags failed to render in %s ms', fa, ia);
-                }, ia);
-                ha();
+                    if (ca > 0) i.warn('%s tags failed to render in %s ms', ca, fa);
+                }, fa);
+                ea();
             }
-            s.subscribe('render', function() {
-                var ba = s.getSubscribers('render.queue');
-                s.clearSubscribers('render.queue');
-                ES(ba, 'forEach', true, function(ca) {
-                    ca();
+            q.subscribe('render', function() {
+                var y = q.getSubscribers('render.queue');
+                q.clearSubscribers('render.queue');
+                ES(y, 'forEach', true, function(z) {
+                    z();
                 });
             });
-            ES('Object', 'assign', false, s, {
-                registerTag: function(ba) {
-                    var ca = ba.xmlns + ':' + ba.localName;
-                    g.isUndefined(p[ca], ca + ' already registered');
-                    p[ca] = ba;
-                    q[ba.xmlns + '-' + ba.localName] = ba;
+            ES('Object', 'assign', false, q, {
+                registerTag: function(y) {
+                    var z = y.xmlns + ':' + y.localName;
+                    g.isUndefined(n[z], z + ' already registered');
+                    n[z] = y;
+                    o[y.xmlns + '-' + y.localName] = y;
                 },
-                parse: function(ba, ca) {
-                    z(ba || document.body, ca || function() {}, true);
+                parse: function(y, z) {
+                    x(y || document.body, z || function() {}, true);
                 },
                 parseNew: function() {
-                    z(document.body, function() {}, false);
+                    x(document.body, function() {}, false);
                 }
             });
-            if (j('log_tag_count')) {
-                var aa = function(ba, ca) {
-                    s.unsubscribe('parse', aa);
-                    setTimeout(ES(k.log, 'bind', true, null, 102, {
-                        tag_count: ca
-                    }), 5000);
-                };
-                s.subscribe('parse', aa);
-            }
-            e.exports = s;
+            e.exports = q;
         }, null);
-        __d("PluginPipe", ["sdk.Content", "sdk.feature", "guid", "insertIframe", "Miny", "ObservableMixin", "JSSDKPluginPipeConfig", "sdk.Runtime", "UrlMap", "UserAgent_DEPRECATED", "XFBML"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) {
+        __d("PluginPipe", ["sdk.Content", "sdk.feature", "guid", "insertIframe", "Miny", "ObservableMixin", "JSSDKPluginPipeConfig", "sdk.Runtime", "sdk.UA", "UrlMap", "XFBML"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) {
             var r = new l(),
                 s = m.threshold,
                 t = [];
 
             function u() {
-                return !!(h('plugin_pipe') && n.getSecure() !== undefined && (p.chrome() || p.firefox()) && m.enabledApps[n.getClientID()]);
+                return !!(h('plugin_pipe', false) && n.getSecure() !== (void 0) && (o.chrome() || o.firefox()) && m.enabledApps[n.getClientID()]);
             }
             function v() {
                 var x = t;
@@ -5723,7 +5762,7 @@ try {
                 ES(x, 'forEach', true, function(aa) {
                     var ba = {};
                     for (var ca in aa.config) ba[ca] = aa.config[ca];
-                    ba.url = o.resolve('www', n.getSecure()) + '/plugins/plugin_pipe_shell.php';
+                    ba.url = p.resolve('www', n.getSecure()) + '/plugins/plugin_pipe_shell.php';
                     ba.onload = z;
                     j(ba);
                 });
@@ -5747,7 +5786,7 @@ try {
                     var fa = document.getElementsByName(ea.config.name)[0];
                     fa.onload = ea.config.onload;
                 });
-                var ca = o.resolve('www', n.getSecure()) + '/plugins/pipe.php',
+                var ca = p.resolve('www', n.getSecure()) + '/plugins/pipe.php',
                     da = i();
                 j({
                     url: 'about:blank',
@@ -5778,7 +5817,7 @@ try {
             });
             e.exports = r;
         }, null);
-        __d("IframePlugin", ["sdk.Auth", "sdk.DOM", "sdk.Event", "Log", "ObservableMixin", "sdk.PlatformVersioning", "PluginPipe", "QueryString", "sdk.Runtime", "Type", "sdk.URI", "UrlMap", "UserAgent_DEPRECATED", "sdk.XD", "sdk.createIframe", "guid", "resolveURI"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w) {
+        __d("IframePlugin", ["sdk.Auth", "sdk.DOM", "sdk.Event", "Log", "ObservableMixin", "sdk.PlatformVersioning", "PluginPipe", "QueryString", "sdk.Runtime", "Type", "sdk.UA", "sdk.URI", "UrlMap", "sdk.XD", "sdk.createIframe", "guid", "resolveURI"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w) {
             var x = {
                 skin: 'string',
                 font: 'string',
@@ -5788,144 +5827,168 @@ try {
                 color_scheme: 'string'
             };
 
-            function y(ga, ha, ia) {
-                if (ha || ha === 0) ga.style.width = ha + 'px';
-                if (ia || ia === 0) ga.style.height = ia + 'px';
+            function y(ha, ia, ja) {
+                if (ia || ia === 0) ha.style.width = ia + 'px';
+                if (ja || ja === 0) ha.style.height = ja + 'px';
             }
-            function z(ga) {
-                return function(ha) {
-                    var ia = {
-                        width: ha.width,
-                        height: ha.height,
-                        pluginID: ga
+            function z(ha, ia) {
+                var ja = h.getPosition(ha)
+                    .x,
+                    ka = h.getViewportInfo()
+                        .width,
+                    la = ea(ia.width),
+                    ma = parseInt(h.getStyle(ha, 'width'), 10),
+                    na = {};
+                if ((ja + la) > ka && ja > la) {
+                    ha.style.left = parseInt(h.getStyle(ha, 'width'), 10) - la + 'px';
+                    this._isRepositioned = true;
+                    na.type = 'reposition';
+                } else if (this._isRepositioned && (ma - la) !== 0) {
+                    ha.style.left = '0px';
+                    this._isRepositioned = false;
+                    na.type = 'restore';
+                } else return;
+                t.sendToFacebook(ha.name, {
+                    method: 'xd/reposition',
+                    params: ES('JSON', 'stringify', false, na)
+                });
+            }
+            function aa(ha) {
+                return function(ia) {
+                    var ja = {
+                        width: ia.width,
+                        height: ia.height,
+                        pluginID: ha
                     };
-                    i.fire('xfbml.resize', ia);
+                    i.fire('xfbml.resize', ja);
                 };
             }
-            var aa = {
-                string: function(ga) {
-                    return ga;
+            var ba = {
+                string: function(ha) {
+                    return ha;
                 },
-                bool: function(ga) {
-                    return ga ? (/^(?:true|1|yes|on)$/i)
-                        .test(ga) : undefined;
+                bool: function(ha) {
+                    return ha ? (/^(?:true|1|yes|on)$/i)
+                        .test(ha) : (void 0);
                 },
-                url: function(ga) {
-                    return w(ga);
+                url: function(ha) {
+                    return w(ha);
                 },
-                url_maybe: function(ga) {
-                    return ga ? w(ga) : ga;
+                url_maybe: function(ha) {
+                    return ha ? w(ha) : ha;
                 },
-                hostname: function(ga) {
-                    return ga || window.location.hostname;
+                hostname: function(ha) {
+                    return ha || window.location.hostname;
                 },
-                px: function(ga) {
+                px: function(ha) {
                     return (/^(\d+)(?:px)?$/)
-                        .test(ga) ? parseInt(RegExp.$1, 10) : undefined;
+                        .test(ha) ? parseInt(RegExp.$1, 10) : (void 0);
                 },
-                text: function(ga) {
-                    return ga;
+                text: function(ha) {
+                    return ha;
                 }
             };
 
-            function ba(ga, ha) {
-                var ia = ga[ha] || ga[ha.replace(/_/g, '-')] || ga[ha.replace(/_/g, '')] || ga['data-' + ha] || ga['data-' + ha.replace(/_/g, '-')] || ga['data-' + ha.replace(/_/g, '')] || undefined;
-                return ia;
+            function ca(ha, ia) {
+                var ja = ha[ia] || ha[ia.replace(/_/g, '-')] || ha[ia.replace(/_/g, '')] || ha['data-' + ia] || ha['data-' + ia.replace(/_/g, '-')] || ha['data-' + ia.replace(/_/g, '')] || (void 0);
+                return ja;
             }
-            function ca(ga, ha, ia, ja) {
-                ES(ES('Object', 'keys', false, ga), 'forEach', true, function(ka) {
-                    if (ga[ka] == 'text' && !ia[ka]) {
-                        ia[ka] = ha.textContent || ha.innerText || '';
-                        ha.setAttribute(ka, ia[ka]);
+            function da(ha, ia, ja, ka) {
+                ES(ES('Object', 'keys', false, ha), 'forEach', true, function(la) {
+                    if (ha[la] == 'text' && !ja[la]) {
+                        ja[la] = ia.textContent || ia.innerText || '';
+                        ia.setAttribute(la, ja[la]);
                     }
-                    ja[ka] = aa[ga[ka]](ba(ia, ka));
+                    ka[la] = ba[ha[la]](ca(ja, la));
                 });
             }
-            function da(ga) {
-                return ga || ga === '0' || ga === 0 ? parseInt(ga, 10) : undefined;
+            function ea(ha) {
+                return ha || ha === '0' || ha === 0 ? parseInt(ha, 10) : (void 0);
             }
-            function ea(ga) {
-                if (ga) y(ga, 0, 0);
+            function fa(ha) {
+                if (ha) y(ha, 0, 0);
             }
-            var fa = p.extend({
-                constructor: function(ga, ha, ia, ja) {
+            var ga = p.extend({
+                constructor: function(ha, ia, ja, ka) {
                     this.parent();
-                    ia = ia.replace(/-/g, '_');
-                    var ka = ba(ja, 'plugin_id');
-                    this.subscribe('xd.resize', z(ka));
-                    this.subscribe('xd.resize.flow', z(ka));
-                    this.subscribe('xd.resize.flow', ES(function(qa) {
+                    ja = ja.replace(/-/g, '_');
+                    var la = ca(ka, 'plugin_id');
+                    this.subscribe('xd.resize', aa(la));
+                    this.subscribe('xd.resize.flow', aa(la));
+                    this.subscribe('xd.resize.flow', ES(function(ra) {
                         ES('Object', 'assign', false, this._iframeOptions.root.style, {
                             verticalAlign: 'bottom',
                             overflow: ''
                         });
-                        y(this._iframeOptions.root, da(qa.width), da(qa.height));
+                        y(this._iframeOptions.root, ea(ra.width), ea(ra.height));
                         this.updateLift();
                         clearTimeout(this._timeoutID);
                     }, 'bind', true, this));
-                    this.subscribe('xd.resize', ES(function(qa) {
+                    this.subscribe('xd.resize', ES(function(ra) {
                         ES('Object', 'assign', false, this._iframeOptions.root.style, {
                             verticalAlign: 'bottom',
                             overflow: ''
                         });
-                        y(this._iframeOptions.root, da(qa.width), da(qa.height));
-                        y(this._iframe, da(qa.width), da(qa.height));
+                        y(this._iframeOptions.root, ea(ra.width), ea(ra.height));
+                        y(this._iframe, ea(ra.width), ea(ra.height));
                         this._isIframeResized = true;
                         this.updateLift();
                         clearTimeout(this._timeoutID);
                     }, 'bind', true, this));
-                    this.subscribe('xd.resize.iframe', ES(function(qa) {
-                        y(this._iframe, da(qa.width), da(qa.height));
+                    this._isRepositioned = false;
+                    this.subscribe('xd.resize.iframe', ES(function(ra) {
+                        if (ra.reposition === "true") z(this._iframe, ra);
+                        y(this._iframe, ea(ra.width), ea(ra.height));
                         this._isIframeResized = true;
                         this.updateLift();
                         clearTimeout(this._timeoutID);
                     }, 'bind', true, this));
-                    this.subscribe('xd.sdk_event', function(qa) {
-                        var ra = ES('JSON', 'parse', false, qa.data);
-                        ra.pluginID = ka;
-                        i.fire(qa.event, ra, ga);
+                    this.subscribe('xd.sdk_event', function(ra) {
+                        var sa = ES('JSON', 'parse', false, ra.data);
+                        sa.pluginID = la;
+                        i.fire(ra.event, sa, ha);
                     });
-                    var la = o.getSecure() || window.location.protocol == 'https:',
-                        ma = r.resolve('www', la) + '/plugins/' + ia + '.php?',
-                        na = {};
-                    ca(this.getParams(), ga, ja, na);
-                    ca(x, ga, ja, na);
-                    ES('Object', 'assign', false, na, {
+                    var ma = o.getSecure() || window.location.protocol == 'https:',
+                        na = s.resolve('www', ma) + '/plugins/' + ja + '.php?',
+                        oa = {};
+                    da(this.getParams(), ha, ka, oa);
+                    da(x, ha, ka, oa);
+                    ES('Object', 'assign', false, oa, {
                         app_id: o.getClientID(),
                         locale: o.getLocale(),
                         sdk: 'joey',
                         kid_directed_site: o.getKidDirectedSite(),
-                        channel: t.handler(ES(function(qa) {
-                            return this.inform('xd.' + qa.type, qa);
+                        channel: t.handler(ES(function(ra) {
+                            return this.inform('xd.' + ra.type, ra);
                         }, 'bind', true, this), 'parent.parent', true)
                     });
-                    h.addCss(ga, 'fb_iframe_widget');
-                    var oa = v();
-                    this.subscribe('xd.verify', function(qa) {
-                        t.sendToFacebook(oa, {
+                    h.addCss(ha, 'fb_iframe_widget');
+                    var pa = v();
+                    this.subscribe('xd.verify', function(ra) {
+                        t.sendToFacebook(pa, {
                             method: 'xd/verify',
-                            params: ES('JSON', 'stringify', false, qa.token)
+                            params: ES('JSON', 'stringify', false, ra.token)
                         });
                     });
                     this.subscribe('xd.refreshLoginStatus', ES(g.getLoginStatus, 'bind', true, g, ES(this.inform, 'bind', true, this, 'login.status'), true));
-                    var pa = document.createElement('span');
-                    ES('Object', 'assign', false, pa.style, {
+                    var qa = document.createElement('span');
+                    ES('Object', 'assign', false, qa.style, {
                         verticalAlign: 'top',
                         width: '0px',
                         height: '0px',
                         overflow: 'hidden'
                     });
-                    this._element = ga;
-                    this._ns = ha;
-                    this._tag = ia;
-                    this._params = na;
+                    this._element = ha;
+                    this._ns = ia;
+                    this._tag = ja;
+                    this._params = oa;
                     this._config = this.getConfig();
                     this._iframeOptions = {
-                        root: pa,
-                        url: ma + n.encode(na),
-                        name: oa,
-                        width: this._config.mobile_fullsize && s.mobile() ? void 0 : na.width || 1000,
-                        height: na.height || 1000,
+                        root: qa,
+                        url: na + n.encode(oa),
+                        name: pa,
+                        width: this._config.mobile_fullsize && q.mobile() ? void 0 : oa.width || 1000,
+                        height: oa.height || 1000,
                         style: {
                             border: 'none',
                             visibility: 'hidden'
@@ -5935,39 +5998,39 @@ try {
                             return this.inform('render');
                         }, 'bind', true, this),
                         onerror: ES(function() {
-                            return ea(this._iframe);
+                            return fa(this._iframe);
                         }, 'bind', true, this)
                     };
                 },
                 process: function() {
                     if (o.getIsVersioned()) {
                         l.assertVersionIsSet();
-                        var ga = q(this._iframeOptions.url);
-                        this._iframeOptions.url = ga.setPath('/' + o.getVersion() + ga.getPath())
+                        var ha = r(this._iframeOptions.url);
+                        this._iframeOptions.url = ha.setPath('/' + o.getVersion() + ha.getPath())
                             .toString();
                     }
-                    var ha = ES('Object', 'assign', false, {}, this._params);
-                    delete ha.channel;
-                    var ia = n.encode(ha);
-                    if (this._element.getAttribute('fb-iframe-plugin-query') == ia) {
-                        j.info('Skipping render: %s:%s %s', this._ns, this._tag, ia);
+                    var ia = ES('Object', 'assign', false, {}, this._params);
+                    delete ia.channel;
+                    var ja = n.encode(ia);
+                    if (this._element.getAttribute('fb-iframe-plugin-query') == ja) {
+                        j.info('Skipping render: %s:%s %s', this._ns, this._tag, ja);
                         this.inform('render');
                         return;
                     }
-                    this._element.setAttribute('fb-iframe-plugin-query', ia);
+                    this._element.setAttribute('fb-iframe-plugin-query', ja);
                     this.subscribe('render', ES(function() {
                         this._iframe.style.visibility = 'visible';
-                        if (!this._isIframeResized) ea(this._iframe);
+                        if (!this._isIframeResized) fa(this._iframe);
                     }, 'bind', true, this));
                     while (this._element.firstChild) this._element.removeChild(this._element.firstChild);
                     this._element.appendChild(this._iframeOptions.root);
-                    var ja = s.mobile() ? 120 : 45;
+                    var ka = q.mobile() ? 120 : 45;
                     this._timeoutID = setTimeout(ES(function() {
-                        ea(this._iframe);
-                        j.warn('%s:%s failed to resize in %ss', this._ns, this._tag, ja);
-                    }, 'bind', true, this), ja * 1000);
+                        fa(this._iframe);
+                        j.warn('%s:%s failed to resize in %ss', this._ns, this._tag, ka);
+                    }, 'bind', true, this), ka * 1000);
                     if (!m.add(this)) this._iframe = u(this._iframeOptions);
-                    if (s.mobile()) {
+                    if (q.mobile()) {
                         h.addCss(this._element, 'fb_iframe_widget_fluid');
                         if (!this._iframeOptions.width) {
                             ES('Object', 'assign', false, this._element.style, {
@@ -5979,11 +6042,16 @@ try {
                                 width: '100%',
                                 height: 'auto'
                             });
-                            ES('Object', 'assign', false, this._iframe.style, {
-                                width: '100%',
+                            var la = {
                                 height: 'auto',
-                                position: 'static'
+                                position: 'static',
+                                width: '100%'
+                            };
+                            if (q.iphone() || q.ipad()) ES('Object', 'assign', false, la, {
+                                width: '220px',
+                                'min-width': '100%'
                             });
+                            ES('Object', 'assign', false, this._iframe.style, la);
                         }
                     }
                 },
@@ -5991,22 +6059,22 @@ try {
                     return {};
                 },
                 updateLift: function() {
-                    var ga = this._iframe.style.width === this._iframeOptions.root.style.width && this._iframe.style.height === this._iframeOptions.root.style.height;
-                    h[ga ? 'removeCss' : 'addCss'](this._iframe, 'fb_iframe_widget_lift');
+                    var ha = this._iframe.style.width === this._iframeOptions.root.style.width && this._iframe.style.height === this._iframeOptions.root.style.height;
+                    h[ha ? 'removeCss' : 'addCss'](this._iframe, 'fb_iframe_widget_lift');
                 }
             }, k);
-            fa.getVal = ba;
-            fa.withParams = function(ga, ha) {
-                return fa.extend({
+            ga.getVal = ca;
+            ga.withParams = function(ha, ia) {
+                return ga.extend({
                     getParams: function() {
-                        return ga;
+                        return ha;
                     },
                     getConfig: function() {
-                        return ha ? ha : {};
+                        return ia ? ia : {};
                     }
                 });
             };
-            e.exports = fa;
+            e.exports = ga;
         }, null);
         __d("PluginConfig", [], function(a, b, c, d, e, f) {
             var g = {
@@ -6458,7 +6526,7 @@ try {
             }
             e.exports = t;
         }, null);
-        __d("sdk.XFBML.Comments", ["sdk.Event", "sdk.XFBML.IframeWidget", "QueryString", "sdk.Runtime", "JSSDKConfig", "UrlMap", "UserAgent_DEPRECATED"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
+        __d("sdk.XFBML.Comments", ["sdk.Event", "sdk.XFBML.IframeWidget", "QueryString", "sdk.Runtime", "JSSDKConfig", "sdk.UA", "UrlMap"], function(a, b, c, d, e, f, g, h, i, j, k, l, m) {
             var n = h.extend({
                 _visibleAfter: 'immediate',
                 _refreshOnAuthChange: true,
@@ -6476,7 +6544,7 @@ try {
                         mobile: this._getBoolAttribute('mobile')
                     };
                     if (!o.width && !o.permalink) o.width = 550;
-                    if (k.initSitevars.enableMobileComments && m.mobile() && o.mobile !== false) {
+                    if (k.initSitevars.enableMobileComments && l.mobile() && o.mobile !== false) {
                         o.mobile = true;
                         delete o.width;
                     }
@@ -6497,7 +6565,7 @@ try {
                                 o.xid = encodeURIComponent(document.URL.substring(0, p));
                             } else o.xid = encodeURIComponent(document.URL);
                         }
-                        if (o.migrated) o.href = l.resolve('www') + '/plugins/comments_v1.php?' + 'app_id=' + j.getClientID() + '&xid=' + encodeURIComponent(o.xid) + '&url=' + encodeURIComponent(o.url);
+                        if (o.migrated) o.href = m.resolve('www') + '/plugins/comments_v1.php?' + 'app_id=' + j.getClientID() + '&xid=' + encodeURIComponent(o.xid) + '&url=' + encodeURIComponent(o.url);
                     } else {
                         var q = this.getAttribute('fb_comment_id');
                         if (!q) {
@@ -6533,7 +6601,7 @@ try {
                     };
                 },
                 getDefaultWebDomain: function() {
-                    return l.resolve(this._attr.mobile ? 'm' : 'www', true);
+                    return m.resolve(this._attr.mobile ? 'm' : 'www', true);
                 },
                 _handleCommentCreatedMsg: function(o) {
                     if (!this.isValid()) return;
@@ -6576,7 +6644,7 @@ try {
         __d("sdk.Helper", ["sdk.ErrorHandling", "sdk.Event", "UrlMap", "safeEval", "sprintf"], function(a, b, c, d, e, f, g, h, i, j, k) {
             var l = {
                 isUser: function(m) {
-                    return m < 2.2e+09 || (m >= 1e+14 && m <= 100099999989999) || (m >= 8.9e+13 && m <= 89999999999999);
+                    return m < 2.2e+09 || (m >= 1e+14 && m <= 100099999989999) || (m >= 8.9e+13 && m <= 89999999999999) || (m >= 6.000001e+13 && m <= 60000019999999);
                 },
                 upperCaseFirstChar: function(m) {
                     if (m.length > 0) {
@@ -6782,9 +6850,9 @@ try {
                         } else if (p) {
                             if (null === p.first_name) p.first_name = '';
                             if (null === p.last_name) p.last_name = '';
-                            if (this._firstnameonly && p.first_name !== undefined) {
+                            if (this._firstnameonly && p.first_name !== (void 0)) {
                                 q = h(p.first_name);
-                            } else if (this._lastnameonly && p.last_name !== undefined) q = h(p.last_name);
+                            } else if (this._lastnameonly && p.last_name !== (void 0)) q = h(p.last_name);
                             if (!q) q = h(p.name);
                             if (q !== '' && this._possessive) q += '\'s';
                         }
@@ -6799,153 +6867,6 @@ try {
                     }
                 });
             e.exports = o;
-        }, null);
-        __d("sdk.XFBML.RecommendationsBar", ["sdk.Arbiter", "DOMEventListener", "sdk.Event", "sdk.XFBML.IframeWidget", "resolveURI", "sdk.Runtime"], function(a, b, c, d, e, f, g, h, i, j, k, l) {
-            var m = j.extend({
-                getUrlBits: function() {
-                    return {
-                        name: 'recommendations_bar',
-                        params: this._attr
-                    };
-                },
-                setupAndValidate: function() {
-                    function n(w, x) {
-                        var y = 0,
-                            z = null;
-
-                        function aa() {
-                            x();
-                            z = null;
-                            y = ES('Date', 'now', false);
-                        }
-                        return function() {
-                            if (!z) {
-                                var ba = ES('Date', 'now', false);
-                                if (ba - y < w) {
-                                    z = setTimeout(aa, w - (ba - y));
-                                } else aa();
-                            }
-                            return true;
-                        };
-                    }
-                    function o(w) {
-                        if (w.match(/^\d+(?:\.\d+)?%$/)) {
-                            var x = Math.min(Math.max(parseInt(w, 10), 0), 100);
-                            w = x / 100;
-                        } else if (w != 'manual' && w != 'onvisible') w = 'onvisible';
-                        return w;
-                    }
-                    function p(w) {
-                        return Math.max(parseInt(w, 10) || 30, 10);
-                    }
-                    function q(w) {
-                        if (w == 'left' || w == 'right') return w;
-                        return l.getRtl() ? 'left' : 'right';
-                    }
-                    this._attr = {
-                        channel: this.getChannelUrl(),
-                        api_key: l.getClientID(),
-                        font: this.getAttribute('font'),
-                        colorscheme: this.getAttribute('colorscheme'),
-                        href: k(this.getAttribute('href')),
-                        side: q(this.getAttribute('side')),
-                        site: this.getAttribute('site'),
-                        action: this.getAttribute('action'),
-                        ref: this.getAttribute('ref'),
-                        max_age: this.getAttribute('max_age'),
-                        trigger: o(this.getAttribute('trigger', '')),
-                        read_time: p(this.getAttribute('read_time')),
-                        num_recommendations: parseInt(this.getAttribute('num_recommendations'), 10) || 2
-                    };
-                    this._showLoader = false;
-                    this.subscribe('iframe.onload', ES(function() {
-                        var w = this.dom.children[0];
-                        w.className = 'fbpluginrecommendationsbar' + this._attr.side;
-                    }, 'bind', true, this));
-                    var r = ES(function() {
-                        h.remove(window, 'scroll', r);
-                        h.remove(document.documentElement, 'click', r);
-                        h.remove(document.documentElement, 'mousemove', r);
-                        setTimeout(ES(this.arbiterInform, 'bind', true, this, 'platform/plugins/recommendations_bar/action', null, g.BEHAVIOR_STATE), this._attr.read_time * 1000);
-                        return true;
-                    }, 'bind', true, this);
-                    h.add(window, 'scroll', r);
-                    h.add(document.documentElement, 'click', r);
-                    h.add(document.documentElement, 'mousemove', r);
-                    if (this._attr.trigger == "manual") {
-                        var s = ES(function(w) {
-                            if (w == this._attr.href) {
-                                i.unsubscribe('xfbml.recommendationsbar.read', s);
-                                this.arbiterInform('platform/plugins/recommendations_bar/trigger', null, g.BEHAVIOR_STATE);
-                            }
-                            return true;
-                        }, 'bind', true, this);
-                        i.subscribe('xfbml.recommendationsbar.read', s);
-                    } else {
-                        var t = n(500, ES(function() {
-                            if (this.calculateVisibility()) {
-                                h.remove(window, 'scroll', t);
-                                h.remove(window, 'resize', t);
-                                this.arbiterInform('platform/plugins/recommendations_bar/trigger', null, g.BEHAVIOR_STATE);
-                            }
-                            return true;
-                        }, 'bind', true, this));
-                        h.add(window, 'scroll', t);
-                        h.add(window, 'resize', t);
-                        t();
-                    }
-                    this.visible = false;
-                    var u = n(500, ES(function() {
-                        if (!this.visible && this.calculateVisibility()) {
-                            this.visible = true;
-                            this.arbiterInform('platform/plugins/recommendations_bar/visible');
-                        } else if (this.visible && !this.calculateVisibility()) {
-                            this.visible = false;
-                            this.arbiterInform('platform/plugins/recommendations_bar/invisible');
-                        }
-                        return true;
-                    }, 'bind', true, this));
-                    h.add(window, 'scroll', u);
-                    h.add(window, 'resize', u);
-                    u();
-                    this.focused = true;
-                    var v = ES(function() {
-                        this.focused = !this.focused;
-                        return true;
-                    }, 'bind', true, this);
-                    h.add(window, 'blur', v);
-                    h.add(window, 'focus', v);
-                    this.resize_running = false;
-                    this.animate = false;
-                    this.subscribe('xd.signal_animation', ES(function() {
-                        this.animate = true;
-                    }, 'bind', true, this));
-                    return true;
-                },
-                getSize: function() {
-                    return {
-                        height: 25,
-                        width: (this._attr.action == 'recommend' ? 140 : 96)
-                    };
-                },
-                calculateVisibility: function() {
-                    var n = document.documentElement.clientHeight;
-                    if (!this.focused && window.console && window.console.firebug) return this.visible;
-                    switch (this._attr.trigger) {
-                    case "manual":
-                        return false;
-                    case "onvisible":
-                        var o = this.dom.getBoundingClientRect()
-                            .top;
-                        return o <= n;
-                    default:
-                        var p = window.pageYOffset || document.body.scrollTop,
-                            q = document.documentElement.scrollHeight;
-                        return (p + n) / q >= this._attr.trigger;
-                    }
-                }
-            });
-            e.exports = m;
         }, null);
         __d("sdk.XFBML.Registration", ["sdk.Auth", "sdk.Helper", "sdk.XFBML.IframeWidget", "sdk.Runtime", "UrlMap"], function(a, b, c, d, e, f, g, h, i, j, k) {
             var l = i.extend({
@@ -7027,15 +6948,14 @@ try {
             });
             e.exports = l;
         }, null);
-        __d("legacy:fb.xfbml", ["Assert", "sdk.Event", "FB", "IframePlugin", "PluginConfig", "PluginTags", "XFBML", "sdk.domReady", "sdk.feature", "wrapFunction", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.RecommendationsBar", "sdk.XFBML.Registration"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
+        __d("legacy:fb.xfbml", ["Assert", "sdk.Event", "FB", "IframePlugin", "PluginConfig", "PluginTags", "XFBML", "sdk.domReady", "sdk.feature", "wrapFunction", "sdk.XFBML.Comments", "sdk.XFBML.CommentsCount", "sdk.XFBML.LoginButton", "sdk.XFBML.Name", "sdk.XFBML.Registration"], function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) {
             var q = {
                 comments: b('sdk.XFBML.Comments'),
                 comments_count: b('sdk.XFBML.CommentsCount'),
                 login_button: b('sdk.XFBML.LoginButton'),
                 name: b('sdk.XFBML.Name'),
-                recommendations_bar: b('sdk.XFBML.RecommendationsBar'),
                 registration: b('sdk.XFBML.Registration')
-            }, r = o('plugin_tags_blacklist');
+            }, r = o('plugin_tags_blacklist', []);
             ES(ES('Object', 'keys', false, l), 'forEach', true, function(t) {
                 if (ES(r, 'indexOf', true, t) !== -1) return;
                 m.registerTag({
@@ -7071,17 +6991,10 @@ try {
                 if (document.namespaces && !document.namespaces.item.fb) document.namespaces.add('fb');
             } catch (s) {}
         }, 3);
-        __d("legacy:fb.xfbml-legacy", ["FB", "sdk.Event"], function(a, b, c, d, e, f, g, h) {
-            g.provide('XFBML.RecommendationsBar', {
-                markRead: function(i) {
-                    h.fire('xfbml.recommendationsbar.read', i || window.location.href);
-                }
-            });
-        }, 3);
 
     })
         .call({}, window.inDapIF ? parent.window : window);
 } catch (e) {
     new Image()
-        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1486784","message":"' + e.message + '"}}');
+        .src = "http:\/\/www.facebook.com\/" + 'common/scribe_endpoint.php?c=jssdk_error&m=' + encodeURIComponent('{"error":"LOAD", "extra": {"name":"' + e.name + '","line":"' + (e.lineNumber || e.line) + '","script":"' + (e.fileName || e.sourceURL || e.script) + '","stack":"' + (e.stackTrace || e.stack) + '","revision":"1549264","message":"' + e.message + '"}}');
 }
